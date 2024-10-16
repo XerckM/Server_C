@@ -1,0 +1,1000 @@
+               net_netip_AddrPort addr,error err)
+
+{
+  int iVar1;
+  uint8 addr_00 [16];
+  string ~r0;
+  __uint8 p;
+  net_netip_Addr ip;
+  __uint8 p_00;
+  net_netip_Addr ~r0_00;
+  __uint8 oob_00;
+  __uint8 oob_01;
+  net_netip_Addr ~r0_01;
+  int in_RSI;
+  int in_R8;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  undefined4 in_stack_ffffffffffffff18;
+  undefined4 uVar2;
+  undefined4 in_stack_ffffffffffffff1c;
+  undefined4 uVar3;
+  undefined4 in_stack_ffffffffffffff20;
+  undefined4 uVar4;
+  undefined4 in_stack_ffffffffffffff24;
+  internal_intern_Value *in_stack_ffffffffffffff28;
+  string in_stack_ffffffffffffff30;
+  uint64 in_stack_ffffffffffffff40;
+  error in_stack_ffffffffffffff48;
+  undefined auStack_68 [24];
+  undefined8 local_50;
+  dword dStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined local_38 [16];
+  
+  while (auStack_68 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar1 = ((c->conn).fd)->family;
+  if (iVar1 == 2) {
+    p_00.array._4_4_ = in_stack_ffffffffffffff1c;
+    p_00.array._0_4_ = in_stack_ffffffffffffff18;
+    p_00.len._0_4_ = in_stack_ffffffffffffff20;
+    p_00.len._4_4_ = in_stack_ffffffffffffff24;
+    p_00.cap = (int)in_stack_ffffffffffffff28;
+    oob_01.cap = in_stack_ffffffffffffff40;
+    oob_01.array = in_stack_ffffffffffffff30.str;
+    oob_01.len = in_stack_ffffffffffffff30.len;
+    net___netFD__readMsgInet4
+              ((c->conn).fd,p_00,oob_01,n,(syscall_SockaddrInet4 *)oobn,flags,in_RSI,in_R8,
+               in_stack_ffffffffffffff48);
+  }
+  else if (iVar1 == 10) {
+    local_50 = in_XMM15._0_8_;
+    dStack_48 = in_XMM15._0_4_;
+    uStack_44 = in_XMM15._4_4_;
+    uStack_40 = in_XMM15._8_4_;
+    uStack_3c = in_XMM15._12_4_;
+    p.array._4_4_ = in_stack_ffffffffffffff1c;
+    p.array._0_4_ = in_stack_ffffffffffffff18;
+    p.len._0_4_ = in_stack_ffffffffffffff20;
+    p.len._4_4_ = in_stack_ffffffffffffff24;
+    p.cap = (int)in_stack_ffffffffffffff28;
+    oob_00.cap = in_stack_ffffffffffffff40;
+    oob_00.array = in_stack_ffffffffffffff30.str;
+    oob_00.len = in_stack_ffffffffffffff30.len;
+    local_38 = in_XMM15;
+    net___netFD__readMsgInet6
+              ((c->conn).fd,p,oob_00,n,(syscall_SockaddrInet6 *)oobn,flags,in_RSI,in_R8,
+               in_stack_ffffffffffffff48);
+    addr_00[4] = (undefined)uStack_40;
+    addr_00[5] = uStack_40._1_1_;
+    addr_00[6] = uStack_40._2_1_;
+    addr_00[7] = uStack_40._3_1_;
+    addr_00[0] = (undefined)uStack_44;
+    addr_00[1] = uStack_44._1_1_;
+    addr_00[2] = uStack_44._2_1_;
+    addr_00[3] = uStack_44._3_1_;
+    addr_00[8] = (undefined)uStack_3c;
+    addr_00[9] = uStack_3c._1_1_;
+    addr_00[10] = uStack_3c._2_1_;
+    addr_00[11] = uStack_3c._3_1_;
+    addr_00[12] = local_38[0];
+    addr_00[13] = local_38[1];
+    addr_00[14] = local_38[2];
+    addr_00[15] = local_38[3];
+    ~r0_00.addr.lo = (uint64)in_stack_ffffffffffffff30.str;
+    ~r0_00.z = in_stack_ffffffffffffff30.len;
+    ~r0_00.addr.hi = (uint64)in_stack_ffffffffffffff28;
+    uVar2 = uStack_44;
+    uVar3 = uStack_40;
+    uVar4 = uStack_3c;
+    net_netip_AddrFrom16(addr_00,~r0_00);
+    ~r0.str._4_4_ = uVar3;
+    ~r0.str._0_4_ = uVar2;
+    ~r0.len._0_4_ = uVar4;
+    ~r0.len._4_4_ = local_38._0_4_;
+    net___ipv6ZoneCache__name(&net_zoneCache,(uint)dStack_48,~r0);
+    ip.addr.hi._4_4_ = uVar3;
+    ip.addr.hi._0_4_ = uVar2;
+    ip.addr.lo._0_4_ = uVar4;
+    ip.addr.lo._4_4_ = local_38._0_4_;
+    ip.z = in_stack_ffffffffffffff28;
+    ~r0_01.addr.lo = (uint64)in_stack_ffffffffffffff48.tab;
+    ~r0_01.z = (uint64)in_stack_ffffffffffffff48.data;
+    ~r0_01.addr.hi = in_stack_ffffffffffffff40;
+    net_netip_Addr_WithZone(ip,in_stack_ffffffffffffff30,~r0_01);
+  }
+  return;
+}
+
+
+
+void net___UDPConn__writeTo(net_UDPConn *c,__uint8 b,net_UDPAddr *addr,int ~r0,error ~r1)
+
+{
+  net_netFD *pnVar1;
+  int iVar2;
+  net_IP ip;
+  __uint8 p;
+  net_IP ip_00;
+  net_IP ip_01;
+  __uint8 p_00;
+  string zone;
+  error err;
+  string ~r0_00;
+  error err_00;
+  syscall_SockaddrInet4 ~r0_01;
+  syscall_SockaddrInet6 ~r0_02;
+  error ~r1_00;
+  int extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar3;
+  int extraout_RAX_03;
+  void *~r0_03;
+  int *in_RSI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  undefined4 in_stack_fffffffffffffed0;
+  undefined4 in_stack_fffffffffffffed4;
+  undefined4 in_stack_fffffffffffffed8;
+  undefined4 in_stack_fffffffffffffedc;
+  undefined4 in_stack_fffffffffffffee0;
+  undefined4 in_stack_fffffffffffffee4;
+  undefined4 in_stack_fffffffffffffee8;
+  undefined4 in_stack_fffffffffffffeec;
+  undefined4 in_stack_fffffffffffffef0;
+  undefined4 in_stack_fffffffffffffef4;
+  undefined4 in_stack_fffffffffffffef8;
+  undefined4 in_stack_fffffffffffffefc;
+  undefined4 in_stack_ffffffffffffff00;
+  undefined4 in_stack_ffffffffffffff04;
+  error in_stack_ffffffffffffff08;
+  undefined in_stack_ffffffffffffff18 [24];
+  runtime_itab *in_stack_ffffffffffffff30;
+  void *in_stack_ffffffffffffff38;
+  void *pvVar4;
+  undefined local_b0 [160];
+  undefined8 local_10;
+  
+  while (local_b0 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pnVar1 = (c->conn).fd;
+  if (pnVar1->isConnected != false) {
+    return;
+  }
+  if (in_RSI == (int *)0x0) {
+    return;
+  }
+  iVar2 = pnVar1->family;
+  if (iVar2 == 2) {
+    ip_01.array._4_4_ = in_stack_fffffffffffffed4;
+    ip_01.array._0_4_ = in_stack_fffffffffffffed0;
+    ip_01.len._0_4_ = in_stack_fffffffffffffed8;
+    ip_01.len._4_4_ = in_stack_fffffffffffffedc;
+    ip_01.cap._0_4_ = in_stack_fffffffffffffee0;
+    ip_01.cap._4_4_ = in_stack_fffffffffffffee4;
+    ~r0_01.Port._4_4_ = in_stack_fffffffffffffeec;
+    ~r0_01.Port._0_4_ = in_stack_fffffffffffffee8;
+    ~r0_01.Addr[0] = (char)in_stack_fffffffffffffef0;
+    ~r0_01.Addr[1] = (char)((dword)in_stack_fffffffffffffef0 >> 8);
+    ~r0_01.Addr[2] = (char)((dword)in_stack_fffffffffffffef0 >> 0x10);
+    ~r0_01.Addr[3] = (char)((dword)in_stack_fffffffffffffef0 >> 0x18);
+    ~r0_01.raw.Family = (short)in_stack_fffffffffffffef4;
+    ~r0_01.raw.Port = (short)((dword)in_stack_fffffffffffffef4 >> 0x10);
+    ~r0_01.raw.Addr[0] = (char)in_stack_fffffffffffffef8;
+    ~r0_01.raw.Addr[1] = (char)((dword)in_stack_fffffffffffffef8 >> 8);
+    ~r0_01.raw.Addr[2] = (char)((dword)in_stack_fffffffffffffef8 >> 0x10);
+    ~r0_01.raw.Addr[3] = (char)((dword)in_stack_fffffffffffffef8 >> 0x18);
+    ~r0_01.raw.Zero[0] = (char)in_stack_fffffffffffffefc;
+    ~r0_01.raw.Zero[1] = (char)((dword)in_stack_fffffffffffffefc >> 8);
+    ~r0_01.raw.Zero[2] = (char)((dword)in_stack_fffffffffffffefc >> 0x10);
+    ~r0_01.raw.Zero[3] = (char)((dword)in_stack_fffffffffffffefc >> 0x18);
+    ~r0_01.raw.Zero[4] = (char)in_stack_ffffffffffffff00;
+    ~r0_01.raw.Zero[5] = (char)((dword)in_stack_ffffffffffffff00 >> 8);
+    ~r0_01.raw.Zero[6] = (char)((dword)in_stack_ffffffffffffff00 >> 0x10);
+    ~r0_01.raw.Zero[7] = (char)((dword)in_stack_ffffffffffffff00 >> 0x18);
+    ~r0_01._28_4_ = in_stack_ffffffffffffff04;
+    net_ipToSockaddrInet4(ip_01,*in_RSI,~r0_01,in_stack_ffffffffffffff08);
+    if (extraout_RAX_03 == 0) {
+      p_00.array._4_4_ = in_stack_fffffffffffffed4;
+      p_00.array._0_4_ = in_stack_fffffffffffffed0;
+      p_00.len._0_4_ = in_stack_fffffffffffffed8;
+      p_00.len._4_4_ = in_stack_fffffffffffffedc;
+      p_00.cap._0_4_ = in_stack_fffffffffffffee0;
+      p_00.cap._4_4_ = in_stack_fffffffffffffee4;
+      err_00.tab._4_4_ = in_stack_fffffffffffffeec;
+      err_00.tab._0_4_ = in_stack_fffffffffffffee8;
+      err_00.data._0_4_ = in_stack_fffffffffffffef0;
+      err_00.data._4_4_ = in_stack_fffffffffffffef4;
+      net___netFD__writeToInet4((c->conn).fd,p_00,(syscall_SockaddrInet4 *)addr,~r0,err_00);
+      return;
+    }
+    return;
+  }
+  if (iVar2 != 10) {
+    ip_00.array._4_4_ = in_stack_fffffffffffffed4;
+    ip_00.array._0_4_ = in_stack_fffffffffffffed0;
+    ip_00.len._0_4_ = in_stack_fffffffffffffed8;
+    ip_00.len._4_4_ = in_stack_fffffffffffffedc;
+    ip_00.cap._0_4_ = in_stack_fffffffffffffee0;
+    ip_00.cap._4_4_ = in_stack_fffffffffffffee4;
+    ~r0_00.str._4_4_ = in_stack_fffffffffffffeec;
+    ~r0_00.str._0_4_ = in_stack_fffffffffffffee8;
+    ~r0_00.len._0_4_ = in_stack_fffffffffffffef0;
+    ~r0_00.len._4_4_ = in_stack_fffffffffffffef4;
+    net_IP_String(ip_00,~r0_00);
+    pvVar4 = ~r0_03;
+    local_10 = extraout_RAX_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0084eb20,~r0_03);
+    extraout_RAX_01[1] = 0x16;
+    *extraout_RAX_01 = &DAT_008b9d67;
+    extraout_RAX_01[3] = pvVar4;
+    puVar3 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = local_10;
+      puVar3 = extraout_RAX_02;
+    }
+    puVar3[2] = local_10;
+    return;
+  }
+  ip.array._4_4_ = in_stack_fffffffffffffed4;
+  ip.array._0_4_ = in_stack_fffffffffffffed0;
+  ip.len._0_4_ = in_stack_fffffffffffffed8;
+  ip.len._4_4_ = in_stack_fffffffffffffedc;
+  ip.cap._0_4_ = in_stack_fffffffffffffee0;
+  ip.cap._4_4_ = in_stack_fffffffffffffee4;
+  zone.str._4_4_ = in_stack_fffffffffffffeec;
+  zone.str._0_4_ = in_stack_fffffffffffffee8;
+  zone.len._0_4_ = in_stack_fffffffffffffef0;
+  zone.len._4_4_ = in_stack_fffffffffffffef4;
+  ~r0_02.Port._4_4_ = in_stack_fffffffffffffefc;
+  ~r0_02.Port._0_4_ = in_stack_fffffffffffffef8;
+  ~r0_02.ZoneId = in_stack_ffffffffffffff00;
+  ~r0_02.Addr[0] = (char)in_stack_ffffffffffffff04;
+  ~r0_02.Addr[1] = (char)((dword)in_stack_ffffffffffffff04 >> 8);
+  ~r0_02.Addr[2] = (char)((dword)in_stack_ffffffffffffff04 >> 0x10);
+  ~r0_02.Addr[3] = (char)((dword)in_stack_ffffffffffffff04 >> 0x18);
+  ~r0_02._16_16_ = (uint8  [16])in_stack_ffffffffffffff08;
+  ~r0_02.raw.Flowinfo = in_stack_ffffffffffffff18._0_4_;
+  ~r0_02.raw.Addr[0] = in_stack_ffffffffffffff18[4];
+  ~r0_02.raw.Addr[1] = in_stack_ffffffffffffff18[5];
+  ~r0_02.raw.Addr[2] = in_stack_ffffffffffffff18[6];
+  ~r0_02.raw.Addr[3] = in_stack_ffffffffffffff18[7];
+  ~r0_02.raw.Addr[4] = in_stack_ffffffffffffff18[8];
+  ~r0_02.raw.Addr[5] = in_stack_ffffffffffffff18[9];
+  ~r0_02.raw.Addr[6] = in_stack_ffffffffffffff18[10];
+  ~r0_02.raw.Addr[7] = in_stack_ffffffffffffff18[11];
+  ~r0_02.raw.Addr[8] = in_stack_ffffffffffffff18[12];
+  ~r0_02.raw.Addr[9] = in_stack_ffffffffffffff18[13];
+  ~r0_02.raw.Addr[10] = in_stack_ffffffffffffff18[14];
+  ~r0_02.raw.Addr[11] = in_stack_ffffffffffffff18[15];
+  ~r0_02.raw.Addr[12] = in_stack_ffffffffffffff18[16];
+  ~r0_02.raw.Addr[13] = in_stack_ffffffffffffff18[17];
+  ~r0_02.raw.Addr[14] = in_stack_ffffffffffffff18[18];
+  ~r0_02.raw.Addr[15] = in_stack_ffffffffffffff18[19];
+  ~r0_02.raw.Scope_id = in_stack_ffffffffffffff18._20_4_;
+  ~r1_00.data = in_stack_ffffffffffffff38;
+  ~r1_00.tab = in_stack_ffffffffffffff30;
+  net_ipToSockaddrInet6(ip,*in_RSI,zone,~r0_02,~r1_00);
+  if (extraout_RAX == 0) {
+    p.array._4_4_ = in_stack_fffffffffffffed4;
+    p.array._0_4_ = in_stack_fffffffffffffed0;
+    p.len._0_4_ = in_stack_fffffffffffffed8;
+    p.len._4_4_ = in_stack_fffffffffffffedc;
+    p.cap._0_4_ = in_stack_fffffffffffffee0;
+    p.cap._4_4_ = in_stack_fffffffffffffee4;
+    err.tab._4_4_ = in_stack_fffffffffffffeec;
+    err.tab._0_4_ = in_stack_fffffffffffffee8;
+    err.data._0_4_ = in_stack_fffffffffffffef0;
+    err.data._4_4_ = in_stack_fffffffffffffef4;
+    net___netFD__writeToInet6((c->conn).fd,p,(syscall_SockaddrInet6 *)addr,~r0,err);
+    return;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__writeToAddrPort
+               (net_UDPConn *c,__uint8 b,net_netip_AddrPort addr,int ~r0,error ~r1)
+
+{
+  net_netFD *pnVar1;
+  int iVar2;
+  __uint8 p;
+  net_netip_Addr ip;
+  __uint8 p_00;
+  net_netip_AddrPort ap;
+  net_netip_AddrPort ap_00;
+  error err;
+  string ~r0_00;
+  error err_00;
+  syscall_SockaddrInet4 ~r0_01;
+  syscall_SockaddrInet6 ~r0_02;
+  error ~r1_00;
+  int extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar3;
+  int extraout_RAX_03;
+  int in_RCX;
+  void *~r0_03;
+  internal_intern_Value *in_R9;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  undefined4 in_stack_fffffffffffffee0;
+  undefined4 in_stack_fffffffffffffee4;
+  undefined4 in_stack_fffffffffffffee8;
+  undefined4 in_stack_fffffffffffffeec;
+  undefined4 in_stack_fffffffffffffef0;
+  undefined4 in_stack_fffffffffffffef4;
+  undefined4 in_stack_fffffffffffffef8;
+  undefined4 in_stack_fffffffffffffefc;
+  undefined4 in_stack_ffffffffffffff00;
+  undefined4 in_stack_ffffffffffffff04;
+  undefined4 in_stack_ffffffffffffff08;
+  undefined4 in_stack_ffffffffffffff0c;
+  undefined4 in_stack_ffffffffffffff10;
+  undefined4 in_stack_ffffffffffffff14;
+  undefined8 in_stack_ffffffffffffff18;
+  error in_stack_ffffffffffffff20;
+  undefined8 in_stack_ffffffffffffff30;
+  undefined8 in_stack_ffffffffffffff38;
+  void *pvVar4;
+  undefined4 in_stack_ffffffffffffff40;
+  undefined4 in_stack_ffffffffffffff44;
+  undefined local_a0 [144];
+  undefined8 local_10;
+  
+  while (local_a0 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pnVar1 = (c->conn).fd;
+  if (pnVar1->isConnected != false) {
+    return;
+  }
+  if (net_netip_z0 == in_R9) {
+    return;
+  }
+  iVar2 = pnVar1->family;
+  if (iVar2 == 2) {
+    ap_00.ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+    ap_00.ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+    ap_00.ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+    ap_00.ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+    ap_00.ip.z._0_4_ = in_stack_fffffffffffffef0;
+    ap_00.ip.z._4_4_ = in_stack_fffffffffffffef4;
+    ap_00._24_4_ = in_stack_fffffffffffffef8;
+    ap_00._28_4_ = in_stack_fffffffffffffefc;
+    ~r0_01.Port._4_4_ = in_stack_ffffffffffffff04;
+    ~r0_01.Port._0_4_ = in_stack_ffffffffffffff00;
+    ~r0_01.Addr[0] = (char)in_stack_ffffffffffffff08;
+    ~r0_01.Addr[1] = (char)((dword)in_stack_ffffffffffffff08 >> 8);
+    ~r0_01.Addr[2] = (char)((dword)in_stack_ffffffffffffff08 >> 0x10);
+    ~r0_01.Addr[3] = (char)((dword)in_stack_ffffffffffffff08 >> 0x18);
+    ~r0_01.raw.Family = (short)in_stack_ffffffffffffff0c;
+    ~r0_01.raw.Port = (short)((dword)in_stack_ffffffffffffff0c >> 0x10);
+    ~r0_01.raw.Addr[0] = (char)in_stack_ffffffffffffff10;
+    ~r0_01.raw.Addr[1] = (char)((dword)in_stack_ffffffffffffff10 >> 8);
+    ~r0_01.raw.Addr[2] = (char)((dword)in_stack_ffffffffffffff10 >> 0x10);
+    ~r0_01.raw.Addr[3] = (char)((dword)in_stack_ffffffffffffff10 >> 0x18);
+    ~r0_01.raw.Zero[0] = (char)in_stack_ffffffffffffff14;
+    ~r0_01.raw.Zero[1] = (char)((dword)in_stack_ffffffffffffff14 >> 8);
+    ~r0_01.raw.Zero[2] = (char)((dword)in_stack_ffffffffffffff14 >> 0x10);
+    ~r0_01.raw.Zero[3] = (char)((dword)in_stack_ffffffffffffff14 >> 0x18);
+    ~r0_01.raw.Zero[4] = (char)in_stack_ffffffffffffff18;
+    ~r0_01.raw.Zero[5] = (char)((uint)in_stack_ffffffffffffff18 >> 8);
+    ~r0_01.raw.Zero[6] = (char)((uint)in_stack_ffffffffffffff18 >> 0x10);
+    ~r0_01.raw.Zero[7] = (char)((uint)in_stack_ffffffffffffff18 >> 0x18);
+    ~r0_01._28_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x20);
+    ~r0_01._29_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x28);
+    ~r0_01._30_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x30);
+    ~r0_01._31_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x38);
+    net_addrPortToSockaddrInet4(ap_00,~r0_01,in_stack_ffffffffffffff20);
+    if (extraout_RAX_03 == 0) {
+      p_00.array._4_4_ = in_stack_fffffffffffffee4;
+      p_00.array._0_4_ = in_stack_fffffffffffffee0;
+      p_00.len._0_4_ = in_stack_fffffffffffffee8;
+      p_00.len._4_4_ = in_stack_fffffffffffffeec;
+      p_00.cap._0_4_ = in_stack_fffffffffffffef0;
+      p_00.cap._4_4_ = in_stack_fffffffffffffef4;
+      err_00.tab._4_4_ = in_stack_fffffffffffffefc;
+      err_00.tab._0_4_ = in_stack_fffffffffffffef8;
+      err_00.data._0_4_ = in_stack_ffffffffffffff00;
+      err_00.data._4_4_ = in_stack_ffffffffffffff04;
+      net___netFD__writeToInet4((c->conn).fd,p_00,(syscall_SockaddrInet4 *)~r0,in_RCX,err_00);
+      return;
+    }
+    return;
+  }
+  if (iVar2 != 10) {
+    ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+    ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+    ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+    ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+    ip.z._0_4_ = in_stack_fffffffffffffef0;
+    ip.z._4_4_ = in_stack_fffffffffffffef4;
+    ~r0_00.str._4_4_ = in_stack_fffffffffffffefc;
+    ~r0_00.str._0_4_ = in_stack_fffffffffffffef8;
+    ~r0_00.len._0_4_ = in_stack_ffffffffffffff00;
+    ~r0_00.len._4_4_ = in_stack_ffffffffffffff04;
+    net_netip_Addr_String(ip,~r0_00);
+    pvVar4 = ~r0_03;
+    local_10 = extraout_RAX_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0084eb20,~r0_03);
+    extraout_RAX_01[1] = 0x16;
+    *extraout_RAX_01 = &DAT_008b9d67;
+    extraout_RAX_01[3] = pvVar4;
+    puVar3 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = local_10;
+      puVar3 = extraout_RAX_02;
+    }
+    puVar3[2] = local_10;
+    return;
+  }
+  ap.ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+  ap.ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+  ap.ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+  ap.ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+  ap.ip.z._0_4_ = in_stack_fffffffffffffef0;
+  ap.ip.z._4_4_ = in_stack_fffffffffffffef4;
+  ap._24_4_ = in_stack_fffffffffffffef8;
+  ap._28_4_ = in_stack_fffffffffffffefc;
+  ~r0_02.Port._4_4_ = in_stack_ffffffffffffff04;
+  ~r0_02.Port._0_4_ = in_stack_ffffffffffffff00;
+  ~r0_02.ZoneId = in_stack_ffffffffffffff08;
+  ~r0_02.Addr[0] = (char)in_stack_ffffffffffffff0c;
+  ~r0_02.Addr[1] = (char)((dword)in_stack_ffffffffffffff0c >> 8);
+  ~r0_02.Addr[2] = (char)((dword)in_stack_ffffffffffffff0c >> 0x10);
+  ~r0_02.Addr[3] = (char)((dword)in_stack_ffffffffffffff0c >> 0x18);
+  ~r0_02.Addr[4] = (char)in_stack_ffffffffffffff10;
+  ~r0_02.Addr[5] = (char)((dword)in_stack_ffffffffffffff10 >> 8);
+  ~r0_02.Addr[6] = (char)((dword)in_stack_ffffffffffffff10 >> 0x10);
+  ~r0_02.Addr[7] = (char)((dword)in_stack_ffffffffffffff10 >> 0x18);
+  ~r0_02.Addr[8] = (char)in_stack_ffffffffffffff14;
+  ~r0_02.Addr[9] = (char)((dword)in_stack_ffffffffffffff14 >> 8);
+  ~r0_02.Addr[10] = (char)((dword)in_stack_ffffffffffffff14 >> 0x10);
+  ~r0_02.Addr[11] = (char)((dword)in_stack_ffffffffffffff14 >> 0x18);
+  ~r0_02.Addr[12] = (char)in_stack_ffffffffffffff18;
+  ~r0_02.Addr[13] = (char)((uint)in_stack_ffffffffffffff18 >> 8);
+  ~r0_02.Addr[14] = (char)((uint)in_stack_ffffffffffffff18 >> 0x10);
+  ~r0_02.Addr[15] = (char)((uint)in_stack_ffffffffffffff18 >> 0x18);
+  ~r0_02.raw.Family._0_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x20);
+  ~r0_02.raw.Family._1_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x28);
+  ~r0_02.raw.Port._0_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x30);
+  ~r0_02.raw.Port._1_1_ = (char)((uint)in_stack_ffffffffffffff18 >> 0x38);
+  ~r0_02.raw._4_16_ = (undefined  [16])in_stack_ffffffffffffff20;
+  ~r0_02.raw.Addr[12] = (char)in_stack_ffffffffffffff30;
+  ~r0_02.raw.Addr[13] = (char)((uint)in_stack_ffffffffffffff30 >> 8);
+  ~r0_02.raw.Addr[14] = (char)((uint)in_stack_ffffffffffffff30 >> 0x10);
+  ~r0_02.raw.Addr[15] = (char)((uint)in_stack_ffffffffffffff30 >> 0x18);
+  ~r0_02.raw.Scope_id._0_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x20);
+  ~r0_02.raw.Scope_id._1_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x28);
+  ~r0_02.raw.Scope_id._2_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x30);
+  ~r0_02.raw.Scope_id._3_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x38);
+  ~r1_00.data._0_4_ = in_stack_ffffffffffffff40;
+  ~r1_00.tab = (runtime_itab *)in_stack_ffffffffffffff38;
+  ~r1_00.data._4_4_ = in_stack_ffffffffffffff44;
+  net_addrPortToSockaddrInet6(ap,~r0_02,~r1_00);
+  if (extraout_RAX == 0) {
+    p.array._4_4_ = in_stack_fffffffffffffee4;
+    p.array._0_4_ = in_stack_fffffffffffffee0;
+    p.len._0_4_ = in_stack_fffffffffffffee8;
+    p.len._4_4_ = in_stack_fffffffffffffeec;
+    p.cap._0_4_ = in_stack_fffffffffffffef0;
+    p.cap._4_4_ = in_stack_fffffffffffffef4;
+    err.tab._4_4_ = in_stack_fffffffffffffefc;
+    err.tab._0_4_ = in_stack_fffffffffffffef8;
+    err.data._0_4_ = in_stack_ffffffffffffff00;
+    err.data._4_4_ = in_stack_ffffffffffffff04;
+    net___netFD__writeToInet6((c->conn).fd,p,(syscall_SockaddrInet6 *)~r0,in_RCX,err);
+    return;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__writeMsg
+               (net_UDPConn *c,__uint8 b,__uint8 oob,net_UDPAddr *addr,int n,int oobn,error err)
+
+{
+  bool bVar1;
+  net_netFD *pnVar2;
+  __uint8 p;
+  error ~r1;
+  __uint8 oob_00;
+  error err_00;
+  int extraout_RCX;
+  void *unaff_RBP;
+  net_UDPAddr *in_R10;
+  int unaff_R14;
+  syscall_Sockaddr in_stack_ffffffffffffffb0;
+  runtime_itab *in_stack_ffffffffffffffc0;
+  uint8 *in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd0 [16];
+  syscall_Sockaddr in_stack_ffffffffffffffe0;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pnVar2 = (c->conn).fd;
+  bVar1 = pnVar2->isConnected;
+  if (bVar1 != false) {
+    if (in_R10 != (net_UDPAddr *)0x0) {
+      return;
+    }
+    if (bVar1 != false) goto LAB_00602592;
+  }
+  if (in_R10 == (net_UDPAddr *)0x0) {
+    return;
+  }
+LAB_00602592:
+  ~r1.data = in_stack_ffffffffffffffc8;
+  ~r1.tab = in_stack_ffffffffffffffc0;
+  net___UDPAddr__sockaddr(in_R10,pnVar2->family,in_stack_ffffffffffffffb0,~r1);
+  if (extraout_RCX == 0) {
+    p.cap = (int)in_stack_ffffffffffffffc0;
+    p.array = (uint8 *)in_stack_ffffffffffffffb0.tab;
+    p.len = (int)in_stack_ffffffffffffffb0.data;
+    oob_00.len = in_stack_ffffffffffffffd0._0_8_;
+    oob_00.cap = in_stack_ffffffffffffffd0._8_8_;
+    oob_00.array = in_stack_ffffffffffffffc8;
+    err_00.data = unaff_RBP;
+    err_00.tab = in_stack_fffffffffffffff0;
+    net___netFD__writeMsg((c->conn).fd,p,oob_00,in_stack_ffffffffffffffe0,(int)addr,n,err_00);
+    return;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__writeMsgAddrPort
+               (net_UDPConn *c,__uint8 b,__uint8 oob,net_netip_AddrPort addr,int n,int oobn,
+               error err)
+
+{
+  bool bVar1;
+  net_netFD *pnVar2;
+  int iVar3;
+  __uint8 p;
+  net_netip_Addr ip;
+  __uint8 p_00;
+  net_netip_AddrPort ap;
+  net_netip_AddrPort ap_00;
+  string ~r0;
+  __uint8 oob_00;
+  __uint8 oob_01;
+  syscall_SockaddrInet4 ~r0_00;
+  syscall_SockaddrInet6 ~r0_01;
+  error err_00;
+  error err_01;
+  error ~r1;
+  int extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar4;
+  int extraout_RAX_03;
+  void *~r0_02;
+  int in_RDI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  undefined4 in_stack_fffffffffffffee0;
+  undefined4 in_stack_fffffffffffffee4;
+  undefined4 in_stack_fffffffffffffee8;
+  undefined4 in_stack_fffffffffffffeec;
+  undefined4 in_stack_fffffffffffffef0;
+  undefined4 in_stack_fffffffffffffef4;
+  undefined4 in_stack_fffffffffffffef8;
+  undefined4 in_stack_fffffffffffffefc;
+  undefined4 in_stack_ffffffffffffff00;
+  undefined4 in_stack_ffffffffffffff04;
+  undefined4 in_stack_ffffffffffffff08;
+  undefined4 in_stack_ffffffffffffff0c;
+  undefined4 in_stack_ffffffffffffff10;
+  undefined4 in_stack_ffffffffffffff14;
+  void *in_stack_ffffffffffffff18;
+  error in_stack_ffffffffffffff20;
+  undefined8 in_stack_ffffffffffffff30;
+  undefined8 in_stack_ffffffffffffff38;
+  void *pvVar5;
+  undefined4 in_stack_ffffffffffffff40;
+  undefined4 in_stack_ffffffffffffff44;
+  undefined local_a0 [144];
+  undefined8 local_10;
+  
+  while (local_a0 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pnVar2 = (c->conn).fd;
+  bVar1 = pnVar2->isConnected;
+  if (bVar1 != false) {
+    if (net_netip_z0 != (internal_intern_Value *)b.cap) {
+      return;
+    }
+    if (bVar1 != false) goto LAB_0060270d;
+  }
+  if (net_netip_z0 == (internal_intern_Value *)b.cap) {
+    return;
+  }
+LAB_0060270d:
+  iVar3 = pnVar2->family;
+  if (iVar3 == 2) {
+    ap_00.ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+    ap_00.ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+    ap_00.ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+    ap_00.ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+    ap_00.ip.z._0_4_ = in_stack_fffffffffffffef0;
+    ap_00.ip.z._4_4_ = in_stack_fffffffffffffef4;
+    ap_00._24_4_ = in_stack_fffffffffffffef8;
+    ap_00._28_4_ = in_stack_fffffffffffffefc;
+    ~r0_00.Port._4_4_ = in_stack_ffffffffffffff04;
+    ~r0_00.Port._0_4_ = in_stack_ffffffffffffff00;
+    ~r0_00.Addr[0] = (char)in_stack_ffffffffffffff08;
+    ~r0_00.Addr[1] = (char)((dword)in_stack_ffffffffffffff08 >> 8);
+    ~r0_00.Addr[2] = (char)((dword)in_stack_ffffffffffffff08 >> 0x10);
+    ~r0_00.Addr[3] = (char)((dword)in_stack_ffffffffffffff08 >> 0x18);
+    ~r0_00.raw.Family = (short)in_stack_ffffffffffffff0c;
+    ~r0_00.raw.Port = (short)((dword)in_stack_ffffffffffffff0c >> 0x10);
+    ~r0_00.raw.Addr[0] = (char)in_stack_ffffffffffffff10;
+    ~r0_00.raw.Addr[1] = (char)((dword)in_stack_ffffffffffffff10 >> 8);
+    ~r0_00.raw.Addr[2] = (char)((dword)in_stack_ffffffffffffff10 >> 0x10);
+    ~r0_00.raw.Addr[3] = (char)((dword)in_stack_ffffffffffffff10 >> 0x18);
+    ~r0_00.raw.Zero[0] = (char)in_stack_ffffffffffffff14;
+    ~r0_00.raw.Zero[1] = (char)((dword)in_stack_ffffffffffffff14 >> 8);
+    ~r0_00.raw.Zero[2] = (char)((dword)in_stack_ffffffffffffff14 >> 0x10);
+    ~r0_00.raw.Zero[3] = (char)((dword)in_stack_ffffffffffffff14 >> 0x18);
+    ~r0_00._24_8_ = (uint8  [8])in_stack_ffffffffffffff18;
+    net_addrPortToSockaddrInet4(ap_00,~r0_00,in_stack_ffffffffffffff20);
+    if (extraout_RAX_03 == 0) {
+      p_00.array._4_4_ = in_stack_fffffffffffffee4;
+      p_00.array._0_4_ = in_stack_fffffffffffffee0;
+      p_00.len._0_4_ = in_stack_fffffffffffffee8;
+      p_00.len._4_4_ = in_stack_fffffffffffffeec;
+      p_00.cap._0_4_ = in_stack_fffffffffffffef0;
+      p_00.cap._4_4_ = in_stack_fffffffffffffef4;
+      oob_01.array._4_4_ = in_stack_fffffffffffffefc;
+      oob_01.array._0_4_ = in_stack_fffffffffffffef8;
+      oob_01.len._0_4_ = in_stack_ffffffffffffff00;
+      oob_01.len._4_4_ = in_stack_ffffffffffffff04;
+      oob_01.cap._0_4_ = in_stack_ffffffffffffff08;
+      oob_01.cap._4_4_ = in_stack_ffffffffffffff0c;
+      err_01.tab._4_4_ = in_stack_ffffffffffffff14;
+      err_01.tab._0_4_ = in_stack_ffffffffffffff10;
+      err_01.data = in_stack_ffffffffffffff18;
+      net___netFD__writeMsgInet4
+                ((c->conn).fd,p_00,oob_01,(syscall_SockaddrInet4 *)n,oobn,in_RDI,err_01);
+      return;
+    }
+    return;
+  }
+  if (iVar3 != 10) {
+    ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+    ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+    ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+    ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+    ip.z._0_4_ = in_stack_fffffffffffffef0;
+    ip.z._4_4_ = in_stack_fffffffffffffef4;
+    ~r0.str._4_4_ = in_stack_fffffffffffffefc;
+    ~r0.str._0_4_ = in_stack_fffffffffffffef8;
+    ~r0.len._0_4_ = in_stack_ffffffffffffff00;
+    ~r0.len._4_4_ = in_stack_ffffffffffffff04;
+    net_netip_Addr_String(ip,~r0);
+    pvVar5 = ~r0_02;
+    local_10 = extraout_RAX_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0084eb20,~r0_02);
+    extraout_RAX_01[1] = 0x16;
+    *extraout_RAX_01 = &DAT_008b9d67;
+    extraout_RAX_01[3] = pvVar5;
+    puVar4 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = local_10;
+      puVar4 = extraout_RAX_02;
+    }
+    puVar4[2] = local_10;
+    return;
+  }
+  ap.ip.addr.hi._4_4_ = in_stack_fffffffffffffee4;
+  ap.ip.addr.hi._0_4_ = in_stack_fffffffffffffee0;
+  ap.ip.addr.lo._0_4_ = in_stack_fffffffffffffee8;
+  ap.ip.addr.lo._4_4_ = in_stack_fffffffffffffeec;
+  ap.ip.z._0_4_ = in_stack_fffffffffffffef0;
+  ap.ip.z._4_4_ = in_stack_fffffffffffffef4;
+  ap._24_4_ = in_stack_fffffffffffffef8;
+  ap._28_4_ = in_stack_fffffffffffffefc;
+  ~r0_01.Port._4_4_ = in_stack_ffffffffffffff04;
+  ~r0_01.Port._0_4_ = in_stack_ffffffffffffff00;
+  ~r0_01.ZoneId = in_stack_ffffffffffffff08;
+  ~r0_01.Addr[0] = (char)in_stack_ffffffffffffff0c;
+  ~r0_01.Addr[1] = (char)((dword)in_stack_ffffffffffffff0c >> 8);
+  ~r0_01.Addr[2] = (char)((dword)in_stack_ffffffffffffff0c >> 0x10);
+  ~r0_01.Addr[3] = (char)((dword)in_stack_ffffffffffffff0c >> 0x18);
+  ~r0_01.Addr[4] = (char)in_stack_ffffffffffffff10;
+  ~r0_01.Addr[5] = (char)((dword)in_stack_ffffffffffffff10 >> 8);
+  ~r0_01.Addr[6] = (char)((dword)in_stack_ffffffffffffff10 >> 0x10);
+  ~r0_01.Addr[7] = (char)((dword)in_stack_ffffffffffffff10 >> 0x18);
+  ~r0_01.Addr[8] = (char)in_stack_ffffffffffffff14;
+  ~r0_01.Addr[9] = (char)((dword)in_stack_ffffffffffffff14 >> 8);
+  ~r0_01.Addr[10] = (char)((dword)in_stack_ffffffffffffff14 >> 0x10);
+  ~r0_01.Addr[11] = (char)((dword)in_stack_ffffffffffffff14 >> 0x18);
+  ~r0_01._24_8_ = in_stack_ffffffffffffff18;
+  ~r0_01.raw._4_16_ = (undefined  [16])in_stack_ffffffffffffff20;
+  ~r0_01.raw.Addr[12] = (char)in_stack_ffffffffffffff30;
+  ~r0_01.raw.Addr[13] = (char)((uint)in_stack_ffffffffffffff30 >> 8);
+  ~r0_01.raw.Addr[14] = (char)((uint)in_stack_ffffffffffffff30 >> 0x10);
+  ~r0_01.raw.Addr[15] = (char)((uint)in_stack_ffffffffffffff30 >> 0x18);
+  ~r0_01.raw.Scope_id._0_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x20);
+  ~r0_01.raw.Scope_id._1_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x28);
+  ~r0_01.raw.Scope_id._2_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x30);
+  ~r0_01.raw.Scope_id._3_1_ = (char)((uint)in_stack_ffffffffffffff30 >> 0x38);
+  ~r1.data._0_4_ = in_stack_ffffffffffffff40;
+  ~r1.tab = (runtime_itab *)in_stack_ffffffffffffff38;
+  ~r1.data._4_4_ = in_stack_ffffffffffffff44;
+  net_addrPortToSockaddrInet6(ap,~r0_01,~r1);
+  if (extraout_RAX == 0) {
+    p.array._4_4_ = in_stack_fffffffffffffee4;
+    p.array._0_4_ = in_stack_fffffffffffffee0;
+    p.len._0_4_ = in_stack_fffffffffffffee8;
+    p.len._4_4_ = in_stack_fffffffffffffeec;
+    p.cap._0_4_ = in_stack_fffffffffffffef0;
+    p.cap._4_4_ = in_stack_fffffffffffffef4;
+    oob_00.array._4_4_ = in_stack_fffffffffffffefc;
+    oob_00.array._0_4_ = in_stack_fffffffffffffef8;
+    oob_00.len._0_4_ = in_stack_ffffffffffffff00;
+    oob_00.len._4_4_ = in_stack_ffffffffffffff04;
+    oob_00.cap._0_4_ = in_stack_ffffffffffffff08;
+    oob_00.cap._4_4_ = in_stack_ffffffffffffff0c;
+    err_00.tab._4_4_ = in_stack_ffffffffffffff14;
+    err_00.tab._0_4_ = in_stack_ffffffffffffff10;
+    err_00.data = in_stack_ffffffffffffff18;
+    net___netFD__writeMsgInet6((c->conn).fd,p,oob_00,(syscall_SockaddrInet6 *)n,oobn,in_RDI,err_00);
+    return;
+  }
+  return;
+}
+
+
+
+void net___sysDialer__dialUDP
+               (net_sysDialer *sd,context_Context ctx,net_UDPAddr *laddr,net_UDPAddr *raddr,
+               net_UDPConn *~r0,error ~r1)
+
+{
+  string net;
+  undefined8 extraout_RAX;
+  net_netFD *fd;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *puVar1;
+  func_context_Context__string__string__syscall_RawConn__error **ctrlCtxFn;
+  func_context_Context__string__string__syscall_RawConn__error **ppfVar2;
+  int extraout_RBX;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  net_sockaddr in_stack_ffffffffffffff98;
+  net_sockaddr in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  error in_stack_ffffffffffffffc8;
+  undefined local_18 [16];
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ppfVar2 = (sd->Dialer).ControlContext;
+  if ((ppfVar2 == (func_context_Context__string__string__syscall_RawConn__error **)0x0) &&
+     ((sd->Dialer).Control != (func_string__string__syscall_RawConn__error **)0x0)) {
+    local_18._8_8_ = sd;
+    local_18._0_8_ = net___sysDialer__dialUDP_func1;
+    ppfVar2 = (func_context_Context__string__string__syscall_RawConn__error **)local_18;
+  }
+  net.len = (int)ppfVar2;
+  net.str = (uint8 *)0x4;
+  net_internetSocket((context_Context)(ZEXT816(0x8ae5f7) << 0x40),net,in_stack_ffffffffffffff98,
+                     in_stack_ffffffffffffffa8,(int)laddr,(int)raddr,in_stack_ffffffffffffffb8,
+                     (func_context_Context__string__string__syscall_RawConn__error **)
+                     (sd->network).str,(net_netFD *)(sd->network).len,in_stack_ffffffffffffffc8);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0083fbe0,(void *)0x0);
+  puVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RAX;
+    puVar1 = extraout_RAX_01;
+  }
+  *puVar1 = extraout_RAX;
+  return;
+}
+
+
+
+void net___sysDialer__dialUDP_func1
+               (context_Context cxt,string network,string address,syscall_RawConn c,error ~r0)
+
+{
+  undefined8 in_RCX;
+  int in_RDX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  net_sysDialer *sd;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  (***(code ***)(*(int *)(in_RDX + 8) + 0x58))(in_RCX,in_RDI,in_RSI,in_R8,in_R9,in_R10);
+  return;
+}
+
+
+
+void net___sysListener__listenUDP
+               (net_sysListener *sl,context_Context ctx,net_UDPAddr *laddr,net_UDPConn *~r0,
+               error ~r1)
+
+{
+  string net;
+  undefined8 extraout_RAX;
+  net_netFD *fd;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *puVar1;
+  func_context_Context__string__string__syscall_RawConn__error **ctrlCtxFn;
+  int extraout_RBX;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  net_sockaddr in_stack_ffffffffffffff98;
+  net_sockaddr in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  error in_stack_ffffffffffffffc8;
+  undefined local_18 [16];
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((sl->ListenConfig).Control == (func_string__string__syscall_RawConn__error **)0x0) {
+    ctrlCtxFn = (func_context_Context__string__string__syscall_RawConn__error **)0x0;
+  }
+  else {
+    local_18._8_8_ = sl;
+    local_18._0_8_ = net___sysListener__listenUDP_func1;
+    ctrlCtxFn = (func_context_Context__string__string__syscall_RawConn__error **)local_18;
+  }
+  net.len = (int)ctrlCtxFn;
+  net.str = &DAT_00000006;
+  net_internetSocket((context_Context)(ZEXT816(0x8af880) << 0x40),net,in_stack_ffffffffffffff98,
+                     in_stack_ffffffffffffffa8,(int)laddr,(int)~r0,in_stack_ffffffffffffffb8,
+                     (func_context_Context__string__string__syscall_RawConn__error **)
+                     (sl->network).str,(net_netFD *)(sl->network).len,in_stack_ffffffffffffffc8);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0083fbe0,(void *)0x0);
+  puVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RAX;
+    puVar1 = extraout_RAX_01;
+  }
+  *puVar1 = extraout_RAX;
+  return;
+}
+
+
+
+void net___sysListener__listenUDP_func1
+               (context_Context cxt,string network,string address,syscall_RawConn c,error ~r0)
+
+{
+  undefined8 in_RCX;
+  int in_RDX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  net_sysListener *sl;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  (**(code **)**(undefined8 **)(in_RDX + 8))(in_RCX,in_RDI,in_RSI,in_R8,in_R9,in_R10);
+  return;
+}
+
+
+
+void net___UnixAddr__Network(net_UnixAddr *a,string ~r0)
+
+{
+  return;
+}
+
+
+
+void net___UnixAddr__String(net_UnixAddr *a,string ~r0)
+
+{
+  if (a != (net_UnixAddr *)0x0) {
+    return;
+  }
+  return;
+}
+
+
+
+void net___UnixAddr__isWildcard(net_UnixAddr *a,bool ~r0)
+
+{
+  return;
+}
+
+
+
+void net___UnixConn__SyscallConn(net_UnixConn *c,syscall_RawConn ~r0,error ~r1)
+
+{
+  net_netFD *pnVar1;
+  net_netFD **extraout_RAX;
+  net_netFD **extraout_RAX_00;
+  net_netFD **ppnVar2;
+  void *in_RBX;
+  void *extraout_RBX;
+  net_netFD **extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  pnVar1 = (c->conn).fd;
+  runtime_newobject((internal_abi_Type *)&DAT_0083fde0,in_RBX);
+  ppnVar2 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = pnVar1;
+    ppnVar2 = extraout_RAX_00;
+  }
+  *ppnVar2 = pnVar1;
+  return;
+}
+
+
+
+void net___UnixConn__CloseRead(net_UnixConn *c,error ~r0)
+
+{
+  net_netFD *pnVar1;
+  int iVar2;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar3;
+  net_UnixConn *extraout_RCX;
+  net_UnixConn *extraout_RCX_00;
+  void *extraout_RCX_01;
+  void *pvVar4;

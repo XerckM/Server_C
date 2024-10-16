@@ -1,0 +1,1000 @@
+    iVar1 = extraout_RBX_00->len;
+    newLen = iVar1 + num;
+    oldCap = extraout_RBX_00->cap;
+    oldPtr = extraout_RBX_00->array;
+    s.groups = extraout_RBX_00;
+    if (oldCap < newLen) {
+      ~r0_00.cap = in_stack_ffffffffffffff58;
+      ~r0_00.array = in_stack_ffffffffffffff48._type;
+      ~r0_00.len = (int)in_stack_ffffffffffffff48.data;
+      runtime_growslice(oldPtr,newLen,oldCap,num,(internal_abi_Type *)&DAT_008075e0,~r0_00);
+      oldPtr = extraout_RAX;
+      newLen = extraout_RBX_01;
+      oldCap = extraout_RCX;
+    }
+    runtime_typedslicecopy
+              ((internal_abi_Type *)&DAT_008075e0,
+               (void *)((int)&oldPtr->str + (iVar1 << 4 & (int)(iVar1 - oldCap) >> 0x3f)),
+               newLen - iVar1,srcPtr,num,newLen - iVar1);
+    (s.groups)->len = newLen;
+    (s.groups)->cap = oldCap;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = oldPtr;
+      extraout_R11[1] = (s.groups)->array;
+    }
+    (s.groups)->array = oldPtr;
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__free(void *__ptr)
+
+{
+  __string *gs;
+  int unaff_R14;
+  void *pvStack0000000000000008;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  pvStack0000000000000008 = __ptr;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((*(char *)((int)pvStack0000000000000008 + 0x10) != '\0') &&
+     (*(int *)(*(int *)((int)pvStack0000000000000008 + 8) + 0x10) < 0x4001)) {
+    *(undefined8 *)(*(int *)((int)pvStack0000000000000008 + 8) + 8) = 0;
+    sync___Pool__Put(&log_slog_internal_buffer_bufPool,in_stack_ffffffffffffffe0);
+  }
+  if (*(int *)((int)pvStack0000000000000008 + 0x30) != 0) {
+    *(undefined8 *)(*(int *)((int)pvStack0000000000000008 + 0x30) + 8) = 0;
+    sync___Pool__Put(&log_slog_groupPool,in_stack_ffffffffffffffe0);
+  }
+  if (*(int *)(*(int *)((int)pvStack0000000000000008 + 0x28) + 0x10) < 0x4001) {
+    *(undefined8 *)(*(int *)((int)pvStack0000000000000008 + 0x28) + 8) = 0;
+    sync___Pool__Put(&log_slog_internal_buffer_bufPool,in_stack_ffffffffffffffe0);
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__openGroup(log_slog_handleState *s,string name)
+
+{
+  runtime_slice ~r0;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  runtime_slice ~r0_02;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *puVar1;
+  uint8 *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  string *extraout_RAX_04;
+  string *extraout_RAX_05;
+  string *extraout_RAX_06;
+  string *oldPtr;
+  size_t in_RCX;
+  uint extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  int extraout_RCX_02;
+  int iVar2;
+  int extraout_RCX_03;
+  log_slog_internal_buffer_Buffer *plVar3;
+  __string *p_Var4;
+  void *in_RBX;
+  uint extraout_RBX;
+  uint uVar5;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  uint extraout_RBX_05;
+  log_slog_internal_buffer_Buffer *extraout_RSI;
+  uint oldCap;
+  undefined8 extraout_R8;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  string **extraout_R11_03;
+  void **extraout_R11_04;
+  int unaff_R14;
+  size_t sStack0000000000000018;
+  string in_stack_ffffffffffffff80;
+  int in_stack_ffffffffffffff90;
+  
+  sStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s->h->json == false) {
+    plVar3 = s->prefix;
+    oldCap = plVar3->cap;
+    iVar2 = plVar3->len;
+    uVar5 = iVar2 + sStack0000000000000018;
+    puVar1 = plVar3->array;
+    if (oldCap < uVar5) {
+      ~r0.cap = in_stack_ffffffffffffff90;
+      ~r0.array = in_stack_ffffffffffffff80.str;
+      ~r0.len = in_stack_ffffffffffffff80.len;
+      runtime_growslice(puVar1,uVar5,oldCap,sStack0000000000000018,
+                        (internal_abi_Type *)&DAT_00807920,~r0);
+      oldCap = extraout_RCX;
+      uVar5 = extraout_RBX;
+      puVar1 = extraout_RAX;
+    }
+    runtime_memmove(puVar1 + iVar2,in_RBX,sStack0000000000000018);
+    plVar3->len = uVar5;
+    plVar3->cap = oldCap;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = puVar1;
+      extraout_R11[1] = extraout_RSI->array;
+      plVar3 = extraout_RSI;
+    }
+    plVar3->array = puVar1;
+    plVar3 = s->prefix;
+    uVar5 = plVar3->len + 1;
+    puVar1 = plVar3->array;
+    if ((uint)plVar3->cap < uVar5) {
+      ~r0_00.cap = in_stack_ffffffffffffff90;
+      ~r0_00.array = in_stack_ffffffffffffff80.str;
+      ~r0_00.len = in_stack_ffffffffffffff80.len;
+      runtime_growslice(puVar1,uVar5,plVar3->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_00);
+      plVar3->cap = extraout_RCX_00;
+      puVar1 = extraout_RAX_00;
+      uVar5 = extraout_RBX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX_01;
+        extraout_R11_00[1] = plVar3->array;
+        puVar1 = extraout_RAX_01;
+        uVar5 = extraout_RBX_01;
+      }
+      plVar3->array = puVar1;
+    }
+    plVar3->len = uVar5;
+    puVar1[uVar5 - 1] = 0x2e;
+  }
+  else {
+    log_slog___handleState__appendKey(s,in_stack_ffffffffffffff80);
+    plVar3 = s->buf;
+    uVar5 = plVar3->len + 1;
+    puVar1 = plVar3->array;
+    if ((uint)plVar3->cap < uVar5) {
+      ~r0_01.cap = in_stack_ffffffffffffff90;
+      ~r0_01.array = in_stack_ffffffffffffff80.str;
+      ~r0_01.len = in_stack_ffffffffffffff80.len;
+      runtime_growslice(puVar1,uVar5,plVar3->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_01);
+      plVar3->cap = extraout_RCX_01;
+      puVar1 = extraout_RAX_02;
+      uVar5 = extraout_RBX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_03;
+        extraout_R11_01[1] = plVar3->array;
+        puVar1 = extraout_RAX_03;
+        uVar5 = extraout_RBX_03;
+      }
+      plVar3->array = puVar1;
+    }
+    plVar3->len = uVar5;
+    puVar1[uVar5 - 1] = 0x7b;
+    (s->sep).len = 0;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_02 = extraout_R8;
+    }
+    (s->sep).str = (uint8 *)0x0;
+  }
+  p_Var4 = s->groups;
+  if (p_Var4 != (__string *)0x0) {
+    uVar5 = p_Var4->len + 1;
+    oldPtr = p_Var4->array;
+    if ((uint)p_Var4->cap < uVar5) {
+      ~r0_02.cap = in_stack_ffffffffffffff90;
+      ~r0_02.array = in_stack_ffffffffffffff80.str;
+      ~r0_02.len = in_stack_ffffffffffffff80.len;
+      runtime_growslice(oldPtr,uVar5,p_Var4->cap,1,(internal_abi_Type *)&DAT_008075e0,~r0_02);
+      p_Var4->cap = extraout_RCX_02;
+      oldPtr = extraout_RAX_04;
+      uVar5 = extraout_RBX_04;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = extraout_RAX_05;
+        extraout_R11_03[1] = p_Var4->array;
+        oldPtr = extraout_RAX_05;
+        uVar5 = extraout_RBX_05;
+      }
+      p_Var4->array = oldPtr;
+    }
+    p_Var4->len = uVar5;
+    iVar2 = (uVar5 - 1) * 0x10;
+    oldPtr[uVar5 - 1].len = sStack0000000000000018;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = in_RBX;
+      extraout_R11_04[1] = *(void **)((int)&extraout_RAX_06->str + extraout_RCX_03);
+      oldPtr = extraout_RAX_06;
+      iVar2 = extraout_RCX_03;
+    }
+    *(void **)((int)&oldPtr->str + iVar2) = in_RBX;
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__appendAttr(log_slog_handleState *s,log_slog_Attr a)
+
+{
+  dword dVar1;
+  func___string__log_slog_Attr__log_slog_Attr **ppfVar2;
+  __string *p_Var3;
+  undefined auVar4 [16];
+  undefined *puVar5;
+  log_slog_Value v;
+  __string _Var6;
+  log_slog_Value v_00;
+  log_slog_Value v_01;
+  log_slog_Value ~r0;
+  log_slog_Value v_02;
+  runtime_slice ~r0_00;
+  log_slog_Attr a_00;
+  runtime_iface r;
+  runtime_iface r_00;
+  runtime_iface r_01;
+  __interface___ a_01;
+  interface___ ~r0_01;
+  log_slog_Value rv;
+  log_slog_Value rv_00;
+  log_slog_Attr lVar7;
+  string ~r0_02;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  int extraout_RAX_01;
+  undefined *extraout_RAX_02;
+  undefined8 extraout_RAX_03;
+  undefined8 extraout_RAX_04;
+  undefined8 extraout_RAX_05;
+  uint8 **extraout_RAX_06;
+  int extraout_RAX_07;
+  uint8 *extraout_RAX_08;
+  uint8 *extraout_RAX_09;
+  uint8 *extraout_RAX_10;
+  undefined8 in_RCX;
+  uint8 **extraout_RCX;
+  uint8 **extraout_RCX_00;
+  int extraout_RCX_01;
+  func___string__log_slog_Attr__log_slog_Attr **rep;
+  uint8 *puVar8;
+  log_slog_Kind x_1;
+  log_slog_Kind x_2;
+  log_slog_internal_buffer_Buffer *plVar9;
+  undefined8 extraout_RBX;
+  undefined *extraout_RBX_00;
+  log_slog_Source *s_00;
+  log_slog_Source *src;
+  undefined8 extraout_RBX_01;
+  void *x_00;
+  undefined8 extraout_RBX_02;
+  uint uVar10;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  undefined *in_RSI;
+  int iVar11;
+  log_slog_Kind x;
+  int *extraout_RSI;
+  int *in_R8;
+  log_slog_handleState *extraout_R9;
+  uint8 **ppuVar12;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  int unaff_R14;
+  bool bVar13;
+  uint8 **ppuStack0000000000000030;
+  interface___ in_stack_fffffffffffffec0;
+  runtime_itab *in_stack_fffffffffffffed0;
+  internal_abi_Type *in_stack_fffffffffffffed8;
+  void *in_stack_fffffffffffffee0;
+  uint8 *in_stack_fffffffffffffee8;
+  int in_stack_fffffffffffffef0;
+  void *in_stack_fffffffffffffef8;
+  log_slog_Attr *local_c0;
+  log_slog_internal_buffer_Buffer *local_b8;
+  uint8 **local_b0;
+  uint8 **local_a8;
+  undefined local_a0 [16];
+  undefined local_90 [16];
+  log_slog_Attr aa;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  
+  ppuStack0000000000000030 = (uint8 **)in_R8;
+  while( true ) {
+    a.Value.num._0_4_ = (undefined4)in_RCX;
+    a.Value.num._4_4_ = (undefined4)((uint)in_RCX >> 0x20);
+    if (*(log_slog_Attr ***)(unaff_R14 + 0x10) < &local_c0) break;
+    runtime_morestack_noctxt();
+  }
+  ppfVar2 = (s->h->opts).ReplaceAttr;
+  if (ppfVar2 == (func___string__log_slog_Attr__log_slog_Attr **)0x0) {
+    bVar13 = false;
+  }
+  else {
+    if (in_RSI == (undefined *)0x0) {
+LAB_007be1da:
+      iVar11 = 0;
+    }
+    else {
+      dVar1 = *(dword *)(in_RSI + 0x10);
+      if (dVar1 < 0x5eb9273e) {
+        if (dVar1 == 0x1712e740) {
+          if (in_RSI == &DAT_0080f280) {
+            iVar11 = 8;
+          }
+          else {
+LAB_007be15d:
+            r.data = in_stack_fffffffffffffed8;
+            r.tab = in_stack_fffffffffffffed0;
+            runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00834fc0,in_stack_fffffffffffffec0
+                               ,r);
+            if (extraout_RAX == 0) {
+              if ((dVar1 != 0xdf1d1ebd) || (in_RSI != &DAT_00807160)) goto LAB_007be1da;
+              iVar11 = 0;
+            }
+            else {
+              iVar11 = 9;
+            }
+          }
+        }
+        else {
+          if ((dVar1 != 0x5eb9273d) || (in_RSI != &DAT_0080f2e0)) goto LAB_007be15d;
+          iVar11 = 5;
+        }
+      }
+      else if (dVar1 == 0x7f949a56) {
+        if (in_RSI != &DAT_0081e5e0) goto LAB_007be15d;
+        iVar11 = (int)*ppuStack0000000000000030;
+      }
+      else {
+        if ((dVar1 != 0xfc24222d) || (in_RSI != &DAT_0080f340)) goto LAB_007be15d;
+        iVar11 = 6;
+      }
+    }
+    bVar13 = iVar11 != 8;
+  }
+  if (bVar13) {
+    if (s->groups == (__string *)0x0) {
+      local_c0 = (log_slog_Attr *)0x0;
+    }
+    else {
+      local_c0 = (log_slog_Attr *)s->groups->array;
+    }
+    v.any.data = in_stack_fffffffffffffed0;
+    v.num = (uint64)in_stack_fffffffffffffec0._type;
+    v.any._type = (internal_abi_Type *)in_stack_fffffffffffffec0.data;
+    rv.any._type = (internal_abi_Type *)in_stack_fffffffffffffee0;
+    rv.num = (uint64)in_stack_fffffffffffffed8;
+    rv.any.data = in_stack_fffffffffffffee8;
+    log_slog_Value_Resolve(v,rv);
+    _Var6.cap = (int)in_stack_fffffffffffffed0;
+    _Var6.array = (string *)in_stack_fffffffffffffec0._type;
+    _Var6.len = (int)in_stack_fffffffffffffec0.data;
+    lVar7.Key.len = (int)in_stack_fffffffffffffee0;
+    lVar7.Key.str = (uint8 *)in_stack_fffffffffffffed8;
+    lVar7.Value.num = (uint64)in_stack_fffffffffffffee8;
+    lVar7.Value.any._type = (internal_abi_Type *)in_stack_fffffffffffffef0;
+    lVar7.Value.any.data = in_stack_fffffffffffffef8;
+    (**ppfVar2)(_Var6,lVar7,local_c0);
+    local_28 = (undefined4)extraout_RBX;
+    uStack_24 = (undefined4)((uint)extraout_RBX >> 0x20);
+    a.Value.num._0_4_ = local_28;
+    a.Value.num._4_4_ = uStack_24;
+    ppuStack0000000000000030 = (uint8 **)extraout_RSI;
+  }
+  v_00.any.data = in_stack_fffffffffffffed0;
+  v_00.num = (uint64)in_stack_fffffffffffffec0._type;
+  v_00.any._type = (internal_abi_Type *)in_stack_fffffffffffffec0.data;
+  rv_00.any._type = (internal_abi_Type *)in_stack_fffffffffffffee0;
+  rv_00.num = (uint64)in_stack_fffffffffffffed8;
+  rv_00.any.data = in_stack_fffffffffffffee8;
+  log_slog_Value_Resolve(v_00,rv_00);
+  a.Value.any._type._0_4_ = (undefined4)extraout_RAX_00;
+  a.Value.any._type._4_4_ = (sdword)((uint)extraout_RAX_00 >> 0x20);
+  a.Value.any.data._0_4_ = SUB84(extraout_RBX_00,0);
+  a.Value.any.data._4_4_ = (undefined4)((uint)extraout_RBX_00 >> 0x20);
+  if (((CONCAT44(a.Value.num._4_4_,(undefined4)a.Value.num) == 0) && (extraout_RAX_00 == 0)) &&
+     (extraout_RBX_00 == (undefined *)0x0)) {
+    return;
+  }
+  ppuStack0000000000000030 = extraout_RCX;
+  if (extraout_RBX_00 == (undefined *)0x0) {
+LAB_007be50a:
+    puVar8 = (uint8 *)0x0;
+  }
+  else {
+    dVar1 = *(dword *)(extraout_RBX_00 + 0x10);
+    if (dVar1 < 0x5eb9273e) {
+      if (dVar1 == 0x1712e740) {
+        if (extraout_RBX_00 == &DAT_0080f280) {
+          puVar8 = (uint8 *)0x8;
+        }
+        else {
+LAB_007be47d:
+          r_00.data = in_stack_fffffffffffffed8;
+          r_00.tab = in_stack_fffffffffffffed0;
+          runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00834fc0,in_stack_fffffffffffffec0,
+                             r_00);
+          if (extraout_RAX_01 == 0) {
+            if ((dVar1 != 0xdf1d1ebd) || (extraout_RBX_00 != &DAT_00807160)) goto LAB_007be50a;
+            puVar8 = (uint8 *)0x0;
+          }
+          else {
+            puVar8 = (uint8 *)0x9;
+          }
+        }
+      }
+      else {
+        if ((dVar1 != 0x5eb9273d) || (extraout_RBX_00 != &DAT_0080f2e0)) goto LAB_007be47d;
+        puVar8 = (uint8 *)0x5;
+      }
+    }
+    else if (dVar1 == 0x7f949a56) {
+      if (extraout_RBX_00 != &DAT_0081e5e0) goto LAB_007be47d;
+      puVar8 = *extraout_RCX;
+    }
+    else {
+      if ((dVar1 != 0xfc24222d) || (extraout_RBX_00 != &DAT_0080f340)) goto LAB_007be47d;
+      puVar8 = &DAT_00000006;
+    }
+  }
+  if ((puVar8 == (uint8 *)0x0) &&
+     (v_01.any.data = in_stack_fffffffffffffed0, v_01.num = (uint64)in_stack_fffffffffffffec0._type,
+     v_01.any._type = (internal_abi_Type *)in_stack_fffffffffffffec0.data,
+     ~r0_01.data = in_stack_fffffffffffffee0, ~r0_01._type = in_stack_fffffffffffffed8,
+     log_slog_Value_Any(v_01,~r0_01), extraout_RAX_02 == &DAT_008252a0)) {
+    if (s->h->json == false) {
+      runtime_convTstring((string)in_stack_fffffffffffffec0,(s_00->File).str);
+      local_a0._8_8_ = extraout_RAX_04;
+      local_a0._0_8_ = &DAT_008075e0;
+      runtime_convT64(s_00->Line,x_00);
+      local_90._8_8_ = extraout_RAX_05;
+      local_90._0_8_ = &DAT_00807760;
+      a_01.len = (int)in_stack_fffffffffffffed8;
+      a_01.array = (interface___ *)in_stack_fffffffffffffed0;
+      a_01.cap = (int)in_stack_fffffffffffffee0;
+      ~r0_02.len = in_stack_fffffffffffffef0;
+      ~r0_02.str = in_stack_fffffffffffffee8;
+      fmt_Sprintf((string)in_stack_fffffffffffffec0,a_01,~r0_02);
+      a.Value.any._type._0_4_ = (undefined4)extraout_RBX_02;
+      a.Value.any._type._4_4_ = (sdword)((uint)extraout_RBX_02 >> 0x20);
+      a.Value.any.data._0_4_ = 0x80f2e0;
+      a.Value.any.data._4_4_ = 0;
+      ppuStack0000000000000030 = extraout_RAX_06;
+    }
+    else {
+      ~r0.any.data = in_stack_fffffffffffffed0;
+      ~r0.num = (uint64)in_stack_fffffffffffffec0._type;
+      ~r0.any._type = (internal_abi_Type *)in_stack_fffffffffffffec0.data;
+      log_slog___Source__group(s_00,~r0);
+      a.Value.any._type._0_4_ = (undefined4)extraout_RAX_03;
+      a.Value.any._type._4_4_ = (sdword)((uint)extraout_RAX_03 >> 0x20);
+      a.Value.any.data._0_4_ = (undefined4)extraout_RBX_01;
+      a.Value.any.data._4_4_ = (undefined4)((uint)extraout_RBX_01 >> 0x20);
+      ppuStack0000000000000030 = extraout_RCX_00;
+    }
+  }
+  puVar5 = (undefined *)CONCAT44(a.Value.any.data._4_4_,a.Value.any.data._0_4_);
+  if (puVar5 != (undefined *)0x0) {
+    dVar1 = *(dword *)(puVar5 + 0x10);
+    if (dVar1 < 0x5eb9273e) {
+      if (dVar1 == 0x1712e740) {
+        if (puVar5 == &DAT_0080f280) {
+          puVar8 = (uint8 *)0x8;
+          goto LAB_007be710;
+        }
+      }
+      else if ((dVar1 == 0x5eb9273d) && (puVar5 == &DAT_0080f2e0)) {
+        puVar8 = (uint8 *)0x5;
+        goto LAB_007be710;
+      }
+    }
+    else if (dVar1 == 0x7f949a56) {
+      if (puVar5 == &DAT_0081e5e0) {
+        puVar8 = *ppuStack0000000000000030;
+        goto LAB_007be710;
+      }
+    }
+    else if ((dVar1 == 0xfc24222d) && (puVar5 == &DAT_0080f340)) {
+      puVar8 = &DAT_00000006;
+      goto LAB_007be710;
+    }
+    r_01.data = in_stack_fffffffffffffed8;
+    r_01.tab = in_stack_fffffffffffffed0;
+    runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00834fc0,in_stack_fffffffffffffec0,r_01);
+    if (extraout_RAX_07 != 0) {
+      puVar8 = (uint8 *)0x9;
+      goto LAB_007be710;
+    }
+    if ((dVar1 == 0xdf1d1ebd) && (puVar5 == &DAT_00807160)) {
+      puVar8 = (uint8 *)0x0;
+      goto LAB_007be710;
+    }
+  }
+  puVar8 = (uint8 *)0x0;
+LAB_007be710:
+  if (puVar8 == (uint8 *)0x8) {
+    if ((undefined *)CONCAT44(a.Value.any.data._4_4_,a.Value.any.data._0_4_) != &DAT_0080f280) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_fffffffffffffec0);
+    }
+    uVar10 = CONCAT44(a.Value.any._type._4_4_,a.Value.any._type._0_4_);
+    if (a.Value.any._type._4_4_ < 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicunsafeslicelen();
+    }
+    local_a8 = ppuStack0000000000000030;
+    auVar4._8_8_ = 0;
+    auVar4._0_8_ = uVar10;
+    if ((SUB168(auVar4 * ZEXT816(0x28),8) != 0) ||
+       ((uint)-(int)ppuStack0000000000000030 < SUB168(auVar4 * ZEXT816(0x28),0))) {
+      if (ppuStack0000000000000030 != (uint8 **)0x0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicunsafeslicelen();
+      }
+                    // WARNING: Subroutine does not return
+      runtime_panicunsafeslicenilptr();
+    }
+    if (uVar10 != 0) {
+      if (CONCAT44(a.Value.num._4_4_,(undefined4)a.Value.num) != 0) {
+        log_slog___handleState__openGroup(s,(string)in_stack_fffffffffffffec0);
+      }
+      ppuVar12 = local_a8;
+      for (iVar11 = 0; iVar11 < (int)uVar10; iVar11 = iVar11 + 1) {
+        aa.Key.str = *ppuVar12;
+        aa.Key.len._0_4_ = *(undefined4 *)(ppuVar12 + 1);
+        aa.Key.len._4_4_ = *(undefined4 *)((int)ppuVar12 + 0xc);
+        aa.Value.num._0_4_ = *(undefined4 *)(ppuVar12 + 2);
+        aa.Value.num._4_4_ = *(undefined4 *)((int)ppuVar12 + 0x14);
+        aa.Value.any._type._0_4_ = *(undefined4 *)(ppuVar12 + 3);
+        aa.Value.any._type._4_4_ = *(undefined4 *)((int)ppuVar12 + 0x1c);
+        aa.Value.any.data._0_4_ = *(undefined4 *)(ppuVar12 + 4);
+        aa.Value.any.data._4_4_ = *(undefined4 *)((int)ppuVar12 + 0x24);
+        a_00.Value.num = (uint64)in_stack_fffffffffffffed0;
+        a_00.Key.str = (uint8 *)in_stack_fffffffffffffec0._type;
+        a_00.Key.len = (int)in_stack_fffffffffffffec0.data;
+        a_00.Value.any._type = in_stack_fffffffffffffed8;
+        a_00.Value.any.data = in_stack_fffffffffffffee0;
+        local_b0 = ppuVar12;
+        log_slog___handleState__appendAttr(s,a_00);
+        ppuVar12 = local_b0 + 5;
+      }
+      if (CONCAT44(a.Value.num._4_4_,(undefined4)a.Value.num) != 0) {
+        if (s->h->json == false) {
+          plVar9 = s->prefix;
+          uVar10 = (plVar9->len - CONCAT44(a.Value.num._4_4_,(undefined4)a.Value.num)) - 1;
+          if ((uint)plVar9->cap < uVar10) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceAcap();
+          }
+          plVar9->len = uVar10;
+        }
+        else {
+          plVar9 = s->buf;
+          uVar10 = plVar9->len + 1;
+          puVar8 = plVar9->array;
+          if ((uint)plVar9->cap < uVar10) {
+            ~r0_00.cap = (int)in_stack_fffffffffffffed0;
+            ~r0_00.array = in_stack_fffffffffffffec0._type;
+            ~r0_00.len = (int)in_stack_fffffffffffffec0.data;
+            local_b8 = plVar9;
+            runtime_growslice(puVar8,uVar10,plVar9->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_00)
+            ;
+            local_b8->cap = extraout_RCX_01;
+            puVar8 = extraout_RAX_08;
+            plVar9 = local_b8;
+            uVar10 = extraout_RBX_03;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11 = extraout_RAX_09;
+              extraout_R11[1] = plVar9->array;
+              puVar8 = extraout_RAX_09;
+              uVar10 = extraout_RBX_04;
+            }
+            plVar9->array = puVar8;
+          }
+          plVar9->len = uVar10;
+          puVar8[uVar10 - 1] = 0x7d;
+        }
+        bVar13 = s->h->json;
+        (s->sep).len = 1;
+        puVar8 = &DAT_0095c5d0;
+        if (bVar13 != false) {
+          puVar8 = &DAT_0095a6c8;
+        }
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = extraout_RAX_10;
+          extraout_R11_00[1] = (extraout_R9->sep).str;
+          puVar8 = extraout_RAX_10;
+          s = extraout_R9;
+        }
+        (s->sep).str = puVar8;
+        p_Var3 = s->groups;
+        if (p_Var3 != (__string *)0x0) {
+          uVar10 = p_Var3->len - 1;
+          if ((uint)p_Var3->cap < uVar10) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceAcap();
+          }
+          p_Var3->len = uVar10;
+        }
+      }
+    }
+  }
+  else {
+    log_slog___handleState__appendKey(s,(string)in_stack_fffffffffffffec0);
+    v_02.any.data = in_stack_fffffffffffffed0;
+    v_02.num = (uint64)in_stack_fffffffffffffec0._type;
+    v_02.any._type = (internal_abi_Type *)in_stack_fffffffffffffec0.data;
+    log_slog___handleState__appendValue(s,v_02);
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__appendError(log_slog_handleState *s,error err)
+
+{
+  string ~r0;
+  int in_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb8;
+  __interface___ in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX != 0) {
+    in_RBX = *(int *)(in_RBX + 8);
+  }
+  ~r0.len = in_RBX;
+  ~r0.str = (uint8 *)s;
+  fmt_Sprintf(in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8,~r0);
+  log_slog___handleState__appendString(s,in_stack_ffffffffffffffb8);
+  return;
+}
+
+
+
+void log_slog___handleState__appendKey(log_slog_handleState *s,string key)
+
+{
+  bool bVar1;
+  size_t __n;
+  int iVar2;
+  runtime_slice ~r0;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  string a1;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  uint8 *puVar3;
+  uint8 *extraout_RAX_04;
+  uint extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  log_slog_internal_buffer_Buffer *plVar4;
+  uint extraout_RBX;
+  uint uVar5;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  log_slog_internal_buffer_Buffer *extraout_RSI;
+  uint oldCap;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  uint8 **extraout_R11_02;
+  int unaff_R14;
+  string in_stack_ffffffffffffff38;
+  uint8 *in_stack_ffffffffffffff48;
+  int in_stack_ffffffffffffff50;
+  string in_stack_ffffffffffffff58;
+  uint8 local_70 [32];
+  uint8 local_50 [8];
+  undefined local_48 [24];
+  uint8 *local_30;
+  log_slog_internal_buffer_Buffer *local_28;
+  log_slog_internal_buffer_Buffer *local_20;
+  log_slog_internal_buffer_Buffer *local_18;
+  uint8 *local_10;
+  
+  while (local_48 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_18 = s->buf;
+  __n = (s->sep).len;
+  oldCap = local_18->cap;
+  iVar2 = local_18->len;
+  uVar5 = iVar2 + __n;
+  puVar3 = (s->sep).str;
+  local_10 = local_18->array;
+  if (oldCap < uVar5) {
+    ~r0.cap = (int)in_stack_ffffffffffffff48;
+    ~r0.array = in_stack_ffffffffffffff38.str;
+    ~r0.len = in_stack_ffffffffffffff38.len;
+    local_30 = puVar3;
+    runtime_growslice(local_10,uVar5,oldCap,__n,(internal_abi_Type *)&DAT_00807920,~r0);
+    oldCap = extraout_RCX;
+    uVar5 = extraout_RBX;
+    puVar3 = local_30;
+    local_10 = extraout_RAX;
+  }
+  runtime_memmove(local_10 + iVar2,puVar3,__n);
+  local_18->len = uVar5;
+  local_18->cap = oldCap;
+  plVar4 = local_18;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = local_10;
+    extraout_R11[1] = extraout_RSI->array;
+    plVar4 = extraout_RSI;
+  }
+  plVar4->array = local_10;
+  plVar4 = s->prefix;
+  if ((plVar4 == (log_slog_internal_buffer_Buffer *)0x0) || (plVar4->len == 0)) {
+    log_slog___handleState__appendString(s,in_stack_ffffffffffffff38);
+  }
+  else {
+    runtime_slicebytetostring(&local_70,plVar4->array,plVar4->len,in_stack_ffffffffffffff38);
+    a1.len = in_stack_ffffffffffffff50;
+    a1.str = in_stack_ffffffffffffff48;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)local_50,in_stack_ffffffffffffff38,a1,in_stack_ffffffffffffff58);
+    log_slog___handleState__appendString(s,in_stack_ffffffffffffff38);
+  }
+  if (s->h->json == false) {
+    plVar4 = s->buf;
+    uVar5 = plVar4->len + 1;
+    puVar3 = plVar4->array;
+    if ((uint)plVar4->cap < uVar5) {
+      ~r0_01.cap = (int)in_stack_ffffffffffffff48;
+      ~r0_01.array = in_stack_ffffffffffffff38.str;
+      ~r0_01.len = in_stack_ffffffffffffff38.len;
+      local_28 = plVar4;
+      runtime_growslice(puVar3,uVar5,plVar4->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_01);
+      local_28->cap = extraout_RCX_01;
+      puVar3 = extraout_RAX_02;
+      plVar4 = local_28;
+      uVar5 = extraout_RBX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_03;
+        extraout_R11_01[1] = plVar4->array;
+        puVar3 = extraout_RAX_03;
+        uVar5 = extraout_RBX_03;
+      }
+      plVar4->array = puVar3;
+    }
+    plVar4->len = uVar5;
+    puVar3[uVar5 - 1] = 0x3d;
+  }
+  else {
+    plVar4 = s->buf;
+    uVar5 = plVar4->len + 1;
+    puVar3 = plVar4->array;
+    if ((uint)plVar4->cap < uVar5) {
+      ~r0_00.cap = (int)in_stack_ffffffffffffff48;
+      ~r0_00.array = in_stack_ffffffffffffff38.str;
+      ~r0_00.len = in_stack_ffffffffffffff38.len;
+      local_20 = plVar4;
+      runtime_growslice(puVar3,uVar5,plVar4->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_00);
+      local_20->cap = extraout_RCX_00;
+      puVar3 = extraout_RAX_00;
+      plVar4 = local_20;
+      uVar5 = extraout_RBX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX_01;
+        extraout_R11_00[1] = plVar4->array;
+        puVar3 = extraout_RAX_01;
+        uVar5 = extraout_RBX_01;
+      }
+      plVar4->array = puVar3;
+    }
+    plVar4->len = uVar5;
+    puVar3[uVar5 - 1] = 0x3a;
+  }
+  bVar1 = s->h->json;
+  (s->sep).len = 1;
+  puVar3 = &DAT_0095c5d0;
+  if (bVar1 != false) {
+    puVar3 = &DAT_0095a6c8;
+  }
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_02 = extraout_RAX_04;
+    extraout_R11_02[1] = (s->sep).str;
+    puVar3 = extraout_RAX_04;
+  }
+  (s->sep).str = puVar3;
+  return;
+}
+
+
+
+void log_slog___handleState__appendString(log_slog_handleState *s,string str)
+
+{
+  int iVar1;
+  runtime_slice ~r0;
+  __uint8 buf;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  __uint8 buf_00;
+  char extraout_AL;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  uint8 *extraout_RAX_04;
+  uint8 *puVar2;
+  uint8 *extraout_RAX_05;
+  uint8 *extraout_RAX_06;
+  uint8 *extraout_RAX_07;
+  size_t in_RCX;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  uint extraout_RCX_02;
+  uint oldCap;
+  int extraout_RCX_03;
+  log_slog_internal_buffer_Buffer *plVar3;
+  void *in_RBX;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  int extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  int extraout_RBX_05;
+  log_slog_internal_buffer_Buffer *extraout_RSI;
+  log_slog_internal_buffer_Buffer *extraout_R8;
+  uint uVar4;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  uint8 **extraout_R11_02;
+  uint8 **extraout_R11_03;
+  int unaff_R14;
+  size_t sStack0000000000000018;
+  string in_stack_ffffffffffffff88;
+  int in_stack_ffffffffffffff98;
+  string in_stack_ffffffffffffffa0;
+  __uint8 in_stack_ffffffffffffffb0;
+  
+  sStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s->h->json == false) {
+    log_slog_needsQuoting(in_stack_ffffffffffffff88,SUB81(in_RBX,0));
+    if (extraout_AL == '\0') {
+      plVar3 = s->buf;
+      oldCap = plVar3->cap;
+      iVar1 = plVar3->len;
+      uVar4 = iVar1 + sStack0000000000000018;
+      puVar2 = plVar3->array;
+      if (oldCap < uVar4) {
+        ~r0_01.cap = in_stack_ffffffffffffff98;
+        ~r0_01.array = in_stack_ffffffffffffff88.str;
+        ~r0_01.len = in_stack_ffffffffffffff88.len;
+        runtime_growslice(puVar2,uVar4,oldCap,sStack0000000000000018,
+                          (internal_abi_Type *)&DAT_00807920,~r0_01);
+        puVar2 = extraout_RAX_05;
+        oldCap = extraout_RCX_02;
+        uVar4 = extraout_RBX_04;
+      }
+      runtime_memmove(puVar2 + iVar1,in_RBX,sStack0000000000000018);
+      plVar3->len = uVar4;
+      plVar3->cap = oldCap;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = puVar2;
+        extraout_R11_02[1] = extraout_RSI->array;
+        plVar3 = extraout_RSI;
+      }
+      plVar3->array = puVar2;
+    }
+    else {
+      plVar3 = s->buf;
+      buf_00.cap = in_stack_ffffffffffffff98;
+      buf_00.array = in_stack_ffffffffffffff88.str;
+      buf_00.len = in_stack_ffffffffffffff88.len;
+      strconv_appendQuotedWith
+                (buf_00,in_stack_ffffffffffffffa0,(uint8)plVar3->array,SUB81(plVar3->len,0),
+                 SUB81(plVar3->cap,0),in_stack_ffffffffffffffb0);
+      plVar3 = s->buf;
+      plVar3->len = extraout_RBX_05;
+      plVar3->cap = extraout_RCX_03;
+      puVar2 = extraout_RAX_06;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = extraout_RAX_07;
+        extraout_R11_03[1] = plVar3->array;
+        puVar2 = extraout_RAX_07;
+      }
+      plVar3->array = puVar2;
+    }
+  }
+  else {
+    plVar3 = s->buf;
+    uVar4 = plVar3->len + 1;
+    puVar2 = plVar3->array;
+    if ((uint)plVar3->cap < uVar4) {
+      ~r0.cap = in_stack_ffffffffffffff98;
+      ~r0.array = in_stack_ffffffffffffff88.str;
+      ~r0.len = in_stack_ffffffffffffff88.len;
+      runtime_growslice(puVar2,uVar4,plVar3->cap,1,(internal_abi_Type *)&DAT_00807920,~r0);
+      plVar3->cap = extraout_RCX;
+      puVar2 = extraout_RAX;
+      uVar4 = extraout_RBX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        extraout_R11[1] = plVar3->array;
+        puVar2 = extraout_RAX_00;
+        uVar4 = extraout_RBX_00;
+      }
+      plVar3->array = puVar2;
+    }
+    plVar3->len = uVar4;
+    puVar2[uVar4 - 1] = 0x22;
+    buf.cap = in_stack_ffffffffffffff98;
+    buf.array = in_stack_ffffffffffffff88.str;
+    buf.len = in_stack_ffffffffffffff88.len;
+    log_slog_appendEscapedJSONString(buf,in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0);
+    plVar3 = s->buf;
+    plVar3->len = extraout_RBX_01;
+    plVar3->cap = extraout_RCX_00;
+    puVar2 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_02;
+      extraout_R11_00[1] = extraout_R8->array;
+      puVar2 = extraout_RAX_02;
+      plVar3 = extraout_R8;
+    }
+    plVar3->array = puVar2;
+    plVar3 = s->buf;
+    uVar4 = plVar3->len + 1;
+    puVar2 = plVar3->array;
+    if ((uint)plVar3->cap < uVar4) {
+      ~r0_00.cap = in_stack_ffffffffffffff98;
+      ~r0_00.array = in_stack_ffffffffffffff88.str;
+      ~r0_00.len = in_stack_ffffffffffffff88.len;
+      runtime_growslice(puVar2,uVar4,plVar3->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_00);
+      plVar3->cap = extraout_RCX_01;
+      puVar2 = extraout_RAX_03;
+      uVar4 = extraout_RBX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_04;
+        extraout_R11_01[1] = plVar3->array;
+        puVar2 = extraout_RAX_04;
+        uVar4 = extraout_RBX_03;
+      }

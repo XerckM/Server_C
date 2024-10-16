@@ -1,0 +1,1000 @@
+  if (in_SIL != '\0') {
+    ~r0_00.len = unaff_retaddr;
+    ~r0_00.str = unaff_RBP;
+    time_Time_Format(in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe8,~r0_00);
+    return;
+  }
+  ~r0_01.len = unaff_retaddr;
+  ~r0_01.str = unaff_RBP;
+  time_Time_Format(in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe8,~r0_01);
+  return;
+}
+
+
+
+// DWARF original prototype: void
+// golang.org/x/net/trace.(*eventLog).hasRecentError(golang.org/x/net/trace.eventLog * el, time.Time
+// now, time.Duration maxErrAge, bool ~r0, bool ~r0)
+
+void golang_org_x_net_trace___eventLog__hasRecentError
+               (golang_org_x_net_trace_eventLog *el,time_Time now,time_Duration maxErrAge,bool ~r0,
+               bool ~r0_1)
+
+{
+  sync_atomic_Int32 *psVar1;
+  sdword sVar2;
+  int in_RSI;
+  undefined7 in_register_00000039;
+  int unaff_R14;
+  undefined8 uStack0000000000000020;
+  int iStack0000000000000028;
+  time_Time in_stack_ffffffffffffff90;
+  time_Time in_stack_ffffffffffffffa8;
+  undefined local_20 [16];
+  code **local_10;
+  
+  uStack0000000000000020 = CONCAT71(in_register_00000039,~r0_1);
+  iStack0000000000000028 = in_RSI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (iStack0000000000000028 != 0) {
+    LOCK();
+    psVar1 = &(el->mu).readerCount;
+    sVar2 = psVar1->v;
+    psVar1->v = psVar1->v + 1;
+    UNLOCK();
+    if ((sdword)(sVar2 + 1) < 0) {
+      sync_runtime_SemacquireRWMutexR(&(el->mu).readerSem,false,0);
+    }
+    local_20._8_8_ = &el->mu;
+    local_20._0_8_ = golang_org_x_net_trace___eventLog__hasRecentError_func1;
+    local_10 = (code **)local_20;
+    time_Time_Sub(in_stack_ffffffffffffff90,in_stack_ffffffffffffffa8,maxErrAge);
+    (**local_10)();
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_trace___eventLog__hasRecentError_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___RWMutex__RUnlock(*(sync_RWMutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void golang_org_x_net_trace___eventLog__delta
+               (golang_org_x_net_trace_eventLog *el,time_Time t,time_Duration ~r0,bool ~r1)
+
+{
+  golang_org_x_net_trace_logEntry *pgVar1;
+  uint64 uVar2;
+  int year;
+  time_Location *month;
+  undefined7 in_register_00000009;
+  int day;
+  int day_1;
+  int iVar3;
+  int yday;
+  int yday_00;
+  time_Month in_RDI;
+  int unaff_R14;
+  time_Month tStack0000000000000020;
+  time_Time in_stack_ffffffffffffff88;
+  time_Time in_stack_ffffffffffffffa0;
+  
+  tStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar3 = (el->events).len;
+  if (iVar3 == 0) {
+    time_Time_Sub(in_stack_ffffffffffffff88,in_stack_ffffffffffffffa0,~r0);
+    return;
+  }
+  pgVar1 = (el->events).array;
+  iVar3 = iVar3 + -1;
+  uVar2 = pgVar1[iVar3].When.wall;
+  year = pgVar1[iVar3].When.ext;
+  month = pgVar1[iVar3].When.loc;
+  time_Time_Sub(in_stack_ffffffffffffff88,in_stack_ffffffffffffffa0,~r0);
+  time_Time_date(in_stack_ffffffffffffff88,SUB81(uVar2,0),year,(time_Month)month,1,yday);
+  time_Time_date(in_stack_ffffffffffffff88,SUB81(~r0,0),CONCAT71(in_register_00000009,~r1),
+                 tStack0000000000000020,1,yday_00);
+  return;
+}
+
+
+
+void golang_org_x_net_trace___eventLog__Printf
+               (golang_org_x_net_trace_eventLog *el,string format,__interface___ a)
+
+{
+  undefined8 in_RCX;
+  undefined8 in_RBX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  golang_org_x_net_trace___eventLog__printf((char *)el,0,in_RBX,in_RCX,in_RDI,in_RSI,in_R8);
+  return;
+}
+
+
+
+void golang_org_x_net_trace___eventLog__Errorf
+               (golang_org_x_net_trace_eventLog *el,string format,__interface___ a)
+
+{
+  undefined8 in_RCX;
+  undefined8 in_RBX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  golang_org_x_net_trace___eventLog__printf((char *)el,1,in_RBX,in_RCX,in_RDI,in_RSI,in_R8);
+  return;
+}
+
+
+
+int golang_org_x_net_trace___eventLog__printf(char *__format,...)
+
+{
+  sync_RWMutex *rw;
+  int iVar1;
+  golang_org_x_net_trace_logEntry *dst;
+  void *x;
+  uint uVar2;
+  int64 iVar3;
+  time_Time ~r0;
+  time_Time t;
+  runtime_slice ~r0_00;
+  __interface___ a;
+  __interface___ a_00;
+  undefined auVar4 [16];
+  string sVar5;
+  uint64 extraout_RAX;
+  uint8 *extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  golang_org_x_net_trace_logEntry *extraout_RAX_02;
+  golang_org_x_net_trace_logEntry *extraout_RAX_03;
+  golang_org_x_net_trace_logEntry *pgVar6;
+  undefined8 extraout_RAX_04;
+  uint8 *extraout_RAX_05;
+  uint8 *extraout_RAX_06;
+  uint8 *puVar7;
+  golang_org_x_net_trace_eventLog *extraout_RAX_07;
+  golang_org_x_net_trace_eventLog *pgVar8;
+  int extraout_RAX_08;
+  undefined8 in_RCX;
+  time_Location *extraout_RCX;
+  int extraout_RCX_00;
+  golang_org_x_net_trace_eventLog *extraout_RCX_01;
+  golang_org_x_net_trace_eventLog *extraout_RCX_02;
+  undefined in_BL;
+  bool extraout_BL;
+  int64 extraout_RBX;
+  uint8 *extraout_RBX_00;
+  uint uVar9;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  int extraout_RBX_03;
+  time_Location *extraout_RBX_04;
+  time_Location *ptVar10;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  time_Location *extraout_R10;
+  golang_org_x_net_trace_logEntry **extraout_R11;
+  uint8 **extraout_R11_00;
+  time_Location **extraout_R11_01;
+  time_Location **extraout_R11_02;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  golang_org_x_net_trace_eventLog *pgStack0000000000000008;
+  undefined uStack0000000000000010;
+  undefined8 uStack0000000000000018;
+  undefined8 uStack0000000000000020;
+  undefined8 uStack0000000000000028;
+  undefined8 uStack0000000000000030;
+  undefined8 uStack0000000000000038;
+  string in_stack_ffffffffffffff30;
+  time_Location *in_stack_ffffffffffffff40;
+  undefined in_stack_ffffffffffffff48 [16];
+  string in_stack_ffffffffffffff58;
+  undefined local_58 [16];
+  golang_org_x_net_trace_logEntry e;
+  
+  pgStack0000000000000008 = (golang_org_x_net_trace_eventLog *)__format;
+  uStack0000000000000018 = in_RCX;
+  uStack0000000000000028 = in_RSI;
+  uStack0000000000000020 = in_RDI;
+  uStack0000000000000030 = in_R8;
+  uStack0000000000000038 = in_R9;
+  uStack0000000000000010 = in_BL;
+  while (local_58 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0.loc = in_stack_ffffffffffffff40;
+  ~r0.wall = (uint64)in_stack_ffffffffffffff30.str;
+  ~r0.ext = in_stack_ffffffffffffff30.len;
+  time_Now(~r0);
+  a.len = in_stack_ffffffffffffff48._0_8_;
+  a.cap = in_stack_ffffffffffffff48._8_8_;
+  a.array = (interface___ *)in_stack_ffffffffffffff40;
+  fmt_Sprintf(in_stack_ffffffffffffff30,a,in_stack_ffffffffffffff58);
+  e.When.ext = in_XMM15._8_8_;
+  e.Elapsed = e.When.ext;
+  e.When.ext = extraout_RBX;
+  e.When.wall = extraout_RAX;
+  e.When.loc = extraout_RCX;
+  e._57_7_ = in_XMM15._9_7_;
+  e.What.len = in_XMM15._0_8_;
+  e._48_9_ = CONCAT18(uStack0000000000000010,e.What.len);
+  e.What.str = extraout_RAX_00;
+  e._32_8_ = e.What.len;
+  e.What.len = (int)extraout_RBX_00;
+  rw = &pgStack0000000000000008->mu;
+  sync___RWMutex__Lock(rw);
+  t.loc = in_stack_ffffffffffffff40;
+  t.wall = (uint64)in_stack_ffffffffffffff30.str;
+  t.ext = in_stack_ffffffffffffff30.len;
+  golang_org_x_net_trace___eventLog__delta
+            (pgStack0000000000000008,t,e.When.wall,SUB161(e.When._0_16_,8));
+  e.Elapsed = extraout_RAX_01;
+  e.NewDay = extraout_BL;
+  x = (void *)(pgStack0000000000000008->events).len;
+  if ((int)x < 100) {
+    uVar2 = (pgStack0000000000000008->events).cap;
+    uVar9 = (int)x + 1;
+    pgVar6 = (pgStack0000000000000008->events).array;
+    if (uVar2 < uVar9) {
+      ~r0_00.cap = (int)in_stack_ffffffffffffff40;
+      ~r0_00.array = in_stack_ffffffffffffff30.str;
+      ~r0_00.len = in_stack_ffffffffffffff30.len;
+      runtime_growslice(pgVar6,uVar9,uVar2,1,(internal_abi_Type *)&DAT_00884420,~r0_00);
+      (pgStack0000000000000008->events).cap = extraout_RCX_00;
+      pgVar6 = extraout_RAX_02;
+      pgVar8 = pgStack0000000000000008;
+      uVar9 = extraout_RBX_01;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_03;
+        extraout_R11[1] = (pgVar8->events).array;
+        pgVar6 = extraout_RAX_03;
+        uVar9 = extraout_RBX_02;
+      }
+      (pgVar8->events).array = pgVar6;
+    }
+    (pgStack0000000000000008->events).len = uVar9;
+    iVar1 = uVar9 - 1;
+    dst = pgVar6 + iVar1;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbMove((internal_abi_Type *)&DAT_00884420,dst,&e);
+    }
+    sVar5 = e._48_16_;
+    auVar4 = e._32_16_;
+    *(undefined4 *)&(dst->When).wall = (undefined4)e.When.wall;
+    *(undefined4 *)((int)&(dst->When).wall + 4) = e.When.wall._4_4_;
+    *(undefined4 *)&(dst->When).ext = (undefined4)e.When.ext;
+    *(undefined4 *)((int)&(dst->When).ext + 4) = e.When.ext._4_4_;
+    *(undefined4 *)&(dst->When).loc = e.When.loc._0_4_;
+    *(undefined4 *)((int)&(dst->When).loc + 4) = e.When.loc._4_4_;
+    *(undefined4 *)&dst->Elapsed = (undefined4)e.Elapsed;
+    *(undefined4 *)((int)&dst->Elapsed + 4) = e.Elapsed._4_4_;
+    pgVar6[iVar1].NewDay = e.NewDay;
+    *(undefined3 *)&pgVar6[iVar1].field_0x21 = e._33_3_;
+    *(undefined4 *)&pgVar6[iVar1].field_0x24 = e._36_4_;
+    *(undefined4 *)&pgVar6[iVar1].What.str = e.What.str._0_4_;
+    *(undefined4 *)((int)&pgVar6[iVar1].What.str + 4) = e.What.str._4_4_;
+    *(undefined4 *)&pgVar6[iVar1].What.len = (undefined4)e.What.len;
+    *(undefined4 *)((int)&pgVar6[iVar1].What.len + 4) = e.What.len._4_4_;
+    pgVar6[iVar1].IsErr = e.IsErr;
+    *(undefined3 *)&pgVar6[iVar1].field_0x39 = e._57_3_;
+    *(undefined4 *)&pgVar6[iVar1].field_0x3c = e._60_4_;
+    e._32_16_ = auVar4;
+    e._48_16_ = sVar5;
+  }
+  else {
+    if (pgStack0000000000000008->discarded == 0) {
+      pgStack0000000000000008->discarded = 2;
+    }
+    else {
+      pgStack0000000000000008->discarded = pgStack0000000000000008->discarded + 1;
+    }
+    runtime_convT64(pgStack0000000000000008->discarded,x);
+    local_58._8_8_ = extraout_RAX_04;
+    local_58._0_8_ = &DAT_00807760;
+    a_00.len = in_stack_ffffffffffffff48._0_8_;
+    a_00.cap = in_stack_ffffffffffffff48._8_8_;
+    a_00.array = (interface___ *)in_stack_ffffffffffffff40;
+    fmt_Sprintf(in_stack_ffffffffffffff30,a_00,in_stack_ffffffffffffff58);
+    if ((pgStack0000000000000008->events).len == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pgVar6 = (pgStack0000000000000008->events).array;
+    (pgVar6->What).len = extraout_RBX_03;
+    puVar7 = extraout_RAX_05;
+    pgVar8 = pgStack0000000000000008;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_06;
+      extraout_R11_00[1] = (pgVar6->What).str;
+      puVar7 = extraout_RAX_06;
+      pgVar8 = extraout_RCX_01;
+    }
+    (pgVar6->What).str = puVar7;
+    if ((uint)(pgVar8->events).len < 2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pgVar6 = (pgVar8->events).array;
+    iVar3 = pgVar6[1].When.ext;
+    ptVar10 = pgVar6[1].When.loc;
+    (pgVar6->When).wall = pgVar6[1].When.wall;
+    (pgVar6->When).ext = iVar3;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = extraout_R10;
+      extraout_R11_01[1] = (pgVar6->When).loc;
+      pgVar8 = extraout_RCX_02;
+      ptVar10 = extraout_R10;
+    }
+    (pgVar6->When).loc = ptVar10;
+    uVar2 = (pgVar8->events).len;
+    if (uVar2 == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    pgVar6 = (pgVar8->events).array;
+    iVar1 = (pgVar8->events).cap;
+    if (uVar2 < 2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    uVar9 = (uint)((dword)(-(iVar1 + -2) >> 0x3f) & 0x80);
+    runtime_typedslicecopy
+              ((internal_abi_Type *)&DAT_00884420,
+               (void *)((int)&(pgVar6->When).wall + (uint)((dword)(-(iVar1 + -1) >> 0x3f) & 0x40)),
+               uVar2 - 1,(void *)((int)&(pgVar6->When).wall + uVar9),uVar2 - 2,uVar9);
+    if ((uint)(pgStack0000000000000008->events).len < 100) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pgVar6 = (pgStack0000000000000008->events).array;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbMove((internal_abi_Type *)&DAT_00884420,pgVar6 + 99,&e);
+    }
+    sVar5 = e._48_16_;
+    auVar4 = e._32_16_;
+    *(undefined4 *)&pgVar6[99].When.wall = (undefined4)e.When.wall;
+    *(undefined4 *)((int)&pgVar6[99].When.wall + 4) = e.When.wall._4_4_;
+    *(undefined4 *)&pgVar6[99].When.ext = (undefined4)e.When.ext;
+    *(undefined4 *)((int)&pgVar6[99].When.ext + 4) = e.When.ext._4_4_;
+    *(undefined4 *)&pgVar6[99].When.loc = e.When.loc._0_4_;
+    *(undefined4 *)((int)&pgVar6[99].When.loc + 4) = e.When.loc._4_4_;
+    *(undefined4 *)&pgVar6[99].Elapsed = (undefined4)e.Elapsed;
+    *(undefined4 *)((int)&pgVar6[99].Elapsed + 4) = e.Elapsed._4_4_;
+    pgVar6[99].NewDay = e.NewDay;
+    *(undefined3 *)&pgVar6[99].field_0x21 = e._33_3_;
+    *(undefined4 *)&pgVar6[99].field_0x24 = e._36_4_;
+    *(undefined4 *)&pgVar6[99].What.str = e.What.str._0_4_;
+    *(undefined4 *)((int)&pgVar6[99].What.str + 4) = e.What.str._4_4_;
+    *(undefined4 *)&pgVar6[99].What.len = (undefined4)e.What.len;
+    *(undefined4 *)((int)&pgVar6[99].What.len + 4) = e.What.len._4_4_;
+    pgVar6[99].IsErr = e.IsErr;
+    *(undefined3 *)&pgVar6[99].field_0x39 = e._57_3_;
+    *(undefined4 *)&pgVar6[99].field_0x3c = e._60_4_;
+    e._32_16_ = auVar4;
+    e._48_16_ = sVar5;
+  }
+  if (e.IsErr != false) {
+    (pgStack0000000000000008->LastErrorTime).wall = e.When.wall;
+    (pgStack0000000000000008->LastErrorTime).ext = e.When.ext;
+    pgVar8 = pgStack0000000000000008;
+    ptVar10 = e.When.loc;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = extraout_RBX_04;
+      extraout_R11_02[1] = (extraout_RAX_07->LastErrorTime).loc;
+      pgVar8 = extraout_RAX_07;
+      ptVar10 = extraout_RBX_04;
+    }
+    (pgVar8->LastErrorTime).loc = ptVar10;
+  }
+  sync___RWMutex__Unlock(rw);
+  return extraout_RAX_08;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void golang_org_x_net_trace___eventLog__When(golang_org_x_net_trace_eventLog *el,string ~r0)
+
+{
+  string ~r0_00;
+  uint8 *unaff_RBP;
+  int unaff_R14;
+  int unaff_retaddr;
+  time_Time in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.len = unaff_retaddr;
+  ~r0_00.str = unaff_RBP;
+  time_Time_Format(in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe8,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_trace___eventLog__ElapsedTime(golang_org_x_net_trace_eventLog *el,string ~r0)
+
+{
+  time_Time t;
+  __interface___ a;
+  int extraout_RAX;
+  time_Duration elapsed;
+  int extraout_RAX_00;
+  time_Duration sec;
+  void *x;
+  time_Duration nsec;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  time_Location *in_stack_ffffffffffffffd0;
+  undefined in_stack_ffffffffffffffd8 [16];
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  t.loc = in_stack_ffffffffffffffd0;
+  t.wall = (uint64)in_stack_ffffffffffffffc0.str;
+  t.ext = in_stack_ffffffffffffffc0.len;
+  time_Since(t,(el->Start).wall);
+  runtime_convT64((uint64)((double)(extraout_RAX / 1000000000) +
+                          (double)(extraout_RAX % 1000000000) / 1000000000.0),x);
+  ~r0_00.len = extraout_RAX_00;
+  ~r0_00.str = &DAT_00807720;
+  a.len = in_stack_ffffffffffffffd8._0_8_;
+  a.cap = in_stack_ffffffffffffffd8._8_8_;
+  a.array = (interface___ *)in_stack_ffffffffffffffd0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,a,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_trace___eventLog__Stack(golang_org_x_net_trace_eventLog *el,string ~r0)
+
+{
+  uint uVar1;
+  int *tabwidth;
+  bytes_Buffer *buf;
+  text_tabwriter_Writer *b;
+  text_tabwriter_Writer *b_00;
+  text_tabwriter_Writer *tw;
+  void *in_RBX;
+  void *~r0_00;
+  void *extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa8;
+  __uintptr in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00860d00,in_RBX);
+  runtime_newobject((internal_abi_Type *)&DAT_008980a0,~r0_00);
+  text_tabwriter___Writer__Init
+            (b,(io_Writer)in_stack_ffffffffffffffa8,0x95e620,(int)tabwidth,1,8,1,
+             (text_tabwriter_Writer *)0x9);
+  golang_org_x_net_trace_printStackRecord
+            ((io_Writer)in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8);
+  text_tabwriter___Writer__flush(b_00,(error)in_stack_ffffffffffffffa8);
+  if (tabwidth != (int *)0x0) {
+    uVar1 = tabwidth[3];
+    if ((uint)tabwidth[1] < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,
+               (uint8 *)(*tabwidth + (uVar1 & (int)(uVar1 - tabwidth[2]) >> 0x3f)),
+               tabwidth[1] - uVar1,in_stack_ffffffffffffffa8);
+  }
+  return;
+}
+
+
+
+void golang_org_x_net_trace_printStackRecord(io_Writer w,__uintptr stk)
+
+{
+  error err;
+  int in_RAX;
+  uintptr pc;
+  runtime_Func *f_00;
+  runtime_Func *f;
+  void *x;
+  int *x_00;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  int in_RCX;
+  int line_00;
+  void *extraout_RCX;
+  int line;
+  int iVar1;
+  runtime_Func *in_RBX;
+  int extraout_RBX;
+  void *x_01;
+  int in_RDI;
+  int unaff_R14;
+  bool bVar2;
+  string in_stack_ffffffffffffff60;
+  string in_stack_ffffffffffffff70;
+  __interface___ in_stack_ffffffffffffff80;
+  runtime_itab *pc_00;
+  void *val;
+  undefined local_28 [16];
+  undefined local_18 [16];
+  
+  while (local_28 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (iVar1 = 0; iVar1 < in_RDI; iVar1 = iVar1 + 1) {
+    pc_00 = *(runtime_itab **)(in_RCX + iVar1 * 8);
+    runtime_FuncForPC((uintptr)pc_00,in_RBX);
+    if (f_00 != (runtime_Func *)0x0) {
+      runtime___Func__FileLine(f_00,(uintptr)pc_00,in_stack_ffffffffffffff60,line_00);
+      val = extraout_RCX;
+      runtime___Func__Name(f_00,in_stack_ffffffffffffff60);
+      if (extraout_RBX < 8) {
+        bVar2 = false;
+      }
+      else {
+        bVar2 = *x_00 == 0x2e656d69746e7572;
+      }
+      if (!bVar2) {
+        runtime_convTstring(in_stack_ffffffffffffff60,x_00);
+        runtime_convTstring(in_stack_ffffffffffffff60,x);
+        local_28._8_8_ = extraout_RAX;
+        local_28._0_8_ = &DAT_008075e0;
+        runtime_convT64((uint64)val,x_01);
+        local_18._8_8_ = extraout_RAX_00;
+        local_18._0_8_ = &DAT_00807760;
+        err.data = val;
+        err.tab = pc_00;
+        fmt_Fprintf((io_Writer)in_stack_ffffffffffffff60,in_stack_ffffffffffffff70,
+                    in_stack_ffffffffffffff80,in_RAX,err);
+      }
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// DWARF original prototype: void
+// golang.org/x/net/trace.(*eventLog).Events(golang.org/x/net/trace.eventLog * el,
+// []golang.org/x/net/trace.logEntry ~r0, []golang.org/x/net/trace.logEntry ~r0)
+
+void golang_org_x_net_trace___eventLog__Events
+               (golang_org_x_net_trace_eventLog *el,__golang_org_x_net_trace_logEntry ~r0,
+               __golang_org_x_net_trace_logEntry ~r0_1)
+
+{
+  sync_atomic_Int32 *psVar1;
+  sdword sVar2;
+  int unaff_R14;
+  undefined local_38 [16];
+  golang_org_x_net_trace_logEntry *local_28;
+  undefined local_20 [16];
+  undefined *local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_28 = (golang_org_x_net_trace_logEntry *)0x0;
+  LOCK();
+  psVar1 = &(el->mu).readerCount;
+  sVar2 = psVar1->v;
+  psVar1->v = psVar1->v + 1;
+  UNLOCK();
+  if ((sdword)(sVar2 + 1) < 0) {
+    sync_runtime_SemacquireRWMutexR(&(el->mu).readerSem,false,0);
+  }
+  local_38._8_8_ = &el->mu;
+  local_38._0_8_ = golang_org_x_net_trace___eventLog__Events_func1;
+  local_10 = local_38;
+  local_28 = (el->events).array;
+  local_20._0_8_ = (el->events).len;
+  local_20._8_8_ = (el->events).cap;
+  golang_org_x_net_trace___eventLog__Events_func1();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_trace___eventLog__Events_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___RWMutex__RUnlock(*(sync_RWMutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void golang_org_x_net_trace_eventsTmpl(html_template_Template *~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (golang_org_x_net_trace_eventsTmplOnce.done == 0) {
+    sync___Once__doSlow(&golang_org_x_net_trace_eventsTmplOnce,
+                        (func__ **)&PTR_golang_org_x_net_trace_eventsTmpl_func1_008ebad8);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_trace___histogram__addMeasurement
+               (golang_org_x_net_trace_histogram *h,int64 value)
+
+{
+  int *piVar1;
+  int64 *extraout_RAX;
+  int64 *extraout_RAX_00;
+  int64 *piVar2;
+  int n;
+  int bucketIndex;
+  void *in_RDI;
+  void *extraout_RDI;
+  int64 **extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  h->sum = h->sum + value;
+  h->sumOfSquares = (float64)((double)value * (double)value + (double)h->sumOfSquares);
+  n = 0;
+  for (; 0xff < value; value = value >> 8) {
+    n = n + 8;
+  }
+  for (; 0 < value; value = value >> 1) {
+    n = n + 1;
+  }
+  bucketIndex = n + -1;
+  if (bucketIndex < 0) {
+    bucketIndex = 0;
+  }
+  if (0x25 < bucketIndex) {
+    bucketIndex = 0x25;
+  }
+  if ((h->valueCount == 0) || ((0 < h->valueCount && (h->value == bucketIndex)))) {
+    h->value = bucketIndex;
+    h->valueCount = h->valueCount + 1;
+  }
+  else {
+    if ((h->buckets).array == (int64 *)0x0) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807820,0x26,0x26,in_RDI);
+      (h->buckets).len = 0x26;
+      (h->buckets).cap = 0x26;
+      piVar2 = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        extraout_R11[1] = (h->buckets).array;
+        piVar2 = extraout_RAX_00;
+      }
+      (h->buckets).array = piVar2;
+      if (0x25 < (uint)h->value) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      (h->buckets).array[h->value] = h->valueCount;
+      h->value = 0;
+      h->valueCount = -1;
+    }
+    if ((uint)(h->buckets).len <= (uint)bucketIndex) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    piVar1 = (h->buckets).array + bucketIndex;
+    *piVar1 = *piVar1 + 1;
+  }
+  return;
+}
+
+
+
+void golang_org_x_net_trace___histogram__percentileBoundary
+               (golang_org_x_net_trace_histogram *h,float64 percentile,int64 ~r0)
+
+{
+  uint uVar1;
+  int64 *piVar2;
+  int iVar3;
+  byte bVar4;
+  int i;
+  byte bVar5;
+  uint8 j;
+  int iVar6;
+  uint uVar7;
+  int64 t;
+  int iVar8;
+  int64 max;
+  int64 total;
+  int64 nextBucketMin;
+  int64 bucketSize;
+  int64 val_1;
+  int64 val;
+  int64 percentOfTotal;
+  int64 bucketMin;
+  int64 min;
+  int64 value;
+  int64 runningTotal;
+  int64 delta;
+  int unaff_R14;
+  float64 percentBucket;
+  undefined8 in_XMM0_Qb;
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  undefined in_XMM2 [16];
+  undefined auVar11 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_XMM0_Qb = 0;
+  }
+  iVar6 = (h->buckets).len;
+  total = 0;
+  if (-1 < h->valueCount) {
+    total = h->valueCount;
+  }
+  for (iVar8 = 0; iVar8 < iVar6; iVar8 = iVar8 + 1) {
+    total = total + (h->buckets).array[iVar8];
+  }
+  if (total != 0) {
+    if (total == 1) {
+      for (iVar8 = 0; iVar8 < iVar6; iVar8 = iVar8 + 1) {
+      }
+      return;
+    }
+    auVar11._0_8_ = (double)percentile * (double)total + 0.5;
+    auVar11._8_8_ = in_XMM0_Qb;
+    if (runtime_x86HasSSE41 == false) {
+      math_Floor((float64)auVar11._0_8_,0.5);
+    }
+    else {
+      auVar11 = roundsd(in_XMM2,auVar11,1);
+    }
+    uVar1 = (h->buckets).len;
+    piVar2 = (h->buckets).array;
+    iVar8 = (int)auVar11._0_8_;
+    i = 0;
+    iVar6 = 0;
+    while( true ) {
+      if ((int)uVar1 <= i) {
+        return;
+      }
+      iVar3 = piVar2[i];
+      iVar6 = iVar6 + iVar3;
+      if (iVar8 == iVar6) break;
+      if (iVar8 < iVar6) {
+        bVar4 = (byte)i;
+        bVar5 = bVar4 + 1;
+        bucketMin = -(uint)(bVar4 < 0x40) & 1 << (bVar4 & 0x3f);
+        if (bVar4 == 0) {
+          bucketMin = 0;
+        }
+        nextBucketMin = 1 << (bVar5 & 0x3f) & -(uint)(bVar5 < 0x40);
+        if (bVar5 == 0) {
+          nextBucketMin = 0;
+        }
+        nextBucketMin = nextBucketMin - bucketMin;
+        auVar9._0_8_ = ((double)(iVar3 - (iVar6 - iVar8)) / (double)iVar3) * (double)nextBucketMin +
+                       0.5;
+        auVar9._8_8_ = 0;
+        if (runtime_x86HasSSE41 == false) {
+          math_Floor((float64)auVar9._0_8_,0.5);
+        }
+        else {
+          roundsd(auVar9,auVar9,1);
+        }
+        return;
+      }
+      i = i + 1;
+    }
+    uVar7 = i + 1;
+    j = (uint8)uVar7;
+    min = 1 << (j & 0x3f) & -(uint)(j < 0x40);
+    if (j == 0) {
+      min = 0;
+    }
+    if (iVar6 < total) {
+      while( true ) {
+        j = (uint8)uVar7;
+        if (uVar1 <= (uVar7 & 0xff)) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        if (piVar2[uVar7 & 0xff] != 0) break;
+        uVar7 = (uint)(dword)((sdword)uVar7 + 1);
+      }
+    }
+    max = 1 << (j & 0x3f) & -(uint)(j < 0x40);
+    if (j == 0) {
+      max = 0;
+    }
+    max = max - min;
+    auVar10._0_8_ = (double)max * 0.5 + 0.5;
+    auVar10._8_8_ = 0;
+    if (runtime_x86HasSSE41 == false) {
+      math_Floor((float64)auVar10._0_8_,0.5);
+    }
+    else {
+      roundsd(auVar10,auVar10,1);
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void golang_org_x_net_trace___histogram__Add
+               (golang_org_x_net_trace_histogram *h,
+               golang_org_x_net_internal_timeseries_Observable other)
+
+{
+  int *piVar1;
+  int iVar2;
+  int64 *extraout_RAX;
+  int64 *extraout_RAX_00;
+  int64 *piVar3;
+  golang_org_x_net_trace_histogram *in_RCX;
+  golang_org_x_net_trace_histogram *o;
+  runtime_itab *in_RBX;
+  int i;
+  void *in_RDI;
+  void *extraout_RDI;
+  int64 **extraout_R11;
+  int unaff_R14;
+  
+  o = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  if (in_RBX != (runtime_itab *)
+                go_itab__golang_org_x_net_trace_histogram_golang_org_x_net_internal_timeseries_Observable
+     ) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeI(in_RBX,(internal_abi_Type *)0x8924c0,(internal_abi_Type *)&DAT_00847060);
+  }
+  iVar2 = o->valueCount;
+  if (iVar2 != 0) {
+    if (((h->valueCount < 0) || (iVar2 < 1)) ||
+       (in_RDI = (void *)h->value, (void *)o->value != in_RDI)) {
+      if ((h->buckets).array == (int64 *)0x0) {
+        runtime_makeslice((internal_abi_Type *)&DAT_00807820,0x26,0x26,in_RDI);
+        (h->buckets).len = 0x26;
+        (h->buckets).cap = 0x26;
+        piVar3 = extraout_RAX;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RAX_00;
+          extraout_R11[1] = (h->buckets).array;
+          piVar3 = extraout_RAX_00;
+        }
+        (h->buckets).array = piVar3;
+        if (0x25 < (uint)h->value) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        (h->buckets).array[h->value] = h->valueCount;
+        h->value = 0;
+        h->valueCount = -1;
+      }
+      if (o->valueCount < 0) {
+        iVar2 = (h->buckets).len;
+        for (i = 0; i < iVar2; i = i + 1) {
+          if ((uint)(h->buckets).len <= (uint)i) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          piVar3 = (h->buckets).array;
+          if ((uint)(o->buckets).len <= (uint)i) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          piVar3[i] = piVar3[i] + (o->buckets).array[i];
+        }
+      }
+      else {
+        if ((uint)(h->buckets).len <= (uint)o->value) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        piVar1 = (h->buckets).array + o->value;
+        *piVar1 = *piVar1 + o->valueCount;
+      }
+    }
+    else {
+      h->valueCount = iVar2 + h->valueCount;
+    }
+  }
+  h->sumOfSquares = (float64)((double)h->sumOfSquares + (double)o->sumOfSquares);
+  h->sum = h->sum + o->sum;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_trace___histogram__Clear(golang_org_x_net_trace_histogram *h)
+
+{
+  golang_org_x_net_trace_histogram *extraout_RAX;
+  undefined8 extraout_RCX;
+  undefined8 *extraout_R11;
+  int unaff_R14;

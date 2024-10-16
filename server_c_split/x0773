@@ -1,0 +1,1000 @@
+      plVar3->array = puVar2;
+    }
+    plVar3->len = uVar4;
+    puVar2[uVar4 - 1] = 0x22;
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__appendValue(log_slog_handleState *s,log_slog_Value v)
+
+{
+  log_slog_Value v_00;
+  log_slog_Value v_01;
+  error ~r0;
+  error ~r0_00;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  int iVar1;
+  void *unaff_RBP;
+  int unaff_R14;
+  error in_stack_ffffffffffffffd8;
+  void *in_stack_ffffffffffffffe8;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s->h->json == false) {
+    v_01.any.data = in_stack_ffffffffffffffe8;
+    v_01.num = (uint64)in_stack_ffffffffffffffd8.tab;
+    v_01.any._type = (internal_abi_Type *)in_stack_ffffffffffffffd8.data;
+    ~r0_00.data = unaff_RBP;
+    ~r0_00.tab = in_stack_fffffffffffffff0;
+    log_slog_appendTextValue(s,v_01,~r0_00);
+    iVar1 = extraout_RAX_00;
+  }
+  else {
+    v_00.any.data = in_stack_ffffffffffffffe8;
+    v_00.num = (uint64)in_stack_ffffffffffffffd8.tab;
+    v_00.any._type = (internal_abi_Type *)in_stack_ffffffffffffffd8.data;
+    ~r0.data = unaff_RBP;
+    ~r0.tab = in_stack_fffffffffffffff0;
+    log_slog_appendJSONValue(s,v_00,~r0);
+    iVar1 = extraout_RAX;
+  }
+  if (iVar1 != 0) {
+    log_slog___handleState__appendError(s,in_stack_ffffffffffffffd8);
+  }
+  return;
+}
+
+
+
+void log_slog___handleState__appendTime(log_slog_handleState *s,time_Time t)
+
+{
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s->h->json == false) {
+    log_slog_writeTimeRFC3339Millis(s->buf,in_stack_ffffffffffffffd8);
+  }
+  else {
+    log_slog_appendJSONTime(s,in_stack_ffffffffffffffd8);
+  }
+  return;
+}
+
+
+
+// WARNING: Removing unreachable block (ram,0x007c059f)
+
+void log_slog_writeTimeRFC3339Millis(log_slog_internal_buffer_Buffer *buf,time_Time t)
+
+{
+  uint8 *puVar1;
+  char cVar2;
+  time_Time t_00;
+  runtime_slice ~r0;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  runtime_slice ~r0_02;
+  runtime_slice ~r0_03;
+  runtime_slice ~r0_04;
+  time_Time t_01;
+  runtime_slice ~r0_05;
+  runtime_slice ~r0_06;
+  runtime_slice ~r0_07;
+  runtime_slice ~r0_08;
+  runtime_slice ~r0_09;
+  runtime_slice ~r0_10;
+  runtime_slice ~r0_11;
+  time_Time t_02;
+  runtime_slice ~r0_12;
+  runtime_slice ~r0_13;
+  runtime_slice ~r0_14;
+  runtime_slice ~r0_15;
+  runtime_slice ~r0_16;
+  runtime_slice ~r0_17;
+  int extraout_RAX;
+  int year;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  uint8 *extraout_RAX_04;
+  uint8 *extraout_RAX_05;
+  uint8 *extraout_RAX_06;
+  uint8 *extraout_RAX_07;
+  uint8 *extraout_RAX_08;
+  int extraout_RAX_09;
+  int hour;
+  uint8 *extraout_RAX_10;
+  uint8 *extraout_RAX_11;
+  uint8 *extraout_RAX_12;
+  uint8 *extraout_RAX_13;
+  uint8 *extraout_RAX_14;
+  uint8 *extraout_RAX_15;
+  uint8 *extraout_RAX_16;
+  uint8 *extraout_RAX_17;
+  uint8 *extraout_RAX_18;
+  uint8 *extraout_RAX_19;
+  uint8 *extraout_RAX_20;
+  uint8 *extraout_RAX_21;
+  uint8 *extraout_RAX_22;
+  uint8 *extraout_RAX_23;
+  uint8 *extraout_RAX_24;
+  uint8 *extraout_RAX_25;
+  uint8 *extraout_RAX_26;
+  uint8 *extraout_RAX_27;
+  uint8 *extraout_RAX_28;
+  uint8 *extraout_RAX_29;
+  uint8 *puVar3;
+  int in_RCX;
+  int extraout_RCX;
+  int day;
+  uint extraout_RCX_00;
+  uint extraout_RCX_01;
+  int extraout_RCX_02;
+  int bp_1;
+  uint extraout_RCX_03;
+  uint extraout_RCX_04;
+  int extraout_RCX_05;
+  int bp_2;
+  uint extraout_RCX_06;
+  uint extraout_RCX_07;
+  int extraout_RCX_08;
+  int extraout_RCX_09;
+  int sec;
+  uint extraout_RCX_10;
+  uint extraout_RCX_11;
+  int extraout_RCX_12;
+  int bp_4;
+  uint extraout_RCX_13;
+  uint extraout_RCX_14;
+  int extraout_RCX_15;
+  int bp_5;
+  uint extraout_RCX_16;
+  int extraout_RCX_17;
+  uint extraout_RCX_18;
+  int extraout_RCX_19;
+  int offsetSeconds;
+  int extraout_RCX_20;
+  int extraout_RCX_21;
+  int iVar4;
+  int extraout_RCX_22;
+  uint extraout_RCX_23;
+  uint extraout_RCX_24;
+  int extraout_RCX_25;
+  int bp_8;
+  uint extraout_RCX_26;
+  int iVar5;
+  int iVar6;
+  int q;
+  log_slog_internal_buffer_Buffer *plVar7;
+  int q_1;
+  int q_2;
+  int q_3;
+  int q_4;
+  int q_5;
+  int q_6;
+  int offsetMinutes;
+  log_slog_internal_buffer_Buffer *plVar8;
+  int iVar9;
+  int q_7;
+  int q_8;
+  int in_RBX;
+  int extraout_RBX;
+  time_Month month;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint uVar10;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  uint extraout_RBX_05;
+  uint extraout_RBX_06;
+  uint extraout_RBX_07;
+  uint extraout_RBX_08;
+  uint extraout_RBX_09;
+  uint extraout_RBX_10;
+  uint extraout_RBX_11;
+  int extraout_RBX_12;
+  int min;
+  uint extraout_RBX_13;
+  uint extraout_RBX_14;
+  uint extraout_RBX_15;
+  uint extraout_RBX_16;
+  uint extraout_RBX_17;
+  uint extraout_RBX_18;
+  uint extraout_RBX_19;
+  uint extraout_RBX_20;
+  uint extraout_RBX_21;
+  uint extraout_RBX_22;
+  uint extraout_RBX_23;
+  int bp_6;
+  uint extraout_RBX_24;
+  uint extraout_RBX_25;
+  uint extraout_RBX_26;
+  uint extraout_RBX_27;
+  uint extraout_RBX_28;
+  uint extraout_RBX_29;
+  uint extraout_RBX_30;
+  uint extraout_RBX_31;
+  uint extraout_RBX_32;
+  uint extraout_RBX_33;
+  uint extraout_RBX_34;
+  uint extraout_RBX_35;
+  int in_RSI;
+  uint uVar11;
+  int bp;
+  int bp_3;
+  log_slog_internal_buffer_Buffer *extraout_RSI;
+  log_slog_internal_buffer_Buffer *extraout_RSI_00;
+  int bp_7;
+  log_slog_internal_buffer_Buffer *extraout_RSI_01;
+  int extraout_RSI_02;
+  time_Month in_RDI;
+  size_t sVar12;
+  uint uVar13;
+  int ns;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  uint8 **extraout_R11_02;
+  uint8 **extraout_R11_03;
+  uint8 **extraout_R11_04;
+  uint8 **extraout_R11_05;
+  uint8 **extraout_R11_06;
+  uint8 **extraout_R11_07;
+  uint8 **extraout_R11_08;
+  uint8 **extraout_R11_09;
+  uint8 **extraout_R11_10;
+  uint8 **extraout_R11_11;
+  uint8 **extraout_R11_12;
+  uint8 **extraout_R11_13;
+  uint8 **extraout_R11_14;
+  uint8 **extraout_R11_15;
+  uint8 **extraout_R11_16;
+  uint8 **extraout_R11_17;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  time_Month tStack0000000000000020;
+  interface___ in_stack_fffffffffffffe30;
+  time_Location *in_stack_fffffffffffffe40;
+  string in_stack_fffffffffffffe48;
+  size_t local_150;
+  size_t local_148;
+  int local_140;
+  int local_138;
+  int local_130;
+  int local_128;
+  uint local_120;
+  uint local_118;
+  int local_110;
+  uint local_108;
+  uint local_100;
+  int local_f8;
+  int local_f0;
+  char cStack_e5;
+  undefined4 local_e4;
+  undefined auStack_e0 [12];
+  undefined4 uStack_d4;
+  undefined4 local_d0;
+  undefined auStack_cc [12];
+  undefined4 uStack_c0;
+  undefined4 local_bc;
+  undefined auStack_b8 [12];
+  undefined4 uStack_ac;
+  undefined4 local_a8;
+  undefined auStack_a4 [12];
+  undefined4 uStack_98;
+  undefined4 local_94;
+  undefined auStack_90 [12];
+  undefined4 uStack_84;
+  undefined4 local_80;
+  undefined auStack_7c [12];
+  undefined4 uStack_70;
+  undefined4 local_6c;
+  undefined auStack_68 [12];
+  undefined4 uStack_5c;
+  undefined4 local_58;
+  undefined auStack_54 [12];
+  undefined4 uStack_48;
+  undefined4 local_44;
+  undefined auStack_40 [12];
+  undefined4 uStack_34;
+  uint8 *local_30;
+  time_Month local_28;
+  int local_20;
+  int local_18;
+  int local_10;
+  
+  tStack0000000000000020 = in_RDI;
+  while (&local_150 <= *(size_t **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI_02;
+  }
+  t_00.loc = in_stack_fffffffffffffe40;
+  t_00.wall = (uint64)in_stack_fffffffffffffe30._type;
+  t_00.ext = (int64)in_stack_fffffffffffffe30.data;
+  local_f8 = in_RCX;
+  local_f0 = in_RBX;
+  local_28 = tStack0000000000000020;
+  time_Time_date(t_00,SUB81(in_RBX,0),in_RCX,tStack0000000000000020,1,in_RSI);
+  if (extraout_RAX < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_44 = in_XMM15._0_4_;
+  auStack_40 = in_XMM15._0_12_;
+  uStack_34 = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  iVar6 = extraout_RAX;
+  for (iVar5 = 4; (cVar2 = (char)iVar6, 9 < iVar6 || (1 < iVar5)); iVar5 = iVar5 + -1) {
+    iVar6 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(iVar6),8) + iVar6 >> 3) - (iVar6 >> 0x3f)
+    ;
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_40[uVar11 - 4] = cVar2 + (char)iVar6 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_40[uVar11 - 4] = cVar2 + '0';
+  uVar10 = buf->cap;
+  local_108 = buf->len;
+  uVar13 = (local_108 - uVar11) + 0x14;
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  local_30 = buf->array;
+  local_138 = extraout_RBX;
+  local_128 = extraout_RCX;
+  if (uVar10 < uVar13) {
+    ~r0.cap = (int)in_stack_fffffffffffffe40;
+    ~r0.array = in_stack_fffffffffffffe30._type;
+    ~r0.len = (int)in_stack_fffffffffffffe30.data;
+    local_148 = sVar12;
+    runtime_growslice(local_30,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0);
+    local_30 = extraout_RAX_00;
+    sVar12 = local_148;
+    uVar10 = extraout_RCX_00;
+    uVar13 = extraout_RBX_00;
+  }
+  iVar6 = local_100 - 4;
+  puVar3 = local_30 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  runtime_memmove(puVar3,auStack_40 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  uVar11 = local_100;
+  plVar7 = buf;
+  uVar10 = local_108;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = local_30;
+    extraout_R11[1] = plVar7->array;
+    uVar11 = extraout_RCX_01;
+    uVar10 = extraout_RBX_01;
+  }
+  plVar7->array = local_30;
+  uVar10 = uVar10 + 1;
+  puVar3 = local_30;
+  if (uVar11 < uVar10) {
+    ~r0_00.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_00.array = in_stack_fffffffffffffe30._type;
+    ~r0_00.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(local_30,uVar10,uVar11,1,(internal_abi_Type *)&DAT_00807920,~r0_00);
+    buf->cap = extraout_RCX_02;
+    puVar3 = extraout_RAX_01;
+    plVar7 = buf;
+    uVar10 = extraout_RBX_02;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_02;
+      extraout_R11_00[1] = plVar7->array;
+      puVar3 = extraout_RAX_02;
+      uVar10 = extraout_RBX_03;
+    }
+    plVar7->array = puVar3;
+  }
+  plVar7->len = uVar10;
+  puVar3[uVar10 - 1] = 0x2d;
+  if (local_138 < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_58 = in_XMM15._0_4_;
+  auStack_54 = in_XMM15._0_12_;
+  uStack_48 = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  for (iVar6 = 2; (cVar2 = (char)local_138, 9 < local_138 || (1 < iVar6)); iVar6 = iVar6 + -1) {
+    local_138 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(local_138),8) + local_138 >> 3) -
+                (local_138 >> 0x3f);
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_54[uVar11 - 4] = cVar2 + (char)local_138 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_54[uVar11 - 4] = cVar2 + '0';
+  uVar10 = plVar7->cap;
+  local_108 = plVar7->len;
+  uVar13 = local_108 + (0x14 - uVar11);
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  puVar3 = plVar7->array;
+  if (uVar10 < uVar13) {
+    ~r0_01.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_01.array = in_stack_fffffffffffffe30._type;
+    ~r0_01.len = (int)in_stack_fffffffffffffe30.data;
+    local_150 = sVar12;
+    runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_01);
+    puVar3 = extraout_RAX_03;
+    sVar12 = local_150;
+    uVar10 = extraout_RCX_03;
+    uVar13 = extraout_RBX_04;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_54 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  uVar11 = local_100;
+  plVar7 = buf;
+  uVar10 = local_108;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_01 = local_30;
+    extraout_R11_01[1] = plVar7->array;
+    uVar11 = extraout_RCX_04;
+    uVar10 = extraout_RBX_05;
+  }
+  plVar7->array = local_30;
+  uVar10 = uVar10 + 1;
+  puVar3 = local_30;
+  if (uVar11 < uVar10) {
+    ~r0_02.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_02.array = in_stack_fffffffffffffe30._type;
+    ~r0_02.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(local_30,uVar10,uVar11,1,(internal_abi_Type *)&DAT_00807920,~r0_02);
+    buf->cap = extraout_RCX_05;
+    puVar3 = extraout_RAX_04;
+    plVar7 = buf;
+    uVar10 = extraout_RBX_06;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = extraout_RAX_05;
+      extraout_R11_02[1] = plVar7->array;
+      puVar3 = extraout_RAX_05;
+      uVar10 = extraout_RBX_07;
+    }
+    plVar7->array = puVar3;
+  }
+  plVar7->len = uVar10;
+  puVar3[uVar10 - 1] = 0x2d;
+  if (local_128 < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_6c = in_XMM15._0_4_;
+  auStack_68 = in_XMM15._0_12_;
+  uStack_5c = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  for (iVar6 = 2; (cVar2 = (char)local_128, 9 < local_128 || (1 < iVar6)); iVar6 = iVar6 + -1) {
+    local_128 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(local_128),8) + local_128 >> 3) -
+                (local_128 >> 0x3f);
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_68[uVar11 - 4] = cVar2 + (char)local_128 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_68[uVar11 - 4] = cVar2 + '0';
+  uVar10 = plVar7->cap;
+  local_108 = plVar7->len;
+  uVar13 = local_108 + (0x14 - uVar11);
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  puVar3 = plVar7->array;
+  if (uVar10 < uVar13) {
+    ~r0_03.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_03.array = in_stack_fffffffffffffe30._type;
+    ~r0_03.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_03);
+    puVar3 = extraout_RAX_06;
+    uVar10 = extraout_RCX_06;
+    uVar13 = extraout_RBX_08;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_68 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  uVar11 = local_100;
+  plVar7 = buf;
+  uVar10 = local_108;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_03 = local_30;
+    extraout_R11_03[1] = plVar7->array;
+    uVar11 = extraout_RCX_07;
+    uVar10 = extraout_RBX_09;
+  }
+  plVar7->array = local_30;
+  uVar10 = uVar10 + 1;
+  puVar3 = local_30;
+  if (uVar11 < uVar10) {
+    ~r0_04.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_04.array = in_stack_fffffffffffffe30._type;
+    ~r0_04.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(local_30,uVar10,uVar11,1,(internal_abi_Type *)&DAT_00807920,~r0_04);
+    buf->cap = extraout_RCX_08;
+    puVar3 = extraout_RAX_07;
+    plVar7 = buf;
+    uVar10 = extraout_RBX_10;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = extraout_RAX_08;
+      extraout_R11_04[1] = plVar7->array;
+      puVar3 = extraout_RAX_08;
+      uVar10 = extraout_RBX_11;
+    }
+    plVar7->array = puVar3;
+  }
+  plVar7->len = uVar10;
+  puVar3[uVar10 - 1] = 0x54;
+  t_01.loc = in_stack_fffffffffffffe40;
+  t_01.wall = (uint64)in_stack_fffffffffffffe30._type;
+  t_01.ext = (int64)in_stack_fffffffffffffe30.data;
+  time_Time_Clock(t_01,local_f0,local_f8,local_28);
+  if (extraout_RAX_09 < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_80 = in_XMM15._0_4_;
+  auStack_7c = in_XMM15._0_12_;
+  uStack_70 = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  iVar6 = extraout_RAX_09;
+  for (iVar5 = 2; (cVar2 = (char)iVar6, 9 < iVar6 || (1 < iVar5)); iVar5 = iVar5 + -1) {
+    iVar6 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(iVar6),8) + iVar6 >> 3) - (iVar6 >> 0x3f)
+    ;
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_7c[uVar11 - 4] = cVar2 + (char)iVar6 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_7c[uVar11 - 4] = cVar2 + '0';
+  uVar10 = buf->cap;
+  local_108 = buf->len;
+  uVar13 = (local_108 - uVar11) + 0x14;
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  puVar3 = buf->array;
+  local_130 = extraout_RBX_12;
+  if (uVar10 < uVar13) {
+    ~r0_05.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_05.array = in_stack_fffffffffffffe30._type;
+    ~r0_05.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_05);
+    puVar3 = extraout_RAX_10;
+    uVar10 = extraout_RCX_10;
+    uVar13 = extraout_RBX_13;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_7c + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  uVar11 = local_100;
+  plVar7 = buf;
+  uVar10 = local_108;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_05 = local_30;
+    extraout_R11_05[1] = plVar7->array;
+    uVar11 = extraout_RCX_11;
+    uVar10 = extraout_RBX_14;
+  }
+  plVar7->array = local_30;
+  uVar10 = uVar10 + 1;
+  puVar3 = local_30;
+  if (uVar11 < uVar10) {
+    ~r0_06.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_06.array = in_stack_fffffffffffffe30._type;
+    ~r0_06.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(local_30,uVar10,uVar11,1,(internal_abi_Type *)&DAT_00807920,~r0_06);
+    buf->cap = extraout_RCX_12;
+    puVar3 = extraout_RAX_11;
+    plVar7 = buf;
+    uVar10 = extraout_RBX_15;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_06 = extraout_RAX_12;
+      extraout_R11_06[1] = plVar7->array;
+      puVar3 = extraout_RAX_12;
+      uVar10 = extraout_RBX_16;
+    }
+    plVar7->array = puVar3;
+  }
+  plVar7->len = uVar10;
+  puVar3[uVar10 - 1] = 0x3a;
+  if (local_130 < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_94 = in_XMM15._0_4_;
+  auStack_90 = in_XMM15._0_12_;
+  uStack_84 = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  for (iVar6 = 2; (cVar2 = (char)local_130, 9 < local_130 || (1 < iVar6)); iVar6 = iVar6 + -1) {
+    local_130 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(local_130),8) + local_130 >> 3) -
+                (local_130 >> 0x3f);
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_90[uVar11 - 4] = cVar2 + (char)local_130 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_90[uVar11 - 4] = cVar2 + '0';
+  uVar10 = plVar7->cap;
+  local_108 = plVar7->len;
+  uVar13 = local_108 + (0x14 - uVar11);
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  puVar3 = plVar7->array;
+  if (uVar10 < uVar13) {
+    ~r0_07.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_07.array = in_stack_fffffffffffffe30._type;
+    ~r0_07.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_07);
+    puVar3 = extraout_RAX_13;
+    uVar10 = extraout_RCX_13;
+    uVar13 = extraout_RBX_17;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_90 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  uVar11 = local_100;
+  plVar7 = buf;
+  uVar10 = local_108;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_07 = local_30;
+    extraout_R11_07[1] = plVar7->array;
+    uVar11 = extraout_RCX_14;
+    uVar10 = extraout_RBX_18;
+  }
+  plVar7->array = local_30;
+  uVar10 = uVar10 + 1;
+  puVar3 = local_30;
+  if (uVar11 < uVar10) {
+    ~r0_08.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_08.array = in_stack_fffffffffffffe30._type;
+    ~r0_08.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(local_30,uVar10,uVar11,1,(internal_abi_Type *)&DAT_00807920,~r0_08);
+    buf->cap = extraout_RCX_15;
+    puVar3 = extraout_RAX_14;
+    plVar7 = buf;
+    uVar10 = extraout_RBX_19;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_08 = extraout_RAX_15;
+      extraout_R11_08[1] = plVar7->array;
+      puVar3 = extraout_RAX_15;
+      uVar10 = extraout_RBX_20;
+    }
+    plVar7->array = puVar3;
+  }
+  plVar7->len = uVar10;
+  puVar3[uVar10 - 1] = 0x3a;
+  if (extraout_RCX_09 < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffe30);
+  }
+  local_a8 = in_XMM15._0_4_;
+  auStack_a4 = in_XMM15._0_12_;
+  uStack_98 = in_XMM15._12_4_;
+  uVar11 = 0x13;
+  iVar5 = extraout_RCX_09;
+  for (iVar6 = 2; (cVar2 = (char)iVar5, 9 < iVar5 || (1 < iVar6)); iVar6 = iVar6 + -1) {
+    iVar5 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(iVar5),8) + iVar5 >> 3) - (iVar5 >> 0x3f)
+    ;
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_a4[uVar11 - 4] = cVar2 + (char)iVar5 * -10 + '0';
+    uVar11 = uVar11 - 1;
+  }
+  if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_a4[uVar11 - 4] = cVar2 + '0';
+  uVar10 = plVar7->cap;
+  local_108 = plVar7->len;
+  uVar13 = local_108 + (0x14 - uVar11);
+  local_100 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+  sVar12 = -(uVar11 - 0x14);
+  puVar3 = plVar7->array;
+  if (uVar10 < uVar13) {
+    ~r0_09.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_09.array = in_stack_fffffffffffffe30._type;
+    ~r0_09.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_09);
+    puVar3 = extraout_RAX_16;
+    uVar10 = extraout_RCX_16;
+    uVar13 = extraout_RBX_21;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar13;
+  local_100 = uVar10;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_a4 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  plVar7 = buf;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_09 = local_30;
+    extraout_R11_09[1] = extraout_RSI->array;
+    plVar7 = extraout_RSI;
+  }
+  plVar7->array = local_30;
+  local_20 = local_f0;
+  local_18 = local_f8;
+  local_10 = local_28;
+  uVar11 = plVar7->len + 1;
+  puVar3 = plVar7->array;
+  iVar6 = local_f0;
+  if ((uint)plVar7->cap < uVar11) {
+    local_110 = local_f0;
+    ~r0_10.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_10.array = in_stack_fffffffffffffe30._type;
+    ~r0_10.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar11,plVar7->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_10);
+    buf->cap = extraout_RCX_17;
+    puVar3 = extraout_RAX_17;
+    plVar7 = buf;
+    uVar11 = extraout_RBX_22;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_10 = extraout_RAX_18;
+      extraout_R11_10[1] = plVar7->array;
+      puVar3 = extraout_RAX_18;
+      uVar11 = extraout_RBX_23;
+    }
+    plVar7->array = puVar3;
+    plVar7 = buf;
+    iVar6 = local_110;
+  }
+  plVar7->len = uVar11;
+  puVar3[uVar11 - 1] = 0x2e;
+  uVar11 = (uint)(int)(sdword)((dword)iVar6 & 0x3fffffff) / 1000000;
+  local_bc = in_XMM15._0_4_;
+  auStack_b8 = in_XMM15._0_12_;
+  uStack_ac = in_XMM15._12_4_;
+  bp_6 = 0x13;
+  for (iVar6 = 3; (cVar2 = (char)uVar11, 9 < (int)uVar11 || (1 < iVar6)); iVar6 = iVar6 + -1) {
+    uVar11 = ((int)(SUB168(SEXT816(-0x3333333333333333) * SEXT816((int)uVar11),8) + uVar11) >> 3) -
+             ((int)uVar11 >> 0x3f);
+    if (0x13 < (uint)bp_6) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_b8[bp_6 + -4] = cVar2 + (char)uVar11 * -10 + '0';
+    bp_6 = bp_6 + -1;
+  }
+  if (0x13 < (uint)bp_6) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  auStack_b8[bp_6 + -4] = cVar2 + '0';
+  uVar11 = plVar7->cap;
+  local_108 = plVar7->len;
+  uVar10 = local_108 + (0x14 - bp_6);
+  local_100 = bp_6 & bp_6 + -0x14 >> 0x3f;
+  sVar12 = -(bp_6 + -0x14);
+  puVar3 = plVar7->array;
+  if (uVar11 < uVar10) {
+    ~r0_11.cap = (int)in_stack_fffffffffffffe40;
+    ~r0_11.array = in_stack_fffffffffffffe30._type;
+    ~r0_11.len = (int)in_stack_fffffffffffffe30.data;
+    runtime_growslice(puVar3,uVar10,uVar11,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_11);
+    puVar3 = extraout_RAX_19;
+    uVar11 = extraout_RCX_18;
+    uVar10 = extraout_RBX_24;
+  }
+  iVar6 = local_100 - 4;
+  puVar1 = puVar3 + local_108;
+  local_108 = uVar10;
+  local_100 = uVar11;
+  local_30 = puVar3;
+  runtime_memmove(puVar1,auStack_b8 + iVar6,sVar12);
+  buf->len = local_108;
+  buf->cap = local_100;
+  plVar7 = buf;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_11 = local_30;
+    extraout_R11_11[1] = extraout_RSI_00->array;
+    plVar7 = extraout_RSI_00;
+  }
+  plVar7->array = local_30;
+  t_02.loc = in_stack_fffffffffffffe40;
+  t_02.wall = (uint64)in_stack_fffffffffffffe30._type;
+  t_02.ext = (int64)in_stack_fffffffffffffe30.data;
+  time_Time_Zone(t_02,in_stack_fffffffffffffe48,local_f0);
+  if (extraout_RCX_19 == 0) {
+    uVar11 = buf->len + 1;
+    puVar3 = buf->array;
+    if ((uint)buf->cap < uVar11) {
+      ~r0_14.cap = (int)in_stack_fffffffffffffe40;
+      ~r0_14.array = in_stack_fffffffffffffe30._type;
+      ~r0_14.len = (int)in_stack_fffffffffffffe30.data;
+      runtime_growslice(puVar3,uVar11,buf->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_14);
+      buf->cap = extraout_RCX_22;
+      puVar3 = extraout_RAX_24;
+      uVar11 = extraout_RBX_29;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_14 = extraout_RAX_25;
+        extraout_R11_14[1] = buf->array;
+        puVar3 = extraout_RAX_25;
+        uVar11 = extraout_RBX_30;
+      }
+      buf->array = puVar3;
+    }
+    buf->len = uVar11;
+    puVar3[uVar11 - 1] = 0x5a;
+  }
+  else {
+    uVar11 = extraout_RCX_19 >> 0x3f;
+    uVar10 = SUB168(SEXT816(-0x7777777777777777) * SEXT816(extraout_RCX_19),8) + extraout_RCX_19 >>
+             5;
+    iVar6 = uVar10 - uVar11;
+    plVar7 = buf;
+    if (iVar6 < 0) {
+      uVar13 = buf->len + 1;
+      puVar3 = buf->array;
+      if ((uint)buf->cap < uVar13) {
+        ~r0_12.cap = (int)in_stack_fffffffffffffe40;
+        ~r0_12.array = in_stack_fffffffffffffe30._type;
+        ~r0_12.len = (int)in_stack_fffffffffffffe30.data;
+        local_108 = uVar10;
+        local_100 = uVar11;
+        runtime_growslice(puVar3,uVar13,buf->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_12);
+        buf->cap = extraout_RCX_20;
+        puVar3 = extraout_RAX_20;
+        uVar13 = extraout_RBX_25;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_12 = extraout_RAX_21;
+          extraout_R11_12[1] = plVar7->array;
+          puVar3 = extraout_RAX_21;
+          uVar13 = extraout_RBX_26;
+        }
+        plVar7->array = puVar3;
+        uVar11 = local_100;
+        uVar10 = local_108;
+      }
+      plVar7->len = uVar13;
+      puVar3[uVar13 - 1] = 0x2d;
+      iVar6 = uVar11 - uVar10;
+    }
+    else {
+      uVar11 = buf->len + 1;
+      puVar3 = buf->array;
+      if ((uint)buf->cap < uVar11) {
+        ~r0_13.cap = (int)in_stack_fffffffffffffe40;
+        ~r0_13.array = in_stack_fffffffffffffe30._type;
+        ~r0_13.len = (int)in_stack_fffffffffffffe30.data;
+        local_140 = iVar6;
+        runtime_growslice(puVar3,uVar11,buf->cap,1,(internal_abi_Type *)&DAT_00807920,~r0_13);
+        buf->cap = extraout_RCX_21;
+        puVar3 = extraout_RAX_22;
+        plVar8 = buf;
+        uVar11 = extraout_RBX_27;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_13 = extraout_RAX_23;
+          extraout_R11_13[1] = plVar8->array;
+          puVar3 = extraout_RAX_23;
+          uVar11 = extraout_RBX_28;
+        }
+        plVar8->array = puVar3;
+        iVar6 = local_140;
+      }
+      buf->len = uVar11;
+      puVar3[uVar11 - 1] = 0x2b;
+    }
+    iVar5 = (SUB168(SEXT816(-0x7777777777777777) * SEXT816(iVar6),8) + iVar6 >> 5) - (iVar6 >> 0x3f)
+    ;
+    if (iVar5 < 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_fffffffffffffe30);
+    }
+    local_d0 = in_XMM15._0_4_;
+    auStack_cc = in_XMM15._0_12_;
+    uStack_c0 = in_XMM15._12_4_;
+    uVar11 = 0x13;
+    iVar9 = iVar5;
+    for (iVar4 = 2; (cVar2 = (char)iVar9, 9 < iVar9 || (1 < iVar4)); iVar4 = iVar4 + -1) {
+      iVar9 = (SUB168(SEXT816(-0x3333333333333333) * SEXT816(iVar9),8) + iVar9 >> 3) -
+              (iVar9 >> 0x3f);
+      if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      auStack_cc[uVar11 - 4] = cVar2 + (char)iVar9 * -10 + '0';
+      uVar11 = uVar11 - 1;
+    }
+    if (0x13 < uVar11) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_cc[uVar11 - 4] = cVar2 + '0';
+    uVar10 = plVar7->cap;
+    local_118 = plVar7->len;
+    uVar13 = local_118 + (0x14 - uVar11);
+    local_120 = uVar11 & (int)(uVar11 - 0x14) >> 0x3f;
+    sVar12 = -(uVar11 - 0x14);
+    puVar3 = plVar7->array;
+    local_108 = iVar5;
+    local_100 = iVar6;
+    if (uVar10 < uVar13) {
+      ~r0_15.cap = (int)in_stack_fffffffffffffe40;
+      ~r0_15.array = in_stack_fffffffffffffe30._type;
+      ~r0_15.len = (int)in_stack_fffffffffffffe30.data;
+      runtime_growslice(puVar3,uVar13,uVar10,sVar12,(internal_abi_Type *)&DAT_00807920,~r0_15);
+      uVar10 = extraout_RCX_23;
+      uVar13 = extraout_RBX_31;

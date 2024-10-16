@@ -1,0 +1,1000 @@
+  int unaff_R14;
+  crypto_elliptic_Curve in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_elliptic_matchesSpecificCurve(curve,in_stack_ffffffffffffffc0,SUB81(x1,0));
+  if (extraout_CL != '\0') {
+    (**(code **)(extraout_RAX + 0x20))(extraout_RBX,x1,y1);
+    return;
+  }
+  crypto_elliptic_panicIfNotOnCurve
+            (in_stack_ffffffffffffffc0,
+             (math_big_Int *)go_itab__crypto_elliptic_CurveParams_crypto_elliptic_Curve,
+             (math_big_Int *)curve);
+  crypto_elliptic_zForAffine(x1,y1,~r0_00);
+  crypto_elliptic___CurveParams__doubleJacobian(curve,x1,y1,z,~r0_01,~r1_00,~r2);
+  crypto_elliptic___CurveParams__affineFromJacobian(curve,x,y,z_00,xOut,yOut);
+  return;
+}
+
+
+
+void crypto_elliptic___CurveParams__doubleJacobian
+               (crypto_elliptic_CurveParams *curve,math_big_Int *x,math_big_Int *y,math_big_Int *z,
+               math_big_Int *~r0,math_big_Int *~r1,math_big_Int *~r2)
+
+{
+  int len;
+  math_big_nat ~r0_00;
+  math_big_nat ~r0_01;
+  math_big_nat ~r0_02;
+  math_big_nat ~r0_03;
+  math_big_Int *z_00;
+  math_big_Int *delta;
+  math_big_Int *z_01;
+  math_big_Int *gamma;
+  math_big_Int *z_02;
+  math_big_Int *z_03;
+  math_big_Int *alpha;
+  math_big_Int *y_00;
+  math_big_Int *alpha2;
+  math_big_Word *extraout_RAX;
+  math_big_Word *extraout_RAX_00;
+  math_big_Word *extraout_RAX_01;
+  math_big_Word *extraout_RAX_02;
+  math_big_Word *extraout_RAX_03;
+  math_big_Int *extraout_RAX_04;
+  math_big_Int *beta;
+  math_big_Int *z_04;
+  math_big_Int *z_05;
+  math_big_Int *x3;
+  math_big_Int *z_06;
+  math_big_Int *z_07;
+  math_big_Int *z3;
+  math_big_Word *extraout_RAX_05;
+  math_big_Word *extraout_RAX_06;
+  math_big_Int *z_08;
+  math_big_Int *y3;
+  math_big_Word *extraout_RAX_07;
+  math_big_Word *extraout_RAX_08;
+  math_big_Word *pmVar1;
+  int iVar2;
+  int iVar3;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  math_big_Int *pmVar4;
+  math_big_Int *pmVar5;
+  void *~r0_04;
+  int extraout_RBX;
+  void *~r0_05;
+  void *~r0_06;
+  int extraout_RBX_00;
+  int extraout_RBX_01;
+  math_big_Int *extraout_RSI;
+  math_big_Int *~r0_07;
+  math_big_Int *~r0_08;
+  math_big_Int *~r0_09;
+  math_big_Int *~r0_10;
+  math_big_Int *~r0_11;
+  math_big_Int *extraout_RDI;
+  math_big_Int *~r0_12;
+  void *~r0_13;
+  math_big_Int *extraout_RDI_00;
+  math_big_Int *extraout_RDI_01;
+  math_big_Int *~r0_14;
+  math_big_Int *~r0_15;
+  math_big_Int *~r0_16;
+  math_big_Int *~r0_17;
+  math_big_Int *~r0_18;
+  math_big_Int *extraout_RDI_02;
+  math_big_Int *~r0_19;
+  math_big_Int *~r0_20;
+  math_big_Int *~r0_21;
+  math_big_Int *~r0_22;
+  math_big_Int *extraout_RDI_03;
+  math_big_Int *~r0_23;
+  math_big_Int *extraout_RDI_04;
+  math_big_Int *extraout_RDI_05;
+  math_big_Int *extraout_RDI_06;
+  math_big_Int *~r0_24;
+  math_big_Int *extraout_RDI_07;
+  math_big_Int *~r0_25;
+  math_big_Int *extraout_RDI_08;
+  math_big_Int *extraout_RDI_09;
+  math_big_Int *~r0_26;
+  math_big_Int *~r0_27;
+  math_big_Int *extraout_RDI_10;
+  math_big_Word **extraout_R11;
+  math_big_Word *__dest;
+  math_big_Word **extraout_R11_00;
+  math_big_Word **extraout_R11_01;
+  math_big_Word **extraout_R11_02;
+  int iVar6;
+  int unaff_R14;
+  crypto_elliptic_CurveParams *pcStack0000000000000008;
+  math_big_nat in_stack_fffffffffffffeb8;
+  math_big_nat in_stack_fffffffffffffed0;
+  undefined8 in_stack_fffffffffffffee8;
+  int in_stack_fffffffffffffef0;
+  int in_stack_fffffffffffffef8;
+  math_big_Int *local_c8;
+  math_big_Int *local_c0;
+  math_big_Int *local_b8;
+  math_big_Int *local_b0;
+  math_big_Int *local_a8;
+  math_big_Int *local_a0;
+  math_big_Int *local_98;
+  math_big_Int *local_90;
+  math_big_Int local_88;
+  math_big_Int local_68;
+  math_big_Int local_48;
+  math_big_Int local_28;
+  
+  pcStack0000000000000008 = curve;
+  while (&local_c8 <= *(math_big_Int ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_28.neg = false;
+  local_28.abs.array = (math_big_Word *)0x0;
+  local_a0 = y;
+  local_98 = z;
+  local_90 = x;
+  math_big___Int__Mul(&local_28,z,z,z);
+  local_c0 = z_00;
+  math_big___Int__Mod(z_00,z_00,pcStack0000000000000008->P,~r0_07);
+  local_48.neg = false;
+  local_48.abs.array = (math_big_Word *)0x0;
+  math_big___Int__Mul(&local_48,local_a0,local_a0,~r0_08);
+  local_c8 = z_01;
+  math_big___Int__Mod(z_01,z_01,pcStack0000000000000008->P,~r0_09);
+  runtime_newobject((internal_abi_Type *)&DAT_00855ba0,~r0_04);
+  math_big___Int__Sub(z_02,local_90,local_c0,~r0_10);
+  if ((z_03->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (z_03->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_11;
+  local_a8 = z_03;
+  if (iVar2 == -1) {
+    math_big___Int__Add(z_03,z_03,pcStack0000000000000008->P,~r0_11);
+    pmVar5 = extraout_RDI;
+  }
+  local_68.neg = false;
+  local_68.abs.array = (math_big_Word *)0x0;
+  math_big___Int__Add(&local_68,local_90,local_c0,pmVar5);
+  local_b0 = y_00;
+  math_big___Int__Mul(local_a8,local_a8,y_00,~r0_12);
+  pmVar5 = local_a8;
+  if (local_b0 != local_a8) {
+    iVar2 = (local_b0->abs).cap;
+    len = (local_a8->abs).len;
+    pmVar1 = (local_a8->abs).array;
+    iVar3 = len;
+    if (iVar2 < len) {
+      if (len == 1) {
+        runtime_makeslice((internal_abi_Type *)&DAT_00808860,1,1,~r0_13);
+        iVar2 = 1;
+        iVar3 = 1;
+        __dest = extraout_RAX;
+      }
+      else {
+        iVar2 = len + 4;
+        runtime_makeslice((internal_abi_Type *)&DAT_00808860,len,iVar2,~r0_13);
+        __dest = extraout_RAX_00;
+        in_stack_fffffffffffffef0 = iVar2;
+      }
+    }
+    else {
+      __dest = (local_b0->abs).array;
+    }
+    iVar6 = iVar3;
+    if (len < iVar3) {
+      iVar6 = len;
+    }
+    if (__dest != pmVar1) {
+      runtime_memmove(__dest,pmVar1,iVar6 << 3);
+      in_stack_fffffffffffffef8 = iVar3;
+    }
+    (local_b0->abs).len = iVar3;
+    (local_b0->abs).cap = iVar2;
+    pmVar4 = local_b0;
+    pmVar5 = local_a8;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_01;
+      extraout_R11[1] = (pmVar4->abs).array;
+      pmVar5 = extraout_RSI;
+      __dest = extraout_RAX_01;
+    }
+    (pmVar4->abs).array = __dest;
+    pmVar4->neg = pmVar5->neg;
+  }
+  ~r0_00.len = in_stack_fffffffffffffef0;
+  ~r0_00.array = (math_big_Word *)in_stack_fffffffffffffee8;
+  ~r0_00.cap = in_stack_fffffffffffffef8;
+  math_big_nat_shl(in_stack_fffffffffffffeb8,in_stack_fffffffffffffed0,(uint)(pmVar5->abs).array,
+                   ~r0_00);
+  (local_a8->abs).len = extraout_RBX;
+  (local_a8->abs).cap = extraout_RCX;
+  pmVar1 = extraout_RAX_02;
+  pmVar5 = local_a8;
+  pmVar4 = extraout_RDI_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RAX_03;
+    extraout_R11_00[1] = (pmVar5->abs).array;
+    pmVar1 = extraout_RAX_03;
+    pmVar4 = extraout_RDI_01;
+  }
+  (pmVar5->abs).array = pmVar1;
+  math_big___Int__Add(pmVar5,pmVar5,local_b0,pmVar4);
+  math_big___Int__Mul(local_b0,local_90,local_c8,~r0_14);
+  local_b8 = extraout_RAX_04;
+  runtime_newobject((internal_abi_Type *)&DAT_00855ba0,~r0_05);
+  math_big___Int__Mul(z_04,local_a8,local_a8,~r0_15);
+  local_88.neg = false;
+  local_88.abs.cap = 0;
+  ~r0_01.len = in_stack_fffffffffffffef0;
+  ~r0_01.array = (math_big_Word *)in_stack_fffffffffffffee8;
+  ~r0_01.cap = in_stack_fffffffffffffef8;
+  math_big_nat_shl(in_stack_fffffffffffffeb8,in_stack_fffffffffffffed0,0,~r0_01);
+  local_88.neg = local_b8->neg;
+  math_big___Int__Mod(&local_88,&local_88,pcStack0000000000000008->P,~r0_16);
+  math_big___Int__Sub(z_05,z_05,&local_88,~r0_17);
+  if ((z_05->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (z_05->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_18;
+  if (iVar2 == -1) {
+    math_big___Int__Add(z_05,z_05,pcStack0000000000000008->P,~r0_18);
+    pmVar5 = extraout_RDI_02;
+  }
+  math_big___Int__Mod(z_05,z_05,pcStack0000000000000008->P,pmVar5);
+  runtime_newobject((internal_abi_Type *)&DAT_00855ba0,~r0_06);
+  math_big___Int__Add(z_06,local_a0,local_98,~r0_19);
+  math_big___Int__Mul(z_07,z_07,z_07,~r0_20);
+  math_big___Int__Sub(z_07,z_07,local_c8,~r0_21);
+  if ((z_07->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (z_07->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_22;
+  if (iVar2 == -1) {
+    math_big___Int__Add(z_07,z_07,pcStack0000000000000008->P,~r0_22);
+    pmVar5 = extraout_RDI_03;
+  }
+  math_big___Int__Sub(z_07,z_07,local_c0,pmVar5);
+  if ((z_07->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (z_07->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_23;
+  if (iVar2 == -1) {
+    math_big___Int__Add(z_07,z_07,pcStack0000000000000008->P,~r0_23);
+    pmVar5 = extraout_RDI_04;
+  }
+  math_big___Int__Mod(z_07,z_07,pcStack0000000000000008->P,pmVar5);
+  ~r0_02.len = in_stack_fffffffffffffef0;
+  ~r0_02.array = (math_big_Word *)in_stack_fffffffffffffee8;
+  ~r0_02.cap = in_stack_fffffffffffffef8;
+  math_big_nat_shl(in_stack_fffffffffffffeb8,in_stack_fffffffffffffed0,(uint)(local_b8->abs).array,
+                   ~r0_02);
+  (local_b8->abs).len = extraout_RBX_00;
+  (local_b8->abs).cap = extraout_RCX_00;
+  pmVar1 = extraout_RAX_05;
+  pmVar5 = local_b8;
+  pmVar4 = extraout_RDI_05;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_01 = extraout_RAX_06;
+    extraout_R11_01[1] = (pmVar5->abs).array;
+    pmVar1 = extraout_RAX_06;
+    pmVar4 = extraout_RDI_06;
+  }
+  (pmVar5->abs).array = pmVar1;
+  math_big___Int__Sub(pmVar5,pmVar5,z_05,pmVar4);
+  if ((local_b8->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (local_b8->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_24;
+  if (iVar2 == -1) {
+    math_big___Int__Add(local_b8,local_b8,pcStack0000000000000008->P,~r0_24);
+    pmVar5 = extraout_RDI_07;
+  }
+  math_big___Int__Mul(local_a8,local_a8,local_b8,pmVar5);
+  math_big___Int__Mul(local_c8,local_c8,local_c8,~r0_25);
+  ~r0_03.len = in_stack_fffffffffffffef0;
+  ~r0_03.array = (math_big_Word *)in_stack_fffffffffffffee8;
+  ~r0_03.cap = in_stack_fffffffffffffef8;
+  math_big_nat_shl(in_stack_fffffffffffffeb8,in_stack_fffffffffffffed0,(uint)(local_c8->abs).array,
+                   ~r0_03);
+  (local_c8->abs).len = extraout_RBX_01;
+  (local_c8->abs).cap = extraout_RCX_01;
+  pmVar1 = extraout_RAX_07;
+  pmVar5 = local_c8;
+  pmVar4 = extraout_RDI_08;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_02 = extraout_RAX_08;
+    extraout_R11_02[1] = (pmVar5->abs).array;
+    pmVar1 = extraout_RAX_08;
+    pmVar4 = extraout_RDI_09;
+  }
+  (pmVar5->abs).array = pmVar1;
+  math_big___Int__Mod(pmVar5,pmVar5,pcStack0000000000000008->P,pmVar4);
+  math_big___Int__Sub(z_08,z_08,local_c8,~r0_26);
+  if ((z_08->abs).len == 0) {
+    iVar2 = 0;
+  }
+  else if (z_08->neg == false) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  pmVar5 = ~r0_27;
+  if (iVar2 == -1) {
+    math_big___Int__Add(z_08,z_08,pcStack0000000000000008->P,~r0_27);
+    pmVar5 = extraout_RDI_10;
+  }
+  math_big___Int__Mod(z_08,z_08,pcStack0000000000000008->P,pmVar5);
+  return;
+}
+
+
+
+void crypto_elliptic___CurveParams__ScalarMult
+               (crypto_elliptic_CurveParams *curve,math_big_Int *Bx,math_big_Int *By,__uint8 k,
+               math_big_Int *~r0,math_big_Int *~r1)
+
+{
+  crypto_elliptic_Curve ~r0_00;
+  crypto_elliptic_Curve curve_00;
+  int extraout_RAX;
+  math_big_Int *z1;
+  math_big_Int *Bz;
+  char extraout_CL;
+  bool ok;
+  math_big_Int *x2;
+  math_big_Int *extraout_RAX_00;
+  math_big_Int *~r0_01;
+  int iVar1;
+  math_big_Int *z2;
+  math_big_Int *extraout_RCX;
+  dword dVar2;
+  math_big_Int *pmVar3;
+  undefined8 extraout_RBX;
+  math_big_Int *y2;
+  math_big_Int *extraout_RBX_00;
+  math_big_Int *xOut;
+  math_big_Int *z;
+  undefined8 in_R8;
+  math_big_Int *y;
+  math_big_Int *x;
+  uint8 byte;
+  math_big_Int *~r0_02;
+  int iVar4;
+  math_big_Int *~r1_00;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000020;
+  math_big_Int *pmStack0000000000000028;
+  undefined8 uStack0000000000000030;
+  runtime_itab *in_stack_ffffffffffffff08;
+  void *in_stack_ffffffffffffff10;
+  int bitNum;
+  undefined local_88 [32];
+  math_big_Int local_68;
+  math_big_Int local_48;
+  math_big_Int local_28;
+  
+  pmStack0000000000000028 = ~r1;
+  pmStack0000000000000020 = ~r0;
+  uStack0000000000000030 = in_R8;
+  while (local_88 + 0x10 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.data = in_stack_ffffffffffffff10;
+  ~r0_00.tab = in_stack_ffffffffffffff08;
+  crypto_elliptic_matchesSpecificCurve(curve,~r0_00,SUB81(Bx,0));
+  if (extraout_CL == '\0') {
+    curve_00.data = in_stack_ffffffffffffff10;
+    curve_00.tab = in_stack_ffffffffffffff08;
+    crypto_elliptic_panicIfNotOnCurve
+              (curve_00,(math_big_Int *)go_itab__crypto_elliptic_CurveParams_crypto_elliptic_Curve,
+               (math_big_Int *)curve);
+    local_28.neg = false;
+    local_28.abs.array = (math_big_Word *)0x0;
+    math_big___Int__SetInt64(&local_28,1,~r0_01);
+    local_48.neg = false;
+    local_48.abs.array = (math_big_Word *)0x0;
+    local_68.neg = false;
+    local_68.abs.array = (math_big_Word *)0x0;
+    local_88[0] = false;
+    local_88._8_8_ = (math_big_Word *)0x0;
+    z = (math_big_Int *)local_88;
+    y = &local_68;
+    x = &local_48;
+    pmVar3 = pmStack0000000000000028;
+    xOut = pmStack0000000000000020;
+    for (iVar1 = 0; iVar1 < (int)pmVar3; iVar1 = iVar1 + 1) {
+      dVar2 = (dword)(&xOut->neg)[iVar1];
+      for (iVar4 = 0; iVar4 < 8; iVar4 = iVar4 + 1) {
+        crypto_elliptic___CurveParams__doubleJacobian(curve,x,y,z,xOut,y,x);
+        x = x2;
+        z = z2;
+        y = y2;
+        if ((dVar2 & 0x80) != 0) {
+          crypto_elliptic___CurveParams__addJacobian
+                    (curve,Bx,By,z1,x2,y2,z2,~r0_02,~r1_00,(math_big_Int *)in_stack_ffffffffffffff08
+                    );
+          x = extraout_RAX_00;
+          z = extraout_RCX;
+          y = extraout_RBX_00;
+        }
+        dVar2 = (dVar2 & 0xff) << 1;
+        pmVar3 = pmStack0000000000000028;
+        xOut = pmStack0000000000000020;
+      }
+    }
+    crypto_elliptic___CurveParams__affineFromJacobian(curve,x,y,z,xOut,y);
+    return;
+  }
+  (**(code **)(extraout_RAX + 0x40))
+            (extraout_RBX,Bx,By,pmStack0000000000000020,pmStack0000000000000028,
+             uStack0000000000000030);
+  return;
+}
+
+
+
+void crypto_elliptic___CurveParams__ScalarBaseMult
+               (crypto_elliptic_CurveParams *curve,__uint8 k,math_big_Int *~r0,math_big_Int *~r1)
+
+{
+  __uint8 k_00;
+  char extraout_CL;
+  bool ok;
+  int extraout_RAX;
+  undefined8 extraout_RBX;
+  undefined8 in_RDI;
+  int unaff_R14;
+  undefined8 uStack0000000000000020;
+  crypto_elliptic_Curve in_stack_ffffffffffffffc8;
+  int in_stack_ffffffffffffffd8;
+  
+  uStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_elliptic_matchesSpecificCurve(curve,in_stack_ffffffffffffffc8,SUB81(~r0,0));
+  if (extraout_CL != '\0') {
+    (**(code **)(extraout_RAX + 0x38))(extraout_RBX,~r0,~r1,uStack0000000000000020);
+    return;
+  }
+  k_00.cap = in_stack_ffffffffffffffd8;
+  k_00.array = (uint8 *)in_stack_ffffffffffffffc8.tab;
+  k_00.len = (int)in_stack_ffffffffffffffc8.data;
+  crypto_elliptic___CurveParams__ScalarMult(curve,curve->Gx,curve->Gy,k_00,~r0,~r1);
+  return;
+}
+
+
+
+void crypto_elliptic_matchesSpecificCurve
+               (crypto_elliptic_CurveParams *params,crypto_elliptic_Curve ~r0,bool ~r1)
+
+{
+  crypto_elliptic_CurveParams *pcVar1;
+  int *piVar2;
+  int iVar3;
+  int unaff_R14;
+  undefined local_48 [16];
+  undefined local_38 [16];
+  undefined local_28 [16];
+  undefined local_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_48._8_8_ = crypto_elliptic_p224;
+  local_48._0_8_ =
+       go_itab__crypto_elliptic_nistCurve__crypto_internal_nistec_P224Point__crypto_elliptic_Curve;
+  local_38._8_8_ = crypto_elliptic_p256;
+  local_38._0_8_ = go_itab__crypto_elliptic_p256Curve_crypto_elliptic_Curve;
+  local_28._8_8_ = crypto_elliptic_p384;
+  local_28._0_8_ =
+       go_itab__crypto_elliptic_nistCurve__crypto_internal_nistec_P384Point__crypto_elliptic_Curve;
+  local_18._8_8_ = crypto_elliptic_p521;
+  local_18._0_8_ =
+       go_itab__crypto_elliptic_nistCurve__crypto_internal_nistec_P521Point__crypto_elliptic_Curve;
+  piVar2 = (int *)local_48;
+  iVar3 = 0;
+  while( true ) {
+    if (3 < iVar3) {
+      return;
+    }
+    pcVar1 = (crypto_elliptic_CurveParams *)(**(code **)(*piVar2 + 0x30))();
+    if (pcVar1 == params) break;
+    piVar2 = piVar2 + 2;
+    iVar3 = iVar3 + 1;
+  }
+  return;
+}
+
+
+
+void type__eq_crypto_elliptic_CurveParams
+               (crypto_elliptic_CurveParams *p,crypto_elliptic_CurveParams *q,bool r)
+
+{
+  char extraout_AL;
+  int unaff_R14;
+  crypto_elliptic_CurveParams *pcStack0000000000000008;
+  crypto_elliptic_CurveParams *pcStack0000000000000010;
+  
+  pcStack0000000000000008 = p;
+  pcStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((pcStack0000000000000010->Name).len == (pcStack0000000000000008->Name).len) &&
+     (runtime_memequal(), extraout_AL != '\0')) {
+    runtime_memequal();
+  }
+  return;
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___UnmarshalCompressed
+               (_param31 curve,__uint8 data,math_big_Int *x,math_big_Int *y)
+
+{
+  undefined8 uVar1;
+  _param32 p;
+  undefined8 in_RSI;
+  int in_RDI;
+  math_big_Int *y_00;
+  int unaff_R14;
+  undefined auVar2 [16];
+  int iStack0000000000000020;
+  undefined8 uStack0000000000000028;
+  
+  uStack0000000000000028 = in_RSI;
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (iStack0000000000000020 != 0) {
+    if ((y->neg == true) || (y->neg == true)) {
+      uVar1 = (**curve->newPoint)((go_shape__uint8 *)curve);
+      auVar2 = (**(code **)x)(uVar1,y,iStack0000000000000020,uStack0000000000000028);
+      if (auVar2._8_8_ != 0) {
+        return;
+      }
+      crypto_elliptic___nistCurve_go_shape__uint8___pointToAffine
+                (curve,*(_param18 *)(x + 3),auVar2._0_8_,y_00);
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___Unmarshal
+               (_param30 curve,__uint8 data,math_big_Int *x,math_big_Int *y)
+
+{
+  math_big_nat ~r0;
+  math_big_nat ~r0_00;
+  undefined8 uVar1;
+  undefined *extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  undefined *extraout_RAX_02;
+  undefined8 extraout_RAX_03;
+  undefined8 extraout_RAX_04;
+  int iVar2;
+  int byteLen;
+  undefined8 extraout_RCX;
+  undefined8 extraout_RCX_00;
+  undefined *puVar3;
+  int extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *~r0_01;
+  undefined8 extraout_RBX_02;
+  uint in_RSI;
+  uint in_RDI;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  uint uStack0000000000000020;
+  uint uStack0000000000000028;
+  math_big_nat in_stack_ffffffffffffffa8;
+  __uint8 in_stack_ffffffffffffffc0;
+  uint uVar4;
+  int in_stack_ffffffffffffffe8;
+  
+  uStack0000000000000028 = in_RSI;
+  uStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((uStack0000000000000020 == 0) || (y->neg != true)) {
+    return;
+  }
+  uVar1 = (**curve->newPoint)((go_shape__uint8 *)curve);
+  (**(code **)x)(uVar1,y,uStack0000000000000020,uStack0000000000000028);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  iVar2 = curve->params->BitSize;
+  runtime_newobject((internal_abi_Type *)&DAT_00855ba0,(void *)0x0);
+  iVar2 = (int)(((uint)(iVar2 + 7 >> 0x3f) >> 0x3d) + iVar2 + 7) >> 3;
+  uVar4 = iVar2 + 1;
+  if (uVar4 <= uStack0000000000000028) {
+    if (uVar4 == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    ~r0.len = uVar4;
+    ~r0.array = (math_big_Word *)iVar2;
+    ~r0.cap = in_stack_ffffffffffffffe8;
+    math_big_nat_setBytes(in_stack_ffffffffffffffa8,in_stack_ffffffffffffffc0,~r0);
+    *(void **)(extraout_RAX + 0x10) = extraout_RBX_00;
+    *(undefined8 *)(extraout_RAX + 0x18) = extraout_RCX;
+    uVar1 = extraout_RAX_00;
+    puVar3 = extraout_RAX;
+    ~r0_01 = extraout_RBX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_01;
+      extraout_R11[1] = *(undefined8 *)(puVar3 + 8);
+      uVar1 = extraout_RAX_01;
+      ~r0_01 = extraout_RBX_01;
+    }
+    *(undefined8 *)(puVar3 + 8) = uVar1;
+    *puVar3 = 0;
+    runtime_newobject((internal_abi_Type *)&DAT_00855ba0,~r0_01);
+    if (uVar4 <= uStack0000000000000020) {
+      ~r0_00.len = uVar4;
+      ~r0_00.array = (math_big_Word *)iVar2;
+      ~r0_00.cap = (int)extraout_RAX_02;
+      puVar3 = extraout_RAX_02;
+      math_big_nat_setBytes(in_stack_ffffffffffffffa8,in_stack_ffffffffffffffc0,~r0_00);
+      *(undefined8 *)(puVar3 + 0x10) = extraout_RBX_02;
+      *(undefined8 *)(puVar3 + 0x18) = extraout_RCX_00;
+      uVar1 = extraout_RAX_03;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX_04;
+        extraout_R11_00[1] = *(undefined8 *)(puVar3 + 8);
+        uVar1 = extraout_RAX_04;
+      }
+      *(undefined8 *)(puVar3 + 8) = uVar1;
+      *puVar3 = 0;
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAcap();
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___CombinedMult
+               (_param28 curve,math_big_Int *Px,math_big_Int *Py,__uint8 s1,__uint8 s2,
+               math_big_Int *x,math_big_Int *y)
+
+{
+  code *pcVar1;
+  __uint8 scalar;
+  __uint8 scalar_00;
+  __uint8 ~r0;
+  __uint8 ~r0_00;
+  go_shape__uint8 *extraout_RAX;
+  undefined8 uVar2;
+  _param29 q;
+  undefined8 extraout_RAX_00;
+  _param29 p;
+  undefined8 extraout_RAX_01;
+  math_big_Int *x_00;
+  int extraout_RCX;
+  undefined8 extraout_RCX_00;
+  undefined8 extraout_RBX;
+  int extraout_RBX_00;
+  undefined8 extraout_RBX_01;
+  undefined8 extraout_RSI;
+  math_big_Int *y_00;
+  int unaff_R14;
+  undefined auVar3 [16];
+  undefined auVar4 [16];
+  math_big_Int *pmStack0000000000000040;
+  interface___ in_stack_ffffffffffffff98;
+  int in_stack_ffffffffffffffa8;
+  undefined in_stack_ffffffffffffffb0 [16];
+  int in_stack_ffffffffffffffc0;
+  int iVar5;
+  
+  pmStack0000000000000040 = y;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  scalar.cap = in_stack_ffffffffffffffa8;
+  scalar.array = (uint8 *)in_stack_ffffffffffffff98._type;
+  scalar.len = (int)in_stack_ffffffffffffff98.data;
+  ~r0.cap = in_stack_ffffffffffffffc0;
+  ~r0.array = (uint8 *)in_stack_ffffffffffffffb0._0_8_;
+  ~r0.len = in_stack_ffffffffffffffb0._8_8_;
+  crypto_elliptic___nistCurve_go_shape__uint8___normalizeScalar(curve,scalar,~r0);
+  iVar5 = extraout_RCX;
+  uVar2 = (**curve->newPoint)(extraout_RAX);
+  auVar3 = (*(code *)Px[1].abs.array)(uVar2,extraout_RAX,extraout_RBX,iVar5,extraout_RSI,&Px[1].abs)
+  ;
+  if (auVar3._8_8_ != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  crypto_elliptic___nistCurve_go_shape__uint8___pointFromAffine
+            (curve,(math_big_Int *)Px[2].abs.cap,Py,&x->neg,(error)in_stack_ffffffffffffff98);
+  if (extraout_RBX_00 != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  scalar_00.cap = in_stack_ffffffffffffffa8;
+  scalar_00.array = (uint8 *)in_stack_ffffffffffffff98._type;
+  scalar_00.len = (int)in_stack_ffffffffffffff98.data;
+  ~r0_00.cap = iVar5;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffb0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffb0._8_8_;
+  crypto_elliptic___nistCurve_go_shape__uint8___normalizeScalar(curve,scalar_00,~r0_00);
+  auVar4 = (**(code **)(Px + 1))
+                     (extraout_RAX_00,extraout_RAX_00,extraout_RAX_01,extraout_RBX_01,
+                      extraout_RCX_00,Px + 1);
+  if (auVar4._8_8_ == 0) {
+    pcVar1 = (code *)(Px->abs).len;
+    x_00 = (math_big_Int *)(*pcVar1)(auVar4._0_8_,auVar4._0_8_,auVar3._0_8_,pcVar1,&(Px->abs).len);
+    crypto_elliptic___nistCurve_go_shape__uint8___pointToAffine
+              (curve,(_param18)Px[2].abs.cap,x_00,y_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffff98);
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___ScalarBaseMult
+               (_param26 curve,__uint8 scalar,math_big_Int *~r0,math_big_Int *~r1)
+
+{
+  __uint8 scalar_00;
+  __uint8 ~r0_00;
+  go_shape__uint8 *extraout_RAX;
+  undefined8 uVar1;
+  _param27 p;
+  undefined8 extraout_RCX;
+  undefined8 extraout_RBX;
+  undefined8 extraout_RSI;
+  math_big_Int *y;
+  int unaff_R14;
+  undefined auVar2 [16];
+  interface___ in_stack_ffffffffffffffb8;
+  int in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd0 [16];
+  int in_stack_ffffffffffffffe0;
+  undefined8 uVar3;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  scalar_00.cap = in_stack_ffffffffffffffc8;
+  scalar_00.array = (uint8 *)in_stack_ffffffffffffffb8._type;
+  scalar_00.len = (int)in_stack_ffffffffffffffb8.data;
+  ~r0_00.cap = in_stack_ffffffffffffffe0;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffd0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffd0._8_8_;
+  crypto_elliptic___nistCurve_go_shape__uint8___normalizeScalar(curve,scalar_00,~r0_00);
+  uVar3 = extraout_RCX;
+  uVar1 = (**curve->newPoint)(extraout_RAX);
+  auVar2 = (*(code *)~r0[1].abs.array)
+                     (uVar1,extraout_RAX,extraout_RBX,uVar3,extraout_RSI,&~r0[1].abs);
+  if (auVar2._8_8_ == 0) {
+    crypto_elliptic___nistCurve_go_shape__uint8___pointToAffine
+              (curve,(_param18)~r0[2].abs.len,auVar2._0_8_,y);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffb8);
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___ScalarMult
+               (_param24 curve,math_big_Int *Bx,math_big_Int *By,__uint8 scalar,math_big_Int *~r0,
+               math_big_Int *~r1)
+
+{
+  __uint8 scalar_00;
+  __uint8 ~r0_00;
+  int extraout_RAX;
+  _param25 p;
+  undefined8 extraout_RAX_00;
+  undefined8 extraout_RCX;
+  int extraout_RBX;
+  undefined8 extraout_RBX_00;
+  math_big_Int *y;
+  int unaff_R14;
+  undefined auVar1 [16];
+  math_big_Int *pmStack0000000000000028;
+  interface___ in_stack_ffffffffffffffc0;
+  int in_stack_ffffffffffffffd0;
+  undefined in_stack_ffffffffffffffd8 [16];
+  int iVar2;
+  
+  pmStack0000000000000028 = ~r1;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_elliptic___nistCurve_go_shape__uint8___pointFromAffine
+            (curve,(math_big_Int *)Bx[2].abs.array,By,&~r0->neg,(error)in_stack_ffffffffffffffc0);
+  if (extraout_RBX == 0) {
+    scalar_00.cap = in_stack_ffffffffffffffd0;
+    scalar_00.array = (uint8 *)in_stack_ffffffffffffffc0._type;
+    scalar_00.len = (int)in_stack_ffffffffffffffc0.data;
+    ~r0_00.cap = extraout_RAX;
+    ~r0_00.array = (uint8 *)in_stack_ffffffffffffffd8._0_8_;
+    ~r0_00.len = in_stack_ffffffffffffffd8._8_8_;
+    iVar2 = extraout_RAX;
+    crypto_elliptic___nistCurve_go_shape__uint8___normalizeScalar(curve,scalar_00,~r0_00);
+    auVar1 = (**(code **)(Bx + 1))(iVar2,iVar2,extraout_RAX_00,extraout_RBX_00,extraout_RCX,Bx + 1);
+    if (auVar1._8_8_ == 0) {
+      crypto_elliptic___nistCurve_go_shape__uint8___pointToAffine
+                (curve,(_param18)Bx[2].abs.array,auVar1._0_8_,y);
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffc0);
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffc0);
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___normalizeScalar
+               (_param23 curve,__uint8 scalar,__uint8 ~r0)
+
+{
+  math_big_nat ~r0_00;
+  uint top;
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  int byteSize;
+  uint in_RDI;
+  math_big_Int *~r0_01;
+  math_big_Int *extraout_RDI;
+  math_big_Int *pmVar4;
+  int i;
+  int unaff_R14;
+  math_big_nat in_stack_ffffffffffffffa0;
+  __uint8 in_stack_ffffffffffffffb8;
+  undefined7 in_stack_ffffffffffffffd9;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pmVar4 = curve->params->N;
+  iVar2 = (pmVar4->abs).len;
+  iVar3 = iVar2 + -1;
+  if (iVar3 < 0) {
+    iVar3 = 0;
+  }
+  else {
+    uVar1 = (pmVar4->abs).array[iVar2 + -1];
+    uVar1 = uVar1 >> 1 | uVar1;
+    uVar1 = uVar1 >> 2 | uVar1;
+    uVar1 = uVar1 >> 4 | uVar1;
+    uVar1 = uVar1 >> 8 | uVar1;
+    uVar1 = uVar1 >> 0x10 | uVar1;
+    uVar1 = uVar1 >> 0x20 | uVar1;
+    iVar2 = 0x3f;
+    if (uVar1 != 0) {
+      for (; uVar1 >> iVar2 == 0; iVar2 = iVar2 + -1) {
+      }
+    }
+    if (uVar1 == 0) {
+      iVar2 = -1;
+    }
+    iVar3 = iVar2 + iVar3 * 0x40 + 1;
+  }
+  uVar1 = (int)(((uint)(iVar3 + 7 >> 0x3f) >> 0x3d) + iVar3 + 7) >> 3;
+  if (in_RDI != uVar1) {
+    ~r0_00.len._0_1_ = 0;
+    ~r0_00.array = (math_big_Word *)uVar1;
+    ~r0_00.len._1_7_ = in_stack_ffffffffffffffd9;
+    ~r0_00.cap = 0;
+    math_big_nat_setBytes(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb8,~r0_00);
+    pmVar4 = ~r0_01;
+    if ((int)uVar1 < (int)in_RDI) {
+      math_big___Int__Mod((math_big_Int *)&stack0xffffffffffffffd8,
+                          (math_big_Int *)&stack0xffffffffffffffd8,curve->params->N,~r0_01);
+      pmVar4 = extraout_RDI;
+    }
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,uVar1,uVar1,pmVar4);
+    math_big___Int__FillBytes
+              ((math_big_Int *)&stack0xffffffffffffffd8,(__uint8)in_stack_ffffffffffffffa0,
+               in_stack_ffffffffffffffb8);
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_elliptic___nistCurve_go_shape__uint8___Double
+               (_param21 curve,math_big_Int *x1,math_big_Int *y1,math_big_Int *~r0,math_big_Int *~r1
+               )
+
+{
+  _param22 p;
+  math_big_Int *x;
+  int extraout_RBX;
+  math_big_Int *y;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000010;
+  interface___ in_stack_ffffffffffffffd0;
+  
+  pmStack0000000000000010 = x1;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_elliptic___nistCurve_go_shape__uint8___pointFromAffine
+            (curve,*(math_big_Int **)(pmStack0000000000000010 + 2),y1,&~r0->neg,
+             (error)in_stack_ffffffffffffffd0);
+  if (extraout_RBX == 0) {
+    x = (math_big_Int *)(*(code *)(pmStack0000000000000010->abs).cap)();
+    crypto_elliptic___nistCurve_go_shape__uint8___pointToAffine
+              (curve,*(_param18 *)(pmStack0000000000000010 + 2),x,y);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffd0);
+}
+
+

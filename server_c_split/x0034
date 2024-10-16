@@ -1,0 +1,1000 @@
+  uVar4 = in_RDI;
+  if (h == hashss) {
+    if (in_RBX < in_RDI) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    runtime_memequal();
+    if (extraout_AL != '\0') {
+      return;
+    }
+  }
+  do {
+    do {
+      i_1 = uVar4;
+      if ((int)in_RBX <= i_1) {
+        return;
+      }
+      uVar3 = i_1 - in_RDI;
+      if (in_RBX <= uVar3) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      h = (h * 0x1000193 + (dword)*(byte *)(~r0 + i_1)) - *(byte *)(~r0 + uVar3) * pow;
+      uVar4 = i_1 + 1;
+    } while (hashss != h);
+    if (uVar4 < uVar3 + 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    if (in_RDI == i_1 - uVar3) {
+      runtime_memequal();
+      cVar1 = extraout_AL_00;
+    }
+    else {
+      cVar1 = '\0';
+    }
+  } while (cVar1 == '\0');
+  return;
+}
+
+
+
+void internal_bytealg_countGeneric(__uint8 b,uint8 c,int ~r0)
+
+{
+  int iVar1;
+  int n;
+  
+  for (iVar1 = 0; iVar1 < ~r0; iVar1 = iVar1 + 1) {
+  }
+  return;
+}
+
+
+
+void internal_bytealg_countGenericString(string s,uint8 c,int ~r0)
+
+{
+  int iVar1;
+  int i;
+  int n;
+  
+  for (iVar1 = 0; iVar1 < ~r0; iVar1 = iVar1 + 1) {
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_bytealg_init_0(void)
+
+{
+  if (internal_cpu_X86.HasAVX2) {
+    internal_bytealg_MaxLen = 0x3f;
+  }
+  else {
+    internal_bytealg_MaxLen = 0x1f;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void cmpbody(void)
+
+{
+  int iVar1;
+  dword dVar2;
+  uint uVar3;
+  byte bVar4;
+  uint in_RDX;
+  uint in_RBX;
+  undefined (*in_RSI) [32];
+  undefined (*in_RDI) [32];
+  uint uVar5;
+  undefined auVar6 [16];
+  undefined auVar7 [16];
+  undefined auVar8 [16];
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  undefined auVar11 [32];
+  undefined auVar12 [32];
+  undefined auVar13 [32];
+  undefined auVar14 [32];
+  
+  if (in_RSI != in_RDI) {
+    if ((int)in_RBX < (int)in_RDX) {
+      in_RDX = in_RBX;
+    }
+    if (in_RDX < 8) {
+      if (in_RDX * -8 == 0) {
+        return;
+      }
+      bVar4 = (byte)(in_RDX * -8);
+      if ((byte)in_RSI < 0xf9) {
+        uVar3 = *(uint *)*in_RSI;
+      }
+      else {
+        uVar3 = *(uint *)(in_RSI[-1] + in_RDX + 0x18) >> (bVar4 & 0x3f);
+      }
+      uVar3 = uVar3 << (bVar4 & 0x3f);
+      if ((byte)in_RDI < 0xf9) {
+        uVar5 = *(uint *)*in_RDI;
+      }
+      else {
+        uVar5 = *(uint *)(in_RDI[-1] + in_RDX + 0x18) >> (bVar4 & 0x3f);
+      }
+      uVar5 = uVar5 << (bVar4 & 0x3f);
+      uVar3 = (uVar5 >> 0x38 | (uVar5 & 0xff000000000000) >> 0x28 | (uVar5 & 0xff0000000000) >> 0x18
+               | (uVar5 & 0xff00000000) >> 8 | (uVar5 & 0xff000000) << 8 |
+               (uVar5 & 0xff0000) << 0x18 | (uVar5 & 0xff00) << 0x28 | uVar5 << 0x38) ^
+              (uVar3 >> 0x38 | (uVar3 & 0xff000000000000) >> 0x28 | (uVar3 & 0xff0000000000) >> 0x18
+               | (uVar3 & 0xff00000000) >> 8 | (uVar3 & 0xff000000) << 8 |
+               (uVar3 & 0xff0000) << 0x18 | (uVar3 & 0xff00) << 0x28 | uVar3 << 0x38);
+      if (uVar3 == 0) {
+        return;
+      }
+      iVar1 = 0x3f;
+      if (uVar3 != 0) {
+        for (; uVar3 >> iVar1 == 0; iVar1 = iVar1 + -1) {
+        }
+      }
+      return;
+    }
+    if (0x3f < in_RDX) {
+      if (internal_cpu_X86.HasAVX2) {
+        do {
+          auVar11 = vmovdqu_avx(*in_RSI);
+          auVar12 = vmovdqu_avx(*in_RDI);
+          auVar13 = vmovdqu_avx(in_RSI[1]);
+          auVar14 = vmovdqu_avx(in_RDI[1]);
+          auVar11 = vpcmpeqb_avx2(auVar12,auVar11);
+          dVar2 = ((dword)(SUB321(auVar11 >> 7,0) & 1) | (dword)(SUB321(auVar11 >> 0xf,0) & 1) << 1
+                   | (dword)(SUB321(auVar11 >> 0x17,0) & 1) << 2 |
+                   (dword)(SUB321(auVar11 >> 0x1f,0) & 1) << 3 |
+                   (dword)(SUB321(auVar11 >> 0x27,0) & 1) << 4 |
+                   (dword)(SUB321(auVar11 >> 0x2f,0) & 1) << 5 |
+                   (dword)(SUB321(auVar11 >> 0x37,0) & 1) << 6 |
+                   (dword)(SUB321(auVar11 >> 0x3f,0) & 1) << 7 |
+                   (dword)(SUB321(auVar11 >> 0x47,0) & 1) << 8 |
+                   (dword)(SUB321(auVar11 >> 0x4f,0) & 1) << 9 |
+                   (dword)(SUB321(auVar11 >> 0x57,0) & 1) << 10 |
+                   (dword)(SUB321(auVar11 >> 0x5f,0) & 1) << 0xb |
+                   (dword)(SUB321(auVar11 >> 0x67,0) & 1) << 0xc |
+                   (dword)(SUB321(auVar11 >> 0x6f,0) & 1) << 0xd |
+                   (dword)(SUB321(auVar11 >> 0x77,0) & 1) << 0xe |
+                   (dword)SUB321(auVar11 >> 0x7f,0) << 0xf |
+                   (dword)(SUB321(auVar11 >> 0x87,0) & 1) << 0x10 |
+                   (dword)(SUB321(auVar11 >> 0x8f,0) & 1) << 0x11 |
+                   (dword)(SUB321(auVar11 >> 0x97,0) & 1) << 0x12 |
+                   (dword)(SUB321(auVar11 >> 0x9f,0) & 1) << 0x13 |
+                   (dword)(SUB321(auVar11 >> 0xa7,0) & 1) << 0x14 |
+                   (dword)(SUB321(auVar11 >> 0xaf,0) & 1) << 0x15 |
+                   (dword)(SUB321(auVar11 >> 0xb7,0) & 1) << 0x16 |
+                   (dword)SUB321(auVar11 >> 0xbf,0) << 0x17 |
+                   (dword)(SUB321(auVar11 >> 199,0) & 1) << 0x18 |
+                   (dword)(SUB321(auVar11 >> 0xcf,0) & 1) << 0x19 |
+                   (dword)(SUB321(auVar11 >> 0xd7,0) & 1) << 0x1a |
+                   (dword)(SUB321(auVar11 >> 0xdf,0) & 1) << 0x1b |
+                   (dword)(SUB321(auVar11 >> 0xe7,0) & 1) << 0x1c |
+                   (dword)(SUB321(auVar11 >> 0xef,0) & 1) << 0x1d |
+                   (dword)(SUB321(auVar11 >> 0xf7,0) & 1) << 0x1e |
+                  (dword)(byte)(auVar11[31] >> 7) << 0x1f) ^ 0xffffffff;
+          uVar3 = (uint)dVar2;
+          if (dVar2 != 0) goto LAB_0040711d;
+          auVar11 = vpcmpeqb_avx2(auVar14,auVar13);
+          dVar2 = ((dword)(SUB321(auVar11 >> 7,0) & 1) | (dword)(SUB321(auVar11 >> 0xf,0) & 1) << 1
+                   | (dword)(SUB321(auVar11 >> 0x17,0) & 1) << 2 |
+                   (dword)(SUB321(auVar11 >> 0x1f,0) & 1) << 3 |
+                   (dword)(SUB321(auVar11 >> 0x27,0) & 1) << 4 |
+                   (dword)(SUB321(auVar11 >> 0x2f,0) & 1) << 5 |
+                   (dword)(SUB321(auVar11 >> 0x37,0) & 1) << 6 |
+                   (dword)(SUB321(auVar11 >> 0x3f,0) & 1) << 7 |
+                   (dword)(SUB321(auVar11 >> 0x47,0) & 1) << 8 |
+                   (dword)(SUB321(auVar11 >> 0x4f,0) & 1) << 9 |
+                   (dword)(SUB321(auVar11 >> 0x57,0) & 1) << 10 |
+                   (dword)(SUB321(auVar11 >> 0x5f,0) & 1) << 0xb |
+                   (dword)(SUB321(auVar11 >> 0x67,0) & 1) << 0xc |
+                   (dword)(SUB321(auVar11 >> 0x6f,0) & 1) << 0xd |
+                   (dword)(SUB321(auVar11 >> 0x77,0) & 1) << 0xe |
+                   (dword)SUB321(auVar11 >> 0x7f,0) << 0xf |
+                   (dword)(SUB321(auVar11 >> 0x87,0) & 1) << 0x10 |
+                   (dword)(SUB321(auVar11 >> 0x8f,0) & 1) << 0x11 |
+                   (dword)(SUB321(auVar11 >> 0x97,0) & 1) << 0x12 |
+                   (dword)(SUB321(auVar11 >> 0x9f,0) & 1) << 0x13 |
+                   (dword)(SUB321(auVar11 >> 0xa7,0) & 1) << 0x14 |
+                   (dword)(SUB321(auVar11 >> 0xaf,0) & 1) << 0x15 |
+                   (dword)(SUB321(auVar11 >> 0xb7,0) & 1) << 0x16 |
+                   (dword)SUB321(auVar11 >> 0xbf,0) << 0x17 |
+                   (dword)(SUB321(auVar11 >> 199,0) & 1) << 0x18 |
+                   (dword)(SUB321(auVar11 >> 0xcf,0) & 1) << 0x19 |
+                   (dword)(SUB321(auVar11 >> 0xd7,0) & 1) << 0x1a |
+                   (dword)(SUB321(auVar11 >> 0xdf,0) & 1) << 0x1b |
+                   (dword)(SUB321(auVar11 >> 0xe7,0) & 1) << 0x1c |
+                   (dword)(SUB321(auVar11 >> 0xef,0) & 1) << 0x1d |
+                   (dword)(SUB321(auVar11 >> 0xf7,0) & 1) << 0x1e |
+                  (dword)(byte)(auVar11[31] >> 7) << 0x1f) ^ 0xffffffff;
+          uVar3 = (uint)dVar2;
+          if (dVar2 != 0) goto LAB_0040711d;
+          in_RSI = in_RSI + 2;
+          in_RDI = in_RDI + 2;
+          in_RDX = in_RDX - 0x40;
+        } while (0x3f < in_RDX);
+      }
+      else {
+        do {
+          auVar7[0] = -((*in_RDI)[0] == (*in_RSI)[0]);
+          auVar7[1] = -((*in_RDI)[1] == (*in_RSI)[1]);
+          auVar7[2] = -((*in_RDI)[2] == (*in_RSI)[2]);
+          auVar7[3] = -((*in_RDI)[3] == (*in_RSI)[3]);
+          auVar7[4] = -((*in_RDI)[4] == (*in_RSI)[4]);
+          auVar7[5] = -((*in_RDI)[5] == (*in_RSI)[5]);
+          auVar7[6] = -((*in_RDI)[6] == (*in_RSI)[6]);
+          auVar7[7] = -((*in_RDI)[7] == (*in_RSI)[7]);
+          auVar7[8] = -((*in_RDI)[8] == (*in_RSI)[8]);
+          auVar7[9] = -((*in_RDI)[9] == (*in_RSI)[9]);
+          auVar7[10] = -((*in_RDI)[10] == (*in_RSI)[10]);
+          auVar7[11] = -((*in_RDI)[0xb] == (*in_RSI)[0xb]);
+          auVar7[12] = -((*in_RDI)[0xc] == (*in_RSI)[0xc]);
+          auVar7[13] = -((*in_RDI)[0xd] == (*in_RSI)[0xd]);
+          auVar7[14] = -((*in_RDI)[0xe] == (*in_RSI)[0xe]);
+          auVar7[15] = -((*in_RDI)[0xf] == (*in_RSI)[0xf]);
+          uVar3 = (ushort)((ushort)(SUB161(auVar7 >> 7,0) & 1) |
+                           (ushort)(SUB161(auVar7 >> 0xf,0) & 1) << 1 |
+                           (ushort)(SUB161(auVar7 >> 0x17,0) & 1) << 2 |
+                           (ushort)(SUB161(auVar7 >> 0x1f,0) & 1) << 3 |
+                           (ushort)(SUB161(auVar7 >> 0x27,0) & 1) << 4 |
+                           (ushort)(SUB161(auVar7 >> 0x2f,0) & 1) << 5 |
+                           (ushort)(SUB161(auVar7 >> 0x37,0) & 1) << 6 |
+                           (ushort)(SUB161(auVar7 >> 0x3f,0) & 1) << 7 |
+                           (ushort)(SUB161(auVar7 >> 0x47,0) & 1) << 8 |
+                           (ushort)(SUB161(auVar7 >> 0x4f,0) & 1) << 9 |
+                           (ushort)(SUB161(auVar7 >> 0x57,0) & 1) << 10 |
+                           (ushort)(SUB161(auVar7 >> 0x5f,0) & 1) << 0xb |
+                           (ushort)(SUB161(auVar7 >> 0x67,0) & 1) << 0xc |
+                           (ushort)(SUB161(auVar7 >> 0x6f,0) & 1) << 0xd |
+                           (ushort)(SUB161(auVar7 >> 0x77,0) & 1) << 0xe |
+                          (ushort)(auVar7[15] >> 7) << 0xf) ^ 0xffff;
+          if (uVar3 != 0) goto LAB_0040711d;
+          auVar8[0] = -((*in_RDI)[0x10] == (*in_RSI)[0x10]);
+          auVar8[1] = -((*in_RDI)[0x11] == (*in_RSI)[0x11]);
+          auVar8[2] = -((*in_RDI)[0x12] == (*in_RSI)[0x12]);
+          auVar8[3] = -((*in_RDI)[0x13] == (*in_RSI)[0x13]);
+          auVar8[4] = -((*in_RDI)[0x14] == (*in_RSI)[0x14]);
+          auVar8[5] = -((*in_RDI)[0x15] == (*in_RSI)[0x15]);
+          auVar8[6] = -((*in_RDI)[0x16] == (*in_RSI)[0x16]);
+          auVar8[7] = -((*in_RDI)[0x17] == (*in_RSI)[0x17]);
+          auVar8[8] = -((*in_RDI)[0x18] == (*in_RSI)[0x18]);
+          auVar8[9] = -((*in_RDI)[0x19] == (*in_RSI)[0x19]);
+          auVar8[10] = -((*in_RDI)[0x1a] == (*in_RSI)[0x1a]);
+          auVar8[11] = -((*in_RDI)[0x1b] == (*in_RSI)[0x1b]);
+          auVar8[12] = -((*in_RDI)[0x1c] == (*in_RSI)[0x1c]);
+          auVar8[13] = -((*in_RDI)[0x1d] == (*in_RSI)[0x1d]);
+          auVar8[14] = -((*in_RDI)[0x1e] == (*in_RSI)[0x1e]);
+          auVar8[15] = -((*in_RDI)[0x1f] == (*in_RSI)[0x1f]);
+          uVar3 = (ushort)((ushort)(SUB161(auVar8 >> 7,0) & 1) |
+                           (ushort)(SUB161(auVar8 >> 0xf,0) & 1) << 1 |
+                           (ushort)(SUB161(auVar8 >> 0x17,0) & 1) << 2 |
+                           (ushort)(SUB161(auVar8 >> 0x1f,0) & 1) << 3 |
+                           (ushort)(SUB161(auVar8 >> 0x27,0) & 1) << 4 |
+                           (ushort)(SUB161(auVar8 >> 0x2f,0) & 1) << 5 |
+                           (ushort)(SUB161(auVar8 >> 0x37,0) & 1) << 6 |
+                           (ushort)(SUB161(auVar8 >> 0x3f,0) & 1) << 7 |
+                           (ushort)(SUB161(auVar8 >> 0x47,0) & 1) << 8 |
+                           (ushort)(SUB161(auVar8 >> 0x4f,0) & 1) << 9 |
+                           (ushort)(SUB161(auVar8 >> 0x57,0) & 1) << 10 |
+                           (ushort)(SUB161(auVar8 >> 0x5f,0) & 1) << 0xb |
+                           (ushort)(SUB161(auVar8 >> 0x67,0) & 1) << 0xc |
+                           (ushort)(SUB161(auVar8 >> 0x6f,0) & 1) << 0xd |
+                           (ushort)(SUB161(auVar8 >> 0x77,0) & 1) << 0xe |
+                          (ushort)(auVar8[15] >> 7) << 0xf) ^ 0xffff;
+          if (uVar3 != 0) goto LAB_0040711d;
+          auVar9[0] = -(in_RDI[1][0] == in_RSI[1][0]);
+          auVar9[1] = -(in_RDI[1][1] == in_RSI[1][1]);
+          auVar9[2] = -(in_RDI[1][2] == in_RSI[1][2]);
+          auVar9[3] = -(in_RDI[1][3] == in_RSI[1][3]);
+          auVar9[4] = -(in_RDI[1][4] == in_RSI[1][4]);
+          auVar9[5] = -(in_RDI[1][5] == in_RSI[1][5]);
+          auVar9[6] = -(in_RDI[1][6] == in_RSI[1][6]);
+          auVar9[7] = -(in_RDI[1][7] == in_RSI[1][7]);
+          auVar9[8] = -(in_RDI[1][8] == in_RSI[1][8]);
+          auVar9[9] = -(in_RDI[1][9] == in_RSI[1][9]);
+          auVar9[10] = -(in_RDI[1][10] == in_RSI[1][10]);
+          auVar9[11] = -(in_RDI[1][0xb] == in_RSI[1][0xb]);
+          auVar9[12] = -(in_RDI[1][0xc] == in_RSI[1][0xc]);
+          auVar9[13] = -(in_RDI[1][0xd] == in_RSI[1][0xd]);
+          auVar9[14] = -(in_RDI[1][0xe] == in_RSI[1][0xe]);
+          auVar9[15] = -(in_RDI[1][0xf] == in_RSI[1][0xf]);
+          uVar3 = (ushort)((ushort)(SUB161(auVar9 >> 7,0) & 1) |
+                           (ushort)(SUB161(auVar9 >> 0xf,0) & 1) << 1 |
+                           (ushort)(SUB161(auVar9 >> 0x17,0) & 1) << 2 |
+                           (ushort)(SUB161(auVar9 >> 0x1f,0) & 1) << 3 |
+                           (ushort)(SUB161(auVar9 >> 0x27,0) & 1) << 4 |
+                           (ushort)(SUB161(auVar9 >> 0x2f,0) & 1) << 5 |
+                           (ushort)(SUB161(auVar9 >> 0x37,0) & 1) << 6 |
+                           (ushort)(SUB161(auVar9 >> 0x3f,0) & 1) << 7 |
+                           (ushort)(SUB161(auVar9 >> 0x47,0) & 1) << 8 |
+                           (ushort)(SUB161(auVar9 >> 0x4f,0) & 1) << 9 |
+                           (ushort)(SUB161(auVar9 >> 0x57,0) & 1) << 10 |
+                           (ushort)(SUB161(auVar9 >> 0x5f,0) & 1) << 0xb |
+                           (ushort)(SUB161(auVar9 >> 0x67,0) & 1) << 0xc |
+                           (ushort)(SUB161(auVar9 >> 0x6f,0) & 1) << 0xd |
+                           (ushort)(SUB161(auVar9 >> 0x77,0) & 1) << 0xe |
+                          (ushort)(auVar9[15] >> 7) << 0xf) ^ 0xffff;
+          if (uVar3 != 0) goto LAB_0040711d;
+          auVar7 = *(undefined (*) [16])(in_RSI[1] + 0x10);
+          auVar10[0] = -(in_RDI[1][0x10] == auVar7[0]);
+          auVar10[1] = -(in_RDI[1][0x11] == auVar7[1]);
+          auVar10[2] = -(in_RDI[1][0x12] == auVar7[2]);
+          auVar10[3] = -(in_RDI[1][0x13] == auVar7[3]);
+          auVar10[4] = -(in_RDI[1][0x14] == auVar7[4]);
+          auVar10[5] = -(in_RDI[1][0x15] == auVar7[5]);
+          auVar10[6] = -(in_RDI[1][0x16] == auVar7[6]);
+          auVar10[7] = -(in_RDI[1][0x17] == auVar7[7]);
+          auVar10[8] = -(in_RDI[1][0x18] == auVar7[8]);
+          auVar10[9] = -(in_RDI[1][0x19] == auVar7[9]);
+          auVar10[10] = -(in_RDI[1][0x1a] == auVar7[10]);
+          auVar10[11] = -(in_RDI[1][0x1b] == auVar7[11]);
+          auVar10[12] = -(in_RDI[1][0x1c] == auVar7[12]);
+          auVar10[13] = -(in_RDI[1][0x1d] == auVar7[13]);
+          auVar10[14] = -(in_RDI[1][0x1e] == auVar7[14]);
+          auVar10[15] = -(in_RDI[1][0x1f] == auVar7[15]);
+          uVar3 = (ushort)((ushort)(SUB161(auVar10 >> 7,0) & 1) |
+                           (ushort)(SUB161(auVar10 >> 0xf,0) & 1) << 1 |
+                           (ushort)(SUB161(auVar10 >> 0x17,0) & 1) << 2 |
+                           (ushort)(SUB161(auVar10 >> 0x1f,0) & 1) << 3 |
+                           (ushort)(SUB161(auVar10 >> 0x27,0) & 1) << 4 |
+                           (ushort)(SUB161(auVar10 >> 0x2f,0) & 1) << 5 |
+                           (ushort)(SUB161(auVar10 >> 0x37,0) & 1) << 6 |
+                           (ushort)(SUB161(auVar10 >> 0x3f,0) & 1) << 7 |
+                           (ushort)(SUB161(auVar10 >> 0x47,0) & 1) << 8 |
+                           (ushort)(SUB161(auVar10 >> 0x4f,0) & 1) << 9 |
+                           (ushort)(SUB161(auVar10 >> 0x57,0) & 1) << 10 |
+                           (ushort)(SUB161(auVar10 >> 0x5f,0) & 1) << 0xb |
+                           (ushort)(SUB161(auVar10 >> 0x67,0) & 1) << 0xc |
+                           (ushort)(SUB161(auVar10 >> 0x6f,0) & 1) << 0xd |
+                           (ushort)(SUB161(auVar10 >> 0x77,0) & 1) << 0xe |
+                          (ushort)(auVar10[15] >> 7) << 0xf) ^ 0xffff;
+          if (uVar3 != 0) goto LAB_0040711d;
+          in_RSI = in_RSI + 2;
+          in_RDI = in_RDI + 2;
+          in_RDX = in_RDX - 0x40;
+        } while (0x40 < in_RDX);
+      }
+    }
+    for (; 0x10 < in_RDX; in_RDX = in_RDX - 0x10) {
+      auVar7 = *(undefined (*) [16])*in_RSI;
+      auVar6[0] = -((*in_RDI)[0] == auVar7[0]);
+      auVar6[1] = -((*in_RDI)[1] == auVar7[1]);
+      auVar6[2] = -((*in_RDI)[2] == auVar7[2]);
+      auVar6[3] = -((*in_RDI)[3] == auVar7[3]);
+      auVar6[4] = -((*in_RDI)[4] == auVar7[4]);
+      auVar6[5] = -((*in_RDI)[5] == auVar7[5]);
+      auVar6[6] = -((*in_RDI)[6] == auVar7[6]);
+      auVar6[7] = -((*in_RDI)[7] == auVar7[7]);
+      auVar6[8] = -((*in_RDI)[8] == auVar7[8]);
+      auVar6[9] = -((*in_RDI)[9] == auVar7[9]);
+      auVar6[10] = -((*in_RDI)[10] == auVar7[10]);
+      auVar6[11] = -((*in_RDI)[0xb] == auVar7[11]);
+      auVar6[12] = -((*in_RDI)[0xc] == auVar7[12]);
+      auVar6[13] = -((*in_RDI)[0xd] == auVar7[13]);
+      auVar6[14] = -((*in_RDI)[0xe] == auVar7[14]);
+      auVar6[15] = -((*in_RDI)[0xf] == auVar7[15]);
+      uVar3 = (ushort)((ushort)(SUB161(auVar6 >> 7,0) & 1) |
+                       (ushort)(SUB161(auVar6 >> 0xf,0) & 1) << 1 |
+                       (ushort)(SUB161(auVar6 >> 0x17,0) & 1) << 2 |
+                       (ushort)(SUB161(auVar6 >> 0x1f,0) & 1) << 3 |
+                       (ushort)(SUB161(auVar6 >> 0x27,0) & 1) << 4 |
+                       (ushort)(SUB161(auVar6 >> 0x2f,0) & 1) << 5 |
+                       (ushort)(SUB161(auVar6 >> 0x37,0) & 1) << 6 |
+                       (ushort)(SUB161(auVar6 >> 0x3f,0) & 1) << 7 |
+                       (ushort)(SUB161(auVar6 >> 0x47,0) & 1) << 8 |
+                       (ushort)(SUB161(auVar6 >> 0x4f,0) & 1) << 9 |
+                       (ushort)(SUB161(auVar6 >> 0x57,0) & 1) << 10 |
+                       (ushort)(SUB161(auVar6 >> 0x5f,0) & 1) << 0xb |
+                       (ushort)(SUB161(auVar6 >> 0x67,0) & 1) << 0xc |
+                       (ushort)(SUB161(auVar6 >> 0x6f,0) & 1) << 0xd |
+                       (ushort)(SUB161(auVar6 >> 0x77,0) & 1) << 0xe |
+                      (ushort)(auVar6[15] >> 7) << 0xf) ^ 0xffff;
+      if (uVar3 != 0) {
+LAB_0040711d:
+        iVar1 = 0;
+        if (uVar3 != 0) {
+          for (; (uVar3 >> iVar1 & 1) == 0; iVar1 = iVar1 + 1) {
+          }
+        }
+        return;
+      }
+      in_RSI = (undefined (*) [32])(*in_RSI + 0x10);
+      in_RDI = (undefined (*) [32])(*in_RDI + 0x10);
+    }
+    if (8 < in_RDX) {
+      uVar3 = *(uint *)*in_RSI;
+      uVar5 = *(uint *)*in_RDI;
+      if (uVar3 != uVar5) goto LAB_00407156;
+    }
+    uVar3 = *(uint *)(in_RSI[-1] + in_RDX + 0x18);
+    uVar5 = *(uint *)(in_RDI[-1] + in_RDX + 0x18);
+    if (uVar3 != uVar5) {
+LAB_00407156:
+      uVar3 = (uVar5 >> 0x38 | (uVar5 & 0xff000000000000) >> 0x28 | (uVar5 & 0xff0000000000) >> 0x18
+               | (uVar5 & 0xff00000000) >> 8 | (uVar5 & 0xff000000) << 8 |
+               (uVar5 & 0xff0000) << 0x18 | (uVar5 & 0xff00) << 0x28 | uVar5 << 0x38) ^
+              (uVar3 >> 0x38 | (uVar3 & 0xff000000000000) >> 0x28 | (uVar3 & 0xff0000000000) >> 0x18
+               | (uVar3 & 0xff00000000) >> 8 | (uVar3 & 0xff000000) << 8 |
+               (uVar3 & 0xff0000) << 0x18 | (uVar3 & 0xff00) << 0x28 | uVar3 << 0x38);
+      iVar1 = 0x3f;
+      if (uVar3 != 0) {
+        for (; uVar3 >> iVar1 == 0; iVar1 = iVar1 + -1) {
+        }
+      }
+      return;
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_bytealg_Compare(void)
+
+{
+  cmpbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_cmpstring(void)
+
+{
+  cmpbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void countbody(void)
+
+{
+  undefined (*pauVar1) [32];
+  char *pcVar2;
+  uint in_RAX;
+  byte bVar3;
+  uint in_RBX;
+  undefined (*in_RSI) [32];
+  uint *in_R8;
+  uint uVar4;
+  char cVar5;
+  undefined auVar6 [16];
+  undefined auVar7 [16];
+  undefined auVar8 [16];
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  undefined auVar11 [32];
+  undefined auVar12 [32];
+  
+  cVar5 = (char)in_RAX;
+  bVar3 = (byte)in_RBX;
+  if ((int)in_RBX < 0x10) {
+    if (in_RBX == 0) {
+      *in_R8 = 0;
+      return;
+    }
+    if (((uint)(*in_RSI + 0x10) & 0xff0) != 0) {
+      auVar9[0] = -((*in_RSI)[0] == cVar5);
+      auVar9[1] = -((*in_RSI)[1] == cVar5);
+      auVar9[2] = -((*in_RSI)[2] == cVar5);
+      auVar9[3] = -((*in_RSI)[3] == cVar5);
+      auVar9[4] = -((*in_RSI)[4] == cVar5);
+      auVar9[5] = -((*in_RSI)[5] == cVar5);
+      auVar9[6] = -((*in_RSI)[6] == cVar5);
+      auVar9[7] = -((*in_RSI)[7] == cVar5);
+      auVar9[8] = -((*in_RSI)[8] == cVar5);
+      auVar9[9] = -((*in_RSI)[9] == cVar5);
+      auVar9[10] = -((*in_RSI)[10] == cVar5);
+      auVar9[11] = -((*in_RSI)[0xb] == cVar5);
+      auVar9[12] = -((*in_RSI)[0xc] == cVar5);
+      auVar9[13] = -((*in_RSI)[0xd] == cVar5);
+      auVar9[14] = -((*in_RSI)[0xe] == cVar5);
+      auVar9[15] = -((*in_RSI)[0xf] == cVar5);
+      *in_R8 = (uint)(dword)POPCOUNT((dword)(ushort)((ushort)(SUB161(auVar9 >> 7,0) & 1) |
+                                                     (ushort)(SUB161(auVar9 >> 0xf,0) & 1) << 1 |
+                                                     (ushort)(SUB161(auVar9 >> 0x17,0) & 1) << 2 |
+                                                     (ushort)(SUB161(auVar9 >> 0x1f,0) & 1) << 3 |
+                                                     (ushort)(SUB161(auVar9 >> 0x27,0) & 1) << 4 |
+                                                     (ushort)(SUB161(auVar9 >> 0x2f,0) & 1) << 5 |
+                                                     (ushort)(SUB161(auVar9 >> 0x37,0) & 1) << 6 |
+                                                     (ushort)(SUB161(auVar9 >> 0x3f,0) & 1) << 7 |
+                                                     (ushort)(SUB161(auVar9 >> 0x47,0) & 1) << 8 |
+                                                     (ushort)(SUB161(auVar9 >> 0x4f,0) & 1) << 9 |
+                                                     (ushort)(SUB161(auVar9 >> 0x57,0) & 1) << 10 |
+                                                     (ushort)(SUB161(auVar9 >> 0x5f,0) & 1) << 0xb |
+                                                     (ushort)(SUB161(auVar9 >> 0x67,0) & 1) << 0xc |
+                                                     (ushort)(SUB161(auVar9 >> 0x6f,0) & 1) << 0xd |
+                                                     (ushort)(SUB161(auVar9 >> 0x77,0) & 1) << 0xe |
+                                                    (ushort)(auVar9[15] >> 7) << 0xf) &
+                                     (sdword)(1 << (bVar3 & 0x3f)) - 1U);
+      return;
+    }
+    pcVar2 = in_RSI[-1] + in_RBX + 0x10;
+    auVar10[0] = -(*pcVar2 == cVar5);
+    auVar10[1] = -(pcVar2[1] == cVar5);
+    auVar10[2] = -(pcVar2[2] == cVar5);
+    auVar10[3] = -(pcVar2[3] == cVar5);
+    auVar10[4] = -(pcVar2[4] == cVar5);
+    auVar10[5] = -(pcVar2[5] == cVar5);
+    auVar10[6] = -(pcVar2[6] == cVar5);
+    auVar10[7] = -(pcVar2[7] == cVar5);
+    auVar10[8] = -(pcVar2[8] == cVar5);
+    auVar10[9] = -(pcVar2[9] == cVar5);
+    auVar10[10] = -(pcVar2[10] == cVar5);
+    auVar10[11] = -(pcVar2[0xb] == cVar5);
+    auVar10[12] = -(pcVar2[0xc] == cVar5);
+    auVar10[13] = -(pcVar2[0xd] == cVar5);
+    auVar10[14] = -(pcVar2[0xe] == cVar5);
+    auVar10[15] = -(pcVar2[0xf] == cVar5);
+    *in_R8 = (uint)(dword)POPCOUNT((dword)(ushort)((ushort)(SUB161(auVar10 >> 7,0) & 1) |
+                                                   (ushort)(SUB161(auVar10 >> 0xf,0) & 1) << 1 |
+                                                   (ushort)(SUB161(auVar10 >> 0x17,0) & 1) << 2 |
+                                                   (ushort)(SUB161(auVar10 >> 0x1f,0) & 1) << 3 |
+                                                   (ushort)(SUB161(auVar10 >> 0x27,0) & 1) << 4 |
+                                                   (ushort)(SUB161(auVar10 >> 0x2f,0) & 1) << 5 |
+                                                   (ushort)(SUB161(auVar10 >> 0x37,0) & 1) << 6 |
+                                                   (ushort)(SUB161(auVar10 >> 0x3f,0) & 1) << 7 |
+                                                   (ushort)(SUB161(auVar10 >> 0x47,0) & 1) << 8 |
+                                                   (ushort)(SUB161(auVar10 >> 0x4f,0) & 1) << 9 |
+                                                   (ushort)(SUB161(auVar10 >> 0x57,0) & 1) << 10 |
+                                                   (ushort)(SUB161(auVar10 >> 0x5f,0) & 1) << 0xb |
+                                                   (ushort)(SUB161(auVar10 >> 0x67,0) & 1) << 0xc |
+                                                   (ushort)(SUB161(auVar10 >> 0x6f,0) & 1) << 0xd |
+                                                   (ushort)(SUB161(auVar10 >> 0x77,0) & 1) << 0xe |
+                                                  (ushort)(auVar10[15] >> 7) << 0xf) &
+                                   (dword)((0xffff >> (0x10 - bVar3 & 0x3f)) <<
+                                          (0x10 - bVar3 & 0x3f)));
+    return;
+  }
+  uVar4 = 0;
+  if ((in_RBX < 0x21) || (!internal_cpu_X86.HasAVX2)) {
+    pauVar1 = (undefined (*) [32])(in_RSI[-1] + in_RBX + 0x10);
+    for (; in_RSI <= pauVar1; in_RSI = (undefined (*) [32])(*in_RSI + 0x10)) {
+      auVar7[0] = -((*in_RSI)[0] == cVar5);
+      auVar7[1] = -((*in_RSI)[1] == cVar5);
+      auVar7[2] = -((*in_RSI)[2] == cVar5);
+      auVar7[3] = -((*in_RSI)[3] == cVar5);
+      auVar7[4] = -((*in_RSI)[4] == cVar5);
+      auVar7[5] = -((*in_RSI)[5] == cVar5);
+      auVar7[6] = -((*in_RSI)[6] == cVar5);
+      auVar7[7] = -((*in_RSI)[7] == cVar5);
+      auVar7[8] = -((*in_RSI)[8] == cVar5);
+      auVar7[9] = -((*in_RSI)[9] == cVar5);
+      auVar7[10] = -((*in_RSI)[10] == cVar5);
+      auVar7[11] = -((*in_RSI)[0xb] == cVar5);
+      auVar7[12] = -((*in_RSI)[0xc] == cVar5);
+      auVar7[13] = -((*in_RSI)[0xd] == cVar5);
+      auVar7[14] = -((*in_RSI)[0xe] == cVar5);
+      auVar7[15] = -((*in_RSI)[0xf] == cVar5);
+      uVar4 = uVar4 + (dword)POPCOUNT((dword)(ushort)((ushort)(SUB161(auVar7 >> 7,0) & 1) |
+                                                      (ushort)(SUB161(auVar7 >> 0xf,0) & 1) << 1 |
+                                                      (ushort)(SUB161(auVar7 >> 0x17,0) & 1) << 2 |
+                                                      (ushort)(SUB161(auVar7 >> 0x1f,0) & 1) << 3 |
+                                                      (ushort)(SUB161(auVar7 >> 0x27,0) & 1) << 4 |
+                                                      (ushort)(SUB161(auVar7 >> 0x2f,0) & 1) << 5 |
+                                                      (ushort)(SUB161(auVar7 >> 0x37,0) & 1) << 6 |
+                                                      (ushort)(SUB161(auVar7 >> 0x3f,0) & 1) << 7 |
+                                                      (ushort)(SUB161(auVar7 >> 0x47,0) & 1) << 8 |
+                                                      (ushort)(SUB161(auVar7 >> 0x4f,0) & 1) << 9 |
+                                                      (ushort)(SUB161(auVar7 >> 0x57,0) & 1) << 10 |
+                                                      (ushort)(SUB161(auVar7 >> 0x5f,0) & 1) << 0xb
+                                                      | (ushort)(SUB161(auVar7 >> 0x67,0) & 1) <<
+                                                        0xc | (ushort)(SUB161(auVar7 >> 0x6f,0) & 1)
+                                                              << 0xd |
+                                                      (ushort)(SUB161(auVar7 >> 0x77,0) & 1) << 0xe
+                                                     | (ushort)(auVar7[15] >> 7) << 0xf));
+    }
+    if ((in_RBX & 0xf) != 0) {
+      bVar3 = 0x10 - (char)(in_RBX & 0xf);
+      auVar8[0] = -((*pauVar1)[0] == cVar5);
+      auVar8[1] = -((*pauVar1)[1] == cVar5);
+      auVar8[2] = -((*pauVar1)[2] == cVar5);
+      auVar8[3] = -((*pauVar1)[3] == cVar5);
+      auVar8[4] = -((*pauVar1)[4] == cVar5);
+      auVar8[5] = -((*pauVar1)[5] == cVar5);
+      auVar8[6] = -((*pauVar1)[6] == cVar5);
+      auVar8[7] = -((*pauVar1)[7] == cVar5);
+      auVar8[8] = -((*pauVar1)[8] == cVar5);
+      auVar8[9] = -((*pauVar1)[9] == cVar5);
+      auVar8[10] = -((*pauVar1)[10] == cVar5);
+      auVar8[11] = -((*pauVar1)[0xb] == cVar5);
+      auVar8[12] = -((*pauVar1)[0xc] == cVar5);
+      auVar8[13] = -((*pauVar1)[0xd] == cVar5);
+      auVar8[14] = -((*pauVar1)[0xe] == cVar5);
+      auVar8[15] = -((*pauVar1)[0xf] == cVar5);
+      uVar4 = uVar4 + (dword)POPCOUNT((dword)(ushort)((ushort)(SUB161(auVar8 >> 7,0) & 1) |
+                                                      (ushort)(SUB161(auVar8 >> 0xf,0) & 1) << 1 |
+                                                      (ushort)(SUB161(auVar8 >> 0x17,0) & 1) << 2 |
+                                                      (ushort)(SUB161(auVar8 >> 0x1f,0) & 1) << 3 |
+                                                      (ushort)(SUB161(auVar8 >> 0x27,0) & 1) << 4 |
+                                                      (ushort)(SUB161(auVar8 >> 0x2f,0) & 1) << 5 |
+                                                      (ushort)(SUB161(auVar8 >> 0x37,0) & 1) << 6 |
+                                                      (ushort)(SUB161(auVar8 >> 0x3f,0) & 1) << 7 |
+                                                      (ushort)(SUB161(auVar8 >> 0x47,0) & 1) << 8 |
+                                                      (ushort)(SUB161(auVar8 >> 0x4f,0) & 1) << 9 |
+                                                      (ushort)(SUB161(auVar8 >> 0x57,0) & 1) << 10 |
+                                                      (ushort)(SUB161(auVar8 >> 0x5f,0) & 1) << 0xb
+                                                      | (ushort)(SUB161(auVar8 >> 0x67,0) & 1) <<
+                                                        0xc | (ushort)(SUB161(auVar8 >> 0x6f,0) & 1)
+                                                              << 0xd |
+                                                      (ushort)(SUB161(auVar8 >> 0x77,0) & 1) << 0xe
+                                                     | (ushort)(auVar8[15] >> 7) << 0xf) &
+                                      (dword)((0xffff >> (bVar3 & 0x3f)) << (bVar3 & 0x3f)));
+    }
+    *in_R8 = uVar4;
+    return;
+  }
+  auVar6._8_8_ = 0;
+  auVar6._0_8_ = in_RAX;
+  pauVar1 = (undefined (*) [32])(in_RSI[-1] + in_RBX);
+  auVar11 = vpbroadcastb_avx2(auVar6);
+  do {
+    auVar12 = vmovdqu_avx(*in_RSI);
+    auVar12 = vpcmpeqb_avx2(auVar12,auVar11);
+    uVar4 = uVar4 + (dword)POPCOUNT((dword)(SUB321(auVar12 >> 7,0) & 1) |
+                                    (dword)(SUB321(auVar12 >> 0xf,0) & 1) << 1 |
+                                    (dword)(SUB321(auVar12 >> 0x17,0) & 1) << 2 |
+                                    (dword)(SUB321(auVar12 >> 0x1f,0) & 1) << 3 |
+                                    (dword)(SUB321(auVar12 >> 0x27,0) & 1) << 4 |
+                                    (dword)(SUB321(auVar12 >> 0x2f,0) & 1) << 5 |
+                                    (dword)(SUB321(auVar12 >> 0x37,0) & 1) << 6 |
+                                    (dword)(SUB321(auVar12 >> 0x3f,0) & 1) << 7 |
+                                    (dword)(SUB321(auVar12 >> 0x47,0) & 1) << 8 |
+                                    (dword)(SUB321(auVar12 >> 0x4f,0) & 1) << 9 |
+                                    (dword)(SUB321(auVar12 >> 0x57,0) & 1) << 10 |
+                                    (dword)(SUB321(auVar12 >> 0x5f,0) & 1) << 0xb |
+                                    (dword)(SUB321(auVar12 >> 0x67,0) & 1) << 0xc |
+                                    (dword)(SUB321(auVar12 >> 0x6f,0) & 1) << 0xd |
+                                    (dword)(SUB321(auVar12 >> 0x77,0) & 1) << 0xe |
+                                    (dword)SUB321(auVar12 >> 0x7f,0) << 0xf |
+                                    (dword)(SUB321(auVar12 >> 0x87,0) & 1) << 0x10 |
+                                    (dword)(SUB321(auVar12 >> 0x8f,0) & 1) << 0x11 |
+                                    (dword)(SUB321(auVar12 >> 0x97,0) & 1) << 0x12 |
+                                    (dword)(SUB321(auVar12 >> 0x9f,0) & 1) << 0x13 |
+                                    (dword)(SUB321(auVar12 >> 0xa7,0) & 1) << 0x14 |
+                                    (dword)(SUB321(auVar12 >> 0xaf,0) & 1) << 0x15 |
+                                    (dword)(SUB321(auVar12 >> 0xb7,0) & 1) << 0x16 |
+                                    (dword)SUB321(auVar12 >> 0xbf,0) << 0x17 |
+                                    (dword)(SUB321(auVar12 >> 199,0) & 1) << 0x18 |
+                                    (dword)(SUB321(auVar12 >> 0xcf,0) & 1) << 0x19 |
+                                    (dword)(SUB321(auVar12 >> 0xd7,0) & 1) << 0x1a |
+                                    (dword)(SUB321(auVar12 >> 0xdf,0) & 1) << 0x1b |
+                                    (dword)(SUB321(auVar12 >> 0xe7,0) & 1) << 0x1c |
+                                    (dword)(SUB321(auVar12 >> 0xef,0) & 1) << 0x1d |
+                                    (dword)(SUB321(auVar12 >> 0xf7,0) & 1) << 0x1e |
+                                    (dword)(byte)(auVar12[31] >> 7) << 0x1f);
+    in_RSI = in_RSI + 1;
+  } while ((int)in_RSI <= (int)pauVar1);
+  if (in_RSI != pauVar1) {
+    auVar12 = vmovdqu_avx(*pauVar1);
+    auVar11 = vpcmpeqb_avx2(auVar12,auVar11);
+    bVar3 = 0x20 - (bVar3 & 0x1f);
+    *in_R8 = uVar4 + (dword)POPCOUNT(((dword)(SUB321(auVar11 >> 7,0) & 1) |
+                                      (dword)(SUB321(auVar11 >> 0xf,0) & 1) << 1 |
+                                      (dword)(SUB321(auVar11 >> 0x17,0) & 1) << 2 |
+                                      (dword)(SUB321(auVar11 >> 0x1f,0) & 1) << 3 |
+                                      (dword)(SUB321(auVar11 >> 0x27,0) & 1) << 4 |
+                                      (dword)(SUB321(auVar11 >> 0x2f,0) & 1) << 5 |
+                                      (dword)(SUB321(auVar11 >> 0x37,0) & 1) << 6 |
+                                      (dword)(SUB321(auVar11 >> 0x3f,0) & 1) << 7 |
+                                      (dword)(SUB321(auVar11 >> 0x47,0) & 1) << 8 |
+                                      (dword)(SUB321(auVar11 >> 0x4f,0) & 1) << 9 |
+                                      (dword)(SUB321(auVar11 >> 0x57,0) & 1) << 10 |
+                                      (dword)(SUB321(auVar11 >> 0x5f,0) & 1) << 0xb |
+                                      (dword)(SUB321(auVar11 >> 0x67,0) & 1) << 0xc |
+                                      (dword)(SUB321(auVar11 >> 0x6f,0) & 1) << 0xd |
+                                      (dword)(SUB321(auVar11 >> 0x77,0) & 1) << 0xe |
+                                      (dword)SUB321(auVar11 >> 0x7f,0) << 0xf |
+                                      (dword)(SUB321(auVar11 >> 0x87,0) & 1) << 0x10 |
+                                      (dword)(SUB321(auVar11 >> 0x8f,0) & 1) << 0x11 |
+                                      (dword)(SUB321(auVar11 >> 0x97,0) & 1) << 0x12 |
+                                      (dword)(SUB321(auVar11 >> 0x9f,0) & 1) << 0x13 |
+                                      (dword)(SUB321(auVar11 >> 0xa7,0) & 1) << 0x14 |
+                                      (dword)(SUB321(auVar11 >> 0xaf,0) & 1) << 0x15 |
+                                      (dword)(SUB321(auVar11 >> 0xb7,0) & 1) << 0x16 |
+                                      (dword)SUB321(auVar11 >> 0xbf,0) << 0x17 |
+                                      (dword)(SUB321(auVar11 >> 199,0) & 1) << 0x18 |
+                                      (dword)(SUB321(auVar11 >> 0xcf,0) & 1) << 0x19 |
+                                      (dword)(SUB321(auVar11 >> 0xd7,0) & 1) << 0x1a |
+                                      (dword)(SUB321(auVar11 >> 0xdf,0) & 1) << 0x1b |
+                                      (dword)(SUB321(auVar11 >> 0xe7,0) & 1) << 0x1c |
+                                      (dword)(SUB321(auVar11 >> 0xef,0) & 1) << 0x1d |
+                                      (dword)(SUB321(auVar11 >> 0xf7,0) & 1) << 0x1e |
+                                     (dword)(byte)(auVar11[31] >> 7) << 0x1f) &
+                                     (dword)((0xffffffff >> (bVar3 & 0x3f)) << (bVar3 & 0x3f)));
+    return;
+  }
+  *in_R8 = uVar4;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_bytealg_Count(void)
+
+{
+  uint8 in_AL;
+  int in_RBX;
+  __uint8 in_stack_00000008;
+  
+  if (!internal_cpu_X86.HasPOPCNT) {
+    internal_bytealg_countGeneric(in_stack_00000008,in_AL,in_RBX);
+    return;
+  }
+  countbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_bytealg_CountString(void)
+
+{
+  uint8 in_AL;
+  int in_RBX;
+  string in_stack_00000008;
+  
+  if (!internal_cpu_X86.HasPOPCNT) {
+    internal_bytealg_countGenericString(in_stack_00000008,in_AL,in_RBX);
+    return;
+  }
+  countbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void memeqbody(void)
+
+{
+  undefined *puVar1;
+  undefined *puVar2;
+  uint in_RBX;
+  undefined (*in_RSI) [32];
+  undefined (*in_RDI) [32];
+  undefined auVar3 [16];
+  undefined auVar4 [16];
+  undefined auVar5 [32];
+  undefined auVar6 [32];
+  undefined auVar7 [32];
+  undefined auVar8 [32];
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  
+  if (in_RBX < 8) {
+    return;
+  }
+  if (0x3f < in_RBX) {
+    if (internal_cpu_X86.HasAVX2) {
+      while (0x3f < in_RBX) {
+        auVar5 = vmovdqu_avx(*in_RSI);
+        auVar6 = vmovdqu_avx(*in_RDI);
+        auVar7 = vmovdqu_avx(in_RSI[1]);
+        auVar8 = vmovdqu_avx(in_RDI[1]);
+        auVar5 = vpcmpeqb_avx2(auVar5,auVar6);
+        auVar6 = vpcmpeqb_avx2(auVar8,auVar7);
+        auVar5 = vpand_avx2(auVar6,auVar5);
+        in_RSI = in_RSI + 2;
+        in_RDI = in_RDI + 2;
+        in_RBX = in_RBX - 0x40;
+        if ((dword)((dword)(SUB321(auVar5 >> 7,0) & 1) | (dword)(SUB321(auVar5 >> 0xf,0) & 1) << 1 |
+                    (dword)(SUB321(auVar5 >> 0x17,0) & 1) << 2 |
+                    (dword)(SUB321(auVar5 >> 0x1f,0) & 1) << 3 |
+                    (dword)(SUB321(auVar5 >> 0x27,0) & 1) << 4 |
+                    (dword)(SUB321(auVar5 >> 0x2f,0) & 1) << 5 |
+                    (dword)(SUB321(auVar5 >> 0x37,0) & 1) << 6 |
+                    (dword)(SUB321(auVar5 >> 0x3f,0) & 1) << 7 |
+                    (dword)(SUB321(auVar5 >> 0x47,0) & 1) << 8 |
+                    (dword)(SUB321(auVar5 >> 0x4f,0) & 1) << 9 |
+                    (dword)(SUB321(auVar5 >> 0x57,0) & 1) << 10 |
+                    (dword)(SUB321(auVar5 >> 0x5f,0) & 1) << 0xb |
+                    (dword)(SUB321(auVar5 >> 0x67,0) & 1) << 0xc |
+                    (dword)(SUB321(auVar5 >> 0x6f,0) & 1) << 0xd |
+                    (dword)(SUB321(auVar5 >> 0x77,0) & 1) << 0xe |
+                    (dword)SUB321(auVar5 >> 0x7f,0) << 0xf |
+                    (dword)(SUB321(auVar5 >> 0x87,0) & 1) << 0x10 |
+                    (dword)(SUB321(auVar5 >> 0x8f,0) & 1) << 0x11 |
+                    (dword)(SUB321(auVar5 >> 0x97,0) & 1) << 0x12 |
+                    (dword)(SUB321(auVar5 >> 0x9f,0) & 1) << 0x13 |
+                    (dword)(SUB321(auVar5 >> 0xa7,0) & 1) << 0x14 |
+                    (dword)(SUB321(auVar5 >> 0xaf,0) & 1) << 0x15 |
+                    (dword)(SUB321(auVar5 >> 0xb7,0) & 1) << 0x16 |
+                    (dword)SUB321(auVar5 >> 0xbf,0) << 0x17 |
+                    (dword)(SUB321(auVar5 >> 199,0) & 1) << 0x18 |
+                    (dword)(SUB321(auVar5 >> 0xcf,0) & 1) << 0x19 |
+                    (dword)(SUB321(auVar5 >> 0xd7,0) & 1) << 0x1a |
+                    (dword)(SUB321(auVar5 >> 0xdf,0) & 1) << 0x1b |
+                    (dword)(SUB321(auVar5 >> 0xe7,0) & 1) << 0x1c |
+                    (dword)(SUB321(auVar5 >> 0xef,0) & 1) << 0x1d |
+                    (dword)(SUB321(auVar5 >> 0xf7,0) & 1) << 0x1e |
+                   (dword)(byte)(auVar5[31] >> 7) << 0x1f) != 0xffffffff) {
+          return;
+        }
+      }
+    }
+    else {
+      while (0x3f < in_RBX) {
+        auVar4 = *(undefined (*) [16])*in_RDI;
+        auVar9 = *(undefined (*) [16])(*in_RDI + 0x10);
+        auVar10 = *(undefined (*) [16])in_RDI[1];
+        auVar3[0] = -((*in_RSI)[0] == auVar4[0]);
+        auVar3[1] = -((*in_RSI)[1] == auVar4[1]);
+        auVar3[2] = -((*in_RSI)[2] == auVar4[2]);
+        auVar3[3] = -((*in_RSI)[3] == auVar4[3]);
+        auVar3[4] = -((*in_RSI)[4] == auVar4[4]);
+        auVar3[5] = -((*in_RSI)[5] == auVar4[5]);
+        auVar3[6] = -((*in_RSI)[6] == auVar4[6]);
+        auVar3[7] = -((*in_RSI)[7] == auVar4[7]);
+        auVar3[8] = -((*in_RSI)[8] == auVar4[8]);
+        auVar3[9] = -((*in_RSI)[9] == auVar4[9]);
+        auVar3[10] = -((*in_RSI)[10] == auVar4[10]);
+        auVar3[11] = -((*in_RSI)[0xb] == auVar4[11]);
+        auVar3[12] = -((*in_RSI)[0xc] == auVar4[12]);
+        auVar3[13] = -((*in_RSI)[0xd] == auVar4[13]);
+        auVar3[14] = -((*in_RSI)[0xe] == auVar4[14]);
+        auVar3[15] = -((*in_RSI)[0xf] == auVar4[15]);
+        auVar4[0] = -((*in_RSI)[0x10] == auVar9[0]);
+        auVar4[1] = -((*in_RSI)[0x11] == auVar9[1]);
+        auVar4[2] = -((*in_RSI)[0x12] == auVar9[2]);
+        auVar4[3] = -((*in_RSI)[0x13] == auVar9[3]);
+        auVar4[4] = -((*in_RSI)[0x14] == auVar9[4]);
+        auVar4[5] = -((*in_RSI)[0x15] == auVar9[5]);
+        auVar4[6] = -((*in_RSI)[0x16] == auVar9[6]);
+        auVar4[7] = -((*in_RSI)[0x17] == auVar9[7]);
+        auVar4[8] = -((*in_RSI)[0x18] == auVar9[8]);
+        auVar4[9] = -((*in_RSI)[0x19] == auVar9[9]);
+        auVar4[10] = -((*in_RSI)[0x1a] == auVar9[10]);
+        auVar4[11] = -((*in_RSI)[0x1b] == auVar9[11]);
+        auVar4[12] = -((*in_RSI)[0x1c] == auVar9[12]);
+        auVar4[13] = -((*in_RSI)[0x1d] == auVar9[13]);
+        auVar4[14] = -((*in_RSI)[0x1e] == auVar9[14]);
+        auVar4[15] = -((*in_RSI)[0x1f] == auVar9[15]);
+        auVar9[0] = -(in_RSI[1][0] == auVar10[0]);
+        auVar9[1] = -(in_RSI[1][1] == auVar10[1]);
+        auVar9[2] = -(in_RSI[1][2] == auVar10[2]);
+        auVar9[3] = -(in_RSI[1][3] == auVar10[3]);
+        auVar9[4] = -(in_RSI[1][4] == auVar10[4]);
+        auVar9[5] = -(in_RSI[1][5] == auVar10[5]);
+        auVar9[6] = -(in_RSI[1][6] == auVar10[6]);
+        auVar9[7] = -(in_RSI[1][7] == auVar10[7]);
+        auVar9[8] = -(in_RSI[1][8] == auVar10[8]);
+        auVar9[9] = -(in_RSI[1][9] == auVar10[9]);
+        auVar9[10] = -(in_RSI[1][10] == auVar10[10]);
+        auVar9[11] = -(in_RSI[1][0xb] == auVar10[11]);
+        auVar9[12] = -(in_RSI[1][0xc] == auVar10[12]);
+        auVar9[13] = -(in_RSI[1][0xd] == auVar10[13]);
+        auVar9[14] = -(in_RSI[1][0xe] == auVar10[14]);
+        auVar9[15] = -(in_RSI[1][0xf] == auVar10[15]);
+        auVar10[0] = -(in_RSI[1][0x10] == in_RDI[1][0x10]);
+        auVar10[1] = -(in_RSI[1][0x11] == in_RDI[1][0x11]);
+        auVar10[2] = -(in_RSI[1][0x12] == in_RDI[1][0x12]);
+        auVar10[3] = -(in_RSI[1][0x13] == in_RDI[1][0x13]);
+        auVar10[4] = -(in_RSI[1][0x14] == in_RDI[1][0x14]);
+        auVar10[5] = -(in_RSI[1][0x15] == in_RDI[1][0x15]);
+        auVar10[6] = -(in_RSI[1][0x16] == in_RDI[1][0x16]);
+        auVar10[7] = -(in_RSI[1][0x17] == in_RDI[1][0x17]);
+        auVar10[8] = -(in_RSI[1][0x18] == in_RDI[1][0x18]);
+        auVar10[9] = -(in_RSI[1][0x19] == in_RDI[1][0x19]);
+        auVar10[10] = -(in_RSI[1][0x1a] == in_RDI[1][0x1a]);
+        auVar10[11] = -(in_RSI[1][0x1b] == in_RDI[1][0x1b]);
+        auVar10[12] = -(in_RSI[1][0x1c] == in_RDI[1][0x1c]);
+        auVar10[13] = -(in_RSI[1][0x1d] == in_RDI[1][0x1d]);
+        auVar10[14] = -(in_RSI[1][0x1e] == in_RDI[1][0x1e]);
+        auVar10[15] = -(in_RSI[1][0x1f] == in_RDI[1][0x1f]);
+        auVar4 = auVar3 & auVar4 & auVar9 & auVar10;
+        in_RSI = in_RSI + 2;
+        in_RDI = in_RDI + 2;
+        in_RBX = in_RBX - 0x40;
+        if ((ushort)((ushort)(SUB161(auVar4 >> 7,0) & 1) |
+                     (ushort)(SUB161(auVar4 >> 0xf,0) & 1) << 1 |
+                     (ushort)(SUB161(auVar4 >> 0x17,0) & 1) << 2 |
+                     (ushort)(SUB161(auVar4 >> 0x1f,0) & 1) << 3 |
+                     (ushort)(SUB161(auVar4 >> 0x27,0) & 1) << 4 |
+                     (ushort)(SUB161(auVar4 >> 0x2f,0) & 1) << 5 |
+                     (ushort)(SUB161(auVar4 >> 0x37,0) & 1) << 6 |
+                     (ushort)(SUB161(auVar4 >> 0x3f,0) & 1) << 7 |
+                     (ushort)(SUB161(auVar4 >> 0x47,0) & 1) << 8 |
+                     (ushort)(SUB161(auVar4 >> 0x4f,0) & 1) << 9 |
+                     (ushort)(SUB161(auVar4 >> 0x57,0) & 1) << 10 |
+                     (ushort)(SUB161(auVar4 >> 0x5f,0) & 1) << 0xb |
+                     (ushort)(SUB161(auVar4 >> 0x67,0) & 1) << 0xc |
+                     (ushort)(SUB161(auVar4 >> 0x6f,0) & 1) << 0xd |
+                     (ushort)(SUB161(auVar4 >> 0x77,0) & 1) << 0xe |
+                    (ushort)(byte)(auVar4[15] >> 7) << 0xf) != 0xffff) {
+          return;
+        }
+      }
+    }
+  }
+  do {
+    if (in_RBX < 9) {
+      return;
+    }
+    puVar1 = *in_RSI;
+    puVar2 = *in_RDI;
+    in_RSI = (undefined (*) [32])(*in_RSI + 8);
+    in_RDI = (undefined (*) [32])(*in_RDI + 8);
+    in_RBX = in_RBX - 8;
+  } while (*(int *)puVar1 == *(int *)puVar2);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memequal(void)
+
+{
+  int in_RAX;
+  int in_RBX;
+  
+  if (in_RAX == in_RBX) {
+    return;
+  }
+  memeqbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memequal_varlen(void)
+
+{
+  int in_RAX;
+  int in_RBX;
+  
+  if (in_RAX == in_RBX) {
+    return;
+  }
+  memeqbody();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void indexbody(void)
+
+{
+  char *pcVar1;
+  char *pcVar2;
+  uint in_RAX;
+  undefined4 uVar3;
+  undefined4 in_register_0000000c;
+  uint in_RDX;
+  undefined (*pauVar4) [32];
+  undefined (*in_RDI) [32];
+  undefined (*in_R8) [32];
+  uint uVar5;
+  int in_R10;
+  int *in_R11;
+  undefined auVar6 [32];

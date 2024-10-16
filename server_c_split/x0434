@@ -1,0 +1,1000 @@
+
+void net___sysDialer__doDialTCPProto_func1
+               (context_Context cxt,string network,string address,syscall_RawConn c,error ~r0)
+
+{
+  undefined8 in_RCX;
+  int in_RDX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  net_sysDialer *sd;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  (***(code ***)(*(int *)(in_RDX + 8) + 0x58))(in_RCX,in_RDI,in_RSI,in_R8,in_R9,in_R10);
+  return;
+}
+
+
+
+void net_selfConnect(net_netFD *fd,error err,bool ~r0)
+
+{
+  runtime_itab *have;
+  runtime_itab *have_00;
+  undefined8 *puVar1;
+  undefined7 in_register_00000019;
+  int unaff_R14;
+  net_IP in_stack_ffffffffffffffc8;
+  net_IP in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (CONCAT71(in_register_00000019,~r0) != 0) {
+    return;
+  }
+  have = (fd->laddr).tab;
+  if ((have == (runtime_itab *)0x0) || (have_00 = (fd->raddr).tab, have_00 == (runtime_itab *)0x0))
+  {
+    return;
+  }
+  if (have != (runtime_itab *)go_itab__net_TCPAddr_net_Addr) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeI(have,(internal_abi_Type *)0x879840,(internal_abi_Type *)&DAT_0083c720);
+  }
+  if (have_00 != (runtime_itab *)go_itab__net_TCPAddr_net_Addr) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeI(have_00,(internal_abi_Type *)0x879840,(internal_abi_Type *)&DAT_0083c720);
+  }
+  puVar1 = (undefined8 *)(fd->laddr).data;
+  if (*(int *)((int)(fd->raddr).data + 0x18) == puVar1[3]) {
+    net_IP_Equal(in_stack_ffffffffffffffc8,in_stack_ffffffffffffffe0,SUB81(*puVar1,0));
+  }
+  return;
+}
+
+
+
+int net___TCPListener__accept(int __fd,sockaddr *__addr,socklen_t *__addr_len)
+
+{
+  net_netFD *fd_00;
+  net_netFD *fd;
+  int extraout_RAX;
+  int extraout_RBX;
+  sockaddr *extraout_RBX_00;
+  net_TCPConn *~r0;
+  int unaff_R14;
+  int *piStack0000000000000008;
+  
+  piStack0000000000000008 = (int *)__fd;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    __addr = extraout_RBX_00;
+  }
+  fd_00 = (net_netFD *)
+          net___netFD__accept(*piStack0000000000000008,__addr,(socklen_t *)*piStack0000000000000008)
+  ;
+  if (extraout_RBX != 0) {
+    return 0;
+  }
+  net_newTCPConn(fd_00,piStack0000000000000008[2],(func_time_Duration_ **)0x0,~r0);
+  return extraout_RAX;
+}
+
+
+
+void net___sysListener__listenTCPProto
+               (net_sysListener *sl,context_Context ctx,net_TCPAddr *laddr,int proto,
+               net_TCPListener *~r0,error ~r1)
+
+{
+  net_mptcpStatus nVar1;
+  context_Context ctx_00;
+  string net;
+  undefined8 extraout_RAX;
+  net_netFD *fd;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar2;
+  func_context_Context__string__string__syscall_RawConn__error **ctrlCtxFn;
+  func_string__string__syscall_RawConn__error **ppfVar3;
+  int extraout_RBX;
+  runtime_itab *in_RSI;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  net_sockaddr in_stack_ffffffffffffff98;
+  net_sockaddr in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  error in_stack_ffffffffffffffc8;
+  undefined local_18 [16];
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((sl->ListenConfig).Control == (func_string__string__syscall_RawConn__error **)0x0) {
+    ctrlCtxFn = (func_context_Context__string__string__syscall_RawConn__error **)0x0;
+  }
+  else {
+    local_18._8_8_ = sl;
+    local_18._0_8_ = net___sysListener__listenTCPProto_func1;
+    ctrlCtxFn = (func_context_Context__string__string__syscall_RawConn__error **)local_18;
+  }
+  ctx_00.data = 
+  "listen.onionndots:sendtoip+netsocketacceptdomaingophertelnet Valuesysmontimersefenceselect, not object next= jobs= goid sweep  B -> % util alloc free  span= prev= list=, i =  code= addr= m->p= p->m=SCHED  curg=], sp= ctxt: min=  max= (...)\n base allow"
+  ;
+  ctx_00.tab = in_RSI;
+  net.len = (int)ctrlCtxFn;
+  net.str = &DAT_00000006;
+  net_internetSocket(ctx_00,net,in_stack_ffffffffffffff98,in_stack_ffffffffffffffa8,(int)laddr,proto
+                     ,in_stack_ffffffffffffffb8,
+                     (func_context_Context__string__string__syscall_RawConn__error **)
+                     (sl->network).str,(net_netFD *)(sl->network).len,in_stack_ffffffffffffffc8);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0084ec60,(void *)0x0);
+  puVar2 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RAX;
+    puVar2 = extraout_RAX_01;
+  }
+  *puVar2 = extraout_RAX;
+  nVar1 = (sl->ListenConfig).mptcpStatus;
+  ppfVar3 = (sl->ListenConfig).Control;
+  puVar2[2] = (sl->ListenConfig).KeepAlive;
+  *(net_mptcpStatus *)(puVar2 + 3) = nVar1;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = ppfVar3;
+    puVar2 = extraout_RAX_02;
+  }
+  puVar2[1] = ppfVar3;
+  return;
+}
+
+
+
+void net___sysListener__listenTCPProto_func1
+               (context_Context cxt,string network,string address,syscall_RawConn c,error ~r0)
+
+{
+  undefined8 in_RCX;
+  int in_RDX;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  net_sysListener *sl;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  (**(code **)**(undefined8 **)(in_RDX + 8))(in_RCX,in_RDI,in_RSI,in_R8,in_R9,in_R10);
+  return;
+}
+
+
+
+// WARNING: Removing unreachable block (ram,0x005ff7dc)
+
+void net_setNoDelay(net_netFD *fd,bool noDelay,error ~r0)
+
+{
+  undefined1 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *puVar1;
+  void *~r0_00;
+  void **extraout_R11;
+  int unaff_R14;
+  error in_stack_ffffffffffffffc8;
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  internal_poll___FD__SetsockoptInt
+            (&fd->pfd,6,1,(uint)noDelay,in_stack_ffffffffffffffc8,in_stack_ffffffffffffffd8);
+  if (extraout_RAX == go_itab_syscall_Errno_error) {
+    runtime_newobject((internal_abi_Type *)&DAT_0084dae0,~r0_00);
+    extraout_RAX_00[1] = 10;
+    *extraout_RAX_00 = &DAT_008b314b;
+    extraout_RAX_00[2] = go_itab_syscall_Errno_error;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = ~r0_00;
+      puVar1 = extraout_RAX_01;
+    }
+    puVar1[3] = ~r0_00;
+  }
+  return;
+}
+
+
+
+// WARNING: Removing unreachable block (ram,0x005ff98a)
+
+void net_setKeepAlivePeriod(net_netFD *fd,time_Duration d,error ~r0)
+
+{
+  int arg;
+  undefined1 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined1 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar1;
+  int secs;
+  void *~r0_00;
+  void *~r0_01;
+  void **extraout_R11;
+  void **extraout_R11_00;
+  int unaff_R14;
+  error in_stack_ffffffffffffffb0;
+  error in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  arg = (d + 999999999) / 1000000000;
+  internal_poll___FD__SetsockoptInt
+            (&fd->pfd,6,5,arg,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0);
+  if (extraout_RAX != (undefined1 *)0x0) {
+    if (extraout_RAX == go_itab_syscall_Errno_error) {
+      runtime_newobject((internal_abi_Type *)&DAT_0084dae0,~r0_00);
+      extraout_RAX_00[1] = 10;
+      *extraout_RAX_00 = &DAT_008b314b;
+      extraout_RAX_00[2] = go_itab_syscall_Errno_error;
+      puVar1 = extraout_RAX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = ~r0_00;
+        puVar1 = extraout_RAX_01;
+      }
+      puVar1[3] = ~r0_00;
+    }
+    return;
+  }
+  internal_poll___FD__SetsockoptInt
+            (&fd->pfd,6,4,arg,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0);
+  if (extraout_RAX_02 == go_itab_syscall_Errno_error) {
+    runtime_newobject((internal_abi_Type *)&DAT_0084dae0,~r0_01);
+    extraout_RAX_03[1] = 10;
+    *extraout_RAX_03 = &DAT_008b314b;
+    extraout_RAX_03[2] = go_itab_syscall_Errno_error;
+    puVar1 = extraout_RAX_03;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = ~r0_01;
+      puVar1 = extraout_RAX_04;
+    }
+    puVar1[3] = ~r0_01;
+  }
+  return;
+}
+
+
+/*
+Unable to decompile 'net.(*UDPAddr).AddrPort'
+Cause: 
+Low-level Error: Overlapping input varnodes
+*/
+
+
+void net___UDPAddr__Network(net_UDPAddr *a,string ~r0)
+
+{
+  return;
+}
+
+
+
+void net___UDPAddr__String(net_UDPAddr *a,string ~r0)
+
+{
+  string ~r0_00;
+  string a0;
+  string a0_00;
+  string a0_01;
+  string ~r0_01;
+  string a0_02;
+  string a0_03;
+  net_IP ip;
+  string a1;
+  string a1_00;
+  string a1_01;
+  string a1_02;
+  string a1_03;
+  string ~r0_02;
+  string a2;
+  string a2_00;
+  string a2_01;
+  string a2_02;
+  string a2_03;
+  string ~r0_03;
+  string ~r0_04;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  int iVar1;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int unaff_R14;
+  uint8 *in_stack_ffffffffffffff50;
+  uint8 *puVar2;
+  int in_stack_ffffffffffffff58;
+  int iVar3;
+  undefined in_stack_ffffffffffffff60;
+  undefined uVar4;
+  undefined7 in_stack_ffffffffffffff61;
+  uint8 *in_stack_ffffffffffffff68;
+  uint8 *in_stack_ffffffffffffff70;
+  int in_stack_ffffffffffffff78;
+  string in_stack_ffffffffffffff80;
+  uint8 *in_stack_ffffffffffffff90;
+  uint8 local_48 [24];
+  undefined local_30 [8];
+  uint8 *local_28;
+  
+  while (local_30 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (a != (net_UDPAddr *)0x0) {
+    if ((a->IP).len == 0) {
+      iVar1 = 0;
+      local_28 = (uint8 *)0x0;
+    }
+    else {
+      ip.len = in_stack_ffffffffffffff58;
+      ip.array = in_stack_ffffffffffffff50;
+      ip.cap._0_1_ = in_stack_ffffffffffffff60;
+      ip.cap._1_7_ = in_stack_ffffffffffffff61;
+      ~r0_02.len = (int)in_stack_ffffffffffffff70;
+      ~r0_02.str = in_stack_ffffffffffffff68;
+      net_IP_String(ip,~r0_02);
+      local_28 = extraout_RAX;
+      iVar1 = extraout_RBX;
+    }
+    if ((a->Zone).len != 0) {
+      ~r0_00.len = in_stack_ffffffffffffff58;
+      ~r0_00.str = in_stack_ffffffffffffff50;
+      internal_itoa_Itoa(a->Port,~r0_00);
+      a0.len = in_stack_ffffffffffffff58;
+      a0.str = in_stack_ffffffffffffff50;
+      a1.str._1_7_ = in_stack_ffffffffffffff61;
+      a1.str._0_1_ = in_stack_ffffffffffffff60;
+      a1.len = (int)in_stack_ffffffffffffff68;
+      a2.len = in_stack_ffffffffffffff78;
+      a2.str = in_stack_ffffffffffffff70;
+      runtime_concatstring3((runtime_tmpBuf *)local_48,a0,a1,a2,in_stack_ffffffffffffff80);
+      uVar4 = 0x3a;
+      puVar2 = extraout_RAX_00;
+      iVar3 = extraout_RBX_00;
+      internal_bytealg_IndexByteString();
+      if ((int)in_stack_ffffffffffffff68 < 0) {
+        a0_01.len = iVar3;
+        a0_01.str = puVar2;
+        a1_01.str._1_7_ = in_stack_ffffffffffffff61;
+        a1_01.str._0_1_ = uVar4;
+        a1_01.len = (int)in_stack_ffffffffffffff68;
+        a2_01.len = in_stack_ffffffffffffff78;
+        a2_01.str = in_stack_ffffffffffffff70;
+        runtime_concatstring3((runtime_tmpBuf *)0x0,a0_01,a1_01,a2_01,in_stack_ffffffffffffff80);
+      }
+      else {
+        a0_00.len = iVar3;
+        a0_00.str = puVar2;
+        a1_00.str._1_7_ = in_stack_ffffffffffffff61;
+        a1_00.str._0_1_ = uVar4;
+        a1_00.len = (int)in_stack_ffffffffffffff68;
+        a2_00.len = in_stack_ffffffffffffff78;
+        a2_00.str = in_stack_ffffffffffffff70;
+        ~r0_03.len = iVar1;
+        ~r0_03.str = in_stack_ffffffffffffff90;
+        runtime_concatstring4
+                  ((runtime_tmpBuf *)0x0,a0_00,a1_00,a2_00,in_stack_ffffffffffffff80,~r0_03);
+      }
+      return;
+    }
+    ~r0_01.len = in_stack_ffffffffffffff58;
+    ~r0_01.str = in_stack_ffffffffffffff50;
+    internal_itoa_Itoa(a->Port,~r0_01);
+    uVar4 = 0x3a;
+    puVar2 = local_28;
+    iVar3 = iVar1;
+    internal_bytealg_IndexByteString();
+    if ((int)in_stack_ffffffffffffff68 < 0) {
+      a0_03.len = iVar1;
+      a0_03.str = puVar2;
+      a1_03.str._1_7_ = in_stack_ffffffffffffff61;
+      a1_03.str._0_1_ = uVar4;
+      a1_03.len = (int)in_stack_ffffffffffffff68;
+      a2_03.len = in_stack_ffffffffffffff78;
+      a2_03.str = in_stack_ffffffffffffff70;
+      runtime_concatstring3((runtime_tmpBuf *)0x0,a0_03,a1_03,a2_03,in_stack_ffffffffffffff80);
+    }
+    else {
+      a0_02.len = iVar1;
+      a0_02.str = puVar2;
+      a1_02.str._1_7_ = in_stack_ffffffffffffff61;
+      a1_02.str._0_1_ = uVar4;
+      a1_02.len = (int)in_stack_ffffffffffffff68;
+      a2_02.len = in_stack_ffffffffffffff78;
+      a2_02.str = in_stack_ffffffffffffff70;
+      ~r0_04.len = iVar3;
+      ~r0_04.str = in_stack_ffffffffffffff90;
+      runtime_concatstring4
+                ((runtime_tmpBuf *)0x0,a0_02,a1_02,a2_02,in_stack_ffffffffffffff80,~r0_04);
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net___UDPAddr__isWildcard(net_UDPAddr *a,bool ~r0)
+
+{
+  uint8 *puVar1;
+  int unaff_R14;
+  net_IP in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((a != (net_UDPAddr *)0x0) && (puVar1 = (a->IP).array, puVar1 != (uint8 *)0x0)) {
+    net_IP_IsUnspecified(in_stack_ffffffffffffffe0,SUB81(puVar1,0));
+    return;
+  }
+  return;
+}
+
+
+
+void net_UDPAddrFromAddrPort(net_netip_AddrPort addr,net_UDPAddr *~r0)
+
+{
+  __uint8 ~r0_00;
+  undefined8 extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar1;
+  undefined8 *in_RCX;
+  undefined8 extraout_RCX;
+  undefined8 uVar2;
+  void *~r0_01;
+  undefined8 uVar3;
+  ushort in_DI;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  net_netip_Addr in_stack_ffffffffffffffa8;
+  undefined6 in_stack_ffffffffffffffc0;
+  undefined8 in_stack_ffffffffffffffc8;
+  int in_stack_ffffffffffffffd0;
+  undefined8 uVar4;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.array._6_2_ = in_DI;
+  ~r0_00.array._0_6_ = in_stack_ffffffffffffffc0;
+  ~r0_00.len = in_stack_ffffffffffffffc8;
+  ~r0_00.cap = in_stack_ffffffffffffffd0;
+  net_netip_Addr_AsSlice(in_stack_ffffffffffffffa8,~r0_00);
+  if (in_RCX == (undefined8 *)0x0) {
+    uVar3 = 0;
+    uVar2 = 0;
+  }
+  else if ((undefined *)*in_RCX == &DAT_008075e0) {
+    uVar3 = *(undefined8 *)in_RCX[1];
+    uVar2 = ((undefined8 *)in_RCX[1])[1];
+  }
+  else {
+    uVar2 = 0;
+    uVar3 = 0;
+  }
+  uVar4 = extraout_RCX;
+  runtime_newobject((internal_abi_Type *)&DAT_0085dc40,~r0_01);
+  extraout_RAX_00[1] = ~r0_01;
+  extraout_RAX_00[2] = uVar4;
+  puVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RAX;
+    puVar1 = extraout_RAX_01;
+  }
+  *puVar1 = extraout_RAX;
+  puVar1[5] = uVar2;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = uVar3;
+    puVar1 = extraout_RAX_02;
+  }
+  puVar1[4] = uVar3;
+  puVar1[3] = (uint)in_DI;
+  return;
+}
+
+
+
+void net_addrPortUDPAddr_Network(string ~r0)
+
+{
+  return;
+}
+
+
+
+void net___UDPConn__SyscallConn(net_UDPConn *c,syscall_RawConn ~r0,error ~r1)
+
+{
+  net_netFD *pnVar1;
+  net_netFD **extraout_RAX;
+  net_netFD **extraout_RAX_00;
+  net_netFD **ppnVar2;
+  void *in_RBX;
+  void *extraout_RBX;
+  net_netFD **extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  pnVar1 = (c->conn).fd;
+  runtime_newobject((internal_abi_Type *)&DAT_0083fde0,in_RBX);
+  ppnVar2 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = pnVar1;
+    ppnVar2 = extraout_RAX_00;
+  }
+  *ppnVar2 = pnVar1;
+  return;
+}
+
+
+
+void net___UDPConn__ReadFromUDP(net_UDPConn *c,__uint8 b,int n,net_UDPAddr *addr,error err)
+
+{
+  net_UDPAddr *in_RDI;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc8;
+  error in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0085dc40,(void *)n);
+  net___UDPConn__readFromUDP
+            (c,in_stack_ffffffffffffffc8,(net_UDPAddr *)n,(int)addr,in_RDI,in_stack_ffffffffffffffe0
+            );
+  return;
+}
+
+
+
+void net___UDPConn__readFromUDP
+               (net_UDPConn *c,__uint8 b,net_UDPAddr *addr,int ~r0,net_UDPAddr *~r1,error ~r2)
+
+{
+  net_netFD *pnVar1;
+  int n;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar2;
+  int extraout_RCX;
+  net_UDPConn *extraout_RCX_00;
+  net_UDPConn *extraout_RCX_01;
+  uint8 *puVar3;
+  void *pvVar4;
+  void *~r0_00;
+  undefined8 extraout_RDI;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffb0;
+  error in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  net___UDPConn__readFrom(c,in_stack_ffffffffffffffb0,addr,~r0,~r1,in_stack_ffffffffffffffc8);
+  if (extraout_RCX != 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX[1] = 4;
+    *extraout_RAX = &DAT_008ae587;
+    pnVar1 = (c->conn).fd;
+    puVar3 = (pnVar1->net).str;
+    extraout_RAX[3] = (pnVar1->net).len;
+    puVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar3;
+      puVar2 = extraout_RAX_00;
+      c = extraout_RCX_00;
+    }
+    puVar2[2] = puVar3;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->laddr).data;
+    puVar2[4] = (pnVar1->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = pvVar4;
+      puVar2 = extraout_RAX_01;
+      c = extraout_RCX_01;
+    }
+    puVar2[5] = pvVar4;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->raddr).data;
+    puVar2[6] = (pnVar1->raddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar4;
+      puVar2 = extraout_RAX_02;
+    }
+    puVar2[7] = pvVar4;
+    puVar2[8] = extraout_RCX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_02 = extraout_RDI;
+      puVar2 = extraout_RAX_03;
+    }
+    puVar2[9] = extraout_RDI;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__ReadFrom(net_UDPConn *c,__uint8 b,int ~r0,net_Addr ~r1,error ~r2)
+
+{
+  int n;
+  int in_RCX;
+  int extraout_RBX;
+  net_UDPAddr *addr;
+  net_UDPAddr *in_RDI;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc8;
+  error in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0085dc40,(void *)~r0);
+  net___UDPConn__readFromUDP
+            (c,in_stack_ffffffffffffffc8,(net_UDPAddr *)~r0,in_RCX,in_RDI,in_stack_ffffffffffffffe0)
+  ;
+  if (extraout_RBX != 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__ReadFromUDPAddrPort
+               (net_UDPConn *c,__uint8 b,int n,net_netip_AddrPort addr,error err)
+
+{
+  net_netFD *pnVar1;
+  net_netip_AddrPort addr_00;
+  error err_00;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar2;
+  net_UDPConn *extraout_RCX;
+  net_UDPConn *extraout_RCX_00;
+  uint8 *puVar3;
+  void *pvVar4;
+  void *~r0;
+  int extraout_R8;
+  undefined8 extraout_R9;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffa0;
+  undefined in_stack_ffffffffffffffb8 [14];
+  undefined2 in_stack_ffffffffffffffc6;
+  internal_intern_Value *in_stack_ffffffffffffffc8;
+  int iVar5;
+  undefined8 in_stack_ffffffffffffffd0;
+  runtime_itab *in_stack_ffffffffffffffd8;
+  void *in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  addr_00.ip.addr.lo._6_2_ = in_stack_ffffffffffffffc6;
+  addr_00.ip.addr._0_14_ = in_stack_ffffffffffffffb8;
+  addr_00.ip.z = in_stack_ffffffffffffffc8;
+  addr_00._24_8_ = in_stack_ffffffffffffffd0;
+  err_00.data = in_stack_ffffffffffffffe0;
+  err_00.tab = in_stack_ffffffffffffffd8;
+  net___UDPConn__readFromAddrPort(c,in_stack_ffffffffffffffa0,n,addr_00,err_00);
+  if (extraout_R8 != 0) {
+    iVar5 = extraout_R8;
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0);
+    extraout_RAX[1] = 4;
+    *extraout_RAX = &DAT_008ae587;
+    pnVar1 = (c->conn).fd;
+    puVar3 = (pnVar1->net).str;
+    extraout_RAX[3] = (pnVar1->net).len;
+    puVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar3;
+      puVar2 = extraout_RAX_00;
+      c = extraout_RCX;
+    }
+    puVar2[2] = puVar3;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->laddr).data;
+    puVar2[4] = (pnVar1->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = pvVar4;
+      puVar2 = extraout_RAX_01;
+      c = extraout_RCX_00;
+    }
+    puVar2[5] = pvVar4;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->raddr).data;
+    puVar2[6] = (pnVar1->raddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar4;
+      puVar2 = extraout_RAX_02;
+    }
+    puVar2[7] = pvVar4;
+    puVar2[8] = iVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_02 = extraout_R9;
+      puVar2 = extraout_RAX_03;
+    }
+    puVar2[9] = extraout_R9;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__ReadMsgUDP
+               (net_UDPConn *c,__uint8 b,__uint8 oob,int n,int oobn,int flags,net_UDPAddr *addr,
+               error err)
+
+{
+  net_netip_AddrPort addr_00;
+  __uint8 oob_00;
+  net_netip_AddrPort addr_01;
+  error err_00;
+  net_UDPAddr *~r0;
+  internal_intern_Value *extraout_R8;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff98;
+  uint8 *in_stack_ffffffffffffffb0;
+  undefined in_stack_ffffffffffffffb8 [16];
+  uint64 in_stack_ffffffffffffffc8;
+  uint64 in_stack_ffffffffffffffd0;
+  internal_intern_Value *in_stack_ffffffffffffffd8;
+  undefined8 in_stack_ffffffffffffffe0;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  oob_00.len = in_stack_ffffffffffffffb8._0_8_;
+  oob_00.cap = in_stack_ffffffffffffffb8._8_8_;
+  oob_00.array = in_stack_ffffffffffffffb0;
+  addr_01.ip.addr.lo = in_stack_ffffffffffffffd0;
+  addr_01.ip.addr.hi = in_stack_ffffffffffffffc8;
+  addr_01.ip.z = in_stack_ffffffffffffffd8;
+  addr_01._24_8_ = in_stack_ffffffffffffffe0;
+  err_00.data = in_stack_fffffffffffffff0;
+  err_00.tab = in_stack_ffffffffffffffe8;
+  net___UDPConn__ReadMsgUDPAddrPort(c,in_stack_ffffffffffffff98,oob_00,n,oobn,flags,addr_01,err_00);
+  if (net_netip_z0 != extraout_R8) {
+    addr_00._24_8_ = in_stack_ffffffffffffffb0;
+    addr_00.ip.addr.hi = (uint64)in_stack_ffffffffffffff98.array;
+    addr_00.ip.addr.lo = in_stack_ffffffffffffff98.len;
+    addr_00.ip.z = (internal_intern_Value *)in_stack_ffffffffffffff98.cap;
+    net_UDPAddrFromAddrPort(addr_00,~r0);
+  }
+  return;
+}
+
+
+
+void net___UDPConn__ReadMsgUDPAddrPort
+               (net_UDPConn *c,__uint8 b,__uint8 oob,int n,int oobn,int flags,
+               net_netip_AddrPort addr,error err)
+
+{
+  net_netFD *pnVar1;
+  net_netip_AddrPort addr_00;
+  error err_00;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar2;
+  net_UDPConn *extraout_RCX;
+  net_UDPConn *extraout_RCX_00;
+  uint8 *puVar3;
+  void *pvVar4;
+  void *~r0;
+  int extraout_R10;
+  undefined8 extraout_R11;
+  uint8 **extraout_R11_00;
+  void **extraout_R11_01;
+  void **extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff78;
+  __uint8 in_stack_ffffffffffffff90;
+  undefined in_stack_ffffffffffffffa8 [14];
+  undefined2 in_stack_ffffffffffffffb6;
+  internal_intern_Value *in_stack_ffffffffffffffb8;
+  int iVar5;
+  undefined8 in_stack_ffffffffffffffc0;
+  runtime_itab *in_stack_ffffffffffffffc8;
+  void *in_stack_ffffffffffffffd0;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  addr_00.ip.addr.lo._6_2_ = in_stack_ffffffffffffffb6;
+  addr_00.ip.addr._0_14_ = in_stack_ffffffffffffffa8;
+  addr_00.ip.z = in_stack_ffffffffffffffb8;
+  addr_00._24_8_ = in_stack_ffffffffffffffc0;
+  err_00.data = in_stack_ffffffffffffffd0;
+  err_00.tab = in_stack_ffffffffffffffc8;
+  net___UDPConn__readMsg
+            (c,in_stack_ffffffffffffff78,in_stack_ffffffffffffff90,n,oobn,flags,addr_00,err_00);
+  if (extraout_R10 != 0) {
+    iVar5 = extraout_R10;
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0);
+    extraout_RAX[1] = 4;
+    *extraout_RAX = &DAT_008ae587;
+    pnVar1 = (c->conn).fd;
+    puVar3 = (pnVar1->net).str;
+    extraout_RAX[3] = (pnVar1->net).len;
+    puVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = puVar3;
+      puVar2 = extraout_RAX_00;
+      c = extraout_RCX;
+    }
+    puVar2[2] = puVar3;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->laddr).data;
+    puVar2[4] = (pnVar1->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar4;
+      puVar2 = extraout_RAX_01;
+      c = extraout_RCX_00;
+    }
+    puVar2[5] = pvVar4;
+    pnVar1 = (c->conn).fd;
+    pvVar4 = (pnVar1->raddr).data;
+    puVar2[6] = (pnVar1->raddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_02 = pvVar4;
+      puVar2 = extraout_RAX_02;
+    }
+    puVar2[7] = pvVar4;
+    puVar2[8] = iVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_03 = extraout_R11;
+      puVar2 = extraout_RAX_03;
+    }
+    puVar2[9] = extraout_R11;
+  }
+  return;
+}
+
+
+
+void net___UDPConn__WriteToUDP(net_UDPConn *c,__uint8 b,net_UDPAddr *addr,int ~r0,error ~r1)
+
+{
+  net_netFD *pnVar1;
+  int n;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar2;
+  undefined8 extraout_RCX;
+  net_UDPConn *extraout_RCX_00;
+  uint8 *puVar3;
+  void *pvVar4;
+  void *~r0_00;
+  int in_RSI;
+  undefined1 *puVar5;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  int *extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffa8;
+  error in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c->conn).fd == (net_netFD *)0x0) {
+    return;
+  }
+  net___UDPConn__writeTo(c,in_stack_ffffffffffffffa8,addr,~r0,in_stack_ffffffffffffffc0);
+  if (~r0_00 != (void *)0x0) {
+    if (in_RSI == 0) {
+      in_RSI = 0;
+      puVar5 = (undefined1 *)0x0;
+    }
+    else {
+      puVar5 = go_itab__net_UDPAddr_net_Addr;
+    }
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX[1] = 5;
+    *extraout_RAX = &DAT_008aec5f;
+    pnVar1 = (c->conn).fd;
+    puVar3 = (pnVar1->net).str;
+    extraout_RAX[3] = (pnVar1->net).len;
+    puVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar3;
+      puVar2 = extraout_RAX_00;
+      c = extraout_RCX_00;
+    }
+    puVar2[2] = puVar3;
+    pnVar1 = (c->conn).fd;

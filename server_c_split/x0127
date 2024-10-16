@@ -1,0 +1,1000 @@
+  dword dVar1;
+  int32 old;
+  bool bVar2;
+  
+  dVar1 = m->state;
+  if ((dVar1 & 5) != 0) {
+    return;
+  }
+  LOCK();
+  bVar2 = dVar1 == m->state;
+  if (bVar2) {
+    m->state = dVar1 | 1;
+  }
+  UNLOCK();
+  if (!bVar2) {
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Mutex__lockSlow(sync_Mutex *m)
+
+{
+  dword dVar1;
+  bool bVar2;
+  int32 delta;
+  char extraout_AL;
+  sync_Mutex *psVar3;
+  int extraout_RAX;
+  int64 ~r0;
+  int extraout_RAX_00;
+  int i;
+  int32 old;
+  int32 new;
+  dword dVar4;
+  bool ~r0_00;
+  bool queueLifo;
+  int iVar5;
+  int iVar6;
+  char cVar7;
+  dword dVar8;
+  int unaff_R14;
+  bool bVar9;
+  sync_Mutex *psStack0000000000000008;
+  string in_stack_ffffffffffffffb8;
+  bool starving;
+  bool awoke;
+  int64 waitStartTime;
+  int iter;
+  
+  psStack0000000000000008 = m;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  new = psStack0000000000000008->state;
+  i = 0;
+  ~r0_00 = false;
+  bVar2 = false;
+  psVar3 = psStack0000000000000008;
+  iVar5 = 0;
+  while( true ) {
+    while( true ) {
+      while( true ) {
+        dVar4 = new & 5;
+        if (dVar4 == 1) {
+          sync_runtime_canSpin(i,~r0_00);
+          psVar3 = psStack0000000000000008;
+          cVar7 = extraout_AL;
+        }
+        else {
+          cVar7 = '\0';
+        }
+        if (cVar7 == '\0') break;
+        if (((!bVar2) && (((dword)new >> 1 & 1) == 0)) && (new >> 3 != 0)) {
+          LOCK();
+          bVar9 = new == psVar3->state;
+          if (bVar9) {
+            psVar3->state = new | 2;
+          }
+          UNLOCK();
+          if (bVar9) {
+            bVar2 = true;
+          }
+        }
+        sync_runtime_doSpin();
+        i = i + 1;
+        new = psStack0000000000000008->state;
+        psVar3 = psStack0000000000000008;
+      }
+      dVar8 = new;
+      if ((new & 4U) == 0) {
+        dVar8 = new | 1;
+      }
+      if (dVar4 != 0) {
+        dVar8 = dVar8 + 8;
+      }
+      if ((~r0_00 != false) && ((new & 1U) != 0)) {
+        dVar8 = dVar8 | 4;
+      }
+      if (bVar2) {
+        if ((dVar8 >> 1 & 1) == 0) {
+          sync_throw(in_stack_ffffffffffffffb8);
+          psVar3 = psStack0000000000000008;
+        }
+        dVar8 = dVar8 & 0xfffffffd;
+      }
+      LOCK();
+      dVar1 = psVar3->state;
+      bVar9 = new == dVar1;
+      if (bVar9) {
+        psVar3->state = dVar8;
+        dVar1 = new;
+      }
+      UNLOCK();
+      if (bVar9) break;
+      new = psVar3->state;
+    }
+    if (dVar4 == 0) break;
+    iVar6 = iVar5;
+    if (iVar5 == 0) {
+      sync_runtime_nanotime((uint)dVar1);
+      iVar6 = extraout_RAX;
+      psVar3 = psStack0000000000000008;
+    }
+    sync_runtime_SemacquireMutex(&psVar3->sema,iVar5 != 0,1);
+    if (~r0_00 == false) {
+      sync_runtime_nanotime(~r0);
+      ~r0_00 = 1000000 < extraout_RAX_00 - iVar6;
+    }
+    else {
+      ~r0_00 = true;
+    }
+    new = psStack0000000000000008->state;
+    if (((dword)new >> 2 & 1) != 0) {
+      if (((new & 3U) != 0) || (new >> 3 == 0)) {
+        sync_throw(in_stack_ffffffffffffffb8);
+      }
+      if ((~r0_00 == false) || (new >> 3 == 1)) {
+        delta = -0xb;
+      }
+      else {
+        delta = -7;
+      }
+      LOCK();
+      psStack0000000000000008->state = psStack0000000000000008->state + delta;
+      UNLOCK();
+      return;
+    }
+    i = 0;
+    bVar2 = true;
+    psVar3 = psStack0000000000000008;
+    iVar5 = iVar6;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Mutex__Unlock(sync_Mutex *m)
+
+{
+  sdword sVar1;
+  int32 new;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  sVar1 = m->state;
+  m->state = m->state + -1;
+  UNLOCK();
+  sVar1 = sVar1 + -1;
+  if (sVar1 != 0) {
+    sync___Mutex__unlockSlow(m,sVar1);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// Local variable old:int32[EBX:4] conflicts with parameter, skipped.
+
+void sync___Mutex__unlockSlow(sync_Mutex *m,int32 new)
+
+{
+  int unaff_R14;
+  bool bVar1;
+  string in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((new + 1U & 1) == 0) {
+    sync_fatal(in_stack_ffffffffffffffe0);
+  }
+  if (((dword)new >> 2 & 1) == 0) {
+    while( true ) {
+      if ((new >> 3 == 0) || ((new & 7U) != 0)) {
+        return;
+      }
+      LOCK();
+      bVar1 = new == m->state;
+      if (bVar1) {
+        m->state = new - 8U | 2;
+      }
+      UNLOCK();
+      if (bVar1) break;
+      new = m->state;
+    }
+    sync_runtime_Semrelease(&m->sema,false,1);
+    return;
+  }
+  sync_runtime_Semrelease(&m->sema,true,1);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Once__Do(sync_Once *o,func__ **f)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (o->done == 0) {
+    sync___Once__doSlow(o,f);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Once__doSlow(sync_Once *o,func__ **f)
+
+{
+  int unaff_R14;
+  bool bVar1;
+  undefined in_XMM15 [16];
+  undefined local_38 [16];
+  undefined local_28 [16];
+  code **local_18;
+  code **ppcStack_10;
+  
+  while (local_18 = in_XMM15._0_8_, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar1 = (o->m).state == 0;
+  if (bVar1) {
+    (o->m).state = 1;
+  }
+  UNLOCK();
+  if (!bVar1) {
+    sync___Mutex__lockSlow(&o->m);
+  }
+  local_38._8_8_ = &o->m;
+  local_38._0_8_ = sync___Once__doSlow_func1;
+  ppcStack_10 = (code **)local_38;
+  if (o->done == 0) {
+    local_28._8_8_ = o;
+    local_28._0_8_ = sync___Once__doSlow_func2;
+    local_18 = (code **)local_28;
+    (**f)();
+    (**local_18)();
+  }
+  (**ppcStack_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Once__doSlow_func2(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)register0x00000020;
+  }
+  LOCK();
+  **(undefined4 **)(in_RDX + 8) = 1;
+  UNLOCK();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Once__doSlow_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void sync___Pool__Put(sync_Pool *p,interface___ x)
+
+{
+  sync_poolLocal **extraout_RAX;
+  sync_poolLocal *l;
+  sync_poolLocal **extraout_RAX_00;
+  sync_poolLocal **ppsVar1;
+  sync_poolLocal *in_RCX;
+  sync_poolLocal *in_RBX;
+  sync_poolLocal **extraout_R11;
+  int unaff_R14;
+  sync_poolLocal *psStack0000000000000018;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  psStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX == (sync_poolLocal *)0x0) {
+    return;
+  }
+  sync___Pool__pin(p,in_RBX,(int)psStack0000000000000018);
+  if (*extraout_RAX == (sync_poolLocal *)0x0) {
+    *extraout_RAX = in_RBX;
+    ppsVar1 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = psStack0000000000000018;
+      extraout_R11[1] = extraout_RAX_00[1];
+      ppsVar1 = extraout_RAX_00;
+    }
+    ppsVar1[1] = psStack0000000000000018;
+  }
+  else {
+    sync___poolChain__pushHead((sync_poolChain *)(extraout_RAX + 2),in_stack_ffffffffffffffe0);
+  }
+  sync_runtime_procUnpin();
+  return;
+}
+
+
+
+void sync___Pool__Get(sync_Pool *p,interface___ ~r0)
+
+{
+  func___interface___ *pfVar1;
+  int *extraout_RAX;
+  sync_poolLocal *l;
+  int *extraout_RAX_00;
+  int *piVar2;
+  int extraout_RAX_01;
+  int extraout_RAX_02;
+  int in_RCX;
+  int extraout_RCX;
+  int iVar3;
+  int extraout_RCX_00;
+  sync_poolLocal *in_RBX;
+  int extraout_RBX;
+  int pid;
+  int extraout_RBX_00;
+  int pid_00;
+  sync_poolLocal *extraout_RBX_01;
+  undefined8 extraout_RSI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RCX = extraout_RCX_00;
+    in_RBX = extraout_RBX_01;
+  }
+  sync___Pool__pin(p,in_RBX,in_RCX);
+  iVar3 = *extraout_RAX;
+  *extraout_RAX = 0;
+  piVar2 = extraout_RAX;
+  pid_00 = extraout_RBX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RSI;
+    piVar2 = extraout_RAX_00;
+    iVar3 = extraout_RCX;
+    pid_00 = extraout_RBX_00;
+  }
+  piVar2[1] = 0;
+  if ((iVar3 == 0) &&
+     (sync___poolChain__popHead
+                ((sync_poolChain *)(piVar2 + 2),in_stack_ffffffffffffffd0,SUB81(pid_00,0)),
+     iVar3 = extraout_RAX_01, extraout_RAX_01 == 0)) {
+    sync___Pool__getSlow(p,pid_00,in_stack_ffffffffffffffd0);
+    iVar3 = extraout_RAX_02;
+  }
+  sync_runtime_procUnpin();
+  if ((iVar3 == 0) && (p->New != (func___interface___ **)0x0)) {
+    pfVar1 = *p->New;
+    (*pfVar1)((interface___ *)pfVar1);
+  }
+  return;
+}
+
+
+
+// WARNING: Variable defined which should be unmapped: i_1
+
+void sync___Pool__getSlow(sync_Pool *p,int pid,interface___ ~r0)
+
+{
+  uintptr uVar1;
+  uint uVar2;
+  interface___ ~r0_00;
+  interface___ ~r0_01;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  undefined8 extraout_RCX;
+  void *locals;
+  int iVar3;
+  void *pvVar4;
+  int extraout_RBX;
+  void *pvVar5;
+  int iVar6;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  internal_abi_Type *piStack_30;
+  int i_1;
+  int i;
+  uintptr size;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = p->localSize;
+  pvVar4 = p->local;
+  for (iVar6 = 0; iVar6 < (int)uVar1; iVar6 = iVar6 + 1) {
+    if (uVar1 == 0xffffffffffffffff) {
+      iVar3 = 0;
+    }
+    else {
+      iVar3 = (iVar6 + pid + 1) % (int)uVar1;
+    }
+    ~r0_00.data = (void *)i_1;
+    ~r0_00._type = piStack_30;
+    sync___poolChain__popTail
+              ((sync_poolChain *)((int)pvVar4 + iVar3 * 0x80 + 0x10),~r0_00,SUB81(pid,0));
+    if (extraout_RAX != 0) {
+      return;
+    }
+  }
+  uVar2 = p->victimSize;
+  if (uVar2 <= (uint)pid) {
+    return;
+  }
+  pvVar4 = p->victim;
+  iVar6 = pid * 0x80;
+  if (*(int *)((int)pvVar4 + iVar6) != 0) {
+    *(undefined8 *)((int)pvVar4 + iVar6) = 0;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RCX;
+      iVar6 = extraout_RBX;
+    }
+    *(undefined8 *)((int)pvVar4 + iVar6 + 8) = 0;
+    return;
+  }
+  pvVar5 = (void *)0x0;
+  while( true ) {
+    if ((int)uVar2 <= (int)pvVar5) {
+      LOCK();
+      p->victimSize = 0;
+      UNLOCK();
+      return;
+    }
+    if (uVar2 == 0xffffffffffffffff) {
+      iVar6 = 0;
+    }
+    else {
+      iVar6 = ((int)pvVar5 + pid) % (int)uVar2;
+    }
+    ~r0_01.data = pvVar5;
+    ~r0_01._type = piStack_30;
+    sync___poolChain__popTail
+              ((sync_poolChain *)((int)pvVar4 + iVar6 * 0x80 + 0x10),~r0_01,SUB81(pvVar5,0));
+    if (extraout_RAX_00 != 0) break;
+    pvVar5 = (void *)((int)pvVar5 + 1);
+  }
+  return;
+}
+
+
+
+void sync___Pool__pin(sync_Pool *p,sync_poolLocal *~r0,int ~r1)
+
+{
+  uint extraout_RAX;
+  int pid;
+  void *lp;
+  void *l;
+  uintptr s;
+  sync_poolLocal *~r0_00;
+  int ~r1_1;
+  int ~r1_00;
+  int unaff_R14;
+  sync_Pool *psStack0000000000000008;
+  
+  psStack0000000000000008 = p;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sync_runtime_procPin((int)psStack0000000000000008);
+  if (extraout_RAX < psStack0000000000000008->localSize) {
+    return;
+  }
+  sync___Pool__pinSlow
+            (psStack0000000000000008,~r0_00,(sync_poolLocal *)psStack0000000000000008,~r1_00,~r1_1);
+  return;
+}
+
+
+
+// DWARF original prototype: void sync.(*Pool).pinSlow(sync.Pool * p, sync.poolLocal * ~r0,
+// sync.poolLocal * ~r0, int ~r1, int ~r1)
+
+void sync___Pool__pinSlow(sync_Pool *p,sync_poolLocal *~r0,sync_poolLocal *~r0_1,int ~r1,int ~r1_1)
+
+{
+  uint extraout_RAX;
+  int pid;
+  sync_Pool **extraout_RAX_00;
+  sync_Pool **extraout_RAX_01;
+  uint len;
+  int size;
+  void *new;
+  void *lp;
+  int extraout_RCX;
+  sync_Pool *extraout_RCX_00;
+  sync_Pool *psVar1;
+  void *l;
+  uint extraout_RBX;
+  uint newLen;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  void *~r0_00;
+  sync_Pool **extraout_R8;
+  sync_Pool **ppsVar2;
+  undefined8 *extraout_R11;
+  sync_Pool **extraout_R11_00;
+  int unaff_R14;
+  bool bVar3;
+  sync_Pool *psStack0000000000000008;
+  runtime_slice in_stack_ffffffffffffff70;
+  undefined local_20 [16];
+  code **local_10;
+  
+  psStack0000000000000008 = p;
+  while (&local_10 <= *(code ****)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sync_runtime_procUnpin();
+  LOCK();
+  bVar3 = sync_allPoolsMu.state == 0;
+  if (bVar3) {
+    sync_allPoolsMu.state = 1;
+  }
+  UNLOCK();
+  if (!bVar3) {
+    sync___Mutex__lockSlow(&sync_allPoolsMu);
+  }
+  local_20._8_8_ = &sync_allPoolsMu;
+  local_20._0_8_ = sync___Pool__pinSlow_func1;
+  local_10 = (code **)local_20;
+  sync_runtime_procPin((int)local_10);
+  if (extraout_RAX < psStack0000000000000008->localSize) {
+    (**local_10)();
+    return;
+  }
+  newLen = extraout_RBX;
+  if (psStack0000000000000008->local == (void *)0x0) {
+    newLen = sync_allPools.len + 1;
+    ppsVar2 = sync_allPools.array;
+    if (((uint)sync_allPools.cap < newLen) &&
+       (runtime_growslice(sync_allPools.array,newLen,sync_allPools.cap,1,
+                          (internal_abi_Type *)&DAT_00857660,in_stack_ffffffffffffff70),
+       newLen = extraout_RBX_00, ppsVar2 = extraout_RAX_00, sync_allPools.cap = extraout_RCX,
+       runtime_writeBarrier._0_4_ != 0)) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_01;
+      extraout_R11[1] = sync_allPools.array;
+      newLen = extraout_RBX_01;
+      ppsVar2 = extraout_RAX_01;
+    }
+    sync_allPools.array = ppsVar2;
+    psVar1 = psStack0000000000000008;
+    ppsVar2 = sync_allPools.array;
+    sync_allPools.len = newLen;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RCX_00;
+      extraout_R11_00[1] = extraout_R8[extraout_RBX_02 - 1];
+      psVar1 = extraout_RCX_00;
+      newLen = extraout_RBX_02;
+      ppsVar2 = extraout_R8;
+    }
+    ppsVar2[newLen - 1] = psVar1;
+  }
+  runtime_GOMAXPROCS(0,newLen);
+  runtime_makeslice((internal_abi_Type *)&DAT_0084f3e0,len,len,~r0_00);
+  if (len == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  sync_atomic_StorePointer(&psStack0000000000000008->local,new);
+  LOCK();
+  psStack0000000000000008->localSize = len;
+  UNLOCK();
+  if (len <= extraout_RAX) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Pool__pinSlow_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync_poolCleanup(void)
+
+{
+  sync_Pool **extraout_RAX;
+  sync_Pool **ppsVar1;
+  sync_Pool **extraout_RAX_00;
+  sync_Pool **extraout_RAX_01;
+  undefined8 extraout_RAX_02;
+  int extraout_RCX;
+  int iVar2;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  int iVar3;
+  sync_Pool *p;
+  sync_Pool *extraout_RBX;
+  sync_Pool *psVar4;
+  sync_Pool *p_1;
+  sync_Pool *extraout_RBX_00;
+  sync_Pool *extraout_RBX_01;
+  undefined8 extraout_RSI;
+  void *extraout_RSI_00;
+  void *pvVar5;
+  undefined8 extraout_RSI_01;
+  undefined8 *extraout_R11;
+  void **extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ppsVar1 = sync_oldPools.array;
+  iVar2 = sync_oldPools.len;
+  for (iVar3 = 0; iVar3 < iVar2; iVar3 = iVar3 + 1) {
+    psVar4 = ppsVar1[iVar3];
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RSI;
+      ppsVar1 = extraout_RAX;
+      iVar2 = extraout_RCX;
+      psVar4 = extraout_RBX;
+    }
+    psVar4->victim = (void *)0x0;
+    psVar4->victimSize = 0;
+  }
+  ppsVar1 = sync_allPools.array;
+  iVar2 = sync_allPools.len;
+  for (iVar3 = 0; iVar3 < iVar2; iVar3 = iVar3 + 1) {
+    psVar4 = ppsVar1[iVar3];
+    pvVar5 = psVar4->local;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RSI_00;
+      extraout_R11_00[1] = extraout_RBX_00->victim;
+      ppsVar1 = extraout_RAX_00;
+      iVar2 = extraout_RCX_00;
+      psVar4 = extraout_RBX_00;
+      pvVar5 = extraout_RSI_00;
+    }
+    psVar4->victim = pvVar5;
+    psVar4->victimSize = psVar4->localSize;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = extraout_RSI_01;
+      ppsVar1 = extraout_RAX_01;
+      iVar2 = extraout_RCX_01;
+      psVar4 = extraout_RBX_01;
+    }
+    psVar4->local = (void *)0x0;
+    psVar4->localSize = 0;
+  }
+  sync_oldPools.len = sync_allPools.len;
+  sync_oldPools.cap = sync_allPools.cap;
+  ppsVar1 = sync_allPools.array;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_02 = ppsVar1;
+    extraout_R11_02[1] = sync_oldPools.array;
+  }
+  sync_allPools._8_16_ = in_XMM15;
+  sync_oldPools.array = ppsVar1;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_03 = extraout_RAX_02;
+  }
+  sync_allPools.array = (sync_Pool **)0x0;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync_init_0(void)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sync_runtime_registerPoolCleanup((func__ **)&PTR_sync_poolCleanup_008eb1e0);
+  return;
+}
+
+
+
+void sync___poolDequeue__pushHead(sync_poolDequeue *d,interface___ val,bool ~r0)
+
+{
+  uint uVar1;
+  sdword sVar2;
+  sync_poolDequeue *extraout_RAX;
+  undefined8 in_RCX;
+  dword dVar3;
+  uint64 ptrs;
+  uint uVar4;
+  int iVar5;
+  undefined7 in_register_00000019;
+  undefined *puVar6;
+  undefined8 extraout_RBX;
+  undefined8 uVar7;
+  sync_eface *extraout_RSI;
+  sync_eface *psVar8;
+  void *typ;
+  undefined *puVar9;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  undefined8 uStack0000000000000018;
+  
+  puVar6 = (undefined *)CONCAT71(in_register_00000019,~r0);
+  uStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (d->vals).len;
+  sVar2 = (sdword)uVar1;
+  dVar3 = (dword)(d->headTail >> 0x20);
+  if (dVar3 == (dword)((sdword)d->headTail + sVar2)) {
+    return;
+  }
+  uVar4 = (uint)(dVar3 & sVar2 - 1U);
+  if (uVar1 <= uVar4) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  psVar8 = (d->vals).array;
+  iVar5 = uVar4 * 0x10;
+  if (psVar8[uVar4].typ == (void *)0x0) {
+    puVar9 = &DAT_0080f400;
+    if (puVar6 != (undefined *)0x0) {
+      puVar9 = puVar6;
+    }
+    psVar8[uVar4].typ = puVar9;
+    uVar7 = 0;
+    if (puVar6 != (undefined *)0x0) {
+      uVar7 = uStack0000000000000018;
+    }
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RBX;
+      extraout_R11[1] = *(undefined8 *)((int)&extraout_RSI->val + iVar5);
+      d = extraout_RAX;
+      uVar7 = extraout_RBX;
+      psVar8 = extraout_RSI;
+    }
+    *(undefined8 *)((int)&psVar8->val + iVar5) = uVar7;
+    LOCK();
+    d->headTail = d->headTail + 0x100000000;
+    UNLOCK();
+    return;
+  }
+  return;
+}
+
+
+
+void sync___poolDequeue__popHead(sync_poolDequeue *d,interface___ ~r0,bool ~r1)
+
+{
+  uint uVar1;
+  sdword sVar2;
+  dword dVar3;
+  uint32 head;
+  uint64 ptrs;
+  uint64 ptrs2;
+  sync_eface *psVar4;
+  sync_eface *extraout_RSI;
+  sync_eface *psVar5;
+  uint uVar6;
+  int extraout_RDI;
+  undefined8 extraout_R8;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  bool bVar7;
+  sync_eface in_XMM15;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = d->headTail;
+    sVar2 = (sdword)(uVar1 >> 0x20);
+    if ((sdword)uVar1 == sVar2) {
+      return;
+    }
+    dVar3 = sVar2 - 1;
+    LOCK();
+    bVar7 = uVar1 == d->headTail;
+    if (bVar7) {
+      d->headTail = (uint)dVar3 << 0x20 | uVar1 & 0xffffffff;
+    }
+    UNLOCK();
+  } while (!bVar7);
+  uVar1 = (d->vals).len;
+  dVar3 = dVar3 & (sdword)uVar1 - 1U;
+  uVar6 = (uint)dVar3;
+  if (uVar1 <= uVar6) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  psVar4 = (d->vals).array;
+  if ((undefined *)psVar4[uVar6].typ == &DAT_0080f400) {
+    runtime_efaceeq((internal_abi_Type *)&DAT_0080f400,psVar4[uVar6].val,(void *)0x0,
+                    (bool)((char)dVar3 * '\x10'));
+  }
+  psVar5 = psVar4 + uVar6;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_R8;
+    extraout_R11[1] = *(undefined8 *)((int)&psVar4->val + extraout_RDI);
+    psVar5 = extraout_RSI;
+  }
+  *psVar5 = in_XMM15;
+  return;
+}
+
+
+
+void sync___poolDequeue__popTail(sync_poolDequeue *d,interface___ ~r0,bool ~r1)
+
+{
+  uint uVar1;
+  sync_eface *extraout_RCX;
+  sync_eface *ptr;
+  uint64 ptrs;
+  uint64 ptrs2;
+  sync_eface *psVar2;
+  dword dVar3;
+  uint uVar4;
+  int iVar5;
+  int extraout_RSI;
+  undefined8 extraout_RDI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  bool bVar6;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = d->headTail;
+    dVar3 = (dword)uVar1;
+    if (dVar3 == (dword)(uVar1 >> 0x20)) {
+      return;
+    }
+    LOCK();
+    bVar6 = uVar1 == d->headTail;
+    if (bVar6) {
+      d->headTail = uVar1 & 0xffffffff00000000 | (uint)(dword)(dVar3 + 1);
+    }
+    UNLOCK();
+  } while (!bVar6);
+  uVar1 = (d->vals).len;
+  uVar4 = (uint)(dVar3 & (sdword)uVar1 - 1U);
+  if (uVar1 <= uVar4) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  iVar5 = uVar4 * 0x10;
+  psVar2 = (d->vals).array;
+  if ((undefined *)psVar2[uVar4].typ == &DAT_0080f400) {
+    runtime_efaceeq((internal_abi_Type *)&DAT_0080f400,psVar2[uVar4].val,(void *)0x0,false);
+  }
+  ptr = psVar2 + uVar4;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = extraout_RDI;
+    ptr = extraout_RCX;
+    iVar5 = extraout_RSI;
+  }
+  *(undefined8 *)((int)&psVar2->val + iVar5) = 0;
+  sync_atomic_StorePointer(&ptr->typ,(void *)0x0);
+  return;
+}
+
+
+
+void sync___poolChain__pushHead(sync_poolChain *c,interface___ val)
+
+{
+  int iVar1;
+  char extraout_AL;
+  sync_poolChainElt *extraout_RAX;
+  sync_eface *extraout_RAX_00;
+  sync_eface *extraout_RAX_01;
+  sync_poolChainElt *extraout_RAX_02;
+  sync_poolChainElt *d2;
+  sync_poolChainElt *extraout_RAX_03;
+  sync_poolChainElt *d_00;
+  sync_eface *extraout_RAX_04;
+  sync_eface *extraout_RAX_05;
+  sync_eface *psVar2;
+  int newSize;
+  int extraout_RCX;
+  sync_poolChainElt *d;
+  sync_poolChainElt *psVar3;
+  void *in_RBX;
+  sync_poolChainElt *extraout_RBX;

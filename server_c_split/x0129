@@ -1,0 +1,1000 @@
+  undefined4 in_stack_ffffffffffffffb4;
+  char cStack_3d;
+  undefined4 local_3c;
+  undefined auStack_38 [12];
+  undefined4 uStack_2c;
+  uint8 local_28 [32];
+  
+  while (uVar3 = uStack_2c, uVar2 = local_3c, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10))
+  {
+    runtime_morestack_noctxt();
+  }
+  local_3c = in_XMM15._0_4_;
+  uStack_2c = in_XMM15._12_4_;
+  if (val < 0) {
+    uVar4 = -val;
+    if (uVar4 != 0) {
+      auStack_38 = in_XMM15._0_12_;
+      uVar5 = 0x13;
+      while (cVar1 = (char)uVar4, 9 < uVar4) {
+        uVar4 = uVar4 / 10;
+        if (0x13 < uVar5) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        auStack_38[uVar5 - 4] = cVar1 + (char)uVar4 * -10 + '0';
+        uVar5 = uVar5 - 1;
+      }
+      if (0x13 < uVar5) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      auStack_38[uVar5 - 4] = cVar1 + '0';
+      runtime_slicebytetostring
+                (&local_28,auStack_38 + ((uVar5 & (int)(uVar5 - 0x14) >> 0x3f) - 4),-(uVar5 - 0x14),
+                 in_stack_ffffffffffffff88);
+      uVar2 = local_3c;
+      uVar3 = uStack_2c;
+    }
+    uStack_2c = uVar3;
+    local_3c = uVar2;
+    ~r0_00.len._0_4_ = in_stack_ffffffffffffffb0;
+    ~r0_00.str = (uint8 *)in_stack_ffffffffffffffa8;
+    ~r0_00.len._4_4_ = in_stack_ffffffffffffffb4;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffff88,in_stack_ffffffffffffff98,~r0_00);
+    return;
+  }
+  if (val != 0) {
+    uVar4 = 0x13;
+    while (cVar1 = (char)val, 9 < (uint)val) {
+      val = (uint)val / 10;
+      if (0x13 < uVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      auStack_38[uVar4 - 0x18] = cVar1 + (char)val * -10 + '0';
+      uVar4 = uVar4 - 1;
+    }
+    if (0x13 < uVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    auStack_38[uVar4 - 0x18] = cVar1 + '0';
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,auStack_38 + ((uVar4 & (int)(uVar4 - 0x14) >> 0x3f) - 0x18),
+               -(uVar4 - 0x14),in_stack_ffffffffffffff88);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall_copyenv(void)
+
+{
+  uint8 *~r0;
+  int iVar1;
+  runtime_hmap *in_RAX;
+  map_string_int extraout_RAX;
+  map_string_int extraout_RAX_00;
+  map_string_int phVar2;
+  int i;
+  int iVar3;
+  int extraout_RAX_01;
+  int *extraout_RAX_02;
+  runtime_hmap *extraout_RAX_03;
+  string *psVar4;
+  char extraout_BL;
+  bool ok;
+  string *extraout_RSI;
+  string *psVar5;
+  undefined8 extraout_R8;
+  map_string_int *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb0;
+  int j;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RAX = extraout_RAX_03;
+  }
+  runtime_makemap_small(in_RAX);
+  phVar2 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = syscall_env;
+    phVar2 = extraout_RAX_00;
+  }
+  iVar1 = syscall_envs.len;
+  i = 0;
+  psVar4 = syscall_envs.array;
+  syscall_env = phVar2;
+  do {
+    if (iVar1 <= i) {
+      return;
+    }
+    ~r0 = psVar4->str;
+    for (iVar3 = 0; iVar3 < psVar4->len; iVar3 = iVar3 + 1) {
+      if (~r0[iVar3] == 0x3d) {
+        runtime_mapaccess2_faststr
+                  ((internal_abi_MapType *)&DAT_0082c560,(runtime_hmap *)syscall_env,
+                   in_stack_ffffffffffffffb0,~r0,SUB81(iVar3,0));
+        psVar5 = syscall_envs.array;
+        if (extraout_BL == '\0') {
+          runtime_mapassign_faststr
+                    ((internal_abi_MapType *)&DAT_0082c560,(runtime_hmap *)syscall_env,
+                     in_stack_ffffffffffffffb0,~r0);
+          *extraout_RAX_02 = i;
+        }
+        else {
+          if ((uint)syscall_envs.len <= (uint)i) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          iVar3 = i * 0x10;
+          syscall_envs.array[i].len = 0;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier1();
+            *extraout_R11_00 = extraout_R8;
+            iVar3 = extraout_RAX_01;
+            psVar5 = extraout_RSI;
+          }
+          *(undefined8 *)((int)&psVar5->str + iVar3) = 0;
+        }
+        break;
+      }
+    }
+    psVar4 = psVar4 + 1;
+    i = i + 1;
+  } while( true );
+}
+
+
+
+// DWARF original prototype: void syscall.Getenv(string key, string value, bool found, bool found)
+
+void syscall_Getenv(string key,string value,bool found,bool found_1)
+
+{
+  uint uVar1;
+  sdword sVar2;
+  undefined7 in_register_00000001;
+  uint *extraout_RAX;
+  int i;
+  int i_1;
+  sdword sVar3;
+  char extraout_BL;
+  bool ok;
+  undefined7 in_register_00000019;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa8;
+  string value_local;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (syscall_envOnce.done == 0) {
+    sync___Once__doSlow(&syscall_envOnce,(func__ **)&PTR_syscall_copyenv_008eb640);
+  }
+  if (CONCAT71(in_register_00000019,found_1) != 0) {
+    LOCK();
+    sVar2 = syscall_envLock.readerCount.v + 1;
+    UNLOCK();
+    sVar3 = syscall_envLock.readerCount.v + 1;
+    syscall_envLock.readerCount.v = sVar2;
+    if (sVar3 < 0) {
+      sync_runtime_SemacquireRWMutexR(&syscall_envLock.readerSem,false,0);
+    }
+    local_20._8_8_ = &syscall_envLock;
+    local_20._0_8_ = syscall_Getenv_func1;
+    local_10 = (code **)local_20;
+    runtime_mapaccess2_faststr
+              ((internal_abi_MapType *)&DAT_0082c560,(runtime_hmap *)syscall_env,
+               in_stack_ffffffffffffffa8,(void *)CONCAT71(in_register_00000001,found),found_1);
+    if (extraout_BL != '\0') {
+      uVar1 = *extraout_RAX;
+      if ((uint)syscall_envs.len <= uVar1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      i_1 = 0;
+      while( true ) {
+        if (syscall_envs.array[uVar1].len <= i_1) {
+          (**local_10)();
+          return;
+        }
+        if (syscall_envs.array[uVar1].str[i_1] == 0x3d) break;
+        i_1 = i_1 + 1;
+      }
+      (**local_10)();
+      return;
+    }
+    (**local_10)();
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall_Getenv_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___RWMutex__RUnlock(*(sync_RWMutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void syscall_SetNonblock(int fd,bool nonblocking,error err)
+
+{
+  uint uVar1;
+  int flag;
+  uint uVar2;
+  int extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = syscall_fcntl(fd,3,0);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  uVar2 = uVar1 & 0xfffffffffffff7ff;
+  if (nonblocking) {
+    uVar2 = uVar1 | 0x800;
+  }
+  syscall_fcntl(fd,4,uVar2);
+  return;
+}
+
+
+
+// WARNING: Removing unreachable block (ram,0x004796fb)
+// WARNING: Removing unreachable block (ram,0x0047970f)
+// WARNING: Removing unreachable block (ram,0x00479719)
+// WARNING: Removing unreachable block (ram,0x00479705)
+// WARNING: Removing unreachable block (ram,0x004796ef)
+// WARNING: Removing unreachable block (ram,0x00479725)
+
+void syscall_newNetlinkRouteRequest(int proto,int seq,int family,__uint8 ~r0)
+
+{
+  undefined4 *extraout_RAX;
+  void *in_RDI;
+  void *extraout_RDI;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  undefined4 uStack_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  uStack_10 = in_XMM15._8_4_;
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x11,0x11,in_RDI);
+  *extraout_RAX = 0x11;
+  *(short *)(extraout_RAX + 1) = (short)proto;
+  *(undefined2 *)((int)extraout_RAX + 6) = 0x301;
+  extraout_RAX[2] = (sdword)seq;
+  extraout_RAX[3] = uStack_10;
+  *(char *)(extraout_RAX + 4) = (char)family;
+  return;
+}
+
+
+
+void syscall_glob__func1(interface___ ~r0)
+
+{
+  undefined8 *~r0_00;
+  __uint8 *_b;
+  int len;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 uVar1;
+  void *in_RBX;
+  undefined8 *extraout_RBX;
+  undefined8 *puVar2;
+  void *extraout_RBX_00;
+  void *~r0_01;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX_00;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00801a20,in_RBX);
+  syscall_Getpagesize((int)~r0_00);
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,len,len,~r0_01);
+  ~r0_00[1] = len;
+  ~r0_00[2] = len;
+  uVar1 = extraout_RAX;
+  puVar2 = ~r0_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = *extraout_RBX;
+    uVar1 = extraout_RAX_00;
+    puVar2 = extraout_RBX;
+  }
+  *puVar2 = uVar1;
+  return;
+}
+
+
+
+// DWARF original prototype: void syscall.NetlinkRIB(int proto, int family, []uint8 ~r0, []uint8
+// ~r0, error ~r1, error ~r1)
+
+void syscall_NetlinkRIB(int proto,int family,__uint8 ~r0,__uint8 ~r0_1,error ~r1,error ~r1_1)
+
+{
+  __uint8 ~r0_00;
+  __uint8 p;
+  __uint8 p_00;
+  runtime_slice ~r0_01;
+  __uint8 b;
+  error err;
+  error err_00;
+  syscall_Sockaddr to;
+  syscall_Sockaddr from;
+  __syscall_NetlinkMessage ~r0_02;
+  error err_01;
+  error err_02;
+  error ~r1_00;
+  sdword extraout_EAX;
+  int fd;
+  int s;
+  undefined2 *extraout_RAX;
+  syscall_SockaddrNetlink *sa;
+  sdword extraout_EAX_00;
+  int extraout_RAX_00;
+  int flags;
+  int extraout_RAX_01;
+  undefined1 *extraout_RAX_02;
+  internal_abi_Type *have;
+  void *oldCap;
+  void *__n;
+  int nr;
+  void *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar1;
+  int extraout_RCX;
+  void *pvVar2;
+  void *extraout_RCX_00;
+  int iVar3;
+  int extraout_RBX;
+  void *~r0_03;
+  int extraout_RBX_00;
+  syscall_SockaddrNetlink *lsanl;
+  void **extraout_RBX_01;
+  __uint8 *rbNew;
+  void *extraout_RBX_02;
+  void *pvVar4;
+  int extraout_RBX_03;
+  int extraout_RDI;
+  int extraout_RDI_00;
+  int unaff_R14;
+  interface___ in_stack_fffffffffffffe50;
+  runtime_itab *in_stack_fffffffffffffe60;
+  runtime_itab *in_stack_fffffffffffffe68;
+  void *in_stack_fffffffffffffe70;
+  runtime_itab *in_stack_fffffffffffffe78;
+  runtime_itab *in_stack_fffffffffffffe80;
+  undefined local_140 [16];
+  runtime__defer local_130;
+  runtime__defer local_e8;
+  void *local_a0;
+  void **local_90;
+  void *local_88;
+  int local_80;
+  undefined local_78 [16];
+  void *local_68;
+  undefined local_60 [16];
+  undefined local_50 [16];
+  undefined local_40 [16];
+  syscall_NetlinkMessage m;
+  
+  while (&local_130 <= *(runtime__defer **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_68 = (void *)0x0;
+  fd = syscall_socket(0x10,0x80003,0);
+  if (extraout_RBX != 0) {
+    local_68 = (void *)0x0;
+    runtime_deferreturn();
+    return;
+  }
+  local_140._8_8_ = fd;
+  local_140._0_8_ = syscall_NetlinkRIB_func1;
+  local_e8.fn = (func__ **)local_140;
+  runtime_deferprocStack(&local_e8);
+  if (extraout_EAX != 0) {
+    runtime_deferreturn();
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0087e360,~r0_03);
+  *extraout_RAX = 0x10;
+  err.data = in_stack_fffffffffffffe68;
+  err.tab = in_stack_fffffffffffffe60;
+  syscall_Bind(fd,(syscall_Sockaddr)in_stack_fffffffffffffe50,err);
+  if (extraout_RAX_00 != 0) {
+    local_68 = (void *)0x0;
+    runtime_deferreturn();
+    return;
+  }
+  ~r0_00.cap = (int)in_stack_fffffffffffffe60;
+  ~r0_00.array = (uint8 *)in_stack_fffffffffffffe50._type;
+  ~r0_00.len = (int)in_stack_fffffffffffffe50.data;
+  syscall_newNetlinkRouteRequest(proto,1,family,~r0_00);
+  p.cap = (int)in_stack_fffffffffffffe60;
+  p.array = (uint8 *)in_stack_fffffffffffffe50._type;
+  p.len = (int)in_stack_fffffffffffffe50.data;
+  to.data = in_stack_fffffffffffffe70;
+  to.tab = in_stack_fffffffffffffe68;
+  err_01.data = in_stack_fffffffffffffe80;
+  err_01.tab = in_stack_fffffffffffffe78;
+  syscall_Sendto(fd,p,flags,to,err_01);
+  if (extraout_RAX_01 != 0) {
+    local_68 = (void *)0x0;
+    runtime_deferreturn();
+    return;
+  }
+  err_00.data = in_stack_fffffffffffffe68;
+  err_00.tab = in_stack_fffffffffffffe60;
+  syscall_Getsockname(fd,(syscall_Sockaddr)in_stack_fffffffffffffe50,err_00);
+  if (extraout_RCX != 0) {
+    local_68 = (void *)0x0;
+    runtime_deferreturn();
+    return;
+  }
+  if (extraout_RAX_02 != go_itab__syscall_SockaddrNetlink_syscall_Sockaddr) {
+    local_68 = (void *)0x0;
+    local_78._8_8_ = &DAT_0095c5d8;
+    local_78._0_8_ = go_itab_syscall_Errno_error;
+    runtime_deferreturn();
+    return;
+  }
+  local_80 = extraout_RBX_00;
+  sync___Pool__Get(syscall_pageBufPool,in_stack_fffffffffffffe50);
+  if (have != (internal_abi_Type *)&DAT_008000e0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeE
+              (have,(internal_abi_Type *)&DAT_008000e0,(internal_abi_Type *)&DAT_00821120);
+  }
+  local_50._8_8_ = syscall_pageBufPool;
+  local_50._0_8_ = syscall_NetlinkRIB_func2;
+  local_40._8_8_ = extraout_RBX_01;
+  local_40._0_8_ = &DAT_008000e0;
+  local_130.fn = (func__ **)local_50;
+  local_90 = extraout_RBX_01;
+  runtime_deferprocStack(&local_130);
+  if (extraout_EAX_00 != 0) {
+    runtime_deferreturn();
+    return;
+  }
+  oldCap = (void *)0x0;
+  pvVar2 = (void *)0x0;
+  local_a0 = (void *)0x0;
+  while( true ) {
+    pvVar4 = local_90[2];
+    local_88 = *local_90;
+    p_00.cap = (int)in_stack_fffffffffffffe60;
+    p_00.array = (uint8 *)in_stack_fffffffffffffe50._type;
+    p_00.len = (int)in_stack_fffffffffffffe50.data;
+    from.data = in_stack_fffffffffffffe70;
+    from.tab = in_stack_fffffffffffffe68;
+    err_02.data = in_stack_fffffffffffffe80;
+    err_02.tab = in_stack_fffffffffffffe78;
+    syscall_Recvfrom(fd,p_00,(int)local_88,(int)local_90[1],from,err_02);
+    if (extraout_RDI != 0) {
+      local_68 = (void *)0x0;
+      runtime_deferreturn();
+      return;
+    }
+    if ((int)__n < 0x10) {
+      local_68 = (void *)0x0;
+      local_78._8_8_ = &DAT_0095c5d8;
+      local_78._0_8_ = go_itab_syscall_Errno_error;
+      runtime_deferreturn();
+      return;
+    }
+    if (pvVar4 < __n) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    pvVar4 = (void *)((int)pvVar2 + (int)__n);
+    if (oldCap < pvVar4) {
+      ~r0_01.cap = (int)in_stack_fffffffffffffe60;
+      ~r0_01.array = in_stack_fffffffffffffe50._type;
+      ~r0_01.len = (int)in_stack_fffffffffffffe50.data;
+      runtime_growslice(local_a0,(int)pvVar4,(int)oldCap,(int)__n,(internal_abi_Type *)&DAT_00807920
+                        ,~r0_01);
+      oldCap = extraout_RCX_00;
+      pvVar4 = extraout_RBX_02;
+      local_a0 = extraout_RAX_03;
+    }
+    runtime_memmove((void *)((int)local_a0 + (int)pvVar2),local_88,(size_t)__n);
+    b.cap = (int)in_stack_fffffffffffffe60;
+    b.array = (uint8 *)in_stack_fffffffffffffe50._type;
+    b.len = (int)in_stack_fffffffffffffe50.data;
+    ~r0_02.len = (int)in_stack_fffffffffffffe70;
+    ~r0_02.array = (syscall_NetlinkMessage *)in_stack_fffffffffffffe68;
+    ~r0_02.cap = (int)in_stack_fffffffffffffe78;
+    ~r1_00.data = pvVar4;
+    ~r1_00.tab = in_stack_fffffffffffffe80;
+    pvVar2 = pvVar4;
+    syscall_ParseNetlinkMessage(b,~r0_02,~r1_00);
+    if (extraout_RDI_00 != 0) break;
+    puVar1 = extraout_RAX_04;
+    for (iVar3 = 0; iVar3 < extraout_RBX_03; iVar3 = iVar3 + 1) {
+      m.Header._0_8_ = *puVar1;
+      m.Header.Seq = *(uint32 *)(puVar1 + 1);
+      m.Header.Pid = *(uint32 *)((int)puVar1 + 0xc);
+      m.Data.array._0_4_ = *(undefined4 *)(puVar1 + 2);
+      m.Data.array._4_4_ = *(undefined4 *)((int)puVar1 + 0x14);
+      m.Data.len._0_4_ = *(undefined4 *)(puVar1 + 3);
+      m.Data.len._4_4_ = *(undefined4 *)((int)puVar1 + 0x1c);
+      m.Data.cap._0_4_ = *(undefined4 *)(puVar1 + 4);
+      m.Data.cap._4_4_ = *(undefined4 *)((int)puVar1 + 0x24);
+      if ((m.Header.Seq != 1) || (*(uint32 *)(local_80 + 4) != m.Header.Pid)) {
+        local_68 = (void *)0x0;
+        local_78._8_8_ = &DAT_0095c5d8;
+        local_78._0_8_ = go_itab_syscall_Errno_error;
+        runtime_deferreturn();
+        return;
+      }
+      if (m.Header.Type == 3) {
+        local_68 = local_a0;
+        local_60._8_8_ = oldCap;
+        local_60._0_8_ = pvVar2;
+        runtime_deferreturn();
+        return;
+      }
+      if (m.Header.Type == 2) {
+        local_68 = (void *)0x0;
+        local_78._8_8_ = &DAT_0095c5d8;
+        local_78._0_8_ = go_itab_syscall_Errno_error;
+        runtime_deferreturn();
+        return;
+      }
+      puVar1 = puVar1 + 5;
+      m.Header.Seq = 1;
+    }
+  }
+  local_68 = (void *)0x0;
+  runtime_deferreturn();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall_NetlinkRIB_func2(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xffffffffffffffe0;
+  }
+  sync___Pool__Put(*(sync_Pool **)(in_RDX + 8),in_stack_ffffffffffffffe0);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall_NetlinkRIB_func1(void)
+
+{
+  int *piVar1;
+  error err;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  err.data = unaff_RBP;
+  err.tab = in_stack_fffffffffffffff0;
+  syscall_Close(*(int *)(in_RDX + 8),err);
+  return;
+}
+
+
+
+void syscall_ParseNetlinkMessage(__uint8 b,__syscall_NetlinkMessage ~r0,error ~r1)
+
+{
+  syscall_NlMsghdr *in_RAX;
+  void *extraout_RAX;
+  int in_RCX;
+  uint extraout_RCX;
+  uint oldCap;
+  uint in_RBX;
+  uint extraout_RBX;
+  void *oldPtr;
+  uint newLen;
+  int l;
+  undefined1 *puVar1;
+  uint uVar2;
+  int dlen;
+  uint uVar3;
+  int iVar4;
+  syscall_NlMsghdr *h;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffff50;
+  syscall_NetlinkMessage m;
+  
+  while (&m <= *(syscall_NetlinkMessage **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  oldCap = 0;
+  oldPtr = (void *)0x0;
+  newLen = 0;
+  while( true ) {
+    if ((int)in_RBX < 0x10) {
+      return;
+    }
+    if ((in_RAX->Len < 0x10) || (dlen = in_RAX->Len + 3 & 0xfffffffffffffffc, (int)in_RBX < dlen)) {
+      puVar1 = go_itab_syscall_Errno_error;
+      dlen = 0;
+      uVar3 = 0;
+      iVar4 = 0;
+      h = (syscall_NlMsghdr *)0x0;
+    }
+    else {
+      uVar3 = in_RCX - 0x10;
+      iVar4 = (int)&in_RAX->Len + (uint)((dword)((int)-uVar3 >> 0x3f) & 0x10);
+      puVar1 = (undefined1 *)0x0;
+      h = in_RAX;
+    }
+    if (puVar1 != (undefined1 *)0x0) {
+      return;
+    }
+    uVar2 = h->Len - 0x10;
+    if (uVar3 < uVar2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    m.Header.Len = h->Len;
+    m.Header.Type = h->Type;
+    m.Header.Flags = h->Flags;
+    m.Header.Seq = h->Seq;
+    m.Header.Pid = h->Pid;
+    m.Data.array._0_4_ = (undefined4)iVar4;
+    m.Data.array._4_4_ = (undefined4)((uint)iVar4 >> 0x20);
+    m.Data.cap = uVar3;
+    m.Data.len = uVar2;
+    newLen = newLen + 1;
+    if (oldCap < newLen) {
+      runtime_growslice(oldPtr,newLen,oldCap,1,(internal_abi_Type *)&DAT_00850880,
+                        in_stack_ffffffffffffff50);
+      oldCap = extraout_RCX;
+      oldPtr = extraout_RAX;
+      newLen = extraout_RBX;
+    }
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbMove((internal_abi_Type *)&DAT_00850880,
+                     (void *)((int)oldPtr + newLen * 0x28 + -0x28),&m);
+    }
+    *(uint *)((int)oldPtr + newLen * 0x28 + -0x28) = CONCAT44(m.Header._4_4_,m.Header.Len);
+    *(uint32 *)((int)oldPtr + newLen * 0x28 + -0x20) = m.Header.Seq;
+    *(uint32 *)((int)oldPtr + newLen * 0x28 + -0x1c) = m.Header.Pid;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -0x18) = m.Data.array._0_4_;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -0x14) = m.Data.array._4_4_;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -0x10) = (undefined4)m.Data.len;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -0xc) = m.Data.len._4_4_;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -8) = (undefined4)m.Data.cap;
+    *(undefined4 *)((int)oldPtr + newLen * 0x28 + -4) = m.Data.cap._4_4_;
+    if (in_RBX < (uint)dlen) break;
+    in_RCX = in_RCX - dlen;
+    in_RBX = in_RBX - dlen;
+    in_RAX = (syscall_NlMsghdr *)((int)&in_RAX->Len + (-in_RCX >> 0x3f & dlen));
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void syscall_ParseNetlinkRouteAttr
+               (syscall_NetlinkMessage *m,__syscall_NetlinkRouteAttr ~r0,error ~r1)
+
+{
+  uint16 uVar1;
+  ushort uVar2;
+  uint oldCap;
+  void *extraout_RAX;
+  uint extraout_RAX_00;
+  void *oldPtr;
+  uint extraout_RCX;
+  void *extraout_RCX_00;
+  uint newLen;
+  undefined1 *puVar3;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  syscall_RtAttr *a;
+  int iVar4;
+  int extraout_RDI;
+  int iVar5;
+  syscall_RtAttr *psVar6;
+  syscall_RtAttr *extraout_R8;
+  uint uVar7;
+  uint extraout_R9;
+  int extraout_R10;
+  uint uVar8;
+  int alen;
+  uint8 **extraout_R11;
+  uint8 *puVar9;
+  uint uVar10;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffff78;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (m->Header).Type;
+  if ((ushort)(uVar1 - 0x10) < 2) {
+    uVar7 = (m->Data).len;
+    if (uVar7 < 0x10) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    iVar5 = (m->Data).cap + -0x10;
+    psVar6 = (syscall_RtAttr *)((m->Data).array + ((dword)(-iVar5 >> 0x3f) & 0x10));
+    uVar7 = uVar7 - 0x10;
+  }
+  else if ((ushort)(uVar1 - 0x14) < 2) {
+    uVar7 = (m->Data).len;
+    if (uVar7 < 8) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    iVar5 = (m->Data).cap + -8;
+    psVar6 = (syscall_RtAttr *)((m->Data).array + ((dword)(-iVar5 >> 0x3f) & 8));
+    uVar7 = uVar7 - 8;
+  }
+  else {
+    if (1 < (ushort)(uVar1 - 0x18)) {
+      return;
+    }
+    uVar7 = (m->Data).len;
+    if (uVar7 < 0xc) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    iVar5 = (m->Data).cap + -0xc;
+    psVar6 = (syscall_RtAttr *)((m->Data).array + ((dword)(-iVar5 >> 0x3f) & 0xc));
+    uVar7 = uVar7 - 0xc;
+  }
+  oldCap = 0;
+  oldPtr = (void *)0x0;
+  newLen = 0;
+  while( true ) {
+    if ((int)uVar7 < 4) {
+      return;
+    }
+    uVar8 = (uint)psVar6->Len;
+    if ((uVar8 < 4) || ((int)uVar7 < (int)uVar8)) {
+      puVar3 = go_itab_syscall_Errno_error;
+      alen = 0;
+      uVar10 = 0;
+      puVar9 = (uint8 *)0x0;
+      a = (syscall_RtAttr *)0x0;
+    }
+    else {
+      uVar10 = iVar5 - 4;
+      puVar9 = (uint8 *)((int)&psVar6->Len + (uint)((dword)((int)-uVar10 >> 0x3f) & 4));
+      alen = uVar8 + 3 & 0xfffffffffffffffc;
+      puVar3 = (undefined1 *)0x0;
+      a = psVar6;
+    }
+    if (puVar3 != (undefined1 *)0x0) {
+      return;
+    }
+    uVar2 = a->Len;
+    uVar8 = uVar2 - 4;
+    if (uVar10 < uVar8) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    newLen = newLen + 1;
+    uVar1 = a->Type;
+    if (oldCap < newLen) {
+      runtime_growslice(oldPtr,newLen,oldCap,1,(internal_abi_Type *)&DAT_008509c0,
+                        in_stack_ffffffffffffff78);
+      oldCap = extraout_RCX;
+      oldPtr = extraout_RAX;
+      newLen = extraout_RBX;
+    }
+    iVar4 = (newLen - 1) * 0x20;
+    *(ushort *)((int)oldPtr + iVar4) = uVar2;
+    *(uint16 *)((int)oldPtr + iVar4 + 2) = uVar1;
+    *(uint *)((int)oldPtr + iVar4 + 0x10) = uVar8;
+    *(uint *)((int)oldPtr + iVar4 + 0x18) = uVar10;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = puVar9;
+      extraout_R11[1] = *(uint8 **)((int)extraout_RCX_00 + extraout_RDI + 8);
+      oldCap = extraout_RAX_00;
+      oldPtr = extraout_RCX_00;
+      iVar4 = extraout_RDI;
+      psVar6 = extraout_R8;
+      uVar7 = extraout_R9;
+      iVar5 = extraout_R10;
+      alen = extraout_RBX_00;
+    }
+    *(uint8 **)((int)oldPtr + iVar4 + 8) = puVar9;
+    if (uVar7 < (uint)alen) break;
+    iVar5 = iVar5 - alen;
+    uVar7 = uVar7 - alen;
+    psVar6 = (syscall_RtAttr *)((int)&psVar6->Len + (-iVar5 >> 0x3f & alen));
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall_init_0(void)
+
+{
+  int extraout_RAX;
+  int unaff_R14;
+  syscall_Rlimit in_XMM15;
+  interface___ in_stack_ffffffffffffffd0;
+  syscall_Rlimit local_18;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_18 = in_XMM15;
+  syscall_Getrlimit(7,&local_18,(error)in_stack_ffffffffffffffd0);
+  if ((extraout_RAX == 0) && (local_18.Max != local_18.Cur)) {
+    runtime_convTnoptr((internal_abi_Type *)&DAT_00850a60,&local_18,(void *)local_18.Cur);
+    sync_atomic___Value__Store(&syscall_origRlimitNofile,in_stack_ffffffffffffffd0);
+    local_18.Cur = local_18.Max;
+    syscall_setrlimit(RLIMIT_NOFILE,(rlimit *)&local_18);
+  }
+  return;
+}
+
+
+
+void syscall_ByteSliceFromString(string s,__uint8 ~r0,error ~r1)
+
+{
+  void *in_RAX;
+  int in_RBX;
+  void *~r0_00;
+  int unaff_R14;
+  int local_18;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  internal_bytealg_IndexByteString();
+  if (local_18 != -1) {
+    return;
+  }
+  runtime_makeslicecopy((internal_abi_Type *)&DAT_00807920,in_RBX + 1,in_RBX,in_RAX,~r0_00);
+  return;
+}
+
+
+
+void syscall___Timespec__Unix(syscall_Timespec *ts,int64 sec,int64 nsec)
+
+{
+  return;
+}
+
+
+
+void syscall___Timespec__Nano(syscall_Timespec *ts,int64 ~r0)
+
+{
+  return;
+}
+
+
+
+void syscall_Pipe2(__int p,int flags,error ~r0)
+
+{
+  int iVar1;
+  int in_RBX;
+  int in_RDI;
+  int unaff_R14;
+  undefined8 local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX == 2) {
+    local_10 = 0;
+    iVar1 = syscall_pipe2(&local_10,in_RDI);
+    if (iVar1 == 0) {
+      *(int *)flags = (int)(sdword)local_10;
+      *(int *)(flags + 8) = (int)local_10._4_4_;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void syscall___SockaddrInet4__sockaddr
+               (syscall_SockaddrInet4 *sa,void *~r0,syscall__Socklen ~r1,error ~r2)
+
+{
+  if (0xffff < (uint)sa->Port) {
+    return;
+  }
+  (sa->raw).Family = 2;
+  *(char *)&(sa->raw).Port = (char)((uint)sa->Port >> 8);
+  *(char *)((int)&(sa->raw).Port + 1) = (char)sa->Port;
+  *(undefined4 *)(sa->raw).Addr = *(undefined4 *)sa->Addr;
+  return;
+}
+
+
+
+void syscall___SockaddrInet6__sockaddr
+               (syscall_SockaddrInet6 *sa,void *~r0,syscall__Socklen ~r1,error ~r2)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  if (0xffff < (uint)sa->Port) {
+    return;
+  }
+  (sa->raw).Family = 10;
+  *(char *)&(sa->raw).Port = (char)((uint)sa->Port >> 8);

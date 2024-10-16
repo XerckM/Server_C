@@ -1,0 +1,1000 @@
+     (val != t->ContentLength)) {
+    runtime_convT64(t->ContentLength,in_RBX);
+    local_30._8_8_ = extraout_RAX_10;
+    local_30._0_8_ = &DAT_00807820;
+    runtime_convT64(val,x);
+    local_20._8_8_ = extraout_RAX_11;
+    local_20._0_8_ = &DAT_00807820;
+    a.cap = in_stack_ffffffffffffff30;
+    a.array = (interface___ *)in_stack_ffffffffffffff20.str;
+    a.len = in_stack_ffffffffffffff20.len;
+    ~r0.tab._6_1_ = uVar7;
+    ~r0.tab._0_6_ = in_stack_ffffffffffffff38;
+    ~r0.tab._7_1_ = uVar8;
+    ~r0.data = in_RBX;
+    fmt_Errorf(in_stack_ffffffffffffff10,a,~r0);
+    (**local_10)();
+    return;
+  }
+  if ((((t->TransferEncoding).len != 0) && (psVar2 = (t->TransferEncoding).array, psVar2->len == 7))
+     && ((psVar3 = (sdword *)psVar2->str, *psVar3 == 0x6e756863 &&
+         ((*(short *)(psVar3 + 1) == 0x656b && (*(char *)((int)psVar3 + 6) == 'd')))))) {
+    if ((t->Trailer != (net_http_Header)0x0) &&
+       (net_http_Header_writeSubset
+                  (t->Trailer,(io_Writer)in_stack_ffffffffffffff10,(map_string_bool)in_RBX,in_RCX,
+                   (error)in_stack_ffffffffffffff20), extraout_RAX_12 != 0)) {
+      (**local_10)();
+      return;
+    }
+    err_04.data._0_6_ = in_stack_ffffffffffffff38;
+    err_04.tab = (runtime_itab *)in_stack_ffffffffffffff30;
+    err_04.data._6_1_ = uVar7;
+    err_04.data._7_1_ = uVar8;
+    io_WriteString((io_Writer)in_stack_ffffffffffffff10,in_stack_ffffffffffffff20,(int)in_RBX,err_04
+                  );
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void net_http___transferWriter__writeBody_func1(void)
+
+{
+  bool *_closed;
+  net_http_transferWriter *t;
+  int *extraout_RCX;
+  int *piVar1;
+  int in_RDX;
+  error *_err;
+  int extraout_RBX;
+  int iVar2;
+  int *extraout_R11;
+  int unaff_R14;
+  undefined auVar3 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(in_RDX + 0x18);
+  if (**(char **)(in_RDX + 8) == '\0') {
+    iVar2 = *(int *)(*(int *)(in_RDX + 0x10) + 0x20);
+    if (iVar2 != 0) {
+      auVar3 = (**(code **)(iVar2 + 0x18))(*(undefined8 *)(*(int *)(in_RDX + 0x10) + 0x28));
+      iVar2 = auVar3._8_8_;
+      if ((auVar3._0_8_ != 0) && (*piVar1 == 0)) {
+        *piVar1 = auVar3._0_8_;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RBX;
+          extraout_R11[1] = extraout_RCX[1];
+          piVar1 = extraout_RCX;
+          iVar2 = extraout_RBX;
+        }
+        piVar1[1] = iVar2;
+      }
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void net_http___transferWriter__doBodyCopy
+               (net_http_transferWriter *t,io_Writer dst,io_Reader src,int64 n,error err)
+
+{
+  error err_00;
+  byte extraout_AL;
+  byte bVar1;
+  void *x;
+  void *extraout_RCX;
+  void *pvVar2;
+  runtime_itab *tab;
+  runtime_itab *prVar3;
+  bool ~r0;
+  void **extraout_R11;
+  int unaff_R14;
+  io_Writer in_stack_ffffffffffffffa8;
+  io_Reader in_stack_ffffffffffffffb8;
+  __uint8 in_stack_ffffffffffffffc8;
+  runtime_itab *in_stack_ffffffffffffffe0;
+  void *in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  err_00.data = in_stack_ffffffffffffffe8;
+  err_00.tab = in_stack_ffffffffffffffe0;
+  io_copyBuffer(in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8,n,
+                err_00);
+  if (tab != (runtime_itab *)0x0) {
+    prVar3 = tab;
+    if (io_EOF.tab == tab) {
+      runtime_ifaceeq(tab,x,io_EOF.data,~r0);
+      bVar1 = extraout_AL ^ 1;
+    }
+    else {
+      bVar1 = 1;
+    }
+    if (bVar1 != 0) {
+      (t->bodyReadError).tab = prVar3;
+      pvVar2 = x;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RCX;
+        extraout_R11[1] = (t->bodyReadError).data;
+        pvVar2 = extraout_RCX;
+      }
+      (t->bodyReadError).data = pvVar2;
+    }
+  }
+  return;
+}
+
+
+
+void net_http___transferWriter__unwrapBody(net_http_transferWriter *t,io_Reader ~r0)
+
+{
+  runtime_itab **pprVar1;
+  runtime_itab *src;
+  io_Reader underlyingReader;
+  char extraout_CL;
+  bool ok;
+  void *unaff_RBP;
+  int unaff_R14;
+  io_Reader in_stack_ffffffffffffffe0;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  underlyingReader.data = unaff_RBP;
+  underlyingReader.tab = in_stack_fffffffffffffff0;
+  net_http_unwrapNopCloser(in_stack_ffffffffffffffe0,underlyingReader,SUB81((t->Body).tab,0));
+  if (extraout_CL == '\0') {
+    pprVar1 = (runtime_itab **)(t->Body).data;
+    if ((t->Body).tab == (runtime_itab *)go_itab__net_http_readTrackingBody_io_Reader) {
+      *(undefined *)(pprVar1 + 2) = 1;
+      src = *pprVar1;
+      runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,src,src);
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Type propagation algorithm not settling
+
+void net_http_readTransfer(interface___ msg,bufio_Reader *r,error err)
+
+{
+  sdword sVar1;
+  net_http_Header *pphVar2;
+  char extraout_AL;
+  bool isResponse;
+  bucket<> *extraout_RAX;
+  int extraout_RAX_00;
+  net_http_Header extraout_RAX_01;
+  int64 realLength;
+  int64 **extraout_RAX_02;
+  net_http_Header extraout_RAX_03;
+  int64 n;
+  net_http_Header extraout_RAX_04;
+  undefined8 extraout_RAX_05;
+  net_http_Header extraout_RAX_06;
+  net_http_Header extraout_RAX_07;
+  net_http_Header extraout_RAX_08;
+  net_http_Header extraout_RAX_09;
+  net_http_Header extraout_RAX_10;
+  undefined8 *extraout_RAX_11;
+  undefined8 *extraout_RAX_12;
+  net_http_Header extraout_RAX_13;
+  net_http_Header extraout_RAX_14;
+  net_http_Header extraout_RAX_15;
+  net_http_Header extraout_RAX_16;
+  net_http_Header phVar3;
+  undefined8 *extraout_RAX_17;
+  undefined8 *extraout_RAX_18;
+  undefined8 *puVar4;
+  uintptr extraout_RCX;
+  net_http_Header extraout_RCX_00;
+  int64 ~r0;
+  net_http_Header extraout_RCX_01;
+  bucket<> *extraout_RCX_02;
+  bucket<> *extraout_RCX_03;
+  net_http_Header extraout_RCX_04;
+  bucket<> *extraout_RCX_05;
+  bucket<> *pbVar5;
+  net_http_Header extraout_RCX_06;
+  net_http_Response *rr;
+  bucket<> *extraout_RBX;
+  int extraout_RBX_00;
+  int extraout_RBX_01;
+  int extraout_RBX_02;
+  void *~r0_00;
+  void *extraout_RBX_03;
+  void *extraout_RBX_04;
+  void *extraout_RBX_05;
+  void *extraout_RBX_06;
+  void *extraout_RBX_07;
+  void *extraout_RBX_08;
+  void *extraout_RBX_09;
+  void *extraout_RBX_10;
+  void *extraout_RBX_11;
+  void *extraout_RBX_12;
+  void *extraout_RBX_13;
+  void *pvVar6;
+  net_http_Header extraout_RSI;
+  net_http_Header extraout_RSI_00;
+  void **extraout_R11;
+  undefined8 *extraout_R11_00;
+  uintptr *extraout_R11_01;
+  uintptr *extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  net_http_Header *extraout_R11_04;
+  net_http_Header *extraout_R11_05;
+  net_http_Header *extraout_R11_06;
+  net_http_Header *extraout_R11_07;
+  undefined8 *extraout_R11_08;
+  net_http_Header *extraout_R11_09;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffff38;
+  io_Reader in_stack_ffffffffffffff48;
+  net_http_transferReader local_60;
+  
+  while (&local_60.RequestMethod.len <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cdb0();
+  local_60.RequestMethod.len = (int)&DAT_00000003;
+  local_60.RequestMethod.str = &DAT_008ae3a8;
+  if (extraout_RAX != (bucket<> *)0x0) {
+    sVar1 = *(sdword *)((int)extraout_RAX->keys + 8);
+    if (sVar1 == -0x5d755a10) {
+      if (extraout_RAX != (bucket<> *)&DAT_008a03c0) goto LAB_006d931b;
+      local_60.Header = (net_http_Header)((string *)((int)extraout_RBX->keys + 0x30))->str;
+      local_60.RequestMethod.str = *(uint8 **)extraout_RBX->tophash;
+      local_60.RequestMethod.len = (int)extraout_RBX->keys[0].str;
+      local_60.ProtoMajor = (int)((string *)((int)extraout_RBX->keys + 0x20))->str;
+      local_60.ProtoMinor = *(int *)((int)extraout_RBX->keys + 0x28);
+      local_60.StatusCode = 200;
+      local_60.Close = *(bool *)&((string *)((int)extraout_RBX->keys + 0x70))->str;
+    }
+    else {
+      if ((sVar1 != -0x140baede) || (extraout_RAX != (bucket<> *)&DAT_008727a0)) goto LAB_006d931b;
+      local_60.Header = (net_http_Header)((string *)((int)extraout_RBX->keys + 0x30))->str;
+      local_60.StatusCode = *(int *)((int)extraout_RBX->keys + 8);
+      local_60.ProtoMajor = (int)((string *)((int)extraout_RBX->keys + 0x20))->str;
+      local_60.ProtoMinor = *(int *)((int)extraout_RBX->keys + 0x28);
+      net_http_shouldClose(local_60.ProtoMajor,local_60.ProtoMinor,local_60.Header,true,true);
+      pphVar2 = *(net_http_Header **)((int)extraout_RBX->keys + 0x78);
+      local_60.Close = (bool)extraout_AL;
+      if (pphVar2 != (net_http_Header *)0x0) {
+        local_60.RequestMethod.str = (uint8 *)*pphVar2;
+        local_60.RequestMethod.len = (int)pphVar2[1];
+      }
+    }
+    if (((undefined *)local_60.ProtoMajor == (undefined *)0x0) &&
+       ((undefined *)local_60.ProtoMinor == (undefined *)0x0)) {
+      local_60.ProtoMajor = (int)&DAT_00000001;
+      local_60.ProtoMinor = (int)&DAT_00000001;
+    }
+    net_http___transferReader__parseTransferEncoding(&local_60,(error)in_stack_ffffffffffffff38);
+    if (extraout_RAX_00 == 0) {
+      net_http_fixLength(sVar1 != -0x5d755a10,local_60.StatusCode,(string)in_stack_ffffffffffffff38,
+                         (net_http_Header)local_60.RequestMethod.str,
+                         SUB81(local_60.RequestMethod.len,0),(int64)local_60.Header,
+                         in_stack_ffffffffffffff48);
+      if (extraout_RBX_00 != 0) {
+        return;
+      }
+      phVar3 = extraout_RCX_00;
+      local_60.ContentLength = (int64)extraout_RAX_01;
+      if (((sVar1 != -0x5d755a10) &&
+          ((net_http_Header)local_60.RequestMethod.len == (net_http_Header)0x4)) &&
+         (*(sdword *)(int *)local_60.RequestMethod.str == 0x44414548)) {
+        runtime_mapaccess1_faststr
+                  ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)local_60.Header,
+                   (string)in_stack_ffffffffffffff38,
+                   "Content-Lengthaccept-charsetcontent-lengthNot AcceptableMAX_FRAME_SIZEPROTOCOL_ERRORINTERNAL_ERRORREFUSED_STREAMinvalid syntax1907348632812595367431640625show_sensitiveprefix length not an ip:portinvalid PrefixResourceHeaderRCodeNameErrormime/multipartinvalid kind: protobuf_oneofXXX_OneofFuncsneed more data/etc/ssl/certs\\.+*?()|[]{}^$LOGGER_UNKNOWNAccept-CharsetDkim-SignatureREQUEST_METHOD$htmltemplate_ /* %s */null formnovalidateprotobuf errorReservedRangesdata truncatedInstEmptyWidthunknown node: ApplyFunction;DifferentialD;DoubleLeftTee;DoubleUpArrow;LeftTeeVector;LeftVectorBar;LessFullEqual;LongLeftArrow;Longleftarrow;NotTildeEqual;NotTildeTilde;Poincareplane;PrecedesEqual;PrecedesTilde;RightArrowBar;RightTeeArrow;RightTriangle;RightUpVector;SucceedsEqual;SucceedsTilde;SupersetEqual;UpEquilibrium;VerticalTilde;VeryThinSpace;bigtriangleup;blacktriangle;divideontimes;fallingdotseq;hookleftarrow;leftarrowtail;leftharpoonup;longleftarrow;looparrowleft;measuredangle;ntriangleleft;shortparallel;smallsetminus;triangleright;upharpoonleft;NotEqualTilde;varsubsetneqq;varsupsetneqq;len of type %sFailed to servenegative offsetcopy_file_rangeduplicated nameGroup: bad kind: cannot parse ,M3.2.0,M11.1.0missing addressunknown networkinvalid address/etc/mdns.allowreflectlite.SetallocmRInternalwrite heap dumpasyncpreemptoffforce gc (idle)sync.Mutex.Lockmalloc deadlockruntime error: elem size wrong  with GC prog\nscan missed a gmisaligned maskruntime: min = runtime: inUse=runtime: max = recovery failedstopm holding pstartm: m has ppreempt SPWRITEmissing mcache?ms: gomaxprocs=]\n\tmorebuf={pc:: no frame (sp=runtime: frame runtimer: bad ptraceback stuckno such processnot a directoryadvertise errornetwork is downno medium foundkey has expiredCardinality(%d)weak_dependencyextension_rangeproto3_optionalunverified_lazyfeature_supportutf8_validationaggregate_valueedition_removedinvalid argSize<invalid Value>InvalidArgumentUnauthenticatedUNAUTHENTICATED\"UNIMPLEMENTED\"AuthInfo is nilAuthInfo: <nil>accept-encodingaccept-languageAccept-Encod..." /* TRUNCATED STRING LITERAL */
+                  );
+        if (extraout_RAX_02[1] == (int64 *)0x0) {
+          ~r0 = 0;
+        }
+        else {
+          ~r0 = **extraout_RAX_02;
+        }
+        net_http_parseContentLength((string)in_stack_ffffffffffffff38,~r0,in_stack_ffffffffffffff48)
+        ;
+        phVar3 = extraout_RCX_01;
+        local_60.ContentLength = (int64)extraout_RAX_03;
+        if (extraout_RBX_01 != 0) {
+          return;
+        }
+      }
+      net_http_fixTrailer(local_60.Header,local_60.Chunked,phVar3,(error)in_stack_ffffffffffffff38);
+      if (extraout_RBX_02 == 0) {
+        if (((((*(sdword *)((int)extraout_RAX->keys + 8) == -0x140baede) &&
+              (extraout_RAX == (bucket<> *)&DAT_008727a0)) &&
+             ((extraout_RAX_01 == (net_http_Header)0xffffffffffffffff &&
+              ((local_60.Chunked == false && (99 < local_60.StatusCode - 100U)))))) &&
+            (local_60.StatusCode != 0xcc)) && (local_60.StatusCode != 0x130)) {
+          local_60.Close = true;
+        }
+        pvVar6 = (void *)0x0;
+        local_60.Trailer = extraout_RAX_04;
+        pbVar5 = extraout_RAX;
+        if (local_60.Chunked == false) {
+          if (extraout_RAX_01 == (net_http_Header)0x0) {
+            local_60.Body.tab = (runtime_itab *)go_itab_net_http_noBody_io_ReadCloser;
+            local_60.Body.data = &runtime_zerobase;
+          }
+          else if ((int)extraout_RAX_01 < 1) {
+            if (local_60.Close == false) {
+              local_60.Body.tab = (runtime_itab *)go_itab_net_http_noBody_io_ReadCloser;
+              local_60.Body.data = &runtime_zerobase;
+            }
+            else {
+              runtime_newobject((internal_abi_Type *)&DAT_00893520,(void *)0x0);
+              extraout_RAX_09->count = (int)go_itab__bufio_Reader_io_Reader;
+              local_60.Body.data = extraout_RAX_09;
+              pvVar6 = extraout_RBX_06;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier1();
+                *extraout_R11_01 = extraout_RCX;
+                local_60.Body.data = extraout_RAX_10;
+                pvVar6 = extraout_RBX_07;
+              }
+              *(char *)((int)local_60.Body.data + 8) = (char)extraout_RCX;
+              *(char *)((int)local_60.Body.data + 9) = (char)(extraout_RCX >> 8);
+              *(short *)((int)local_60.Body.data + 10) = (short)(extraout_RCX >> 0x10);
+              *(sdword *)((int)local_60.Body.data + 0xc) = (sdword)(extraout_RCX >> 0x20);
+              *(bool *)((int)local_60.Body.data + 0x28) = local_60.Close;
+              local_60.Body.tab = (runtime_itab *)go_itab__net_http_body_io_ReadCloser;
+            }
+          }
+          else {
+            runtime_newobject((internal_abi_Type *)&DAT_0084e440,(void *)0x0);
+            *extraout_RAX_11 = go_itab__bufio_Reader_io_Reader;
+            puVar4 = extraout_RAX_11;
+            pvVar6 = extraout_RBX_08;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier1();
+              *extraout_R11_02 = extraout_RCX;
+              puVar4 = extraout_RAX_12;
+              pvVar6 = extraout_RBX_09;
+            }
+            puVar4[1] = extraout_RCX;
+            puVar4[2] = extraout_RAX_01;
+            runtime_newobject((internal_abi_Type *)&DAT_00893520,pvVar6);
+            extraout_RAX_13->count = (int)go_itab__io_LimitedReader_io_Reader;
+            local_60.Body.data = extraout_RAX_13;
+            pvVar6 = extraout_RBX_10;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier1();
+              *extraout_R11_03 = puVar4;
+              local_60.Body.data = extraout_RAX_14;
+              pvVar6 = extraout_RBX_11;
+            }
+            *(undefined8 **)((int)local_60.Body.data + 8) = puVar4;
+            *(bool *)((int)local_60.Body.data + 0x28) = local_60.Close;
+            local_60.Body.tab = (runtime_itab *)go_itab__net_http_body_io_ReadCloser;
+          }
+        }
+        else if ((sVar1 == -0x5d755a10) ||
+                (((((net_http_Header)local_60.RequestMethod.len != (net_http_Header)0x4 ||
+                   (*(sdword *)(int *)local_60.RequestMethod.str != 0x44414548)) &&
+                  (99 < local_60.StatusCode - 100U)) &&
+                 ((local_60.StatusCode != 0xcc && (local_60.StatusCode != 0x130)))))) {
+          net_http_internal_NewChunkedReader
+                    ((io_Reader)in_stack_ffffffffffffff38,in_stack_ffffffffffffff48);
+          runtime_newobject((internal_abi_Type *)&DAT_00893520,~r0_00);
+          extraout_RAX_06->count = extraout_RAX_05;
+          local_60.Body.data = extraout_RAX_06;
+          pvVar6 = extraout_RBX_03;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier1();
+            *extraout_R11 = ~r0_00;
+            local_60.Body.data = extraout_RAX_07;
+            pvVar6 = extraout_RBX_04;
+          }
+          *(void **)((int)local_60.Body.data + 8) = ~r0_00;
+          *(bucket<> **)((int)local_60.Body.data + 0x10) = extraout_RAX;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_00 = extraout_RBX;
+            extraout_R11_00[1] = extraout_RCX;
+            local_60.Body.data = extraout_RAX_08;
+            pbVar5 = extraout_RCX_02;
+            pvVar6 = extraout_RBX_05;
+          }
+          *(bucket<> **)((int)local_60.Body.data + 0x18) = extraout_RBX;
+          *(uintptr *)((int)local_60.Body.data + 0x20) = extraout_RCX;
+          *(bool *)((int)local_60.Body.data + 0x28) = local_60.Close;
+          local_60.Body.tab = (runtime_itab *)go_itab__net_http_body_io_ReadCloser;
+        }
+        else {
+          local_60.Body.tab = (runtime_itab *)go_itab_net_http_noBody_io_ReadCloser;
+          local_60.Body.data = &runtime_zerobase;
+        }
+        sVar1 = *(sdword *)((int)pbVar5->keys + 8);
+        if (sVar1 == -0x5d755a10) {
+          if (pbVar5 == (bucket<> *)&DAT_008a03c0) {
+            *(runtime_itab **)((int)extraout_RBX->keys + 0x38) = local_60.Body.tab;
+            pbVar5 = extraout_RBX;
+            phVar3 = (net_http_Header)local_60.Body.data;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_04 = extraout_RSI;
+              extraout_R11_04[1] = (net_http_Header)((string *)((int)pbVar5->keys + 0x40))->str;
+              pvVar6 = extraout_RBX_12;
+              phVar3 = extraout_RSI;
+            }
+            ((string *)((int)pbVar5->keys + 0x40))->str = (uint8 *)phVar3;
+            ((string *)((int)pbVar5->keys + 0x50))->str = (uint8 *)local_60.ContentLength;
+            if (local_60.Chunked != false) {
+              runtime_newobject((internal_abi_Type *)&DAT_008117e0,pvVar6);
+              extraout_RAX_15->flags = 7;
+              extraout_RAX_15->B = 0;
+              extraout_RAX_15->noverflow = 0;
+              extraout_RAX_15->hash0 = 0;
+              extraout_RAX_15->count = (int)&DAT_008b0ba4;
+              ((string *)((int)extraout_RBX->keys + 0x60))->str = &DAT_00000001;
+              *(undefined **)((int)extraout_RBX->keys + 0x68) = &DAT_00000001;
+              phVar3 = extraout_RAX_15;
+              pbVar5 = extraout_RBX;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_05 = extraout_RAX_16;
+                extraout_R11_05[1] = *(net_http_Header *)((int)extraout_RCX_03->keys + 0x58);
+                phVar3 = extraout_RAX_16;
+                pbVar5 = extraout_RCX_03;
+              }
+              *(net_http_Header *)((int)pbVar5->keys + 0x58) = phVar3;
+            }
+            *(bool *)&((string *)((int)pbVar5->keys + 0x70))->str = local_60.Close;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_06 = extraout_RCX_04;
+              extraout_R11_06[1] = *(net_http_Header *)((int)pbVar5->values + 0x20);
+              local_60.Trailer = extraout_RCX_04;
+            }
+            *(net_http_Header *)((int)pbVar5->values + 0x20) = local_60.Trailer;
+          }
+        }
+        else if ((sVar1 == -0x140baede) && (pbVar5 == (bucket<> *)&DAT_008727a0)) {
+          *(runtime_itab **)((int)extraout_RBX->keys + 0x38) = local_60.Body.tab;
+          pbVar5 = extraout_RBX;
+          phVar3 = (net_http_Header)local_60.Body.data;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_07 = extraout_RSI_00;
+            extraout_R11_07[1] = (net_http_Header)((string *)((int)pbVar5->keys + 0x40))->str;
+            pvVar6 = extraout_RBX_13;
+            phVar3 = extraout_RSI_00;
+          }
+          ((string *)((int)pbVar5->keys + 0x40))->str = (uint8 *)phVar3;
+          *(int64 *)((int)pbVar5->keys + 0x48) = local_60.ContentLength;
+          if (local_60.Chunked != false) {
+            runtime_newobject((internal_abi_Type *)&DAT_008117e0,pvVar6);
+            extraout_RAX_17[1] = 7;
+            *extraout_RAX_17 = &DAT_008b0ba4;
+            *(int *)((int)extraout_RBX->keys + 0x58) = 1;
+            ((string *)((int)extraout_RBX->keys + 0x60))->str = (uint8 *)0x1;
+            puVar4 = extraout_RAX_17;
+            pbVar5 = extraout_RBX;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_08 = extraout_RAX_18;
+              extraout_R11_08[1] = ((string *)((int)extraout_RCX_05->keys + 0x50))->str;
+              puVar4 = extraout_RAX_18;
+              pbVar5 = extraout_RCX_05;
+            }
+            ((string *)((int)pbVar5->keys + 0x50))->str = (uint8 *)puVar4;
+          }
+          *(bool *)((int)pbVar5->keys + 0x68) = local_60.Close;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_09 = extraout_RCX_06;
+            extraout_R11_09[1] = (net_http_Header)((string *)((int)pbVar5->keys + 0x70))->str;
+            local_60.Trailer = extraout_RCX_06;
+          }
+          ((string *)((int)pbVar5->keys + 0x70))->str = (uint8 *)local_60.Trailer;
+        }
+        return;
+      }
+      return;
+    }
+    return;
+  }
+LAB_006d931b:
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffff38);
+}
+
+
+
+void net_http___unsupportedTEError__Error(net_http_unsupportedTEError *uste,string ~r0)
+
+{
+  return;
+}
+
+
+
+void net_http___transferReader__parseTransferEncoding(net_http_transferReader *t,error ~r0)
+
+{
+  void **x;
+  __uint8 val;
+  __interface___ a;
+  __interface___ a_00;
+  string ~r0_00;
+  string ~r0_01;
+  int **extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *extraout_RAX_05;
+  undefined8 *puVar1;
+  int i;
+  char extraout_BL;
+  bool present;
+  void *~r0_02;
+  void *~r0_03;
+  char cVar2;
+  char cVar3;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffff98;
+  interface___ *in_stack_ffffffffffffffa8;
+  undefined in_stack_ffffffffffffffb0 [16];
+  int *piVar4;
+  int *piVar5;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_mapaccess2_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)t->Header,
+             in_stack_ffffffffffffff98,&DAT_008b723c,true);
+  x = (void **)*extraout_RAX;
+  piVar4 = extraout_RAX[1];
+  piVar5 = extraout_RAX[2];
+  if (extraout_BL == '\0') {
+    return;
+  }
+  runtime_mapdelete_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)t->Header,
+             in_stack_ffffffffffffff98);
+  if ((t->ProtoMajor < 2) && ((t->ProtoMajor != 1 || (t->ProtoMinor < 1)))) {
+    return;
+  }
+  if (piVar4 != (int *)&DAT_00000001) {
+    val.cap = (int)in_stack_ffffffffffffffa8;
+    val.array = in_stack_ffffffffffffff98.str;
+    val.len = in_stack_ffffffffffffff98.len;
+    runtime_convTslice(val,x);
+    a.len = in_stack_ffffffffffffffb0._0_8_;
+    a.cap = in_stack_ffffffffffffffb0._8_8_;
+    a.array = in_stack_ffffffffffffffa8;
+    ~r0_00.len = (int)piVar5;
+    ~r0_00.str = (uint8 *)piVar4;
+    fmt_Sprintf(in_stack_ffffffffffffff98,a,~r0_00);
+    runtime_newobject((internal_abi_Type *)&DAT_00842b60,~r0_02);
+    extraout_RAX_01[1] = ~r0_02;
+    puVar1 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RAX_00;
+      puVar1 = extraout_RAX_02;
+    }
+    *puVar1 = extraout_RAX_00;
+    return;
+  }
+  if (x[1] == (void *)0x7) {
+    i = 0;
+    while( true ) {
+      if (6 < i) {
+        runtime_mapdelete_faststr
+                  ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)t->Header,
+                   in_stack_ffffffffffffff98);
+        t->Chunked = true;
+        return;
+      }
+      cVar2 = *(char *)(i + (int)*x);
+      if ((byte)(cVar2 + 0xbfU) < 0x1a) {
+        cVar2 = cVar2 + ' ';
+      }
+      cVar3 = (&DAT_008b0ba4)[i];
+      if ((byte)(cVar3 + 0xbfU) < 0x1a) {
+        cVar3 = cVar3 + ' ';
+      }
+      if (cVar2 != cVar3) break;
+      i = i + 1;
+    }
+  }
+  runtime_convTstring(in_stack_ffffffffffffff98,*x);
+  a_00.len = in_stack_ffffffffffffffb0._0_8_;
+  a_00.cap = in_stack_ffffffffffffffb0._8_8_;
+  a_00.array = in_stack_ffffffffffffffa8;
+  ~r0_01.len = (int)piVar5;
+  ~r0_01.str = (uint8 *)piVar4;
+  fmt_Sprintf(in_stack_ffffffffffffff98,a_00,~r0_01);
+  runtime_newobject((internal_abi_Type *)&DAT_00842b60,~r0_03);
+  extraout_RAX_04[1] = ~r0_03;
+  puVar1 = extraout_RAX_04;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RAX_03;
+    puVar1 = extraout_RAX_05;
+  }
+  *puVar1 = extraout_RAX_03;
+  return;
+}
+
+
+
+void net_http_fixLength(bool isResponse,int status,string requestMethod,net_http_Header header,
+                       bool chunked,int64 ~r0,error ~r1)
+
+{
+  char cVar1;
+  char **ppcVar2;
+  runtime_slice ~r0_00;
+  __uint8 val;
+  error ~r1_00;
+  string ~r0_01;
+  string ~r0_02;
+  string ~r0_03;
+  __interface___ a;
+  char extraout_AL;
+  undefined8 *extraout_RAX;
+  int64 n;
+  int iVar3;
+  void *~r0_04;
+  void **extraout_RAX_00;
+  void *extraout_RAX_01;
+  void *extraout_RAX_02;
+  void *oldPtr;
+  undefined8 *extraout_RAX_03;
+  undefined8 extraout_RAX_04;
+  char *pcVar4;
+  void *extraout_RCX;
+  char **x;
+  char *pcVar5;
+  int extraout_RBX;
+  void *newLen;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  int iVar6;
+  int extraout_RSI;
+  undefined7 in_register_00000039;
+  char in_R8B;
+  char *pcVar7;
+  void **extraout_R11;
+  char **extraout_R11_00;
+  char *pcVar8;
+  int unaff_R14;
+  char cStack0000000000000030;
+  string in_stack_ffffffffffffff58;
+  runtime_itab *in_stack_ffffffffffffff68;
+  void *in_stack_ffffffffffffff70;
+  int in_stack_ffffffffffffff78;
+  error in_stack_ffffffffffffff80;
+  void **local_28;
+  runtime_hmap *local_20;
+  undefined local_18 [16];
+  
+  cStack0000000000000030 = in_R8B;
+  while (&local_28 <= *(void ****)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_20 = (runtime_hmap *)~r0;
+  runtime_mapaccess1_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)~r0,in_stack_ffffffffffffff58,
+             "Content-Lengthaccept-charsetcontent-lengthNot AcceptableMAX_FRAME_SIZEPROTOCOL_ERRORINTERNAL_ERRORREFUSED_STREAMinvalid syntax1907348632812595367431640625show_sensitiveprefix length not an ip:portinvalid PrefixResourceHeaderRCodeNameErrormime/multipartinvalid kind: protobuf_oneofXXX_OneofFuncsneed more data/etc/ssl/certs\\.+*?()|[]{}^$LOGGER_UNKNOWNAccept-CharsetDkim-SignatureREQUEST_METHOD$htmltemplate_ /* %s */null formnovalidateprotobuf errorReservedRangesdata truncatedInstEmptyWidthunknown node: ApplyFunction;DifferentialD;DoubleLeftTee;DoubleUpArrow;LeftTeeVector;LeftVectorBar;LessFullEqual;LongLeftArrow;Longleftarrow;NotTildeEqual;NotTildeTilde;Poincareplane;PrecedesEqual;PrecedesTilde;RightArrowBar;RightTeeArrow;RightTriangle;RightUpVector;SucceedsEqual;SucceedsTilde;SupersetEqual;UpEquilibrium;VerticalTilde;VeryThinSpace;bigtriangleup;blacktriangle;divideontimes;fallingdotseq;hookleftarrow;leftarrowtail;leftharpoonup;longleftarrow;looparrowleft;measuredangle;ntriangleleft;shortparallel;smallsetminus;triangleright;upharpoonleft;NotEqualTilde;varsubsetneqq;varsupsetneqq;len of type %sFailed to servenegative offsetcopy_file_rangeduplicated nameGroup: bad kind: cannot parse ,M3.2.0,M11.1.0missing addressunknown networkinvalid address/etc/mdns.allowreflectlite.SetallocmRInternalwrite heap dumpasyncpreemptoffforce gc (idle)sync.Mutex.Lockmalloc deadlockruntime error: elem size wrong  with GC prog\nscan missed a gmisaligned maskruntime: min = runtime: inUse=runtime: max = recovery failedstopm holding pstartm: m has ppreempt SPWRITEmissing mcache?ms: gomaxprocs=]\n\tmorebuf={pc:: no frame (sp=runtime: frame runtimer: bad ptraceback stuckno such processnot a directoryadvertise errornetwork is downno medium foundkey has expiredCardinality(%d)weak_dependencyextension_rangeproto3_optionalunverified_lazyfeature_supportutf8_validationaggregate_valueedition_removedinvalid argSize<invalid Value>InvalidArgumentUnauthenticatedUNAUTHENTICATED\"UNIMPLEMENTED\"AuthInfo is nilAuthInfo: <nil>accept-encodingaccept-languageAccept-Encod..." /* TRUNCATED STRING LITERAL */
+            );
+  iVar6 = extraout_RAX[1];
+  x = (char **)*extraout_RAX;
+  if (1 < iVar6) {
+    pcVar4 = x[1];
+    for (pcVar5 = *x;
+        (pcVar4 != (char *)0x0 &&
+        ((((cVar1 = *pcVar5, cVar1 == ' ' || (cVar1 == '\t')) || (cVar1 == '\n')) || (cVar1 == '\r')
+         ))); pcVar5 = pcVar5 + ((dword)(-(int)pcVar4 >> 0x3f) & 1)) {
+      pcVar4 = pcVar4 + -1;
+    }
+    for (; (pcVar4 != (char *)0x0 &&
+           (((cVar1 = (pcVar5 + -1)[(int)pcVar4], cVar1 == ' ' || (cVar1 == '\t')) ||
+            ((cVar1 == '\n' || (cVar1 == '\r')))))); pcVar4 = pcVar4 + -1) {
+    }
+    ppcVar2 = x;
+    for (iVar3 = 0; iVar3 < iVar6 + -1; iVar3 = iVar3 + 1) {
+      pcVar8 = ppcVar2[3];
+      for (pcVar7 = ppcVar2[2];
+          (pcVar8 != (char *)0x0 &&
+          (((cVar1 = *pcVar7, cVar1 == ' ' || (cVar1 == '\t')) ||
+           ((cVar1 == '\n' || (cVar1 == '\r'))))));
+          pcVar7 = pcVar7 + ((dword)(-(int)pcVar8 >> 0x3f) & 1)) {
+        pcVar8 = pcVar8 + -1;
+      }
+      for (; (pcVar8 != (char *)0x0 &&
+             ((((cVar1 = (pcVar7 + -1)[(int)pcVar8], cVar1 == ' ' || (cVar1 == '\t')) ||
+               (cVar1 == '\n')) || (cVar1 == '\r')))); pcVar8 = pcVar8 + -1) {
+      }
+      if ((pcVar8 != pcVar4) || (runtime_memequal(), extraout_AL == '\0')) {
+        val.cap = (int)in_stack_ffffffffffffff68;
+        val.array = in_stack_ffffffffffffff58.str;
+        val.len = in_stack_ffffffffffffff58.len;
+        runtime_convTslice(val,x);
+        local_18._8_8_ = extraout_RAX_04;
+        local_18._0_8_ = &DAT_00802320;
+        a.len = (int)in_stack_ffffffffffffff70;
+        a.array = (interface___ *)in_stack_ffffffffffffff68;
+        a.cap = in_stack_ffffffffffffff78;
+        fmt_Errorf(in_stack_ffffffffffffff58,a,in_stack_ffffffffffffff80);
+        return;
+      }
+      ppcVar2 = ppcVar2 + 2;
+    }
+    ~r0_02.len = (int)in_stack_ffffffffffffff70;
+    ~r0_02.str = (uint8 *)in_stack_ffffffffffffff68;
+    net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff58,~r0_02);
+    runtime_mapdelete_faststr
+              ((internal_abi_MapType *)&DAT_00873760,local_20,in_stack_ffffffffffffff58);
+    ~r0_03.len = (int)in_stack_ffffffffffffff70;
+    ~r0_03.str = (uint8 *)in_stack_ffffffffffffff68;
+    net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff58,~r0_03);
+    runtime_mapassign_faststr
+              ((internal_abi_MapType *)&DAT_00873760,local_20,in_stack_ffffffffffffff58,~r0_04);
+    newLen = (void *)((int)extraout_RAX_00[1] + 1);
+    oldPtr = *extraout_RAX_00;
+    local_28 = extraout_RAX_00;
+    if (extraout_RAX_00[2] < newLen) {
+      ~r0_00.cap = (int)in_stack_ffffffffffffff68;
+      ~r0_00.array = in_stack_ffffffffffffff58.str;
+      ~r0_00.len = in_stack_ffffffffffffff58.len;
+      runtime_growslice(oldPtr,(int)newLen,(int)extraout_RAX_00[2],1,
+                        (internal_abi_Type *)&DAT_008075e0,~r0_00);
+      local_28[2] = extraout_RCX;
+      oldPtr = extraout_RAX_01;
+      newLen = extraout_RBX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_02;
+        extraout_R11[1] = *local_28;
+        oldPtr = extraout_RAX_02;
+        newLen = extraout_RBX_01;
+      }
+      *local_28 = oldPtr;
+    }
+    local_28[1] = newLen;
+    iVar6 = ((int)newLen + -1) * 0x10;
+    *(char **)((int)oldPtr + iVar6 + 8) = pcVar4;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = pcVar5;
+      extraout_R11_00[1] = *(char **)((int)oldPtr + extraout_RSI);
+      iVar6 = extraout_RSI;
+    }
+    *(char **)((int)oldPtr + iVar6) = pcVar5;
+    runtime_mapaccess1_faststr
+              ((internal_abi_MapType *)&DAT_008909e0,local_20,in_stack_ffffffffffffff58,
+               "Content-Lengthaccept-charsetcontent-lengthNot AcceptableMAX_FRAME_SIZEPROTOCOL_ERRORINTERNAL_ERRORREFUSED_STREAMinvalid syntax1907348632812595367431640625show_sensitiveprefix length not an ip:portinvalid PrefixResourceHeaderRCodeNameErrormime/multipartinvalid kind: protobuf_oneofXXX_OneofFuncsneed more data/etc/ssl/certs\\.+*?()|[]{}^$LOGGER_UNKNOWNAccept-CharsetDkim-SignatureREQUEST_METHOD$htmltemplate_ /* %s */null formnovalidateprotobuf errorReservedRangesdata truncatedInstEmptyWidthunknown node: ApplyFunction;DifferentialD;DoubleLeftTee;DoubleUpArrow;LeftTeeVector;LeftVectorBar;LessFullEqual;LongLeftArrow;Longleftarrow;NotTildeEqual;NotTildeTilde;Poincareplane;PrecedesEqual;PrecedesTilde;RightArrowBar;RightTeeArrow;RightTriangle;RightUpVector;SucceedsEqual;SucceedsTilde;SupersetEqual;UpEquilibrium;VerticalTilde;VeryThinSpace;bigtriangleup;blacktriangle;divideontimes;fallingdotseq;hookleftarrow;leftarrowtail;leftharpoonup;longleftarrow;looparrowleft;measuredangle;ntriangleleft;shortparallel;smallsetminus;triangleright;upharpoonleft;NotEqualTilde;varsubsetneqq;varsupsetneqq;len of type %sFailed to servenegative offsetcopy_file_rangeduplicated nameGroup: bad kind: cannot parse ,M3.2.0,M11.1.0missing addressunknown networkinvalid address/etc/mdns.allowreflectlite.SetallocmRInternalwrite heap dumpasyncpreemptoffforce gc (idle)sync.Mutex.Lockmalloc deadlockruntime error: elem size wrong  with GC prog\nscan missed a gmisaligned maskruntime: min = runtime: inUse=runtime: max = recovery failedstopm holding pstartm: m has ppreempt SPWRITEmissing mcache?ms: gomaxprocs=]\n\tmorebuf={pc:: no frame (sp=runtime: frame runtimer: bad ptraceback stuckno such processnot a directoryadvertise errornetwork is downno medium foundkey has expiredCardinality(%d)weak_dependencyextension_rangeproto3_optionalunverified_lazyfeature_supportutf8_validationaggregate_valueedition_removedinvalid argSize<invalid Value>InvalidArgumentUnauthenticatedUNAUTHENTICATED\"UNIMPLEMENTED\"AuthInfo is nilAuthInfo: <nil>accept-encodingaccept-languageAccept-Encod..." /* TRUNCATED STRING LITERAL */
+              );
+    x = (char **)*extraout_RAX_03;
+    iVar6 = extraout_RAX_03[1];
+  }
+  if (((isResponse) && (CONCAT71(in_register_00000039,chunked) == 4)) &&
+     (*(sdword *)&header->count == 0x44414548)) {
+    return;
+  }
+  if ((SUB168(SEXT816(-0x5c28f5c28f5c28f5) * SEXT816(status),8) + status >> 6) - (status >> 0x3f) ==
+      1) {
+    return;
+  }
+  if ((status != 0xcc) && (status != 0x130)) {
+    if (cStack0000000000000030 != '\0') {
+      return;
+    }
+    if (iVar6 == 1) {
+      pcVar4 = x[1];
+      for (pcVar5 = *x;
+          (pcVar4 != (char *)0x0 &&
+          ((((cVar1 = *pcVar5, cVar1 == ' ' || (cVar1 == '\t')) || (cVar1 == '\n')) ||
+           (cVar1 == '\r')))); pcVar5 = pcVar5 + ((dword)(-(int)pcVar4 >> 0x3f) & 1)) {
+        pcVar4 = pcVar4 + -1;
+      }
+      for (; (pcVar4 != (char *)0x0 &&
+             (((cVar1 = (pcVar4 + -1)[(int)pcVar5], cVar1 == ' ' || (cVar1 == '\t')) ||
+              ((cVar1 == '\n' || (cVar1 == '\r')))))); pcVar4 = pcVar4 + -1) {
+      }
+    }
+    else {
+      pcVar4 = (char *)0x0;
+      pcVar5 = (char *)0x0;
+    }
+    if (pcVar4 != (char *)0x0) {
+      ~r1_00.data = in_stack_ffffffffffffff70;
+      ~r1_00.tab = in_stack_ffffffffffffff68;
+      net_http_parseContentLength(in_stack_ffffffffffffff58,(int64)pcVar5,~r1_00);
+      if (extraout_RBX == 0) {
+        return;
+      }
+      return;
+    }
+    ~r0_01.len = (int)in_stack_ffffffffffffff70;
+    ~r0_01.str = (uint8 *)in_stack_ffffffffffffff68;
+    net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff58,~r0_01);
+    runtime_mapdelete_faststr
+              ((internal_abi_MapType *)&DAT_00873760,local_20,in_stack_ffffffffffffff58);
+    if (!isResponse) {
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net_http_shouldClose
+               (int major,int minor,net_http_Header header,bool removeCloseHeader,bool ~r0)
+
+{
+  int iVar1;
+  char extraout_AL;
+  bool hasClose;
+  char extraout_AL_00;
+  undefined8 *extraout_RAX;
+  int iVar2;
+  undefined8 *puVar3;
+  undefined8 *puVar4;
+  int unaff_R14;
+  int iStack0000000000000008;
+  int iStack0000000000000010;
+  char cStack0000000000000020;
+  string in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffc0;
+  
+  iStack0000000000000008 = major;
+  iStack0000000000000010 = minor;
+  cStack0000000000000020 = removeCloseHeader;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (iStack0000000000000008 < 1) {
+    return;
+  }
+  runtime_mapaccess1_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)header,in_stack_ffffffffffffffb0,
+             &DAT_008b341b);
+  puVar4 = (undefined8 *)*extraout_RAX;
+  iVar1 = extraout_RAX[1];
+  iVar2 = 0;
+  puVar3 = puVar4;
+  while ((iVar2 < iVar1 &&
+         (vendor_golang_org_x_net_http_httpguts_headerValueContainsToken
+                    (in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,SUB81(*puVar3,0)),
+         extraout_AL == '\0'))) {
+    puVar3 = puVar3 + 2;
+    iVar2 = iVar2 + 1;
+  }
+  if ((iStack0000000000000008 == 1) && (iStack0000000000000010 == 0)) {
+    if (iVar1 <= iVar2) {
+      iVar2 = 0;
+      while ((iVar2 < iVar1 &&
+             (vendor_golang_org_x_net_http_httpguts_headerValueContainsToken
+                        (in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,SUB81(*puVar4,0)),
+             extraout_AL_00 == '\0'))) {
+        puVar4 = puVar4 + 2;
+        iVar2 = iVar2 + 1;
+      }
+    }
+    return;
+  }
+  if ((iVar2 < iVar1) && (cStack0000000000000020 != '\0')) {
+    net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0);
+    runtime_mapdelete_faststr
+              ((internal_abi_MapType *)&DAT_00873760,(runtime_hmap *)header,
+               in_stack_ffffffffffffffb0);
+  }
+  return;
+}
+
+
+
+void net_http_fixTrailer(net_http_Header header,bool chunked,net_http_Header ~r0,error ~r1)
+
+{
+  int iVar1;
+  undefined8 *extraout_RAX;
+  runtime_hmap *~r0_00;
+  int *extraout_RAX_00;
+  net_http_Header trailer;
+  undefined8 *puVar2;
+  int iVar3;
+  int iVar4;
+  char extraout_BL;
+  bool ok;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffff80;
+  string in_stack_ffffffffffffff90;
+  error err;
+  
+  while (iVar4 = in_XMM15._0_8_, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_mapaccess2_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)header,in_stack_ffffffffffffff80,
+             &DAT_008b0b2d,true);
+  if (extraout_BL == '\0') {
+    return;
+  }
+  if (!chunked) {
+    return;
+  }
+  puVar2 = (undefined8 *)*extraout_RAX;
+  iVar1 = extraout_RAX[1];
+  net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff80,in_stack_ffffffffffffff90);
+  runtime_mapdelete_faststr
+            ((internal_abi_MapType *)&DAT_00873760,(runtime_hmap *)header,in_stack_ffffffffffffff80)
+  ;
+  runtime_makemap_small(~r0_00);
+  for (iVar3 = 0; iVar3 < iVar1; iVar3 = iVar3 + 1) {
+    net_http_foreachHeaderElement(in_stack_ffffffffffffff80,(func_string_ **)*puVar2);
+    puVar2 = puVar2 + 2;
+  }
+  if (iVar4 == 0) {
+    if (extraout_RAX_00 == (int *)0x0) {
+      iVar4 = 0;
+    }
+    else {
+      iVar4 = *extraout_RAX_00;
+    }
+    if (iVar4 == 0) {
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net_http_fixTrailer_func1(string key)
+
+{
+  runtime_hmap *h;
+  __interface___ a;
+  error ~r0;
+  char extraout_AL;
+  int *extraout_RAX;
+  int extraout_RAX_00;
+  int *piVar1;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar2;
+  error *_err;
+  int *extraout_RCX;
+  int *piVar3;
+  undefined8 extraout_RCX_00;
+  int in_RDX;
+  net_http_Header trailer;
+  runtime_itab *extraout_RBX;
+  int extraout_RBX_00;
+  int extraout_RBX_01;

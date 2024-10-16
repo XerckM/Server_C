@@ -1,0 +1,1000 @@
+  uint8 *extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  void *x;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar3;
+  runtime_itab *tab;
+  runtime_itab *prVar4;
+  uint8 *puVar5;
+  uint8 *extraout_RBX;
+  int iVar6;
+  uint uVar7;
+  void **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  void **extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  io_Reader in_stack_ffffffffffffff98;
+  __uint8 in_stack_ffffffffffffffa8;
+  runtime_itab *in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar7 = (f->dict).wrPos;
+  uVar1 = (f->dict).hist.len;
+  if (uVar1 < uVar7) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  pvVar3 = (void *)((f->dict).hist.cap - uVar7);
+  if (((int)(void *)f->copyLen < (int)(uVar1 - uVar7)) && (pvVar3 < (void *)f->copyLen)) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  prVar4 = (runtime_itab *)(f->r).data;
+  runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(f->r).tab,prVar4);
+  err.data = pvVar3;
+  err.tab = in_stack_ffffffffffffffc0;
+  io_ReadAtLeast(in_stack_ffffffffffffff98,in_stack_ffffffffffffffa8,min,(int)prVar4,err);
+  f->roffset = f->roffset + extraout_RAX;
+  iVar6 = f->copyLen - extraout_RAX;
+  f->copyLen = iVar6;
+  uVar7 = (f->dict).wrPos + extraout_RAX;
+  (f->dict).wrPos = uVar7;
+  if (tab != (runtime_itab *)0x0) {
+    pvVar3 = x;
+    prVar4 = tab;
+    if ((io_EOF.tab == tab) &&
+       (runtime_ifaceeq(tab,x,io_EOF.data,SUB81(uVar7,0)), pvVar3 = x, prVar4 = tab,
+       extraout_AL != '\0')) {
+      pvVar3 = io_ErrUnexpectedEOF.data;
+      prVar4 = io_ErrUnexpectedEOF.tab;
+    }
+    (f->err).tab = prVar4;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX;
+      extraout_R11[1] = (f->err).data;
+      pvVar3 = extraout_RCX;
+    }
+    (f->err).data = pvVar3;
+    return;
+  }
+  uVar1 = (f->dict).hist.cap;
+  puVar5 = (f->dict).hist.array;
+  if (((f->dict).hist.len != uVar7) && (iVar6 < 1)) {
+    if (f->final != false) {
+      uVar2 = (f->dict).rdPos;
+      if (0 < (int)(uVar7 - uVar2)) {
+        if (uVar1 < uVar7) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceAcap();
+        }
+        if (uVar7 < uVar2) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceB();
+        }
+        (f->dict).rdPos = uVar7;
+        puVar5 = puVar5 + (uVar2 & (int)-(uVar1 - uVar2) >> 0x3f);
+        if ((f->dict).hist.len == uVar7) {
+          (f->dict).wrPos = in_XMM15._0_8_;
+          (f->dict).rdPos = in_XMM15._8_8_;
+          (f->dict).full = true;
+        }
+        (f->toRead).len = uVar7 - uVar2;
+        (f->toRead).cap = uVar1 - uVar2;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_01 = extraout_RAX_00;
+          extraout_R11_01[1] = (f->toRead).array;
+          puVar5 = extraout_RAX_00;
+        }
+        (f->toRead).array = puVar5;
+      }
+      pvVar3 = io_EOF.data;
+      (f->err).tab = io_EOF.tab;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = extraout_RCX_00;
+        extraout_R11_02[1] = (f->err).data;
+        pvVar3 = extraout_RCX_00;
+      }
+      (f->err).data = pvVar3;
+    }
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_03 = extraout_RAX_01;
+    }
+    f->step = (func__compress_flate_decompressor_ **)
+              &PTR_compress_flate___decompressor__nextBlock_008ec9c0;
+    return;
+  }
+  if (uVar1 < uVar7) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  uVar2 = (f->dict).rdPos;
+  if (uVar7 < uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  (f->dict).rdPos = uVar7;
+  puVar5 = puVar5 + ((int)-(uVar1 - uVar2) >> 0x3f & uVar2);
+  if ((f->dict).hist.len == uVar7) {
+    (f->dict).wrPos = in_XMM15._0_8_;
+    (f->dict).rdPos = in_XMM15._8_8_;
+    (f->dict).full = true;
+  }
+  (f->toRead).len = uVar7 - uVar2;
+  (f->toRead).cap = uVar1 - uVar2;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier3();
+    *extraout_R11_00 = extraout_RBX;
+    extraout_R11_00[1] = (f->toRead).array;
+    extraout_R11_00[2] = (uint8 *)f->step;
+    puVar5 = extraout_RBX;
+  }
+  (f->toRead).array = puVar5;
+  f->step = (func__compress_flate_decompressor_ **)
+            &PTR_compress_flate___decompressor__copyData_008ec9b0;
+  return;
+}
+
+
+
+void compress_flate___decompressor__moreBits(compress_flate_decompressor *f,error ~r0)
+
+{
+  byte bVar1;
+  uint8 c;
+  void *x;
+  runtime_itab *tab;
+  bool ~r0_00;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bVar1 = (*(code *)(f->r).tab[1].inter)((f->r).data);
+  if (tab == (runtime_itab *)0x0) {
+    f->roffset = f->roffset + 1;
+    f->b = f->b | (dword)bVar1 << ((byte)f->nb & 0x1f) & -(dword)(f->nb < 0x20);
+    f->nb = f->nb + 8;
+    return;
+  }
+  if (io_EOF.tab == tab) {
+    runtime_ifaceeq(tab,x,io_EOF.data,~r0_00);
+  }
+  return;
+}
+
+
+
+void compress_flate___decompressor__huffSym
+               (compress_flate_decompressor *f,compress_flate_huffmanDecoder *h,int ~r0,error ~r1)
+
+{
+  __uint32 *p_Var1;
+  byte bVar2;
+  uint8 c;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  void *pvVar3;
+  void *x;
+  uint n;
+  uint uVar4;
+  uint uVar5;
+  runtime_itab *tab;
+  uint nb;
+  uint uVar6;
+  bool ~r0_00;
+  uint32 b;
+  uint32 chunk;
+  uint32 uVar7;
+  void **extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar5 = h->min;
+  uVar6 = f->nb;
+  uVar7 = f->b;
+  do {
+    for (; uVar6 < uVar5; uVar6 = uVar6 + 8) {
+      bVar2 = (*(code *)(f->r).tab[1].inter)((f->r).data);
+      if (tab != (runtime_itab *)0x0) {
+        f->b = uVar7;
+        f->nb = uVar6;
+        if (io_EOF.tab == tab) {
+          runtime_ifaceeq(tab,x,io_EOF.data,~r0_00);
+        }
+        return;
+      }
+      f->roffset = f->roffset + 1;
+      uVar7 = (dword)bVar2 << ((byte)uVar6 & 0x1f) | uVar7;
+    }
+    uVar5 = (uint)(h->chunks[uVar7 & 0x1ff] & 0xf);
+    if (9 < uVar5) {
+      uVar5 = (uint)(h->chunks[uVar7 & 0x1ff] >> 4);
+      if ((uint)(h->links).len <= uVar5) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      p_Var1 = (h->links).array;
+      uVar4 = (uint)(uVar7 >> 9 & h->linkMask);
+      if ((uint)p_Var1[uVar5].len <= uVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      uVar5 = (uint)(p_Var1[uVar5].array[uVar4] & 0xf);
+    }
+    if (uVar5 <= uVar6) {
+      if (uVar5 != 0) {
+        f->b = uVar7 >> (sbyte)uVar5;
+        f->nb = uVar6 - uVar5;
+        return;
+      }
+      f->b = uVar7;
+      f->nb = uVar6;
+      runtime_convT64(f->roffset,h);
+      (f->err).tab = (runtime_itab *)go_itab_compress_flate_CorruptInputError_error;
+      pvVar3 = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        extraout_R11[1] = (f->err).data;
+        pvVar3 = extraout_RAX_00;
+      }
+      (f->err).data = pvVar3;
+      return;
+    }
+  } while( true );
+}
+
+
+
+void compress_flate___decompressor__makeReader(compress_flate_decompressor *f,io_Reader r)
+
+{
+  char extraout_AL;
+  runtime_itab *extraout_RAX;
+  runtime_itab *extraout_RAX_00;
+  runtime_itab *prVar1;
+  uint8 *extraout_RAX_01;
+  uint8 *extraout_RAX_02;
+  uint8 *puVar2;
+  bufio_Reader *b;
+  undefined8 *dst;
+  bufio_Reader *r_1;
+  bufio_Reader *extraout_RAX_03;
+  bufio_Reader *extraout_RAX_04;
+  bufio_Reader *pbVar3;
+  bufio_Reader *in_RCX;
+  compress_flate_decompressor *extraout_RCX;
+  compress_flate_decompressor *extraout_RCX_00;
+  compress_flate_decompressor *pcVar4;
+  undefined1 *in_RBX;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *pvVar5;
+  bufio_Reader *extraout_RBX_02;
+  bufio_Reader *pbVar6;
+  bufio_Reader *dst_00;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0;
+  undefined8 extraout_R8;
+  undefined8 extraout_R9;
+  undefined8 extraout_R10;
+  bufio_Reader **extraout_R11;
+  void **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  undefined8 extraout_R11_02;
+  bufio_Reader **extraout_R11_03;
+  bufio_Reader **extraout_R11_04;
+  int unaff_R14;
+  bufio_Reader *pbStack0000000000000018;
+  runtime_iface in_stack_ffffffffffffff08;
+  runtime_iface in_stack_ffffffffffffff18;
+  undefined local_b8 [16];
+  undefined8 local_a8;
+  bufio_Reader *local_98;
+  undefined local_78 [8];
+  undefined8 local_70;
+  undefined8 local_68;
+  undefined local_60 [16];
+  undefined8 local_50;
+  undefined8 local_48;
+  bufio_Reader *local_40;
+  undefined8 local_18;
+  undefined8 local_10;
+  
+  pbStack0000000000000018 = in_RCX;
+  while (local_78 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_0083d4a0,in_stack_ffffffffffffff08,
+                     in_stack_ffffffffffffff18);
+  if (extraout_RAX == (runtime_itab *)0x0) {
+    pbVar3 = f->rBuf;
+    if (pbVar3 == (bufio_Reader *)0x0) {
+      if ((in_RBX != go_itab__bufio_Reader_io_Reader) ||
+         ((pbStack0000000000000018->buf).len < 0x1000)) {
+        runtime_newobject((internal_abi_Type *)&DAT_0088af00,go_itab__bufio_Reader_io_Reader);
+        runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x1000,0x1000,~r0);
+        local_b8._0_8_ = FUN_0046cdb0();
+        local_b8._8_8_ = 0x1000;
+        local_a8 = 0x1000;
+        local_98 = pbStack0000000000000018;
+        local_70 = 0xffffffffffffffff;
+        local_68 = 0xffffffffffffffff;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_wbMove((internal_abi_Type *)&DAT_0088af00,dst,local_b8);
+        }
+        *dst = local_b8._0_8_;
+        pbStack0000000000000018 = (bufio_Reader *)FUN_0046d11a();
+      }
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = extraout_RAX_03;
+        extraout_R11_03[1] = f->rBuf;
+        pbStack0000000000000018 = extraout_RAX_03;
+      }
+      f->rBuf = pbStack0000000000000018;
+    }
+    else {
+      pvVar5 = extraout_RDI;
+      if ((in_RBX != go_itab__bufio_Reader_io_Reader) ||
+         (runtime_ifaceeq((runtime_itab *)go_itab__bufio_Reader_io_Reader,pbVar3,
+                          pbStack0000000000000018,SUB81(extraout_RDI,0)), pvVar5 = extraout_RDI_00,
+         extraout_AL == '\0')) {
+        if ((pbVar3->buf).array == (uint8 *)0x0) {
+          runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x1000,0x1000,pvVar5);
+          (pbVar3->buf).len = 0x1000;
+          (pbVar3->buf).cap = 0x1000;
+          puVar2 = extraout_RAX_01;
+          pbVar6 = pbVar3;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_01 = extraout_RAX_02;
+            extraout_R11_01[1] = (extraout_RBX_02->buf).array;
+            puVar2 = extraout_RAX_02;
+            pbVar6 = extraout_RBX_02;
+          }
+          (pbVar6->buf).array = puVar2;
+        }
+        pcVar4 = f;
+        FUN_0046cdb0();
+        local_60._8_8_ = extraout_R10;
+        local_60._0_8_ = extraout_R9;
+        local_40 = pbStack0000000000000018;
+        local_18 = 0xffffffffffffffff;
+        local_10 = 0xffffffffffffffff;
+        pbVar6 = dst_00;
+        local_50 = extraout_R11_02;
+        local_48 = extraout_R8;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_wbMove((internal_abi_Type *)&DAT_0088af00,dst_00,local_60);
+          pcVar4 = f;
+          pbVar6 = pbVar3;
+        }
+        f = pcVar4;
+        (pbVar6->buf).array = (uint8 *)local_60._0_8_;
+        FUN_0046d11a();
+      }
+    }
+    pbVar3 = f->rBuf;
+    (f->r).tab = (runtime_itab *)go_itab__bufio_Reader_compress_flate_Reader;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = extraout_RAX_04;
+      extraout_R11_04[1] = (bufio_Reader *)(f->r).data;
+      pbVar3 = extraout_RAX_04;
+    }
+    (f->r).data = pbVar3;
+    return;
+  }
+  prVar1 = extraout_RAX;
+  pvVar5 = extraout_RBX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    pbVar3 = f->rBuf;
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = pbVar3;
+    prVar1 = extraout_RAX_00;
+    f = extraout_RCX;
+    pvVar5 = extraout_RBX_00;
+  }
+  f->rBuf = (bufio_Reader *)0x0;
+  (f->r).tab = prVar1;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RBX_01;
+    extraout_R11_00[1] = (extraout_RCX_00->r).data;
+    f = extraout_RCX_00;
+    pvVar5 = extraout_RBX_01;
+  }
+  (f->r).data = pvVar5;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void compress_flate_fixedHuffmanDecoderInit(void)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (compress_flate_fixedOnce.done == 0) {
+    sync___Once__doSlow(&compress_flate_fixedOnce,
+                        (func__ **)&PTR_compress_flate_fixedHuffmanDecoderInit_func1_008ec9c8);
+  }
+  return;
+}
+
+
+
+void compress_flate___decompressor__Reset
+               (compress_flate_decompressor *f,io_Reader r,__uint8 dict,error ~r0)
+
+{
+  int iVar1;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *puVar2;
+  int iVar3;
+  size_t __n;
+  uint8 *puVar4;
+  compress_flate_decompressor *pcVar5;
+  int extraout_RBX;
+  size_t in_RSI;
+  void **ppvVar6;
+  uint8 *in_RDI;
+  void **ppvVar7;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_00;
+  int in_R8;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  int unaff_R14;
+  byte bVar8;
+  undefined in_XMM15 [16];
+  io_Reader in_stack_ffffffffffffee98;
+  runtime_itab *local_1130;
+  void *pvStack_1128;
+  bufio_Reader *local_1120;
+  undefined auStack_10e8 [4152];
+  int (*local_b0) [316];
+  int (*local_a8) [19];
+  undefined4 local_a0;
+  undefined4 uStack_9c;
+  undefined4 uStack_98;
+  undefined4 uStack_94;
+  undefined4 local_90;
+  undefined4 uStack_8c;
+  undefined4 uStack_88;
+  undefined4 uStack_84;
+  undefined4 local_80;
+  undefined4 uStack_7c;
+  undefined4 uStack_78;
+  undefined4 uStack_74;
+  undefined **local_68;
+  
+  bVar8 = 0;
+  while( true ) {
+    local_1130 = in_XMM15._0_8_;
+    if (((undefined *)0x10e7 < &stack0x00000000) &&
+       (*(undefined **)(unaff_R14 + 0x10) < auStack_10e8)) break;
+    runtime_morestack_noctxt();
+  }
+  ppvVar6 = &pvStack_1128;
+  for (iVar3 = 0x224; iVar3 != 0; iVar3 = iVar3 + -1) {
+    *ppvVar6 = (void *)0x0;
+    ppvVar6 = ppvVar6 + (uint)bVar8 * -2 + 1;
+  }
+  local_1120 = f->rBuf;
+  local_b0 = f->bits;
+  local_a8 = f->codebits;
+  local_a0 = *(undefined4 *)&(f->dict).hist.array;
+  uStack_9c = *(undefined4 *)((int)&(f->dict).hist.array + 4);
+  uStack_98 = *(undefined4 *)&(f->dict).hist.len;
+  uStack_94 = *(undefined4 *)((int)&(f->dict).hist.len + 4);
+  local_90 = *(undefined4 *)&(f->dict).hist.cap;
+  uStack_8c = *(undefined4 *)((int)&(f->dict).hist.cap + 4);
+  uStack_88 = *(undefined4 *)&(f->dict).wrPos;
+  uStack_84 = *(undefined4 *)((int)&(f->dict).wrPos + 4);
+  local_80 = *(undefined4 *)&(f->dict).rdPos;
+  uStack_7c = *(undefined4 *)((int)&(f->dict).rdPos + 4);
+  uStack_78 = *(undefined4 *)&(f->dict).full;
+  uStack_74 = *(undefined4 *)&(f->dict).field_0x2c;
+  local_68 = &PTR_compress_flate___decompressor__nextBlock_008ec9c0;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_wbMove((internal_abi_Type *)&DAT_008a1340,f,&local_1130);
+  }
+  (f->r).tab = local_1130;
+  ppvVar6 = &pvStack_1128;
+  ppvVar7 = &(f->r).data;
+  for (iVar3 = 0x224; iVar3 != 0; iVar3 = iVar3 + -1) {
+    *ppvVar7 = *ppvVar6;
+    ppvVar6 = ppvVar6 + (uint)bVar8 * -2 + 1;
+    ppvVar7 = ppvVar7 + (uint)bVar8 * -2 + 1;
+  }
+  compress_flate___decompressor__makeReader(f,in_stack_ffffffffffffee98);
+  puVar2 = (f->dict).hist.array;
+  iVar3 = (f->dict).hist.cap;
+  iVar1 = (f->dict).hist.len;
+  ~r0_00 = extraout_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    puVar4 = puVar2;
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = puVar4;
+    extraout_R11[1] = *(uint8 **)(extraout_RBX + 0x1090);
+    runtime_wbZero((internal_abi_Type *)&DAT_008784a0,(void *)(extraout_RBX + 0x1090));
+    ~r0_00 = extraout_RDI_00;
+  }
+  (f->dict).hist.array = (uint8 *)in_XMM15._0_8_;
+  (f->dict).hist.len = in_XMM15._8_8_;
+  *(undefined (*) [16])&(f->dict).hist.cap = in_XMM15;
+  (f->dict).rdPos = in_XMM15._0_8_;
+  (f->dict).full = (bool)in_XMM15[8];
+  *(int7 *)&(f->dict).field_0x29 = in_XMM15._9_7_;
+  (f->dict).hist.array = puVar2;
+  (f->dict).hist.len = iVar1;
+  (f->dict).hist.cap = iVar3;
+  pcVar5 = f;
+  if (iVar3 < 0x8000) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x8000,0x8000,~r0_00);
+    (f->dict).hist.len = 0x8000;
+    (f->dict).hist.cap = 0x8000;
+    puVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_00;
+      extraout_R11_00[1] = (pcVar5->dict).hist.array;
+      puVar2 = extraout_RAX_00;
+    }
+    (pcVar5->dict).hist.array = puVar2;
+  }
+  if ((uint)(pcVar5->dict).hist.cap < 0x8000) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  (pcVar5->dict).hist.len = 0x8000;
+  if (0x8000 < (int)in_RSI) {
+    if (in_RSI < in_RSI - 0x8000) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    in_RDI = in_RDI + (in_RSI - 0x8000 & (int)-((in_R8 - in_RSI) + 0x8000) >> 0x3f);
+    in_RSI = 0x8000;
+  }
+  puVar2 = (pcVar5->dict).hist.array;
+  __n = 0x8000;
+  if ((int)in_RSI < 0x8000) {
+    __n = in_RSI;
+  }
+  if (in_RDI != puVar2) {
+    runtime_memmove(puVar2,in_RDI,__n);
+    pcVar5 = f;
+  }
+  (pcVar5->dict).wrPos = __n;
+  if ((pcVar5->dict).hist.len == __n) {
+    (pcVar5->dict).wrPos = 0;
+    (pcVar5->dict).full = true;
+  }
+  (pcVar5->dict).rdPos = (pcVar5->dict).wrPos;
+  return;
+}
+
+
+
+void compress_flate_NewReader(io_Reader r,io_ReadCloser ~r0)
+
+{
+  int iVar1;
+  compress_flate_decompressor *f;
+  compress_flate_decompressor *_f;
+  int (*extraout_RAX) [316];
+  int (*extraout_RAX_00) [316];
+  int (*paiVar2) [316];
+  int (*extraout_RAX_01) [19];
+  int (*extraout_RAX_02) [19];
+  int (*paiVar3) [19];
+  uint8 *extraout_RAX_03;
+  uint8 *extraout_RAX_04;
+  uint8 *puVar4;
+  void *~r0_00;
+  void *~r0_01;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *pvVar5;
+  int extraout_RBX_01;
+  compress_flate_decompressor *extraout_RBX_02;
+  compress_flate_decompressor *pcVar6;
+  undefined8 extraout_RSI;
+  int (**extraout_R11) [316];
+  int (**extraout_R11_00) [19];
+  undefined8 *extraout_R11_01;
+  uint8 **extraout_R11_02;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  io_Reader in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  compress_flate_fixedHuffmanDecoderInit();
+  runtime_newobject((internal_abi_Type *)&DAT_008a1340,~r0_00);
+  compress_flate___decompressor__makeReader(f,in_stack_ffffffffffffffc0);
+  runtime_newobject((internal_abi_Type *)&DAT_0081bca0,~r0_01);
+  paiVar2 = extraout_RAX;
+  pvVar5 = extraout_RBX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = f->bits;
+    paiVar2 = extraout_RAX_00;
+    pvVar5 = extraout_RBX_00;
+  }
+  f->bits = paiVar2;
+  runtime_newobject((internal_abi_Type *)&DAT_0081bd00,pvVar5);
+  paiVar3 = extraout_RAX_01;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier3();
+    *extraout_R11_00 = extraout_RAX_02;
+    extraout_R11_00[1] = f->codebits;
+    extraout_R11_00[2] = (int (*) [19])f->step;
+    paiVar3 = extraout_RAX_02;
+  }
+  f->codebits = paiVar3;
+  f->step = (func__compress_flate_decompressor_ **)
+            &PTR_compress_flate___decompressor__nextBlock_008ec9c0;
+  puVar4 = (f->dict).hist.array;
+  pvVar5 = (void *)(f->dict).hist.cap;
+  iVar1 = (f->dict).hist.len;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_01 = extraout_RSI;
+    extraout_R11_01[1] = *(undefined8 *)(extraout_RBX_01 + 0x1090);
+    runtime_wbZero((internal_abi_Type *)&DAT_008784a0,(void *)(extraout_RBX_01 + 0x1090));
+  }
+  (f->dict).hist.array = (uint8 *)in_XMM15._0_8_;
+  (f->dict).hist.len = in_XMM15._8_8_;
+  *(undefined (*) [16])&(f->dict).hist.cap = in_XMM15;
+  (f->dict).rdPos = in_XMM15._0_8_;
+  (f->dict).full = (bool)in_XMM15[8];
+  *(int7 *)&(f->dict).field_0x29 = in_XMM15._9_7_;
+  (f->dict).hist.array = puVar4;
+  (f->dict).hist.len = iVar1;
+  (f->dict).hist.cap = (int)pvVar5;
+  pcVar6 = f;
+  if ((int)pvVar5 < 0x8000) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x8000,0x8000,pvVar5);
+    (f->dict).hist.len = 0x8000;
+    (f->dict).hist.cap = 0x8000;
+    puVar4 = extraout_RAX_03;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = extraout_RAX_04;
+      extraout_R11_02[1] = (extraout_RBX_02->dict).hist.array;
+      puVar4 = extraout_RAX_04;
+      pcVar6 = extraout_RBX_02;
+    }
+    (pcVar6->dict).hist.array = puVar4;
+  }
+  if (0x7fff < (uint)(pcVar6->dict).hist.cap) {
+    (pcVar6->dict).hist.len = 0x8000;
+    (pcVar6->dict).wrPos = 0;
+    if ((pcVar6->dict).hist.len == 0) {
+      (pcVar6->dict).wrPos = 0;
+      (pcVar6->dict).full = true;
+    }
+    (pcVar6->dict).rdPos = (pcVar6->dict).wrPos;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAcap();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void compress_flate_fixedHuffmanDecoderInit_func1(void)
+
+{
+  int i;
+  int i_1;
+  int i_2;
+  int i_3;
+  int iVar1;
+  undefined8 *puVar2;
+  int unaff_R14;
+  byte bVar3;
+  undefined8 local_908 [12];
+  undefined local_8a8 [1056];
+  undefined8 auStack_488 [112];
+  undefined8 auStack_108 [24];
+  undefined8 auStack_48 [8];
+  
+  bVar3 = 0;
+  while (local_8a8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar2 = local_908;
+  for (iVar1 = 0x120; iVar1 != 0; iVar1 = iVar1 + -1) {
+    *puVar2 = 0;
+    puVar2 = puVar2 + (uint)bVar3 * -2 + 1;
+  }
+  for (i = 0; i < 0x90; i = i + 1) {
+    local_908[i] = 8;
+  }
+  for (i_1 = 0x90; i_1 < 0x100; i_1 = i_1 + 1) {
+    local_908[i_1] = 9;
+  }
+  for (i_2 = 0x100; i_2 < 0x118; i_2 = i_2 + 1) {
+    local_908[i_2] = 7;
+  }
+  for (i_3 = 0x118; i_3 < 0x120; i_3 = i_3 + 1) {
+    local_908[i_3] = 8;
+  }
+  compress_flate___huffmanDecoder__init((EVP_PKEY_CTX *)&compress_flate_fixedHuffmanDecoder);
+  return;
+}
+
+
+
+int compress_flate_init(EVP_PKEY_CTX *ctx)
+
+{
+  compress_flate_hcode *pcVar1;
+  compress_flate_huffmanEncoder *extraout_RAX;
+  compress_flate_huffmanEncoder *extraout_RAX_00;
+  compress_flate_hcode *extraout_RAX_01;
+  compress_flate_huffmanEncoder *extraout_RAX_02;
+  compress_flate_huffmanEncoder *h;
+  compress_flate_huffmanEncoder *extraout_RAX_03;
+  compress_flate_huffmanEncoder *extraout_RAX_04;
+  compress_flate_huffmanEncoder *pcVar2;
+  compress_flate_huffmanEncoder *extraout_RAX_05;
+  int ch;
+  void *~r0;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_00;
+  compress_flate_huffmanEncoder **extraout_R11;
+  compress_flate_hcode **extraout_R11_00;
+  compress_flate_huffmanEncoder **extraout_R11_01;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ctx = (EVP_PKEY_CTX *)extraout_RAX_05;
+  }
+  compress_flate_generateFixedLiteralEncoding((compress_flate_huffmanEncoder *)ctx);
+  pcVar2 = extraout_RAX;
+  ~r0_00 = extraout_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = compress_flate_fixedLiteralEncoding;
+    pcVar2 = extraout_RAX_00;
+    ~r0_00 = extraout_RDI_00;
+  }
+  compress_flate_fixedLiteralEncoding = pcVar2;
+  runtime_makeslice((internal_abi_Type *)&DAT_00855240,0x1e,0x1e,~r0_00);
+  runtime_newobject((internal_abi_Type *)&DAT_008819a0,~r0);
+  (extraout_RAX_02->codes).len = 0x1e;
+  (extraout_RAX_02->codes).cap = 0x1e;
+  pcVar2 = extraout_RAX_02;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RAX_01;
+    pcVar2 = extraout_RAX_03;
+  }
+  (pcVar2->codes).array = extraout_RAX_01;
+  pcVar1 = (pcVar2->codes).array;
+  for (ch = 0; ch < 0x1e; ch = ch + 1) {
+    pcVar1[ch].code =
+         (ushort)(byte)"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+                       [(ushort)((ushort)((sdword)ch << 0xb) >> 8) + 0x2d22];
+    pcVar1[ch].len = 5;
+  }
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_01 = extraout_RAX_04;
+    extraout_R11_01[1] = compress_flate_fixedOffsetEncoding;
+    pcVar2 = extraout_RAX_04;
+  }
+  compress_flate_fixedOffsetEncoding = pcVar2;
+  return (int)pcVar2;
+}
+
+
+
+void type__eq_compress_flate_literalNode
+               (compress_flate_literalNode *p,compress_flate_literalNode *q,bool r)
+
+{
+  if (q->literal == p->literal) {
+    return;
+  }
+  return;
+}
+
+
+
+void compress_flate___byLiteral__Len(int ~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff8;
+  }
+  if (~r0 != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void compress_flate___byLiteral__Less(int i,int j,bool ~r0)
+
+{
+  int *piVar1;
+  undefined7 in_register_00000009;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  if (i == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if (*(uint *)(i + 8) <= (uint)j) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (CONCAT71(in_register_00000009,~r0) < *(uint *)(i + 8)) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void compress_flate___byLiteral__Swap(int i,int j)
+
+{
+  undefined2 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  int *piVar4;
+  int iVar5;
+  int *in_RAX;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar4 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar4 != (int *)0x0) && ((undefined *)*piVar4 == &stack0x00000008)) {
+    *piVar4 = (int)auStack_18;
+  }
+  if (in_RAX == (int *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if ((uint)in_RAX[1] <= (uint)i) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  iVar5 = *in_RAX;
+  uVar2 = *(undefined4 *)(iVar5 + 4 + i * 8);
+  if ((uint)j < (uint)in_RAX[1]) {
+    uVar3 = *(undefined4 *)(iVar5 + 4 + j * 8);
+    uVar1 = *(undefined2 *)(iVar5 + i * 8);
+    *(undefined2 *)(iVar5 + i * 8) = *(undefined2 *)(iVar5 + j * 8);
+    *(undefined4 *)(iVar5 + 4 + i * 8) = uVar3;
+    *(undefined2 *)(iVar5 + j * 8) = uVar1;
+    *(undefined4 *)(iVar5 + 4 + j * 8) = uVar2;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void compress_flate___byFreq__Len(int ~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff8;
+  }
+  if (~r0 != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void compress_flate___byFreq__Less(int i,int j,bool ~r0)
+
+{
+  int *piVar1;
+  undefined7 in_register_00000009;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  if (i == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if (*(uint *)(i + 8) <= (uint)j) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (CONCAT71(in_register_00000009,~r0) < *(uint *)(i + 8)) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void compress_flate___byFreq__Swap(int i,int j)
+
+{
+  undefined2 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  int *piVar4;
+  int iVar5;
+  int *in_RAX;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar4 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar4 != (int *)0x0) && ((undefined *)*piVar4 == &stack0x00000008)) {
+    *piVar4 = (int)auStack_18;
+  }
+  if (in_RAX == (int *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if ((uint)in_RAX[1] <= (uint)i) {
+                    // WARNING: Subroutine does not return

@@ -1,0 +1,1000 @@
+
+// WARNING: Variable defined which should be unmapped: k
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_http2_hpack___headerFieldTable__evictOldest
+               (golang_org_x_net_http2_hpack_headerFieldTable *t,int n)
+
+{
+  int iVar1;
+  uint64 val;
+  golang_org_x_net_http2_hpack_HeaderField *pgVar2;
+  uint uVar3;
+  golang_org_x_net_http2_hpack_HeaderField *pgVar4;
+  string ~r0;
+  int *extraout_RAX;
+  int *extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  undefined8 extraout_RAX_02;
+  void *x;
+  uint uVar5;
+  uint64 id;
+  void *x_00;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_00;
+  int k_1;
+  int unaff_R14;
+  string in_XMM15;
+  interface___ in_stack_ffffffffffffff38;
+  __interface___ in_stack_ffffffffffffff48;
+  uint8 *local_a0;
+  int k;
+  golang_org_x_net_http2_hpack_pairNameValue p;
+  undefined local_50 [16];
+  undefined local_40 [16];
+  golang_org_x_net_http2_hpack_HeaderField f;
+  
+  while (local_50 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  val = (t->ents).len;
+  if ((int)val < n) {
+    runtime_convT64(n,(void *)n);
+    local_50._8_8_ = extraout_RAX_01;
+    local_50._0_8_ = &DAT_00807760;
+    runtime_convT64(val,x_00);
+    local_40._8_8_ = extraout_RAX_02;
+    local_40._0_8_ = &DAT_00807760;
+    ~r0.len = k;
+    ~r0.str = local_a0;
+    fmt_Sprintf((string)in_stack_ffffffffffffff38,in_stack_ffffffffffffff48,~r0);
+    runtime_convTstring((string)in_stack_ffffffffffffff38,x);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff38);
+  }
+  for (uVar5 = 0; (int)uVar5 < n; uVar5 = uVar5 + 1) {
+    if ((uint)(t->ents).len <= uVar5) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pgVar2 = (t->ents).array;
+    f.Name.str = pgVar2[uVar5].Name.str;
+    f.Name.len._0_4_ = *(undefined4 *)&pgVar2[uVar5].Name.len;
+    f.Name.len._4_4_ = *(undefined4 *)((int)&pgVar2[uVar5].Name.len + 4);
+    f.Value.str._0_4_ = *(undefined4 *)&pgVar2[uVar5].Value.str;
+    f.Value.str._4_4_ = *(undefined4 *)((int)&pgVar2[uVar5].Value.str + 4);
+    f.Value.len._0_4_ = *(undefined4 *)&pgVar2[uVar5].Value.len;
+    f.Value.len._4_4_ = *(undefined4 *)((int)&pgVar2[uVar5].Value.len + 4);
+    f.Sensitive = pgVar2[uVar5].Sensitive;
+    f._33_3_ = *(undefined3 *)&pgVar2[uVar5].field_0x21;
+    f._36_4_ = *(undefined4 *)&pgVar2[uVar5].field_0x24;
+    iVar1 = uVar5 + t->evictCount + 1;
+    runtime_mapaccess1_faststr
+              ((internal_abi_MapType *)&DAT_0082bc60,(runtime_hmap *)t->byName,
+               (string)in_stack_ffffffffffffff38,f.Name.str);
+    ~r0_00 = extraout_RDI;
+    if (*extraout_RAX == iVar1) {
+      runtime_mapdelete_faststr
+                ((internal_abi_MapType *)&DAT_0082bc60,(runtime_hmap *)t->byName,
+                 (string)in_stack_ffffffffffffff38);
+      ~r0_00 = extraout_RDI_00;
+    }
+    p.name.len._4_4_ = f.Name.len._4_4_;
+    p.name.len._0_4_ = (undefined4)f.Name.len;
+    p.name.str = f.Name.str;
+    p.value.str._4_4_ = f.Value.str._4_4_;
+    p.value.str._0_4_ = f.Value.str._0_4_;
+    p.value.len._4_4_ = f.Value.len._4_4_;
+    p.value.len._0_4_ = (undefined4)f.Value.len;
+    runtime_mapaccess1((internal_abi_MapType *)&DAT_0082f7a0,(runtime_hmap *)t->byNameValue,&p,
+                       ~r0_00);
+    if (*extraout_RAX_00 == iVar1) {
+      runtime_mapdelete((internal_abi_MapType *)&DAT_0082f7a0,(runtime_hmap *)t->byNameValue,&p);
+    }
+  }
+  uVar5 = (t->ents).len;
+  if (uVar5 < (uint)n) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  pgVar2 = (t->ents).array;
+  iVar1 = (t->ents).cap;
+  runtime_typedslicecopy
+            ((internal_abi_Type *)&DAT_008811c0,pgVar2,uVar5,
+             (void *)((int)&(pgVar2->Name).str + (n * 0x28 & n - iVar1 >> 0x3f)),uVar5 - n,iVar1);
+  uVar5 = (t->ents).len - n;
+  while( true ) {
+    uVar3 = (t->ents).len;
+    if ((int)uVar3 <= (int)uVar5) break;
+    if (uVar3 <= uVar5) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pgVar4 = (t->ents).array;
+    pgVar2 = pgVar4 + uVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbZero((internal_abi_Type *)&DAT_008811c0,pgVar2);
+    }
+    pgVar2->Name = in_XMM15;
+    *(string *)&pgVar4[uVar5].Name.len = in_XMM15;
+    *(string *)(&(pgVar2->Value).str + 1) = in_XMM15;
+    uVar5 = uVar5 + 1;
+  }
+  if ((uint)(t->ents).cap < uVar3 - n) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  (t->ents).len = uVar3 - n;
+  uVar5 = n + t->evictCount;
+  if (t->evictCount <= uVar5) {
+    t->evictCount = uVar5;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffff38);
+}
+
+
+
+void golang_org_x_net_http2_hpack___headerFieldTable__search
+               (golang_org_x_net_http2_hpack_headerFieldTable *t,
+               golang_org_x_net_http2_hpack_HeaderField f,uint64 i,bool nameValueMatch)
+
+{
+  undefined auVar1 [16];
+  undefined8 uVar2;
+  uint64 *extraout_RAX;
+  uint64 *extraout_RAX_00;
+  undefined7 in_register_00000009;
+  uint64 ~r0;
+  uint64 ~r0_00;
+  uint64 id;
+  uint64 id_1;
+  void *in_RDI;
+  char in_R8B;
+  int unaff_R14;
+  char cStack0000000000000030;
+  string in_stack_ffffffffffffffb8;
+  undefined local_28 [9];
+  undefined7 uStack_1f;
+  
+  auVar1 = _local_28;
+  uVar2 = stack0xffffffffffffffe0;
+  cStack0000000000000030 = in_R8B;
+  _local_28 = auVar1;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (cStack0000000000000030 == '\0') {
+    local_28._0_8_ = i;
+    _local_28 = CONCAT88(uVar2,local_28._0_8_);
+    runtime_mapaccess1((internal_abi_MapType *)&DAT_0082f7a0,(runtime_hmap *)t->byNameValue,local_28
+                       ,in_RDI);
+    if (*extraout_RAX != 0) {
+      golang_org_x_net_http2_hpack___headerFieldTable__idToIndex(t,*extraout_RAX,~r0);
+      return;
+    }
+  }
+  runtime_mapaccess1_faststr
+            ((internal_abi_MapType *)&DAT_0082bc60,(runtime_hmap *)t->byName,
+             in_stack_ffffffffffffffb8,(void *)i);
+  if (*extraout_RAX_00 == 0) {
+    return;
+  }
+  golang_org_x_net_http2_hpack___headerFieldTable__idToIndex(t,*extraout_RAX_00,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_hpack___headerFieldTable__idToIndex
+               (golang_org_x_net_http2_hpack_headerFieldTable *t,uint64 id,uint64 ~r0)
+
+{
+  int extraout_RAX;
+  void *x;
+  void *x_00;
+  int unaff_R14;
+  golang_org_x_net_http2_hpack_headerFieldTable *pgStack0000000000000008;
+  interface___ in_stack_ffffffffffffffb0;
+  __interface___ in_stack_ffffffffffffffc0;
+  string ~r0_00;
+  
+  pgStack0000000000000008 = t;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (pgStack0000000000000008->evictCount < id) {
+    if (golang_org_x_net_http2_hpack_staticTable != pgStack0000000000000008) {
+      return;
+    }
+    return;
+  }
+  runtime_convT64(id,(void *)id);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008079e0;
+  runtime_convT64(pgStack0000000000000008->evictCount,x_00);
+  fmt_Sprintf((string)in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+  runtime_convTstring((string)in_stack_ffffffffffffffb0,x);
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffb0);
+}
+
+
+
+int golang_org_x_net_http2_hpack_init(EVP_PKEY_CTX *ctx)
+
+{
+  undefined8 uVar1;
+  runtime_hmap *h;
+  undefined8 *extraout_RAX;
+  runtime_hmap *extraout_RAX_00;
+  runtime_hmap *prVar2;
+  runtime_hmap *h_00;
+  undefined8 *extraout_RAX_01;
+  runtime_hmap *extraout_RAX_02;
+  runtime_hmap *prVar3;
+  int iVar4;
+  runtime_hmap *in_RDI;
+  runtime_hmap *extraout_RDI;
+  runtime_hmap *extraout_RDI_00;
+  runtime_hmap *extraout_RDI_01;
+  void *extraout_RDI_02;
+  void *extraout_RDI_03;
+  void *~r0;
+  runtime_hmap *extraout_RDI_04;
+  runtime_hmap **extraout_R11;
+  runtime_hmap **extraout_R11_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI_04;
+  }
+  runtime_makemap((internal_abi_MapType *)&DAT_0082bc60,0x34,(runtime_hmap *)0x0,in_RDI);
+  prVar3 = extraout_RDI;
+  for (iVar4 = 0; iVar4 < 0x34; iVar4 = iVar4 + 1) {
+    uVar1 = (&DAT_009697d0)[iVar4];
+    runtime_mapassign_faststr
+              ((internal_abi_MapType *)&DAT_0082bc60,h,in_stack_ffffffffffffffb8,
+               (&PTR_DAT_0096a7a0)[iVar4 * 2]);
+    *extraout_RAX = uVar1;
+    prVar3 = extraout_RDI_00;
+  }
+  prVar2 = h;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = DAT_00c4ce80;
+    prVar2 = extraout_RAX_00;
+    prVar3 = extraout_RDI_01;
+  }
+  DAT_00c4ce80 = prVar2;
+  runtime_makemap((internal_abi_MapType *)&DAT_0082f7a0,0x3d,(runtime_hmap *)0x0,prVar3);
+  ~r0 = extraout_RDI_02;
+  for (iVar4 = 0; iVar4 < 0x3d; iVar4 = iVar4 + 1) {
+    uVar1 = (&DAT_00969970)[iVar4];
+    runtime_mapassign((internal_abi_MapType *)&DAT_0082f7a0,h_00,&PTR_DAT_0096bff0 + iVar4 * 4,~r0);
+    *extraout_RAX_01 = uVar1;
+    ~r0 = extraout_RDI_03;
+  }
+  prVar3 = h_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RAX_02;
+    extraout_R11_00[1] = DAT_00c4ce88;
+    prVar3 = extraout_RAX_02;
+  }
+  DAT_00c4ce88 = prVar3;
+  return (int)prVar3;
+}
+
+
+
+void golang_org_x_net_http2_hpack___HeaderField__IsPseudo(bool ~r0)
+
+{
+  int *piVar1;
+  undefined7 in_register_00000001;
+  int unaff_R14;
+  undefined local_30 [40];
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)local_30;
+  }
+  if (CONCAT71(in_register_00000001,~r0) != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void golang_org_x_net_http2_hpack___HeaderField__Size(uint32 ~r0)
+
+{
+  int *piVar1;
+  undefined4 in_register_00000004;
+  int unaff_R14;
+  undefined local_30 [40];
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)local_30;
+  }
+  if (CONCAT44(in_register_00000004,~r0) != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void golang_org_x_net_http2_hpack___HeaderField__String(string ~r0)
+
+{
+  string **ppsVar1;
+  string *in_RAX;
+  int unaff_R14;
+  golang_org_x_net_http2_hpack_HeaderField in_stack_ffffffffffffffa8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    ~r0.str = (uint8 *)in_RAX;
+    runtime_morestack_noctxt();
+    in_RAX = (string *)~r0.str;
+  }
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)&stack0xffffffffffffffa8;
+  }
+  if (in_RAX != (string *)0x0) {
+    golang_org_x_net_http2_hpack_HeaderField_String(in_stack_ffffffffffffffa8,*in_RAX);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void golang_org_x_net_http2_hpack___DecodingError__Error(string ~r0)
+
+{
+  string **ppsVar1;
+  uint8 **in_RAX;
+  uint8 *puVar2;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    ~r0.str = (uint8 *)in_RAX;
+    runtime_morestack_noctxt();
+    in_RAX = (uint8 **)~r0.str;
+  }
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)&stack0xffffffffffffffc0;
+  }
+  if (in_RAX != (uint8 **)0x0) {
+    puVar2 = *in_RAX;
+    if (puVar2 != (uint8 *)0x0) {
+      puVar2 = *(uint8 **)(puVar2 + 8);
+    }
+    ~r0_00.len = (int)in_RAX[1];
+    ~r0_00.str = puVar2;
+    fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void golang_org_x_net_http2_hpack___InvalidIndexError__Error(string ~r0)
+
+{
+  string **ppsVar1;
+  uint64 *in_RAX;
+  int extraout_RAX;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    ~r0.str = (uint8 *)in_RAX;
+    runtime_morestack_noctxt();
+    in_RAX = (uint64 *)~r0.str;
+    in_RBX = extraout_RBX;
+  }
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)&stack0xffffffffffffffc0;
+  }
+  if (in_RAX != (uint64 *)0x0) {
+    runtime_convT64(*in_RAX,in_RBX);
+    ~r0_00.len = extraout_RAX;
+    ~r0_00.str = &DAT_00807760;
+    fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void type__eq_golang_org_x_net_http2_hpack_HeaderField
+               (golang_org_x_net_http2_hpack_HeaderField *p,
+               golang_org_x_net_http2_hpack_HeaderField *q,bool r)
+
+{
+  char extraout_AL;
+  int unaff_R14;
+  golang_org_x_net_http2_hpack_HeaderField *pgStack0000000000000008;
+  golang_org_x_net_http2_hpack_HeaderField *pgStack0000000000000010;
+  
+  pgStack0000000000000008 = p;
+  pgStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((((pgStack0000000000000010->Name).len == (pgStack0000000000000008->Name).len) &&
+       ((pgStack0000000000000010->Value).len == (pgStack0000000000000008->Value).len)) &&
+      (pgStack0000000000000010->Sensitive == pgStack0000000000000008->Sensitive)) &&
+     (runtime_memequal(), extraout_AL != '\0')) {
+    runtime_memequal();
+  }
+  return;
+}
+
+
+
+void type__eq_golang_org_x_net_http2_hpack_pairNameValue
+               (golang_org_x_net_http2_hpack_pairNameValue *p,
+               golang_org_x_net_http2_hpack_pairNameValue *q,bool r)
+
+{
+  char extraout_AL;
+  int unaff_R14;
+  golang_org_x_net_http2_hpack_pairNameValue *pgStack0000000000000008;
+  golang_org_x_net_http2_hpack_pairNameValue *pgStack0000000000000010;
+  
+  pgStack0000000000000008 = p;
+  pgStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((((pgStack0000000000000010->name).len == (pgStack0000000000000008->name).len) &&
+      ((pgStack0000000000000010->value).len == (pgStack0000000000000008->value).len)) &&
+     (runtime_memequal(), extraout_AL != '\0')) {
+    runtime_memequal();
+  }
+  return;
+}
+
+
+
+void type__hash_golang_org_x_net_http2_hpack_pairNameValue
+               (golang_org_x_net_http2_hpack_pairNameValue *p,uintptr h,uintptr ~r0)
+
+{
+  int unaff_R14;
+  golang_org_x_net_http2_hpack_pairNameValue *pgStack0000000000000008;
+  
+  pgStack0000000000000008 = p;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_strhash();
+  runtime_strhash();
+  return;
+}
+
+
+
+void golang_org_x_net_http2_ErrCode_String(golang_org_x_net_http2_ErrCode e,string ~r0)
+
+{
+  string ~r0_00;
+  bool ok;
+  void *x;
+  undefined8 in_RSI;
+  undefined8 extraout_RSI;
+  void *in_RDI;
+  void *extraout_RDI;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb8;
+  __interface___ in_stack_ffffffffffffffc8;
+  undefined4 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    in_RDI = extraout_RDI;
+  }
+  runtime_mapaccess2_fast32
+            ((internal_abi_MapType *)&DAT_0082f500,
+             (runtime_hmap *)golang_org_x_net_http2_errCodeName,e,in_RDI,SUB81(in_RSI,0));
+  ok = SUB81(x,0);
+  if (ok != false) {
+    return;
+  }
+  runtime_convT32(e,x);
+  ~r0_00.str._4_4_ = e;
+  ~r0_00.str._0_4_ = in_stack_ffffffffffffffe0;
+  ~r0_00.len = (int)&DAT_008078e0;
+  fmt_Sprintf(in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_ConnectionError_Error
+               (golang_org_x_net_http2_ConnectionError e,string ~r0)
+
+{
+  int extraout_RAX;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_convT32(e,in_RBX);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008328e0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_StreamError_Error(golang_org_x_net_http2_StreamError e,string ~r0)
+
+{
+  string ~r0_00;
+  string ~r0_01;
+  uint32 in_EAX;
+  int in_RCX;
+  uint32 val;
+  void *in_RBX;
+  void *x;
+  void *x_00;
+  undefined8 in_RDI;
+  int unaff_R14;
+  string in_stack_ffffffffffffff68;
+  __interface___ in_stack_ffffffffffffff78;
+  undefined4 in_stack_ffffffffffffff90;
+  int in_stack_ffffffffffffff98;
+  undefined local_18 [16];
+  
+  while (val = (uint32)in_RBX, local_18 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = (void *)((uint)in_RBX & 0xffffffff);
+  }
+  if (in_RCX != 0) {
+    runtime_convT32(in_EAX,in_RBX);
+    runtime_convT32(val,x);
+    local_18._0_8_ = in_RCX;
+    if (in_RCX != 0) {
+      local_18._0_8_ = *(int *)(in_RCX + 8);
+    }
+    local_18._8_8_ = in_RDI;
+    ~r0_00.str._4_4_ = val;
+    ~r0_00.str._0_4_ = in_stack_ffffffffffffff90;
+    ~r0_00.len = in_RCX;
+    fmt_Sprintf(in_stack_ffffffffffffff68,in_stack_ffffffffffffff78,~r0_00);
+    return;
+  }
+  runtime_convT32(in_EAX,in_RBX);
+  runtime_convT32(val,x_00);
+  ~r0_01.str._4_4_ = val;
+  ~r0_01.str._0_4_ = in_stack_ffffffffffffff90;
+  ~r0_01.len = in_stack_ffffffffffffff98;
+  fmt_Sprintf(in_stack_ffffffffffffff68,in_stack_ffffffffffffff78,~r0_01);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_connError_Error(golang_org_x_net_http2_connError e,string ~r0)
+
+{
+  string ~r0_00;
+  uint32 in_EAX;
+  uint8 *in_RCX;
+  void *in_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa0;
+  __interface___ in_stack_ffffffffffffffb0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_convT32(in_EAX,in_RBX);
+  runtime_convTstring(in_stack_ffffffffffffffa0,in_RBX);
+  ~r0_00.len = (int)in_RBX;
+  ~r0_00.str = in_RCX;
+  fmt_Sprintf(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_pseudoHeaderError_Error
+               (golang_org_x_net_http2_pseudoHeaderError e,string ~r0)
+
+{
+  void *in_RAX;
+  int extraout_RAX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_convTstring(in_stack_ffffffffffffffc0,in_RAX);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008075e0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_duplicatePseudoHeaderError_Error
+               (golang_org_x_net_http2_duplicatePseudoHeaderError e,string ~r0)
+
+{
+  void *in_RAX;
+  int extraout_RAX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_convTstring(in_stack_ffffffffffffffc0,in_RAX);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008075e0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_headerFieldNameError_Error
+               (golang_org_x_net_http2_headerFieldNameError e,string ~r0)
+
+{
+  void *in_RAX;
+  int extraout_RAX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_convTstring(in_stack_ffffffffffffffc0,in_RAX);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008075e0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_headerFieldValueError_Error
+               (golang_org_x_net_http2_headerFieldValueError e,string ~r0)
+
+{
+  void *in_RAX;
+  int extraout_RAX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_convTstring(in_stack_ffffffffffffffc0,in_RAX);
+  ~r0_00.len = extraout_RAX;
+  ~r0_00.str = &DAT_008075e0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_FrameType_String(golang_org_x_net_http2_FrameType t,string ~r0)
+
+{
+  char extraout_BL;
+  bool ok;
+  undefined8 in_RSI;
+  undefined8 extraout_RSI;
+  void *in_RDI;
+  void *extraout_RDI;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  ~r0.str._0_1_ = t;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    in_RDI = extraout_RDI;
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082f680,
+                     (runtime_hmap *)golang_org_x_net_http2_frameName,&~r0,in_RDI,SUB81(in_RSI,0));
+  if (extraout_BL != '\0') {
+    return;
+  }
+  ~r0_00.len = (int)(runtime_staticuint64s + (golang_org_x_net_http2_FrameType)~r0.str);
+  ~r0_00.str = &DAT_00807920;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void golang_org_x_net_http2_Flags_Has
+               (golang_org_x_net_http2_Flags f,golang_org_x_net_http2_Flags v,bool ~r0)
+
+{
+  return;
+}
+
+
+
+void golang_org_x_net_http2_FrameHeader_Header
+               (golang_org_x_net_http2_FrameHeader h,golang_org_x_net_http2_FrameHeader ~r0)
+
+{
+  return;
+}
+
+
+
+void golang_org_x_net_http2_FrameHeader_String(golang_org_x_net_http2_FrameHeader h,string ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  string s;
+  error ~r0_00;
+  string ~r0_01;
+  error err;
+  byte in_AL;
+  bytes_Buffer *b;
+  bytes_Buffer *_buf;
+  void *in_RBX;
+  int unaff_R14;
+  golang_org_x_net_http2_FrameHeader in_stack_ffffffffffffffd8;
+  undefined4 in_stack_ffffffffffffffe4;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  bytes_Buffer *b_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = (void *)((uint)in_RBX & 0xff);
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00860d00,in_RBX);
+  s.len._4_4_ = in_stack_ffffffffffffffe4;
+  s._0_12_ = (undefined  [12])in_stack_ffffffffffffffd8;
+  err.data = b;
+  err.tab = in_stack_ffffffffffffffe8;
+  b_00 = b;
+  bytes___Buffer__WriteString(b,s,0x8b4f4f,err);
+  golang_org_x_net_http2_FrameHeader_writeDebug
+            (in_stack_ffffffffffffffd8,(bytes_Buffer *)(uint)in_AL);
+  ~r0_00.data._4_4_ = in_stack_ffffffffffffffe4;
+  ~r0_00._0_12_ = (undefined  [12])in_stack_ffffffffffffffd8;
+  bytes___Buffer__WriteByte(b_00,0x5d,~r0_00);
+  if (b_00 != (bytes_Buffer *)0x0) {
+    uVar1 = (b_00->buf).len;
+    uVar2 = b_00->off;
+    if (uVar1 < uVar2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    ~r0_01.len._4_4_ = in_stack_ffffffffffffffe4;
+    ~r0_01._0_12_ = (undefined  [12])in_stack_ffffffffffffffd8;
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,
+               (b_00->buf).array + (uVar2 & (int)(uVar2 - (b_00->buf).cap) >> 0x3f),uVar1 - uVar2,
+               ~r0_01);
+  }
+  return;
+}
+
+
+
+void golang_org_x_net_http2_FrameHeader_writeDebug
+               (golang_org_x_net_http2_FrameHeader h,bytes_Buffer *buf)
+
+{
+  __interface___ a;
+  __interface___ a_00;
+  __interface___ a_01;
+  __interface___ a_02;
+  error err;
+  error err_00;
+  error err_01;
+  uint8 i;
+  int *extraout_RAX;
+  int extraout_RAX_00;
+  runtime_hmap **extraout_RAX_01;
+  int *extraout_RAX_02;
+  golang_org_x_net_http2_Flags in_CL;
+  int n;
+  golang_org_x_net_http2_FrameType in_BL;
+  char extraout_BL;
+  bool ok;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  int set;
+  void *x;
+  void *x_00;
+  byte bVar1;
+  uint32 in_ESI;
+  void *in_RDI;
+  void *extraout_RDI;
+  void *~r0;
+  void *extraout_RDI_00;
+  void *~r0_00;
+  void *extraout_RDI_01;
+  void *extraout_RDI_02;
+  bytes_Buffer *in_R8;
+  int unaff_R14;
+  string in_stack_ffffffffffffff98;
+  string in_stack_ffffffffffffffa8;
+  interface___ *in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc0;
+  undefined4 in_stack_ffffffffffffffd0;
+  golang_org_x_net_http2_FrameType gVar2;
+  byte in_stack_ffffffffffffffd5;
+  byte bVar3;
+  byte in_stack_ffffffffffffffd6;
+  byte in_stack_ffffffffffffffd7;
+  void *in_stack_ffffffffffffffd8;
+  
+  h.Type = in_BL;
+  h.Flags = in_CL;
+  h.StreamID = in_ESI;
+  while( true ) {
+    h.valid = SUB81(buf,0);
+    h.Length = (uint32)in_RDI;
+    if (*(undefined **)(unaff_R14 + 0x10) < &stack0x00000000) break;
+    runtime_morestack_noctxt();
+    buf = (bytes_Buffer *)(uint)h.valid;
+    in_RDI = (void *)(uint)h.Length;
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082f680,
+                     (runtime_hmap *)golang_org_x_net_http2_frameName,&stack0xffffffffffffffd4,
+                     in_RDI,SUB41(h.StreamID,0));
+  if (extraout_BL == '\0') {
+    a.cap = (int)in_stack_ffffffffffffffb8;
+    a.array = (interface___ *)in_stack_ffffffffffffffa8.str;
+    a.len = in_stack_ffffffffffffffa8.len;
+    fmt_Sprintf(in_stack_ffffffffffffff98,a,in_stack_ffffffffffffffc0);
+    n = extraout_RAX_00;
+    gVar2 = h.Type;
+  }
+  else {
+    n = *extraout_RAX;
+    gVar2 = h.Type;
+  }
+  bytes___Buffer__WriteString(in_R8,in_stack_ffffffffffffff98,n,(error)in_stack_ffffffffffffffa8);
+  x = extraout_RBX;
+  if (h.Flags != 0) {
+    bytes___Buffer__WriteString
+              (in_R8,in_stack_ffffffffffffff98,0x8b0b6c,(error)in_stack_ffffffffffffffa8);
+    set = 0;
+    x = extraout_RBX_00;
+    ~r0 = extraout_RDI;
+    for (bVar3 = 0; bVar3 < 8; bVar3 = bVar3 + 1) {
+      bVar1 = (byte)(1 << (bVar3 & 0x1f));
+      if ((h.Flags & bVar1) != 0) {
+        set = set + 1;
+        in_stack_ffffffffffffffd5 = bVar3;
+        if (1 < set) {
+          bytes___Buffer__WriteByte(in_R8,0x7c,(error)in_stack_ffffffffffffff98);
+          ~r0 = extraout_RDI_00;
+          in_stack_ffffffffffffffd5 = bVar3;
+          in_stack_ffffffffffffffd6 = bVar1;
+        }
+        runtime_mapaccess1((internal_abi_MapType *)&DAT_0082f620,
+                           (runtime_hmap *)golang_org_x_net_http2_flagName,&h.Type,~r0);
+        runtime_mapaccess1((internal_abi_MapType *)&DAT_0082f560,*extraout_RAX_01,
+                           &stack0xffffffffffffffd7,~r0_00);
+        if (extraout_RAX_02[1] == 0) {
+          runtime_convT64(1 << (in_stack_ffffffffffffffd5 & 0x3f),x_00);
+          a_02.len = (int)in_stack_ffffffffffffffc0.str;
+          a_02.cap = in_stack_ffffffffffffffc0.len;
+          a_02.array = in_stack_ffffffffffffffb8;
+          err_01.tab._4_1_ = gVar2;
+          err_01.tab._0_4_ = in_stack_ffffffffffffffd0;
+          err_01.tab._5_1_ = in_stack_ffffffffffffffd5;
+          err_01.tab._6_1_ = in_stack_ffffffffffffffd6;
+          err_01.tab._7_1_ = bVar1;
+          err_01.data = (void *)set;
+          fmt_Fprintf((io_Writer)in_stack_ffffffffffffff98,in_stack_ffffffffffffffa8,a_02,0x95e620,
+                      err_01);
+          ~r0 = extraout_RDI_02;
+          in_stack_ffffffffffffffd7 = bVar1;
+          in_stack_ffffffffffffffd8 = (void *)set;
+          bVar3 = in_stack_ffffffffffffffd5;
+        }
+        else {
+          bytes___Buffer__WriteString
+                    (in_R8,in_stack_ffffffffffffff98,*extraout_RAX_02,
+                     (error)in_stack_ffffffffffffffa8);
+          ~r0 = extraout_RDI_01;
+          in_stack_ffffffffffffffd7 = bVar1;
+          in_stack_ffffffffffffffd8 = (void *)set;
+          bVar3 = in_stack_ffffffffffffffd5;
+        }
+      }
+      x = (void *)set;
+    }
+  }
+  if (h.StreamID != 0) {
+    runtime_convT32(h.StreamID,x);
+    a_00.len = (int)in_stack_ffffffffffffffc0.str;
+    a_00.cap = in_stack_ffffffffffffffc0.len;
+    a_00.array = in_stack_ffffffffffffffb8;
+    err.tab._4_1_ = gVar2;
+    err.tab._0_4_ = in_stack_ffffffffffffffd0;
+    err.tab._5_1_ = in_stack_ffffffffffffffd5;
+    err.tab._6_1_ = in_stack_ffffffffffffffd6;
+    err.tab._7_1_ = in_stack_ffffffffffffffd7;
+    err.data = in_stack_ffffffffffffffd8;
+    fmt_Fprintf((io_Writer)in_stack_ffffffffffffff98,in_stack_ffffffffffffffa8,a_00,0x95e620,err);
+    x = extraout_RBX_01;
+  }
+  runtime_convT32(h.Length,x);
+  a_01.len = (int)in_stack_ffffffffffffffc0.str;
+  a_01.cap = in_stack_ffffffffffffffc0.len;
+  a_01.array = in_stack_ffffffffffffffb8;
+  err_00.tab._4_1_ = gVar2;
+  err_00.tab._0_4_ = in_stack_ffffffffffffffd0;
+  err_00.tab._5_1_ = in_stack_ffffffffffffffd5;
+  err_00.tab._6_1_ = in_stack_ffffffffffffffd6;
+  err_00.tab._7_1_ = in_stack_ffffffffffffffd7;
+  err_00.data = in_stack_ffffffffffffffd8;
+  fmt_Fprintf((io_Writer)in_stack_ffffffffffffff98,in_stack_ffffffffffffffa8,a_01,0x95e620,err_00);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void golang_org_x_net_http2___FrameHeader__invalidate(golang_org_x_net_http2_FrameHeader *h)
+

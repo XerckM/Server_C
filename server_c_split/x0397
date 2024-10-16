@@ -1,0 +1,1000 @@
+    err_local.tab = (runtime_itab *)0x0;
+    err_local.data = (void *)0x0;
+    h = extraout_RAX_00;
+  }
+  else {
+    h = (uint8 *)0x0;
+    err_local.data = extraout_RSI;
+    err_local.tab = extraout_RDI;
+  }
+  if (err_local.tab == (runtime_itab *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_007f7d60,~r0_03);
+    local_b0 = res;
+    net__C_getaddrinfo((net__Ctype_char *)h,(net__Ctype_char *)0x0,local_a8,res,~r0_04,
+                       (error)in_stack_fffffffffffffec8);
+    err_local.data = extraout_RCX;
+    err_local.tab = x;
+    if (val != 0) {
+      if (val == 0xfffffffffffffff5) {
+        if (x == (runtime_itab *)0x0) {
+          err_local.data = &DAT_0095c660;
+          err_local.tab = (runtime_itab *)go_itab_syscall_Errno_error;
+        }
+        isErrorNoSuchHost = false;
+        bVar9 = false;
+      }
+      else if ((val == 0xfffffffffffffffb) || (val == 0xfffffffffffffffe)) {
+        err_local.data = net_errNoSuchHost.data;
+        err_local.tab = net_errNoSuchHost.tab;
+        isErrorNoSuchHost = true;
+        bVar9 = false;
+      }
+      else {
+        runtime_convT64(val,x);
+        err_local.data = extraout_RAX_04;
+        err_local.tab = (runtime_itab *)go_itab_net_addrinfoErrno_error;
+        bVar9 = val == 0xfffffffffffffffd;
+        isErrorNoSuchHost = false;
+      }
+      auVar10 = (*(code *)(err_local.tab)->fun[0])(err_local.data);
+      local_b8 = auVar10._0_8_;
+      runtime_newobject((internal_abi_Type *)&DAT_00885120,auVar10._8_8_);
+      extraout_RAX_05[1] = auVar10._8_8_;
+      puVar6 = extraout_RAX_05;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = local_b8;
+        puVar6 = extraout_RAX_06;
+      }
+      *puVar6 = local_b8;
+      puVar6[3] = in_RDI;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_02 = in_RCX;
+        puVar6 = extraout_RAX_07;
+      }
+      puVar6[2] = in_RCX;
+      *(bool *)((int)puVar6 + 0x32) = isErrorNoSuchHost;
+      *(bool *)((int)puVar6 + 0x31) = bVar9;
+      err_local.data = puVar6;
+      err_local.tab = (runtime_itab *)go_itab__net_DNSError_error;
+      net_releaseThread();
+      return;
+    }
+    for (pnVar8 = *local_b0; pnVar8 != (net__Ctype_struct_addrinfo *)0x0; pnVar8 = pnVar8->ai_next)
+    {
+      if (pnVar8->ai_socktype == 1) {
+        dVar1 = pnVar8->ai_family;
+        if (dVar1 == 2) {
+          pnVar2 = pnVar8->ai_addr;
+          runtime_mallocgc(4,(internal_abi_Type *)0x0,false,(void *)(uint)dVar1);
+          *extraout_RAX_11 = *(undefined4 *)(pnVar2->sa_data + 2);
+          addr.IP.len._0_4_ = 4;
+          addr.IP.len._4_4_ = 0;
+          addr.IP.cap._0_4_ = 4;
+          addr.IP.cap._4_4_ = 0;
+          addrs_local.len = addrs_local.len + 1;
+          addr.IP.array = (uint8 *)extraout_RAX_11;
+          addr.Zone = in_XMM15;
+          if ((uint)addrs_local.cap < (uint)addrs_local.len) {
+            ~r0_00.cap = (int)in_stack_fffffffffffffed8;
+            ~r0_00.array = in_stack_fffffffffffffec8.str;
+            ~r0_00.len = in_stack_fffffffffffffec8.len;
+            runtime_growslice(addrs_local.array,addrs_local.len,addrs_local.cap,1,
+                              (internal_abi_Type *)&DAT_0084e9e0,~r0_00);
+            addrs_local.len = extraout_RBX_01;
+            addrs_local.array = extraout_RAX_12;
+            addrs_local.cap = extraout_RCX_01;
+          }
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_wbMove((internal_abi_Type *)&DAT_0084e9e0,
+                           addrs_local.array + (addrs_local.len - 1),&addr);
+          }
+          addrs_local.array[addrs_local.len - 1].IP.array = addr.IP.array;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].IP.len = (undefined4)addr.IP.len;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].IP.len + 4) =
+               addr.IP.len._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].IP.cap = (undefined4)addr.IP.cap;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].IP.cap + 4) =
+               addr.IP.cap._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].Zone.str = addr.Zone.str._0_4_;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].Zone.str + 4) =
+               addr.Zone.str._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].Zone.len =
+               (undefined4)addr.Zone.len;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].Zone.len + 4) =
+               addr.Zone.len._4_4_;
+        }
+        else if (dVar1 == 10) {
+          pnVar2 = pnVar8->ai_addr;
+          runtime_mallocgc(0x10,(internal_abi_Type *)0x0,false,(void *)(uint)dVar1);
+          uVar3 = *(undefined4 *)(pnVar2->sa_data + 10);
+          uVar4 = *(undefined4 *)(pnVar2 + 1);
+          uVar5 = *(undefined4 *)(pnVar2[1].sa_data + 2);
+          *extraout_RAX_08 = *(undefined4 *)(pnVar2->sa_data + 6);
+          extraout_RAX_08[1] = uVar3;
+          extraout_RAX_08[2] = uVar4;
+          extraout_RAX_08[3] = uVar5;
+          net___ipv6ZoneCache__name
+                    (&net_zoneCache,(uint)*(dword *)(pnVar2[1].sa_data + 6),
+                     in_stack_fffffffffffffec8);
+          addr_1.IP.len._0_4_ = 0x10;
+          addr_1.IP.len._4_4_ = 0;
+          addr_1.IP.cap._0_4_ = 0x10;
+          addr_1.IP.cap._4_4_ = 0;
+          addr_1.Zone.len = extraout_RBX;
+          addr_1.Zone.str = extraout_RAX_09;
+          addrs_local.len = addrs_local.len + 1;
+          addr_1.IP.array = (uint8 *)extraout_RAX_08;
+          if ((uint)addrs_local.cap < (uint)addrs_local.len) {
+            ~r0.cap = (int)in_stack_fffffffffffffed8;
+            ~r0.array = in_stack_fffffffffffffec8.str;
+            ~r0.len = in_stack_fffffffffffffec8.len;
+            runtime_growslice(addrs_local.array,addrs_local.len,addrs_local.cap,1,
+                              (internal_abi_Type *)&DAT_0084e9e0,~r0);
+            addrs_local.len = extraout_RBX_00;
+            addrs_local.array = extraout_RAX_10;
+            addrs_local.cap = extraout_RCX_00;
+          }
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_wbMove((internal_abi_Type *)&DAT_0084e9e0,
+                           addrs_local.array + (addrs_local.len - 1),&addr_1);
+          }
+          addrs_local.array[addrs_local.len - 1].IP.array = addr_1.IP.array;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].IP.len = (undefined4)addr_1.IP.len;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].IP.len + 4) =
+               addr_1.IP.len._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].IP.cap = (undefined4)addr_1.IP.cap;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].IP.cap + 4) =
+               addr_1.IP.cap._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].Zone.str = addr_1.Zone.str._0_4_;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].Zone.str + 4) =
+               addr_1.Zone.str._4_4_;
+          *(undefined4 *)&addrs_local.array[addrs_local.len - 1].Zone.len =
+               (undefined4)addr_1.Zone.len;
+          *(undefined4 *)((int)&addrs_local.array[addrs_local.len - 1].Zone.len + 4) =
+               addr_1.Zone.len._4_4_;
+        }
+      }
+    }
+    net_cgoLookupHostIP_func1();
+    net_releaseThread();
+    return;
+  }
+  auVar10 = (*(code *)(err_local.tab)->fun[0])(err_local.data);
+  local_b8 = auVar10._0_8_;
+  runtime_newobject((internal_abi_Type *)&DAT_00885120,auVar10._8_8_);
+  extraout_RAX_01[1] = auVar10._8_8_;
+  puVar6 = extraout_RAX_01;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = local_b8;
+    puVar6 = extraout_RAX_02;
+  }
+  *puVar6 = local_b8;
+  puVar6[3] = in_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = in_RCX;
+    puVar6 = extraout_RAX_03;
+  }
+  puVar6[2] = in_RCX;
+  err_local.data = puVar6;
+  err_local.tab = (runtime_itab *)go_itab__net_DNSError_error;
+  net_releaseThread();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void net_cgoLookupHostIP_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  net__C_freeaddrinfo(*(net__Ctype_struct_addrinfo **)(in_RDX + 8));
+  return;
+}
+
+
+
+void net_cgoLookupIP(context_Context ctx,string network,string name,__net_IPAddr addrs,error err)
+
+{
+  error ~r1;
+  _param1 ~r0;
+  void *in_RAX;
+  code **extraout_RAX;
+  code **extraout_RAX_00;
+  code **extraout_RAX_01;
+  code **ppcVar1;
+  code *in_RCX;
+  void *in_RBX;
+  int unaff_RBP;
+  code *in_RSI;
+  code *in_RDI;
+  code *in_R8;
+  code **extraout_R11;
+  code **extraout_R11_00;
+  int unaff_R14;
+  runtime_itab *unaff_retaddr;
+  context_Context in_stack_ffffffffffffffd8;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00859d20,in_RBX);
+  *extraout_RAX = net_cgoLookupIP_func1;
+  extraout_RAX[2] = in_RDI;
+  ppcVar1 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = in_RCX;
+    ppcVar1 = extraout_RAX_00;
+  }
+  ppcVar1[1] = in_RCX;
+  ppcVar1[4] = in_R8;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = in_RSI;
+    ppcVar1 = extraout_RAX_01;
+  }
+  ppcVar1[3] = in_RSI;
+  ~r0.cap = unaff_RBP;
+  ~r0.array = (net_IPAddr *)in_stack_ffffffffffffffe8._0_8_;
+  ~r0.len = in_stack_ffffffffffffffe8._8_8_;
+  ~r1.data = in_RAX;
+  ~r1.tab = unaff_retaddr;
+  net_doBlockingWithCtx_go_shape___net_IPAddr_
+            (in_stack_ffffffffffffffd8,(_param0)net__dict_doBlockingWithCtx___net_IPAddr_,~r0,~r1);
+  return;
+}
+
+
+/*
+Unable to decompile 'net.cgoLookupIP.func1'
+Cause: 
+Low-level Error: Overlapping input varnodes
+*/
+
+
+void net_cgoLookupPTR(context_Context ctx,string addr,__string names,error err)
+
+{
+  net_netip_Addr ip;
+  net_IP ip_00;
+  net_netip_Addr ip_01;
+  string a1;
+  net_netip_Addr ~r0;
+  _param1 ~r0_00;
+  string zone;
+  string ~r0_01;
+  __uint8 ~r0_02;
+  string ~r0_03;
+  error ~r1;
+  error ~r1_00;
+  char **extraout_RAX;
+  char **extraout_RAX_00;
+  char **ppcVar1;
+  net__Ctype_struct_sockaddr *~r0_04;
+  code *extraout_RAX_01;
+  net__Ctype_struct_sockaddr *sa;
+  code **extraout_RAX_02;
+  code **extraout_RAX_03;
+  code **ppcVar2;
+  undefined8 *extraout_RAX_04;
+  undefined8 extraout_RAX_05;
+  undefined8 extraout_RAX_06;
+  undefined8 uVar3;
+  code *in_RCX;
+  net__Ctype_uint ~r1_01;
+  net__Ctype_uint salen;
+  undefined4 uVar4;
+  void *~r0_05;
+  void *~r0_06;
+  void *~r0_07;
+  undefined8 extraout_RBX;
+  undefined8 *extraout_RSI;
+  undefined8 *extraout_RSI_00;
+  undefined8 *puVar5;
+  code *in_RDI;
+  int extraout_RDI;
+  code **extraout_R11;
+  code **extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  code **extraout_R11_02;
+  int unaff_R14;
+  net_netip_uint128 in_stack_ffffffffffffff90;
+  internal_intern_Value *in_stack_ffffffffffffffa0;
+  uint8 *in_stack_ffffffffffffffa8;
+  internal_intern_Value *in_stack_ffffffffffffffb0;
+  undefined4 in_stack_ffffffffffffffb8;
+  undefined4 in_stack_ffffffffffffffbc;
+  void *in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0.addr.lo = (uint64)in_stack_ffffffffffffffa8;
+  ~r0.addr.hi = (uint64)in_stack_ffffffffffffffa0;
+  ~r0.z = in_stack_ffffffffffffffb0;
+  ~r1.tab._4_4_ = in_stack_ffffffffffffffbc;
+  ~r1.tab._0_4_ = in_stack_ffffffffffffffb8;
+  ~r1.data = in_stack_ffffffffffffffc0;
+  net_netip_ParseAddr((string)in_stack_ffffffffffffff90,~r0,~r1);
+  if (extraout_RDI != 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00885120,~r0_05);
+    extraout_RAX[1] = (char *)0xf;
+    *extraout_RAX =
+         "invalid address/etc/mdns.allowreflectlite.SetallocmRInternalwrite heap dumpasyncpreemptoffforce gc (idle)sync.Mutex.Lockmalloc deadlockruntime error: elem size wrong  with GC prog\nscan missed a gmisaligned maskruntime: min = runtime: inUse=runtime: max = recovery failedstopm holding pstartm: m has ppreempt SPWRITEmissing mcache?ms: gomaxprocs=]\n\tmorebuf={pc:: no frame (sp=runtime: frame runtimer: bad ptraceback stuckno such processnot a directoryadvertise errornetwork is downno medium foundkey has expiredCardinality(%d)weak_dependencyextension_rangeproto3_optionalunverified_lazyfeature_supportutf8_validationaggregate_valueedition_removedinvalid argSize<invalid Value>InvalidArgumentUnauthenticatedUNAUTHENTICATED\"UNIMPLEMENTED\"AuthInfo is nilAuthInfo: <nil>accept-encodingaccept-languageAccept-EncodingPartial ContentRequest TimeoutLength RequiredNot ImplementedGateway Timeoutunexpected typebad trailer key47683715820312515:04:05.000000/debug/requestsHanifi_RohingyaPsalter_Pahlaviinvalid pointerjstmpllitinterptarinsecurepathzipinsecurepathinvalid kind %vX-Forwarded-For#multipartfilesAccept-Language/etc/mime.types()<>@,;:\\\"/[]?=html/template: contenteditableContainingOneofRequiredNumbersExtensionRanges is unavailable0601021504Z0700invalid booleannon-minimal tagunknown Go typeBelowExactAboveunclosed actionno dot in fieldtemplate clauseDiacriticalDot;DoubleRightTee;DownLeftVector;GreaterGreater;HorizontalLine;InvisibleComma;InvisibleTimes;LeftDownVector;LeftRightArrow;Leftrightarrow;LessSlantEqual;LongRightArrow;Longrightarrow;LowerLeftArrow;NestedLessLess;NotGreaterLess;NotLessGreater;NotSubsetEqual;NotVerticalBar;OpenCurlyQuote;ReverseElement;RightTeeVector;RightVectorBar;ShortDownArrow;ShortLeftArrow;SquareSuperset;TildeFullEqual;UpperLeftArrow;ZeroWidthSpace;curvearrowleft;doublebarwedge;downdownarrows;hookrightarrow;leftleftarrows;leftrightarrow;leftthreetimes;longrightarrow;looparrowright;nshortparallel;ntriangleright;rightarrowtail;rightharpoonup;trianglelefteq;upharpoonright; not a functionavx512vpopcntdqFailed t..." /* TRUNCATED STRING LITERAL */
+    ;
+    extraout_RAX[3] = (char *)in_RDI;
+    ppcVar1 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = in_RCX;
+      ppcVar1 = extraout_RAX_00;
+    }
+    ppcVar1[2] = (char *)in_RCX;
+    return;
+  }
+  ip.z = in_stack_ffffffffffffffa0;
+  ip.addr = in_stack_ffffffffffffff90;
+  ~r0_02.len = (int)in_stack_ffffffffffffffb0;
+  ~r0_02.array = in_stack_ffffffffffffffa8;
+  ~r0_02.cap._0_4_ = in_stack_ffffffffffffffb8;
+  ~r0_02.cap._4_4_ = in_stack_ffffffffffffffbc;
+  net_netip_Addr_AsSlice(ip,~r0_02);
+  ip_00.cap = (int)in_stack_ffffffffffffffa0;
+  ip_00.array = (uint8 *)in_stack_ffffffffffffff90.hi;
+  ip_00.len = in_stack_ffffffffffffff90.lo;
+  zone.len = (int)in_stack_ffffffffffffffb0;
+  zone.str = in_stack_ffffffffffffffa8;
+  net_cgoSockaddr(ip_00,zone,~r0_04,~r1_01);
+  if (extraout_RAX_01 == (code *)0x0) {
+    ip_01.z = in_stack_ffffffffffffffa0;
+    ip_01.addr = in_stack_ffffffffffffff90;
+    ~r0_01.len = (int)in_stack_ffffffffffffffb0;
+    ~r0_01.str = in_stack_ffffffffffffffa8;
+    net_netip_Addr_String(ip_01,~r0_01);
+    runtime_newobject((internal_abi_Type *)&DAT_00885120,~r0_07);
+    a1.len = (int)in_stack_ffffffffffffffa8;
+    a1.str = (uint8 *)in_stack_ffffffffffffffa0;
+    ~r0_03.len._0_4_ = in_stack_ffffffffffffffb8;
+    ~r0_03.str = (uint8 *)in_stack_ffffffffffffffb0;
+    ~r0_03.len._4_4_ = in_stack_ffffffffffffffbc;
+    runtime_concatstring2((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffff90,a1,~r0_03);
+    extraout_RAX_04[1] = extraout_RBX;
+    uVar3 = extraout_RAX_05;
+    puVar5 = extraout_RAX_04;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = extraout_RAX_06;
+      extraout_R11_01[1] = *extraout_RSI;
+      uVar3 = extraout_RAX_06;
+      puVar5 = extraout_RSI;
+    }
+    *puVar5 = uVar3;
+    puVar5[3] = in_RDI;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = in_RCX;
+      extraout_R11_02[1] = (code *)extraout_RSI_00[2];
+      puVar5 = extraout_RSI_00;
+    }
+    puVar5[2] = in_RCX;
+    return;
+  }
+  uVar4 = SUB84(~r0_06,0);
+  runtime_newobject((internal_abi_Type *)&DAT_00869f20,~r0_06);
+  *extraout_RAX_02 = net_cgoLookupPTR_func1;
+  extraout_RAX_02[2] = in_RDI;
+  ppcVar2 = extraout_RAX_02;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = in_RCX;
+    extraout_R11_00[1] = extraout_RAX_01;
+    ppcVar2 = extraout_RAX_03;
+  }
+  ppcVar2[1] = in_RCX;
+  ppcVar2[3] = extraout_RAX_01;
+  *(undefined4 *)(ppcVar2 + 4) = uVar4;
+  ~r0_00.len = (int)in_stack_ffffffffffffffa8;
+  ~r0_00.array = (string *)in_stack_ffffffffffffffa0;
+  ~r0_00.cap = (int)in_stack_ffffffffffffffb0;
+  ~r1_00.tab._4_4_ = uVar4;
+  ~r1_00.tab._0_4_ = in_stack_ffffffffffffffb8;
+  ~r1_00.data = in_stack_ffffffffffffffc0;
+  net_doBlockingWithCtx_go_shape___string_
+            ((context_Context)in_stack_ffffffffffffff90,
+             (_param0)net__dict_doBlockingWithCtx___string_,~r0_00,~r1_00);
+  return;
+}
+
+
+
+void net_cgoLookupPTR_func1(__string ~r0,error ~r1)
+
+{
+  error err;
+  __string names;
+  net__Ctype_struct_sockaddr *sa;
+  int in_RDX;
+  int unaff_RBP;
+  net__Ctype_uint salen;
+  int unaff_R14;
+  runtime_itab *unaff_retaddr;
+  string in_stack_ffffffffffffffd8;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  names.cap = unaff_RBP;
+  names.array = (string *)in_stack_ffffffffffffffe8._0_8_;
+  names.len = in_stack_ffffffffffffffe8._8_8_;
+  err.data = ~r0.array;
+  err.tab = unaff_retaddr;
+  net_cgoLookupAddrPTR
+            (in_stack_ffffffffffffffd8,*(net__Ctype_struct_sockaddr **)(in_RDX + 8),
+             (net__Ctype_uint)*(undefined8 *)(in_RDX + 0x10),names,err);
+  return;
+}
+
+
+
+void net_cgoLookupAddrPTR
+               (string addr,net__Ctype_struct_sockaddr *sa,net__Ctype_uint salen,__string names,
+               error err)
+
+{
+  string ~r0;
+  string a0;
+  __uint8 b;
+  string a1;
+  error ~r1;
+  string ~r0_00;
+  bool isErrorNoSuchHost;
+  bool isTemporary;
+  net__Ctype_struct_sockaddr *sa_00;
+  uint64 extraout_RAX;
+  void *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  int i;
+  int iVar2;
+  uint8 *extraout_RAX_04;
+  uint8 *extraout_RAX_05;
+  uint8 *puVar3;
+  uint8 **extraout_RAX_06;
+  uint8 **extraout_RAX_07;
+  uint8 **ppuVar4;
+  int gerrno;
+  void *extraout_RCX;
+  int iVar5;
+  undefined4 in_register_0000001c;
+  net__Ctype_struct_sockaddr *ptr;
+  runtime_itab *extraout_RBX;
+  uint8 *extraout_RBX_00;
+  uint8 *extraout_RBX_01;
+  uint8 *~r0_01;
+  undefined4 in_EDI;
+  void *extraout_RDI;
+  void *~r0_02;
+  void *extraout_RDI_00;
+  undefined8 *extraout_R11;
+  net__Ctype_struct_sockaddr **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  int unaff_R14;
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  undefined auVar6 [16];
+  uint8 *in_stack_ffffffffffffff58;
+  uint8 *puVar7;
+  int in_stack_ffffffffffffff60;
+  uint8 *puVar8;
+  undefined in_stack_ffffffffffffff68;
+  undefined uVar9;
+  undefined7 in_stack_ffffffffffffff69;
+  runtime_itab *in_stack_ffffffffffffff70;
+  void *in_stack_ffffffffffffff78;
+  undefined in_stack_ffffffffffffff80;
+  undefined in_stack_ffffffffffffff81;
+  undefined in_stack_ffffffffffffff82;
+  undefined uVar10;
+  int l;
+  error err_local;
+  __string names_local;
+  
+  while (&names_local <= *(__string **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  names_local.array = (string *)0x0;
+  auVar6._4_4_ = in_XMM15_Db;
+  auVar6._0_4_ = in_XMM15_Da;
+  auVar6._8_4_ = in_XMM15_Dc;
+  auVar6._12_4_ = in_XMM15_Dd;
+  names_local.cap = auVar6._8_8_;
+  err_local.tab._4_4_ = in_XMM15_Db;
+  err_local.tab._0_4_ = in_XMM15_Da;
+  err_local.data._0_4_ = in_XMM15_Dc;
+  err_local.data._4_4_ = in_XMM15_Dd;
+  net_acquireThread();
+  uVar10 = 1;
+  gerrno = 0;
+  ptr = (net__Ctype_struct_sockaddr *)0x0;
+  iVar5 = 0;
+  ~r0_02 = extraout_RDI;
+  for (iVar2 = 0x40; iVar2 < 0x1001; iVar2 = iVar2 << 1) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,iVar2,iVar2,~r0_02);
+    b.len = in_stack_ffffffffffffff60;
+    b.array = in_stack_ffffffffffffff58;
+    b.cap._0_1_ = in_stack_ffffffffffffff68;
+    b.cap._1_7_ = in_stack_ffffffffffffff69;
+    ~r1.data = in_stack_ffffffffffffff78;
+    ~r1.tab = in_stack_ffffffffffffff70;
+    net_cgoNameinfoPTR(b,sa_00,(net__Ctype_uint)iVar2,iVar2,~r1);
+    err_local.data = extraout_RCX;
+    err_local.tab = extraout_RBX;
+    gerrno = extraout_RAX;
+    iVar5 = iVar2;
+    ptr = sa_00;
+    if ((extraout_RAX == 0) || (extraout_RAX != 0xfffffffffffffff4)) break;
+    ~r0_02 = extraout_RDI_00;
+  }
+  if (gerrno != 0) {
+    if (gerrno == 0xfffffffffffffff5) {
+      if (err_local.tab == (runtime_itab *)0x0) {
+        err_local.data = &DAT_0095c660;
+        err_local.tab = (runtime_itab *)go_itab_syscall_Errno_error;
+      }
+      uVar10 = false;
+      isErrorNoSuchHost = false;
+    }
+    else if (gerrno == 0xfffffffffffffffe) {
+      err_local.data = net_errNoSuchHost.data;
+      err_local.tab = net_errNoSuchHost.tab;
+      uVar10 = false;
+      isErrorNoSuchHost = true;
+    }
+    else {
+      runtime_convT64(gerrno,ptr);
+      err_local.data = extraout_RAX_00;
+      err_local.tab = (runtime_itab *)go_itab_net_addrinfoErrno_error;
+      uVar10 = gerrno == 0xfffffffffffffffd;
+      isErrorNoSuchHost = false;
+    }
+    auVar6 = (*(code *)(err_local.tab)->fun[0])(err_local.data);
+    runtime_newobject((internal_abi_Type *)&DAT_00885120,auVar6._8_8_);
+    extraout_RAX_01[1] = auVar6._8_8_;
+    puVar1 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = auVar6._0_8_;
+      puVar1 = extraout_RAX_02;
+    }
+    *puVar1 = auVar6._0_8_;
+    puVar1[3] = CONCAT44(in_register_0000001c,salen);
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = sa;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[2] = sa;
+    *(undefined *)((int)puVar1 + 0x31) = uVar10;
+    *(bool *)((int)puVar1 + 0x32) = isErrorNoSuchHost;
+    names_local.cap = 0;
+    net_releaseThread();
+    return;
+  }
+  for (i = 0; (iVar2 = iVar5, i < iVar5 && (iVar2 = i, ptr->sa_data[i + -2] != 0)); i = i + 1) {
+  }
+  ~r0.len = in_stack_ffffffffffffff60;
+  ~r0.str = in_stack_ffffffffffffff58;
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,(uint8 *)ptr,iVar2,~r0);
+  uVar9 = 0x2e;
+  puVar7 = extraout_RAX_04;
+  puVar8 = extraout_RBX_00;
+  internal_bytealg_IndexByteString();
+  puVar3 = extraout_RBX_00;
+  ~r0_01 = extraout_RAX_04;
+  if (in_stack_ffffffffffffff70 != (runtime_itab *)0xffffffffffffffff) {
+    if (extraout_RBX_00 <= extraout_RBX_00 + -1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if ((extraout_RBX_00 + -1)[(int)extraout_RAX_04] != 0x2e) {
+      a0.len = (int)puVar8;
+      a0.str = puVar7;
+      a1.str._1_7_ = in_stack_ffffffffffffff69;
+      a1.str._0_1_ = uVar9;
+      a1.len = (int)in_stack_ffffffffffffff70;
+      ~r0_00.len._0_1_ = in_stack_ffffffffffffff80;
+      ~r0_00.str = (uint8 *)in_stack_ffffffffffffff78;
+      ~r0_00.len._1_1_ = in_stack_ffffffffffffff81;
+      ~r0_00.len._2_1_ = in_stack_ffffffffffffff82;
+      ~r0_00.len._3_1_ = uVar10;
+      ~r0_00.len._4_4_ = in_EDI;
+      runtime_concatstring2((runtime_tmpBuf *)0x0,a0,a1,~r0_00);
+      puVar3 = extraout_RBX_01;
+      ~r0_01 = extraout_RAX_05;
+    }
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_008117e0,~r0_01);
+  extraout_RAX_06[1] = puVar3;
+  ppuVar4 = extraout_RAX_06;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_01 = ~r0_01;
+    ppuVar4 = extraout_RAX_07;
+  }
+  *ppuVar4 = ~r0_01;
+  names_local.len = 1;
+  names_local.cap = 1;
+  net_releaseThread();
+  return;
+}
+
+
+
+void net_cgoSockaddr(net_IP ip,string zone,net__Ctype_struct_sockaddr *~r0,net__Ctype_uint ~r1)
+
+{
+  undefined uVar1;
+  undefined uVar2;
+  net__Ctype_char nVar3;
+  net__Ctype_char nVar4;
+  char *pcVar5;
+  undefined (*extraout_RAX) [16];
+  syscall_RawSockaddrInet6 *_sa;
+  undefined8 *extraout_RAX_00;
+  syscall_RawSockaddrInet4 *_sa_1;
+  size_t __n;
+  int i;
+  size_t sVar6;
+  undefined4 in_register_0000001c;
+  void *~r0_00;
+  void *__n_00;
+  void *~r0_01;
+  int in_RDI;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  net__Ctype_struct_sockaddr local_38;
+  net__Ctype_struct_sockaddr *local_28;
+  net__Ctype_struct_sockaddr *local_20;
+  
+  sVar6 = CONCAT44(in_register_0000001c,~r1);
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (sVar6 == 4) {
+    ~r0_01 = (void *)0x4;
+    local_20 = ~r0;
+  }
+  else {
+    if (sVar6 == 0x10) {
+      for (i = 0; i < 10; i = i + 1) {
+        if (~r0->sa_data[i + -2] != 0) goto LAB_005d71ca;
+      }
+      if ((~r0->sa_data[8] == -1) && (~r0->sa_data[9] == -1)) {
+        ~r0_01 = (void *)0x4;
+        local_20 = (net__Ctype_struct_sockaddr *)(~r0->sa_data + 10);
+        goto LAB_005d7000;
+      }
+    }
+LAB_005d71ca:
+    ~r0_01 = (void *)0x0;
+    local_20 = (net__Ctype_struct_sockaddr *)0x0;
+  }
+LAB_005d7000:
+  if (local_20 != (net__Ctype_struct_sockaddr *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00875ce0,~r0_01);
+    *extraout_RAX_00 = 2;
+    extraout_RAX_00[1] = 0;
+    __n_00 = (void *)0x4;
+    if (~r0_01 < (void *)0x4) {
+      __n_00 = ~r0_01;
+    }
+    if (local_20 != (net__Ctype_struct_sockaddr *)((int)extraout_RAX_00 + 4)) {
+      runtime_memmove((net__Ctype_struct_sockaddr *)((int)extraout_RAX_00 + 4),local_20,
+                      (size_t)__n_00);
+    }
+    return;
+  }
+  if (sVar6 == 4) {
+    uVar1 = *(undefined *)&~r0->sa_family;
+    uVar2 = *(undefined *)((int)&~r0->sa_family + 1);
+    nVar3 = ~r0->sa_data[0];
+    nVar4 = ~r0->sa_data[1];
+    sVar6 = 0x10;
+    if (net_v4InV6Prefix.len < 0x10) {
+      sVar6 = net_v4InV6Prefix.len;
+    }
+    local_38._0_12_ = in_XMM15._0_12_;
+    if ((net__Ctype_struct_sockaddr *)net_v4InV6Prefix.array != &local_38) {
+      runtime_memmove(&local_38,net_v4InV6Prefix.array,sVar6);
+    }
+    local_38.sa_data[10] = uVar1;
+    local_38.sa_data[11] = uVar2;
+    local_38.sa_data[12] = nVar3;
+    local_38.sa_data[13] = nVar4;
+    ~r0 = &local_38;
+    sVar6 = 0x10;
+  }
+  else if (sVar6 != 0x10) {
+    ~r0 = (net__Ctype_struct_sockaddr *)0x0;
+    sVar6 = 0;
+  }
+  if (~r0 == (net__Ctype_struct_sockaddr *)0x0) {
+    return;
+  }
+  local_28 = ~r0;
+  pcVar5 = net___ipv6ZoneCache__index((char *)&net_zoneCache,in_RDI);
+  runtime_newobject((internal_abi_Type *)&DAT_0087e440,~r0_00);
+  *extraout_RAX = in_XMM15;
+  *(undefined (*) [16])(*extraout_RAX + 0xc) = in_XMM15;
+  *(undefined2 *)*extraout_RAX = 10;
+  *(sdword *)(extraout_RAX[1] + 8) = (sdword)pcVar5;
+  __n = 0x10;
+  if ((int)sVar6 < 0x10) {
+    __n = sVar6;
+  }
+  if (local_28 != (net__Ctype_struct_sockaddr *)(*extraout_RAX + 8)) {
+    runtime_memmove((net__Ctype_struct_sockaddr *)(*extraout_RAX + 8),local_28,__n);
+  }
+  return;
+}
+
+
+
+void net_cgoLookupCNAME(context_Context ctx,string name,string cname,error err,bool completed)
+
+{
+  undefined7 in_register_00000001;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined1 *puVar1;
+  int in_RBX;
+  void *~r0;
+  int extraout_RDI;
+  vendor_golang_org_x_net_dns_dnsmessage_CNAMEResource *c;
+  int unaff_R14;
+  string in_stack_fffffffffffffec8;
+  string in_stack_fffffffffffffed8;
+  __vendor_golang_org_x_net_dns_dnsmessage_Resource in_stack_fffffffffffffee8;
+  error in_stack_ffffffffffffff00;
+  undefined local_b8 [175];
+  byte local_9;
+  
+  while (local_b8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_resSearch((context_Context)in_stack_fffffffffffffec8,in_stack_fffffffffffffed8,
+                CONCAT71(in_register_00000001,completed),in_RBX,in_stack_fffffffffffffee8,
+                in_stack_ffffffffffffff00);
+  if (extraout_RDI != 0) {
+    return;
+  }
+  if (~r0 == (void *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,(void *)0x0);
+    extraout_RAX_01[1] = 0x18;
+    *extraout_RAX_01 = &DAT_008bb205;
+    puVar1 = go_itab__errors_errorString_error;
+  }
+  else if (*(undefined1 **)(extraout_RAX + 0x110) ==
+           go_itab__vendor_golang_org_x_net_dns_dnsmessage_CNAMEResource_vendor_golang_org_x_net_dns_dnsmessage_ResourceBody
+          ) {
+    FUN_0046d080();
+    if (0xff < local_9) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,&stack0xfffffffffffffef8,(uint)local_9,
+               in_stack_fffffffffffffec8);
+    puVar1 = (undefined1 *)0x0;
+  }
+  else {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0);
+    extraout_RAX_00[1] = 0x1c;
+    *extraout_RAX_00 = &DAT_008bd67d;
+    puVar1 = go_itab__errors_errorString_error;
+  }
+  if (puVar1 == (undefined1 *)0x0) {
+    return;
+  }
+  return;
+}
+
+
+
+void net_resSearch(context_Context ctx,string hostname,int rtype,int class,
+                  __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0,error ~r1)
+
+{
+  error ~r1_00;
+  _param1 ~r0_00;
+  code **extraout_RAX;
+  code **extraout_RAX_00;
+  code **ppcVar1;
+  code *in_RCX;
+  int unaff_RBP;
+  code *in_RSI;
+  code *in_RDI;
+  code *in_R8;
+  code **extraout_R11;
+  int unaff_R14;
+  runtime_itab *unaff_retaddr;
+  context_Context in_stack_ffffffffffffffd8;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00869fe0,(void *)class);
+  *extraout_RAX = net_resSearch_func1;
+  extraout_RAX[2] = in_RDI;
+  ppcVar1 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = in_RCX;
+    ppcVar1 = extraout_RAX_00;
+  }
+  ppcVar1[1] = in_RCX;
+  ppcVar1[3] = in_RSI;
+  ppcVar1[4] = in_R8;
+  ~r0_00.cap = unaff_RBP;
+  ~r0_00.array = (vendor_golang_org_x_net_dns_dnsmessage_Resource *)in_stack_ffffffffffffffe8._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe8._8_8_;
+  ~r1_00.data = (void *)rtype;
+  ~r1_00.tab = unaff_retaddr;
+  net_doBlockingWithCtx_go_shape___vendor_golang_org_x_net_dns_dnsmessage_Resource_
+            (in_stack_ffffffffffffffd8,
+             (_param0)net__dict_doBlockingWithCtx___vendor_golang_org_x_net_dns_dnsmessage_Resource_
+             ,~r0_00,~r1_00);
+  return;
+}
+
+
+
+void net_resSearch_func1(__vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0,error ~r1)
+
+{
+  __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0_1;
+  error ~r1_00;
+  error ~r1_1;
+  __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0_00;
+  int rtype;
+  int in_RDX;
+  int unaff_RBP;
+  int class;
+  int unaff_R14;
+  vendor_golang_org_x_net_dns_dnsmessage_Resource *unaff_retaddr;
+  void *in_stack_00000030;
+  string in_stack_ffffffffffffffd8;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  ~r0_00.cap = unaff_RBP;
+  ~r0_00.array = (vendor_golang_org_x_net_dns_dnsmessage_Resource *)in_stack_ffffffffffffffe8._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe8._8_8_;
+  ~r0_1.len = (int)~r0.array;
+  ~r0_1.cap = ~r0.len;
+  ~r0_1.array = unaff_retaddr;
+  ~r1_00.data = ~r1.tab;
+  ~r1_00.tab = (runtime_itab *)~r0.cap;
+  ~r1_1.data = in_stack_00000030;
+  ~r1_1.tab = (runtime_itab *)~r1.data;
+  net_cgoResSearch(in_stack_ffffffffffffffd8,*(int *)(in_RDX + 8),*(int *)(in_RDX + 0x10),~r0_00,
+                   ~r0_1,~r1_00,~r1_1);
+  return;
+}
+
+
+
+// DWARF original prototype: void net.cgoResSearch(string hostname, int rtype, int class,
+// []vendor/golang.org/x/net/dns/dnsmessage.Resource ~r0,
+// []vendor/golang.org/x/net/dns/dnsmessage.Resource ~r0, error ~r1, error ~r1)
+
+void net_cgoResSearch(string hostname,int rtype,int class,
+                     __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0,
+                     __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0_1,error ~r1,error ~r1_1)
+
+{
+  string s_00;
+  error r2;
+  error ~r0_00;
+  __uint8 msg;
+  __vendor_golang_org_x_net_dns_dnsmessage_Resource ~r0_01;
+  __uint8 ~r0_02;
+  vendor_golang_org_x_net_dns_dnsmessage_Header ~r0_03;
+  error ~r1_00;
+  char extraout_AL;
+  sdword extraout_EAX;
+  uint64 p0;
+  struct___ *state;
+  uint64 p0_00;
+  net__Ctype_uchar *buf;
+  sdword extraout_EAX_00;
+  uint8 *extraout_RAX;
+  uint8 *s;
+  uint64 p0_01;
+  int extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  runtime_itab *tab;
+  net__Ctype_int in_ECX;
+  int iVar1;
+  uint extraout_RCX;
+  int iVar2;
+  void *r1;
+  void *r1_00;
+  int extraout_RBX;
+  void *r1_01;
+  void *~r0_04;
+  void *x;
+  undefined8 extraout_RSI;
+  bool ~r0_05;
+  net__Ctype_int in_EDI;
+  int extraout_RDI;
+  net__Ctype_uchar *extraout_RDI_00;
+  net__Ctype_uchar *p3;
+  int extraout_RDI_01;
+  net__Ctype_int extraout_R8D;
+  net__Ctype_int extraout_R8D_00;
+  net__Ctype_int r1_02;
+  int unaff_R14;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined8 uVar8;
+  uint8 *puVar9;
+  undefined4 in_stack_fffffffffffffcd0;
+  net__Ctype_int nVar10;
+  undefined4 in_stack_fffffffffffffcd4;
+  net__Ctype_int nVar11;
+  undefined8 in_stack_fffffffffffffcd8;
+  void *pvVar12;
+  undefined4 in_stack_fffffffffffffce0;
+  undefined4 in_stack_fffffffffffffce4;
+  sdword in_stack_fffffffffffffce8;
+  vendor_golang_org_x_net_dns_dnsmessage_RCode in_stack_fffffffffffffcec;
+  undefined2 in_stack_fffffffffffffcee;
+  error in_stack_fffffffffffffcf0;
+  int bufSize;
+  undefined local_2f0 [72];
+  runtime__defer local_2a8;
+  runtime__defer local_260;
+  runtime__defer local_218;
+  void *local_1d0;
+  undefined8 local_1c8;
+  uint8 *local_1c0;
+  void *local_1b8;
+  runtime_itab *local_1b0;
+  undefined local_1a8 [16];
+  undefined local_198 [16];
+  undefined local_188 [16];
+  undefined local_178 [16];
+  undefined8 local_168;
+  undefined local_160 [16];

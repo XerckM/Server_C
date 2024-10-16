@@ -1,0 +1,1000 @@
+                      (l,(google_golang_org_grpc_internal_transport_goAway *)in_RCX,
+                       (error)in_stack_ffffffffffffffb0);
+            return;
+          }
+        }
+        else if (dVar1 == 0xd94f822) {
+          if (in_RBX == &DAT_00826f80) {
+            google_golang_org_grpc_internal_transport___loopyWriter__preprocessData
+                      (l,(google_golang_org_grpc_internal_transport_dataFrame *)in_RCX);
+            return;
+          }
+        }
+        else if ((dVar1 == 0x3013e669) && (in_RBX == &DAT_00826da0)) {
+          google_golang_org_grpc_internal_transport___loopyWriter__incomingWindowUpdateHandler
+                    (l,(google_golang_org_grpc_internal_transport_incomingWindowUpdate *)in_RCX);
+          return;
+        }
+      }
+      else if (dVar1 < 0x79679b61) {
+        if (dVar1 == 0x647c9ae1) {
+          if (in_RBX == &DAT_00826d40) {
+            google_golang_org_grpc_internal_transport___loopyWriter__incomingSettingsHandler
+                      (l,(google_golang_org_grpc_internal_transport_incomingSettings *)in_RCX,
+                       (error)in_stack_ffffffffffffffb0);
+            return;
+          }
+        }
+        else if ((dVar1 == 0x79679b60) && (in_RBX == &DAT_00826c80)) {
+          google_golang_org_grpc_internal_transport___loopyWriter__headerHandler
+                    (l,in_RCX,(error)in_stack_ffffffffffffffb0);
+          return;
+        }
+      }
+      else if (dVar1 == 0x7ad95d9c) {
+        if (in_RBX == &DAT_00826ec0) {
+          golang_org_x_net_http2___Framer__WriteWindowUpdate
+                    (l->framer->fr,in_RCX->streamID,*(uint32 *)&in_RCX->field_0x4,
+                     (error)in_stack_ffffffffffffffb0);
+          return;
+        }
+      }
+      else if ((dVar1 == 0x7b578250) && (in_RBX == &DAT_00826fe0)) {
+        runtime_newobject((internal_abi_Type *)&DAT_0088a2a0,&DAT_00826fe0);
+        *extraout_RAX = in_RCX->streamID;
+        *(undefined8 *)(extraout_RAX + 2) = 1;
+        puVar6 = extraout_RAX;
+        runtime_newobject((internal_abi_Type *)&DAT_00851b40,~r0_01);
+        uVar2 = extraout_RAX_00;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RAX_01;
+          extraout_R11[1] = *(undefined8 *)(puVar6 + 4);
+          uVar2 = extraout_RAX_01;
+        }
+        *(undefined8 *)(puVar6 + 4) = uVar2;
+        pgVar7 = (in_RCX->hf).array;
+        puVar4 = puVar6;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = extraout_RDI;
+          extraout_R11_00[1] = *(golang_org_x_net_http2_hpack_HeaderField **)(puVar6 + 8);
+          in_RCX = extraout_RSI;
+          pgVar7 = extraout_RDI;
+        }
+        *(golang_org_x_net_http2_hpack_HeaderField **)(puVar6 + 8) = pgVar7;
+        runtime_mapassign_fast32
+                  ((internal_abi_MapType *)&DAT_0082d8e0,(runtime_hmap *)l->estdStreams,
+                   in_RCX->streamID,l);
+        ppuVar3 = extraout_RAX_02;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_01 = puVar4;
+          extraout_R11_01[1] = *extraout_RAX_03;
+          ppuVar3 = extraout_RAX_03;
+        }
+        *ppuVar3 = puVar4;
+        return;
+      }
+    }
+    else if (dVar1 < 0xb794db82) {
+      if (dVar1 == 0x7f0b13c4) {
+        if (in_RBX == &DAT_0083ce20) {
+          runtime_convT((internal_abi_Type *)&DAT_00884220,
+                        &google_golang_org_grpc_internal_transport_ErrConnClosing,in_RCX);
+          return;
+        }
+      }
+      else if (dVar1 == 0xb7721455) {
+        if (in_RBX == &DAT_00826e60) {
+          settings.cap = (int)in_stack_ffffffffffffffc0;
+          settings.array = (golang_org_x_net_http2_Setting *)in_stack_ffffffffffffffb0.str;
+          settings.len = in_stack_ffffffffffffffb0.len;
+          golang_org_x_net_http2___Framer__WriteSettings
+                    (l->framer->fr,settings,in_stack_ffffffffffffffc8);
+          return;
+        }
+      }
+      else if ((dVar1 == 0xb794db81) && (in_RBX == &DAT_00826e00)) {
+        runtime_chansend1(*(runtime_hchan **)in_RCX,&l->sendQuota);
+        return;
+      }
+    }
+    else if (dVar1 < 0xcd5737ad) {
+      if (dVar1 == 0xc8bf35ba) {
+        if (in_RBX == &DAT_00826c20) {
+          google_golang_org_grpc_internal_transport___loopyWriter__earlyAbortStreamHandler
+                    (l,(google_golang_org_grpc_internal_transport_earlyAbortStream *)in_RCX,
+                     (error)in_stack_ffffffffffffffb0);
+          return;
+        }
+      }
+      else if ((dVar1 == 0xcd5737ac) && (in_RBX == &DAT_00826ce0)) {
+        if (l->side == 0) {
+          l->draining = true;
+          if (l->estdStreams == (map_uint32__google_golang_org_grpc_internal_transport_outStream)0x0
+             ) {
+            iVar5 = 0;
+          }
+          else {
+            iVar5 = l->estdStreams->count;
+          }
+          if (iVar5 == 0) {
+            runtime_newobject((internal_abi_Type *)&DAT_0083e560,&DAT_00826ce0);
+            extraout_RAX_04[1] = 0x26;
+            *extraout_RAX_04 = &DAT_008c39f1;
+          }
+        }
+        return;
+      }
+    }
+    else if (dVar1 == 0xf771307c) {
+      if (in_RBX == &DAT_00826f20) {
+        google_golang_org_grpc_internal_transport___loopyWriter__pingHandler
+                  (l,(google_golang_org_grpc_internal_transport_ping *)in_RCX,
+                   (error)in_stack_ffffffffffffffb0);
+        return;
+      }
+    }
+    else if ((dVar1 == 0xfa552596) && (in_RBX == &DAT_00826bc0)) {
+      google_golang_org_grpc_internal_transport___loopyWriter__cleanupStreamHandler
+                (l,(google_golang_org_grpc_internal_transport_cleanupStream *)in_RCX,
+                 (error)in_stack_ffffffffffffffb0);
+      return;
+    }
+  }
+  a.len = (int)in_stack_ffffffffffffffc8.tab;
+  a.cap = (int)in_stack_ffffffffffffffc8.data;
+  a.array = in_stack_ffffffffffffffc0;
+  ~r0_00.data = in_stack_ffffffffffffffe0;
+  ~r0_00.tab = in_stack_ffffffffffffffd8;
+  fmt_Errorf(in_stack_ffffffffffffffb0,a,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___loopyWriter__applySettings
+               (google_golang_org_grpc_internal_transport_loopyWriter *l,
+               __golang_org_x_net_http2_Setting ss)
+
+{
+  short sVar1;
+  dword dVar2;
+  dword dVar3;
+  int in_RCX;
+  google_golang_org_grpc_internal_transport_outStream *stream;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RCX;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RCX_00;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RCX_01;
+  google_golang_org_grpc_internal_transport_outStream *pgVar4;
+  int iVar5;
+  int in_RBX;
+  runtime_hmap *h;
+  google_golang_org_grpc_internal_transport_outStreamList *extraout_RBX;
+  google_golang_org_grpc_internal_transport_outStreamList *extraout_RBX_00;
+  google_golang_org_grpc_internal_transport_outStreamList *pgVar6;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RBX_01;
+  google_golang_org_grpc_internal_transport_outStream *pgVar7;
+  google_golang_org_grpc_internal_transport_outStream *e;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RSI;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RSI_00;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_00;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_01;
+  int unaff_R14;
+  runtime_hiter local_68;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (iVar5 = 0; iVar5 < in_RCX; iVar5 = iVar5 + 1) {
+    sVar1 = *(short *)(in_RBX + iVar5 * 8);
+    dVar2 = *(dword *)(in_RBX + 4 + iVar5 * 8);
+    if (sVar1 == 1) {
+      (**google_golang_org_grpc_internal_transport_updateHeaderTblSize)(l->hEnc,dVar2);
+    }
+    else if ((sVar1 == 4) && (dVar3 = l->oiws, l->oiws = dVar2, dVar3 < dVar2)) {
+      FUN_0046cdab();
+      runtime_mapiterinit((internal_abi_MapType *)&DAT_0082d8e0,h,&local_68);
+      while (local_68.key != (void *)0x0) {
+                    // WARNING: Load size is inaccurate
+        pgVar4 = *local_68.elem;
+        if (pgVar4->state == 2) {
+          pgVar4->state = 0;
+          pgVar6 = l->activeStreams;
+          pgVar7 = pgVar6->tail->prev;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier4();
+            *extraout_R11 = extraout_RCX;
+            extraout_R11[1] = extraout_RSI->next;
+            extraout_R11[2] = extraout_RSI;
+            extraout_R11[3] = extraout_RCX->prev;
+            pgVar4 = extraout_RCX;
+            pgVar6 = extraout_RBX;
+            pgVar7 = extraout_RSI;
+          }
+          pgVar7->next = pgVar4;
+          pgVar4->prev = pgVar7;
+          pgVar7 = pgVar6->tail;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_00 = extraout_RSI_00;
+            extraout_R11_00[1] = extraout_RCX_00->next;
+            pgVar4 = extraout_RCX_00;
+            pgVar6 = extraout_RBX_00;
+            pgVar7 = extraout_RSI_00;
+          }
+          pgVar4->next = pgVar7;
+          pgVar7 = pgVar6->tail;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_01 = extraout_RCX_01;
+            extraout_R11_01[1] = extraout_RBX_01->prev;
+            pgVar4 = extraout_RCX_01;
+            pgVar7 = extraout_RBX_01;
+          }
+          pgVar7->prev = pgVar4;
+        }
+        runtime_mapiternext(&local_68);
+      }
+    }
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___loopyWriter__processData
+               (google_golang_org_grpc_internal_transport_loopyWriter *l,bool ~r0,error ~r1)
+
+{
+  void *__dest;
+  internal_abi_Type *have;
+  __uint8 data;
+  __golang_org_x_net_http2_hpack_HeaderField hf;
+  __uint8 data_00;
+  __golang_org_x_net_http2_hpack_HeaderField hf_00;
+  __uint8 pad;
+  __uint8 pad_00;
+  bool endStream;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_00;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_01;
+  int extraout_RAX_02;
+  google_golang_org_grpc_internal_transport_itemNode *extraout_RAX_03;
+  undefined8 extraout_RAX_04;
+  int extraout_RAX_05;
+  int extraout_RAX_06;
+  int size;
+  int extraout_RAX_07;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_08;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_09;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_10;
+  google_golang_org_grpc_internal_transport_loopyWriter *extraout_RAX_11;
+  google_golang_org_grpc_internal_transport_loopyWriter *l_00;
+  int extraout_RAX_12;
+  int extraout_RAX_13;
+  size_t sVar1;
+  int extraout_RCX;
+  int iVar2;
+  int extraout_RCX_00;
+  google_golang_org_grpc_internal_transport_itemNode *extraout_RCX_01;
+  undefined8 extraout_RCX_02;
+  google_golang_org_grpc_internal_transport_outStream *pgVar3;
+  uint uVar4;
+  uint32 *puVar5;
+  google_golang_org_grpc_internal_transport_itemList *pgVar6;
+  google_golang_org_grpc_internal_transport_headerFrame *trailer_1;
+  google_golang_org_grpc_internal_transport_outStreamList *pgVar7;
+  google_golang_org_grpc_internal_transport_outStream *pgVar8;
+  int extraout_RBX;
+  google_golang_org_grpc_internal_transport_outStreamList *extraout_RSI;
+  google_golang_org_grpc_internal_transport_outStreamList *extraout_RSI_00;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RSI_01;
+  uint uVar9;
+  int maxSize;
+  google_golang_org_grpc_internal_transport_outStream *e_1;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RSI_02;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RSI_03;
+  google_golang_org_grpc_internal_transport_outStream *e;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RDI;
+  google_golang_org_grpc_internal_transport_outStream *extraout_RDI_00;
+  undefined8 *puVar10;
+  int dSize;
+  google_golang_org_grpc_internal_transport_itemList *extraout_R10;
+  google_golang_org_grpc_internal_transport_itemList *extraout_R10_00;
+  google_golang_org_grpc_internal_transport_headerFrame *trailer;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_01;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_02;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_03;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_04;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_05;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_06;
+  google_golang_org_grpc_internal_transport_outStream *extraout_R10_07;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_00;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_01;
+  google_golang_org_grpc_internal_transport_itemNode **extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_04;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_05;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_06;
+  int iVar11;
+  int *extraout_R11_07;
+  int *extraout_R11_08;
+  google_golang_org_grpc_internal_transport_itemNode **extraout_R11_09;
+  google_golang_org_grpc_internal_transport_itemNode *pgVar12;
+  undefined8 *extraout_R11_10;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_11;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_12;
+  google_golang_org_grpc_internal_transport_outStream **extraout_R11_13;
+  google_golang_org_grpc_internal_transport_outStream *b;
+  google_golang_org_grpc_internal_transport_outStream *str;
+  int unaff_R14;
+  int hSize;
+  byte bVar13;
+  undefined in_XMM15 [16];
+  error in_stack_ffffffffffffbf68;
+  int in_stack_ffffffffffffbf78;
+  error in_stack_ffffffffffffbf80;
+  int in_stack_ffffffffffffbf90;
+  error in_stack_ffffffffffffbf98;
+  undefined8 local_4030 [3];
+  undefined auStack_4018 [16360];
+  uint32 *local_30;
+  google_golang_org_grpc_internal_transport_outStream *local_28;
+  uint32 *local_20;
+  uint32 *local_18;
+  undefined8 *local_10;
+  
+  bVar13 = 0;
+  while ((&stack0x00000000 < (undefined *)0x4018 ||
+         (auStack_4018 <= *(undefined **)(unaff_R14 + 0x10)))) {
+    runtime_morestack_noctxt();
+  }
+  if (l->sendQuota == 0) {
+    return;
+  }
+  str = l->activeStreams->head->next;
+  if (l->activeStreams->tail == str) {
+    str = (google_golang_org_grpc_internal_transport_outStream *)0x0;
+  }
+  else {
+    pgVar3 = str->prev;
+    if (pgVar3 != (google_golang_org_grpc_internal_transport_outStream *)0x0) {
+      pgVar8 = str->next;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = pgVar8;
+        extraout_R11[1] = pgVar3->next;
+        l = extraout_RAX;
+      }
+      pgVar3->next = pgVar8;
+    }
+    pgVar3 = str->next;
+    if (pgVar3 != (google_golang_org_grpc_internal_transport_outStream *)0x0) {
+      pgVar8 = str->prev;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = pgVar8;
+        extraout_R11_00[1] = pgVar3->prev;
+        l = extraout_RAX_00;
+      }
+      pgVar3->prev = pgVar8;
+    }
+    if (runtime_writeBarrier._0_4_ != 0) {
+      pgVar3 = str->next;
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = pgVar3;
+      extraout_R11_01[1] = str->prev;
+      l = extraout_RAX_01;
+    }
+    str->next = (google_golang_org_grpc_internal_transport_outStream *)in_XMM15._0_8_;
+    str->prev = (google_golang_org_grpc_internal_transport_outStream *)in_XMM15._8_8_;
+  }
+  if (str == (google_golang_org_grpc_internal_transport_outStream *)0x0) {
+    return;
+  }
+  pgVar12 = str->itl->head;
+  have = (pgVar12->it)._type;
+  if (have != (internal_abi_Type *)&DAT_00826f80) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeE
+              (have,(internal_abi_Type *)&DAT_00826f80,(internal_abi_Type *)&DAT_00821120);
+  }
+  local_30 = (uint32 *)(pgVar12->it).data;
+  hSize = *(int *)(local_30 + 4);
+  local_28 = str;
+  if ((hSize == 0) && (*(int *)(local_30 + 10) == 0)) {
+    data.cap = in_stack_ffffffffffffbf78;
+    data.array = (uint8 *)in_stack_ffffffffffffbf68.tab;
+    data.len = (int)in_stack_ffffffffffffbf68.data;
+    pad.cap = in_stack_ffffffffffffbf90;
+    pad.array = (uint8 *)in_stack_ffffffffffffbf80.tab;
+    pad.len = (int)in_stack_ffffffffffffbf80.data;
+    golang_org_x_net_http2___Framer__WriteDataPadded
+              (l->framer->fr,*local_30,*(bool *)(local_30 + 1),data,pad,in_stack_ffffffffffffbf98);
+    if (extraout_RAX_02 != 0) {
+      return;
+    }
+    pgVar6 = local_28->itl;
+    pgVar3 = local_28;
+    if (pgVar6->head != (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+      pgVar12 = pgVar6->head->next;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = extraout_RAX_03;
+        extraout_R11_02[1] = extraout_R10->head;
+        pgVar6 = extraout_R10;
+        pgVar12 = extraout_RAX_03;
+      }
+      pgVar6->head = pgVar12;
+      if (pgVar12 == (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_03 = extraout_RAX_04;
+          pgVar6 = extraout_R10_00;
+        }
+        pgVar6->tail = (google_golang_org_grpc_internal_transport_itemNode *)0x0;
+      }
+    }
+    pgVar12 = pgVar3->itl->head;
+    if (pgVar12 == (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+      pgVar3->state = 1;
+    }
+    else if ((pgVar12->it)._type == (internal_abi_Type *)&DAT_00826c80) {
+      local_18 = (uint32 *)(pgVar12->it).data;
+      hf.cap = in_stack_ffffffffffffbf78;
+      hf.array = (golang_org_x_net_http2_hpack_HeaderField *)in_stack_ffffffffffffbf68.tab;
+      hf.len = (int)in_stack_ffffffffffffbf68.data;
+      google_golang_org_grpc_internal_transport___loopyWriter__writeHeader
+                (l,*local_18,*(bool *)(local_18 + 8),hf,*(func__ ***)(local_18 + 2),
+                 in_stack_ffffffffffffbf80);
+      if (extraout_RAX_05 != 0) {
+        return;
+      }
+      google_golang_org_grpc_internal_transport___loopyWriter__cleanupStreamHandler
+                (l,*(google_golang_org_grpc_internal_transport_cleanupStream **)(local_18 + 0x10),
+                 in_stack_ffffffffffffbf68);
+      if (extraout_RAX_06 != 0) {
+        return;
+      }
+    }
+    else {
+      pgVar7 = l->activeStreams;
+      pgVar8 = pgVar7->tail->prev;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier4();
+        *extraout_R11_04 = pgVar3;
+        extraout_R11_04[1] = extraout_RDI->next;
+        extraout_R11_04[2] = extraout_RDI;
+        extraout_R11_04[3] = pgVar3->prev;
+        pgVar7 = extraout_RSI;
+        pgVar8 = extraout_RDI;
+      }
+      pgVar8->next = pgVar3;
+      pgVar3->prev = pgVar8;
+      pgVar8 = pgVar7->tail;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_05 = extraout_RDI_00;
+        extraout_R11_05[1] = pgVar3->next;
+        pgVar7 = extraout_RSI_00;
+        pgVar8 = extraout_RDI_00;
+      }
+      pgVar3->next = pgVar8;
+      pgVar8 = pgVar7->tail;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_06 = pgVar3;
+        extraout_R11_06[1] = extraout_RSI_01->prev;
+        pgVar8 = extraout_RSI_01;
+      }
+      pgVar8->prev = pgVar3;
+    }
+    return;
+  }
+  uVar9 = (uint)l->oiws - str->bytesOutStanding;
+  if ((int)uVar9 < 1) {
+    str->state = 2;
+    return;
+  }
+  uVar4 = 0x4000;
+  if ((int)uVar9 < 0x4000) {
+    uVar4 = uVar9;
+  }
+  if ((int)(uint)l->sendQuota < (int)uVar4) {
+    uVar4 = (uint)l->sendQuota;
+  }
+  if ((int)uVar4 < hSize) {
+    hSize = uVar4;
+  }
+  dSize = *(int *)(local_30 + 10);
+  if ((int)(uVar4 - hSize) < *(int *)(local_30 + 10)) {
+    dSize = uVar4 - hSize;
+  }
+  if (hSize == 0) {
+    local_10 = *(undefined8 **)(local_30 + 8);
+    uVar9 = *(uint *)(local_30 + 0xc);
+  }
+  else if (dSize == 0) {
+    local_10 = *(undefined8 **)(local_30 + 2);
+    uVar9 = *(uint *)(local_30 + 6);
+  }
+  else {
+    puVar10 = local_4030;
+    for (iVar11 = 0x800; iVar11 != 0; iVar11 = iVar11 + -1) {
+      *puVar10 = 0;
+      puVar10 = puVar10 + (uint)bVar13 * -2 + 1;
+    }
+    if (0x4000 < (uint)hSize) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    sVar1 = hSize;
+    if ((int)*(size_t *)(local_30 + 4) < hSize) {
+      sVar1 = *(size_t *)(local_30 + 4);
+    }
+    if (*(undefined8 **)(local_30 + 2) != local_4030) {
+      runtime_memmove(local_4030,*(undefined8 **)(local_30 + 2),sVar1);
+    }
+    iVar11 = hSize + -0x4000;
+    if (*(uint *)(local_30 + 0xc) < (uint)dSize) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    __dest = (void *)((int)local_4030 + (iVar11 >> 0x3f & hSize));
+    sVar1 = -iVar11;
+    if (SBORROW8(dSize,-iVar11) != dSize + iVar11 < 0) {
+      sVar1 = dSize;
+    }
+    if (*(void **)(local_30 + 8) != __dest) {
+      runtime_memmove(__dest,*(void **)(local_30 + 8),sVar1);
+    }
+    if (0x4000 < (uint)(dSize + hSize)) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    uVar9 = 0x4000;
+    local_10 = local_4030;
+  }
+  uVar4 = dSize + hSize;
+  (**local_28->wq->replenish)(uVar4);
+  if ((*(char *)(local_30 + 1) == '\0') ||
+     ((int)uVar4 < *(int *)(local_30 + 4) + *(int *)(local_30 + 10))) {
+    endStream = false;
+  }
+  else {
+    endStream = true;
+  }
+  if (*(code ***)(local_30 + 0xe) != (code **)0x0) {
+    (***(code ***)(local_30 + 0xe))();
+  }
+  if (uVar9 < uVar4) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  data_00.cap = in_stack_ffffffffffffbf78;
+  data_00.array = (uint8 *)in_stack_ffffffffffffbf68.tab;
+  data_00.len = (int)in_stack_ffffffffffffbf68.data;
+  pad_00.cap = in_stack_ffffffffffffbf90;
+  pad_00.array = (uint8 *)in_stack_ffffffffffffbf80.tab;
+  pad_00.len = (int)in_stack_ffffffffffffbf80.data;
+  golang_org_x_net_http2___Framer__WriteDataPadded
+            (l->framer->fr,*local_30,endStream,data_00,pad_00,in_stack_ffffffffffffbf98);
+  if (extraout_RAX_07 != 0) {
+    return;
+  }
+  local_28->bytesOutStanding = local_28->bytesOutStanding + uVar4;
+  l->sendQuota = l->sendQuota - (sdword)uVar4;
+  if ((uint)hSize <= *(uint *)(local_30 + 4)) {
+    iVar11 = *(int *)(local_30 + 6);
+    *(uint *)(local_30 + 4) = *(uint *)(local_30 + 4) - hSize;
+    *(int *)(local_30 + 6) = iVar11 - hSize;
+    iVar11 = (hSize & -(iVar11 - hSize) >> 0x3f) + *(int *)(local_30 + 2);
+    l_00 = l;
+    puVar5 = local_30;
+    pgVar3 = local_28;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_07 = extraout_RCX;
+      extraout_R11_07[1] = *(int *)(puVar5 + 2);
+      l_00 = extraout_RAX_08;
+      pgVar3 = extraout_R10_01;
+      iVar11 = extraout_RCX;
+    }
+    *(int *)(puVar5 + 2) = iVar11;
+    if (*(uint *)(puVar5 + 10) < (uint)dSize) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    iVar11 = *(int *)(puVar5 + 0xc);
+    iVar2 = *(uint *)(puVar5 + 10) - dSize;
+    *(int *)(puVar5 + 10) = iVar2;
+    *(int *)(puVar5 + 0xc) = iVar11 - dSize;
+    iVar11 = *(int *)(puVar5 + 8) + (dSize & -(iVar11 - dSize) >> 0x3f);
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_08 = extraout_RBX;
+      extraout_R11_08[1] = *(int *)(puVar5 + 8);
+      l_00 = extraout_RAX_09;
+      iVar2 = extraout_RCX_00;
+      pgVar3 = extraout_R10_02;
+      iVar11 = extraout_RBX;
+    }
+    *(int *)(puVar5 + 8) = iVar11;
+    if ((*(int *)(puVar5 + 4) == 0) && (iVar2 == 0)) {
+      pgVar6 = pgVar3->itl;
+      if (pgVar6->head != (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+        pgVar12 = pgVar6->head->next;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_09 = extraout_RCX_01;
+          extraout_R11_09[1] = pgVar6->head;
+          l_00 = extraout_RAX_10;
+          pgVar3 = extraout_R10_03;
+          pgVar12 = extraout_RCX_01;
+        }
+        pgVar6->head = pgVar12;
+        if (pgVar12 == (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier1();
+            *extraout_R11_10 = extraout_RCX_02;
+            l_00 = extraout_RAX_11;
+            pgVar3 = extraout_R10_04;
+          }
+          pgVar6->tail = (google_golang_org_grpc_internal_transport_itemNode *)0x0;
+        }
+      }
+    }
+    pgVar12 = pgVar3->itl->head;
+    if (pgVar12 == (google_golang_org_grpc_internal_transport_itemNode *)0x0) {
+      pgVar3->state = 1;
+    }
+    else if ((pgVar12->it)._type == (internal_abi_Type *)&DAT_00826c80) {
+      local_20 = (uint32 *)(pgVar12->it).data;
+      hf_00.cap = in_stack_ffffffffffffbf78;
+      hf_00.array = (golang_org_x_net_http2_hpack_HeaderField *)in_stack_ffffffffffffbf68.tab;
+      hf_00.len = (int)in_stack_ffffffffffffbf68.data;
+      google_golang_org_grpc_internal_transport___loopyWriter__writeHeader
+                (l_00,*local_20,*(bool *)(local_20 + 8),hf_00,*(func__ ***)(local_20 + 2),
+                 in_stack_ffffffffffffbf80);
+      if (extraout_RAX_12 != 0) {
+        return;
+      }
+      google_golang_org_grpc_internal_transport___loopyWriter__cleanupStreamHandler
+                (l,*(google_golang_org_grpc_internal_transport_cleanupStream **)(local_20 + 0x10),
+                 in_stack_ffffffffffffbf68);
+      if (extraout_RAX_13 != 0) {
+        return;
+      }
+    }
+    else if ((uint)l_00->oiws == pgVar3->bytesOutStanding ||
+             (int)((uint)l_00->oiws - pgVar3->bytesOutStanding) < 0) {
+      pgVar3->state = 2;
+    }
+    else {
+      pgVar7 = l_00->activeStreams;
+      pgVar8 = pgVar7->tail->prev;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier4();
+        *extraout_R11_11 = extraout_R10_05;
+        extraout_R11_11[1] = extraout_RSI_02->next;
+        extraout_R11_11[2] = extraout_RSI_02;
+        extraout_R11_11[3] = extraout_R10_05->prev;
+        pgVar8 = extraout_RSI_02;
+        pgVar3 = extraout_R10_05;
+      }
+      pgVar8->next = pgVar3;
+      pgVar3->prev = pgVar8;
+      pgVar8 = pgVar7->tail;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_12 = extraout_RSI_03;
+        extraout_R11_12[1] = extraout_R10_06->next;
+        pgVar8 = extraout_RSI_03;
+        pgVar3 = extraout_R10_06;
+      }
+      pgVar3->next = pgVar8;
+      pgVar8 = pgVar7->tail;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_13 = extraout_R10_07;
+        extraout_R11_13[1] = pgVar8->prev;
+        pgVar3 = extraout_R10_07;
+      }
+      pgVar8->prev = pgVar3;
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___inFlow__newLimit
+               (google_golang_org_grpc_internal_transport_inFlow *f,uint32 n)
+
+{
+  sdword sVar1;
+  int32 new;
+  int unaff_R14;
+  bool bVar2;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar2 = (f->mu).state == 0;
+  if (bVar2) {
+    (f->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar2) {
+    sync___Mutex__lockSlow(&f->mu);
+  }
+  f->limit = n;
+  LOCK();
+  sVar1 = (f->mu).state;
+  (f->mu).state = (f->mu).state + -1;
+  UNLOCK();
+  sVar1 = sVar1 + -1;
+  if (sVar1 != 0) {
+    sync___Mutex__unlockSlow(&f->mu,sVar1);
+  }
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// DWARF original prototype: void
+// google.golang.org/grpc/internal/transport.(*inFlow).maybeAdjust(google.golang.org/grpc/internal/transport.inFlow
+// * f, uint32 n, uint32 ~r0, uint32 ~r0)
+
+void google_golang_org_grpc_internal_transport___inFlow__maybeAdjust
+               (google_golang_org_grpc_internal_transport_inFlow *f,uint32 n,uint32 ~r0,uint32 ~r0_1
+               )
+
+{
+  uint32 uVar1;
+  int32 estSenderQuota;
+  int32 estUntransmittedData;
+  int unaff_R14;
+  bool bVar2;
+  undefined local_20 [16];
+  undefined *local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar2 = (f->mu).state == 0;
+  if (bVar2) {
+    (f->mu).state = 1;
+  }
+  UNLOCK();
+  if (0x7fffffff < n) {
+    n = 0x7fffffff;
+  }
+  if (!bVar2) {
+    sync___Mutex__lockSlow(&f->mu);
+  }
+  local_20._8_8_ = f;
+  local_20._0_8_ = google_golang_org_grpc_internal_transport___inFlow__maybeAdjust_func1;
+  local_10 = local_20;
+  uVar1 = f->limit;
+  if ((sdword)(n - f->pendingData) <= (sdword)(uVar1 - (f->pendingUpdate + f->pendingData))) {
+    google_golang_org_grpc_internal_transport___inFlow__maybeAdjust_func1();
+    return;
+  }
+  if ((dword)(n + uVar1) < 0x80000000) {
+    f->delta = n;
+  }
+  else {
+    f->delta = -(uVar1 + 0x80000001);
+  }
+  google_golang_org_grpc_internal_transport___inFlow__maybeAdjust_func1();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___inFlow__maybeAdjust_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___inFlow__onData
+               (google_golang_org_grpc_internal_transport_inFlow *f,uint32 n,error ~r0)
+
+{
+  error ~r0_00;
+  dword val;
+  uint32 uVar1;
+  dword new_00;
+  int32 new;
+  sdword sVar2;
+  int32 new_1;
+  void *extraout_RBX;
+  void *x_00;
+  int unaff_R14;
+  bool bVar3;
+  string in_stack_ffffffffffffffa0;
+  __interface___ in_stack_ffffffffffffffb0;
+  dword in_stack_ffffffffffffffc8;
+  google_golang_org_grpc_internal_transport_inFlow *in_stack_ffffffffffffffd0;
+  void *x;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar3 = (f->mu).state == 0;
+  if (bVar3) {
+    (f->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar3) {
+    sync___Mutex__lockSlow(&f->mu);
+    in_stack_ffffffffffffffd0 = f;
+  }
+  uVar1 = n + f->pendingData;
+  f->pendingData = uVar1;
+  val = f->pendingUpdate + uVar1;
+  uVar1 = f->limit;
+  if (val <= (dword)(f->delta + uVar1)) {
+    LOCK();
+    sVar2 = (f->mu).state;
+    (f->mu).state = (f->mu).state + -1;
+    UNLOCK();
+    sVar2 = sVar2 + -1;
+    if (sVar2 != 0) {
+      sync___Mutex__unlockSlow(&f->mu,sVar2);
+    }
+    return;
+  }
+  LOCK();
+  sVar2 = (f->mu).state;
+  (f->mu).state = (f->mu).state + -1;
+  UNLOCK();
+  new_00 = sVar2 - 1;
+  x = (void *)(uint)new_00;
+  if (new_00 != 0) {
+    sync___Mutex__unlockSlow(&f->mu,new_00);
+    x = extraout_RBX;
+    in_stack_ffffffffffffffc8 = val;
+  }
+  runtime_convT32(val,x);
+  runtime_convT32(uVar1,x_00);
+  ~r0_00.tab._4_4_ = uVar1;
+  ~r0_00.tab._0_4_ = in_stack_ffffffffffffffc8;
+  ~r0_00.data = in_stack_ffffffffffffffd0;
+  fmt_Errorf(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___inFlow__onRead
+               (google_golang_org_grpc_internal_transport_inFlow *f,uint32 n,uint32 ~r0)
+
+{
+  int32 new_1;
+  sdword sVar1;
+  int32 new;
+  dword dVar2;
+  int32 new_2;
+  int unaff_R14;
+  bool bVar3;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar3 = (f->mu).state == 0;
+  if (bVar3) {
+    (f->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar3) {
+    sync___Mutex__lockSlow(&f->mu);
+  }
+  if (f->pendingData != 0) {
+    f->pendingData = f->pendingData - n;
+    dVar2 = f->delta;
+    if (dVar2 < n) {
+      f->delta = 0;
+      sVar1 = n - dVar2;
+    }
+    else {
+      f->delta = dVar2 - n;
+      sVar1 = 0;
+    }
+    dVar2 = sVar1 + f->pendingUpdate;
+    f->pendingUpdate = dVar2;
+    if (dVar2 < f->limit >> 2) {
+      LOCK();
+      sVar1 = (f->mu).state;
+      (f->mu).state = (f->mu).state + -1;
+      UNLOCK();
+      sVar1 = sVar1 + -1;
+      if (sVar1 != 0) {
+        sync___Mutex__unlockSlow(&f->mu,sVar1);
+      }
+      return;
+    }
+    f->pendingUpdate = 0;
+    LOCK();
+    sVar1 = (f->mu).state;
+    (f->mu).state = (f->mu).state + -1;
+    UNLOCK();
+    sVar1 = sVar1 + -1;
+    if (sVar1 != 0) {
+      sync___Mutex__unlockSlow(&f->mu,sVar1);
+    }
+    return;
+  }
+  LOCK();
+  sVar1 = (f->mu).state;
+  (f->mu).state = (f->mu).state + -1;
+  UNLOCK();
+  sVar1 = sVar1 + -1;
+  if (sVar1 != 0) {
+    sync___Mutex__unlockSlow(&f->mu,sVar1);
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport_NewServerHandlerTransport
+               (net_http_ResponseWriter w,net_http_Request *r,
+               __google_golang_org_grpc_stats_Handler stats,
+               google_golang_org_grpc_internal_transport_ServerTransport ~r0,error ~r1)
+
+{
+  runtime_slice ~r0_00;
+  __string kv;
+  runtime_slice ~r0_01;
+  string ~r0_02;
+  string error;
+  string ~r0_03;
+  runtime_iface r_00;
+  runtime_iface r_01;
+  string ~r0_04;
+  error ~r1_00;
+  string error_00;
+  string error_01;
+  string error_02;
+  string error_03;
+  string ~r0_05;
+  string v;
+  string error_04;
+  __interface___ a;
+  __interface___ a_00;
+  __interface___ a_01;
+  __interface___ a_02;
+  __interface___ a_03;

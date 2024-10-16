@@ -1,0 +1,1000 @@
+
+
+
+void sync___Map__LoadAndDelete(sync_Map *m,interface___ key,interface___ value,bool loaded)
+
+{
+  runtime_hmap **pprVar1;
+  sync_entry **extraout_RAX;
+  sync_entry **extraout_RAX_00;
+  sync_entry **extraout_RAX_01;
+  char cVar2;
+  sync_readOnly *p;
+  sdword sVar3;
+  int32 new;
+  sync_entry *e;
+  sync_entry *e_00;
+  char extraout_BL;
+  bool ok;
+  char extraout_BL_00;
+  char extraout_BL_01;
+  char ok_00;
+  undefined7 in_register_00000019;
+  undefined ~r1;
+  runtime_hmap *prVar4;
+  sync_readOnly *p_1;
+  void *in_RDI;
+  void *~r0;
+  void *extraout_RDI;
+  int unaff_R14;
+  bool bVar5;
+  interface___ in_stack_ffffffffffffffc8;
+  
+  key.data = (void *)CONCAT71(in_register_00000019,loaded);
+  key._type = (internal_abi_Type *)m;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  pprVar1 = (runtime_hmap **)((sync_atomic_Pointer_sync_readOnly_ *)&(key._type)->PtrBytes)->v;
+  if (pprVar1 == (runtime_hmap **)0x0) {
+    prVar4 = (runtime_hmap *)0x0;
+    cVar2 = '\0';
+  }
+  else {
+    prVar4 = *pprVar1;
+    cVar2 = *(char *)(pprVar1 + 1);
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar4,&key.data,in_RDI,SUB81(prVar4,0));
+  e_00 = *extraout_RAX;
+  ok_00 = extraout_BL;
+  if ((extraout_BL == '\0') && (cVar2 != '\0')) {
+    LOCK();
+    bVar5 = *(sdword *)&(key._type)->Size_ == 0;
+    if (bVar5) {
+      *(undefined4 *)&(key._type)->Size_ = 1;
+    }
+    UNLOCK();
+    if (!bVar5) {
+      sync___Mutex__lockSlow((sync_Mutex *)key._type);
+    }
+    pprVar1 = (runtime_hmap **)(key._type)->PtrBytes;
+    if (pprVar1 == (runtime_hmap **)0x0) {
+      prVar4 = (runtime_hmap *)0x0;
+      ~r1 = false;
+    }
+    else {
+      prVar4 = *pprVar1;
+      ~r1 = *(undefined *)(pprVar1 + 1);
+    }
+    runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar4,&key.data,prVar4,(bool)~r1);
+    e_00 = *extraout_RAX_00;
+    ok_00 = extraout_BL_00;
+    if ((extraout_BL_00 == '\0') && ((bool)~r1 != false)) {
+      runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                         &key.data,~r0,(bool)~r1);
+      e_00 = *extraout_RAX_01;
+      runtime_mapdelete((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                        &key.data);
+      sync___Map__missLocked((sync_Map *)key._type);
+      ok_00 = extraout_BL_01;
+    }
+    LOCK();
+    sVar3 = *(sdword *)&(key._type)->Size_;
+    *(sdword *)&(key._type)->Size_ = *(sdword *)&(key._type)->Size_ + -1;
+    UNLOCK();
+    sVar3 = sVar3 + -1;
+    if (sVar3 != 0) {
+      sync___Mutex__unlockSlow((sync_Mutex *)key._type,sVar3);
+    }
+  }
+  if ((bool)ok_00 == false) {
+    return;
+  }
+  sync___entry__delete(e_00,in_stack_ffffffffffffffc8,(bool)ok_00);
+  return;
+}
+
+
+
+void sync___Map__Delete(sync_Map *m,interface___ key)
+
+{
+  interface___ value;
+  bool in_BL;
+  void *unaff_RBP;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe0;
+  internal_abi_Type *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  value.data = unaff_RBP;
+  value._type = in_stack_fffffffffffffff0;
+  sync___Map__LoadAndDelete(m,in_stack_ffffffffffffffe0,value,in_BL);
+  return;
+}
+
+
+
+void sync___entry__delete(sync_entry *e,interface___ value,bool ok)
+
+{
+  interface___ *old;
+  char extraout_AL;
+  interface___ *p;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL_00;
+  }
+  while ((old = (interface___ *)(e->p).v, old != (interface___ *)0x0 && (sync_expunged != old))) {
+    sync_atomic_CompareAndSwapPointer((void **)e,old,(void *)0x0,(bool)in_DIL);
+    in_DIL = extraout_DIL;
+    if (extraout_AL != '\0') {
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void sync___entry__trySwap(sync_entry *e,interface___ *i,interface___ *~r0,bool ~r1)
+
+{
+  interface___ *old;
+  char extraout_AL;
+  interface___ *p;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  int unaff_R14;
+  sync_entry *psStack0000000000000008;
+  
+  psStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r1 = (bool)extraout_DIL_00;
+  }
+  do {
+    old = (interface___ *)(psStack0000000000000008->p).v;
+    if (old == sync_expunged) {
+      return;
+    }
+    sync_atomic_CompareAndSwapPointer((void **)psStack0000000000000008,old,i,~r1);
+    ~r1 = (bool)extraout_DIL;
+  } while (extraout_AL == '\0');
+  return;
+}
+
+
+
+void sync___Map__Swap(sync_Map *m,interface___ key,interface___ value,interface___ previous,
+                     bool loaded)
+
+{
+  void **ptr;
+  char extraout_AL;
+  interface___ *i;
+  interface___ *_value;
+  sync_entry **extraout_RAX;
+  sync_entry *e;
+  int extraout_RAX_00;
+  interface___ *v;
+  undefined8 *extraout_RAX_01;
+  sync_entry *e_1;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  interface___ *v_1;
+  undefined8 *extraout_RAX_04;
+  runtime_hmap **extraout_RAX_05;
+  runtime_hmap **extraout_RAX_06;
+  runtime_hmap **pprVar1;
+  internal_abi_Type **extraout_RAX_07;
+  interface___ *_i;
+  internal_abi_Type **extraout_RAX_08;
+  internal_abi_Type **new_00;
+  void **ptr_00;
+  sync_entry *e_3;
+  undefined8 *extraout_RAX_09;
+  undefined8 *extraout_RAX_10;
+  undefined8 *puVar2;
+  sync_entry *e_2;
+  interface___ *v_2;
+  interface___ *~r0;
+  void *~r0_00;
+  internal_abi_Type *extraout_RCX;
+  internal_abi_Type *piVar3;
+  char extraout_BL;
+  bool ok;
+  char extraout_BL_00;
+  bool ok_1;
+  char extraout_BL_01;
+  bool ok_2;
+  bool ok_3;
+  sdword sVar4;
+  int32 new;
+  undefined7 in_register_00000019;
+  void *extraout_RBX;
+  void *~r0_01;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  void *pvVar5;
+  undefined ~r1;
+  bool ~r1_00;
+  undefined8 in_RSI;
+  sync_readOnly *p;
+  runtime_hmap *prVar6;
+  sync_readOnly *p_1;
+  bool ~r1_01;
+  undefined8 in_RDI;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_02;
+  void *~r0_03;
+  void *~r0_04;
+  undefined8 *extraout_R11;
+  runtime_hmap **extraout_R11_00;
+  internal_abi_Type **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  bool bVar7;
+  
+  key.data = (void *)CONCAT71(in_register_00000019,loaded);
+  key._type = (internal_abi_Type *)m;
+  while( true ) {
+    value.data._0_4_ = (undefined4)in_RDI;
+    value.data._4_4_ = (undefined4)((uint)in_RDI >> 0x20);
+    previous._type._0_4_ = (undefined4)in_RSI;
+    previous._type._4_4_ = (undefined4)((uint)in_RSI >> 0x20);
+    if (*(undefined **)(unaff_R14 + 0x10) < &stack0x00000000) break;
+    runtime_morestack_noctxt();
+    in_RDI = CONCAT44(value.data._4_4_,value.data._0_4_);
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00821120,key.data);
+  pvVar5 = extraout_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_wbMove((internal_abi_Type *)&DAT_00821120,i,&value.data);
+    pvVar5 = extraout_RDI_00;
+  }
+  *(undefined4 *)&i->_type = value.data._0_4_;
+  *(undefined4 *)((int)&i->_type + 4) = value.data._4_4_;
+  *(undefined4 *)&i->data = previous._type._0_4_;
+  *(undefined4 *)((int)&i->data + 4) = previous._type._4_4_;
+  if ((runtime_hmap **)(key._type)->PtrBytes == (runtime_hmap **)0x0) {
+    prVar6 = (runtime_hmap *)0x0;
+  }
+  else {
+    prVar6 = *(runtime_hmap **)(key._type)->PtrBytes;
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar6,&key.data,pvVar5,SUB81(prVar6,0));
+  if ((extraout_BL != '\0') &&
+     (sync___entry__trySwap(*extraout_RAX,i,~r0,~r1_01), extraout_BL_00 != '\0')) {
+    if (extraout_RAX_00 == 0) {
+      return;
+    }
+    return;
+  }
+  LOCK();
+  bVar7 = *(sdword *)&(key._type)->Size_ == 0;
+  if (bVar7) {
+    *(undefined4 *)&(key._type)->Size_ = 1;
+  }
+  UNLOCK();
+  if (!bVar7) {
+    sync___Mutex__lockSlow((sync_Mutex *)key._type);
+  }
+  pprVar1 = (runtime_hmap **)(key._type)->PtrBytes;
+  if (pprVar1 == (runtime_hmap **)0x0) {
+    prVar6 = (runtime_hmap *)0x0;
+    ~r1 = false;
+  }
+  else {
+    prVar6 = *pprVar1;
+    ~r1 = *(undefined *)(pprVar1 + 1);
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar6,&key.data,prVar6,(bool)~r1);
+  if (extraout_BL_01 == '\0') {
+    runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                       &key.data,~r0_02,~r1_00);
+    ok_3 = SUB81(extraout_RBX,0);
+    if (ok_3 == false) {
+      pvVar5 = extraout_RBX;
+      if ((bool)~r1 == false) {
+        sync___Map__dirtyLocked((sync_Map *)key._type);
+        runtime_newobject((internal_abi_Type *)&DAT_0084f020,~r0_01);
+        pprVar1 = extraout_RAX_05;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_00 = prVar6;
+          pprVar1 = extraout_RAX_06;
+        }
+        *pprVar1 = prVar6;
+        *(undefined *)(pprVar1 + 1) = 1;
+        sync_atomic_StorePointer((void **)&(key._type)->PtrBytes,pprVar1);
+        pvVar5 = extraout_RBX_00;
+      }
+      runtime_newobject((internal_abi_Type *)&DAT_00821120,pvVar5);
+      piVar3 = (internal_abi_Type *)i->data;
+      *extraout_RAX_07 = i->_type;
+      new_00 = extraout_RAX_07;
+      pvVar5 = extraout_RBX_01;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = extraout_RCX;
+        new_00 = extraout_RAX_08;
+        piVar3 = extraout_RCX;
+        pvVar5 = extraout_RBX_02;
+      }
+      new_00[1] = piVar3;
+      runtime_newobject((internal_abi_Type *)&DAT_008401e0,pvVar5);
+      sync_atomic_StorePointer(ptr_00,new_00);
+      runtime_mapassign((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                        &key.data,~r0_04);
+      puVar2 = extraout_RAX_09;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = ptr_00;
+        extraout_R11_02[1] = *extraout_RAX_10;
+        puVar2 = extraout_RAX_10;
+      }
+      *puVar2 = ptr_00;
+    }
+    else {
+      sync_atomic_SwapPointer((void **)*extraout_RAX_04,i,~r0_00);
+    }
+  }
+  else {
+    ptr = (void **)*extraout_RAX_01;
+    sync_atomic_CompareAndSwapPointer(ptr,sync_expunged,(void *)0x0,SUB81(~r0_02,0));
+    if (extraout_AL != '\0') {
+      runtime_mapassign((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                        &key.data,~r0_03);
+      puVar2 = extraout_RAX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = ptr;
+        extraout_R11[1] = *extraout_RAX_03;
+        puVar2 = extraout_RAX_03;
+      }
+      *puVar2 = ptr;
+    }
+    sync_atomic_SwapPointer(ptr,i,ptr);
+  }
+  LOCK();
+  sVar4 = *(sdword *)&(key._type)->Size_;
+  *(sdword *)&(key._type)->Size_ = *(sdword *)&(key._type)->Size_ + -1;
+  UNLOCK();
+  sVar4 = sVar4 + -1;
+  if (sVar4 != 0) {
+    sync___Mutex__unlockSlow((sync_Mutex *)key._type,sVar4);
+  }
+  return;
+}
+
+
+
+// DWARF original prototype: void sync.(*Map).CompareAndSwap(sync.Map * m, interface_{} key,
+// interface_{} old, interface_{} new, bool ~r0, bool ~r0)
+
+void sync___Map__CompareAndSwap
+               (sync_Map *m,interface___ key,interface___ old,interface___ new,bool ~r0,bool ~r0_1)
+
+{
+  runtime_hmap **pprVar1;
+  bool swapped;
+  sync_entry **extraout_RAX;
+  sync_entry **extraout_RAX_00;
+  sync_entry *e_1;
+  sync_entry **extraout_RAX_01;
+  sync_entry *e_2;
+  sync_entry *e;
+  char cVar2;
+  sync_readOnly *p;
+  char extraout_BL;
+  bool ok;
+  bool ~r0_00;
+  char extraout_BL_00;
+  bool ok_1;
+  char extraout_BL_01;
+  bool ok_2;
+  undefined7 in_register_00000019;
+  bool in_SIL;
+  bool ~r1;
+  sync_readOnly *p_1;
+  runtime_hmap *prVar3;
+  void *in_RDI;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_01;
+  void *~r0_02;
+  int unaff_R14;
+  bool bVar4;
+  interface___ in_stack_ffffffffffffffb0;
+  interface___ in_stack_ffffffffffffffc0;
+  undefined local_20 [16];
+  code **local_10;
+  
+  key.data = (void *)CONCAT71(in_register_00000019,~r0);
+  key._type = (internal_abi_Type *)m;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pprVar1 = (runtime_hmap **)((sync_atomic_Pointer_sync_readOnly_ *)&(key._type)->PtrBytes)->v;
+  if (pprVar1 == (runtime_hmap **)0x0) {
+    prVar3 = (runtime_hmap *)0x0;
+    cVar2 = '\0';
+  }
+  else {
+    prVar3 = *pprVar1;
+    cVar2 = *(char *)(pprVar1 + 1);
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar3,&key.data,in_RDI,in_SIL);
+  ~r0_00 = SUB81(in_RDI,0);
+  if (extraout_BL != '\0') {
+    sync___entry__tryCompareAndSwap
+              (*extraout_RAX,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+    return;
+  }
+  if (cVar2 == '\0') {
+    return;
+  }
+  LOCK();
+  bVar4 = *(sdword *)&(key._type)->Size_ == 0;
+  if (bVar4) {
+    *(undefined4 *)&(key._type)->Size_ = 1;
+  }
+  UNLOCK();
+  ~r0_01 = extraout_RDI;
+  if (!bVar4) {
+    sync___Mutex__lockSlow((sync_Mutex *)key._type);
+    ~r0_01 = extraout_RDI_00;
+  }
+  local_20._8_8_ = key._type;
+  local_20._0_8_ = sync___Map__CompareAndSwap_func1;
+  local_10 = (code **)local_20;
+  if ((runtime_hmap **)(key._type)->PtrBytes == (runtime_hmap **)0x0) {
+    prVar3 = (runtime_hmap *)0x0;
+  }
+  else {
+    prVar3 = *(runtime_hmap **)(key._type)->PtrBytes;
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar3,&key.data,~r0_01,SUB81(prVar3,0));
+  if (extraout_BL_00 == '\0') {
+    runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                       &key.data,~r0_02,~r1);
+    if (extraout_BL_01 != '\0') {
+      sync___entry__tryCompareAndSwap
+                (*extraout_RAX_01,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+      sync___Map__missLocked((sync_Map *)key._type);
+    }
+  }
+  else {
+    sync___entry__tryCompareAndSwap
+              (*extraout_RAX_00,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Map__CompareAndSwap_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void sync___Map__CompareAndDelete(sync_Map *m,interface___ key,interface___ old,bool deleted)
+
+{
+  runtime_hmap **pprVar1;
+  interface___ *old_00;
+  byte extraout_AL;
+  byte bVar2;
+  char extraout_AL_00;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  char cVar3;
+  sync_readOnly *p_1;
+  sync_entry *e;
+  interface___ **ptr;
+  bool ok;
+  sdword sVar6;
+  int32 new;
+  byte extraout_BL;
+  undefined7 in_register_00000019;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  uint uVar4;
+  uint uVar5;
+  undefined ~r1;
+  void *in_RSI;
+  sync_readOnly *p_2;
+  internal_abi_Type *in_RDI;
+  runtime_hmap *prVar7;
+  void *~r0;
+  interface___ *p;
+  int unaff_R14;
+  bool bVar8;
+  void *pvStack0000000000000028;
+  
+  key.data = (void *)CONCAT71(in_register_00000019,deleted);
+  key._type = (internal_abi_Type *)m;
+  pvStack0000000000000028 = in_RSI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pprVar1 = (runtime_hmap **)((sync_atomic_Pointer_sync_readOnly_ *)&(key._type)->PtrBytes)->v;
+  if (pprVar1 == (runtime_hmap **)0x0) {
+    prVar7 = (runtime_hmap *)0x0;
+    cVar3 = '\0';
+  }
+  else {
+    prVar7 = *pprVar1;
+    cVar3 = *(char *)(pprVar1 + 1);
+  }
+  runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar7,&key.data,in_RDI,
+                     SUB81(pvStack0000000000000028,0));
+  ptr = (interface___ **)*extraout_RAX;
+  uVar4 = extraout_RBX;
+  uVar5 = extraout_RBX;
+  if (((char)extraout_RBX == '\0') && (uVar5 = extraout_RBX, cVar3 != '\0')) {
+    LOCK();
+    bVar8 = *(sdword *)&(key._type)->Size_ == 0;
+    if (bVar8) {
+      *(undefined4 *)&(key._type)->Size_ = 1;
+    }
+    UNLOCK();
+    if (!bVar8) {
+      sync___Mutex__lockSlow((sync_Mutex *)key._type);
+    }
+    pprVar1 = (runtime_hmap **)(key._type)->PtrBytes;
+    if (pprVar1 == (runtime_hmap **)0x0) {
+      prVar7 = (runtime_hmap *)0x0;
+      ~r1 = false;
+    }
+    else {
+      prVar7 = *pprVar1;
+      ~r1 = *(undefined *)(pprVar1 + 1);
+    }
+    runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,prVar7,&key.data,prVar7,(bool)~r1);
+    ptr = (interface___ **)*extraout_RAX_00;
+    uVar4 = extraout_RBX_00;
+    if (((char)extraout_RBX_00 == '\0') && ((bool)~r1 != false)) {
+      runtime_mapaccess2((internal_abi_MapType *)&DAT_0082c800,*(runtime_hmap **)&(key._type)->Hash,
+                         &key.data,~r0,(bool)~r1);
+      ptr = (interface___ **)*extraout_RAX_01;
+      sync___Map__missLocked((sync_Map *)key._type);
+      uVar4 = (uint)extraout_BL;
+    }
+    LOCK();
+    sVar6 = *(sdword *)&(key._type)->Size_;
+    *(sdword *)&(key._type)->Size_ = *(sdword *)&(key._type)->Size_ + -1;
+    UNLOCK();
+    sVar6 = sVar6 + -1;
+    uVar5 = uVar4;
+    if (sVar6 != 0) {
+      sync___Mutex__unlockSlow((sync_Mutex *)key._type,sVar6);
+      uVar4 = uVar4 & 0xff;
+      uVar5 = uVar4;
+    }
+  }
+  while( true ) {
+    if ((char)uVar4 == '\0') {
+      return;
+    }
+    old_00 = *ptr;
+    if ((old_00 == (interface___ *)0x0) || (sync_expunged == old_00)) break;
+    if (in_RDI == old_00->_type) {
+      runtime_efaceeq(old_00->_type,old_00->data,pvStack0000000000000028,SUB81(old_00,0));
+      bVar2 = extraout_AL ^ 1;
+    }
+    else {
+      bVar2 = 1;
+    }
+    if (bVar2 != 0) {
+      return;
+    }
+    sync_atomic_CompareAndSwapPointer(ptr,old_00,(void *)0x0,SUB81(old_00,0));
+    if (extraout_AL_00 != '\0') {
+      return;
+    }
+    uVar4 = uVar5 & 0xff;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Map__Range(sync_Map *m,func_interface_____interface_____bool **f)
+
+{
+  map_interface_____sync_entry *pphVar1;
+  char cVar2;
+  map_interface_____sync_entry *extraout_RAX;
+  sync_readOnly *_read;
+  map_interface_____sync_entry *extraout_RAX_00;
+  map_interface_____sync_entry *pphVar3;
+  sync_Map *extraout_RAX_01;
+  sync_Map *m_00;
+  bool ok;
+  sync_Map *extraout_RCX;
+  sync_Map *extraout_RCX_00;
+  sync_Map *extraout_RCX_01;
+  undefined uVar4;
+  sync_readOnly *p;
+  sdword sVar6;
+  int32 new;
+  map_interface_____sync_entry phVar5;
+  runtime_hmap *h;
+  map_interface_____sync_entry extraout_RSI;
+  sync_readOnly *p_1;
+  map_interface_____sync_entry extraout_RSI_00;
+  interface___ *p_2;
+  map_interface_____sync_entry extraout_R8;
+  sync_entry *e;
+  map_interface_____sync_entry *extraout_R11;
+  map_interface_____sync_entry *extraout_R11_00;
+  map_interface_____sync_entry *extraout_R11_01;
+  map_interface_____sync_entry *extraout_R11_02;
+  int unaff_R14;
+  bool bVar7;
+  sync_Map *psStack0000000000000008;
+  func_interface_____interface_____bool **ppfStack0000000000000010;
+  interface___ in_stack_ffffffffffffff70;
+  interface___ in_stack_ffffffffffffff80;
+  undefined local_68 [96];
+  
+  psStack0000000000000008 = m;
+  ppfStack0000000000000010 = f;
+  while (local_68 + 0x58 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0084f020,ppfStack0000000000000010);
+  pphVar3 = (map_interface_____sync_entry *)(psStack0000000000000008->read).v;
+  if (pphVar3 == (map_interface_____sync_entry *)0x0) {
+    uVar4 = 0;
+    phVar5 = (map_interface_____sync_entry)0x0;
+  }
+  else {
+    phVar5 = *pphVar3;
+    uVar4 = *(undefined *)(pphVar3 + 1);
+  }
+  *(undefined *)(extraout_RAX + 1) = uVar4;
+  pphVar3 = extraout_RAX;
+  m_00 = psStack0000000000000008;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RSI;
+    extraout_R11[1] = *extraout_RAX_00;
+    pphVar3 = extraout_RAX_00;
+    m_00 = extraout_RCX;
+    phVar5 = extraout_RSI;
+  }
+  *pphVar3 = phVar5;
+  if (*(char *)(pphVar3 + 1) != '\0') {
+    LOCK();
+    bVar7 = (m_00->mu).state == 0;
+    if (bVar7) {
+      (m_00->mu).state = 1;
+    }
+    UNLOCK();
+    if (!bVar7) {
+      sync___Mutex__lockSlow(&m_00->mu);
+      m_00 = psStack0000000000000008;
+    }
+    pphVar1 = (map_interface_____sync_entry *)(m_00->read).v;
+    if (pphVar1 == (map_interface_____sync_entry *)0x0) {
+      uVar4 = 0;
+      phVar5 = (map_interface_____sync_entry)0x0;
+    }
+    else {
+      phVar5 = *pphVar1;
+      uVar4 = *(undefined *)(pphVar1 + 1);
+    }
+    *(undefined *)(pphVar3 + 1) = uVar4;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_R8;
+      extraout_R11_00[1] = *pphVar3;
+      m_00 = extraout_RCX_00;
+      phVar5 = extraout_R8;
+    }
+    *pphVar3 = phVar5;
+    if (*(char *)(pphVar3 + 1) != '\0') {
+      phVar5 = m_00->dirty;
+      *(undefined *)(pphVar3 + 1) = 0;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RSI_00;
+        extraout_R11_01[1] = *pphVar3;
+        m_00 = extraout_RCX_01;
+        phVar5 = extraout_RSI_00;
+      }
+      *pphVar3 = phVar5;
+      sync_atomic_StorePointer(&(m_00->read).v,pphVar3);
+      m_00 = psStack0000000000000008;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        phVar5 = psStack0000000000000008->dirty;
+        runtime_gcWriteBarrier1();
+        *extraout_R11_02 = phVar5;
+        m_00 = extraout_RAX_01;
+      }
+      m_00->dirty = (map_interface_____sync_entry)0x0;
+      m_00->misses = 0;
+    }
+    LOCK();
+    sVar6 = (m_00->mu).state;
+    (m_00->mu).state = (m_00->mu).state + -1;
+    UNLOCK();
+    sVar6 = sVar6 + -1;
+    if (sVar6 != 0) {
+      sync___Mutex__unlockSlow(&m_00->mu,sVar6);
+    }
+  }
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_0082c800,h,(runtime_hiter *)local_68);
+  while( true ) {
+    if ((bool **)local_68._0_8_ == (bool **)0x0) {
+      return;
+    }
+    if ((**(interface___ ***)local_68._8_8_ == (interface___ *)0x0) ||
+       (sync_expunged == **(interface___ ***)local_68._8_8_)) {
+      bVar7 = false;
+    }
+    else {
+      bVar7 = true;
+    }
+    if ((bVar7) &&
+       (cVar2 = (**ppfStack0000000000000010)
+                          (in_stack_ffffffffffffff70,in_stack_ffffffffffffff80,
+                           *(bool **)local_68._0_8_), cVar2 == '\0')) break;
+    runtime_mapiternext((runtime_hiter *)local_68);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Map__missLocked(sync_Map *m)
+
+{
+  map_interface_____sync_entry *extraout_RAX;
+  map_interface_____sync_entry *extraout_RAX_00;
+  map_interface_____sync_entry *new;
+  sync_Map *extraout_RAX_01;
+  int iVar1;
+  sync_Map *extraout_RCX;
+  sync_Map *psVar2;
+  undefined8 extraout_RCX_00;
+  int iVar3;
+  map_interface_____sync_entry phVar4;
+  void *in_RBX;
+  void *extraout_RBX;
+  map_interface_____sync_entry *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  sync_Map *psStack0000000000000008;
+  
+  psStack0000000000000008 = m;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  iVar1 = psStack0000000000000008->misses + 1;
+  psStack0000000000000008->misses = iVar1;
+  if (psStack0000000000000008->dirty == (map_interface_____sync_entry)0x0) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = psStack0000000000000008->dirty->count;
+  }
+  if (iVar1 < iVar3) {
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0084f020,in_RBX);
+  phVar4 = psStack0000000000000008->dirty;
+  new = extraout_RAX;
+  psVar2 = psStack0000000000000008;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = phVar4;
+    new = extraout_RAX_00;
+    psVar2 = extraout_RCX;
+  }
+  *new = phVar4;
+  sync_atomic_StorePointer(&(psVar2->read).v,new);
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RCX_00;
+    psStack0000000000000008 = extraout_RAX_01;
+  }
+  psStack0000000000000008->dirty = (map_interface_____sync_entry)0x0;
+  psStack0000000000000008->misses = 0;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Map__dirtyLocked(sync_Map *m)
+
+{
+  runtime_hmap **pprVar1;
+  sync_entry *e_00;
+  char extraout_AL;
+  map_interface_____sync_entry extraout_RAX;
+  map_interface_____sync_entry extraout_RAX_00;
+  map_interface_____sync_entry phVar2;
+  sync_entry *e;
+  sync_entry **extraout_RAX_01;
+  sync_entry **extraout_RAX_02;
+  sync_entry **ppsVar3;
+  sync_readOnly *p;
+  runtime_hmap *h;
+  undefined8 extraout_RBX;
+  undefined8 extraout_RBX_00;
+  undefined8 uVar4;
+  int hint;
+  runtime_hmap *in_RDI;
+  void *~r0;
+  runtime_hmap *extraout_RDI;
+  map_interface_____sync_entry *extraout_R11;
+  sync_entry **extraout_R11_00;
+  int unaff_R14;
+  sync_Map *psStack0000000000000008;
+  interface___ k;
+  runtime_hiter local_68;
+  
+  psStack0000000000000008 = m;
+  while (&local_68.offset <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  if (psStack0000000000000008->dirty != (map_interface_____sync_entry)0x0) {
+    return;
+  }
+  pprVar1 = (runtime_hmap **)(psStack0000000000000008->read).v;
+  if (pprVar1 == (runtime_hmap **)0x0) {
+    h = (runtime_hmap *)0x0;
+  }
+  else {
+    h = *pprVar1;
+  }
+  if (h == (runtime_hmap *)0x0) {
+    hint = 0;
+  }
+  else {
+    hint = h->count;
+  }
+  runtime_makemap((internal_abi_MapType *)&DAT_0082c800,hint,(runtime_hmap *)0x0,in_RDI);
+  phVar2 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = psStack0000000000000008->dirty;
+    phVar2 = extraout_RAX_00;
+  }
+  psStack0000000000000008->dirty = phVar2;
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_0082c800,h,&local_68);
+  uVar4 = extraout_RBX;
+  while ((internal_abi_Type **)local_68.key != (internal_abi_Type **)0x0) {
+                    // WARNING: Load size is inaccurate
+    k._type = *local_68.key;
+    k.data = *(internal_abi_Type **)((int)local_68.key + 8);
+                    // WARNING: Load size is inaccurate
+    e_00 = *local_68.elem;
+    sync___entry__tryExpungeLocked(e_00,SUB81(uVar4,0));
+    if (extraout_AL == '\0') {
+      runtime_mapassign((internal_abi_MapType *)&DAT_0082c800,
+                        (runtime_hmap *)psStack0000000000000008->dirty,&k,~r0);
+      ppsVar3 = extraout_RAX_01;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = e_00;
+        extraout_R11_00[1] = *extraout_RAX_02;
+        ppsVar3 = extraout_RAX_02;
+      }
+      *ppsVar3 = e_00;
+    }
+    runtime_mapiternext(&local_68);
+    uVar4 = extraout_RBX_00;
+  }
+  return;
+}
+
+
+
+void sync___entry__tryExpungeLocked(sync_entry *e,bool isExpunged)
+
+{
+  char extraout_AL;
+  interface___ *p;
+  void *pvVar1;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  int unaff_R14;
+  sync_entry *psStack0000000000000008;
+  
+  psStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL_00;
+  }
+  pvVar1 = (psStack0000000000000008->p).v;
+  while( true ) {
+    if (pvVar1 != (void *)0x0) {
+      return;
+    }
+    sync_atomic_CompareAndSwapPointer
+              ((void **)psStack0000000000000008,(void *)0x0,sync_expunged,(bool)in_DIL);
+    if (extraout_AL != '\0') break;
+    pvVar1 = (psStack0000000000000008->p).v;
+    in_DIL = extraout_DIL;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync___Mutex__Lock(sync_Mutex *m)
+
+{
+  int unaff_R14;
+  bool bVar1;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar1 = m->state == 0;
+  if (bVar1) {
+    m->state = 1;
+  }
+  UNLOCK();
+  if (!bVar1) {
+    sync___Mutex__lockSlow(m);
+    return;
+  }
+  return;
+}
+
+
+
+void sync___Mutex__TryLock(sync_Mutex *m,bool ~r0)
+
+{

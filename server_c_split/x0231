@@ -1,0 +1,1000 @@
+void bytes___Reader__ReadRune(bytes_Reader *r,int32 ch,int size,error err)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint8 *puVar3;
+  int extraout_RBX;
+  uint8 c;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((r->s).len <= r->i) {
+    r->prevRune = -1;
+    return;
+  }
+  r->prevRune = r->i;
+  uVar1 = (r->s).len;
+  uVar2 = r->i;
+  if (uVar1 <= uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  puVar3 = (r->s).array;
+  if (puVar3[uVar2] < 0x80) {
+    r->i = uVar2 + 1;
+    return;
+  }
+  unicode_utf8_DecodeRune
+            (in_stack_ffffffffffffffe0,
+             (sdword)puVar3 + ((dword)((int)-((r->s).cap - uVar2) >> 0x3f) & (dword)uVar2),
+             uVar1 - uVar2);
+  r->i = r->i + extraout_RBX;
+  return;
+}
+
+
+
+void bytes___Reader__UnreadRune(bytes_Reader *r,error ~r0)
+
+{
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  if (0 < r->i) {
+    if (r->prevRune < 0) {
+      runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+      extraout_RAX[1] = 0x3c;
+      *extraout_RAX = &DAT_008cb1aa;
+      return;
+    }
+    r->i = r->prevRune;
+    r->prevRune = -1;
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+  extraout_RAX_00[1] = 0x2e;
+  *extraout_RAX_00 = &DAT_008c779d;
+  return;
+}
+
+
+
+// Local variable abs:int64[RBX:8] conflicts with parameter, skipped.
+
+void bytes___Reader__Seek(bytes_Reader *r,int64 offset,int whence,int64 ~r0,error ~r1)
+
+{
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r->prevRune = -1;
+  if (whence != 0) {
+    if (whence == 1) {
+      offset = offset + r->i;
+    }
+    else {
+      if (whence != 2) {
+        runtime_newobject((internal_abi_Type *)&DAT_0083e560,(void *)offset);
+        extraout_RAX_00[1] = 0x21;
+        *extraout_RAX_00 = &DAT_008c0e03;
+        return;
+      }
+      offset = offset + (r->s).len;
+    }
+  }
+  if (offset < 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,(void *)offset);
+    extraout_RAX[1] = 0x24;
+    *extraout_RAX = &DAT_008c282b;
+    return;
+  }
+  r->i = offset;
+  return;
+}
+
+
+
+void bytes___Reader__WriteTo(bytes_Reader *r,io_Writer w,int64 n,error err)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int m;
+  undefined8 in_RCX;
+  int unaff_R14;
+  undefined auVar3 [16];
+  interface___ in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r->prevRune = -1;
+  uVar1 = (r->s).len;
+  uVar2 = r->i;
+  if ((int)uVar1 <= (int)uVar2) {
+    return;
+  }
+  if (uVar1 < uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  auVar3 = (**(code **)(n + 0x18))
+                     (in_RCX,(r->s).array + (uVar2 & (int)-((r->s).cap - uVar2) >> 0x3f),
+                      uVar1 - uVar2);
+  if ((int)(uVar1 - uVar2) < auVar3._0_8_) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffd0);
+  }
+  r->i = r->i + auVar3._0_8_;
+  return;
+}
+
+
+
+void bytes___Reader__Reset(bytes_Reader *r,__uint8 b)
+
+{
+  undefined8 *dst;
+  int in_RCX;
+  uint8 *in_RBX;
+  undefined8 extraout_RBX;
+  int in_RDI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  int iStack0000000000000020;
+  
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RBX;
+    extraout_R11[1] = *dst;
+    runtime_wbZero((internal_abi_Type *)&DAT_00860dc0,dst);
+  }
+  (r->s).array = (uint8 *)in_XMM15._0_8_;
+  (r->s).len = in_XMM15._8_8_;
+  (r->s).len = in_XMM15._0_8_;
+  (r->s).cap = in_XMM15._8_8_;
+  r->i = in_XMM15._0_8_;
+  r->prevRune = in_XMM15._8_8_;
+  (r->s).array = in_RBX;
+  (r->s).len = in_RCX;
+  (r->s).cap = iStack0000000000000020;
+  r->prevRune = -1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void bytes_growSlice_func1(void)
+
+{
+  int extraout_RAX;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_gorecover((uintptr)&stack0x00000008,in_stack_ffffffffffffffe8);
+  if (extraout_RAX == 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffe8);
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Syntax_IsValid
+               (google_golang_org_protobuf_reflect_protoreflect_Syntax s,bool ~r0)
+
+{
+  if ((byte)(s - 2U) < 3) {
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Syntax_String
+               (google_golang_org_protobuf_reflect_protoreflect_Syntax s,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s == 2) {
+    return;
+  }
+  if (s == 3) {
+    return;
+  }
+  if (s == 4) {
+    return;
+  }
+  ~r0_00.len = (int)(runtime_staticuint64s + (byte)s);
+  ~r0_00.str = &DAT_0083c9a0;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Syntax_GoString
+               (google_golang_org_protobuf_reflect_protoreflect_Syntax s,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s != 2) {
+    if (s == 3) {
+      return;
+    }
+    ~r0_00.len = (int)(runtime_staticuint64s + (byte)s);
+    ~r0_00.str = &DAT_0083c9a0;
+    fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Cardinality_IsValid
+               (google_golang_org_protobuf_reflect_protoreflect_Cardinality c,bool ~r0)
+
+{
+  if ((byte)(c - 1U) < 3) {
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Cardinality_String
+               (google_golang_org_protobuf_reflect_protoreflect_Cardinality c,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (c == 1) {
+    return;
+  }
+  if (c == 2) {
+    return;
+  }
+  if (c == 3) {
+    return;
+  }
+  ~r0_00.len = (int)(runtime_staticuint64s + (byte)c);
+  ~r0_00.str = &DAT_0083c920;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Cardinality_GoString
+               (google_golang_org_protobuf_reflect_protoreflect_Cardinality c,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (c == 1) {
+    return;
+  }
+  if (c == 2) {
+    return;
+  }
+  if (c == 3) {
+    return;
+  }
+  ~r0_00.len = (int)(runtime_staticuint64s + (byte)c);
+  ~r0_00.str = &DAT_0083c920;
+  fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Kind_IsValid
+               (google_golang_org_protobuf_reflect_protoreflect_Kind k,bool ~r0)
+
+{
+  if ((byte)(k - 1U) < 0x12) {
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Kind_String
+               (google_golang_org_protobuf_reflect_protoreflect_Kind k,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  switch(k) {
+  case 1:
+    return;
+  case 2:
+    return;
+  case 3:
+    return;
+  case 4:
+    return;
+  case 5:
+    return;
+  case 6:
+    return;
+  case 7:
+    return;
+  case 8:
+    return;
+  case 9:
+    return;
+  case 10:
+    return;
+  case 0xb:
+    return;
+  case 0xc:
+    return;
+  case 0xd:
+    return;
+  case 0xe:
+    return;
+  case 0xf:
+    return;
+  case 0x10:
+    return;
+  case 0x11:
+    return;
+  case 0x12:
+    return;
+  default:
+    ~r0_00.len = (int)(runtime_staticuint64s + (byte)k);
+    ~r0_00.str = &DAT_0083ca20;
+    fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+    return;
+  }
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Kind_GoString
+               (google_golang_org_protobuf_reflect_protoreflect_Kind k,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  string ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  switch(k) {
+  case 1:
+    return;
+  case 2:
+    return;
+  case 3:
+    return;
+  case 4:
+    return;
+  case 5:
+    return;
+  case 6:
+    return;
+  case 7:
+    return;
+  case 8:
+    return;
+  case 9:
+    return;
+  case 10:
+    return;
+  case 0xb:
+    return;
+  case 0xc:
+    return;
+  case 0xd:
+    return;
+  case 0xe:
+    return;
+  case 0xf:
+    return;
+  case 0x10:
+    return;
+  case 0x11:
+    return;
+  case 0x12:
+    return;
+  default:
+    ~r0_00.len = (int)(runtime_staticuint64s + (byte)k);
+    ~r0_00.str = &DAT_0083ca20;
+    fmt_Sprintf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+    return;
+  }
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_Name_IsValid
+               (google_golang_org_protobuf_reflect_protoreflect_Name s,bool ~r0)
+
+{
+  undefined7 in_register_00000001;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  google_golang_org_protobuf_reflect_protoreflect_consumeIdent
+            (in_stack_ffffffffffffffe8,CONCAT71(in_register_00000001,~r0));
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_FullName_IsValid
+               (google_golang_org_protobuf_reflect_protoreflect_FullName s,bool ~r0)
+
+{
+  undefined7 in_register_00000001;
+  int i_00;
+  uint extraout_RAX;
+  int i;
+  uint uVar1;
+  int extraout_RAX_00;
+  int n;
+  uint in_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe0;
+  
+  i_00 = CONCAT71(in_register_00000001,~r0);
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  google_golang_org_protobuf_reflect_protoreflect_consumeIdent(in_stack_ffffffffffffffe0,i_00);
+  uVar1 = extraout_RAX;
+  if ((int)extraout_RAX < 0) {
+    return;
+  }
+  while( true ) {
+    if ((int)in_RBX <= (int)uVar1) {
+      return;
+    }
+    if (in_RBX <= uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (*(char *)(i_00 + uVar1) != '.') {
+      return;
+    }
+    google_golang_org_protobuf_reflect_protoreflect_consumeIdent
+              (in_stack_ffffffffffffffe0,(uVar1 + 1 & (int)-((in_RBX - uVar1) + -1) >> 0x3f) + i_00)
+    ;
+    if (extraout_RAX_00 < 0) break;
+    uVar1 = uVar1 + extraout_RAX_00 + 1;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_consumeIdent(string s,int i)
+
+{
+  char cVar1;
+  int iVar2;
+  int in_RBX;
+  
+  if ((in_RBX != 0) &&
+     (((cVar1 = *(char *)i, cVar1 == '_' || ((byte)(cVar1 + 0x9fU) < 0x1a)) ||
+      ((byte)(cVar1 + 0xbfU) < 0x1a)))) {
+    for (iVar2 = 1;
+        (iVar2 < in_RBX &&
+        (((cVar1 = *(char *)(i + iVar2), cVar1 == '_' || ((byte)(cVar1 + 0x9fU) < 0x1a)) ||
+         (((byte)(cVar1 + 0xbfU) < 0x1a || ((byte)(cVar1 - 0x30U) < 10)))))); iVar2 = iVar2 + 1) {
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_FullName_Name
+               (google_golang_org_protobuf_reflect_protoreflect_FullName n,
+               google_golang_org_protobuf_reflect_protoreflect_Name ~r0)
+
+{
+  int in_RAX;
+  int i_1;
+  int i;
+  uint in_RBX;
+  
+  for (i = in_RBX - 1; -1 < i; i = i + -1) {
+    if (*(char *)(in_RAX + i) == '.') goto LAB_005066cf;
+  }
+  i = -1;
+LAB_005066cf:
+  if (i < 0) {
+    return;
+  }
+  if (in_RBX < i + 1U) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_FullName_Parent
+               (google_golang_org_protobuf_reflect_protoreflect_FullName n,
+               google_golang_org_protobuf_reflect_protoreflect_FullName ~r0)
+
+{
+  int in_RAX;
+  uint in_RBX;
+  int i_1;
+  int i;
+  
+  for (i = in_RBX - 1; -1 < i; i = i + -1) {
+    if (*(char *)(in_RAX + i) == '.') goto LAB_0050674f;
+  }
+  i = -1;
+LAB_0050674f:
+  if (i < 0) {
+    return;
+  }
+  if (in_RBX < (uint)i) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlen();
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_FullName_Append
+               (google_golang_org_protobuf_reflect_protoreflect_FullName n,
+               google_golang_org_protobuf_reflect_protoreflect_Name s,
+               google_golang_org_protobuf_reflect_protoreflect_FullName ~r0)
+
+{
+  string ~r0_00;
+  int in_RBX;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX == 0) {
+    return;
+  }
+  ~r0_00.len = unaff_RBP;
+  ~r0_00.str = in_stack_fffffffffffffff0;
+  runtime_concatstring3
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,
+             in_stack_ffffffffffffffe0,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_SourcePath_Equal
+               (google_golang_org_protobuf_reflect_protoreflect_SourcePath p1,
+               google_golang_org_protobuf_reflect_protoreflect_SourcePath p2,bool ~r0)
+
+{
+  undefined7 in_register_00000001;
+  int i;
+  int in_RBX;
+  int in_RSI;
+  int in_RDI;
+  
+  if (in_RSI != in_RBX) {
+    return;
+  }
+  i = 0;
+  while( true ) {
+    if (in_RBX <= i) {
+      return;
+    }
+    if (*(sdword *)(in_RDI + i * 4) != *(sdword *)(CONCAT71(in_register_00000001,~r0) + i * 4))
+    break;
+    i = i + 1;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect_SourcePath_String
+               (google_golang_org_protobuf_reflect_protoreflect_SourcePath p,string ~r0)
+
+{
+  int iVar1;
+  __uint8 b;
+  __uint8 dst;
+  runtime_slice ~r0_00;
+  int32 *in_RAX;
+  google_golang_org_protobuf_reflect_protoreflect_SourcePath *p_00;
+  google_golang_org_protobuf_reflect_protoreflect_SourcePath *_p;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *ptr;
+  uint8 *extraout_RAX_01;
+  undefined8 in_RCX;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  uint oldCap;
+  void *in_RBX;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int n;
+  uint newLen;
+  uint extraout_RBX_01;
+  int iVar2;
+  int unaff_R14;
+  string in_stack_ffffffffffffff90;
+  int in_stack_ffffffffffffffa0;
+  __uint8 in_stack_ffffffffffffffa8;
+  
+  p.array = in_RAX;
+  while (p.len._0_4_ = SUB84(in_RBX,0), p.len._4_4_ = (undefined4)((uint)in_RBX >> 0x20),
+        p.cap._0_4_ = (undefined4)in_RCX, p.cap._4_4_ = (undefined4)((uint)in_RCX >> 0x20),
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = (void *)CONCAT44(p.len._4_4_,(undefined4)p.len);
+    in_RCX = CONCAT44(p.cap._4_4_,(undefined4)p.cap);
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_008367c0,in_RBX);
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_wbMove((internal_abi_Type *)&DAT_008367c0,p_00,&p);
+  }
+  p_00->array = p.array;
+  *(undefined4 *)&p_00->len = (undefined4)p.len;
+  *(undefined4 *)((int)&p_00->len + 4) = p.len._4_4_;
+  *(undefined4 *)&p_00->cap = (undefined4)p.cap;
+  *(undefined4 *)((int)&p_00->cap + 4) = p.cap._4_4_;
+  b.cap = in_stack_ffffffffffffffa0;
+  b.array = in_stack_ffffffffffffff90.str;
+  b.len = in_stack_ffffffffffffff90.len;
+  google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendFileDescriptorProto
+            (p_00,b,in_stack_ffffffffffffffa8);
+  iVar1 = p_00->len;
+  ptr = extraout_RAX;
+  oldCap = extraout_RCX;
+  n = extraout_RBX;
+  for (iVar2 = 0; iVar2 < iVar1; iVar2 = iVar2 + 1) {
+    newLen = n + 1;
+    if (oldCap < newLen) {
+      ~r0_00.cap = in_stack_ffffffffffffffa0;
+      ~r0_00.array = in_stack_ffffffffffffff90.str;
+      ~r0_00.len = in_stack_ffffffffffffff90.len;
+      runtime_growslice(ptr,newLen,oldCap,1,(internal_abi_Type *)&DAT_00807920,~r0_00);
+      ptr = extraout_RAX_01;
+      newLen = extraout_RBX_01;
+    }
+    ptr[newLen - 1] = 0x2e;
+    dst.cap = in_stack_ffffffffffffffa0;
+    dst.array = in_stack_ffffffffffffff90.str;
+    dst.len = in_stack_ffffffffffffff90.len;
+    strconv_AppendInt(dst,(int64)ptr,newLen,in_stack_ffffffffffffffa8);
+    ptr = extraout_RAX_00;
+    oldCap = extraout_RCX_00;
+    n = extraout_RBX_00;
+  }
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,ptr,n,in_stack_ffffffffffffff90);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendSingularField
+               (google_golang_org_protobuf_reflect_protoreflect_SourcePath *p,__uint8 b,string name,
+               google_golang_org_protobuf_reflect_protoreflect_appendFunc **f,__uint8 ~r0)
+
+{
+  google_golang_org_protobuf_reflect_protoreflect_appendFunc **extraout_RAX;
+  google_golang_org_protobuf_reflect_protoreflect_appendFunc **extraout_RAX_00;
+  google_golang_org_protobuf_reflect_protoreflect_SourcePath *extraout_RAX_01;
+  int in_RCX;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  uint newLen;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  void *in_RSI;
+  int32 *piVar1;
+  int32 *extraout_RSI;
+  uint in_RDI;
+  size_t in_R8;
+  int iVar2;
+  code **in_R9;
+  uint newLen_00;
+  int32 **extraout_R11;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffffa0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (p->len == 0) {
+    return;
+  }
+  newLen = in_RCX + 1;
+  if (in_RDI < newLen) {
+    runtime_growslice(f,newLen,in_RDI,1,(internal_abi_Type *)&DAT_00807920,in_stack_ffffffffffffffa0
+                     );
+    newLen = extraout_RBX;
+    f = extraout_RAX;
+    in_RDI = extraout_RCX;
+  }
+  *(undefined *)((newLen - 1) + (int)f) = 0x2e;
+  newLen_00 = newLen + in_R8;
+  if (in_RDI < newLen_00) {
+    runtime_growslice(f,newLen_00,in_RDI,in_R8,(internal_abi_Type *)&DAT_00807920,
+                      in_stack_ffffffffffffffa0);
+    f = extraout_RAX_00;
+    in_RDI = extraout_RCX_00;
+    newLen_00 = extraout_RBX_00;
+  }
+  runtime_memmove((void *)((int)f + newLen),in_RSI,in_R8);
+  if (p->len == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  iVar2 = p->cap + -1;
+  p->len = p->len + -1;
+  p->cap = iVar2;
+  piVar1 = (int32 *)((int)p->array + (uint)((dword)(-iVar2 >> 0x3f) & 4));
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RSI;
+    extraout_R11[1] = extraout_RAX_01->array;
+    p = extraout_RAX_01;
+    piVar1 = extraout_RSI;
+  }
+  p->array = piVar1;
+  if (in_R9 != (code **)0x0) {
+    (**in_R9)(p,f,newLen_00,in_RDI);
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendRepeatedField
+               (google_golang_org_protobuf_reflect_protoreflect_SourcePath *p,__uint8 b,string name,
+               google_golang_org_protobuf_reflect_protoreflect_appendFunc **f,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  __uint8 ~r0_01;
+  void *oldPtr;
+  void *extraout_RAX;
+  void *oldPtr_00;
+  void *extraout_RAX_00;
+  void *extraout_RAX_01;
+  void *pvVar1;
+  uint oldCap;
+  uint oldCap_00;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  int extraout_RBX;
+  uint uVar2;
+  uint extraout_RBX_00;
+  int extraout_RBX_01;
+  uint newLen;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  google_golang_org_protobuf_reflect_protoreflect_SourcePath *extraout_RSI;
+  int32 *extraout_R8;
+  int32 *piVar3;
+  code **in_R9;
+  int iVar4;
+  int32 **extraout_R11;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffd0;
+  uint8 *in_stack_ffffffffffffffe0;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_01.len = in_stack_ffffffffffffffe8._0_8_;
+  ~r0_01.cap = in_stack_ffffffffffffffe8._8_8_;
+  ~r0_01.array = in_stack_ffffffffffffffe0;
+  google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendSingularField
+            (p,in_stack_ffffffffffffffb8,in_stack_ffffffffffffffd0,f,~r0_01);
+  if ((p->len == 0) || (*p->array < 0)) {
+    return;
+  }
+  uVar2 = extraout_RBX + 1;
+  pvVar1 = oldPtr;
+  if (oldCap < uVar2) {
+    runtime_growslice(oldPtr,uVar2,oldCap,1,(internal_abi_Type *)&DAT_00807920,
+                      (runtime_slice)in_stack_ffffffffffffffb8);
+    pvVar1 = extraout_RAX;
+    uVar2 = extraout_RBX_00;
+  }
+  *(undefined *)((uVar2 - 1) + (int)pvVar1) = 0x5b;
+  if (p->len != 0) {
+    ~r0_00.cap = (int)in_stack_ffffffffffffffe0;
+    ~r0_00.array = in_stack_ffffffffffffffd0.str;
+    ~r0_00.len = in_stack_ffffffffffffffd0.len;
+    strconv_AppendUint(in_stack_ffffffffffffffb8,(uint64)pvVar1,uVar2,~r0_00);
+    newLen = extraout_RBX_01 + 1;
+    pvVar1 = oldPtr_00;
+    uVar2 = oldCap_00;
+    if (oldCap_00 < newLen) {
+      runtime_growslice(oldPtr_00,newLen,oldCap_00,1,(internal_abi_Type *)&DAT_00807920,
+                        (runtime_slice)in_stack_ffffffffffffffb8);
+      pvVar1 = extraout_RAX_00;
+      uVar2 = extraout_RCX;
+      newLen = extraout_RBX_02;
+    }
+    *(undefined *)((newLen - 1) + (int)pvVar1) = 0x5d;
+    if (p->len != 0) {
+      iVar4 = p->cap + -1;
+      p->len = p->len + -1;
+      p->cap = iVar4;
+      piVar3 = (int32 *)((int)p->array + (uint)((dword)(-iVar4 >> 0x3f) & 4));
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_R8;
+        extraout_R11[1] = extraout_RSI->array;
+        pvVar1 = extraout_RAX_01;
+        uVar2 = extraout_RCX_00;
+        newLen = extraout_RBX_03;
+        p = extraout_RSI;
+        piVar3 = extraout_R8;
+      }
+      p->array = piVar3;
+      if (in_R9 != (code **)0x0) {
+        (**in_R9)(p,pvVar1,newLen,uVar2);
+      }
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendFileDescriptorProto
+               (google_golang_org_protobuf_reflect_protoreflect_SourcePath *p,__uint8 b,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  __uint8 ~r0_01;
+  __uint8 ~r0_02;
+  __uint8 ~r0_03;
+  __uint8 ~r0_04;
+  __uint8 ~r0_05;
+  __uint8 ~r0_06;
+  __uint8 ~r0_07;
+  __uint8 ~r0_08;
+  __uint8 ~r0_09;
+  __uint8 ~r0_10;
+  __uint8 ~r0_11;
+  __uint8 ~r0_12;
+  google_golang_org_protobuf_reflect_protoreflect_appendFunc **in_RBX;
+  int unaff_RBP;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc0;
+  string in_stack_ffffffffffffffd8;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (p->len == 0) {
+    return;
+  }
+  switch(*p->array) {
+  case 1:
+    ~r0_00.cap = unaff_RBP;
+    ~r0_00.array = (uint8 *)in_stack_ffffffffffffffe8._0_8_;
+    ~r0_00.len = in_stack_ffffffffffffffe8._8_8_;
+    google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendSingularField
+              (p,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_RBX,~r0_00);
+    break;
+  case 2:
+    ~r0_01.cap = unaff_RBP;
+    ~r0_01.array = (uint8 *)in_stack_ffffffffffffffe8._0_8_;
+    ~r0_01.len = in_stack_ffffffffffffffe8._8_8_;
+    google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendSingularField
+              (p,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_RBX,~r0_01);
+    break;
+  case 3:
+    ~r0_02.cap = unaff_RBP;
+    ~r0_02.array = (uint8 *)in_stack_ffffffffffffffe8._0_8_;
+    ~r0_02.len = in_stack_ffffffffffffffe8._8_8_;
+    google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendRepeatedField
+              (p,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_RBX,~r0_02);
+    break;
+  case 4:
+    ~r0_03.cap = unaff_RBP;
+    ~r0_03.array = (uint8 *)in_stack_ffffffffffffffe8._0_8_;
+    ~r0_03.len = in_stack_ffffffffffffffe8._8_8_;
+    google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendRepeatedField
+              (p,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_RBX,~r0_03);
+    break;
+  case 5:
+    ~r0_04.cap = unaff_RBP;
+    ~r0_04.array = (uint8 *)in_stack_ffffffffffffffe8._0_8_;
+    ~r0_04.len = in_stack_ffffffffffffffe8._8_8_;
+    google_golang_org_protobuf_reflect_protoreflect___SourcePath__appendRepeatedField
+              (p,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_RBX,~r0_04);
+    break;
+  case 6:
+    ~r0_05.cap = unaff_RBP;

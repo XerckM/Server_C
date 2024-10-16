@@ -1,0 +1,1000 @@
+      if (extraout_RBX_02 == 0) {
+        bVar4 = true;
+        for (iVar10 = 0; iVar10 < (extraout_RAX_02->limbs).len; iVar10 = iVar10 + 1) {
+          bVar4 = (bool)(bVar4 & (extraout_RAX_02->limbs).array[iVar10] == 0);
+        }
+        if (!bVar4) {
+          local_b0 = extraout_RAX_02;
+          FUN_0046cd74();
+          local_50._8_16_ = ZEXT816(0x20) << 0x40;
+          local_50._0_8_ = local_3c8;
+          hash_00.cap = in_stack_fffffffffffff9e8;
+          hash_00.array = (uint8 *)in_stack_fffffffffffff9d8._type;
+          hash_00.len = (int)in_stack_fffffffffffff9d8.data;
+          crypto_ecdsa_hashToNat_go_shape__uint8_
+                    ((_param0)(c->nMinus2).len,(crypto_internal_bigmod_Nat *)pub,hash_00);
+          FUN_0046cd74();
+          local_68._8_16_ = ZEXT816(0x20) << 0x40;
+          local_68._0_8_ = local_4c8;
+          crypto_ecdsa_inverse_go_shape__uint8_
+                    ((_param0)pub,(crypto_internal_bigmod_Nat *)local_68,local_b0);
+          local_88 = (*(code *)((pub->Curve).tab)->inter)();
+          crypto_internal_bigmod___Nat__Mul
+                    ((crypto_internal_bigmod_Nat *)local_50,(crypto_internal_bigmod_Nat *)local_68,
+                     (crypto_internal_bigmod_Modulus *)pub->Y,~r0_01);
+          iVar10 = *(int *)(*(int *)pub->Y + 8) * 0x40 - (int)(pub->Y->abs).array;
+          uVar5 = (int)(iVar10 + ((uint)(iVar10 + 7 >> 0x3f) >> 0x3d) + 7) >> 3;
+          local_c0 = extraout_RAX_03;
+          runtime_makeslice((internal_abi_Type *)&DAT_00807920,uVar5,uVar5,~r0_02);
+          iVar10 = *local_c0;
+          iVar2 = local_c0[1];
+          iVar6 = 0;
+          uVar8 = uVar5;
+          do {
+            if (iVar2 <= iVar6) {
+              auVar11 = (*(code *)c->newPoint)(local_88,extraout_RAX_04,uVar5,uVar5);
+              local_98 = auVar11._0_8_;
+              if (auVar11._8_8_ != 0) {
+                return;
+              }
+              crypto_internal_bigmod___Nat__Mul
+                        ((crypto_internal_bigmod_Nat *)local_68,local_a0,
+                         (crypto_internal_bigmod_Modulus *)pub->Y,~r0_03);
+              ~r0_04 = (void *)(*(int *)(*(int *)pub->Y + 8) * 0x40 - (int)(pub->Y->abs).array);
+              uVar5 = (int)((int)~r0_04 + ((uint)((int)~r0_04 + 7 >> 0x3f) >> 0x3d) + 7) >> 3;
+              local_c8 = extraout_RAX_05;
+              runtime_makeslice((internal_abi_Type *)&DAT_00807920,uVar5,uVar5,~r0_04);
+              iVar10 = *local_c8;
+              iVar2 = local_c8[1];
+              iVar6 = 0;
+              uVar8 = uVar5;
+              do {
+                if (iVar2 <= iVar6) {
+                  auVar11 = (*(code *)(c->curve).tab)
+                                      (local_90,local_90,extraout_RAX_06,uVar5,uVar5,&c->curve);
+                  if (auVar11._8_8_ != 0) {
+                    return;
+                  }
+                  pcVar3 = (code *)(c->curve).data;
+                  (*pcVar3)(local_98,local_98,auVar11._0_8_,pcVar3,&(c->curve).data);
+                  (*(code *)c->N)();
+                  if (extraout_RDI_00 != 0) {
+                    return;
+                  }
+                  auVar11 = FUN_0046cd74();
+                  local_80._8_16_ = ZEXT816(0x20) << 0x40;
+                  local_80._0_8_ = local_5c8;
+                  b_01.cap = in_stack_fffffffffffff9e8;
+                  b_01.array = (uint8 *)in_stack_fffffffffffff9d8._type;
+                  b_01.len = (int)in_stack_fffffffffffff9d8.data;
+                  crypto_internal_bigmod___Nat__SetOverflowingBytes
+                            ((crypto_internal_bigmod_Nat *)local_80,b_01,auVar11._0_8_,auVar11._8_8_
+                             ,in_stack_fffffffffffff9f0);
+                  if (extraout_RBX_03 == 0) {
+                    crypto_internal_bigmod___Nat__Equal(x,local_a0,~r0_00);
+                    return;
+                  }
+                  return;
+                }
+                uVar7 = *(uint *)(iVar10 + iVar6 * 8);
+                for (iVar9 = 0; iVar9 < 8; iVar9 = iVar9 + 1) {
+                  uVar1 = uVar8 - 1;
+                  if ((int)uVar1 < 0) {
+                    uVar8 = uVar1;
+                    if (uVar7 != 0) {
+                    // WARNING: Subroutine does not return
+                      runtime_gopanic(in_stack_fffffffffffff9d8);
+                    }
+                    break;
+                  }
+                  if (uVar5 <= uVar1) {
+                    // WARNING: Subroutine does not return
+                    runtime_panicIndex();
+                  }
+                  *(char *)((uVar8 - 1) + extraout_RAX_06) = (char)uVar7;
+                  uVar7 = uVar7 >> 8;
+                  uVar8 = uVar1;
+                }
+                iVar6 = iVar6 + 1;
+              } while( true );
+            }
+            uVar7 = *(uint *)(iVar10 + iVar6 * 8);
+            for (iVar9 = 0; iVar9 < 8; iVar9 = iVar9 + 1) {
+              uVar1 = uVar8 - 1;
+              if ((int)uVar1 < 0) {
+                uVar8 = uVar1;
+                if (uVar7 != 0) {
+                    // WARNING: Subroutine does not return
+                  runtime_gopanic(in_stack_fffffffffffff9d8);
+                }
+                break;
+              }
+              if (uVar5 <= uVar1) {
+                    // WARNING: Subroutine does not return
+                runtime_panicIndex();
+              }
+              *(char *)((uVar8 - 1) + extraout_RAX_04) = (char)uVar7;
+              uVar7 = uVar7 >> 8;
+              uVar8 = uVar1;
+            }
+            iVar6 = iVar6 + 1;
+          } while( true );
+        }
+      }
+      return;
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_ecdsa_inverse_go_shape__uint8_
+               (_param0 c,crypto_internal_bigmod_Nat *kInv,crypto_internal_bigmod_Nat *k)
+
+{
+  runtime_itab *prVar1;
+  uint *puVar2;
+  __uint8 e;
+  __uint8 k_00;
+  __uint8 b;
+  __uint8 ~r0;
+  error ~r1;
+  int iVar3;
+  int extraout_RAX;
+  crypto_internal_bigmod_Modulus *m;
+  runtime_itab *len;
+  int i;
+  int iVar4;
+  crypto_internal_bigmod_Nat *~r0_00;
+  int extraout_RBX;
+  void *~r0_01;
+  int extraout_RDI;
+  runtime_itab *prVar5;
+  uint limb;
+  uint uVar6;
+  int iVar7;
+  int j;
+  int unaff_R14;
+  _param0 pcStack0000000000000010;
+  crypto_internal_bigmod_Nat *pcStack0000000000000020;
+  interface___ in_stack_ffffffffffffffb8;
+  int in_stack_ffffffffffffffc8;
+  error in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffe0;
+  
+  pcStack0000000000000010 = c;
+  pcStack0000000000000020 = k;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar3 = (**(code **)&(pcStack0000000000000010->curve).tab[1].hash)
+                    ((pcStack0000000000000010->curve).data);
+  if (((*(int *)(iVar3 + 0x38) == 5) && (**(sdword **)(iVar3 + 0x30) == 0x35322d50)) &&
+     (*(char *)(*(sdword **)(iVar3 + 0x30) + 1) == '6')) {
+    ~r0_01 = (void *)((pcStack0000000000000010->N->nat->limbs).len * 0x40 -
+                     pcStack0000000000000010->N->leading);
+    len = (runtime_itab *)((int)((int)~r0_01 + ((uint)((int)~r0_01 + 7 >> 0x3f) >> 0x3d) + 7) >> 3);
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,(int)len,(int)len,~r0_01);
+    puVar2 = (pcStack0000000000000020->limbs).array;
+    iVar3 = (pcStack0000000000000020->limbs).len;
+    prVar5 = len;
+    for (iVar4 = 0; iVar4 < iVar3; iVar4 = iVar4 + 1) {
+      uVar6 = puVar2[iVar4];
+      for (iVar7 = 0; iVar7 < 8; iVar7 = iVar7 + 1) {
+        prVar1 = (runtime_itab *)((int)prVar5[-1].fun + 7);
+        if ((int)prVar1 < 0) {
+          prVar5 = prVar1;
+          if (uVar6 != 0) {
+                    // WARNING: Subroutine does not return
+            runtime_gopanic(in_stack_ffffffffffffffb8);
+          }
+          break;
+        }
+        if (len <= prVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        prVar5->_[extraout_RAX + -0x15] = (uint8)uVar6;
+        uVar6 = uVar6 >> 8;
+        prVar5 = prVar1;
+      }
+    }
+    k_00.cap = in_stack_ffffffffffffffc8;
+    k_00.array = (uint8 *)in_stack_ffffffffffffffb8._type;
+    k_00.len = (int)in_stack_ffffffffffffffb8.data;
+    ~r0.cap = in_stack_ffffffffffffffe0;
+    ~r0.array = (uint8 *)in_stack_ffffffffffffffd0.tab;
+    ~r0.len = (int)in_stack_ffffffffffffffd0.data;
+    ~r1.data = kInv;
+    ~r1.tab = len;
+    crypto_internal_nistec_P256OrdInverse(k_00,~r0,~r1);
+    if (extraout_RDI == 0) {
+      b.cap = in_stack_ffffffffffffffc8;
+      b.array = (uint8 *)in_stack_ffffffffffffffb8._type;
+      b.len = (int)in_stack_ffffffffffffffb8.data;
+      crypto_internal_bigmod___Nat__SetBytes(kInv,b,m,~r0_00,in_stack_ffffffffffffffd0);
+      if (extraout_RBX != 0) {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffffb8);
+      }
+      return;
+    }
+  }
+  e.cap = in_stack_ffffffffffffffc8;
+  e.array = (uint8 *)in_stack_ffffffffffffffb8._type;
+  e.len = (int)in_stack_ffffffffffffffb8.data;
+  crypto_internal_bigmod___Nat__Exp
+            (kInv,pcStack0000000000000020,e,
+             (crypto_internal_bigmod_Modulus *)(pcStack0000000000000010->nMinus2).array,
+             (crypto_internal_bigmod_Nat *)(pcStack0000000000000010->nMinus2).len);
+  return;
+}
+
+
+
+void crypto_ecdsa_hashToNat_go_shape__uint8_(_param0 c,crypto_internal_bigmod_Nat *e,__uint8 hash)
+
+{
+  uint *puVar1;
+  crypto_internal_bigmod_Nat *pcVar2;
+  runtime_slice ~r0;
+  __uint8 b;
+  crypto_internal_bigmod_Modulus *extraout_RAX;
+  crypto_internal_bigmod_Nat *in_RCX;
+  int extraout_RCX;
+  crypto_internal_bigmod_Nat *extraout_RBX;
+  int extraout_RBX_00;
+  crypto_internal_bigmod_Nat *in_RSI;
+  crypto_internal_bigmod_Modulus *in_RDI;
+  crypto_internal_bigmod_Nat *in_R8;
+  int i;
+  crypto_internal_bigmod_Nat *pcVar3;
+  int size;
+  uint uVar4;
+  int excess;
+  int iVar5;
+  uint uVar6;
+  byte bVar7;
+  int unaff_R14;
+  crypto_internal_bigmod_Modulus *pcStack0000000000000020;
+  interface___ in_stack_ffffffffffffffa0;
+  int in_stack_ffffffffffffffb0;
+  error in_stack_ffffffffffffffb8;
+  crypto_internal_bigmod_Modulus local_38;
+  crypto_internal_bigmod_Modulus *local_18;
+  crypto_internal_bigmod_Nat *local_10;
+  
+  pcStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar1 = e[1].limbs.array;
+  iVar5 = *(int *)(*puVar1 + 8) * 0x40 - puVar1[1];
+  pcVar3 = (crypto_internal_bigmod_Nat *)
+           ((int)(((uint)(iVar5 + 7 >> 0x3f) >> 0x3d) + iVar5 + 7) >> 3);
+  if ((int)pcVar3 <= (int)in_RSI) {
+    if (in_R8 < pcVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    uVar4 = (int)pcVar3 * 8 - iVar5;
+    in_RSI = pcVar3;
+    if (0 < (int)uVar4) {
+      if (pcStack0000000000000020 == (crypto_internal_bigmod_Modulus *)0x0) {
+        pcStack0000000000000020 = (crypto_internal_bigmod_Modulus *)0x0;
+        pcVar3 = (crypto_internal_bigmod_Nat *)0x0;
+        in_RSI = (crypto_internal_bigmod_Nat *)0x0;
+      }
+      else {
+        local_38.m0inv = uVar4;
+        local_10 = in_RCX;
+        if (pcVar3 == (crypto_internal_bigmod_Nat *)0x0) {
+          local_18 = &local_38;
+          local_38.leading = 0;
+          local_38.nat = (crypto_internal_bigmod_Nat *)0x0;
+        }
+        else {
+          ~r0.cap = in_stack_ffffffffffffffb0;
+          ~r0.array = in_stack_ffffffffffffffa0._type;
+          ~r0.len = (int)in_stack_ffffffffffffffa0.data;
+          local_38.rr = pcVar3;
+          runtime_growslice(&local_38,(int)pcVar3,0,(int)pcVar3,(internal_abi_Type *)&DAT_00807920,
+                            ~r0);
+          local_18 = extraout_RAX;
+          pcVar3 = local_38.rr;
+          local_38.leading = extraout_RCX;
+          local_38.nat = extraout_RBX;
+        }
+        runtime_memmove(local_18,pcStack0000000000000020,(size_t)pcVar3);
+        pcVar3 = local_38.nat;
+        uVar4 = local_38.m0inv;
+        pcStack0000000000000020 = local_18;
+        in_RCX = local_10;
+        in_RSI = local_38.nat;
+      }
+      while (pcVar2 = pcVar3,
+            pcVar3 = (crypto_internal_bigmod_Nat *)((int)&pcVar2[-1].limbs.cap + 7),
+            -1 < (int)pcVar3) {
+        bVar7 = -(uVar4 < 8) &
+                *(byte *)((int)&((crypto_internal_bigmod_Modulus *)
+                                (&pcStack0000000000000020->m0inv + -2))->nat + (int)&pcVar3->limbs)
+                >> ((byte)uVar4 & 0x1f);
+        *(byte *)((int)&((crypto_internal_bigmod_Modulus *)(&pcStack0000000000000020->m0inv + -2))->
+                        nat + (int)&pcVar3->limbs) = bVar7;
+        if (0 < (int)pcVar3) {
+          uVar6 = -(uVar4 - 8);
+          if (0 < (int)(uVar4 - 8)) {
+                    // WARNING: Subroutine does not return
+            runtime_panicshift();
+          }
+          *(byte *)((int)&((crypto_internal_bigmod_Modulus *)(&pcStack0000000000000020->m0inv + -2))
+                          ->nat + (int)&pcVar3->limbs) =
+               bVar7 | -(uVar6 < 0x20) &
+                       ((undefined *)((int)&pcVar2[-1].limbs.cap + 6))[(int)pcStack0000000000000020]
+                       << ((byte)uVar6 & 0x1f);
+        }
+      }
+    }
+  }
+  b.cap = in_stack_ffffffffffffffb0;
+  b.array = (uint8 *)in_stack_ffffffffffffffa0._type;
+  b.len = (int)in_stack_ffffffffffffffa0.data;
+  crypto_internal_bigmod___Nat__SetOverflowingBytes
+            (in_RCX,b,pcStack0000000000000020,in_RSI,in_stack_ffffffffffffffb8);
+  if (extraout_RBX_00 != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffa0);
+  }
+  return;
+}
+
+
+
+void crypto_ecdsa_PublicKey_Add
+               (math_big_Int *x1,math_big_Int *y1,math_big_Int *x2,math_big_Int *y2,math_big_Int *x,
+               math_big_Int *y)
+
+{
+  int *piVar1;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000010;
+  math_big_Int *pmStack0000000000000018;
+  math_big_Int *pmStack0000000000000020;
+  math_big_Int *in_stack_00000028;
+  math_big_Int *in_stack_00000030;
+  undefined8 uStack0000000000000038;
+  undefined8 uStack0000000000000040;
+  undefined auStack_30 [40];
+  
+  pmStack0000000000000008 = x1;
+  pmStack0000000000000018 = x2;
+  pmStack0000000000000010 = y1;
+  pmStack0000000000000020 = y2;
+  uStack0000000000000038 = in_R9;
+  uStack0000000000000040 = in_R10;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000028 = x;
+    in_stack_00000030 = y;
+    runtime_morestack_noctxt();
+    x = in_stack_00000028;
+    y = in_stack_00000030;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((math_big_Int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_30;
+  }
+  (*(code *)(pmStack0000000000000008->abs).cap)
+            (pmStack0000000000000010,x,y,uStack0000000000000038,uStack0000000000000040);
+  return;
+}
+
+
+
+void crypto_ecdsa___PublicKey__Add
+               (math_big_Int *x1,math_big_Int *y1,math_big_Int *x2,math_big_Int *y2,math_big_Int *x,
+               math_big_Int *y)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  math_big_Int *in_stack_00000008;
+  math_big_Int *in_stack_00000010;
+  math_big_Int *in_stack_00000018;
+  math_big_Int *in_stack_00000020;
+  math_big_Int *in_stack_00000028;
+  undefined auStack_30 [40];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = x1;
+    in_stack_00000010 = y1;
+    in_stack_00000018 = x2;
+    in_stack_00000020 = y2;
+    in_stack_00000028 = x;
+    runtime_morestack_noctxt();
+    x1 = in_stack_00000008;
+    x2 = in_stack_00000018;
+    y1 = in_stack_00000010;
+    x = in_stack_00000028;
+    y2 = in_stack_00000020;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((math_big_Int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_30;
+  }
+  (**(code **)(*(int *)x1 + 0x18))((x1->abs).array);
+  return;
+}
+
+
+
+void crypto_ecdsa_PublicKey_Double
+               (math_big_Int *x1,math_big_Int *y1,math_big_Int *x,math_big_Int *y)
+
+{
+  int *piVar1;
+  undefined8 in_RSI;
+  undefined8 in_R8;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000010;
+  math_big_Int *pmStack0000000000000018;
+  math_big_Int *pmStack0000000000000020;
+  undefined8 uStack0000000000000028;
+  undefined8 uStack0000000000000030;
+  undefined auStack_20 [24];
+  
+  pmStack0000000000000008 = x1;
+  pmStack0000000000000018 = x;
+  pmStack0000000000000010 = y1;
+  uStack0000000000000028 = in_RSI;
+  pmStack0000000000000020 = y;
+  uStack0000000000000030 = in_R8;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((math_big_Int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(pmStack0000000000000008 + 1))
+            (pmStack0000000000000010,uStack0000000000000028,uStack0000000000000030);
+  return;
+}
+
+
+
+void crypto_ecdsa___PublicKey__Double
+               (math_big_Int *x1,math_big_Int *y1,math_big_Int *x,math_big_Int *y)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  math_big_Int *in_stack_00000008;
+  math_big_Int *in_stack_00000010;
+  math_big_Int *in_stack_00000018;
+  undefined auStack_20 [24];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = x1;
+    in_stack_00000010 = y1;
+    in_stack_00000018 = x;
+    runtime_morestack_noctxt();
+    x1 = in_stack_00000008;
+    x = in_stack_00000018;
+    y1 = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((math_big_Int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(*(int *)x1 + 0x20))((x1->abs).array);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_ecdsa_PublicKey_IsOnCurve(math_big_Int *x,math_big_Int *y)
+
+{
+  int *piVar1;
+  int in_RAX;
+  undefined8 in_RBX;
+  int unaff_R14;
+  int iStack0000000000000008;
+  undefined8 uStack0000000000000010;
+  math_big_Int *in_stack_00000028;
+  math_big_Int *in_stack_00000030;
+  undefined auStack_20 [24];
+  
+  iStack0000000000000008 = in_RAX;
+  uStack0000000000000010 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000028 = x;
+    in_stack_00000030 = y;
+    runtime_morestack_noctxt();
+    x = in_stack_00000028;
+    y = in_stack_00000030;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(iStack0000000000000008 + 0x28))(uStack0000000000000010,x,y);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_ecdsa___PublicKey__IsOnCurve(math_big_Int *x,math_big_Int *y)
+
+{
+  int *piVar1;
+  int *in_RAX;
+  int unaff_R14;
+  int *piStack0000000000000008;
+  math_big_Int *in_stack_00000010;
+  math_big_Int *in_stack_00000018;
+  undefined auStack_20 [24];
+  
+  piStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000010 = x;
+    in_stack_00000018 = y;
+    runtime_morestack_noctxt();
+    y = in_stack_00000018;
+    x = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(*piStack0000000000000008 + 0x28))(piStack0000000000000008[1]);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_ecdsa_PublicKey_Params(void)
+
+{
+  int *piVar1;
+  int in_RAX;
+  undefined8 in_RBX;
+  int unaff_R14;
+  int iStack0000000000000008;
+  undefined8 uStack0000000000000010;
+  undefined auStack_10 [8];
+  
+  iStack0000000000000008 = in_RAX;
+  uStack0000000000000010 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  (**(code **)(iStack0000000000000008 + 0x30))(uStack0000000000000010);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_ecdsa___PublicKey__Params(void)
+
+{
+  int *piVar1;
+  int *in_RAX;
+  int unaff_R14;
+  int *piStack0000000000000008;
+  undefined auStack_10 [8];
+  
+  piStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  (**(code **)(*piStack0000000000000008 + 0x30))(piStack0000000000000008[1]);
+  return;
+}
+
+
+
+void crypto_ecdsa_PublicKey_ScalarBaseMult(__uint8 k,math_big_Int *x,math_big_Int *y)
+
+{
+  __uint8 **pp_Var1;
+  undefined8 in_RSI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  int unaff_R14;
+  undefined8 uStack0000000000000028;
+  __uint8 _Stack_28;
+  
+  k.array = &x->neg;
+  k.len = (int)y;
+  uStack0000000000000028 = in_RSI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &k)) {
+    *pp_Var1 = &_Stack_28;
+  }
+  (*(code *)(((math_big_Int *)((int)k.array + 0x20))->abs).cap)
+            (k.len,uStack0000000000000028,in_R8,in_R9);
+  return;
+}
+
+
+
+void crypto_ecdsa___PublicKey__ScalarBaseMult(__uint8 k,math_big_Int *x,math_big_Int *y)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 _Stack_28;
+  
+  k.len = (int)y;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    k.array = &x->neg;
+    k.cap = in_RCX;
+    runtime_morestack_noctxt();
+    x = (math_big_Int *)k.array;
+    in_RCX = k.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &k)) {
+    *pp_Var1 = &_Stack_28;
+  }
+  (**(code **)(*(int *)x + 0x38))((x->abs).array);
+  return;
+}
+
+
+
+void crypto_ecdsa_PublicKey_ScalarMult
+               (math_big_Int *x1,math_big_Int *y1,__uint8 k,math_big_Int *x,math_big_Int *y)
+
+{
+  __uint8 **pp_Var1;
+  undefined8 in_RSI;
+  undefined8 in_R8;
+  undefined8 in_R9;
+  undefined8 in_R10;
+  undefined8 in_R11;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000020;
+  undefined8 uStack0000000000000038;
+  __uint8 a_Stack_38 [2];
+  
+  k.array = &x1->neg;
+  k.cap = (int)x;
+  k.len = (int)y1;
+  pmStack0000000000000020 = y;
+  uStack0000000000000038 = in_R9;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &k)) {
+    *pp_Var1 = a_Stack_38;
+  }
+  (**(code **)((int)k.array + 0x40))(k.len,in_RSI,in_R8,uStack0000000000000038,in_R10,in_R11);
+  return;
+}
+
+
+
+void crypto_ecdsa___PublicKey__ScalarMult
+               (math_big_Int *x1,math_big_Int *y1,__uint8 k,math_big_Int *x,math_big_Int *y)
+
+{
+  __uint8 **pp_Var1;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000020;
+  __uint8 a_Stack_38 [2];
+  
+  pmStack0000000000000020 = y;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    k.array = &x1->neg;
+    k.len = (int)y1;
+    k.cap = (int)x;
+    runtime_morestack_noctxt();
+    x1 = (math_big_Int *)k.array;
+    x = (math_big_Int *)k.cap;
+    y1 = (math_big_Int *)k.len;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &k)) {
+    *pp_Var1 = a_Stack_38;
+  }
+  (**(code **)(*(int *)x1 + 0x40))((x1->abs).array);
+  return;
+}
+
+
+
+void type__eq_crypto_ecdsa_PublicKey(crypto_ecdsa_PublicKey *p,crypto_ecdsa_PublicKey *q,bool r)
+
+{
+  runtime_itab *tab;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  int unaff_R14;
+  crypto_ecdsa_PublicKey *pcStack0000000000000008;
+  crypto_ecdsa_PublicKey *pcStack0000000000000010;
+  
+  pcStack0000000000000008 = p;
+  pcStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL;
+  }
+  tab = (pcStack0000000000000008->Curve).tab;
+  if ((pcStack0000000000000010->Curve).tab == tab) {
+    runtime_ifaceeq(tab,(pcStack0000000000000008->Curve).data,(pcStack0000000000000010->Curve).data,
+                    (bool)in_DIL);
+  }
+  return;
+}
+
+
+
+void crypto_internal_edwards25519___Point__bytes
+               (crypto_internal_edwards25519_Point *v,uint8 (*buf) [32],__uint8 ~r0)
+
+{
+  interface___ e;
+  __uint8 ~r0_00;
+  __uint8 ~r0_01;
+  char extraout_AL;
+  char extraout_AL_00;
+  crypto_internal_edwards25519_Point *p;
+  uint8 (*__src) [32];
+  byte *extraout_RAX;
+  crypto_internal_edwards25519_field_Element *pcVar1;
+  size_t __n;
+  size_t extraout_RBX;
+  int extraout_RBX_00;
+  int unaff_R14;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  internal_abi_Type *in_stack_fffffffffffffec0;
+  crypto_internal_edwards25519_field_Element *pcVar6;
+  void *in_stack_fffffffffffffec8;
+  crypto_internal_edwards25519_field_Element *pcVar7;
+  undefined local_128 [16];
+  undefined local_118 [16];
+  undefined local_108 [16];
+  undefined local_f8 [16];
+  crypto_internal_edwards25519_field_Element local_e8;
+  crypto_internal_edwards25519_field_Element local_c0;
+  crypto_internal_edwards25519_field_Element local_98 [3];
+  crypto_internal_edwards25519_field_Element *local_20;
+  crypto_internal_edwards25519_Point *local_18;
+  crypto_internal_edwards25519_Point *local_10;
+  
+  while (&local_c0 <= *(crypto_internal_edwards25519_field_Element **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pcVar1 = (crypto_internal_edwards25519_field_Element *)0x0;
+  local_10 = v;
+  while (pcVar1 == (crypto_internal_edwards25519_field_Element *)0x0) {
+    local_18 = local_10;
+    runtime_memequal();
+    if (extraout_AL != '\0') {
+      runtime_memequal();
+      if (extraout_AL_00 != '\0') {
+        e.data = in_stack_fffffffffffffec8;
+        e._type = in_stack_fffffffffffffec0;
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(e);
+      }
+    }
+    pcVar1 = (crypto_internal_edwards25519_field_Element *)&DAT_00000001;
+  }
+  crypto_internal_edwards25519_field___Element__Invert(&local_e8,&v->z,pcVar1);
+  local_20 = &v->y;
+  crypto_internal_edwards25519_field_feMul();
+  pcVar6 = &local_c0;
+  pcVar1 = &local_e8;
+  pcVar7 = local_20;
+  crypto_internal_edwards25519_field_feMul();
+  uVar2 = 0;
+  uVar3 = 0;
+  uVar4 = 0;
+  uVar5 = 0;
+  local_108 = ZEXT816(0);
+  local_f8 = ZEXT816(0);
+  ~r0_00.len = (int)pcVar7;
+  ~r0_00.array = (uint8 *)pcVar6;
+  ~r0_00.cap = (int)pcVar1;
+  crypto_internal_edwards25519_field___Element__bytes(&local_c0,(uint8 (*) [32])local_108,~r0_00);
+  __n = 0x20;
+  if ((int)extraout_RBX < 0x20) {
+    __n = extraout_RBX;
+  }
+  if (__src != buf) {
+    runtime_memmove(buf,__src,__n);
+  }
+  local_128._4_4_ = uVar3;
+  local_128._0_4_ = uVar2;
+  local_128._8_4_ = uVar4;
+  local_128._12_4_ = uVar5;
+  local_118._4_4_ = uVar3;
+  local_118._0_4_ = uVar2;
+  local_118._8_4_ = uVar4;
+  local_118._12_4_ = uVar5;
+  ~r0_01.len = (int)pcVar7;
+  ~r0_01.array = (uint8 *)pcVar6;
+  ~r0_01.cap = (int)pcVar1;
+  crypto_internal_edwards25519_field___Element__bytes(local_98,(uint8 (*) [32])local_128,~r0_01);
+  if (extraout_RBX_00 != 0) {
+    (*buf)[0x1f] = (*buf)[0x1f] | (byte)((*extraout_RAX & 1) << 7);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void crypto_internal_edwards25519___Point__SetBytes
+               (crypto_internal_edwards25519_Point *v,__uint8 x,
+               crypto_internal_edwards25519_Point *~r0,error ~r1)
+
+{
+  undefined auVar1 [16];
+  undefined auVar2 [16];
+  __uint8 x_00;
+  error ~r1_00;
+  crypto_internal_edwards25519_field_Element *pcVar3;
+  uint64 *extraout_RAX;
+  crypto_internal_edwards25519_field_Element *y;
+  crypto_internal_edwards25519_field_Element *extraout_RAX_00;
+  crypto_internal_edwards25519_field_Element *u;
+  crypto_internal_edwards25519_field_Element *v_00;
+  crypto_internal_edwards25519_field_Element *vv;
+  crypto_internal_edwards25519_field_Element *b;
+  crypto_internal_edwards25519_field_Element *xx;
+  uint *extraout_RAX_01;
+  crypto_internal_edwards25519_field_Element *xxNeg;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  uint in_RCX;
+  uint uVar4;
+  uint64 m;
+  uint uVar5;
+  void *~r0_00;
+  int extraout_RBX;
+  int wasSquare;
+  int wasSquare_00;
+  crypto_internal_edwards25519_field_Element *~r0_01;
+  crypto_internal_edwards25519_field_Element *~r0_02;
+  crypto_internal_edwards25519_field_Element *R;
+  crypto_internal_edwards25519_field_Element *~r0_03;
+  int unaff_R14;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  undefined8 in_stack_fffffffffffffed0;
+  undefined8 in_stack_fffffffffffffed8;
+  int in_stack_fffffffffffffee0;
+  runtime_itab *in_stack_fffffffffffffee8;
+  void *in_stack_fffffffffffffef0;
+  undefined local_e8 [40];
+  undefined local_c0 [16];
+  uint64 local_b0;
+  undefined local_a8 [16];
+  undefined local_98 [40];
+  crypto_internal_edwards25519_field_Element local_70;
+  crypto_internal_edwards25519_field_Element local_48;
+  uint64 *local_20;
+  crypto_internal_edwards25519_field_Element *local_18;
+  crypto_internal_edwards25519_field_Element *local_10;
+  
+  while (local_c0 + 0x10 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  x_00.len = in_stack_fffffffffffffed8;
+  x_00.array = (uint8 *)in_stack_fffffffffffffed0;
+  x_00.cap = in_stack_fffffffffffffee0;
+  ~r1_00.data = in_stack_fffffffffffffef0;
+  ~r1_00.tab = in_stack_fffffffffffffee8;
+  crypto_internal_edwards25519_field___Element__SetBytes(&local_48,x_00,&~r0->x,~r1_00);
+  if (~r0_00 != (void *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0_00);
+    extraout_RAX_03[1] = 0x2b;
+    *extraout_RAX_03 = &DAT_008c63cf;
+    return;
+  }
+  local_20 = extraout_RAX;
+  crypto_internal_edwards25519_field_feSquare();
+  uVar6 = 0;
+  uVar7 = 0;
+  uVar8 = 0;
+  uVar9 = 0;
+  local_98._0_8_ = 0;
+  local_98._8_8_ = 0;
+  local_98._16_8_ = 0;
+  local_98._24_16_ = ZEXT816(0);
+  crypto_internal_edwards25519_field___Element__Subtract
+            ((crypto_internal_edwards25519_field_Element *)local_98,&local_70,
+             crypto_internal_edwards25519_feOne,~r0_01);
+  local_c0._0_8_ = CONCAT44(uVar7,uVar6);
+  local_c0._8_8_ = CONCAT44(uVar7,uVar6);
+  auVar1._8_4_ = uVar8;
+  auVar1._0_8_ = local_c0._8_8_;
+  auVar1._12_4_ = uVar9;
+  local_b0 = auVar1._8_8_;
+  local_a8._4_4_ = uVar7;
+  local_a8._0_4_ = uVar6;
+  local_a8._8_4_ = uVar8;
+  local_a8._12_4_ = uVar9;
+  local_10 = extraout_RAX_00;
+  crypto_internal_edwards25519_field_feMul();
+  uVar6 = 0;
+  uVar7 = 0;
+  uVar8 = 0;
+  uVar9 = 0;
+  crypto_internal_edwards25519_field___Element__Add
+            ((crypto_internal_edwards25519_field_Element *)local_c0,
+             (crypto_internal_edwards25519_field_Element *)local_c0,
+             crypto_internal_edwards25519_feOne,~r0_02);
+  local_e8._0_8_ = CONCAT44(uVar7,uVar6);
+  local_e8._8_8_ = CONCAT44(uVar7,uVar6);
+  auVar2._8_4_ = uVar8;
+  auVar2._0_8_ = local_e8._8_8_;
+  auVar2._12_4_ = uVar9;
+  local_e8._16_8_ = auVar2._8_8_;
+  local_e8._28_4_ = uVar7;
+  local_e8._24_4_ = uVar6;
+  local_e8._32_4_ = uVar8;
+  local_e8._36_4_ = uVar9;
+  crypto_internal_edwards25519_field___Element__SqrtRatio
+            ((crypto_internal_edwards25519_field_Element *)local_e8,local_10,v_00,R,wasSquare_00);
+  if (extraout_RBX == 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,(void *)0x0);
+    extraout_RAX_02[1] = 0x24;
+    *extraout_RAX_02 = &DAT_008c2c63;
+    return;
+  }
+  local_18 = b;
+  crypto_internal_edwards25519_field___Element__Subtract
+            ((crypto_internal_edwards25519_field_Element *)&stack0xfffffffffffffef0,
+             crypto_internal_edwards25519_field_feZero,b,~r0_03);
+  if (0x1f < in_RCX) {
+    uVar4 = -(uint)(*(byte *)((int)&(~r0->x).l3 + 7) >> 7);
+    uVar5 = ~uVar4;
+    local_18->l0 = local_18->l0 & uVar5 | *extraout_RAX_01 & uVar4;
+    local_18->l1 = local_18->l1 & uVar5 | extraout_RAX_01[1] & uVar4;
+    local_18->l2 = local_18->l2 & uVar5 | extraout_RAX_01[2] & uVar4;
+    local_18->l3 = local_18->l3 & uVar5 | extraout_RAX_01[3] & uVar4;
+    local_18->l4 = uVar5 & local_18->l4 | uVar4 & extraout_RAX_01[4];
+    (v->x).l0 = local_18->l0;
+    uVar6 = *(undefined4 *)((int)&local_18->l1 + 4);
+    uVar7 = *(undefined4 *)&local_18->l2;
+    uVar8 = *(undefined4 *)((int)&local_18->l2 + 4);
+    *(undefined4 *)&(v->x).l1 = *(undefined4 *)&local_18->l1;

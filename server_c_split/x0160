@@ -1,0 +1,1000 @@
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a60a8:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 != (runtime_itab *)0x0) {
+    return;
+  }
+  local_20._8_8_ = fd;
+  local_20._0_8_ = internal_poll___FD__Fsync_func2;
+  local_10 = (code **)local_20;
+  do {
+    syscall_Fsync(fd->Sysfd,(error)in_stack_ffffffffffffff98);
+    if (extraout_RAX != go_itab_syscall_Errno_error) break;
+    runtime_ifaceeq((runtime_itab *)go_itab_syscall_Errno_error,x,&DAT_0095a650,~r0_00);
+  } while (extraout_AL != '\0');
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__Fsync_func2(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;
+}
+
+
+
+void internal_poll___fdMutex__increfAndClose(internal_poll_fdMutex *mu,bool ~r0)
+
+{
+  uint64 old;
+  uint uVar1;
+  uint64 new;
+  uint uVar2;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  while( true ) {
+    uVar2 = mu->state;
+    if ((uVar2 & 1) != 0) {
+      return;
+    }
+    uVar1 = (uVar2 | 1) + 8;
+    if ((uVar1 & 0x7ffff8) == 0) break;
+    LOCK();
+    bVar3 = uVar2 == mu->state;
+    if (bVar3) {
+      mu->state = uVar1 & 0x80000000007fffff;
+    }
+    UNLOCK();
+    if (bVar3) {
+      for (; (uVar2 & 0x7ffff800000) != 0; uVar2 = uVar2 - 0x800000) {
+        internal_poll_runtime_Semrelease(&mu->rsema);
+      }
+      for (; (uVar2 & 0x7ffff80000000000) != 0; uVar2 = uVar2 - 0x80000000000) {
+        internal_poll_runtime_Semrelease(&mu->wsema);
+      }
+      return;
+    }
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffd8);
+}
+
+
+
+void internal_poll___fdMutex__rwlock(internal_poll_fdMutex *mu,bool read,bool ~r0)
+
+{
+  uint uVar1;
+  internal_poll_fdMutex *piVar2;
+  uint32 *mutexSema;
+  uint32 *addr;
+  uint uVar3;
+  uint64 mutexBit;
+  int iVar4;
+  uint64 mutexWait;
+  uint uVar5;
+  uint64 mutexMask;
+  uint64 old;
+  uint uVar6;
+  uint64 new;
+  int unaff_R14;
+  bool bVar7;
+  internal_poll_fdMutex *piStack0000000000000008;
+  interface___ in_stack_ffffffffffffffc8;
+  
+  piStack0000000000000008 = mu;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar2 = piStack0000000000000008;
+  if (read) {
+    addr = &piStack0000000000000008->rsema;
+    uVar3 = 2;
+    iVar4 = 0x800000;
+    uVar5 = 0x7ffff800000;
+  }
+  else {
+    addr = &piStack0000000000000008->wsema;
+    uVar3 = 4;
+    iVar4 = 0x80000000000;
+    uVar5 = 0x7ffff80000000000;
+  }
+  while( true ) {
+    do {
+      uVar1 = piVar2->state;
+      if ((uVar1 & 1) != 0) {
+        return;
+      }
+      if ((uVar1 & uVar3) == 0) {
+        uVar6 = (uVar1 | uVar3) + 8;
+        if ((uVar6 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+          runtime_gopanic(in_stack_ffffffffffffffc8);
+        }
+      }
+      else {
+        uVar6 = iVar4 + uVar1;
+        if ((uVar5 & uVar6) == 0) {
+                    // WARNING: Subroutine does not return
+          runtime_gopanic(in_stack_ffffffffffffffc8);
+        }
+      }
+      LOCK();
+      bVar7 = uVar1 == piVar2->state;
+      if (bVar7) {
+        piVar2->state = uVar6;
+      }
+      UNLOCK();
+    } while (!bVar7);
+    if ((uVar1 & uVar3) == 0) break;
+    internal_poll_runtime_Semacquire(addr);
+    piVar2 = piStack0000000000000008;
+  }
+  return;
+}
+
+
+
+void internal_poll___fdMutex__rwunlock(internal_poll_fdMutex *mu,bool read,bool ~r0)
+
+{
+  uint uVar1;
+  uint32 *mutexSema;
+  uint32 *addr;
+  uint64 mutexBit;
+  uint uVar2;
+  uint64 mutexMask;
+  uint64 mutexWait;
+  uint64 old;
+  uint64 new;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (read) {
+    addr = &mu->rsema;
+    mutexBit = 2;
+    mutexMask = 0x7ffff800000;
+    mutexWait = 0x800000;
+  }
+  else {
+    addr = &mu->wsema;
+    mutexBit = 4;
+    mutexMask = 0x7ffff80000000000;
+    mutexWait = 0x80000000000;
+  }
+  do {
+    uVar1 = mu->state;
+    if (((uVar1 & mutexBit) == 0) || ((uVar1 & 0x7ffff8) == 0)) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffe0);
+    }
+    uVar2 = ~mutexBit & uVar1;
+    if ((uVar1 & mutexMask) != 0) {
+      uVar2 = (~mutexBit & uVar1) - mutexWait;
+    }
+    LOCK();
+    bVar3 = uVar1 == mu->state;
+    if (bVar3) {
+      mu->state = uVar2 - 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  if ((uVar1 & mutexMask) != 0) {
+    internal_poll_runtime_Semrelease(addr);
+  }
+  return;
+}
+
+
+
+void internal_poll___FD__decref(internal_poll_FD *fd,error ~r0)
+
+{
+  uint uVar1;
+  uint64 old;
+  uint64 new;
+  int unaff_R14;
+  bool bVar2;
+  interface___ in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    if ((uVar1 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffe8);
+    }
+    LOCK();
+    bVar2 = uVar1 == (fd->fdmu).state;
+    if (bVar2) {
+      (fd->fdmu).state = uVar1 - 8;
+    }
+    UNLOCK();
+  } while (!bVar2);
+  if (((dword)(uVar1 - 8) & 0x7ffff9) != 1) {
+    return;
+  }
+  internal_poll___FD__destroy(fd,(error)in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__readUnlock(internal_poll_FD *fd)
+
+{
+  char extraout_AL;
+  undefined in_CL;
+  undefined extraout_CL;
+  int unaff_R14;
+  internal_poll_FD *piStack0000000000000008;
+  error in_stack_ffffffffffffffe8;
+  
+  piStack0000000000000008 = fd;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_CL = extraout_CL;
+  }
+  internal_poll___fdMutex__rwunlock(&piStack0000000000000008->fdmu,true,(bool)in_CL);
+  if (extraout_AL != '\0') {
+    internal_poll___FD__destroy(piStack0000000000000008,in_stack_ffffffffffffffe8);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__writeUnlock(internal_poll_FD *fd)
+
+{
+  char extraout_AL;
+  undefined in_CL;
+  undefined extraout_CL;
+  int unaff_R14;
+  internal_poll_FD *piStack0000000000000008;
+  error in_stack_ffffffffffffffe8;
+  
+  piStack0000000000000008 = fd;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_CL = extraout_CL;
+  }
+  internal_poll___fdMutex__rwunlock(&piStack0000000000000008->fdmu,false,(bool)in_CL);
+  if (extraout_AL != '\0') {
+    internal_poll___FD__destroy(piStack0000000000000008,in_stack_ffffffffffffffe8);
+  }
+  return;
+}
+
+
+
+int internal_poll___pollDesc__init(internal_poll_pollDesc *pd,internal_poll_FD *fd,error ~r0)
+
+{
+  uintptr extraout_RAX;
+  uintptr ctx;
+  uint ~r1;
+  uint extraout_RCX;
+  uint64 x;
+  int errno;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r1 = (uint)internal_poll_serverInit.done;
+  if (internal_poll_serverInit.done == 0) {
+    sync___Once__doSlow(&internal_poll_serverInit,
+                        (func__ **)&PTR_internal_poll_runtime_pollServerInit_008eb680);
+    ~r1 = extraout_RCX;
+  }
+  internal_poll_runtime_pollOpen(fd->Sysfd,(runtime_pollDesc *)fd,~r1);
+  if (x == 0) {
+    pd->runtimeCtx = extraout_RAX;
+    return 0;
+  }
+  if (x < 3) {
+    if (x == 2) {
+      return (int)internal_poll_errENOENT.tab;
+    }
+  }
+  else {
+    if (x == 0xb) {
+      return (int)internal_poll_errEAGAIN.tab;
+    }
+    if (x == 0x16) {
+      return (int)internal_poll_errEINVAL.tab;
+    }
+  }
+  runtime_convT64(x,(void *)x);
+  return (int)go_itab_syscall_Errno_error;
+}
+
+
+
+void internal_poll___pollDesc__prepare(internal_poll_pollDesc *pd,int mode,bool isFile,error ~r0)
+
+{
+  int v;
+  int res;
+  undefined7 in_register_00000009;
+  uint ~r0_00;
+  int unaff_R14;
+  byte bStack0000000000000018;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  ~r0_00 = CONCAT71(in_register_00000009,isFile);
+  while (bStack0000000000000018 = (byte)~r0_00,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0_00 = (uint)bStack0000000000000018;
+  }
+  if ((runtime_pollDesc *)pd->runtimeCtx == (runtime_pollDesc *)0x0) {
+    return;
+  }
+  internal_poll_runtime_pollReset((runtime_pollDesc *)pd->runtimeCtx,mode,~r0_00);
+  if (v < 2) {
+    if ((v != 0) && (v != 1)) {
+LAB_004a68af:
+      runtime_printlock();
+      runtime_printstring((string)in_stack_ffffffffffffffe0);
+      runtime_printint(v);
+      runtime_printnl();
+      runtime_printunlock();
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffe0);
+    }
+  }
+  else if ((v != 2) && (v != 3)) goto LAB_004a68af;
+  return;
+}
+
+
+
+__pid_t internal_poll___pollDesc__wait(void *__stat_loc)
+
+{
+  int v;
+  int res;
+  undefined8 *extraout_RAX;
+  uint in_RCX;
+  undefined1 *puVar1;
+  void *in_RBX;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RCX = in_RCX & 0xff;
+  }
+                    // WARNING: Load size is inaccurate
+  if (*__stat_loc == (runtime_pollDesc *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+    extraout_RAX[1] = 0x21;
+    *extraout_RAX = &DAT_008c0c98;
+    return 0x95e140;
+  }
+  internal_poll_runtime_pollWait(*__stat_loc,(int)in_RBX,in_RCX);
+  if (v < 2) {
+    if (v == 0) {
+      puVar1 = (undefined1 *)0x0;
+    }
+    else {
+      if (v != 1) goto LAB_004a69f7;
+      puVar1 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+      if ((char)in_RCX == '\0') {
+        puVar1 = go_itab_internal_poll_errNetClosing_error;
+      }
+    }
+  }
+  else {
+    puVar1 = (undefined1 *)internal_poll_ErrDeadlineExceeded.tab;
+    if ((v != 2) && (puVar1 = (undefined1 *)internal_poll_ErrNotPollable.tab, v != 3)) {
+LAB_004a69f7:
+      runtime_printlock();
+      runtime_printstring((string)in_stack_ffffffffffffffe0);
+      runtime_printint(v);
+      runtime_printnl();
+      runtime_printunlock();
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffe0);
+    }
+  }
+  return (__pid_t)(runtime_itab *)puVar1;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void internal_poll___FD__SetDeadline(internal_poll_FD *fd,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int in_RBX;
+  runtime_itab *unaff_RBP;
+  int unaff_R14;
+  void *unaff_retaddr;
+  time_Time in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_1.data = unaff_retaddr;
+  ~r0_1.tab = unaff_RBP;
+  internal_poll_setDeadlineImpl(fd,in_stack_ffffffffffffffd0,in_RBX,in_stack_ffffffffffffffe8,~r0_1)
+  ;
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void internal_poll___FD__SetReadDeadline(internal_poll_FD *fd,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int in_RBX;
+  runtime_itab *unaff_RBP;
+  int unaff_R14;
+  void *unaff_retaddr;
+  time_Time in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_1.data = unaff_retaddr;
+  ~r0_1.tab = unaff_RBP;
+  internal_poll_setDeadlineImpl(fd,in_stack_ffffffffffffffd0,in_RBX,in_stack_ffffffffffffffe8,~r0_1)
+  ;
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void internal_poll___FD__SetWriteDeadline(internal_poll_FD *fd,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int in_RBX;
+  runtime_itab *unaff_RBP;
+  int unaff_R14;
+  void *unaff_retaddr;
+  time_Time in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_1.data = unaff_retaddr;
+  ~r0_1.tab = unaff_RBP;
+  internal_poll_setDeadlineImpl(fd,in_stack_ffffffffffffffd0,in_RBX,in_stack_ffffffffffffffe8,~r0_1)
+  ;
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// DWARF original prototype: void internal/poll.setDeadlineImpl(internal/poll.FD * fd, time.Time t,
+// int mode, error ~r0, error ~r0)
+
+void internal_poll_setDeadlineImpl(internal_poll_FD *fd,time_Time t,int mode,error ~r0,error ~r0_1)
+
+{
+  uint uVar1;
+  runtime_pollDesc *pd;
+  time_Time t_00;
+  int extraout_RAX;
+  int64 d;
+  int d_00;
+  int in_RCX;
+  int in_RSI;
+  uint64 old;
+  undefined1 *puVar2;
+  uint64 new;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffff90;
+  time_Location *in_stack_ffffffffffffffa0;
+  undefined local_38 [16];
+  int local_28;
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (mode < 0) {
+    in_RCX = ((uint)(mode << 1) >> 0x1f) + 0xdd7b17f80;
+  }
+  local_28 = mode;
+  if ((in_RCX == 0) && ((mode & 0x3fffffffU) == 0)) {
+    d_00 = 0;
+  }
+  else {
+    t_00.loc = in_stack_ffffffffffffffa0;
+    t_00.wall = (uint64)in_stack_ffffffffffffff90._type;
+    t_00.ext = (int64)in_stack_ffffffffffffff90.data;
+    time_Until(t_00,mode);
+    d_00 = extraout_RAX;
+    if (extraout_RAX == 0) {
+      d_00 = -1;
+    }
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    bVar3 = (uVar1 & 1) != 0;
+    if (bVar3) goto LAB_004a6c92;
+    if ((uVar1 + 8 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff90);
+    }
+    LOCK();
+    bVar3 = uVar1 == (fd->fdmu).state;
+    if (bVar3) {
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a6c92:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 != (runtime_itab *)0x0) {
+    return;
+  }
+  local_38._8_8_ = fd;
+  local_38._0_8_ = internal_poll_setDeadlineImpl_func1;
+  local_10 = (code **)local_38;
+  pd = (runtime_pollDesc *)(fd->pd).runtimeCtx;
+  if (pd != (runtime_pollDesc *)0x0) {
+    internal_poll_runtime_pollSetDeadline(pd,d_00,in_RSI);
+    (**local_10)();
+    return;
+  }
+  internal_poll_setDeadlineImpl_func1();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll_setDeadlineImpl_func1(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;
+}
+
+
+
+// DWARF original prototype: void internal/poll.(*FD).Shutdown(internal/poll.FD * fd, int how, error
+// ~r0, error ~r0)
+
+void internal_poll___FD__Shutdown(internal_poll_FD *fd,int how,error ~r0,error ~r0_1)
+
+{
+  uint uVar1;
+  uint64 old;
+  undefined1 *puVar2;
+  uint64 new;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffffb8;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    bVar3 = (uVar1 & 1) != 0;
+    if (bVar3) goto LAB_004a6ea8;
+    if ((uVar1 + 8 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffb8);
+    }
+    LOCK();
+    bVar3 = uVar1 == (fd->fdmu).state;
+    if (bVar3) {
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a6ea8:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 == (runtime_itab *)0x0) {
+    local_20._8_8_ = fd;
+    local_20._0_8_ = internal_poll___FD__Shutdown_func1;
+    local_10 = (code **)local_20;
+    syscall_Shutdown(fd->Sysfd,how,(error)in_stack_ffffffffffffffb8);
+    (**local_10)();
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__Shutdown_func1(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;
+}
+
+
+
+// DWARF original prototype: void internal/poll.(*FD).Fchown(internal/poll.FD * fd, int uid, int
+// gid, error ~r0, error ~r0)
+
+void internal_poll___FD__Fchown(internal_poll_FD *fd,int uid,int gid,error ~r0,error ~r0_1)
+
+{
+  uint uVar1;
+  char extraout_AL;
+  undefined1 *extraout_RAX;
+  uint64 old;
+  undefined1 *puVar2;
+  void *x;
+  uint64 new;
+  bool ~r0_00;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffff98;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    bVar3 = (uVar1 & 1) != 0;
+    if (bVar3) goto LAB_004a706e;
+    if ((uVar1 + 8 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff98);
+    }
+    LOCK();
+    bVar3 = uVar1 == (fd->fdmu).state;
+    if (bVar3) {
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a706e:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 != (runtime_itab *)0x0) {
+    return;
+  }
+  local_20._8_8_ = fd;
+  local_20._0_8_ = internal_poll___FD__Fchown_func2;
+  local_10 = (code **)local_20;
+  do {
+    syscall_Fchown(fd->Sysfd,uid,gid,(error)in_stack_ffffffffffffff98);
+    if (extraout_RAX != go_itab_syscall_Errno_error) break;
+    runtime_ifaceeq((runtime_itab *)go_itab_syscall_Errno_error,x,&DAT_0095a650,~r0_00);
+  } while (extraout_AL != '\0');
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__Fchown_func2(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;
+}
+
+
+
+// DWARF original prototype: void internal/poll.(*FD).Ftruncate(internal/poll.FD * fd, int64 size,
+// error ~r0, error ~r0)
+
+void internal_poll___FD__Ftruncate(internal_poll_FD *fd,int64 size,error ~r0,error ~r0_1)
+
+{
+  uint uVar1;
+  char extraout_AL;
+  undefined1 *extraout_RAX;
+  uint64 old;
+  undefined1 *puVar2;
+  uint64 new;
+  void *x;
+  bool ~r0_00;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffff98;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    bVar3 = (uVar1 & 1) != 0;
+    if (bVar3) goto LAB_004a7288;
+    if ((uVar1 + 8 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff98);
+    }
+    LOCK();
+    bVar3 = uVar1 == (fd->fdmu).state;
+    if (bVar3) {
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a7288:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 != (runtime_itab *)0x0) {
+    return;
+  }
+  local_20._8_8_ = fd;
+  local_20._0_8_ = internal_poll___FD__Ftruncate_func2;
+  local_10 = (code **)local_20;
+  do {
+    syscall_Ftruncate(fd->Sysfd,size,(error)in_stack_ffffffffffffff98);
+    if (extraout_RAX != go_itab_syscall_Errno_error) break;
+    runtime_ifaceeq((runtime_itab *)go_itab_syscall_Errno_error,x,&DAT_0095a650,~r0_00);
+  } while (extraout_AL != '\0');
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__Ftruncate_func2(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;
+}
+
+
+
+// DWARF original prototype: void internal/poll.(*FD).RawControl(internal/poll.FD * fd,
+// func(uintptr) * * f, error ~r0, error ~r0)
+
+void internal_poll___FD__RawControl(internal_poll_FD *fd,func_uintptr_ **f,error ~r0,error ~r0_1)
+
+{
+  uint uVar1;
+  uint64 old;
+  undefined1 *puVar2;
+  uint64 new;
+  int unaff_R14;
+  bool bVar3;
+  interface___ in_stack_ffffffffffffffb8;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  do {
+    uVar1 = (fd->fdmu).state;
+    bVar3 = (uVar1 & 1) != 0;
+    if (bVar3) goto LAB_004a748e;
+    if ((uVar1 + 8 & 0x7ffff8) == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffb8);
+    }
+    LOCK();
+    bVar3 = uVar1 == (fd->fdmu).state;
+    if (bVar3) {
+      (fd->fdmu).state = uVar1 + 8;
+    }
+    UNLOCK();
+  } while (!bVar3);
+  bVar3 = (uVar1 & 1) != 0;
+LAB_004a748e:
+  if (bVar3) {
+    puVar2 = (undefined1 *)internal_poll_ErrFileClosing.tab;
+    if (fd->isFile == false) {
+      puVar2 = go_itab_internal_poll_errNetClosing_error;
+    }
+  }
+  else {
+    puVar2 = (undefined1 *)0x0;
+  }
+  if ((runtime_itab *)puVar2 == (runtime_itab *)0x0) {
+    local_20._8_8_ = fd;
+    local_20._0_8_ = internal_poll___FD__RawControl_func1;
+    local_10 = (code **)local_20;
+    (**f)(fd->Sysfd);
+    (**local_10)();
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_poll___FD__RawControl_func1(void)
+
+{
+  int *piVar1;
+  error ~r0;
+  int in_RDX;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff0;
+  }
+  ~r0.data = unaff_RBP;
+  ~r0.tab = in_stack_fffffffffffffff0;
+  internal_poll___FD__decref(*(internal_poll_FD **)(in_RDX + 8),~r0);
+  return;

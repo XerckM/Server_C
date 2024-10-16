@@ -1,0 +1,1000 @@
+  local_18._4_4_ = in_XMM15_Db;
+  local_18._0_4_ = in_XMM15_Da;
+  uStack_10 = in_XMM15_Dc;
+  uStack_c = in_XMM15_Dd;
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Sqr();
+  acc = 0;
+  for (i = 0; i < 4; i = i + 1) {
+    acc = acc | local_48[i] ^ (*pauStack0000000000000010)[i];
+  }
+  uVar1 = ~acc >> 0x20 & ~acc;
+  uVar1 = uVar1 >> 0x10 & uVar1;
+  uVar1 = uVar1 >> 8 & uVar1;
+  uVar1 = uVar1 >> 4 & uVar1;
+  uVar1 = uVar1 >> 2 & uVar1;
+  if ((dword)((dword)(uVar1 >> 1) & (dword)uVar1) != 1) {
+    return;
+  }
+  *(undefined4 *)*pauStack0000000000000008 = local_28._0_4_;
+  *(undefined4 *)((int)*pauStack0000000000000008 + 4) = local_28._4_4_;
+  *(undefined4 *)(*pauStack0000000000000008 + 1) = uStack_20;
+  *(undefined4 *)((int)*pauStack0000000000000008 + 0xc) = uStack_1c;
+  *(undefined4 *)(*pauStack0000000000000008 + 2) = local_18._0_4_;
+  *(undefined4 *)((int)*pauStack0000000000000008 + 0x14) = local_18._4_4_;
+  *(undefined4 *)(*pauStack0000000000000008 + 3) = uStack_10;
+  *(undefined4 *)((int)*pauStack0000000000000008 + 0x1c) = uStack_c;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_init_0(void)
+
+{
+  crypto_internal_nistec_p256AffineTable (*extraout_RAX) [43];
+  crypto_internal_nistec_p256AffineTable (*paacVar1) [43];
+  crypto_internal_nistec_p256AffineTable (**extraout_R11) [43];
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  paacVar1 = (crypto_internal_nistec_p256AffineTable (*) [43])
+             crypto_internal_nistec_p256PrecomputedEmbed.str;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX;
+    extraout_R11[1] = crypto_internal_nistec_p256Precomputed;
+    paacVar1 = extraout_RAX;
+  }
+  crypto_internal_nistec_p256Precomputed = paacVar1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_p256OrdReduce(crypto_internal_nistec_p256OrdElement *s)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  uint64 t1;
+  uint64 t2;
+  uint64 t3;
+  uint64 t0;
+  uint64 b;
+  uint64 tMask;
+  
+  uVar1 = (*s)[0];
+  uVar4 = (*s)[1] + 0x4319055258e8617c;
+  uVar2 = (uint)((*s)[1] < 0xbce6faada7179e84 || uVar4 < (uVar1 < 0xf3b9cac2fc632551));
+  uVar5 = (*s)[2] + 1;
+  uVar3 = (uint)((*s)[2] != 0xffffffffffffffff || uVar5 < uVar2);
+  uVar6 = (*s)[3] + 0x100000000;
+  b = ((*s)[3] < 0xffffffff00000000 || uVar6 < uVar3) - 1;
+  (*s)[0] = uVar1 ^ (uVar1 + 0xc46353d039cdaaf ^ uVar1) & b;
+  (*s)[1] = (uVar4 - (uVar1 < 0xf3b9cac2fc632551) ^ (*s)[1]) & b ^ (*s)[1];
+  (*s)[2] = (uVar5 - uVar2 ^ (*s)[2]) & b ^ (*s)[2];
+  (*s)[3] = (uVar6 - uVar3 ^ (*s)[3]) & b ^ (*s)[3];
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__Add
+               (crypto_internal_nistec_P256Point *q,crypto_internal_nistec_P256Point *r1,
+               crypto_internal_nistec_P256Point *r2,crypto_internal_nistec_P256Point *~r0)
+
+{
+  undefined4 *puVar1;
+  int pointsEqual;
+  int i;
+  int i_1;
+  int r2IsInfinity;
+  uint64 acc;
+  int r1IsInfinity;
+  uint64 acc_1;
+  int unaff_R14;
+  undefined4 local_c8;
+  undefined4 uStack_c4;
+  undefined4 uStack_c0;
+  undefined4 uStack_bc;
+  undefined4 local_b8;
+  undefined4 uStack_b4;
+  undefined4 uStack_b0;
+  undefined4 uStack_ac;
+  undefined4 local_a8;
+  undefined4 uStack_a4;
+  undefined4 uStack_a0;
+  undefined4 uStack_9c;
+  undefined4 local_98;
+  undefined4 uStack_94;
+  undefined4 uStack_90;
+  undefined4 uStack_8c;
+  undefined4 local_88;
+  undefined4 uStack_84;
+  undefined4 uStack_80;
+  undefined4 uStack_7c;
+  undefined4 local_78;
+  undefined4 uStack_74;
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  
+  while (&uStack_c0 <= *(undefined4 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cdab();
+  puVar1 = (undefined4 *)FUN_0046cdab();
+  for (i = 0; i < 4; i = i + 1) {
+  }
+  for (i_1 = 0; i_1 < 4; i_1 = i_1 + 1) {
+  }
+  crypto_internal_nistec_p256PointAddAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256MovCond();
+  crypto_internal_nistec_p256MovCond();
+  crypto_internal_nistec_p256MovCond();
+  *puVar1 = local_c8;
+  puVar1[1] = uStack_c4;
+  puVar1[2] = uStack_c0;
+  puVar1[3] = uStack_bc;
+  puVar1[4] = local_b8;
+  puVar1[5] = uStack_b4;
+  puVar1[6] = uStack_b0;
+  puVar1[7] = uStack_ac;
+  puVar1[8] = local_a8;
+  puVar1[9] = uStack_a4;
+  puVar1[10] = uStack_a0;
+  puVar1[0xb] = uStack_9c;
+  puVar1[0xc] = local_98;
+  puVar1[0xd] = uStack_94;
+  puVar1[0xe] = uStack_90;
+  puVar1[0xf] = uStack_8c;
+  puVar1[0x10] = local_88;
+  puVar1[0x11] = uStack_84;
+  puVar1[0x12] = uStack_80;
+  puVar1[0x13] = uStack_7c;
+  puVar1[0x14] = local_78;
+  puVar1[0x15] = uStack_74;
+  puVar1[0x16] = uStack_70;
+  puVar1[0x17] = uStack_6c;
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__Double
+               (crypto_internal_nistec_P256Point *q,crypto_internal_nistec_P256Point *p,
+               crypto_internal_nistec_P256Point *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_P256Point *pcStack0000000000000008;
+  undefined4 local_68;
+  undefined4 uStack_64;
+  undefined4 uStack_60;
+  undefined4 uStack_5c;
+  undefined4 local_58;
+  undefined4 uStack_54;
+  undefined4 uStack_50;
+  undefined4 uStack_4c;
+  undefined4 local_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 local_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined4 local_18;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  pcStack0000000000000008 = q;
+  while (&local_38 <= *(undefined4 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cdab();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  *(undefined4 *)pcStack0000000000000008->x = local_68;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 4) = uStack_64;
+  *(undefined4 *)(pcStack0000000000000008->x + 1) = uStack_60;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0xc) = uStack_5c;
+  *(undefined4 *)(pcStack0000000000000008->x + 2) = local_58;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x14) = uStack_54;
+  *(undefined4 *)(pcStack0000000000000008->x + 3) = uStack_50;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x1c) = uStack_4c;
+  *(undefined4 *)pcStack0000000000000008->y = local_48;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 4) = uStack_44;
+  *(undefined4 *)(pcStack0000000000000008->y + 1) = uStack_40;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0xc) = uStack_3c;
+  *(undefined4 *)(pcStack0000000000000008->y + 2) = local_38;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0x14) = uStack_34;
+  *(undefined4 *)(pcStack0000000000000008->y + 3) = uStack_30;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0x1c) = uStack_2c;
+  *(undefined4 *)pcStack0000000000000008->z = local_28;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 4) = uStack_24;
+  *(undefined4 *)(pcStack0000000000000008->z + 1) = uStack_20;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0xc) = uStack_1c;
+  *(undefined4 *)(pcStack0000000000000008->z + 2) = local_18;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0x14) = uStack_14;
+  *(undefined4 *)(pcStack0000000000000008->z + 3) = uStack_10;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0x1c) = uStack_c;
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__ScalarBaseMult
+               (crypto_internal_nistec_P256Point *r,__uint8 scalar,
+               crypto_internal_nistec_P256Point *~r0,error ~r1)
+
+{
+  undefined8 *extraout_RAX;
+  int in_RCX;
+  int unaff_R14;
+  uint64 local_30 [4];
+  crypto_internal_nistec_P256Point *local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RCX != 0x20) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0);
+    extraout_RAX[1] = 0x15;
+    *extraout_RAX = &DAT_008b9c76;
+    return;
+  }
+  local_10 = r;
+  crypto_internal_nistec_p256OrdBigToLittle();
+  crypto_internal_nistec_p256OrdReduce(&local_30);
+  crypto_internal_nistec___P256Point__p256BaseMult(local_10,&local_30);
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__ScalarMult
+               (crypto_internal_nistec_P256Point *r,crypto_internal_nistec_P256Point *q,
+               __uint8 scalar,crypto_internal_nistec_P256Point *~r0,error ~r1)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  undefined4 uVar10;
+  undefined4 uVar11;
+  undefined4 uVar12;
+  undefined4 uVar13;
+  undefined4 uVar14;
+  undefined4 uVar15;
+  undefined4 uVar16;
+  undefined4 uVar17;
+  undefined4 uVar18;
+  undefined4 uVar19;
+  undefined8 *extraout_RAX;
+  int in_RDI;
+  int unaff_R14;
+  uint64 local_28 [4];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RDI != 0x20) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,q);
+    extraout_RAX[1] = 0x15;
+    *extraout_RAX = &DAT_008b9c76;
+    return;
+  }
+  crypto_internal_nistec_p256OrdBigToLittle();
+  crypto_internal_nistec_p256OrdReduce(&local_28);
+  uVar1 = *(undefined4 *)q->y;
+  uVar2 = *(undefined4 *)((int)q->y + 4);
+  uVar3 = *(undefined4 *)(q->y + 1);
+  uVar4 = *(undefined4 *)((int)q->y + 0xc);
+  uVar5 = *(undefined4 *)(q->y + 2);
+  uVar6 = *(undefined4 *)((int)q->y + 0x14);
+  uVar7 = *(undefined4 *)(q->y + 3);
+  uVar8 = *(undefined4 *)((int)q->y + 0x1c);
+  uVar9 = *(undefined4 *)q->z;
+  uVar10 = *(undefined4 *)((int)q->z + 4);
+  uVar11 = *(undefined4 *)(q->z + 1);
+  uVar12 = *(undefined4 *)((int)q->z + 0xc);
+  uVar13 = *(undefined4 *)(q->z + 2);
+  uVar14 = *(undefined4 *)((int)q->z + 0x14);
+  uVar15 = *(undefined4 *)(q->z + 3);
+  uVar16 = *(undefined4 *)((int)q->z + 0x1c);
+  uVar17 = *(undefined4 *)((int)q->x + 4);
+  uVar18 = *(undefined4 *)(q->x + 1);
+  uVar19 = *(undefined4 *)((int)q->x + 0xc);
+  *(undefined4 *)r->x = *(undefined4 *)q->x;
+  *(undefined4 *)((int)r->x + 4) = uVar17;
+  *(undefined4 *)(r->x + 1) = uVar18;
+  *(undefined4 *)((int)r->x + 0xc) = uVar19;
+  uVar17 = *(undefined4 *)((int)q->x + 0x14);
+  uVar18 = *(undefined4 *)(q->x + 3);
+  uVar19 = *(undefined4 *)((int)q->x + 0x1c);
+  *(undefined4 *)(r->x + 2) = *(undefined4 *)(q->x + 2);
+  *(undefined4 *)((int)r->x + 0x14) = uVar17;
+  *(undefined4 *)(r->x + 3) = uVar18;
+  *(undefined4 *)((int)r->x + 0x1c) = uVar19;
+  *(undefined4 *)r->y = uVar1;
+  *(undefined4 *)((int)r->y + 4) = uVar2;
+  *(undefined4 *)(r->y + 1) = uVar3;
+  *(undefined4 *)((int)r->y + 0xc) = uVar4;
+  *(undefined4 *)(r->y + 2) = uVar5;
+  *(undefined4 *)((int)r->y + 0x14) = uVar6;
+  *(undefined4 *)(r->y + 3) = uVar7;
+  *(undefined4 *)((int)r->y + 0x1c) = uVar8;
+  *(undefined4 *)r->z = uVar9;
+  *(undefined4 *)((int)r->z + 4) = uVar10;
+  *(undefined4 *)(r->z + 1) = uVar11;
+  *(undefined4 *)((int)r->z + 0xc) = uVar12;
+  *(undefined4 *)(r->z + 2) = uVar13;
+  *(undefined4 *)((int)r->z + 0x14) = uVar14;
+  *(undefined4 *)(r->z + 3) = uVar15;
+  *(undefined4 *)((int)r->z + 0x1c) = uVar16;
+  crypto_internal_nistec___P256Point__p256ScalarMult(r,&local_28);
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__Bytes(crypto_internal_nistec_P256Point *p,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  uint8 (*out) [65];
+  uint8 (*_out) [65];
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffe0 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00818880,in_RBX);
+  ~r0_00.cap = (int)p;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffe0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe0._8_8_;
+  crypto_internal_nistec___P256Point__bytes(p,out,~r0_00);
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__bytes
+               (crypto_internal_nistec_P256Point *p,uint8 (*out) [65],__uint8 ~r0)
+
+{
+  int i;
+  uint64 acc;
+  uint uVar1;
+  int unaff_R14;
+  uint64 local_48 [4];
+  uint64 local_28 [4];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  acc = 0;
+  for (i = 0; i < 4; i = i + 1) {
+    acc = acc | p->z[i] ^ crypto_internal_nistec_p256Zero[i];
+  }
+  uVar1 = ~acc >> 0x20 & ~acc;
+  uVar1 = uVar1 >> 0x10 & uVar1;
+  uVar1 = uVar1 >> 8 & uVar1;
+  uVar1 = uVar1 >> 4 & uVar1;
+  uVar1 = uVar1 >> 2 & uVar1;
+  if ((dword)((dword)(uVar1 >> 1) & (dword)uVar1) == 1) {
+    (*out)[0] = 0;
+    return;
+  }
+  crypto_internal_nistec___P256Point__affineFromMont(p,&local_28,&local_48);
+  (*out)[0] = 4;
+  crypto_internal_nistec_p256LittleToBig();
+  crypto_internal_nistec_p256LittleToBig();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec___P256Point__affineFromMont
+               (crypto_internal_nistec_P256Point *p,crypto_internal_nistec_p256Element *x,
+               crypto_internal_nistec_p256Element *y)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_P256Point *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = p;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_p256Inverse(y,&pcStack0000000000000008->z);
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256FromMont();
+  crypto_internal_nistec_p256FromMont();
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void crypto_internal_nistec___P256Point__BytesX
+               (crypto_internal_nistec_P256Point *p,__uint8 ~r0,error ~r1)
+
+{
+  __uint8 ~r0_00;
+  error ~r1_00;
+  uint8 (*out) [32];
+  uint8 (*_out) [32];
+  void *in_RBX;
+  void *extraout_RBX;
+  runtime_itab *unaff_RBP;
+  int unaff_R14;
+  void *unaff_retaddr;
+  undefined in_stack_ffffffffffffffe0 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00810480,in_RBX);
+  ~r0_00.cap = (int)p;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffe0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe0._8_8_;
+  ~r1_00.data = unaff_retaddr;
+  ~r1_00.tab = unaff_RBP;
+  crypto_internal_nistec___P256Point__bytesX(p,out,~r0_00,~r1_00);
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__bytesX
+               (crypto_internal_nistec_P256Point *p,uint8 (*out) [32],__uint8 ~r0,error ~r1)
+
+{
+  undefined8 *extraout_RAX;
+  int i;
+  uint64 acc;
+  uint uVar1;
+  int unaff_R14;
+  uint64 local_28 [4];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  acc = 0;
+  for (i = 0; i < 4; i = i + 1) {
+    acc = acc | p->z[i] ^ crypto_internal_nistec_p256Zero[i];
+  }
+  uVar1 = ~acc >> 0x20 & ~acc;
+  uVar1 = uVar1 >> 0x10 & uVar1;
+  uVar1 = uVar1 >> 8 & uVar1;
+  uVar1 = uVar1 >> 4 & uVar1;
+  uVar1 = uVar1 >> 2 & uVar1;
+  if ((dword)((dword)(uVar1 >> 1) & (dword)uVar1) == 1) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,out);
+    extraout_RAX[1] = 0x23;
+    *extraout_RAX = &DAT_008c21ff;
+    return;
+  }
+  crypto_internal_nistec_p256Inverse(&local_28,&p->z);
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256FromMont();
+  crypto_internal_nistec_p256LittleToBig();
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__BytesCompressed
+               (crypto_internal_nistec_P256Point *p,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  uint8 (*out) [33];
+  uint8 (*_out) [33];
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffe0 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00819580,in_RBX);
+  ~r0_00.cap = (int)p;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffe0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe0._8_8_;
+  crypto_internal_nistec___P256Point__bytesCompressed(p,out,~r0_00);
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__bytesCompressed
+               (crypto_internal_nistec_P256Point *p,uint8 (*out) [33],__uint8 ~r0)
+
+{
+  int i;
+  uint64 acc;
+  uint uVar1;
+  int unaff_R14;
+  undefined4 in_XMM15_Da;
+  byte local_48;
+  uint64 local_28 [4];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  acc = 0;
+  for (i = 0; i < 4; i = i + 1) {
+    acc = acc | p->z[i] ^ crypto_internal_nistec_p256Zero[i];
+  }
+  uVar1 = ~acc >> 0x20 & ~acc;
+  uVar1 = uVar1 >> 0x10 & uVar1;
+  uVar1 = uVar1 >> 8 & uVar1;
+  uVar1 = uVar1 >> 4 & uVar1;
+  uVar1 = uVar1 >> 2 & uVar1;
+  if ((dword)((dword)(uVar1 >> 1) & (dword)uVar1) == 1) {
+    (*out)[0] = 0;
+    return;
+  }
+  local_48 = (byte)in_XMM15_Da;
+  crypto_internal_nistec___P256Point__affineFromMont
+            (p,&local_28,(crypto_internal_nistec_p256Element *)&local_48);
+  (*out)[0] = local_48 & 1 | 2;
+  crypto_internal_nistec_p256LittleToBig();
+  return;
+}
+
+
+
+void crypto_internal_nistec___P256Point__Select
+               (crypto_internal_nistec_P256Point *q,crypto_internal_nistec_P256Point *p1,
+               crypto_internal_nistec_P256Point *p2,int cond,crypto_internal_nistec_P256Point *~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_p256MovCond();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_p256Inverse
+               (crypto_internal_nistec_p256Element *out,crypto_internal_nistec_p256Element *in)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_p256Element *local_10;
+  
+  while (&local_10 <= *(crypto_internal_nistec_p256Element ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_10 = in;
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  crypto_internal_nistec_p256Sqr();
+  crypto_internal_nistec_p256Mul();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec___P256Point__p256BaseMult
+               (crypto_internal_nistec_P256Point *p,crypto_internal_nistec_p256OrdElement *scalar)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  int i;
+  uint64 wvalue;
+  uint s;
+  int sign;
+  int iVar9;
+  uint uVar10;
+  uint s_1;
+  uint index;
+  int sel;
+  uint d_1;
+  uint d;
+  int unaff_R14;
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  crypto_internal_nistec_P256Point *pcStack0000000000000008;
+  crypto_internal_nistec_p256OrdElement *pauStack0000000000000010;
+  undefined4 local_c8;
+  undefined4 uStack_c4;
+  undefined4 uStack_c0;
+  undefined4 uStack_bc;
+  undefined4 local_b8;
+  undefined4 uStack_b4;
+  undefined4 uStack_b0;
+  undefined4 uStack_ac;
+  undefined local_a8 [8];
+  undefined4 uStack_a0;
+  undefined4 uStack_9c;
+  undefined local_98 [8];
+  undefined4 uStack_90;
+  undefined4 uStack_8c;
+  undefined local_88 [8];
+  undefined4 uStack_80;
+  undefined4 uStack_7c;
+  undefined local_78 [8];
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  undefined4 local_68;
+  undefined4 uStack_64;
+  undefined4 uStack_60;
+  undefined4 uStack_5c;
+  undefined4 local_58;
+  undefined4 uStack_54;
+  undefined4 uStack_50;
+  undefined4 uStack_4c;
+  undefined4 local_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 local_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined4 local_18;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  pcStack0000000000000008 = p;
+  pauStack0000000000000010 = scalar;
+  while (&local_c8 <= *(undefined4 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_a8._4_4_ = in_XMM15_Db;
+  local_a8._0_4_ = in_XMM15_Da;
+  uStack_a0 = in_XMM15_Dc;
+  uStack_9c = in_XMM15_Dd;
+  local_98._4_4_ = in_XMM15_Db;
+  local_98._0_4_ = in_XMM15_Da;
+  uStack_90 = in_XMM15_Dc;
+  uStack_8c = in_XMM15_Dd;
+  local_88._4_4_ = in_XMM15_Db;
+  local_88._0_4_ = in_XMM15_Da;
+  uStack_80 = in_XMM15_Dc;
+  uStack_7c = in_XMM15_Dd;
+  local_78._4_4_ = in_XMM15_Db;
+  local_78._0_4_ = in_XMM15_Da;
+  uStack_70 = in_XMM15_Dc;
+  uStack_6c = in_XMM15_Dd;
+  crypto_internal_nistec_p256SelectAffine();
+  uVar8 = crypto_internal_nistec_p256One[3]._4_4_;
+  uVar7 = (undefined4)crypto_internal_nistec_p256One[3];
+  uVar6 = crypto_internal_nistec_p256One[2]._4_4_;
+  uVar5 = (undefined4)crypto_internal_nistec_p256One[2];
+  uVar4 = crypto_internal_nistec_p256One[1]._4_4_;
+  uVar3 = (undefined4)crypto_internal_nistec_p256One[1];
+  uVar2 = crypto_internal_nistec_p256One[0]._4_4_;
+  uVar1 = (undefined4)crypto_internal_nistec_p256One[0];
+  local_c8 = local_88._0_4_;
+  uStack_c4 = local_88._4_4_;
+  uStack_c0 = uStack_80;
+  uStack_bc = uStack_7c;
+  local_b8 = local_78._0_4_;
+  uStack_b4 = local_78._4_4_;
+  uStack_b0 = uStack_70;
+  uStack_ac = uStack_6c;
+  *(undefined4 *)pcStack0000000000000008->x = local_a8._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 4) = local_a8._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->x + 1) = uStack_a0;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0xc) = uStack_9c;
+  *(undefined4 *)(pcStack0000000000000008->x + 2) = local_98._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x14) = local_98._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->x + 3) = uStack_90;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x1c) = uStack_8c;
+  *(undefined4 *)pcStack0000000000000008->y = local_88._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 4) = local_88._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->y + 1) = uStack_80;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0xc) = uStack_7c;
+  *(undefined4 *)(pcStack0000000000000008->y + 2) = local_78._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0x14) = local_78._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->y + 3) = uStack_70;
+  *(undefined4 *)((int)pcStack0000000000000008->y + 0x1c) = uStack_6c;
+  *(undefined4 *)pcStack0000000000000008->z = uVar1;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 4) = uVar2;
+  *(undefined4 *)(pcStack0000000000000008->z + 1) = uVar3;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0xc) = uVar4;
+  *(undefined4 *)(pcStack0000000000000008->z + 2) = uVar5;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0x14) = uVar6;
+  *(undefined4 *)(pcStack0000000000000008->z + 3) = uVar7;
+  *(undefined4 *)((int)pcStack0000000000000008->z + 0x1c) = uVar8;
+  crypto_internal_nistec_p256NegCond();
+  iVar9 = 1;
+  uVar10 = 5;
+  do {
+    if (0x2a < iVar9) {
+      FUN_0046cdab();
+      local_68 = (undefined4)crypto_internal_nistec_p256One[0];
+      uStack_64 = crypto_internal_nistec_p256One[0]._4_4_;
+      uStack_60 = (undefined4)crypto_internal_nistec_p256One[1];
+      uStack_5c = crypto_internal_nistec_p256One[1]._4_4_;
+      local_58 = (undefined4)crypto_internal_nistec_p256One[2];
+      uStack_54 = crypto_internal_nistec_p256One[2]._4_4_;
+      uStack_50 = (undefined4)crypto_internal_nistec_p256One[3];
+      uStack_4c = crypto_internal_nistec_p256One[3]._4_4_;
+      local_48 = (undefined4)crypto_internal_nistec_p256One[0];
+      uStack_44 = crypto_internal_nistec_p256One[0]._4_4_;
+      uStack_40 = (undefined4)crypto_internal_nistec_p256One[1];
+      uStack_3c = crypto_internal_nistec_p256One[1]._4_4_;
+      local_38 = (undefined4)crypto_internal_nistec_p256One[2];
+      uStack_34 = crypto_internal_nistec_p256One[2]._4_4_;
+      uStack_30 = (undefined4)crypto_internal_nistec_p256One[3];
+      uStack_2c = crypto_internal_nistec_p256One[3]._4_4_;
+      local_28 = (undefined4)crypto_internal_nistec_p256Zero[0];
+      uStack_24 = crypto_internal_nistec_p256Zero[0]._4_4_;
+      uStack_20 = (undefined4)crypto_internal_nistec_p256Zero[1];
+      uStack_1c = crypto_internal_nistec_p256Zero[1]._4_4_;
+      local_18 = (undefined4)crypto_internal_nistec_p256Zero[2];
+      uStack_14 = crypto_internal_nistec_p256Zero[2]._4_4_;
+      uStack_10 = (undefined4)crypto_internal_nistec_p256Zero[3];
+      uStack_c = crypto_internal_nistec_p256Zero[3]._4_4_;
+      crypto_internal_nistec_p256MovCond();
+      return;
+    }
+    if (uVar10 < 0xc0) {
+      if (3 < uVar10 >> 6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      if (3 < (uVar10 >> 6) + 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+    }
+    else if (3 < uVar10 >> 6) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    iVar9 = iVar9 + 1;
+    uVar10 = uVar10 + 6;
+    crypto_internal_nistec_p256SelectAffine();
+    crypto_internal_nistec_p256PointAddAffineAsm();
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec___P256Point__p256ScalarMult
+               (crypto_internal_nistec_P256Point *p,crypto_internal_nistec_p256OrdElement *scalar)
+
+{
+  uint uVar1;
+  uint s_1;
+  uint s_2;
+  int iVar2;
+  uint d_1;
+  uint d_2;
+  uint64 wvalue;
+  uint s;
+  int sel;
+  int sign;
+  undefined8 *puVar3;
+  uint d;
+  int unaff_R14;
+  byte bVar4;
+  crypto_internal_nistec_P256Point *pcStack0000000000000008;
+  crypto_internal_nistec_p256OrdElement *pauStack0000000000000010;
+  uint index;
+  undefined local_748 [320];
+  undefined8 local_608 [192];
+  
+  bVar4 = 0;
+  pcStack0000000000000008 = p;
+  pauStack0000000000000010 = scalar;
+  while (local_748 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar3 = local_608;
+  for (iVar2 = 0xc0; iVar2 != 0; iVar2 = iVar2 + -1) {
+    *puVar3 = 0;
+    puVar3 = puVar3 + (uint)bVar4 * -2 + 1;
+  }
+  FUN_0046cdab();
+  FUN_0046cdab();
+  FUN_0046cdab();
+  FUN_0046cdab();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointAddAsm();
+  crypto_internal_nistec_p256PointAddAsm();
+  crypto_internal_nistec_p256PointAddAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointAddAsm();
+  crypto_internal_nistec_p256PointAddAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  crypto_internal_nistec_p256PointDoubleAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256PointAddAsm();
+  crypto_internal_nistec_p256PointAddAsm();
+  FUN_0046d10c();
+  FUN_0046d10c();
+  crypto_internal_nistec_p256Select();
+  uVar1 = 0xfe;
+  do {
+    if (uVar1 < 5) {
+      crypto_internal_nistec_p256PointDoubleAsm();
+      crypto_internal_nistec_p256PointDoubleAsm();
+      crypto_internal_nistec_p256PointDoubleAsm();
+      crypto_internal_nistec_p256PointDoubleAsm();
+      crypto_internal_nistec_p256PointDoubleAsm();
+      crypto_internal_nistec_p256Select();
+      crypto_internal_nistec_p256NegCond();
+      crypto_internal_nistec_p256PointAddAsm();
+      crypto_internal_nistec_p256MovCond();
+      crypto_internal_nistec_p256MovCond();
+      return;
+    }
+    crypto_internal_nistec_p256PointDoubleAsm();
+    crypto_internal_nistec_p256PointDoubleAsm();
+    crypto_internal_nistec_p256PointDoubleAsm();
+    crypto_internal_nistec_p256PointDoubleAsm();
+    crypto_internal_nistec_p256PointDoubleAsm();
+    uVar1 = uVar1 - 5;
+    if (uVar1 < 0xc0) {
+      if (3 < uVar1 >> 6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      if (3 < (uVar1 >> 6) + 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+    }
+    else if (3 < uVar1 >> 6) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    crypto_internal_nistec_p256Select();
+    crypto_internal_nistec_p256NegCond();
+    crypto_internal_nistec_p256PointAddAsm();
+    crypto_internal_nistec_p256MovCond();
+    crypto_internal_nistec_p256MovCond();
+  } while( true );
+}
+
+
+
+void crypto_internal_nistec_P256OrdInverse(__uint8 k,__uint8 ~r0,error ~r1)
+
+{
+  undefined8 *extraout_RAX;
+  int iVar1;
+  uint8 (*_xOut) [32];
+  int s;
+  void *in_RBX;
+  void *~r0_00;
+  int unaff_R14;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  int i;
+  undefined local_2b0 [16];
+  undefined local_2a0 [16];
+  undefined local_290 [16];
+  undefined local_280 [16];
+  undefined local_270 [16];
+  undefined local_260 [16];
+  undefined local_250 [16];
+  undefined local_240 [16];
+  undefined local_230 [16];
+  undefined local_220 [16];
+  undefined local_210 [16];
+  undefined local_200 [16];
+  undefined local_1f0 [16];
+  undefined local_1e0 [16];
+  uint64 local_1d0 [4];

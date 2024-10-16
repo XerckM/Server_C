@@ -1,0 +1,1000 @@
+  __uint8 ~r0;
+  uint extraout_RAX;
+  int m;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *puVar2;
+  uint ~r0_00;
+  int extraout_RCX;
+  int extraout_RBX;
+  int unaff_RBP;
+  uint8 **extraout_R11;
+  int unaff_R14;
+  error in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffe0;
+  undefined8 in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((dword)r < 0x80) {
+    bytes___Buffer__WriteByte(b,(uint8)r,in_stack_ffffffffffffffd0);
+    return;
+  }
+  b->lastRead = 0;
+  ~r0_00 = (b->buf).len;
+  uVar1 = (b->buf).cap;
+  if ((int)(uVar1 - ~r0_00) < 4) {
+    bytes___Buffer__grow(b,4,~r0_00);
+    ~r0_00 = extraout_RAX;
+  }
+  else {
+    if (uVar1 < ~r0_00 + 4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    (b->buf).len = ~r0_00 + 4;
+  }
+  if (~r0_00 <= (uint)(b->buf).cap) {
+    p.cap = in_stack_ffffffffffffffe0;
+    p.array = (uint8 *)in_stack_ffffffffffffffd0.tab;
+    p.len = (int)in_stack_ffffffffffffffd0.data;
+    ~r0.len = ~r0_00;
+    ~r0.array = (uint8 *)in_stack_ffffffffffffffe8;
+    ~r0.cap = unaff_RBP;
+    unicode_utf8_appendRuneNonASCII(p,(int32)(b->buf).array,~r0);
+    (b->buf).len = extraout_RBX;
+    (b->buf).cap = extraout_RCX;
+    puVar2 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_01;
+      extraout_R11[1] = (b->buf).array;
+      puVar2 = extraout_RAX_01;
+    }
+    (b->buf).array = puVar2;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAcap();
+}
+
+
+
+void bytes___Buffer__Read(bytes_Buffer *b,__uint8 p,int n,error err)
+
+{
+  uint8 *__src;
+  uint uVar1;
+  uint uVar2;
+  size_t in_RCX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  b->lastRead = 0;
+  uVar1 = (b->buf).len;
+  uVar2 = b->off;
+  if ((int)uVar1 <= (int)uVar2) {
+    (b->buf).len = 0;
+    b->off = 0;
+    b->lastRead = 0;
+    if (in_RCX == 0) {
+      return;
+    }
+    return;
+  }
+  if (uVar2 <= uVar1) {
+    __src = (b->buf).array + (uVar2 & (int)(uVar2 - (b->buf).cap) >> 0x3f);
+    if ((int)(uVar1 - uVar2) < (int)in_RCX) {
+      in_RCX = uVar1 - uVar2;
+    }
+    if ((uint8 *)n != __src) {
+      runtime_memmove((void *)n,__src,in_RCX);
+    }
+    b->off = b->off + in_RCX;
+    if (0 < (int)in_RCX) {
+      b->lastRead = -1;
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void bytes___Buffer__Next(bytes_Buffer *b,int n,__uint8 ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  int m;
+  
+  b->lastRead = 0;
+  uVar2 = b->off;
+  iVar3 = (b->buf).len - uVar2;
+  if (iVar3 < n) {
+    n = iVar3;
+  }
+  uVar1 = n + uVar2;
+  if (uVar1 <= (uint)(b->buf).cap) {
+    if (uVar2 <= uVar1) {
+      b->off = uVar1;
+      if (0 < n) {
+        b->lastRead = -1;
+      }
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAcap();
+}
+
+
+
+void bytes___Buffer__ReadByte(bytes_Buffer *b,uint8 ~r0,error ~r1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint8 c;
+  
+  uVar1 = (b->buf).len;
+  uVar2 = b->off;
+  if ((int)uVar1 <= (int)uVar2) {
+    (b->buf).len = 0;
+    b->off = 0;
+    b->lastRead = 0;
+    return;
+  }
+  if (uVar2 < uVar1) {
+    b->off = uVar2 + 1;
+    b->lastRead = -1;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void bytes___Buffer__ReadRune(bytes_Buffer *b,int32 r,int size,error err)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint8 *puVar3;
+  int extraout_RBX;
+  int n;
+  uint8 c;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (b->buf).len;
+  uVar2 = b->off;
+  if ((int)uVar1 <= (int)uVar2) {
+    (b->buf).len = 0;
+    b->off = 0;
+    b->lastRead = 0;
+    return;
+  }
+  if (uVar1 <= uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  puVar3 = (b->buf).array;
+  if (puVar3[uVar2] < 0x80) {
+    b->off = uVar2 + 1;
+    b->lastRead = 1;
+    return;
+  }
+  unicode_utf8_DecodeRune
+            (in_stack_ffffffffffffffe0,
+             ((dword)uVar2 & (dword)((int)-((b->buf).cap - uVar2) >> 0x3f)) + (sdword)puVar3,
+             uVar1 - uVar2);
+  b->off = b->off + extraout_RBX;
+  b->lastRead = (bytes_readOp)extraout_RBX;
+  return;
+}
+
+
+
+void bytes___Buffer__UnreadRune(bytes_Buffer *b,error ~r0)
+
+{
+  bytes_readOp bVar1;
+  char **extraout_RAX;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  bVar1 = b->lastRead;
+  if (0 < bVar1) {
+    if ((int)bVar1 <= b->off) {
+      b->off = b->off - (int)bVar1;
+    }
+    b->lastRead = 0;
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+  extraout_RAX[1] = (char *)0x4a;
+  *extraout_RAX =
+       "bytes.Buffer: UnreadRune: previous operation was not a successful ReadRuneheader list size to send violates the maximum size (%d bytes) set by serverHeader list size to send violates the maximum size (%d bytes) set by clienttransport: http2Server.HandleStreams received bogus greeting from client: %qtransport: http2Server.HandleStreams saw invalid preface type %T from clienttransport: trying to send header list size larger than the limit set by peergrpc: credentials.Bundle may not be used with individual TransportCredentialsClientConn\'s authority from transport creds %q and dial option %q don\'t matchMapIter.Next called on an iterator that does not have an associated map Valuereflect: embedded type with methods not implemented if type is not first fieldtransport: http2Server.HandleStreams failed to read initial settings frame: %vx509: signature check attempts limit reached while verifying certificate chain115792089210356248762697446949407573530086143415290314195533631308867097853951115792089210356248762697446949407573529996955224135760342422259061068512044369cannot convert slice with length %y to array or pointer to array with length %xmetadata: FromOutgoingContext got an odd number of input pairs for metadata: %dx509: invalid signature: parent certificate cannot sign this kind of certificatecrypto/rand: blocked for 60 seconds waiting to read random data from the kernel\ncrypto/ecdh: internal error: nistec ScalarBaseMult failed for a fixed-size inputgrpc: Server.RegisterService found the handler of type %v that does not satisfy %vreceived goaway with stream id: %v, which exceeds stream id of previous goaway: %vtransport: http2Server.HandleStreams failed to receive the preface from client: %vx509: a root or intermediate certificate is not authorized to sign for this name: refusing to use HTTP_PROXY value in CGI environment; see golang.org/s/cgihttpproxymethod configs in service config will be ignored due to presence of config selectorreflect: embedded type with methods not implemented if there is more than one fieldj..." /* TRUNCATED STRING LITERAL */
+  ;
+  return;
+}
+
+
+
+void bytes___Buffer__UnreadByte(bytes_Buffer *b,error ~r0)
+
+{
+  if (b->lastRead != 0) {
+    b->lastRead = 0;
+    if (0 < b->off) {
+      b->off = b->off + -1;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void bytes___Buffer__ReadBytes(bytes_Buffer *b,uint8 delim,__uint8 line,error err)
+
+{
+  void *__src;
+  void *extraout_RAX;
+  void *__dest;
+  size_t __n;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff98;
+  error in_stack_ffffffffffffffb0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bytes___Buffer__readSlice(b,delim,in_stack_ffffffffffffff98,in_stack_ffffffffffffffb0);
+  if (__n == 0) {
+    __dest = (void *)0x0;
+  }
+  else {
+    runtime_growslice((void *)0x0,__n,0,__n,(internal_abi_Type *)&DAT_00807920,
+                      (runtime_slice)in_stack_ffffffffffffff98);
+    __dest = extraout_RAX;
+  }
+  runtime_memmove(__dest,__src,__n);
+  return;
+}
+
+
+
+void bytes___Buffer__readSlice(bytes_Buffer *b,uint8 delim,__uint8 line,error err)
+
+{
+  int i;
+  int end;
+  uint uVar1;
+  int unaff_R14;
+  int local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((uint)(b->buf).len < (uint)b->off) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  internal_bytealg_IndexByte();
+  uVar1 = local_10 + b->off + 1;
+  if (local_10 < 0) {
+    uVar1 = (b->buf).len;
+  }
+  if ((uint)(b->buf).cap < uVar1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  if (uVar1 < (uint)b->off) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  b->off = uVar1;
+  b->lastRead = -1;
+  return;
+}
+
+
+
+void bytes___Buffer__ReadString(bytes_Buffer *b,uint8 delim,string line,error err)
+
+{
+  __uint8 line_00;
+  error err_00;
+  uint8 *ptr;
+  int n;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffe0;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  line_00.cap = in_stack_ffffffffffffffe0;
+  line_00.array = in_stack_ffffffffffffffd0.str;
+  line_00.len = in_stack_ffffffffffffffd0.len;
+  err_00.data = in_stack_fffffffffffffff0;
+  err_00.tab = in_stack_ffffffffffffffe8;
+  bytes___Buffer__readSlice(b,delim,line_00,err_00);
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,ptr,n,in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+void bytes_Count(__uint8 s,__uint8 sep,int ~r0)
+
+{
+  __uint8 p;
+  __uint8 s_00;
+  __uint8 sep_00;
+  int extraout_RAX;
+  int i;
+  uint uVar1;
+  int in_RCX;
+  uint in_RBX;
+  int in_RSI;
+  int unaff_R14;
+  undefined8 in_stack_ffffffffffffffa8;
+  undefined8 in_stack_ffffffffffffffb0;
+  int in_stack_ffffffffffffffb8;
+  undefined in_stack_ffffffffffffffc0;
+  undefined in_stack_ffffffffffffffc1 [23];
+  int n;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RSI == 0) {
+    p.len = in_stack_ffffffffffffffb0;
+    p.array = (uint8 *)in_stack_ffffffffffffffa8;
+    p.cap = in_stack_ffffffffffffffb8;
+    unicode_utf8_RuneCount(p,~r0);
+    return;
+  }
+  if (in_RSI == 1) {
+    internal_bytealg_Count();
+    return;
+  }
+  while( true ) {
+    s_00.len = in_stack_ffffffffffffffb0;
+    s_00.array = (uint8 *)in_stack_ffffffffffffffa8;
+    s_00.cap = in_stack_ffffffffffffffb8;
+    sep_00._1_23_ = in_stack_ffffffffffffffc1;
+    sep_00.array._0_1_ = in_stack_ffffffffffffffc0;
+    bytes_Index(s_00,sep_00,~r0);
+    if (extraout_RAX == -1) {
+      return;
+    }
+    uVar1 = extraout_RAX + in_RSI;
+    if (in_RBX < uVar1) break;
+    in_RCX = in_RCX - uVar1;
+    in_RBX = in_RBX - uVar1;
+    ~r0 = ~r0 + (-in_RCX >> 0x3f & uVar1);
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void bytes_IndexRune(__uint8 s,int32 r,int ~r0)
+
+{
+  __uint8 p;
+  __uint8 s_00;
+  __uint8 p_00;
+  __uint8 sep;
+  sdword extraout_EAX;
+  int32 r1;
+  undefined4 in_register_00000004;
+  uint extraout_RAX;
+  int n_1;
+  int in_RCX;
+  uint uVar1;
+  int extraout_RBX;
+  int n;
+  dword in_EDI;
+  int unaff_R14;
+  undefined8 in_stack_ffffffffffffffb8;
+  undefined8 in_stack_ffffffffffffffc0;
+  int in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd0;
+  undefined in_stack_ffffffffffffffd1 [23];
+  undefined4 local_14;
+  int i;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_EDI < 0x80) {
+    internal_bytealg_IndexByte();
+    return;
+  }
+  if (in_EDI == 0xfffd) {
+    uVar1 = 0;
+    while( true ) {
+      if (~r0 <= (int)uVar1) {
+        return;
+      }
+      if ((uint)~r0 < uVar1) break;
+      p_00.len = in_stack_ffffffffffffffc0;
+      p_00.array = (uint8 *)in_stack_ffffffffffffffb8;
+      p_00.cap = in_stack_ffffffffffffffc8;
+      i = uVar1;
+      unicode_utf8_DecodeRune
+                (p_00,((dword)((int)-(in_RCX - uVar1) >> 0x3f) & (dword)uVar1) + r,~r0 - uVar1);
+      if (extraout_EAX == 0xfffd) {
+        return;
+      }
+      uVar1 = i + extraout_RBX;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  if ((0xd7ff < in_EDI) && (0x101fff < (dword)(in_EDI - 0xe000))) {
+    return;
+  }
+  local_14 = 0;
+  p.len = in_stack_ffffffffffffffc0;
+  p.array = (uint8 *)in_stack_ffffffffffffffb8;
+  p.cap = in_stack_ffffffffffffffc8;
+  unicode_utf8_EncodeRune(p,(int32)&local_14,4);
+  if (extraout_RAX < 5) {
+    s_00.len = in_stack_ffffffffffffffc0;
+    s_00.array = (uint8 *)in_stack_ffffffffffffffb8;
+    s_00.cap = in_stack_ffffffffffffffc8;
+    sep._1_23_ = in_stack_ffffffffffffffd1;
+    sep.array._0_1_ = in_stack_ffffffffffffffd0;
+    bytes_Index(s_00,sep,CONCAT44(in_register_00000004,r));
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAlen();
+}
+
+
+
+void bytes_IndexAny(__uint8 s,string chars,int ~r0)
+
+{
+  string s_00;
+  string s_01;
+  string s_02;
+  string s_03;
+  __uint8 s_04;
+  __uint8 p;
+  int32 r_2;
+  char extraout_AL;
+  sdword sVar1;
+  int32 extraout_EAX;
+  int32 extraout_EAX_00;
+  int iVar2;
+  int width;
+  uint extraout_RAX;
+  undefined8 extraout_RAX_00;
+  uint uVar3;
+  int in_RCX;
+  int i;
+  uint8 c;
+  int32 r;
+  int i_2;
+  uint in_RBX;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int extraout_RBX_01;
+  int extraout_RBX_02;
+  int extraout_RBX_03;
+  int in_RSI;
+  int32 r_1;
+  int32 ch;
+  uint8 *in_RDI;
+  uint8 c_1;
+  int unaff_R14;
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  uint8 *in_stack_ffffffffffffff70;
+  int in_stack_ffffffffffffff78;
+  byte in_stack_ffffffffffffff80;
+  byte bVar4;
+  undefined7 in_stack_ffffffffffffff81;
+  int local_78;
+  int local_70;
+  uint8 local_60 [4];
+  uint8 local_5c [4];
+  int local_58;
+  int i_1;
+  undefined local_48 [8];
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  dword local_28 [8];
+  
+  while (local_28 + 6 <= *(dword **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RSI == 0) {
+    return;
+  }
+  if (in_RBX == 1) {
+    if (*(byte *)~r0 < 0x80) {
+      internal_bytealg_IndexByteString();
+      if (-1 < local_78) {
+        return;
+      }
+      return;
+    }
+    iVar2 = 0;
+    do {
+      if (in_RSI <= iVar2) {
+        return;
+      }
+      r = (int32)in_RDI[iVar2];
+      if (in_RDI[iVar2] < 0x80) {
+        iVar2 = iVar2 + 1;
+      }
+      else {
+        s_03.len = in_stack_ffffffffffffff78;
+        s_03.str = in_stack_ffffffffffffff70;
+        runtime_decoderune(s_03,(int)in_RDI,(int32)in_RSI,iVar2);
+        iVar2 = extraout_RBX_03;
+        r = extraout_EAX_00;
+      }
+    } while (r != 0xfffd);
+    return;
+  }
+  if (in_RSI == 1) {
+    s_04.len = in_stack_ffffffffffffff78;
+    s_04.array = in_stack_ffffffffffffff70;
+    s_04.cap._0_1_ = in_stack_ffffffffffffff80;
+    s_04.cap._1_7_ = in_stack_ffffffffffffff81;
+    bytes_IndexRune(s_04,(int32)~r0,in_RBX);
+    return;
+  }
+  if (8 < (int)in_RBX) {
+    local_48._4_4_ = in_XMM15_Db;
+    local_48._0_4_ = in_XMM15_Da;
+    uStack_40 = in_XMM15_Dc;
+    uStack_3c = in_XMM15_Dd;
+    for (i_2 = 0; i_2 < in_RSI; i_2 = i_2 + 1) {
+      bVar4 = in_RDI[i_2];
+      if (0x7f < bVar4) break;
+      *(dword *)(local_48 + (uint)(bVar4 >> 5) * 4) =
+           *(dword *)(local_48 + (uint)(bVar4 >> 5) * 4) | 1 << (bVar4 & 0x1f);
+    }
+    local_28[0] = local_48._0_4_;
+    local_28[1] = local_48._4_4_;
+    local_28[2] = uStack_40;
+    local_28[3] = uStack_3c;
+    local_28[4] = in_XMM15_Da;
+    local_28[5] = in_XMM15_Db;
+    local_28[6] = in_XMM15_Dc;
+    if (in_RSI <= i_2) {
+      i = 0;
+      while( true ) {
+        if ((int)in_RBX <= i) {
+          return;
+        }
+        if ((local_28[*(byte *)(i + ~r0) >> 5] >> (*(byte *)(i + ~r0) & 0x1f) & 1) != 0) break;
+        i = i + 1;
+      }
+      return;
+    }
+  }
+  uVar3 = 0;
+  do {
+    if ((int)in_RBX <= (int)uVar3) {
+      return;
+    }
+    if (in_RBX <= uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    bVar4 = *(byte *)(uVar3 + ~r0);
+    i_1 = uVar3;
+    if (bVar4 < 0x80) {
+      in_stack_ffffffffffffff70 = in_RDI;
+      in_stack_ffffffffffffff78 = in_RSI;
+      internal_bytealg_IndexByteString();
+      if (-1 < local_78) {
+        return;
+      }
+      width = 1;
+      in_stack_ffffffffffffff80 = bVar4;
+    }
+    else {
+      p.len = in_stack_ffffffffffffff78;
+      p.array = in_stack_ffffffffffffff70;
+      p.cap._0_1_ = in_stack_ffffffffffffff80;
+      p.cap._1_7_ = in_stack_ffffffffffffff81;
+      unicode_utf8_DecodeRune
+                (p,((dword)((int)-(in_RCX - uVar3) >> 0x3f) & (dword)uVar3) + (int32)~r0,
+                 in_RBX - uVar3);
+      sVar1 = (sdword)extraout_RAX;
+      local_58 = extraout_RBX;
+      if (sVar1 == 0xfffd) {
+LAB_00503818:
+        iVar2 = 0;
+        uVar3 = extraout_RAX;
+        width = extraout_RBX;
+        while (iVar2 < in_RSI) {
+          ch = (int32)in_RDI[iVar2];
+          if (in_RDI[iVar2] < 0x80) {
+            iVar2 = iVar2 + 1;
+          }
+          else {
+            s_02.len = in_stack_ffffffffffffff78;
+            s_02.str = in_stack_ffffffffffffff70;
+            runtime_decoderune(s_02,(int)in_RDI,(int32)in_RSI,iVar2);
+            uVar3 = extraout_RAX & 0xffffffff;
+            width = local_58;
+            iVar2 = extraout_RBX_02;
+            ch = extraout_EAX;
+          }
+          if ((sdword)uVar3 == ch) {
+            return;
+          }
+        }
+      }
+      else if (extraout_RBX == in_RSI) {
+        s_01.len = in_stack_ffffffffffffff78;
+        s_01.str = in_stack_ffffffffffffff70;
+        runtime_intstring(&local_5c,(int)sVar1,s_01);
+        width = local_58;
+        if ((extraout_RBX_01 == in_RSI) &&
+           (runtime_memequal(), width = local_58, extraout_AL != '\0')) {
+          return;
+        }
+      }
+      else {
+        if (internal_bytealg_MaxLen < extraout_RBX) goto LAB_00503818;
+        s_00.len = in_stack_ffffffffffffff78;
+        s_00.str = in_stack_ffffffffffffff70;
+        runtime_intstring(&local_60,(int)sVar1,s_00);
+        in_stack_ffffffffffffff80 = (byte)extraout_RAX_00;
+        in_stack_ffffffffffffff81 = (undefined7)((uint)extraout_RAX_00 >> 8);
+        in_stack_ffffffffffffff70 = in_RDI;
+        in_stack_ffffffffffffff78 = in_RSI;
+        internal_bytealg_IndexString();
+        width = local_58;
+        local_78 = extraout_RBX_00;
+        if (-1 < local_70) {
+          return;
+        }
+      }
+    }
+    uVar3 = width + i_1;
+  } while( true );
+}
+
+
+
+void bytes_Map(func_int32__int32 **mapping,__uint8 s,__uint8 ~r0)
+
+{
+  dword extraout_EAX;
+  int32 r;
+  dword dVar1;
+  void *extraout_RAX;
+  void *oldPtr;
+  void *extraout_RAX_00;
+  void *extraout_RAX_01;
+  int32 *in_RCX;
+  int32 *extraout_RCX;
+  int32 *oldCap;
+  int32 *extraout_RCX_00;
+  int in_RBX;
+  int32 *extraout_RBX;
+  int32 *piVar2;
+  int32 *newLen;
+  int32 *extraout_RBX_00;
+  int32 *extraout_RBX_01;
+  void *in_RDI;
+  int32 *piVar3;
+  int32 *piVar4;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff88;
+  __uint8 in_stack_ffffffffffffffa0;
+  int wid;
+  int i;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,0,(int)in_RCX,in_RDI);
+  piVar3 = (int32 *)0x0;
+  newLen = (int32 *)0x0;
+  oldPtr = extraout_RAX;
+  oldCap = in_RCX;
+  while( true ) {
+    if ((int)in_RCX <= (int)piVar3) {
+      return;
+    }
+    if (in_RCX <= piVar3) break;
+    dVar1 = (dword)*(byte *)(in_RBX + (int)piVar3);
+    if (*(byte *)(in_RBX + (int)piVar3) < 0x80) {
+      piVar4 = (int32 *)&DAT_00000001;
+      piVar2 = piVar3;
+    }
+    else {
+      unicode_utf8_DecodeRune
+                (in_stack_ffffffffffffff88,
+                 (sdword)in_RBX + ((dword)(-((int)in_RDI - (int)piVar3) >> 0x3f) & (dword)piVar3),
+                 (int)in_RCX - (int)piVar3);
+      piVar2 = extraout_RBX;
+      piVar4 = extraout_RBX;
+      dVar1 = extraout_EAX;
+    }
+    dVar1 = (**mapping)(dVar1,piVar2);
+    if (-1 < (sdword)dVar1) {
+      if (dVar1 < 0x80) {
+        newLen = (int32 *)((int)newLen + 1);
+        if (oldCap < newLen) {
+          runtime_growslice(oldPtr,(int)newLen,(int)oldCap,1,(internal_abi_Type *)&DAT_00807920,
+                            (runtime_slice)in_stack_ffffffffffffff88);
+          oldCap = extraout_RCX;
+          oldPtr = extraout_RAX_00;
+          newLen = extraout_RBX_00;
+        }
+        ((undefined *)((int)newLen + -1))[(int)oldPtr] = (char)dVar1;
+      }
+      else {
+        unicode_utf8_appendRuneNonASCII
+                  (in_stack_ffffffffffffff88,(int32)oldPtr,in_stack_ffffffffffffffa0);
+        oldCap = extraout_RCX_00;
+        oldPtr = extraout_RAX_01;
+        newLen = extraout_RBX_01;
+      }
+    }
+    piVar3 = (int32 *)((int)piVar3 + (int)piVar4);
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void bytes_ToUpper(__uint8 s,__uint8 ~r0)
+
+{
+  byte bVar1;
+  bool bVar2;
+  __uint8 ~r0_00;
+  void *in_RAX;
+  int extraout_RAX;
+  uintptr *extraout_RAX_00;
+  uintptr *__dest;
+  int iVar3;
+  int i;
+  size_t in_RBX;
+  uint extraout_RBX;
+  bool hasLower;
+  int i_1;
+  uint8 c;
+  uint8 c_1;
+  char cVar4;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffb8;
+  undefined in_stack_ffffffffffffffd0 [16];
+  int in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar3 = 0;
+  bVar2 = false;
+  while( true ) {
+    if ((int)in_RBX <= iVar3) {
+      if (!bVar2) {
+        if (in_RBX == 0) {
+          __dest = &runtime_zerobase;
+        }
+        else {
+          runtime_growslice(&runtime_zerobase,in_RBX,0,in_RBX,(internal_abi_Type *)&DAT_00807920,
+                            (runtime_slice)in_stack_ffffffffffffffb8);
+          __dest = extraout_RAX_00;
+        }
+        runtime_memmove(__dest,in_RAX,in_RBX);
+        return;
+      }
+      internal_bytealg_MakeNoZero(in_RBX,in_stack_ffffffffffffffb8);
+      i_1 = 0;
+      while( true ) {
+        if ((int)in_RBX <= i_1) {
+          return;
+        }
+        cVar4 = *(char *)(i_1 + (int)in_RAX);
+        if ((byte)(cVar4 + 0x9fU) < 0x1a) {
+          cVar4 = cVar4 + -0x20;
+        }
+        if (extraout_RBX <= (uint)i_1) break;
+        *(char *)(extraout_RAX + i_1) = cVar4;
+        i_1 = i_1 + 1;
+      }
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    bVar1 = *(byte *)((int)in_RAX + iVar3);
+    if (0x7f < bVar1) break;
+    if (bVar2) {
+      bVar2 = true;
+    }
+    else if (bVar1 < 0x61) {
+      bVar2 = false;
+    }
+    else {
+      bVar2 = bVar1 < 0x7b;
+    }
+    iVar3 = iVar3 + 1;
+  }
+  ~r0_00.cap = in_stack_ffffffffffffffe0;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffd0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffd0._8_8_;
+  bytes_Map((func_int32__int32 **)&PTR_unicode_ToUpper_008eb840,in_stack_ffffffffffffffb8,~r0_00);
+  return;
+}
+
+
+
+void bytes_ToLower(__uint8 s,__uint8 ~r0)
+
+{
+  byte bVar1;
+  bool bVar2;
+  __uint8 ~r0_00;
+  void *in_RAX;
+  int extraout_RAX;
+  uintptr *extraout_RAX_00;
+  uintptr *__dest;
+  int iVar3;
+  int i;
+  size_t in_RBX;
+  uint extraout_RBX;
+  bool hasUpper;
+  int i_1;
+  uint8 c;
+  uint8 c_1;
+  char cVar4;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffb8;
+  undefined in_stack_ffffffffffffffd0 [16];
+  int in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar3 = 0;
+  bVar2 = false;
+  while( true ) {
+    if ((int)in_RBX <= iVar3) {
+      if (!bVar2) {
+        if (in_RBX == 0) {
+          __dest = &runtime_zerobase;
+        }
+        else {
+          runtime_growslice(&runtime_zerobase,in_RBX,0,in_RBX,(internal_abi_Type *)&DAT_00807920,
+                            (runtime_slice)in_stack_ffffffffffffffb8);
+          __dest = extraout_RAX_00;
+        }
+        runtime_memmove(__dest,in_RAX,in_RBX);
+        return;
+      }
+      internal_bytealg_MakeNoZero(in_RBX,in_stack_ffffffffffffffb8);
+      i_1 = 0;
+      while( true ) {
+        if ((int)in_RBX <= i_1) {
+          return;
+        }
+        cVar4 = *(char *)(i_1 + (int)in_RAX);
+        if ((byte)(cVar4 + 0xbfU) < 0x1a) {
+          cVar4 = cVar4 + ' ';
+        }
+        if (extraout_RBX <= (uint)i_1) break;
+        *(char *)(extraout_RAX + i_1) = cVar4;
+        i_1 = i_1 + 1;
+      }
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    bVar1 = *(byte *)((int)in_RAX + iVar3);
+    if (0x7f < bVar1) break;
+    if (bVar2) {
+      bVar2 = true;
+    }
+    else if (bVar1 < 0x41) {
+      bVar2 = false;
+    }
+    else {
+      bVar2 = bVar1 < 0x5b;
+    }
+    iVar3 = iVar3 + 1;
+  }
+  ~r0_00.cap = in_stack_ffffffffffffffe0;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffd0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffd0._8_8_;
+  bytes_Map((func_int32__int32 **)&PTR_unicode_ToLower_008eb838,in_stack_ffffffffffffffb8,~r0_00);
+  return;
+}
+
+
+
+void bytes_TrimRightFunc(__uint8 s,func_int32__bool **f,__uint8 ~r0)
+
+{
+  uint extraout_RAX;
+  int i;
+  uint in_RCX;
+  uint uVar1;
+  uint in_RBX;
+  int extraout_RBX;
+  int wid;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bytes_lastIndexFunc(in_stack_ffffffffffffffc8,f,SUB81(in_RBX,0),in_RCX);
+  if (-1 < (int)extraout_RAX) {
+    if (in_RBX <= extraout_RAX) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (0x7f < *(byte *)((int)f + extraout_RAX)) {
+      unicode_utf8_DecodeRune
+                (in_stack_ffffffffffffffc8,
+                 ((dword)((int)-(in_RCX - extraout_RAX) >> 0x3f) & (dword)extraout_RAX) + (sdword)f,
+                 in_RBX - extraout_RAX);
+      uVar1 = extraout_RAX + extraout_RBX;
+      goto LAB_00503fcc;
+    }
+  }
+  uVar1 = extraout_RAX + 1;
+LAB_00503fcc:
+  if (in_RCX < uVar1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  return;
+}
+
+
+
+void bytes_TrimFunc(__uint8 s,func_int32__bool **f,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  uint extraout_RAX;
+  int i;
+  int in_RCX;
+  func_int32__bool **f_00;
+  uint in_RBX;
+  int in_RDI;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffe0 [16];

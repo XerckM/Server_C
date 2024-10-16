@@ -1,0 +1,1000 @@
+  local_10 = (code **)local_20;
+  h_local.tab = in_XMM15_Qa;
+  if (mux->hosts != false) {
+    ~r0.len._7_1_ = 1;
+    ~r0._0_15_ = in_stack_ffffffffffffff28;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)local_90,in_stack_ffffffffffffff08,in_stack_ffffffffffffff18,~r0);
+    runtime_mapaccess2_faststr
+              ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)mux->m,
+               in_stack_ffffffffffffff08,~r0_00,SUB81(extraout_RBX,0));
+    if (extraout_BL == '\0') {
+      pnVar8 = (mux->es).array;
+      iVar3 = (mux->es).len;
+      for (iVar4 = 0; iVar4 < iVar3; iVar4 = iVar4 + 1) {
+        prVar7 = (runtime_itab *)(pnVar8->pattern).len;
+        pattern_local.str = (pnVar8->pattern).str;
+        h_local.tab = (pnVar8->h).tab;
+        if (extraout_RBX < (int)prVar7) {
+          cVar6 = '\0';
+        }
+        else {
+          local_58 = (pnVar8->h).data;
+          local_50 = (runtime_itab *)pattern_local.str;
+          local_48 = pnVar8;
+          runtime_memequal();
+          pattern_local.str = (uint8 *)local_50;
+          pnVar8 = local_48;
+          cVar6 = extraout_AL_00;
+        }
+        if (cVar6 != '\0') goto LAB_006d5927;
+        pnVar8 = pnVar8 + 1;
+      }
+      prVar7 = (runtime_itab *)0x0;
+      h_local.tab = (runtime_itab *)0x0;
+      pattern_local.str = (uint8 *)0x0;
+    }
+    else {
+      h_local.tab = *extraout_RAX;
+      pattern_local.str = (uint8 *)extraout_RAX[2];
+      prVar7 = extraout_RAX[3];
+    }
+LAB_006d5927:
+    pattern_local.len = (int)prVar7;
+  }
+  if (h_local.tab == (runtime_itab *)0x0) {
+    runtime_mapaccess2_faststr
+              ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)mux->m,
+               in_stack_ffffffffffffff08,in_RDI,SUB81(in_RSI,0));
+    if (extraout_BL_00 == '\0') {
+      pnVar8 = (mux->es).array;
+      iVar3 = (mux->es).len;
+      for (iVar4 = 0; iVar4 < iVar3; iVar4 = iVar4 + 1) {
+        prVar5 = (runtime_itab *)(pnVar8->pattern).len;
+        prVar7 = (runtime_itab *)(pnVar8->pattern).str;
+        h_local.tab = (pnVar8->h).tab;
+        if (in_RSI < (int)prVar5) {
+          cVar6 = '\0';
+        }
+        else {
+          local_68 = (pnVar8->h).data;
+          local_60 = prVar7;
+          local_48 = pnVar8;
+          runtime_memequal();
+          prVar7 = local_60;
+          pnVar8 = local_48;
+          cVar6 = extraout_AL;
+        }
+        if (cVar6 != '\0') goto LAB_006d59bc;
+        pnVar8 = pnVar8 + 1;
+      }
+      prVar5 = (runtime_itab *)0x0;
+      h_local.tab = (runtime_itab *)0x0;
+      prVar7 = (runtime_itab *)0x0;
+    }
+    else {
+      h_local.tab = *extraout_RAX_00;
+      prVar7 = extraout_RAX_00[2];
+      prVar5 = extraout_RAX_00[3];
+    }
+LAB_006d59bc:
+    pattern_local.len = (int)prVar5;
+    pattern_local.str = (uint8 *)prVar7;
+  }
+  if (h_local.tab == (runtime_itab *)0x0) {
+    pattern_local.len = in_XMM15_Qb;
+    pattern_local.str = (uint8 *)prVar9;
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void net_http___ServeMux__handler_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___RWMutex__RUnlock(*(sync_RWMutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void net_http___ServeMux__Handle(net_http_ServeMux *mux,string pattern,net_http_Handler handler)
+
+{
+  __net_http_muxEntry es;
+  string a1;
+  net_http_muxEntry e;
+  __net_http_muxEntry ~r0;
+  runtime_hmap *~r0_00;
+  map_string_net_http_muxEntry extraout_RAX;
+  map_string_net_http_muxEntry extraout_RAX_00;
+  map_string_net_http_muxEntry phVar1;
+  int *extraout_RAX_01;
+  int *extraout_RAX_02;
+  int *piVar2;
+  net_http_muxEntry *extraout_RAX_03;
+  net_http_muxEntry *extraout_RAX_04;
+  net_http_muxEntry *pnVar3;
+  void *x;
+  int in_RCX;
+  int extraout_RCX;
+  net_http_ServeMux *pnVar4;
+  char extraout_BL;
+  bool exist;
+  char *in_RBX;
+  int extraout_RBX;
+  int in_RSI;
+  int in_RDI;
+  int extraout_R9;
+  map_string_net_http_muxEntry *extraout_R11;
+  int *extraout_R11_00;
+  net_http_muxEntry **extraout_R11_01;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffff98;
+  uint8 *in_stack_ffffffffffffffa8;
+  int in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffb8;
+  int in_stack_ffffffffffffffc8;
+  undefined7 in_stack_ffffffffffffffd0;
+  undefined uVar5;
+  code *pcVar6;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sync___RWMutex__Lock(&mux->mu);
+  pcVar6 = net_http___ServeMux__Handle_func1;
+  uVar5 = 1;
+  if (in_RCX == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  if (in_RDI == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  runtime_mapaccess2_faststr
+            ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)mux->m,
+             (string)in_stack_ffffffffffffff98,in_RBX,SUB81(in_RCX,0));
+  if (extraout_BL != '\0') {
+    a1.len = in_stack_ffffffffffffffb0;
+    a1.str = in_stack_ffffffffffffffa8;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffff98,a1,in_stack_ffffffffffffffb8)
+    ;
+    runtime_convTstring((string)in_stack_ffffffffffffff98,x);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  if (mux->m == (map_string_net_http_muxEntry)0x0) {
+    runtime_makemap_small(~r0_00);
+    phVar1 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = mux->m;
+      phVar1 = extraout_RAX_00;
+    }
+    mux->m = phVar1;
+  }
+  runtime_mapassign_faststr
+            ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)mux->m,
+             (string)in_stack_ffffffffffffff98,in_RBX);
+  *extraout_RAX_01 = in_RDI;
+  extraout_RAX_01[3] = in_RCX;
+  piVar2 = extraout_RAX_01;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier4();
+    *extraout_R11_00 = in_RSI;
+    extraout_R11_00[1] = extraout_RAX_02[1];
+    extraout_R11_00[2] = (int)in_RBX;
+    extraout_R11_00[3] = extraout_RAX_02[2];
+    piVar2 = extraout_RAX_02;
+    in_RCX = extraout_R9;
+  }
+  piVar2[1] = in_RSI;
+  piVar2[2] = (int)in_RBX;
+  if (in_RBX[in_RCX + -1] == '/') {
+    es.cap = (int)in_stack_ffffffffffffffa8;
+    es.array = (net_http_muxEntry *)in_stack_ffffffffffffff98._type;
+    es.len = (int)in_stack_ffffffffffffff98.data;
+    e.h.data = (runtime_itab *)in_stack_ffffffffffffffb8.str;
+    e.pattern.str = (void *)in_stack_ffffffffffffffb8.len;
+    e.h.tab = (runtime_itab *)in_stack_ffffffffffffffb0;
+    e.pattern.len = in_stack_ffffffffffffffc8;
+    ~r0.array._7_1_ = uVar5;
+    ~r0.array._0_7_ = in_stack_ffffffffffffffd0;
+    ~r0.len = in_RDI;
+    ~r0.cap = (int)pcVar6;
+    net_http_appendSorted(es,e,~r0);
+    (mux->es).len = extraout_RBX;
+    (mux->es).cap = extraout_RCX;
+    pnVar3 = extraout_RAX_03;
+    pnVar4 = mux;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = extraout_RAX_04;
+      extraout_R11_01[1] = (pnVar4->es).array;
+      pnVar3 = extraout_RAX_04;
+    }
+    (pnVar4->es).array = pnVar3;
+  }
+  if (*in_RBX != '/') {
+    mux->hosts = true;
+  }
+  (*pcVar6)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void net_http___ServeMux__Handle_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___RWMutex__Unlock(*(sync_RWMutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void net_http_appendSorted(__net_http_muxEntry es,net_http_muxEntry e,__net_http_muxEntry ~r0)
+
+{
+  int iVar1;
+  net_http_muxEntry *in_RAX;
+  uint extraout_RAX;
+  int i;
+  net_http_muxEntry *extraout_RAX_00;
+  net_http_muxEntry *extraout_RAX_01;
+  net_http_muxEntry *extraout_RAX_02;
+  uint extraout_RAX_03;
+  uint uVar2;
+  int in_RCX;
+  int extraout_RCX;
+  int iVar3;
+  net_http_muxEntry *pnVar4;
+  int n;
+  uint uVar5;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  undefined8 in_RSI;
+  uint extraout_RSI;
+  runtime_itab *in_RDI;
+  undefined8 in_R8;
+  int extraout_R8;
+  int in_R9;
+  void **extraout_R9;
+  void **ppvVar6;
+  undefined8 extraout_R10;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  runtime_slice in_stack_ffffffffffffff58;
+  undefined local_38 [16];
+  undefined local_28 [32];
+  
+  es.array = in_RAX;
+  es.cap = in_RCX;
+  while (es.len = n, local_28 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    n = es.len;
+  }
+  local_38._8_8_ = &es;
+  local_38._0_8_ = net_http_appendSorted_func1;
+  sort_Search(n,(func_int__bool **)local_38,(int)&es);
+  if (extraout_RAX == n) {
+    uVar5 = es.len + 1;
+    if ((uint)es.cap < uVar5) {
+      runtime_growslice(es.array,uVar5,es.cap,1,(internal_abi_Type *)&DAT_00852cc0,
+                        in_stack_ffffffffffffff58);
+      es.array = extraout_RAX_00;
+      uVar5 = extraout_RBX;
+    }
+    iVar1 = uVar5 - 1;
+    iVar3 = iVar1 * 0x20;
+    es.array[iVar1].h.tab = in_RDI;
+    es.array[iVar1].pattern.len = in_R9;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier4();
+      *extraout_R11 = in_RSI;
+      extraout_R11[1] = *(undefined8 *)((int)&(extraout_RAX_01->h).data + iVar3);
+      extraout_R11[2] = in_R8;
+      extraout_R11[3] = *(undefined8 *)((int)&(extraout_RAX_01->pattern).str + iVar3);
+      es.array = extraout_RAX_01;
+    }
+    *(undefined8 *)((int)&((es.array)->h).data + iVar3) = in_RSI;
+    *(undefined8 *)((int)&((es.array)->pattern).str + iVar3) = in_R8;
+    return;
+  }
+  es.len = es.len + 1;
+  if ((uint)es.cap < (uint)es.len) {
+    runtime_growslice(es.array,es.len,es.cap,1,(internal_abi_Type *)&DAT_00852cc0,
+                      in_stack_ffffffffffffff58);
+    es.len = extraout_RBX_00;
+    es.array = extraout_RAX_02;
+    es.cap = extraout_RCX;
+  }
+  iVar1 = es.len - 1;
+  es.array[iVar1].h.tab = (runtime_itab *)0x0;
+  es.array[iVar1].pattern.len = 0;
+  ppvVar6 = &es.array[iVar1].h.data;
+  uVar5 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    pnVar4 = es.array;
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_R10;
+    extraout_R11_00[1] = *(undefined8 *)((int)&(pnVar4->pattern).str + extraout_R8);
+    uVar5 = extraout_RAX_03;
+    ppvVar6 = extraout_R9;
+  }
+  *(undefined (*) [16])ppvVar6 = in_XMM15;
+  if ((uint)es.len < uVar5 + 1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  if ((uint)es.len < uVar5) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  uVar2 = uVar5 * 0x20;
+  runtime_typedslicecopy
+            ((internal_abi_Type *)&DAT_00852cc0,
+             (void *)((int)&((es.array)->h).tab +
+                     ((int)-((es.cap - uVar5) + -1) >> 0x3f & (uVar5 + 1) * 0x20)),
+             (es.len - uVar5) + -1,
+             (void *)((int)&((es.array)->h).tab + ((int)-(es.cap - uVar5) >> 0x3f & uVar2)),
+             es.len - uVar5,(int)es.array);
+  if ((uint)es.len <= extraout_RAX) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  es.array[uVar5].h.tab = in_RDI;
+  es.array[uVar5].pattern.len = in_R9;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier4();
+    *extraout_R11_01 = in_RSI;
+    extraout_R11_01[1] = *(undefined8 *)((int)&((es.array)->h).data + extraout_RSI);
+    extraout_R11_01[2] = in_R8;
+    extraout_R11_01[3] = *(undefined8 *)((int)&((es.array)->pattern).str + extraout_RSI);
+    uVar2 = extraout_RSI;
+  }
+  *(undefined8 *)((int)&((es.array)->h).data + uVar2) = in_RSI;
+  *(undefined8 *)((int)&((es.array)->pattern).str + uVar2) = in_R8;
+  return;
+}
+
+
+
+void net_http_appendSorted_func1(int i,bool ~r0)
+
+{
+  int in_RDX;
+  __net_http_muxEntry *_es;
+  
+  if ((uint)i < *(uint *)(*(int *)(in_RDX + 8) + 8)) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void net_http_StatusText(int code,string ~r0)
+
+{
+  if (code < 0x199) {
+    if (code < 0x12d) {
+      if (code < 0xcb) {
+        if (code < 0x67) {
+          if (code == 100) {
+            return;
+          }
+          if (code == 0x65) {
+            return;
+          }
+          if (code == 0x66) {
+            return;
+          }
+        }
+        else {
+          if (200 < code) {
+            if (code == 0xc9) {
+              return;
+            }
+            return;
+          }
+          if (code == 0x67) {
+            return;
+          }
+          if (code == 200) {
+            return;
+          }
+        }
+      }
+      else {
+        if (code < 0xcf) {
+          if (0xcc < code) {
+            if (code == 0xcd) {
+              return;
+            }
+            return;
+          }
+          if (code == 0xcb) {
+            return;
+          }
+          return;
+        }
+        if (code < 0xd1) {
+          if (code == 0xcf) {
+            return;
+          }
+          return;
+        }
+        if (code == 0xe2) {
+          return;
+        }
+        if (code == 300) {
+          return;
+        }
+      }
+    }
+    else {
+      if (400 < code) {
+        if (0x194 < code) {
+          if (0x196 < code) {
+            if (code == 0x197) {
+              return;
+            }
+            return;
+          }
+          if (code == 0x195) {
+            return;
+          }
+          return;
+        }
+        if (0x192 < code) {
+          if (code == 0x193) {
+            return;
+          }
+          return;
+        }
+        if (code == 0x191) {
+          return;
+        }
+        return;
+      }
+      if (code < 0x131) {
+        if (0x12e < code) {
+          if (code == 0x12f) {
+            return;
+          }
+          return;
+        }
+        if (code == 0x12d) {
+          return;
+        }
+        return;
+      }
+      if (code < 0x134) {
+        if (code == 0x131) {
+          return;
+        }
+        if (code == 0x133) {
+          return;
+        }
+      }
+      else {
+        if (code == 0x134) {
+          return;
+        }
+        if (code == 400) {
+          return;
+        }
+      }
+    }
+  }
+  else if (code < 0x1aa) {
+    if (code < 0x1a0) {
+      if (0x19b < code) {
+        if (0x19d < code) {
+          if (code == 0x19e) {
+            return;
+          }
+          return;
+        }
+        if (code == 0x19c) {
+          return;
+        }
+        return;
+      }
+      if (code == 0x199) {
+        return;
+      }
+      if (code == 0x19a) {
+        return;
+      }
+      return;
+    }
+    if (0x1a5 < code) {
+      if (0x1a7 < code) {
+        if (code == 0x1a8) {
+          return;
+        }
+        return;
+      }
+      if (code == 0x1a6) {
+        return;
+      }
+      return;
+    }
+    if (code < 0x1a2) {
+      if (code == 0x1a0) {
+        return;
+      }
+      return;
+    }
+    if (code == 0x1a2) {
+      return;
+    }
+    if (code == 0x1a5) {
+      return;
+    }
+  }
+  else if (code < 0x1f7) {
+    if (code < 0x1b0) {
+      if (code < 0x1ad) {
+        if (code == 0x1aa) {
+          return;
+        }
+        if (code == 0x1ac) {
+          return;
+        }
+      }
+      else {
+        if (code == 0x1ad) {
+          return;
+        }
+        if (code == 0x1af) {
+          return;
+        }
+      }
+    }
+    else {
+      if (500 < code) {
+        if (code == 0x1f5) {
+          return;
+        }
+        return;
+      }
+      if (code == 0x1c3) {
+        return;
+      }
+      if (code == 500) {
+        return;
+      }
+    }
+  }
+  else {
+    if (code < 0x1fb) {
+      if (0x1f8 < code) {
+        if (code == 0x1f9) {
+          return;
+        }
+        return;
+      }
+      if (code == 0x1f7) {
+        return;
+      }
+      return;
+    }
+    if (code < 0x1fd) {
+      if (code == 0x1fb) {
+        return;
+      }
+      return;
+    }
+    if (code == 0x1fe) {
+      return;
+    }
+    if (code == 0x1ff) {
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void net_http_errorReader_Read(net_http_errorReader r,__uint8 p,int n,error err)
+
+{
+  return;
+}
+
+
+
+void net_http___byteReader__Read(net_http_byteReader *br,__uint8 p,int n,error err)
+
+{
+  int in_RCX;
+  
+  if (br->done != false) {
+    return;
+  }
+  if (in_RCX == 0) {
+    return;
+  }
+  br->done = true;
+  *(uint8 *)n = br->b;
+  return;
+}
+
+
+
+void net_http_newTransferWriter(interface___ r,net_http_transferWriter *t,error err)
+
+{
+  io_Reader *piVar1;
+  sdword sVar2;
+  int iVar3;
+  sdword *psVar4;
+  bool bVar5;
+  error ~r0;
+  char extraout_AL;
+  char cVar6;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  net_http_transferWriter *extraout_RAX;
+  net_http_transferWriter *extraout_RAX_00;
+  net_http_transferWriter *extraout_RAX_01;
+  net_http_transferWriter *extraout_RAX_02;
+  net_http_transferWriter *extraout_RAX_03;
+  net_http_transferWriter *pnVar7;
+  runtime_itab *extraout_RAX_04;
+  runtime_itab *extraout_RAX_05;
+  string *extraout_RAX_06;
+  string *extraout_RAX_07;
+  string *psVar8;
+  net_http_transferWriter *extraout_RAX_08;
+  runtime_itab *extraout_RAX_09;
+  runtime_itab *extraout_RAX_10;
+  runtime_itab *extraout_RCX;
+  runtime_itab *extraout_RCX_00;
+  runtime_itab *extraout_RCX_01;
+  runtime_itab *extraout_RCX_02;
+  runtime_itab *prVar9;
+  net_http_transferWriter *extraout_RCX_03;
+  net_http_transferWriter *pnVar10;
+  net_http_transferWriter *extraout_RCX_04;
+  net_http_transferWriter *extraout_RCX_05;
+  runtime_itab *extraout_RCX_06;
+  net_http_transferWriter *extraout_RCX_07;
+  net_http_transferWriter *extraout_RCX_08;
+  net_http_transferWriter *extraout_RCX_09;
+  net_http_transferWriter *extraout_RCX_10;
+  net_http_transferWriter *extraout_RCX_11;
+  net_http_transferWriter *extraout_RCX_12;
+  net_http_transferWriter *extraout_RCX_13;
+  net_http_transferWriter *extraout_RCX_14;
+  bool atLeastHTTP11;
+  internal_abi_Type *piVar11;
+  net_http_Header phVar12;
+  uintptr uVar13;
+  internal_abi_InterfaceType *piVar14;
+  void *pvVar15;
+  runtime_itab *in_RBX;
+  net_http_Request *rr;
+  void *x;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  internal_abi_InterfaceType *piVar16;
+  internal_abi_InterfaceType *extraout_RSI;
+  net_http_Header extraout_RSI_00;
+  net_http_Header extraout_RSI_01;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  undefined ~r0_00;
+  internal_abi_InterfaceType *extraout_RDI;
+  string *extraout_R8;
+  internal_abi_InterfaceType **extraout_R11;
+  internal_abi_InterfaceType **extraout_R11_00;
+  net_http_Header *extraout_R11_01;
+  internal_abi_Type **extraout_R11_02;
+  internal_abi_Type **extraout_R11_03;
+  internal_abi_Type **extraout_R11_04;
+  string **extraout_R11_05;
+  internal_abi_InterfaceType **extraout_R11_06;
+  internal_abi_Type **extraout_R11_07;
+  internal_abi_Type **extraout_R11_08;
+  string **extraout_R11_09;
+  net_http_Header *extraout_R11_10;
+  net_http_Header *extraout_R11_11;
+  void **extraout_R11_12;
+  string **extraout_R11_13;
+  net_http_Header *extraout_R11_14;
+  int unaff_R14;
+  bool bVar17;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffffa0;
+  __interface___ in_stack_ffffffffffffffb0;
+  runtime_itab *in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00899a80,in_RBX);
+  pnVar7 = extraout_RAX;
+  if (t == (net_http_transferWriter *)0x0) {
+    bVar5 = false;
+  }
+  else {
+    sVar2 = *(sdword *)&(t->Body).tab;
+    if (sVar2 == -0x5d755a10) {
+      if (t == (net_http_transferWriter *)&DAT_008a03c0) {
+        if ((in_RBX[2].fun[0] != 0) && (in_RBX[2].inter == (internal_abi_InterfaceType *)0x0)) {
+          runtime_convT64(in_RBX[2].fun[0],x);
+          ~r0.data = pnVar7;
+          ~r0.tab = in_stack_ffffffffffffffc8;
+          fmt_Errorf(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,~r0);
+          return;
+        }
+        piVar11 = in_RBX->_type;
+        if (piVar11 == (internal_abi_Type *)0x0) {
+          piVar11 = (internal_abi_Type *)&DAT_00000003;
+          piVar16 = (internal_abi_InterfaceType *)&DAT_008ae3a8;
+        }
+        else {
+          piVar16 = in_RBX->inter;
+        }
+        (extraout_RAX->Method).len = (int)piVar11;
+        prVar9 = in_RBX;
+        pnVar10 = extraout_RAX;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11 = extraout_RSI;
+          pnVar7 = extraout_RAX_00;
+          prVar9 = extraout_RCX;
+          piVar16 = extraout_RSI;
+        }
+        (pnVar7->Method).str = (uint8 *)piVar16;
+        pnVar7->Close = *(bool *)prVar9[3].fun;
+        iVar3 = *(int *)&prVar9[3].hash;
+        piVar16 = prVar9[3].inter;
+        (pnVar7->TransferEncoding).len = (int)prVar9[3]._type;
+        (pnVar7->TransferEncoding).cap = iVar3;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_00 = extraout_RDI;
+          pnVar7 = extraout_RAX_01;
+          prVar9 = extraout_RCX_00;
+          piVar16 = extraout_RDI;
+        }
+        (pnVar7->TransferEncoding).array = (string *)piVar16;
+        phVar12 = (net_http_Header)prVar9[1].fun[0];
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_01 = phVar12;
+          pnVar7 = extraout_RAX_02;
+          prVar9 = extraout_RCX_01;
+        }
+        pnVar7->Header = phVar12;
+        piVar11 = prVar9[5]._type;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_02 = piVar11;
+          pnVar7 = extraout_RAX_03;
+          prVar9 = extraout_RCX_02;
+        }
+        pnVar7->Trailer = (net_http_Header)piVar11;
+        piVar11 = prVar9[2]._type;
+        runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(runtime_itab *)prVar9[2].inter,
+                        prVar9);
+        (pnVar10->Body).tab = extraout_RAX_04;
+        pnVar7 = pnVar10;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_03 = piVar11;
+          extraout_R11_03[1] = (internal_abi_Type *)(extraout_RCX_03->Body).data;
+          pnVar10 = extraout_RCX_03;
+        }
+        (pnVar10->Body).data = piVar11;
+        piVar11 = in_RBX[2]._type;
+        runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834cc0,(runtime_itab *)in_RBX[2].inter,
+                        (runtime_itab *)pnVar10);
+        (pnVar7->BodyCloser).tab = extraout_RAX_05;
+        pvVar15 = extraout_RBX;
+        ~r0_00 = extraout_DIL;
+        pnVar10 = pnVar7;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_04 = piVar11;
+          extraout_R11_04[1] = (internal_abi_Type *)(extraout_RCX_04->BodyCloser).data;
+          pnVar7 = extraout_RCX_04;
+          pvVar15 = extraout_RBX_00;
+          ~r0_00 = extraout_DIL_00;
+        }
+        (pnVar7->BodyCloser).data = piVar11;
+        if (in_RBX[2].inter == (internal_abi_InterfaceType *)0x0) {
+          cVar6 = '\x01';
+        }
+        else if (in_RBX[2].inter ==
+                 (internal_abi_InterfaceType *)go_itab_net_http_noBody_io_ReadCloser) {
+          pnVar7 = pnVar10;
+          runtime_ifaceeq((runtime_itab *)go_itab_net_http_noBody_io_ReadCloser,in_RBX[2]._type,
+                          &runtime_zerobase,(bool)~r0_00);
+          pvVar15 = extraout_RBX_01;
+          pnVar10 = pnVar7;
+          cVar6 = extraout_AL;
+        }
+        else {
+          cVar6 = '\0';
+        }
+        if (cVar6 == '\0') {
+          uVar13 = in_RBX[2].fun[0];
+          if (uVar13 == 0) {
+            uVar13 = 0xffffffffffffffff;
+          }
+        }
+        else {
+          uVar13 = 0;
+        }
+        pnVar7->ContentLength = uVar13;
+        if ((int)uVar13 < 0) {
+          if ((pnVar7->TransferEncoding).len == 0) {
+            net_http___transferWriter__shouldSendChunkedRequestBody(pnVar7,SUB81(pvVar15,0));
+            pnVar7 = pnVar10;
+            pvVar15 = extraout_RBX_02;
+            cVar6 = extraout_AL_00;
+            pnVar10 = pnVar7;
+          }
+          else {
+            cVar6 = '\0';
+          }
+        }
+        else {
+          cVar6 = '\0';
+        }
+        if (cVar6 != '\0') {
+          pnVar7 = pnVar10;
+          runtime_newobject((internal_abi_Type *)&DAT_008117e0,pvVar15);
+          extraout_RAX_06->len = 7;
+          extraout_RAX_06->str = &DAT_008b0ba4;
+          (pnVar7->TransferEncoding).len = (int)&DAT_00000001;
+          (pnVar7->TransferEncoding).cap = (int)&DAT_00000001;
+          psVar8 = extraout_RAX_06;
+          pnVar10 = pnVar7;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_05 = extraout_RAX_07;
+            extraout_R11_05[1] = (extraout_RCX_05->TransferEncoding).array;
+            psVar8 = extraout_RAX_07;
+            pnVar7 = extraout_RCX_05;
+          }
+          (pnVar7->TransferEncoding).array = psVar8;
+        }
+        if ((pnVar7->ContentLength != 0) &&
+           (piVar1 = &pnVar7->Body, pnVar7 = pnVar10,
+           net_http_isKnownInMemoryReader((io_Reader)in_stack_ffffffffffffffa0,SUB81(piVar1->tab,0))
+           , extraout_AL_01 == '\0')) {
+          pnVar7->FlushHeaders = true;
+        }
+        bVar5 = true;
+        goto LAB_006d6ed1;
+      }
+    }
+    else if ((sVar2 == -0x140baede) && (t == (net_http_transferWriter *)&DAT_008727a0)) {
+      extraout_RAX->IsResponse = true;
+      piVar16 = in_RBX[4].inter;
+      prVar9 = in_RBX;
+      pnVar10 = extraout_RAX;
+      if (piVar16 != (internal_abi_InterfaceType *)0x0) {
+        piVar14 = (internal_abi_InterfaceType *)(piVar16->Type).Size_;
+        (extraout_RAX->Method).len = (int)(piVar16->Type).PtrBytes;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_06 = piVar14;
+          pnVar7 = extraout_RAX_08;
+          prVar9 = extraout_RCX_06;
+        }
+        (pnVar7->Method).str = (uint8 *)piVar14;
+      }
+      piVar11 = prVar9[2]._type;
+      runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(runtime_itab *)prVar9[2].inter,
+                      prVar9);
+      (pnVar10->Body).tab = extraout_RAX_09;
+      pnVar7 = pnVar10;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_07 = piVar11;
+        extraout_R11_07[1] = (internal_abi_Type *)(extraout_RCX_07->Body).data;
+        pnVar10 = extraout_RCX_07;
+      }
+      (pnVar10->Body).data = piVar11;
+      piVar11 = in_RBX[2]._type;
+      runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834cc0,(runtime_itab *)in_RBX[2].inter,
+                      (runtime_itab *)pnVar10);
+      (pnVar7->BodyCloser).tab = extraout_RAX_10;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_08 = piVar11;
+        extraout_R11_08[1] = (internal_abi_Type *)(extraout_RCX_08->BodyCloser).data;
+        pnVar7 = extraout_RCX_08;
+      }
+      (pnVar7->BodyCloser).data = piVar11;
+      pnVar7->ContentLength = *(int64 *)&in_RBX[2].hash;
+      pnVar7->Close = *(bool *)&in_RBX[3].hash;
+      piVar11 = in_RBX[3]._type;
+      psVar8 = (string *)in_RBX[2].fun[0];
+      (pnVar7->TransferEncoding).len = (int)in_RBX[3].inter;
+      (pnVar7->TransferEncoding).cap = (int)piVar11;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_09 = extraout_R8;
+        extraout_R11_09[1] = (extraout_RCX_09->TransferEncoding).array;
+        pnVar7 = extraout_RCX_09;
+        psVar8 = extraout_R8;
+      }
+      (pnVar7->TransferEncoding).array = psVar8;
+      phVar12 = (net_http_Header)in_RBX[1].fun[0];
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_10 = extraout_RSI_00;
+        extraout_R11_10[1] = extraout_RCX_10->Header;
+        pnVar7 = extraout_RCX_10;
+        phVar12 = extraout_RSI_00;
+      }
+      pnVar7->Header = phVar12;
+      phVar12 = (net_http_Header)in_RBX[3].fun[0];
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_11 = extraout_RSI_01;
+        extraout_R11_11[1] = extraout_RCX_11->Trailer;
+        pnVar7 = extraout_RCX_11;
+        phVar12 = extraout_RSI_01;
+      }
+      pnVar7->Trailer = phVar12;
+      if ((int)in_RBX[1]._type < 2) {
+        if (in_RBX[1]._type == (internal_abi_Type *)&DAT_00000001) {
+          iVar3._0_4_ = in_RBX[1].hash;
+          iVar3._4_1_ = in_RBX[1]._[0];
+          iVar3._5_1_ = in_RBX[1]._[1];
+          iVar3._6_1_ = in_RBX[1]._[2];
+          iVar3._7_1_ = in_RBX[1]._[3];
+          bVar5 = 0 < iVar3;

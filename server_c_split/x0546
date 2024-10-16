@@ -1,0 +1,1000 @@
+        ppiVar10 = ppiVar10 + 7;
+        iVar5 = certType;
+      }
+LAB_00696beb:
+      local_140 = iVar2;
+      if (iVar6 < *(int *)(local_128 + 0x2f0)) {
+        newLen = newLen + 1;
+        if (oldCap < newLen) {
+          ~r0_01.cap = (int)in_stack_fffffffffffffe50;
+          ~r0_01.array = in_stack_fffffffffffffe40.str;
+          ~r0_01.len = in_stack_fffffffffffffe40.len;
+          runtime_growslice(oldPtr,newLen,oldCap,1,(internal_abi_Type *)&DAT_0088f220,~r0_01);
+          oldCap = extraout_RCX_01;
+          iVar5 = certType;
+          oldPtr = extraout_RAX_09;
+          iVar3 = in_RDI;
+          pcVar4 = opts;
+          puVar8 = local_128;
+          newLen = extraout_RBX_00;
+        }
+        iVar2 = local_140;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_R10;
+          extraout_R11[1] = (uint8 *)extraout_RBX_01[extraout_RSI - 1];
+          iVar2 = extraout_RAX_10;
+          oldCap = extraout_RCX_02;
+          oldPtr = extraout_RBX_01;
+          iVar3 = extraout_R8;
+          pcVar4 = extraout_R9;
+          puVar8 = extraout_R10;
+          newLen = extraout_RSI;
+        }
+        oldPtr[newLen - 1] = (uint)puVar8;
+      }
+    }
+    local_180 = newLen;
+    local_138 = oldPtr;
+    iVar2 = 0;
+    while (iVar2 < (int)local_180) {
+      local_140 = iVar2;
+      piVar7 = *(int **)(local_138[iVar2] + 0x2e8);
+      for (iVar5 = 0; iVar5 < *(int *)(local_138[iVar2] + 0x2f0); iVar5 = iVar5 + 1) {
+        callback = (func_int____uint8__error **)piVar7[4];
+        if (crypto_x509_oidExtensionSubjectAltName.len == piVar7[1]) {
+          iVar3 = 0;
+          while( true ) {
+            if (piVar7[1] <= iVar3) goto LAB_00696cd7;
+            if (crypto_x509_oidExtensionSubjectAltName.array[iVar3] != *(int *)(*piVar7 + iVar3 * 8)
+               ) break;
+            iVar3 = iVar3 + 1;
+          }
+        }
+        piVar7 = piVar7 + 7;
+      }
+      callback = (func_int____uint8__error **)0x0;
+LAB_00696cd7:
+      local_110._8_8_ = c;
+      local_110._0_8_ = crypto_x509___Certificate__isValid_func1;
+      local_100._8_8_ = &local_168;
+      local_100._0_8_ = &local_158;
+      der.cap = (int)in_stack_fffffffffffffe50;
+      der.array = in_stack_fffffffffffffe40.str;
+      der.len = in_stack_fffffffffffffe40.len;
+      crypto_x509_forEachSAN(der,callback,(error)in_stack_fffffffffffffe58);
+      if (extraout_RAX_11 != 0) {
+        return;
+      }
+      iVar5 = certType;
+      iVar3 = in_RDI;
+      iVar2 = local_140 + 1;
+    }
+  }
+  if ((iVar5 == 1) && ((c->BasicConstraintsValid == false || (c->IsCA == false)))) {
+    local_d0._8_8_ = 0;
+    local_d0._0_8_ = c;
+    runtime_convT((internal_abi_Type *)&DAT_00873460,local_d0,c);
+    return;
+  }
+  if (((c->BasicConstraintsValid != false) && (-1 < c->MaxPathLen)) && (c->MaxPathLen < iVar3 + -1))
+  {
+    local_d0._8_8_ = 3;
+    local_d0._0_8_ = c;
+    runtime_convT((internal_abi_Type *)&DAT_00873460,local_d0,c);
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_x509___Certificate__isValid_func1(int tag,__uint8 data,error ~r0)
+
+{
+  string ~r0_00;
+  string domain;
+  string val;
+  string nameType;
+  string val_00;
+  string format;
+  string ~r0_01;
+  string in;
+  string nameType_00;
+  string format_00;
+  string format_01;
+  string nameType_01;
+  string ~r0_02;
+  string rawURL;
+  string nameType_02;
+  string val_01;
+  string format_02;
+  __uint8 val_02;
+  __uint8 val_03;
+  __uint8 val_04;
+  __uint8 val_05;
+  __uint8 val_06;
+  net_IP ip;
+  __uint8 val_07;
+  __uint8 val_08;
+  __uint8 val_09;
+  __uint8 val_10;
+  __uint8 val_11;
+  string name;
+  string name_00;
+  string name_01;
+  error ~r1;
+  string name_02;
+  __string reverseLabels;
+  __interface___ a;
+  __interface___ a_00;
+  __interface___ a_01;
+  __interface___ a_02;
+  crypto_x509_rfc2821Mailbox mailbox_00;
+  string ~r0_03;
+  interface___ parsedName;
+  interface___ parsedName_00;
+  interface___ parsedName_01;
+  interface___ parsedName_02;
+  error ~r0_04;
+  error ~r0_05;
+  error ~r0_06;
+  error ~r0_07;
+  interface___ permitted;
+  interface___ permitted_00;
+  interface___ permitted_01;
+  interface___ permitted_02;
+  bool ok_00;
+  void *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  internal_abi_Type *extraout_RAX_01;
+  int extraout_RAX_02;
+  undefined8 extraout_RAX_03;
+  uint8 *extraout_RAX_04;
+  internal_abi_Type *extraout_RAX_05;
+  int extraout_RAX_06;
+  undefined8 extraout_RAX_07;
+  undefined8 extraout_RAX_08;
+  uint8 *extraout_RAX_09;
+  internal_abi_Type *extraout_RAX_10;
+  int extraout_RAX_11;
+  net_url_URL *~r0_08;
+  net_url_URL *uri;
+  uint8 *extraout_RAX_12;
+  internal_abi_Type *extraout_RAX_13;
+  int extraout_RAX_14;
+  undefined8 extraout_RAX_15;
+  int in_RCX;
+  int l;
+  void *~r0_09;
+  int in_RDX;
+  int *_comparisonCount;
+  char extraout_SIL;
+  bool ok;
+  uint8 *in_RBX;
+  int extraout_RBX;
+  crypto_x509_Certificate *c;
+  char extraout_DIL;
+  bool ok_1;
+  int *_maxConstraintComparisons;
+  int unaff_R14;
+  uint8 *in_stack_fffffffffffffee8;
+  int in_stack_fffffffffffffef0;
+  runtime_itab *in_stack_fffffffffffffef8;
+  uint8 *in_stack_ffffffffffffff00;
+  int in_stack_ffffffffffffff08;
+  runtime_itab *in_stack_ffffffffffffff10;
+  internal_abi_Type *in_stack_ffffffffffffff18;
+  void *in_stack_ffffffffffffff20;
+  interface___ in_stack_ffffffffffffff28;
+  error in_stack_ffffffffffffff38;
+  undefined local_98 [24];
+  net_url_URL *local_80;
+  void *local_78;
+  crypto_x509_Certificate *local_68;
+  uint8 *local_58;
+  uint8 *local_50;
+  int *local_48;
+  int *local_40;
+  undefined local_38 [16];
+  crypto_x509_rfc2821Mailbox mailbox;
+  
+  while (local_98 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  local_68 = *(crypto_x509_Certificate **)(in_RDX + 8);
+  local_48 = *(int **)(in_RDX + 0x18);
+  local_40 = *(int **)(in_RDX + 0x10);
+  if (tag < 3) {
+    if (tag == 1) {
+      ~r0_01.len = in_stack_fffffffffffffef0;
+      ~r0_01.str = in_stack_fffffffffffffee8;
+      runtime_slicebytetostring((runtime_tmpBuf *)0x0,in_RBX,in_RCX,~r0_01);
+      in.len = in_stack_fffffffffffffef0;
+      in.str = in_stack_fffffffffffffee8;
+      mailbox_00.local.len = (int)in_stack_ffffffffffffff00;
+      mailbox_00.local.str = (uint8 *)in_stack_fffffffffffffef8;
+      mailbox_00.domain.str = (uint8 *)in_stack_ffffffffffffff08;
+      mailbox_00.domain.len = (int)in_stack_ffffffffffffff10;
+      crypto_x509_parseRFC2821Mailbox(in,mailbox_00,ok_00);
+      if (extraout_SIL == '\0') {
+        runtime_convT((internal_abi_Type *)&DAT_00854de0,&mailbox,~r0_09);
+        local_38._8_8_ = extraout_RAX_07;
+        local_38._0_8_ = &DAT_00854de0;
+        format_00.len = in_stack_fffffffffffffef0;
+        format_00.str = in_stack_fffffffffffffee8;
+        a_00.len = (int)in_stack_ffffffffffffff00;
+        a_00.array = (interface___ *)in_stack_fffffffffffffef8;
+        a_00.cap = in_stack_ffffffffffffff08;
+        ~r0_05.data = in_stack_ffffffffffffff18;
+        ~r0_05.tab = in_stack_ffffffffffffff10;
+        fmt_Errorf(format_00,a_00,~r0_05);
+        return;
+      }
+      runtime_convT((internal_abi_Type *)&DAT_00854de0,&mailbox,~r0_09);
+      val_04.len = in_stack_fffffffffffffef0;
+      val_04.array = in_stack_fffffffffffffee8;
+      val_04.cap = (int)in_stack_fffffffffffffef8;
+      runtime_convTslice(val_04,(local_68->PermittedEmailAddresses).array);
+      val_05.len = in_stack_fffffffffffffef0;
+      val_05.array = in_stack_fffffffffffffee8;
+      val_05.cap = (int)in_stack_fffffffffffffef8;
+      local_58 = extraout_RAX_04;
+      runtime_convTslice(val_05,(local_68->ExcludedEmailAddresses).array);
+      nameType_00.len = (int)&DAT_00802320;
+      nameType_00.str = (uint8 *)&PTR_crypto_x509___Certificate__isValid_func1_1_008ec920;
+      name_00.len = (int)&DAT_00802320;
+      name_00.str = local_58;
+      parsedName_00.data = in_stack_ffffffffffffff10;
+      parsedName_00._type = extraout_RAX_05;
+      permitted_00.data = in_stack_ffffffffffffff20;
+      permitted_00._type = in_stack_ffffffffffffff18;
+      crypto_x509___Certificate__checkNameConstraints
+                (local_68,local_40,*local_48,nameType_00,name_00,parsedName_00,
+                 (func_interface_____interface______bool__error_ **)0x8b5116,permitted_00,
+                 in_stack_ffffffffffffff28,in_stack_ffffffffffffff38);
+      if (extraout_RAX_06 != 0) {
+        return;
+      }
+    }
+    else if (tag == 2) {
+      ~r0_00.len = in_stack_fffffffffffffef0;
+      ~r0_00.str = in_stack_fffffffffffffee8;
+      runtime_slicebytetostring((runtime_tmpBuf *)0x0,in_RBX,in_RCX,~r0_00);
+      domain.len = in_stack_fffffffffffffef0;
+      domain.str = in_stack_fffffffffffffee8;
+      reverseLabels.len = (int)in_stack_ffffffffffffff00;
+      reverseLabels.array = (string *)in_stack_fffffffffffffef8;
+      reverseLabels.cap = in_stack_ffffffffffffff08;
+      local_78 = extraout_RAX;
+      crypto_x509_domainToReverseLabels(domain,reverseLabels,SUB81(extraout_RAX,0));
+      if (extraout_DIL == '\0') {
+        val_00.len = in_stack_fffffffffffffef0;
+        val_00.str = in_stack_fffffffffffffee8;
+        runtime_convTstring(val_00,local_78);
+        local_38._8_8_ = extraout_RAX_03;
+        local_38._0_8_ = &DAT_008075e0;
+        format.len = in_stack_fffffffffffffef0;
+        format.str = in_stack_fffffffffffffee8;
+        a.len = (int)in_stack_ffffffffffffff00;
+        a.array = (interface___ *)in_stack_fffffffffffffef8;
+        a.cap = in_stack_ffffffffffffff08;
+        ~r0_04.data = in_stack_ffffffffffffff18;
+        ~r0_04.tab = in_stack_ffffffffffffff10;
+        fmt_Errorf(format,a,~r0_04);
+        return;
+      }
+      val.len = in_stack_fffffffffffffef0;
+      val.str = in_stack_fffffffffffffee8;
+      runtime_convTstring(val,local_78);
+      val_02.len = in_stack_fffffffffffffef0;
+      val_02.array = in_stack_fffffffffffffee8;
+      val_02.cap = (int)in_stack_fffffffffffffef8;
+      runtime_convTslice(val_02,(local_68->PermittedDNSDomains).array);
+      val_03.len = in_stack_fffffffffffffef0;
+      val_03.array = in_stack_fffffffffffffee8;
+      val_03.cap = (int)in_stack_fffffffffffffef8;
+      local_58 = extraout_RAX_00;
+      runtime_convTslice(val_03,(local_68->ExcludedDNSDomains).array);
+      nameType.len = (int)&DAT_00802320;
+      nameType.str = (uint8 *)&PTR_crypto_x509___Certificate__isValid_func1_2_008ec928;
+      name.len = (int)&DAT_00802320;
+      name.str = local_58;
+      parsedName.data = in_stack_ffffffffffffff10;
+      parsedName._type = extraout_RAX_01;
+      permitted.data = in_stack_ffffffffffffff20;
+      permitted._type = in_stack_ffffffffffffff18;
+      crypto_x509___Certificate__checkNameConstraints
+                (local_68,local_40,*local_48,nameType,name,parsedName,
+                 (func_interface_____interface______bool__error_ **)&DAT_008b1f46,permitted,
+                 in_stack_ffffffffffffff28,in_stack_ffffffffffffff38);
+      if (extraout_RAX_02 != 0) {
+        return;
+      }
+    }
+  }
+  else if (tag == 6) {
+    ~r0_02.len = in_stack_fffffffffffffef0;
+    ~r0_02.str = in_stack_fffffffffffffee8;
+    runtime_slicebytetostring((runtime_tmpBuf *)0x0,in_RBX,in_RCX,~r0_02);
+    rawURL.len = in_stack_fffffffffffffef0;
+    rawURL.str = in_stack_fffffffffffffee8;
+    ~r1.data = in_stack_ffffffffffffff00;
+    ~r1.tab = in_stack_fffffffffffffef8;
+    local_80 = ~r0_08;
+    net_url_Parse(rawURL,~r0_08,~r1);
+    if (extraout_RBX != 0) {
+      val_01.len = in_stack_fffffffffffffef0;
+      val_01.str = in_stack_fffffffffffffee8;
+      runtime_convTstring(val_01,local_80);
+      local_38._8_8_ = extraout_RAX_15;
+      local_38._0_8_ = &DAT_008075e0;
+      format_02.len = in_stack_fffffffffffffef0;
+      format_02.str = in_stack_fffffffffffffee8;
+      a_02.len = (int)in_stack_ffffffffffffff00;
+      a_02.array = (interface___ *)in_stack_fffffffffffffef8;
+      a_02.cap = in_stack_ffffffffffffff08;
+      ~r0_07.data = in_stack_ffffffffffffff18;
+      ~r0_07.tab = in_stack_ffffffffffffff10;
+      fmt_Errorf(format_02,a_02,~r0_07);
+      return;
+    }
+    val_10.len = in_stack_fffffffffffffef0;
+    val_10.array = in_stack_fffffffffffffee8;
+    val_10.cap = (int)in_stack_fffffffffffffef8;
+    runtime_convTslice(val_10,(local_68->PermittedURIDomains).array);
+    val_11.len = in_stack_fffffffffffffef0;
+    val_11.array = in_stack_fffffffffffffee8;
+    val_11.cap = (int)in_stack_fffffffffffffef8;
+    local_50 = extraout_RAX_12;
+    runtime_convTslice(val_11,(local_68->ExcludedURIDomains).array);
+    nameType_02.len = (int)&DAT_00802320;
+    nameType_02.str = (uint8 *)&PTR_crypto_x509___Certificate__isValid_func1_3_008ec930;
+    name_02.len = (int)&DAT_00802320;
+    name_02.str = local_50;
+    parsedName_02.data = in_stack_ffffffffffffff10;
+    parsedName_02._type = extraout_RAX_13;
+    permitted_02.data = in_stack_ffffffffffffff20;
+    permitted_02._type = in_stack_ffffffffffffff18;
+    crypto_x509___Certificate__checkNameConstraints
+              (local_68,local_40,*local_48,nameType_02,name_02,parsedName_02,
+               (func_interface_____interface______bool__error_ **)&DAT_008ae429,permitted_02,
+               in_stack_ffffffffffffff28,in_stack_ffffffffffffff38);
+    if (extraout_RAX_14 != 0) {
+      return;
+    }
+  }
+  else if (tag == 7) {
+    if ((in_RCX != 4) && (in_RCX != 0x10)) {
+      val_06.len = in_stack_fffffffffffffef0;
+      val_06.array = in_stack_fffffffffffffee8;
+      val_06.cap = (int)in_stack_fffffffffffffef8;
+      runtime_convTslice(val_06,in_RBX);
+      local_38._8_8_ = extraout_RAX_08;
+      local_38._0_8_ = &DAT_00801a20;
+      format_01.len = in_stack_fffffffffffffef0;
+      format_01.str = in_stack_fffffffffffffee8;
+      a_01.len = (int)in_stack_ffffffffffffff00;
+      a_01.array = (interface___ *)in_stack_fffffffffffffef8;
+      a_01.cap = in_stack_ffffffffffffff08;
+      ~r0_06.data = in_stack_ffffffffffffff18;
+      ~r0_06.tab = in_stack_ffffffffffffff10;
+      fmt_Errorf(format_01,a_01,~r0_06);
+      return;
+    }
+    ip.len = in_stack_fffffffffffffef0;
+    ip.array = in_stack_fffffffffffffee8;
+    ip.cap = (int)in_stack_fffffffffffffef8;
+    ~r0_03.len = in_stack_ffffffffffffff08;
+    ~r0_03.str = in_stack_ffffffffffffff00;
+    net_IP_String(ip,~r0_03);
+    val_07.len = in_stack_fffffffffffffef0;
+    val_07.array = in_stack_fffffffffffffee8;
+    val_07.cap = (int)in_stack_fffffffffffffef8;
+    runtime_convTslice(val_07,in_RBX);
+    val_08.len = in_stack_fffffffffffffef0;
+    val_08.array = in_stack_fffffffffffffee8;
+    val_08.cap = (int)in_stack_fffffffffffffef8;
+    runtime_convTslice(val_08,(local_68->PermittedIPRanges).array);
+    val_09.len = in_stack_fffffffffffffef0;
+    val_09.array = in_stack_fffffffffffffee8;
+    val_09.cap = (int)in_stack_fffffffffffffef8;
+    local_58 = extraout_RAX_09;
+    runtime_convTslice(val_09,(local_68->ExcludedIPRanges).array);
+    nameType_01.len = (int)&DAT_00804a40;
+    nameType_01.str = (uint8 *)&PTR_crypto_x509___Certificate__isValid_func1_4_008ec938;
+    name_01.len = (int)&DAT_00804a40;
+    name_01.str = local_58;
+    parsedName_01.data = in_stack_ffffffffffffff10;
+    parsedName_01._type = extraout_RAX_10;
+    permitted_01.data = in_stack_ffffffffffffff20;
+    permitted_01._type = in_stack_ffffffffffffff18;
+    crypto_x509___Certificate__checkNameConstraints
+              (local_68,local_40,*local_48,nameType_01,name_01,parsedName_01,
+               (func_interface_____interface______bool__error_ **)&DAT_008b3141,permitted_01,
+               in_stack_ffffffffffffff28,in_stack_ffffffffffffff38);
+    if (extraout_RAX_11 != 0) {
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509___Certificate__Verify
+               (crypto_x509_Certificate *c,crypto_x509_VerifyOptions opts,
+               _____crypto_x509_Certificate chains,error err)
+
+{
+  error *peVar1;
+  func_____crypto_x509_Certificate__error_ *pfVar2;
+  undefined8 uVar3;
+  undefined8 uVar4;
+  string format;
+  string h;
+  ___crypto_x509_Certificate currentChain;
+  __uint8 data;
+  ___crypto_x509_Certificate currentChain_00;
+  ___crypto_x509_Certificate chain;
+  runtime_slice ~r0;
+  error ~r0_00;
+  __interface___ a;
+  error ~r0_01;
+  _____crypto_x509_Certificate chains_00;
+  __crypto_x509_ExtKeyUsage keyUsages;
+  uint8 ~r0_02 [28];
+  error ~r0_03;
+  error err_00;
+  char extraout_AL;
+  int extraout_RAX;
+  crypto_x509_Certificate *c_1;
+  crypto_x509_CertPool *extraout_RAX_00;
+  int extraout_RAX_01;
+  int extraout_RAX_02;
+  char *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  crypto_x509_Certificate **extraout_RAX_05;
+  crypto_x509_Certificate **extraout_RAX_06;
+  crypto_x509_Certificate **extraout_RAX_07;
+  crypto_x509_Certificate **ppcVar5;
+  undefined8 *extraout_RAX_08;
+  crypto_x509_ExtKeyUsage *extraout_RAX_09;
+  int iVar6;
+  void *extraout_RAX_10;
+  void *extraout_RAX_11;
+  void *extraout_RAX_12;
+  error *peVar7;
+  undefined8 extraout_RCX;
+  undefined *extraout_RCX_00;
+  undefined *extraout_RCX_01;
+  undefined *oldCap;
+  char cVar8;
+  int iVar9;
+  crypto_x509_CertPool *in_RBX;
+  int extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  void *pvVar10;
+  void *~r0_04;
+  undefined *~r0_05;
+  undefined *extraout_RBX_03;
+  undefined *newLen;
+  undefined *extraout_RBX_04;
+  undefined *extraout_RBX_05;
+  crypto_x509_CertPool *extraout_RBX_06;
+  void *~r0_06;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *extraout_RDI_01;
+  int extraout_RDI_02;
+  void *extraout_RDI_03;
+  undefined8 *extraout_R8;
+  crypto_x509_Certificate **extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int unaff_R14;
+  undefined4 in_stack_fffffffffffffec8;
+  undefined4 in_stack_fffffffffffffecc;
+  undefined4 in_stack_fffffffffffffed0;
+  undefined4 in_stack_fffffffffffffed4;
+  undefined4 in_stack_fffffffffffffed8;
+  undefined4 in_stack_fffffffffffffedc;
+  undefined4 in_stack_fffffffffffffee0;
+  undefined4 in_stack_fffffffffffffee4;
+  void *in_stack_fffffffffffffee8;
+  int in_stack_fffffffffffffef0;
+  undefined4 in_stack_fffffffffffffef8;
+  undefined4 in_stack_fffffffffffffefc;
+  void *in_stack_ffffffffffffff00;
+  int i;
+  undefined local_b8 [56];
+  crypto_x509_CertPool *local_80;
+  undefined8 *local_78;
+  undefined8 local_70;
+  undefined8 *local_68;
+  void *local_60;
+  undefined8 *local_58;
+  crypto_x509_Certificate *local_50;
+  undefined local_48 [16];
+  undefined local_38 [16];
+  undefined local_28 [32];
+  
+  while (local_b8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX_06;
+  }
+  if ((c->Raw).len == 0) {
+    return;
+  }
+  peVar7 = (error *)0x0;
+  while( true ) {
+    if (opts.Intermediates == (crypto_x509_CertPool *)0x0) {
+      iVar6 = 0;
+    }
+    else {
+      iVar6 = ((opts.Intermediates)->lazyCerts).len;
+    }
+    if (iVar6 <= (int)peVar7) break;
+    peVar1 = (error *)((opts.Intermediates)->lazyCerts).len;
+    if (peVar1 <= peVar7) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pfVar2 = *((opts.Intermediates)->lazyCerts).array[(int)peVar7].getCert;
+    (*pfVar2)((crypto_x509_Certificate **)pfVar2,peVar1);
+    if (extraout_RBX != 0) {
+      local_38._0_8_ = extraout_RBX;
+      if (extraout_RBX != 0) {
+        local_38._0_8_ = *(int *)(extraout_RBX + 8);
+      }
+      local_38._8_8_ = extraout_RCX;
+      format.str._4_4_ = in_stack_fffffffffffffecc;
+      format.str._0_4_ = in_stack_fffffffffffffec8;
+      format.len._0_4_ = in_stack_fffffffffffffed0;
+      format.len._4_4_ = in_stack_fffffffffffffed4;
+      a.array._4_4_ = in_stack_fffffffffffffedc;
+      a.array._0_4_ = in_stack_fffffffffffffed8;
+      a.len._0_4_ = in_stack_fffffffffffffee0;
+      a.len._4_4_ = in_stack_fffffffffffffee4;
+      a.cap = (int)in_stack_fffffffffffffee8;
+      ~r0_03.data._0_4_ = in_stack_fffffffffffffef8;
+      ~r0_03.tab = (runtime_itab *)in_stack_fffffffffffffef0;
+      ~r0_03.data._4_4_ = in_stack_fffffffffffffefc;
+      fmt_Errorf(format,a,~r0_03);
+      return;
+    }
+    if (*(int *)(extraout_RAX + 8) == 0) {
+      return;
+    }
+    peVar7 = (error *)((int)&peVar7->tab + 1);
+    in_RBX = (crypto_x509_CertPool *)0x0;
+  }
+  if ((opts.Roots == (crypto_x509_CertPool *)0x0) &&
+     (crypto_x509_systemRootsPool((crypto_x509_CertPool *)c,in_RBX), opts.Roots = extraout_RAX_00,
+     extraout_RAX_00 == (crypto_x509_CertPool *)0x0)) {
+    local_48._8_8_ = crypto_x509_systemRootsErr.data;
+    local_48._0_8_ = crypto_x509_systemRootsErr.tab;
+    runtime_convT((internal_abi_Type *)&DAT_00858b00,local_48,crypto_x509_systemRootsErr.tab);
+    return;
+  }
+  currentChain.array._4_4_ = in_stack_fffffffffffffecc;
+  currentChain.array._0_4_ = in_stack_fffffffffffffec8;
+  currentChain.len._0_4_ = in_stack_fffffffffffffed0;
+  currentChain.len._4_4_ = in_stack_fffffffffffffed4;
+  currentChain.cap._0_4_ = in_stack_fffffffffffffed8;
+  currentChain.cap._4_4_ = in_stack_fffffffffffffedc;
+  ~r0_01.tab._4_4_ = in_stack_fffffffffffffee4;
+  ~r0_01.tab._0_4_ = in_stack_fffffffffffffee0;
+  ~r0_01.data = in_stack_fffffffffffffee8;
+  crypto_x509___Certificate__isValid(c,0,currentChain,(crypto_x509_VerifyOptions *)0x0,~r0_01);
+  if (extraout_RAX_01 != 0) {
+    return;
+  }
+  pvVar10 = extraout_RBX_00;
+  if ((opts.DNSName.len != 0) &&
+     (h.str._4_4_ = in_stack_fffffffffffffecc, h.str._0_4_ = in_stack_fffffffffffffec8,
+     h.len._0_4_ = in_stack_fffffffffffffed0, h.len._4_4_ = in_stack_fffffffffffffed4,
+     ~r0_00.tab._4_4_ = in_stack_fffffffffffffedc, ~r0_00.tab._0_4_ = in_stack_fffffffffffffed8,
+     ~r0_00.data._0_4_ = in_stack_fffffffffffffee0, ~r0_00.data._4_4_ = in_stack_fffffffffffffee4,
+     crypto_x509___Certificate__VerifyHostname(c,h,~r0_00), pvVar10 = extraout_RBX_01,
+     extraout_RAX_02 != 0)) {
+    return;
+  }
+  if (opts.Roots == (crypto_x509_CertPool *)0x0) {
+    cVar8 = '\0';
+  }
+  else {
+    local_80 = opts.Roots;
+    data.array._4_4_ = in_stack_fffffffffffffecc;
+    data.array._0_4_ = in_stack_fffffffffffffec8;
+    data.len._0_4_ = in_stack_fffffffffffffed0;
+    data.len._4_4_ = in_stack_fffffffffffffed4;
+    data.cap._0_4_ = in_stack_fffffffffffffed8;
+    data.cap._4_4_ = in_stack_fffffffffffffedc;
+    ~r0_02[4] = (char)in_stack_fffffffffffffee4;
+    ~r0_02[5] = (char)((dword)in_stack_fffffffffffffee4 >> 8);
+    ~r0_02[6] = (char)((dword)in_stack_fffffffffffffee4 >> 0x10);
+    ~r0_02[7] = (char)((dword)in_stack_fffffffffffffee4 >> 0x18);
+    ~r0_02[0] = (char)in_stack_fffffffffffffee0;
+    ~r0_02[1] = (char)((dword)in_stack_fffffffffffffee0 >> 8);
+    ~r0_02[2] = (char)((dword)in_stack_fffffffffffffee0 >> 0x10);
+    ~r0_02[3] = (char)((dword)in_stack_fffffffffffffee0 >> 0x18);
+    ~r0_02._8_8_ = in_stack_fffffffffffffee8;
+    ~r0_02[16] = (char)in_stack_fffffffffffffef0;
+    ~r0_02[17] = (char)((uint)in_stack_fffffffffffffef0 >> 8);
+    ~r0_02[18] = (char)((uint)in_stack_fffffffffffffef0 >> 0x10);
+    ~r0_02[19] = (char)((uint)in_stack_fffffffffffffef0 >> 0x18);
+    ~r0_02[20] = (char)((uint)in_stack_fffffffffffffef0 >> 0x20);
+    ~r0_02[21] = (char)((uint)in_stack_fffffffffffffef0 >> 0x28);
+    ~r0_02[22] = (char)((uint)in_stack_fffffffffffffef0 >> 0x30);
+    ~r0_02[23] = (char)((uint)in_stack_fffffffffffffef0 >> 0x38);
+    ~r0_02[24] = (char)in_stack_fffffffffffffef8;
+    ~r0_02[25] = (char)((dword)in_stack_fffffffffffffef8 >> 8);
+    ~r0_02[26] = (char)((dword)in_stack_fffffffffffffef8 >> 0x10);
+    ~r0_02[27] = (char)((dword)in_stack_fffffffffffffef8 >> 0x18);
+    crypto_sha256_Sum224(data,~r0_02);
+    runtime_mapaccess1((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)local_80->haveSum,
+                       local_b8,~r0_06);
+    cVar8 = *extraout_RAX_03;
+    pvVar10 = extraout_RBX_02;
+  }
+  if (cVar8 == '\0') {
+    currentChain_00.array._4_4_ = in_stack_fffffffffffffecc;
+    currentChain_00.array._0_4_ = in_stack_fffffffffffffec8;
+    currentChain_00.len._0_4_ = in_stack_fffffffffffffed0;
+    currentChain_00.len._4_4_ = in_stack_fffffffffffffed4;
+    currentChain_00.cap._0_4_ = in_stack_fffffffffffffed8;
+    currentChain_00.cap._4_4_ = in_stack_fffffffffffffedc;
+    chains_00.array._4_4_ = in_stack_fffffffffffffee4;
+    chains_00.array._0_4_ = in_stack_fffffffffffffee0;
+    chains_00.len = (int)in_stack_fffffffffffffee8;
+    chains_00.cap = in_stack_fffffffffffffef0;
+    err_00.tab._4_4_ = in_stack_fffffffffffffefc;
+    err_00.tab._0_4_ = in_stack_fffffffffffffef8;
+    err_00.data = in_stack_ffffffffffffff00;
+    local_50 = c;
+    crypto_x509___Certificate__buildChains
+              (c,currentChain_00,(int *)&local_50,(crypto_x509_VerifyOptions *)&DAT_00000001,
+               chains_00,err_00);
+    if (extraout_RDI_02 != 0) {
+      return;
+    }
+    pvVar10 = (void *)0x0;
+    ~r0_05 = extraout_RBX_03;
+    local_58 = extraout_RAX_08;
+  }
+  else {
+    runtime_newobject((internal_abi_Type *)&DAT_0081b540,pvVar10);
+    local_58 = extraout_RAX_04;
+    runtime_newobject((internal_abi_Type *)&DAT_0081b600,~r0_04);
+    ppcVar5 = extraout_RAX_05;
+    pvVar10 = extraout_RDI;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = c;
+      ppcVar5 = extraout_RAX_06;
+      pvVar10 = extraout_RDI_00;
+    }
+    *ppcVar5 = c;
+    local_58[1] = 1;
+    local_58[2] = 1;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_07;
+      extraout_R11_00[1] = *extraout_R8;
+      ppcVar5 = extraout_RAX_07;
+      pvVar10 = extraout_RDI_01;
+      local_58 = extraout_R8;
+    }
+    *local_58 = ppcVar5;
+    ~r0_05 = &DAT_00000001;
+  }
+  local_78 = local_58;
+  if (opts.KeyUsages.len == 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0081b300,~r0_05);
+    *extraout_RAX_09 = 1;
+    opts.KeyUsages.len = 1;
+    pvVar10 = extraout_RDI_03;
+    opts.KeyUsages.array = extraout_RAX_09;
+  }
+  for (iVar6 = 0; iVar6 < opts.KeyUsages.len; iVar6 = iVar6 + 1) {
+    if (opts.KeyUsages.array[iVar6] == 0) {
+      return;
+    }
+  }
+  runtime_makeslice((internal_abi_Type *)&DAT_00804800,0,(int)~r0_05,pvVar10);
+  newLen = (undefined *)0x0;
+  local_60 = extraout_RAX_10;
+  oldCap = ~r0_05;
+  for (iVar6 = 0; iVar6 < (int)~r0_05; iVar6 = iVar6 + 1) {
+    local_70 = *local_78;
+    uVar3 = local_78[1];
+    uVar4 = local_78[2];
+    chain.array._4_4_ = in_stack_fffffffffffffecc;
+    chain.array._0_4_ = in_stack_fffffffffffffec8;
+    chain.len._0_4_ = in_stack_fffffffffffffed0;
+    chain.len._4_4_ = in_stack_fffffffffffffed4;
+    chain.cap._0_4_ = in_stack_fffffffffffffed8;
+    chain.cap._4_4_ = in_stack_fffffffffffffedc;
+    keyUsages.array._4_4_ = in_stack_fffffffffffffee4;
+    keyUsages.array._0_4_ = in_stack_fffffffffffffee0;
+    keyUsages.len = (int)in_stack_fffffffffffffee8;
+    keyUsages.cap = in_stack_fffffffffffffef0;
+    local_68 = local_78;
+    crypto_x509_checkChainForKeyUsage(chain,keyUsages,SUB81(local_70,0));
+    if (extraout_AL != '\0') {
+      newLen = newLen + 1;
+      if (oldCap < newLen) {
+        ~r0.array._4_4_ = in_stack_fffffffffffffecc;
+        ~r0.array._0_4_ = in_stack_fffffffffffffec8;
+        ~r0.len._0_4_ = in_stack_fffffffffffffed0;
+        ~r0.len._4_4_ = in_stack_fffffffffffffed4;
+        ~r0.cap._0_4_ = in_stack_fffffffffffffed8;
+        ~r0.cap._4_4_ = in_stack_fffffffffffffedc;
+        runtime_growslice(local_60,(int)newLen,(int)oldCap,1,(internal_abi_Type *)&DAT_00804800,~r0)
+        ;
+        local_60 = extraout_RAX_11;
+        oldCap = extraout_RCX_00;
+        newLen = extraout_RBX_04;
+      }
+      iVar9 = (int)newLen * 3;
+      *(undefined8 *)((int)local_60 + (int)newLen * 0x18 + -0x10) = uVar3;
+      *(undefined8 *)((int)local_60 + (int)newLen * 0x18 + -8) = uVar4;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = local_70;
+        extraout_R11_01[1] = *(undefined8 *)((int)extraout_RAX_12 + iVar9 * 8 + -0x18);
+        local_60 = extraout_RAX_12;
+        oldCap = extraout_RCX_01;
+        newLen = extraout_RBX_05;
+      }
+      *(undefined8 *)((int)local_60 + iVar9 * 8 + -0x18) = local_70;
+    }
+    local_78 = local_68 + 3;
+  }
+  if (newLen != (undefined *)0x0) {
+    return;
+  }
+  local_28._8_8_ = 4;
+  local_28._0_8_ = c;
+  runtime_convT((internal_abi_Type *)&DAT_00873460,local_28,c);
+  return;
+}
+
+
+
+// WARNING: Removing unreachable block (ram,0x00697f1b)
+
+void crypto_x509_alreadyInChain
+               (crypto_x509_Certificate *candidate,___crypto_x509_Certificate chain,bool ~r0)
+
+{
+  int iVar1;
+  runtime_itab *~r0_00;
+  int *piVar2;
+  char extraout_AL;
+  char extraout_AL_00;
+  char cVar3;
+  int extraout_RAX;
+  int iVar4;
+  crypto_x509_pkix_Extension *certSAN;
+  int in_RCX;
+  int i_1;
+  crypto_x509_pkix_Extension *pcVar5;
+  crypto_x509_pkix_Extension *candidateSAN;
+  undefined7 in_register_00000019;
+  int **ppiVar6;
+  int iVar7;
+  crypto_x509_Certificate *cert;
+  int i;
+  int unaff_R14;
+  crypto_x509_pkix_Extension ext_1;
+  crypto_x509_pkix_Extension ext;
+  
+  while (&ext.Id.cap <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pcVar5 = (candidate->Extensions).array;
+  iVar7 = 0;
+  do {
+    if ((candidate->Extensions).len <= iVar7) {
+      candidateSAN = (crypto_x509_pkix_Extension *)0x0;
+LAB_00697d92:
+      iVar7 = 0;
+      do {
+        if (in_RCX <= iVar7) {
+          return;
+        }
+        iVar1 = *(int *)(CONCAT71(in_register_00000019,~r0) + iVar7 * 8);
+        if (*(int *)(iVar1 + 0x50) == (candidate->RawSubject).len) {
+          runtime_memequal();
+          cVar3 = extraout_AL;
+        }
+        else {
+          cVar3 = '\0';
+        }
+        if (cVar3 != '\0') {
+          ~r0_00 = (runtime_itab *)(candidate->PublicKey).data;
+          runtime_assertE2I((internal_abi_InterfaceType *)&DAT_00839a40,(candidate->PublicKey)._type
+                            ,~r0_00);
+          cVar3 = (**(code **)(extraout_RAX + 0x18))
+                            (~r0_00,*(undefined8 *)(iVar1 + 0xa0),*(undefined8 *)(iVar1 + 0xa8));
+          if (cVar3 != '\0') {
+            ppiVar6 = *(int ***)(iVar1 + 0x2e8);
+            for (iVar4 = 0; iVar4 < *(int *)(iVar1 + 0x2f0); iVar4 = iVar4 + 1) {
+              ext_1.Id.array = *ppiVar6;
+              ext_1.Id.len._0_4_ = *(undefined4 *)(ppiVar6 + 1);
+              ext_1.Id.len._4_4_ = *(undefined4 *)((int)ppiVar6 + 0xc);
+              piVar2 = ppiVar6[1];
+              ext_1.Id.cap._0_4_ = *(undefined4 *)(ppiVar6 + 2);
+              ext_1.Id.cap._4_4_ = *(undefined4 *)((int)ppiVar6 + 0x14);
+              ext_1._24_4_ = *(undefined4 *)(ppiVar6 + 3);
+              ext_1._28_4_ = *(undefined4 *)((int)ppiVar6 + 0x1c);
+              ext_1.Value.array._0_4_ = *(undefined4 *)(ppiVar6 + 4);
+              ext_1.Value.array._4_4_ = *(undefined4 *)((int)ppiVar6 + 0x24);
+              ext_1.Value.len._0_4_ = *(undefined4 *)(ppiVar6 + 5);
+              ext_1.Value.len._4_4_ = *(undefined4 *)((int)ppiVar6 + 0x2c);
+              ext_1.Value.cap._0_4_ = *(undefined4 *)(ppiVar6 + 6);
+              ext_1.Value.cap._4_4_ = *(undefined4 *)((int)ppiVar6 + 0x34);
+              if ((int *)crypto_x509_oidExtensionSubjectAltName.len == piVar2) {
+                i_1 = 0;
+                while( true ) {
+                  if ((int)piVar2 <= i_1) {
+                    certSAN = &ext_1;
+                    goto LAB_00697f07;
+                  }
+                  if (crypto_x509_oidExtensionSubjectAltName.array[i_1] != ext_1.Id.array[i_1])
+                  break;
+                  i_1 = i_1 + 1;
+                }
+              }
+              ppiVar6 = ppiVar6 + 7;
+            }
+            certSAN = (crypto_x509_pkix_Extension *)0x0;
+LAB_00697f07:
+            if (candidateSAN == (crypto_x509_pkix_Extension *)0x0) {
+              if (certSAN != (crypto_x509_pkix_Extension *)0x0) {
+                return;
+              }
+              return;
+            }
+            if (certSAN == (crypto_x509_pkix_Extension *)0x0) {
+              return;
+            }
+            if (((certSAN->Value).len == (candidateSAN->Value).len) &&
+               (runtime_memequal(), extraout_AL_00 != '\0')) {
+              return;
+            }
+          }
+        }
+        iVar7 = iVar7 + 1;
+      } while( true );
+    }
+    ext.Id.array = (pcVar5->Id).array;
+    piVar2 = &(pcVar5->Id).len;
+    ext.Id.len._0_4_ = *(undefined4 *)piVar2;
+    ext.Id.len._4_4_ = *(undefined4 *)((int)&(pcVar5->Id).len + 4);
+    iVar1 = *piVar2;
+    ext.Id.cap._0_4_ = *(undefined4 *)&(pcVar5->Id).cap;
+    ext.Id.cap._4_4_ = *(undefined4 *)((int)&(pcVar5->Id).cap + 4);
+    ext.Critical = pcVar5->Critical;
+    ext._25_3_ = *(undefined3 *)&pcVar5->field_0x19;
+    ext._28_4_ = *(undefined4 *)&pcVar5->field_0x1c;
+    ext.Value.array._0_4_ = *(undefined4 *)&(pcVar5->Value).array;
+    ext.Value.array._4_4_ = *(undefined4 *)((int)&(pcVar5->Value).array + 4);
+    ext.Value.len._0_4_ = *(undefined4 *)&(pcVar5->Value).len;
+    ext.Value.len._4_4_ = *(undefined4 *)((int)&(pcVar5->Value).len + 4);
+    ext.Value.cap._0_4_ = *(undefined4 *)&(pcVar5->Value).cap;
+    ext.Value.cap._4_4_ = *(undefined4 *)((int)&(pcVar5->Value).cap + 4);
+    if (crypto_x509_oidExtensionSubjectAltName.len == iVar1) {
+      i = 0;
+      while( true ) {
+        if (iVar1 <= i) {
+          candidateSAN = &ext;
+          goto LAB_00697d92;
+        }
+        if (crypto_x509_oidExtensionSubjectAltName.array[i] != ext.Id.array[i]) break;
+        i = i + 1;
+      }
+    }
+    pcVar5 = pcVar5 + 1;
+    iVar7 = iVar7 + 1;
+  } while( true );
+}
+
+
+
+void crypto_x509___Certificate__buildChains
+               (crypto_x509_Certificate *c,___crypto_x509_Certificate currentChain,int *sigChecks,
+               crypto_x509_VerifyOptions *opts,_____crypto_x509_Certificate chains,error err)
+
+{
+  ___crypto_x509_Certificate ~r0;
+  ___crypto_x509_Certificate ~r0_00;
+  crypto_x509_Certificate *cert;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  undefined8 extraout_RCX;
+  int iVar1;
+  undefined8 extraout_RBX;
+  int extraout_RBX_00;
+  crypto_x509_Certificate *root;
+  int extraout_RBX_01;
+  crypto_x509_Certificate *intermediate;
+  ___crypto_x509_Certificate *in_RDI;
+  int in_R8;
+  int extraout_R8;
+  int unaff_R14;
+  error in_XMM15;
+  undefined in_stack_ffffffffffffff10 [16];
+  int in_stack_ffffffffffffff20;
+  crypto_x509_Certificate *hintCert;
+  int local_c8;
+  int local_c0;
+  error hintErr;
+  error err_local;
+  _____crypto_x509_Certificate chains_local;
+  undefined local_80 [16];
+  undefined local_70 [16];
+  undefined local_60 [16];
+  undefined8 local_50;
+  int *local_40;
+  error *local_38;
+  crypto_x509_Certificate *local_30;
+  error *local_28;
+  crypto_x509_Certificate **local_20;
+  int local_18;
+  _____crypto_x509_Certificate *local_10;
+  
+  chains.cap = in_R8;
+  while (local_70 <= *(undefined **)(unaff_R14 + 0x10)) {
+    chains.array = in_RDI;
+    runtime_morestack_noctxt();
+    in_RDI = chains.array;
+  }
+  chains_local.array = (___crypto_x509_Certificate *)0x0;
+  hintCert = (crypto_x509_Certificate *)0x0;
+  hintErr = in_XMM15;
+  err_local = in_XMM15;
+  chains_local._8_16_ = (undefined  [16])in_XMM15;
+  FUN_0046cdb0();
+  local_60._8_8_ = extraout_RBX;
+  local_60._0_8_ = crypto_x509___Certificate__buildChains_func1;
+  local_40 = &chains.len;
+  local_38 = &err_local;
+  local_28 = &hintErr;
+  local_20 = &hintCert;
+  local_10 = &chains_local;
+  ~r0.cap = in_stack_ffffffffffffff20;
+  ~r0.array = (crypto_x509_Certificate **)in_stack_ffffffffffffff10._0_8_;
+  ~r0.len = in_stack_ffffffffffffff10._8_8_;
+  local_50 = extraout_RCX;
+  local_30 = cert;
+  local_18 = extraout_R8;
+  crypto_x509___CertPool__findPotentialParents
+            (*(crypto_x509_CertPool **)(extraout_R8 + 0x18),cert,~r0);
+  iVar1 = 0;
+  local_c0 = extraout_RAX;
+  while (iVar1 < extraout_RBX_00) {
+    in_stack_ffffffffffffff20 = iVar1;
+    (*(code *)local_60._0_8_)(2,*(undefined8 *)(local_c0 + iVar1 * 8));
+    iVar1 = in_stack_ffffffffffffff20 + 1;
+  }
+  ~r0_00.cap = in_stack_ffffffffffffff20;
+  ~r0_00.array = (crypto_x509_Certificate **)in_stack_ffffffffffffff10._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffff10._8_8_;
+  crypto_x509___CertPool__findPotentialParents
+            (*(crypto_x509_CertPool **)(chains.cap + 0x10),c,~r0_00);
+  local_c8 = extraout_RAX_00;
+  for (iVar1 = 0; iVar1 < extraout_RBX_01; iVar1 = iVar1 + 1) {
+    (*(code *)local_60._0_8_)(1,*(undefined8 *)(local_c8 + iVar1 * 8));
+  }
+  if ((chains_local.len == 0) && (err_local.tab == (runtime_itab *)0x0)) {
+    local_80._8_8_ = hintErr.tab;
+    local_80._0_8_ = c;
+    local_70._8_8_ = hintCert;
+    local_70._0_8_ = hintErr.data;
+    runtime_convT((internal_abi_Type *)&DAT_008733a0,local_80,hintCert);
+  }

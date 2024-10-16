@@ -1,0 +1,1000 @@
+  *(char *)((int)&(sa->raw).Port + 1) = (char)sa->Port;
+  (sa->raw).Scope_id = sa->ZoneId;
+  uVar1 = *(undefined4 *)(sa->Addr + 4);
+  uVar2 = *(undefined4 *)(sa->Addr + 8);
+  uVar3 = *(undefined4 *)(sa->Addr + 0xc);
+  *(undefined4 *)(sa->raw).Addr = *(undefined4 *)sa->Addr;
+  *(undefined4 *)((sa->raw).Addr + 4) = uVar1;
+  *(undefined4 *)((sa->raw).Addr + 8) = uVar2;
+  *(undefined4 *)((sa->raw).Addr + 0xc) = uVar3;
+  return;
+}
+
+
+
+void syscall___SockaddrUnix__sockaddr
+               (syscall_SockaddrUnix *sa,void *~r0,syscall__Socklen ~r1,error ~r2)
+
+{
+  int iVar1;
+  uint8 *puVar2;
+  int i;
+  int n;
+  syscall__Socklen sl;
+  
+  iVar1 = (sa->Name).len;
+  if (0x6c < iVar1) {
+    return;
+  }
+  puVar2 = (sa->Name).str;
+  if ((iVar1 == 0x6c) && (*puVar2 != 0x40)) {
+    return;
+  }
+  (sa->raw).Family = 1;
+  for (i = 0; i < iVar1; i = i + 1) {
+    (sa->raw).Path[i] = puVar2[i];
+  }
+  if ((sa->raw).Path[0] == 0x40) {
+    (sa->raw).Path[0] = 0;
+  }
+  return;
+}
+
+
+
+void syscall___SockaddrLinklayer__sockaddr
+               (syscall_SockaddrLinklayer *sa,void *~r0,syscall__Socklen ~r1,error ~r2)
+
+{
+  if (0x7fffffff < (uint)sa->Ifindex) {
+    return;
+  }
+  (sa->raw).Family = 0x11;
+  (sa->raw).Protocol = sa->Protocol;
+  (sa->raw).Ifindex = (int32)sa->Ifindex;
+  (sa->raw).Hatype = sa->Hatype;
+  (sa->raw).Pkttype = sa->Pkttype;
+  (sa->raw).Halen = sa->Halen;
+  *(undefined8 *)(sa->raw).Addr = *(undefined8 *)sa->Addr;
+  return;
+}
+
+
+
+void syscall___SockaddrNetlink__sockaddr
+               (syscall_SockaddrNetlink *sa,void *~r0,syscall__Socklen ~r1,error ~r2)
+
+{
+  (sa->raw).Family = 0x10;
+  (sa->raw).Pad = sa->Pad;
+  (sa->raw).Pid = sa->Pid;
+  (sa->raw).Groups = sa->Groups;
+  return;
+}
+
+
+
+// Local variable pp:syscall.RawSockaddrNetlink *[RAX:8] conflicts with parameter, skipped.
+// Local variable pp_1:syscall.RawSockaddrLinklayer *[RAX:8] conflicts with parameter, skipped.
+// Local variable pp_2:syscall.RawSockaddrUnix *[RAX:8] conflicts with parameter, skipped.
+// Local variable pp_3:syscall.RawSockaddrInet4 *[RAX:8] conflicts with parameter, skipped.
+// Local variable pp_4:syscall.RawSockaddrInet6 *[RAX:8] conflicts with parameter, skipped.
+
+void syscall_anyToSockaddr(syscall_RawSockaddrAny *rsa,syscall_Sockaddr ~r0,error ~r1)
+
+{
+  ushort uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined8 *extraout_RAX;
+  syscall_SockaddrUnix *sa_2;
+  uint *extraout_RAX_00;
+  syscall_SockaddrInet4 *sa_3;
+  undefined2 *extraout_RAX_01;
+  syscall_SockaddrLinklayer *sa_1;
+  uint16 *extraout_RAX_02;
+  syscall_SockaddrNetlink *sa;
+  uint *extraout_RAX_03;
+  syscall_SockaddrInet6 *sa_4;
+  undefined8 extraout_RAX_04;
+  undefined8 extraout_RAX_05;
+  undefined8 uVar5;
+  int n;
+  undefined8 *puVar6;
+  void *in_RBX;
+  int8 *ptr;
+  undefined8 extraout_RBX;
+  void *extraout_RBX_00;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX_00;
+  }
+  uVar1 = (rsa->Addr).Family;
+  if (uVar1 < 3) {
+    if (uVar1 == 1) {
+      runtime_newobject((internal_abi_Type *)&DAT_00850560,in_RBX);
+      if ((rsa->Addr).Data[0] == 0) {
+        (rsa->Addr).Data[0] = 0x40;
+      }
+      for (n = 0; (n < 0x6c && ((rsa->Addr).Data[n] != 0)); n = n + 1) {
+      }
+      if (-1 < n) {
+        ptr = (rsa->Addr).Data;
+        if ((uint)n <= (uint)-(int)ptr) {
+          runtime_slicebytetostring((runtime_tmpBuf *)0x0,(uint8 *)ptr,n,in_stack_ffffffffffffffd8);
+          extraout_RAX[1] = extraout_RBX;
+          uVar5 = extraout_RAX_04;
+          puVar6 = extraout_RAX;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11 = extraout_RAX_05;
+            extraout_R11[1] = *puVar6;
+            uVar5 = extraout_RAX_05;
+          }
+          *puVar6 = uVar5;
+          return;
+        }
+                    // WARNING: Subroutine does not return
+        runtime_panicunsafeslicelen();
+      }
+                    // WARNING: Subroutine does not return
+      runtime_panicunsafeslicelen();
+    }
+    if (uVar1 == 2) {
+      runtime_newobject((internal_abi_Type *)&DAT_0085f200,in_RBX);
+      *extraout_RAX_00 = (uint)CONCAT11((rsa->Addr).Data[0],(rsa->Addr).Data[1]);
+      *(undefined4 *)(extraout_RAX_00 + 1) = *(undefined4 *)((rsa->Addr).Data + 2);
+      return;
+    }
+  }
+  else {
+    if (uVar1 == 10) {
+      runtime_newobject((internal_abi_Type *)&DAT_00875da0,in_RBX);
+      *extraout_RAX_03 = (uint)CONCAT11((rsa->Addr).Data[0],(rsa->Addr).Data[1]);
+      *(undefined4 *)(extraout_RAX_03 + 1) = *(undefined4 *)(rsa->Pad + 8);
+      uVar2 = *(undefined4 *)((rsa->Addr).Data + 10);
+      uVar3 = *(undefined4 *)rsa->Pad;
+      uVar4 = *(undefined4 *)(rsa->Pad + 4);
+      *(undefined4 *)((int)extraout_RAX_03 + 0xc) = *(undefined4 *)((rsa->Addr).Data + 6);
+      *(undefined4 *)(extraout_RAX_03 + 2) = uVar2;
+      *(undefined4 *)((int)extraout_RAX_03 + 0x14) = uVar3;
+      *(undefined4 *)(extraout_RAX_03 + 3) = uVar4;
+      return;
+    }
+    if (uVar1 == 0x10) {
+      runtime_newobject((internal_abi_Type *)&DAT_0087e360,in_RBX);
+      *extraout_RAX_02 = (rsa->Addr).Family;
+      extraout_RAX_02[1] = *(uint16 *)(rsa->Addr).Data;
+      *(undefined4 *)(extraout_RAX_02 + 2) = *(undefined4 *)((rsa->Addr).Data + 2);
+      *(undefined4 *)(extraout_RAX_02 + 4) = *(undefined4 *)((rsa->Addr).Data + 6);
+      return;
+    }
+    if (uVar1 == 0x11) {
+      runtime_newobject((internal_abi_Type *)&DAT_00889d00,in_RBX);
+      *extraout_RAX_01 = *(undefined2 *)(rsa->Addr).Data;
+      *(int *)(extraout_RAX_01 + 4) = (int)*(sdword *)((rsa->Addr).Data + 2);
+      extraout_RAX_01[8] = *(undefined2 *)((rsa->Addr).Data + 6);
+      *(int8 *)(extraout_RAX_01 + 9) = (rsa->Addr).Data[8];
+      *(int8 *)((int)extraout_RAX_01 + 0x13) = (rsa->Addr).Data[9];
+      *(undefined8 *)(extraout_RAX_01 + 10) = *(undefined8 *)((rsa->Addr).Data + 10);
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void syscall_Accept4(int fd,int flags,int nfd,syscall_Sockaddr sa,error err)
+
+{
+  int extraout_RCX;
+  int extraout_RBX;
+  int unaff_R14;
+  undefined auVar1 [16];
+  interface___ in_stack_ffffffffffffff38;
+  error in_stack_ffffffffffffff48;
+  dword local_a4;
+  int local_98;
+  syscall_RawSockaddrAny local_90;
+  
+  while (local_90.Pad + 0x38 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  auVar1 = FUN_0046cda6();
+  local_a4 = 0x70;
+  local_98 = syscall_accept4(auVar1._0_8_,(sockaddr *)&local_90,(socklen_t *)&local_a4,auVar1._8_8_)
+  ;
+  if (extraout_RBX != 0) {
+    return;
+  }
+  if (0x70 < local_a4) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff38);
+  }
+  syscall_anyToSockaddr
+            (&local_90,(syscall_Sockaddr)in_stack_ffffffffffffff38,in_stack_ffffffffffffff48);
+  if (extraout_RCX != 0) {
+    syscall_Close(local_98,(error)in_stack_ffffffffffffff38);
+  }
+  return;
+}
+
+
+
+void syscall_Getsockname(int fd,syscall_Sockaddr sa,error err)
+
+{
+  error ~r1;
+  int iVar1;
+  int unaff_R14;
+  syscall_Sockaddr in_stack_ffffffffffffff68;
+  undefined in_stack_ffffffffffffff78 [12];
+  undefined4 uVar2;
+  syscall_RawSockaddrAny local_78;
+  
+  while (local_78.Pad + 0x50 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar1 = FUN_0046cda6();
+  uVar2 = 0x70;
+  iVar1 = syscall_getsockname(iVar1,(sockaddr *)&local_78,(socklen_t *)&stack0xffffffffffffff84);
+  if (iVar1 != 0) {
+    return;
+  }
+  ~r1.data._4_4_ = uVar2;
+  ~r1._0_12_ = in_stack_ffffffffffffff78;
+  syscall_anyToSockaddr(&local_78,in_stack_ffffffffffffff68,~r1);
+  return;
+}
+
+
+
+void syscall_recvmsgRaw(int fd,__uint8 p,__uint8 oob,int flags,syscall_RawSockaddrAny *rsa,int n,
+                       int oobn,int recvflags,error err)
+
+{
+  int extraout_RAX;
+  int sockType;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int in_R10;
+  int unaff_R14;
+  syscall_Iovec in_XMM15;
+  error in_stack_ffffffffffffff80;
+  uint8 local_61;
+  int local_60;
+  int local_58;
+  syscall_Iovec iov;
+  syscall_Msghdr msg;
+  
+  while (msg.Iov = (syscall_Iovec *)in_XMM15.Len,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  msg.Pad_cgo_0 = in_XMM15.Base._4_4_;
+  msg.Namelen = 0x70;
+  iov = in_XMM15;
+  if (rsa != (syscall_RawSockaddrAny *)0x0) {
+    iov.Len = (uint64)rsa;
+    iov.Base = (uint8 *)flags;
+  }
+  local_61 = 0;
+  msg._40_16_ = (undefined  [16])in_XMM15;
+  msg.Control = (uint8 *)msg.Iov;
+  if (recvflags != 0) {
+    msg._48_8_ = msg.Iov;
+    if (rsa == (syscall_RawSockaddrAny *)0x0) {
+      local_60 = in_R10;
+      local_58 = fd;
+      syscall_GetsockoptInt(fd,1,3,n,in_stack_ffffffffffffff80);
+      if (extraout_RBX != 0) {
+        return;
+      }
+      fd = local_58;
+      in_R10 = local_60;
+      if (extraout_RAX != 2) {
+        iov.Len = 1;
+        iov.Base = &local_61;
+      }
+    }
+    msg.Controllen = recvflags;
+    msg.Control = (uint8 *)oobn;
+  }
+  msg.Iov = &iov;
+  msg.Iovlen = 1;
+  syscall_recvmsg(fd,(msghdr *)&msg,in_R10);
+  if (extraout_RBX_00 == 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void syscall_sendmsgN(int fd,__uint8 p,__uint8 oob,void *ptr,syscall__Socklen salen,int flags,int n,
+                     error err)
+
+{
+  int extraout_RAX;
+  int sockType;
+  undefined4 in_register_0000000c;
+  uint64 uVar1;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  uint64 in_R8;
+  int unaff_R14;
+  syscall_Iovec in_XMM15;
+  error in_stack_ffffffffffffff88;
+  uint8 local_59;
+  int local_58;
+  syscall_Iovec iov;
+  syscall_Msghdr msg;
+  
+  uVar1 = CONCAT44(in_register_0000000c,salen);
+  while (msg.Iov = (syscall_Iovec *)in_XMM15.Len,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  msg.Pad_cgo_0 = in_XMM15.Base._4_4_;
+  iov = in_XMM15;
+  if (uVar1 != 0) {
+    iov.Len = uVar1;
+    iov.Base = (uint8 *)ptr;
+  }
+  local_59 = 0;
+  msg._40_16_ = (undefined  [16])in_XMM15;
+  msg.Control = (uint8 *)msg.Iov;
+  if (in_R8 != 0) {
+    msg._48_8_ = msg.Iov;
+    if (uVar1 == 0) {
+      local_58 = fd;
+      syscall_GetsockoptInt(fd,1,3,flags,in_stack_ffffffffffffff88);
+      if (extraout_RBX != 0) {
+        return;
+      }
+      fd = local_58;
+      if (extraout_RAX != 2) {
+        iov.Len = 1;
+        iov.Base = &local_59;
+      }
+    }
+    msg.Controllen = in_R8;
+    msg.Control = (uint8 *)n;
+  }
+  msg.Iov = &iov;
+  msg.Iovlen = 1;
+  syscall_sendmsg(fd,(msghdr *)&msg,(int)p.array);
+  if (extraout_RBX_00 != 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void syscall_Accept(int fd,int nfd,syscall_Sockaddr sa,error err)
+
+{
+  int __fd;
+  int extraout_RCX;
+  int extraout_RBX;
+  int unaff_R14;
+  error in_stack_ffffffffffffff38;
+  error in_stack_ffffffffffffff48;
+  undefined4 local_a4;
+  int local_98;
+  syscall_RawSockaddrAny local_90;
+  
+  while (local_90.Pad + 0x38 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  __fd = FUN_0046cda6();
+  local_a4 = 0x70;
+  local_98 = syscall_accept4(__fd,(sockaddr *)&local_90,(socklen_t *)&local_a4,0);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  syscall_anyToSockaddr(&local_90,in_stack_ffffffffffffff38,in_stack_ffffffffffffff48);
+  if (extraout_RCX != 0) {
+    syscall_Close(local_98,in_stack_ffffffffffffff38);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void syscall___Iovec__SetLen(syscall_Iovec *iov,int length)
+
+{
+  iov->Len = length;
+  return;
+}
+
+
+
+void syscall_Errno_Error(syscall_Errno e,string ~r0)
+
+{
+  string ~r0_00;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((e < 0x85) && (syscall_errors[e].len != 0)) {
+    return;
+  }
+  internal_itoa_Itoa(e,in_stack_ffffffffffffffd0);
+  ~r0_00.len = unaff_RBP;
+  ~r0_00.str = in_stack_fffffffffffffff0;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_00);
+  return;
+}
+
+
+
+void syscall_Errno_Is(syscall_Errno e,error target,bool ~r0)
+
+{
+  char extraout_AL;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  char extraout_AL_02;
+  void *in_RCX;
+  undefined7 in_register_00000019;
+  runtime_itab *tab;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  undefined extraout_DIL_01;
+  undefined extraout_DIL_02;
+  int unaff_R14;
+  void *pvStack0000000000000018;
+  
+  tab = (runtime_itab *)CONCAT71(in_register_00000019,~r0);
+  pvStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL_02;
+  }
+  if ((internal_oserror_ErrPermission.tab == tab) &&
+     (runtime_ifaceeq(tab,pvStack0000000000000018,internal_oserror_ErrPermission.data,(bool)in_DIL),
+     in_DIL = extraout_DIL, extraout_AL != '\0')) {
+    return;
+  }
+  if ((internal_oserror_ErrExist.tab == tab) &&
+     (runtime_ifaceeq(tab,pvStack0000000000000018,internal_oserror_ErrExist.data,(bool)in_DIL),
+     in_DIL = extraout_DIL_00, extraout_AL_00 != '\0')) {
+    return;
+  }
+  if ((internal_oserror_ErrNotExist.tab == tab) &&
+     (runtime_ifaceeq(tab,pvStack0000000000000018,internal_oserror_ErrNotExist.data,(bool)in_DIL),
+     in_DIL = extraout_DIL_01, extraout_AL_01 != '\0')) {
+    return;
+  }
+  if ((errors_ErrUnsupported.tab == tab) &&
+     (runtime_ifaceeq(tab,pvStack0000000000000018,errors_ErrUnsupported.data,(bool)in_DIL),
+     extraout_AL_02 != '\0')) {
+    return;
+  }
+  return;
+}
+
+
+
+void syscall_Errno_Temporary(syscall_Errno e,bool ~r0)
+
+{
+  return;
+}
+
+
+
+void syscall_Errno_Timeout(syscall_Errno e,bool ~r0)
+
+{
+  return;
+}
+
+
+
+void syscall_Bind(int fd,syscall_Sockaddr sa,error err)
+
+{
+  sockaddr *__addr;
+  void *ptr;
+  undefined8 in_RCX;
+  int extraout_RCX;
+  syscall__Socklen n;
+  int in_RBX;
+  uint extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (**(code **)(in_RBX + 0x18))(in_RCX);
+  if (extraout_RCX != 0) {
+    return;
+  }
+  syscall_bind(fd,__addr,extraout_RBX & 0xffffffff);
+  return;
+}
+
+
+
+void syscall_Connect(int fd,syscall_Sockaddr sa,error err)
+
+{
+  sockaddr *__addr;
+  void *ptr;
+  undefined8 in_RCX;
+  int extraout_RCX;
+  syscall__Socklen n;
+  int in_RBX;
+  uint extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (**(code **)(in_RBX + 0x18))(in_RCX);
+  if (extraout_RCX != 0) {
+    return;
+  }
+  syscall_connect(fd,__addr,extraout_RBX & 0xffffffff);
+  return;
+}
+
+
+
+void syscall_Getpeername(int fd,syscall_Sockaddr sa,error err)
+
+{
+  error ~r1;
+  int iVar1;
+  int unaff_R14;
+  syscall_Sockaddr in_stack_ffffffffffffff68;
+  undefined in_stack_ffffffffffffff78 [12];
+  undefined4 uVar2;
+  syscall_RawSockaddrAny local_78;
+  
+  while (local_78.Pad + 0x50 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar1 = FUN_0046cda6();
+  uVar2 = 0x70;
+  iVar1 = syscall_getpeername(iVar1,(sockaddr *)&local_78,(socklen_t *)&stack0xffffffffffffff84);
+  if (iVar1 != 0) {
+    return;
+  }
+  ~r1.data._4_4_ = uVar2;
+  ~r1._0_12_ = in_stack_ffffffffffffff78;
+  syscall_anyToSockaddr(&local_78,in_stack_ffffffffffffff68,~r1);
+  return;
+}
+
+
+
+void syscall_GetsockoptInt(int fd,int level,int opt,int value,error err)
+
+{
+  int unaff_R14;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_c = 0;
+  local_10 = 4;
+  syscall_getsockopt(fd,level,opt,&local_c,(socklen_t *)&local_10);
+  return;
+}
+
+
+
+void syscall_Recvfrom(int fd,__uint8 p,int flags,int n,syscall_Sockaddr from,error err)
+
+{
+  int __fd;
+  size_t __n;
+  void *__buf;
+  int extraout_RBX;
+  sockaddr *__addr;
+  int in_RDI;
+  int unaff_R14;
+  syscall_Sockaddr in_stack_ffffffffffffff40;
+  error in_stack_ffffffffffffff50;
+  syscall_RawSockaddrAny local_78;
+  
+  while (local_78.Pad + 0x28 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  syscall_recvfrom(__fd,__buf,__n,in_RDI,__addr,(socklen_t *)&local_78);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  if (local_78.Addr.Family != 0) {
+    syscall_anyToSockaddr(&local_78,in_stack_ffffffffffffff40,in_stack_ffffffffffffff50);
+  }
+  return;
+}
+
+
+
+void syscall_recvfromInet4(int fd,__uint8 p,int flags,syscall_SockaddrInet4 *from,int n,error err)
+
+{
+  int __fd;
+  size_t __n;
+  void *__buf;
+  int extraout_RBX;
+  sockaddr *__addr;
+  uint *in_R8;
+  int unaff_R14;
+  uint *puStack0000000000000030;
+  undefined8 local_78;
+  undefined local_38 [48];
+  
+  puStack0000000000000030 = in_R8;
+  while (local_38 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  syscall_recvfrom(__fd,__buf,__n,n,__addr,&local_78);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  *puStack0000000000000030 = (uint)CONCAT11(local_78._2_1_,local_78._3_1_);
+  *(undefined4 *)(puStack0000000000000030 + 1) = local_78._4_4_;
+  return;
+}
+
+
+
+void syscall_recvfromInet6(int fd,__uint8 p,int flags,syscall_SockaddrInet6 *from,int n,error err)
+
+{
+  int __fd;
+  size_t __n;
+  void *__buf;
+  int extraout_RBX;
+  sockaddr *__addr;
+  uint *in_R8;
+  int unaff_R14;
+  uint *puStack0000000000000030;
+  undefined8 local_78;
+  undefined4 local_70;
+  undefined4 uStack_6c;
+  undefined4 uStack_68;
+  undefined4 uStack_64;
+  undefined4 local_60;
+  undefined local_38 [48];
+  
+  puStack0000000000000030 = in_R8;
+  while (local_38 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  syscall_recvfrom(__fd,__buf,__n,n,__addr,&local_78);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  *puStack0000000000000030 = (uint)CONCAT11(local_78._2_1_,local_78._3_1_);
+  *(undefined4 *)(puStack0000000000000030 + 1) = local_60;
+  *(undefined4 *)((int)puStack0000000000000030 + 0xc) = local_70;
+  *(undefined4 *)(puStack0000000000000030 + 2) = uStack_6c;
+  *(undefined4 *)((int)puStack0000000000000030 + 0x14) = uStack_68;
+  *(undefined4 *)(puStack0000000000000030 + 3) = uStack_64;
+  return;
+}
+
+
+
+void syscall_recvmsgInet4
+               (int fd,__uint8 p,__uint8 oob,int flags,syscall_SockaddrInet4 *from,int n,int oobn,
+               int recvflags,error err)
+
+{
+  int fd_00;
+  syscall_RawSockaddrAny *rsa;
+  int flags_00;
+  int oobn_00;
+  int extraout_RDI;
+  int recvflags_00;
+  uint *in_R11;
+  int unaff_R14;
+  uint *puStack0000000000000048;
+  __uint8 in_stack_ffffffffffffff40;
+  __uint8 in_stack_ffffffffffffff58;
+  error in_stack_ffffffffffffff70;
+  undefined local_76;
+  undefined local_75;
+  undefined4 local_74;
+  undefined local_40 [56];
+  
+  puStack0000000000000048 = in_R11;
+  while (local_40 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  syscall_recvmsgRaw(fd_00,in_stack_ffffffffffffff40,in_stack_ffffffffffffff58,flags_00,rsa,n,
+                     oobn_00,recvflags_00,in_stack_ffffffffffffff70);
+  if (extraout_RDI != 0) {
+    return;
+  }
+  *puStack0000000000000048 = (uint)CONCAT11(local_76,local_75);
+  *(undefined4 *)(puStack0000000000000048 + 1) = local_74;
+  return;
+}
+
+
+
+void syscall_recvmsgInet6
+               (int fd,__uint8 p,__uint8 oob,int flags,syscall_SockaddrInet6 *from,int n,int oobn,
+               int recvflags,error err)
+
+{
+  int fd_00;
+  syscall_RawSockaddrAny *rsa;
+  int flags_00;
+  int oobn_00;
+  int extraout_RDI;
+  int recvflags_00;
+  uint *in_R11;
+  int unaff_R14;
+  uint *puStack0000000000000048;
+  __uint8 in_stack_ffffffffffffff40;
+  __uint8 in_stack_ffffffffffffff58;
+  error in_stack_ffffffffffffff70;
+  undefined local_76;
+  undefined local_75;
+  undefined4 local_70;
+  undefined4 uStack_6c;
+  undefined4 uStack_68;
+  undefined4 uStack_64;
+  undefined4 local_60;
+  undefined local_40 [56];
+  
+  puStack0000000000000048 = in_R11;
+  while (local_40 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  syscall_recvmsgRaw(fd_00,in_stack_ffffffffffffff40,in_stack_ffffffffffffff58,flags_00,rsa,n,
+                     oobn_00,recvflags_00,in_stack_ffffffffffffff70);
+  if (extraout_RDI != 0) {
+    return;
+  }
+  *puStack0000000000000048 = (uint)CONCAT11(local_76,local_75);
+  *(undefined4 *)(puStack0000000000000048 + 1) = local_60;
+  *(undefined4 *)((int)puStack0000000000000048 + 0xc) = local_70;
+  *(undefined4 *)(puStack0000000000000048 + 2) = uStack_6c;
+  *(undefined4 *)((int)puStack0000000000000048 + 0x14) = uStack_68;
+  *(undefined4 *)(puStack0000000000000048 + 3) = uStack_64;
+  return;
+}
+
+
+
+void syscall_Recvmsg(int fd,__uint8 p,__uint8 oob,int flags,int n,int oobn,int recvflags,
+                    syscall_Sockaddr from,error err)
+
+{
+  __uint8 p_00;
+  error ~r1;
+  __uint8 oob_00;
+  int fd_00;
+  syscall_RawSockaddrAny *rsa;
+  int flags_00;
+  int oobn_00;
+  int recvflags_00;
+  int unaff_R14;
+  syscall_Sockaddr in_stack_ffffffffffffff28;
+  runtime_itab *in_stack_ffffffffffffff38;
+  uint8 *in_stack_ffffffffffffff40;
+  undefined in_stack_ffffffffffffff48 [16];
+  error in_stack_ffffffffffffff58;
+  syscall_RawSockaddrAny local_78;
+  
+  while (local_78.Pad + 0x10 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cda6();
+  p_00.cap = (int)in_stack_ffffffffffffff38;
+  p_00.array = (uint8 *)in_stack_ffffffffffffff28.tab;
+  p_00.len = (int)in_stack_ffffffffffffff28.data;
+  oob_00.len = in_stack_ffffffffffffff48._0_8_;
+  oob_00.cap = in_stack_ffffffffffffff48._8_8_;
+  oob_00.array = in_stack_ffffffffffffff40;
+  syscall_recvmsgRaw(fd_00,p_00,oob_00,flags_00,rsa,oobn,oobn_00,recvflags_00,
+                     in_stack_ffffffffffffff58);
+  if (local_78.Addr.Family != 0) {
+    ~r1.data = in_stack_ffffffffffffff40;
+    ~r1.tab = in_stack_ffffffffffffff38;
+    syscall_anyToSockaddr(&local_78,in_stack_ffffffffffffff28,~r1);
+  }
+  return;
+}
+
+
+
+void syscall_SendmsgN(int fd,__uint8 p,__uint8 oob,syscall_Sockaddr to,int flags,int n,error err)
+
+{
+  __uint8 p_00;
+  void *ptr;
+  syscall__Socklen salen;
+  int extraout_RCX;
+  int in_RSI;
+  int in_RDI;
+  int in_R10;
+  undefined8 in_R11;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffa8 [16];
+  __uint8 in_stack_ffffffffffffffb8;
+  error in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((in_R10 != 0) && ((**(code **)(in_R10 + 0x18))(in_R11), extraout_RCX != 0)) {
+    return;
+  }
+  p_00.len = in_stack_ffffffffffffffa8._0_8_;
+  p_00.cap = in_stack_ffffffffffffffa8._8_8_;
+  p_00.array = p.array;
+  syscall_sendmsgN(fd,p_00,in_stack_ffffffffffffffb8,(void *)flags,(syscall__Socklen)n,in_RDI,in_RSI
+                   ,in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+void syscall_sendmsgNInet4
+               (int fd,__uint8 p,__uint8 oob,syscall_SockaddrInet4 *to,int flags,int n,error err)
+
+{
+  __uint8 p_00;
+  undefined1 *puVar1;
+  int in_RSI;
+  syscall__Socklen salen;
+  uint *in_R10;
+  uint8 *in_R11;
+  void *ptr;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffb0 [16];
+  __uint8 in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (*in_R10 < 0x10000) {
+    *(undefined2 *)((int)in_R10 + 0xc) = 2;
+    *(char *)((int)in_R10 + 0xe) = (char)(*in_R10 >> 8);
+    *(char *)((int)in_R10 + 0xf) = (char)*in_R10;
+    *(undefined4 *)(in_R10 + 2) = *(undefined4 *)(in_R10 + 1);
+    puVar1 = (undefined1 *)0x0;
+  }
+  else {
+    puVar1 = go_itab_syscall_Errno_error;
+  }
+  if (puVar1 != (undefined1 *)0x0) {
+    return;
+  }
+  p_00.len = in_stack_ffffffffffffffb0._0_8_;
+  p_00.cap = in_stack_ffffffffffffffb0._8_8_;
+  p_00.array = in_R11;
+  syscall_sendmsgN(fd,p_00,in_stack_ffffffffffffffc0,to,(syscall__Socklen)flags,n,in_RSI,
+                   in_stack_ffffffffffffffd8);
+  return;
+}
+
+
+
+void syscall_sendmsgNInet6
+               (int fd,__uint8 p,__uint8 oob,syscall_SockaddrInet6 *to,int flags,int n,error err)
+
+{
+  __uint8 p_00;
+  undefined1 *puVar1;
+  int in_RSI;
+  syscall__Socklen salen;
+  uint *in_R10;
+  uint8 *in_R11;
+  void *ptr;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffb0 [16];
+  __uint8 in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (*in_R10 < 0x10000) {
+    *(undefined2 *)((int)in_R10 + 0x1c) = 10;
+    *(char *)((int)in_R10 + 0x1e) = (char)(*in_R10 >> 8);
+    *(char *)((int)in_R10 + 0x1f) = (char)*in_R10;
+    *(undefined4 *)((int)in_R10 + 0x34) = *(undefined4 *)(in_R10 + 1);
+    *(undefined4 *)((int)in_R10 + 0x24) = *(undefined4 *)((int)in_R10 + 0xc);
+    *(undefined4 *)(in_R10 + 5) = *(undefined4 *)(in_R10 + 2);
+    *(undefined4 *)((int)in_R10 + 0x2c) = *(undefined4 *)((int)in_R10 + 0x14);
+    *(undefined4 *)(in_R10 + 6) = *(undefined4 *)(in_R10 + 3);
+    puVar1 = (undefined1 *)0x0;
+  }
+  else {
+    puVar1 = go_itab_syscall_Errno_error;
+  }
+  if (puVar1 != (undefined1 *)0x0) {
+    return;
+  }
+  p_00.len = in_stack_ffffffffffffffb0._0_8_;
+  p_00.cap = in_stack_ffffffffffffffb0._8_8_;
+  p_00.array = in_R11;
+  syscall_sendmsgN(fd,p_00,in_stack_ffffffffffffffc0,to,(syscall__Socklen)flags,n,in_RSI,
+                   in_stack_ffffffffffffffd8);
+  return;
+}
+
+
+
+void syscall_sendtoInet4(int fd,__uint8 p,int flags,syscall_SockaddrInet4 *to,error err)
+
+{
+  undefined1 *puVar1;
+  sockaddr *in_RSI;
+  int in_RDI;
+  syscall__Socklen n;
+  uint *in_R8;
+  void *ptr;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (*in_R8 < 0x10000) {
+    *(undefined2 *)((int)in_R8 + 0xc) = 2;
+    *(char *)((int)in_R8 + 0xe) = (char)(*in_R8 >> 8);
+    *(char *)((int)in_R8 + 0xf) = (char)*in_R8;
+    *(undefined4 *)(in_R8 + 2) = *(undefined4 *)(in_R8 + 1);
+    ptr = (void *)((int)in_R8 + 0xc);
+    puVar1 = (undefined1 *)0x0;
+  }
+  else {
+    puVar1 = go_itab_syscall_Errno_error;
+    ptr = (void *)0x0;
+  }
+  if (puVar1 != (undefined1 *)0x0) {
+    return;
+  }
+  syscall_sendto(fd,(void *)flags,(size_t)to,in_RDI,in_RSI,(socklen_t)ptr);
+  return;
+}
+
+
+
+void syscall_sendtoInet6(int fd,__uint8 p,int flags,syscall_SockaddrInet6 *to,error err)
+
+{
+  undefined1 *puVar1;
+  sockaddr *in_RSI;
+  int in_RDI;
+  syscall__Socklen n;
+  uint *in_R8;
+  void *ptr;

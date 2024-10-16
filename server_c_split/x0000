@@ -1,0 +1,1000 @@
+typedef unsigned char   undefined;
+
+typedef unsigned char    bool;
+typedef unsigned char    byte;
+typedef unsigned int    dword;
+float4
+float8
+typedef long long    longlong;
+typedef unsigned int    qword;
+typedef char    sbyte;
+typedef int    sdword;
+typedef int    sqword;
+typedef short    sword;
+typedef unsigned char    uchar;
+typedef unsigned int    uint;
+typedef unsigned long    ulong;
+typedef unsigned long long    ulonglong;
+typedef unsigned char    undefined1;
+typedef unsigned short    undefined2;
+typedef unsigned int    undefined3;
+typedef unsigned int    undefined4;
+typedef unsigned int    undefined5;
+typedef unsigned int    undefined6;
+typedef unsigned int    undefined7;
+typedef unsigned int    undefined8;
+typedef unsigned short    ushort;
+typedef unsigned short    word;
+typedef struct stat stat, *Pstat;
+
+typedef ulong __dev_t;
+
+typedef ulong __ino_t;
+
+typedef ulong __nlink_t;
+
+typedef uint __mode_t;
+
+typedef uint __uid_t;
+
+typedef uint __gid_t;
+
+typedef long __off_t;
+
+typedef long __blksize_t;
+
+typedef long __blkcnt_t;
+
+typedef struct timespec timespec, *Ptimespec;
+
+typedef long __time_t;
+
+struct timespec {
+    __time_t tv_sec;
+    long tv_nsec;
+};
+
+struct stat {
+    __dev_t st_dev;
+    __ino_t st_ino;
+    __nlink_t st_nlink;
+    __mode_t st_mode;
+    __uid_t st_uid;
+    __gid_t st_gid;
+    int __pad0;
+    __dev_t st_rdev;
+    __off_t st_size;
+    __blksize_t st_blksize;
+    __blkcnt_t st_blocks;
+    struct timespec st_atim;
+    struct timespec st_mtim;
+    struct timespec st_ctim;
+    long __unused[3];
+};
+
+typedef struct hmac_ctx_st hmac_ctx_st, *Phmac_ctx_st;
+
+typedef struct hmac_ctx_st HMAC_CTX;
+
+typedef struct env_md_st env_md_st, *Penv_md_st;
+
+typedef struct env_md_ctx_st env_md_ctx_st, *Penv_md_ctx_st;
+
+typedef ulong size_t;
+
+typedef struct env_md_ctx_st EVP_MD_CTX;
+
+typedef struct env_md_st EVP_MD;
+
+typedef struct engine_st engine_st, *Pengine_st;
+
+typedef struct engine_st ENGINE;
+
+typedef struct evp_pkey_ctx_st evp_pkey_ctx_st, *Pevp_pkey_ctx_st;
+
+typedef struct evp_pkey_ctx_st EVP_PKEY_CTX;
+
+struct engine_st {
+};
+
+struct env_md_ctx_st {
+    EVP_MD *digest;
+    ENGINE *engine;
+    ulong flags;
+    void *md_data;
+    EVP_PKEY_CTX *pctx;
+    int (*update)(EVP_MD_CTX *, void *, size_t);
+};
+
+struct evp_pkey_ctx_st {
+};
+
+struct hmac_ctx_st {
+    EVP_MD *md;
+    EVP_MD_CTX md_ctx;
+    EVP_MD_CTX i_ctx;
+    EVP_MD_CTX o_ctx;
+    uint key_length;
+    uchar key[128];
+};
+
+struct env_md_st {
+    int type;
+    int pkey_type;
+    int md_size;
+    ulong flags;
+    int (*init)(EVP_MD_CTX *);
+    int (*update)(EVP_MD_CTX *, void *, size_t);
+    int (*final)(EVP_MD_CTX *, uchar *);
+    int (*copy)(EVP_MD_CTX *, EVP_MD_CTX *);
+    int (*cleanup)(EVP_MD_CTX *);
+    int (*sign)(int, uchar *, uint, uchar *, uint *, void *);
+    int (*verify)(int, uchar *, uint, uchar *, uint, void *);
+    int required_pkey_type[5];
+    int block_size;
+    int ctx_size;
+    int (*md_ctrl)(EVP_MD_CTX *, int, int, void *);
+};
+
+typedef struct cert_st cert_st, *Pcert_st;
+
+struct cert_st {
+};
+
+typedef struct srtp_protection_profile_st srtp_protection_profile_st, *Psrtp_protection_profile_st;
+
+struct srtp_protection_profile_st {
+    char *name;
+    ulong id;
+};
+
+typedef struct ssl_session_st ssl_session_st, *Pssl_session_st;
+
+typedef struct sess_cert_st sess_cert_st, *Psess_cert_st;
+
+typedef struct x509_st x509_st, *Px509_st;
+
+typedef struct x509_st X509;
+
+typedef struct ssl_cipher_st ssl_cipher_st, *Pssl_cipher_st;
+
+typedef struct ssl_cipher_st SSL_CIPHER;
+
+typedef struct stack_st_SSL_CIPHER stack_st_SSL_CIPHER, *Pstack_st_SSL_CIPHER;
+
+typedef struct crypto_ex_data_st crypto_ex_data_st, *Pcrypto_ex_data_st;
+
+typedef struct crypto_ex_data_st CRYPTO_EX_DATA;
+
+typedef struct x509_cinf_st x509_cinf_st, *Px509_cinf_st;
+
+typedef struct x509_cinf_st X509_CINF;
+
+typedef struct X509_algor_st X509_algor_st, *PX509_algor_st;
+
+typedef struct X509_algor_st X509_ALGOR;
+
+typedef struct asn1_string_st asn1_string_st, *Pasn1_string_st;
+
+typedef struct asn1_string_st ASN1_BIT_STRING;
+
+typedef struct asn1_string_st ASN1_OCTET_STRING;
+
+typedef struct AUTHORITY_KEYID_st AUTHORITY_KEYID_st, *PAUTHORITY_KEYID_st;
+
+typedef struct AUTHORITY_KEYID_st AUTHORITY_KEYID;
+
+typedef struct X509_POLICY_CACHE_st X509_POLICY_CACHE_st, *PX509_POLICY_CACHE_st;
+
+typedef struct X509_POLICY_CACHE_st X509_POLICY_CACHE;
+
+typedef struct stack_st_DIST_POINT stack_st_DIST_POINT, *Pstack_st_DIST_POINT;
+
+typedef struct stack_st_GENERAL_NAME stack_st_GENERAL_NAME, *Pstack_st_GENERAL_NAME;
+
+typedef struct NAME_CONSTRAINTS_st NAME_CONSTRAINTS_st, *PNAME_CONSTRAINTS_st;
+
+typedef struct NAME_CONSTRAINTS_st NAME_CONSTRAINTS;
+
+typedef struct stack_st_IPAddressFamily stack_st_IPAddressFamily, *Pstack_st_IPAddressFamily;
+
+typedef struct ASIdentifiers_st ASIdentifiers_st, *PASIdentifiers_st;
+
+typedef struct x509_cert_aux_st x509_cert_aux_st, *Px509_cert_aux_st;
+
+typedef struct x509_cert_aux_st X509_CERT_AUX;
+
+typedef struct stack_st stack_st, *Pstack_st;
+
+typedef struct stack_st _STACK;
+
+typedef struct stack_st_void stack_st_void, *Pstack_st_void;
+
+typedef struct asn1_string_st ASN1_INTEGER;
+
+typedef struct X509_name_st X509_name_st, *PX509_name_st;
+
+typedef struct X509_name_st X509_NAME;
+
+typedef struct X509_val_st X509_val_st, *PX509_val_st;
+
+typedef struct X509_val_st X509_VAL;
+
+typedef struct X509_pubkey_st X509_pubkey_st, *PX509_pubkey_st;
+
+typedef struct X509_pubkey_st X509_PUBKEY;
+
+typedef struct stack_st_X509_EXTENSION stack_st_X509_EXTENSION, *Pstack_st_X509_EXTENSION;
+
+typedef struct ASN1_ENCODING_st ASN1_ENCODING_st, *PASN1_ENCODING_st;
+
+typedef struct ASN1_ENCODING_st ASN1_ENCODING;
+
+typedef struct asn1_object_st asn1_object_st, *Pasn1_object_st;
+
+typedef struct asn1_object_st ASN1_OBJECT;
+
+typedef struct asn1_type_st asn1_type_st, *Pasn1_type_st;
+
+typedef struct asn1_type_st ASN1_TYPE;
+
+typedef struct stack_st_GENERAL_NAME GENERAL_NAMES;
+
+typedef struct stack_st_GENERAL_SUBTREE stack_st_GENERAL_SUBTREE, *Pstack_st_GENERAL_SUBTREE;
+
+typedef struct ASIdentifierChoice_st ASIdentifierChoice_st, *PASIdentifierChoice_st;
+
+typedef struct ASIdentifierChoice_st ASIdentifierChoice;
+
+typedef struct stack_st_ASN1_OBJECT stack_st_ASN1_OBJECT, *Pstack_st_ASN1_OBJECT;
+
+typedef struct asn1_string_st ASN1_UTF8STRING;
+
+typedef struct stack_st_X509_ALGOR stack_st_X509_ALGOR, *Pstack_st_X509_ALGOR;
+
+typedef struct stack_st_X509_NAME_ENTRY stack_st_X509_NAME_ENTRY, *Pstack_st_X509_NAME_ENTRY;
+
+typedef struct buf_mem_st buf_mem_st, *Pbuf_mem_st;
+
+typedef struct buf_mem_st BUF_MEM;
+
+typedef struct asn1_string_st ASN1_TIME;
+
+typedef struct evp_pkey_st evp_pkey_st, *Pevp_pkey_st;
+
+typedef struct evp_pkey_st EVP_PKEY;
+
+typedef union _union_257 _union_257, *P_union_257;
+
+typedef union _union_933 _union_933, *P_union_933;
+
+typedef struct evp_pkey_asn1_method_st evp_pkey_asn1_method_st, *Pevp_pkey_asn1_method_st;
+
+typedef struct evp_pkey_asn1_method_st EVP_PKEY_ASN1_METHOD;
+
+typedef union _union_271 _union_271, *P_union_271;
+
+typedef struct stack_st_X509_ATTRIBUTE stack_st_X509_ATTRIBUTE, *Pstack_st_X509_ATTRIBUTE;
+
+typedef int ASN1_BOOLEAN;
+
+typedef struct asn1_string_st ASN1_STRING;
+
+typedef struct asn1_string_st ASN1_ENUMERATED;
+
+typedef struct asn1_string_st ASN1_PRINTABLESTRING;
+
+typedef struct asn1_string_st ASN1_T61STRING;
+
+typedef struct asn1_string_st ASN1_IA5STRING;
+
+typedef struct asn1_string_st ASN1_GENERALSTRING;
+
+typedef struct asn1_string_st ASN1_BMPSTRING;
+
+typedef struct asn1_string_st ASN1_UNIVERSALSTRING;
+
+typedef struct asn1_string_st ASN1_UTCTIME;
+
+typedef struct asn1_string_st ASN1_GENERALIZEDTIME;
+
+typedef struct asn1_string_st ASN1_VISIBLESTRING;
+
+typedef struct ASN1_VALUE_st ASN1_VALUE_st, *PASN1_VALUE_st;
+
+typedef struct ASN1_VALUE_st ASN1_VALUE;
+
+typedef int ASN1_NULL;
+
+typedef struct stack_st_ASIdOrRange stack_st_ASIdOrRange, *Pstack_st_ASIdOrRange;
+
+typedef struct stack_st_ASIdOrRange ASIdOrRanges;
+
+typedef struct rsa_st rsa_st, *Prsa_st;
+
+typedef struct dsa_st dsa_st, *Pdsa_st;
+
+typedef struct dh_st dh_st, *Pdh_st;
+
+typedef struct ec_key_st ec_key_st, *Pec_key_st;
+
+typedef struct rsa_meth_st rsa_meth_st, *Prsa_meth_st;
+
+typedef struct rsa_st RSA;
+
+typedef struct bignum_st bignum_st, *Pbignum_st;
+
+typedef struct bignum_st BIGNUM;
+
+typedef struct bignum_ctx bignum_ctx, *Pbignum_ctx;
+
+typedef struct bignum_ctx BN_CTX;
+
+typedef struct bn_mont_ctx_st bn_mont_ctx_st, *Pbn_mont_ctx_st;
+
+typedef struct bn_mont_ctx_st BN_MONT_CTX;
+
+typedef struct bn_gencb_st bn_gencb_st, *Pbn_gencb_st;
+
+typedef struct bn_gencb_st BN_GENCB;
+
+typedef struct rsa_meth_st RSA_METHOD;
+
+typedef struct bn_blinding_st bn_blinding_st, *Pbn_blinding_st;
+
+typedef struct bn_blinding_st BN_BLINDING;
+
+typedef struct dsa_method dsa_method, *Pdsa_method;
+
+typedef struct DSA_SIG_st DSA_SIG_st, *PDSA_SIG_st;
+
+typedef struct DSA_SIG_st DSA_SIG;
+
+typedef struct dsa_st DSA;
+
+typedef struct dsa_method DSA_METHOD;
+
+typedef struct dh_method dh_method, *Pdh_method;
+
+typedef struct dh_st DH;
+
+typedef struct dh_method DH_METHOD;
+
+typedef union _union_175 _union_175, *P_union_175;
+
+struct crypto_ex_data_st {
+    struct stack_st_void *sk;
+    int dummy;
+};
+
+struct stack_st {
+    int num;
+    char **data;
+    int sorted;
+    int num_alloc;
+    int (*comp)(void *, void *);
+};
+
+struct stack_st_SSL_CIPHER {
+    _STACK stack;
+};
+
+struct ssl_cipher_st {
+    int valid;
+    char *name;
+    ulong id;
+    ulong algorithm_mkey;
+    ulong algorithm_auth;
+    ulong algorithm_enc;
+    ulong algorithm_mac;
+    ulong algorithm_ssl;
+    ulong algo_strength;
+    ulong algorithm2;
+    int strength_bits;
+    int alg_bits;
+};
+
+struct evp_pkey_asn1_method_st {
+};
+
+struct X509_pubkey_st {
+    X509_ALGOR *algor;
+    ASN1_BIT_STRING *public_key;
+    EVP_PKEY *pkey;
+};
+
+union _union_257 {
+    char *ptr;
+    ASN1_BOOLEAN boolean;
+    ASN1_STRING *asn1_string;
+    ASN1_OBJECT *object;
+    ASN1_INTEGER *integer;
+    ASN1_ENUMERATED *enumerated;
+    ASN1_BIT_STRING *bit_string;
+    ASN1_OCTET_STRING *octet_string;
+    ASN1_PRINTABLESTRING *printablestring;
+    ASN1_T61STRING *t61string;
+    ASN1_IA5STRING *ia5string;
+    ASN1_GENERALSTRING *generalstring;
+    ASN1_BMPSTRING *bmpstring;
+    ASN1_UNIVERSALSTRING *universalstring;
+    ASN1_UTCTIME *utctime;
+    ASN1_GENERALIZEDTIME *generalizedtime;
+    ASN1_VISIBLESTRING *visiblestring;
+    ASN1_UTF8STRING *utf8string;
+    ASN1_STRING *set;
+    ASN1_STRING *sequence;
+    ASN1_VALUE *asn1_value;
+};
+
+struct asn1_type_st {
+    int type;
+    union _union_257 value;
+};
+
+struct dh_method {
+    char *name;
+    int (*generate_key)(DH *);
+    int (*compute_key)(uchar *, BIGNUM *, DH *);
+    int (*bn_mod_exp)(DH *, BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BN_CTX *, BN_MONT_CTX *);
+    int (*init)(DH *);
+    int (*finish)(DH *);
+    int flags;
+    char *app_data;
+    int (*generate_params)(DH *, int, int, BN_GENCB *);
+};
+
+struct buf_mem_st {
+    size_t length;
+    char *data;
+    size_t max;
+};
+
+struct stack_st_X509_ATTRIBUTE {
+    _STACK stack;
+};
+
+struct NAME_CONSTRAINTS_st {
+    struct stack_st_GENERAL_SUBTREE *permittedSubtrees;
+    struct stack_st_GENERAL_SUBTREE *excludedSubtrees;
+};
+
+struct stack_st_void {
+    _STACK stack;
+};
+
+struct ASN1_VALUE_st {
+};
+
+struct x509_st {
+    X509_CINF *cert_info;
+    X509_ALGOR *sig_alg;
+    ASN1_BIT_STRING *signature;
+    int valid;
+    int references;
+    char *name;
+    CRYPTO_EX_DATA ex_data;
+    long ex_pathlen;
+    long ex_pcpathlen;
+    ulong ex_flags;
+    ulong ex_kusage;
+    ulong ex_xkusage;
+    ulong ex_nscert;
+    ASN1_OCTET_STRING *skid;
+    AUTHORITY_KEYID *akid;
+    X509_POLICY_CACHE *policy_cache;
+    struct stack_st_DIST_POINT *crldp;
+    struct stack_st_GENERAL_NAME *altname;
+    NAME_CONSTRAINTS *nc;
+    struct stack_st_IPAddressFamily *rfc3779_addr;
+    struct ASIdentifiers_st *rfc3779_asid;
+    uchar sha1_hash[20];
+    X509_CERT_AUX *aux;
+};
+
+struct dsa_st {
+    int pad;
+    long version;
+    int write_params;
+    BIGNUM *p;
+    BIGNUM *q;
+    BIGNUM *g;
+    BIGNUM *pub_key;
+    BIGNUM *priv_key;
+    BIGNUM *kinv;
+    BIGNUM *r;
+    int flags;
+    BN_MONT_CTX *method_mont_p;
+    int references;
+    CRYPTO_EX_DATA ex_data;
+    DSA_METHOD *meth;
+    ENGINE *engine;
+};
+
+struct stack_st_ASN1_OBJECT {
+    _STACK stack;
+};
+
+struct asn1_object_st {
+    char *sn;
+    char **ln;
+    int nid;
+    int length;
+    uchar *data;
+    int flags;
+};
+
+union _union_933 {
+    ASN1_NULL *inherit;
+    ASIdOrRanges *asIdsOrRanges;
+};
+
+struct ASN1_ENCODING_st {
+    uchar *enc;
+    long len;
+    int modified;
+};
+
+struct stack_st_GENERAL_SUBTREE {
+    _STACK stack;
+};
+
+struct bignum_st {
+    ulong *d;
+    int top;
+    int dmax;
+    int neg;
+    int flags;
+};
+
+struct rsa_meth_st {
+    char *name;
+    int (*rsa_pub_enc)(int, uchar *, uchar *, RSA *, int);
+    int (*rsa_pub_dec)(int, uchar *, uchar *, RSA *, int);
+    int (*rsa_priv_enc)(int, uchar *, uchar *, RSA *, int);
+    int (*rsa_priv_dec)(int, uchar *, uchar *, RSA *, int);
+    int (*rsa_mod_exp)(BIGNUM *, BIGNUM *, RSA *, BN_CTX *);
+    int (*bn_mod_exp)(BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BN_CTX *, BN_MONT_CTX *);
+    int (*init)(RSA *);
+    int (*finish)(RSA *);
+    int flags;
+    char *app_data;
+    int (*rsa_sign)(int, uchar *, uint, uchar *, uint *, RSA *);
+    int (*rsa_verify)(int, uchar *, uint, uchar *, uint, RSA *);
+    int (*rsa_keygen)(RSA *, int, BIGNUM *, BN_GENCB *);
+};
+
+union _union_175 {
+    void (*cb_1)(int, int, void *);
+    int (*cb_2)(int, int, BN_GENCB *);
+};
+
+struct asn1_string_st {
+    int length;
+    int type;
+    uchar *data;
+    long flags;
+};
+
+struct stack_st_GENERAL_NAME {
+    _STACK stack;
+};
+
+struct bn_gencb_st {
+    uint ver;
+    void *arg;
+    union _union_175 cb;
+};
+
+union _union_271 {
+    char *ptr;
+    struct rsa_st *rsa;
+    struct dsa_st *dsa;
+    struct dh_st *dh;
+    struct ec_key_st *ec;
+};
+
+struct x509_cinf_st {
+    ASN1_INTEGER *version;
+    ASN1_INTEGER *serialNumber;
+    X509_ALGOR *signature;
+    X509_NAME *issuer;
+    X509_VAL *validity;
+    X509_NAME *subject;
+    X509_PUBKEY *key;
+    ASN1_BIT_STRING *issuerUID;
+    ASN1_BIT_STRING *subjectUID;
+    struct stack_st_X509_EXTENSION *extensions;
+    ASN1_ENCODING enc;
+};
+
+struct rsa_st {
+    int pad;
+    long version;
+    RSA_METHOD *meth;
+    ENGINE *engine;
+    BIGNUM *n;
+    BIGNUM *e;
+    BIGNUM *d;
+    BIGNUM *p;
+    BIGNUM *q;
+    BIGNUM *dmp1;
+    BIGNUM *dmq1;
+    BIGNUM *iqmp;
+    CRYPTO_EX_DATA ex_data;
+    int references;
+    int flags;
+    BN_MONT_CTX *_method_mod_n;
+    BN_MONT_CTX *_method_mod_p;
+    BN_MONT_CTX *_method_mod_q;
+    char *bignum_data;
+    BN_BLINDING *blinding;
+    BN_BLINDING *mt_blinding;
+};
+
+struct stack_st_X509_ALGOR {
+    _STACK stack;
+};
+
+struct dh_st {
+    int pad;
+    int version;
+    BIGNUM *p;
+    BIGNUM *g;
+    long length;
+    BIGNUM *pub_key;
+    BIGNUM *priv_key;
+    int flags;
+    BN_MONT_CTX *method_mont_p;
+    BIGNUM *q;
+    BIGNUM *j;
+    uchar *seed;
+    int seedlen;
+    BIGNUM *counter;
+    int references;
+    CRYPTO_EX_DATA ex_data;
+    DH_METHOD *meth;
+    ENGINE *engine;
+};
+
+struct AUTHORITY_KEYID_st {
+    ASN1_OCTET_STRING *keyid;
+    GENERAL_NAMES *issuer;
+    ASN1_INTEGER *serial;
+};
+
+struct bn_blinding_st {
+};
+
+struct stack_st_DIST_POINT {
+    _STACK stack;
+};
+
+struct ec_key_st {
+};
+
+struct ASIdentifiers_st {
+    ASIdentifierChoice *asnum;
+    ASIdentifierChoice **rdi;
+};
+
+struct X509_name_st {
+    struct stack_st_X509_NAME_ENTRY *entries;
+    int modified;
+    BUF_MEM *bytes;
+    uchar *canon_enc;
+    int canon_enclen;
+};
+
+struct X509_algor_st {
+    ASN1_OBJECT *algorithm;
+    ASN1_TYPE *parameter;
+};
+
+struct ssl_session_st {
+    int ssl_version;
+    uint key_arg_length;
+    uchar key_arg[8];
+    int master_key_length;
+    uchar master_key[48];
+    uint session_id_length;
+    uchar session_id[32];
+    uint sid_ctx_length;
+    uchar sid_ctx[32];
+    uint krb5_client_princ_len;
+    uchar krb5_client_princ[256];
+    char *psk_identity_hint;
+    char *psk_identity;
+    int not_resumable;
+    struct sess_cert_st *sess_cert;
+    X509 *peer;
+    long verify_result;
+    int references;
+    long timeout;
+    long time;
+    uint compress_meth;
+    SSL_CIPHER *cipher;
+    ulong cipher_id;
+    struct stack_st_SSL_CIPHER *ciphers;
+    CRYPTO_EX_DATA ex_data;
+    struct ssl_session_st *prev;
+    struct ssl_session_st **next;
+    char *tlsext_hostname;
+    size_t tlsext_ecpointformatlist_length;
+    uchar *tlsext_ecpointformatlist;
+    size_t tlsext_ellipticcurvelist_length;
+    uchar *tlsext_ellipticcurvelist;
+    uchar *tlsext_tick;
+    size_t tlsext_ticklen;
+    long tlsext_tick_lifetime_hint;
+};
+
+struct X509_val_st {
+    ASN1_TIME *notBefore;
+    ASN1_TIME *notAfter;
+};
+
+struct bignum_ctx {
+};
+
+struct stack_st_X509_EXTENSION {
+    _STACK stack;
+};
+
+struct DSA_SIG_st {
+    BIGNUM *r;
+    BIGNUM *s;
+};
+
+struct X509_POLICY_CACHE_st {
+};
+
+struct stack_st_IPAddressFamily {
+    _STACK stack;
+};
+
+struct stack_st_ASIdOrRange {
+    _STACK stack;
+};
+
+struct x509_cert_aux_st {
+    struct stack_st_ASN1_OBJECT *trust;
+    struct stack_st_ASN1_OBJECT *reject;
+    ASN1_UTF8STRING *alias;
+    ASN1_OCTET_STRING *keyid;
+    struct stack_st_X509_ALGOR *other;
+};
+
+struct ASIdentifierChoice_st {
+    int type;
+    union _union_933 u;
+};
+
+struct stack_st_X509_NAME_ENTRY {
+    _STACK stack;
+};
+
+struct dsa_method {
+    char *name;
+    DSA_SIG * (*dsa_do_sign)(uchar *, int, DSA *);
+    int (*dsa_sign_setup)(DSA *, BN_CTX *, BIGNUM **, BIGNUM **);
+    int (*dsa_do_verify)(uchar *, int, DSA_SIG *, DSA *);
+    int (*dsa_mod_exp)(DSA *, BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BN_CTX *, BN_MONT_CTX *);
+    int (*bn_mod_exp)(DSA *, BIGNUM *, BIGNUM *, BIGNUM *, BIGNUM *, BN_CTX *, BN_MONT_CTX *);
+    int (*init)(DSA *);
+    int (*finish)(DSA *);
+    int flags;
+    char *app_data;
+    int (*dsa_paramgen)(DSA *, int, uchar *, int, int *, ulong *, BN_GENCB *);
+    int (*dsa_keygen)(DSA *);
+};
+
+struct evp_pkey_st {
+    int type;
+    int save_type;
+    int references;
+    EVP_PKEY_ASN1_METHOD *ameth;
+    ENGINE *engine;
+    union _union_271 pkey;
+    int save_parameters;
+    struct stack_st_X509_ATTRIBUTE *attributes;
+};
+
+struct sess_cert_st {
+};
+
+struct bn_mont_ctx_st {
+    int ri;
+    BIGNUM RR;
+    BIGNUM N;
+    BIGNUM Ni;
+    ulong n0[2];
+    int flags;
+};
+
+typedef struct lhash_st_SSL_SESSION lhash_st_SSL_SESSION, *Plhash_st_SSL_SESSION;
+
+struct lhash_st_SSL_SESSION {
+    int dummy;
+};
+
+typedef struct ssl_comp_st ssl_comp_st, *Pssl_comp_st;
+
+typedef struct comp_method_st comp_method_st, *Pcomp_method_st;
+
+typedef struct comp_ctx_st comp_ctx_st, *Pcomp_ctx_st;
+
+typedef struct comp_ctx_st COMP_CTX;
+
+typedef struct comp_method_st COMP_METHOD;
+
+struct ssl_comp_st {
+    int id;
+    char *name;
+    COMP_METHOD *method;
+};
+
+struct comp_ctx_st {
+    COMP_METHOD *meth;
+    ulong compress_in;
+    ulong compress_out;
+    ulong expand_in;
+    ulong expand_out;
+    CRYPTO_EX_DATA ex_data;
+};
+
+struct comp_method_st {
+    int type;
+    char *name;
+    int (*init)(COMP_CTX *);
+    void (*finish)(COMP_CTX *);
+    int (*compress)(COMP_CTX *, uchar *, uint, uchar *, uint);
+    int (*expand)(COMP_CTX *, uchar *, uint, uchar *, uint);
+    long (*ctrl)(void);
+    long (*callback_ctrl)(void);
+};
+
+typedef struct ssl3_buf_freelist_st ssl3_buf_freelist_st, *Pssl3_buf_freelist_st;
+
+struct ssl3_buf_freelist_st {
+};
+
+typedef struct stack_st_SRTP_PROTECTION_PROFILE stack_st_SRTP_PROTECTION_PROFILE, *Pstack_st_SRTP_PROTECTION_PROFILE;
+
+struct stack_st_SRTP_PROTECTION_PROFILE {
+    _STACK stack;
+};
+
+typedef struct ssl_comp_st SSL_COMP;
+
+typedef struct ssl3_enc_method ssl3_enc_method, *Pssl3_enc_method;
+
+struct ssl3_enc_method {
+};
+
+typedef struct ssl3_state_st ssl3_state_st, *Pssl3_state_st;
+
+typedef struct ssl3_buffer_st ssl3_buffer_st, *Pssl3_buffer_st;
+
+typedef struct ssl3_buffer_st SSL3_BUFFER;
+
+typedef struct ssl3_record_st ssl3_record_st, *Pssl3_record_st;
+
+typedef struct ssl3_record_st SSL3_RECORD;
+
+typedef struct bio_st bio_st, *Pbio_st;
+
+typedef struct bio_st BIO;
+
+typedef struct _struct_645 _struct_645, *P_struct_645;
+
+typedef struct bio_method_st bio_method_st, *Pbio_method_st;
+
+typedef void (bio_info_cb)(struct bio_st *, int, char *, int, long, long);
+
+typedef struct bio_method_st BIO_METHOD;
+
+typedef struct ec_key_st EC_KEY;
+
+typedef struct stack_st_X509_NAME stack_st_X509_NAME, *Pstack_st_X509_NAME;
+
+typedef struct evp_cipher_st evp_cipher_st, *Pevp_cipher_st;
+
+typedef struct evp_cipher_ctx_st evp_cipher_ctx_st, *Pevp_cipher_ctx_st;
+
+typedef struct evp_cipher_ctx_st EVP_CIPHER_CTX;
+
+typedef struct evp_cipher_st EVP_CIPHER;
+
+struct ssl3_record_st {
+    int type;
+    uint length;
+    uint off;
+    uchar *data;
+    uchar *input;
+    uchar *comp;
+    ulong epoch;
+    uchar seq_num[8];
+};
+
+struct evp_cipher_st {
+    int nid;
+    int block_size;
+    int key_len;
+    int iv_len;
+    ulong flags;
+    int (*init)(EVP_CIPHER_CTX *, uchar *, uchar *, int);
+    int (*do_cipher)(EVP_CIPHER_CTX *, uchar *, uchar *, size_t);
+    int (*cleanup)(EVP_CIPHER_CTX *);
+    int ctx_size;
+    int (*set_asn1_parameters)(EVP_CIPHER_CTX *, ASN1_TYPE *);
+    int (*get_asn1_parameters)(EVP_CIPHER_CTX *, ASN1_TYPE *);
+    int (*ctrl)(EVP_CIPHER_CTX *, int, int, void *);
+    void *app_data;
+};
+
+struct _struct_645 {
+    uchar cert_verify_md[128];
+    uchar finish_md[128];
+    int finish_md_len;
+    uchar peer_finish_md[128];
+    int peer_finish_md_len;
+    ulong message_size;
+    int message_type;
+    SSL_CIPHER *new_cipher;
+    DH *dh;
+    EC_KEY *ecdh;
+    int next_state;
+    int reuse_message;
+    int cert_req;
+    int ctype_num;
+    char ctype[9];
+    struct stack_st_X509_NAME *ca_names;
+    int use_rsa_tmp;
+    int key_block_length;
+    uchar *key_block;
+    EVP_CIPHER *new_sym_enc;
+    EVP_MD *new_hash;
+    int new_mac_pkey_type;
+    int new_mac_secret_size;
+    SSL_COMP *new_compression;
+    int cert_request;
+};
+
+struct ssl3_buffer_st {
+    uchar *buf;
+    size_t len;
+    int offset;
+    int left;
+};
+
+struct bio_st {
+    BIO_METHOD *method;
+    long (*callback)(struct bio_st *, int, char *, int, long, long);
+    char *cb_arg;
+    int init;
+    int shutdown;
+    int flags;
+    int retry_reason;
+    int num;
+    void *ptr;
+    struct bio_st *next_bio;
+    struct bio_st *prev_bio;
+    int references;
+    ulong num_read;
+    ulong num_write;
+    CRYPTO_EX_DATA ex_data;
+};
+
+struct ssl3_state_st {
+    long flags;
+    int delay_buf_pop_ret;
+    uchar read_sequence[8];
+    int read_mac_secret_size;
+    uchar read_mac_secret[64];
+    uchar write_sequence[8];
+    int write_mac_secret_size;
+    uchar write_mac_secret[64];
+    uchar server_random[32];
+    uchar client_random[32];
+    int need_empty_fragments;

@@ -1,0 +1,1000 @@
+        runtime_printuint(uStack0000000000000010);
+        runtime_printstring(in_stack_fffffffffffffed8);
+        runtime_printint(local_a8);
+        runtime_printnl();
+        runtime_printunlock();
+        local_38 = (prStack0000000000000008->searchAddr).a;
+        runtime_printlock();
+        runtime_printstring(in_stack_fffffffffffffed8);
+        runtime_printhex(local_38);
+        runtime_printstring(in_stack_fffffffffffffed8);
+        runtime_printint(local_50);
+        runtime_printnl();
+        runtime_printunlock();
+        local_68.a = runtime_levelShift[local_40];
+        local_70 = runtime_levelBits[local_40];
+        runtime_printlock();
+        runtime_printstring(in_stack_fffffffffffffed8);
+        runtime_printuint(local_68.a);
+        runtime_printstring(in_stack_fffffffffffffed8);
+        runtime_printuint(local_70);
+        runtime_printnl();
+        runtime_printunlock();
+        iVar4 = 0;
+        while (iVar4 < (int)local_48) {
+          uVar7 = *(uint *)(local_20 + iVar4 * 8);
+          uVar6 = (uint64)((dword)uVar7 & 0x1fffff);
+          if ((uVar7 & 0x8000000000000000) != 0) {
+            uVar6 = 0x200000;
+          }
+          if ((int)uVar7 < 0) {
+            uVar12 = 0x200000;
+            uVar8 = 0x200000;
+          }
+          else {
+            uVar12 = (uint64)((dword)(uVar7 >> 0x15) & 0x1fffff);
+            uVar8 = (uint64)((dword)(uVar7 >> 0x2a) & 0x1fffff);
+          }
+          j_2 = iVar4;
+          runtime_printlock();
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printint(local_40);
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printint(j_2 + local_50);
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printuint(uVar6);
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printuint(uVar12);
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printuint(uVar8);
+          runtime_printstring(in_stack_fffffffffffffed8);
+          runtime_printunlock();
+          iVar4 = j_2 + 1;
+        }
+                    // WARNING: Subroutine does not return
+        runtime_throw(in_stack_fffffffffffffed8);
+      }
+      return;
+    }
+    if (uVar10 <= (uint)j_1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    uVar11 = *(uint *)(iVar9 + j_1 * 8);
+    if (uVar11 == 0) {
+      size = 0;
+    }
+    else {
+      local_90 = j_1 + uVar5;
+      bVar3 = (byte)uVar1;
+      local_60 = (uint)((dword)uVar11 & 0x1fffff);
+      local_98 = j_1;
+      local_88 = base;
+      local_58 = uVar11;
+      (*(code *)local_18._0_8_)
+                ((-(uint)(runtime_levelShift[iVar4] < 0x40) &
+                 local_90 << ((byte)runtime_levelShift[iVar4] & 0x3f)) - 0x800000000000,
+                 (1 << (bVar3 & 0x3f) & -(uint)(uVar1 < 0x40)) << 0xd);
+      s = local_60;
+      if ((local_58 & 0x8000000000000000) != 0) {
+        s = 0x200000;
+      }
+      uVar11 = size + s;
+      prVar2 = prStack0000000000000008;
+      uVar7 = uStack0000000000000010;
+      iVar4 = local_40;
+      base = local_88;
+      uVar5 = local_50;
+      if (uStack0000000000000010 <= uVar11) {
+        if (size == 0) {
+          base = local_98 << (bVar3 & 0x3f) & -(uint)(uVar1 < 0x40);
+        }
+        goto LAB_00430804;
+      }
+      if ((int)local_58 < 0) {
+        uVar10 = 0x200000;
+      }
+      else {
+        uVar10 = (uint)((dword)(local_58 >> 0x15) & 0x1fffff);
+      }
+      if (uStack0000000000000010 <= uVar10) break;
+      uVar10 = local_48;
+      j_1 = local_98;
+      iVar9 = local_20;
+      if ((size == 0) || (uVar11 = 1 << (bVar3 & 0x3f) & -(uint)(uVar1 < 0x40), s < uVar11)) {
+        if ((int)local_58 < 0) {
+          size = 0x200000;
+        }
+        else {
+          size = (uint)((dword)(local_58 >> 0x2a) & 0x1fffff);
+        }
+        base = (-(uint)(uVar1 < 0x40) & local_98 + 1 << (bVar3 & 0x3f)) - size;
+      }
+      else {
+        size = size + uVar11;
+      }
+    }
+    j_1 = j_1 + 1;
+  } while( true );
+  iVar4 = local_40 + 1;
+  i = local_90;
+  lastSumIdx = local_90;
+  lastSum = local_58;
+  goto LAB_00430202;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime___pageAlloc__find_func1(runtime_offAddr addr,uintptr size)
+
+{
+  uint64 *puVar1;
+  uint64 v;
+  uint64 v_00;
+  struct___runtime_base_runtime_offAddr__runtime_bound_runtime_offAddr__ *_firstFree;
+  int in_RDX;
+  int unaff_R14;
+  uintptr uStack0000000000000010;
+  string in_stack_ffffffffffffffd0;
+  
+  uStack0000000000000010 = size;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  puVar1 = *(uint64 **)(in_RDX + 8);
+  if ((addr.a + 0x800000000000 < *puVar1 + 0x800000000000) ||
+     (puVar1[1] + 0x800000000000 < uStack0000000000000010 + addr.a + 0x7fffffffffff)) {
+    if ((*puVar1 + 0x800000000000 <= uStack0000000000000010 + addr.a + 0x7fffffffffff) &&
+       (addr.a + 0x800000000000 <= puVar1[1] + 0x800000000000)) {
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffd0);
+      runtime_printhex(addr.a);
+      runtime_printstring(in_stack_ffffffffffffffd0);
+      runtime_printuint(uStack0000000000000010);
+      runtime_printnl();
+      runtime_printunlock();
+      v = *puVar1;
+      v_00 = puVar1[1];
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffd0);
+      runtime_printhex(v);
+      runtime_printstring(in_stack_ffffffffffffffd0);
+      runtime_printhex(v_00);
+      runtime_printnl();
+      runtime_printunlock();
+                    // WARNING: Subroutine does not return
+      runtime_throw(in_stack_ffffffffffffffd0);
+    }
+  }
+  else {
+    *puVar1 = addr.a;
+    puVar1[1] = (uStack0000000000000010 + addr.a) - 1;
+  }
+  return;
+}
+
+
+
+void runtime___pageAlloc__alloc(runtime_pageAlloc *p,uintptr npages,uintptr addr,uintptr scav)
+
+{
+  runtime_offAddr ~r1;
+  uint64 v;
+  int extraout_RAX;
+  uint j;
+  uintptr extraout_RAX_00;
+  uint ~r0;
+  uintptr uVar1;
+  runtime_offAddr searchAddr;
+  int extraout_RBX;
+  uint searchIdx;
+  uintptr extraout_RBX_00;
+  uint uVar2;
+  uintptr base;
+  uint uVar3;
+  uintptr ~r0_00;
+  uintptr extraout_RDI;
+  uint max;
+  int unaff_R14;
+  runtime_pageAlloc *prStack0000000000000008;
+  uintptr uStack0000000000000010;
+  string in_stack_ffffffffffffffc0;
+  
+  prStack0000000000000008 = p;
+  uStack0000000000000010 = npages;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x18)) {
+    runtime_morestackc();
+  }
+  uVar1 = (prStack0000000000000008->searchAddr).a;
+  ~r1.a = uVar1 + 0x800000000000;
+  uVar2 = ~r1.a >> 0x16;
+  if (prStack0000000000000008->end <= uVar2) {
+    return;
+  }
+  ~r0 = (uint)(((dword)uVar1 & 0x3fffff) >> 0xd);
+  if (uStack0000000000000010 <= -(~r0 - 0x200)) {
+    if ((uint)prStack0000000000000008->summary[4].len <= uVar2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    uVar3 = prStack0000000000000008->summary[4].array[uVar2];
+    if ((int)uVar3 < 0) {
+      max = 0x200000;
+    }
+    else {
+      max = (uint)((dword)(uVar3 >> 0x15) & 0x1fffff);
+    }
+    if (uStack0000000000000010 <= max) {
+      uVar3 = ~r1.a >> 0x23;
+      if (0x1fff < uVar3) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      uVar2 = (uint)((dword)uVar2 & 0x1fff);
+      runtime___pallocBits__find
+                ((*prStack0000000000000008->chunks[uVar3])[uVar2].pallocBits,uStack0000000000000010,
+                 ~r0,uVar3,uVar2 * 0x80);
+      if (extraout_RAX == -1) {
+        runtime_printlock();
+        runtime_printstring(in_stack_ffffffffffffffc0);
+        runtime_printuint(max);
+        runtime_printstring(in_stack_ffffffffffffffc0);
+        runtime_printuint(uStack0000000000000010);
+        runtime_printnl();
+        runtime_printunlock();
+        v = (prStack0000000000000008->searchAddr).a;
+        runtime_printlock();
+        runtime_printstring(in_stack_ffffffffffffffc0);
+        runtime_printuint((uint)(((dword)v & 0x3fffff) >> 0xd));
+        runtime_printstring(in_stack_ffffffffffffffc0);
+        runtime_printhex(v);
+        runtime_printnl();
+        runtime_printunlock();
+                    // WARNING: Subroutine does not return
+        runtime_throw(in_stack_ffffffffffffffc0);
+      }
+      ~r0_00 = 0xffff800000000000;
+      base = (extraout_RAX * 0x2000 + (~r1.a & 0xffffffffffc00000)) - 0x800000000000;
+      uVar1 = ((~r1.a & 0xffffffffffc00000) + extraout_RBX * 0x2000) - 0x800000000000;
+      goto LAB_00430fa1;
+    }
+  }
+  runtime___pageAlloc__find(prStack0000000000000008,uStack0000000000000010,~r0,~r1);
+  uVar1 = extraout_RBX_00;
+  base = extraout_RAX_00;
+  ~r0_00 = extraout_RDI;
+  if (extraout_RAX_00 == 0) {
+    if (uStack0000000000000010 == 1) {
+      (prStack0000000000000008->searchAddr).a = runtime_maxOffAddr.a;
+    }
+    return;
+  }
+LAB_00430fa1:
+  runtime___pageAlloc__allocRange(prStack0000000000000008,base,uStack0000000000000010,~r0_00);
+  if ((prStack0000000000000008->searchAddr).a + 0x800000000000 < uVar1 + 0x800000000000) {
+    (prStack0000000000000008->searchAddr).a = uVar1;
+  }
+  return;
+}
+
+
+
+// Local variable b:runtime.offAddr[RBX:8] conflicts with parameter, skipped.
+
+void runtime___pageAlloc__free(void *__ptr)
+
+{
+  struct___runtime_index_runtime_scavengeIndex__runtime_releasedBg_runtime_internal_atomic_Uintptr__runtime_releasedEager_runtime_internal_atomic_Uintptr__
+  *psVar1;
+  uint uVar2;
+  dword dVar3;
+  uintptr in_RCX;
+  uintptr limit;
+  uint uVar4;
+  runtime_chunkIdx c;
+  runtime_pallocData *prVar5;
+  uintptr in_RBX;
+  uint uVar6;
+  dword dVar7;
+  uint uVar8;
+  uint uVar9;
+  uint i;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  runtime_pageAlloc *prStack0000000000000008;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  
+  prStack0000000000000008 = (runtime_pageAlloc *)__ptr;
+  uStack0000000000000018 = in_RCX;
+  uStack0000000000000010 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x18)) {
+    runtime_morestackc();
+  }
+  uVar2 = uStack0000000000000010 + 0x800000000000;
+  if (uVar2 < (prStack0000000000000008->searchAddr).a + 0x800000000000) {
+    (prStack0000000000000008->searchAddr).a = uStack0000000000000010;
+  }
+  dVar3 = (dword)uStack0000000000000010;
+  if (uStack0000000000000018 == 1) {
+    if (0x1fff < uVar2 >> 0x23) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    dVar7 = (dword)(uVar2 >> 0x16) & 0x1fff;
+    uVar6 = (uint)((dVar3 & 0x3fffff) >> 0x13);
+    if (7 < uVar6) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    (*prStack0000000000000008->chunks[uVar2 >> 0x23])[dVar7].pallocBits[uVar6] =
+         (*prStack0000000000000008->chunks[uVar2 >> 0x23])[dVar7].pallocBits[uVar6] &
+         ~(1 << ((dVar3 & 0x3fffff) >> 0xd & 0x3f));
+    runtime___scavengeIndex__free(&prStack0000000000000008->scav);
+  }
+  else {
+    uVar6 = uVar2 >> 0x16;
+    uVar8 = uStack0000000000000010 + uStack0000000000000018 * 0x2000 + 0x7fffffffffff;
+    uVar9 = uVar8 >> 0x16;
+    i = (uint)((dVar3 & 0x3fffff) >> 0xd);
+    uVar4 = (uint)((((sdword)(uStack0000000000000018 * 0x2000) + dVar3) - 1 & 0x3fffff) >> 0xd);
+    if (uVar9 == uVar6) {
+      if (0x1fff < uVar2 >> 0x23) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      psVar1 = &prStack0000000000000008->scav;
+      runtime___pageBits__clearRange
+                ((*prStack0000000000000008->chunks[uVar2 >> 0x23])[(dword)uVar6 & 0x1fff].pallocBits
+                 ,i,(uVar4 - i) + 1);
+      runtime___scavengeIndex__free(psVar1);
+    }
+    else {
+      if (0x1fff < uVar2 >> 0x23) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      psVar1 = &prStack0000000000000008->scav;
+      runtime___pageBits__clearRange
+                ((*prStack0000000000000008->chunks[uVar2 >> 0x23])[(dword)uVar6 & 0x1fff].pallocBits
+                 ,i,-(i - 0x200));
+      runtime___scavengeIndex__free(psVar1);
+      while (uVar6 = uVar6 + 1, uVar6 < uVar9) {
+        if (0x1fff < uVar6 >> 0xd) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        prVar5 = *prStack0000000000000008->chunks[uVar6 >> 0xd] + ((dword)uVar6 & 0x1fff);
+        *(undefined (*) [16])prVar5->pallocBits = in_XMM15;
+        *(undefined (*) [16])(prVar5->pallocBits + 2) = in_XMM15;
+        *(undefined (*) [16])(prVar5->pallocBits + 4) = in_XMM15;
+        *(undefined (*) [16])(prVar5->pallocBits + 6) = in_XMM15;
+        runtime___scavengeIndex__free(psVar1);
+      }
+      uVar8 = uVar8 >> 0x23;
+      if (0x1fff < uVar8) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      runtime___pageBits__clearRange
+                ((*prStack0000000000000008->chunks[uVar8])[(dword)uVar9 & 0x1fff].pallocBits,0,
+                 uVar4 + 1);
+      runtime___scavengeIndex__free(psVar1);
+    }
+  }
+  runtime___pageAlloc__update
+            (prStack0000000000000008,uStack0000000000000010,uStack0000000000000018,true,false);
+  return;
+}
+
+
+
+void runtime_mergeSummaries(__runtime_pallocSum sums,uint logMaxPagesPerSum,runtime_pallocSum ~r0)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint max;
+  uint end;
+  uint in_RDI;
+  uint start;
+  uint mi;
+  uint ei;
+  uint uVar3;
+  uint si;
+  uint uVar4;
+  int i;
+  
+  if (~r0 != 0) {
+    uVar3 = *(uint *)logMaxPagesPerSum;
+    if ((int)uVar3 < 0) {
+      start = 0x200000;
+      max = 0x200000;
+      end = 0x200000;
+    }
+    else {
+      start = (uint)((dword)uVar3 & 0x1fffff);
+      max = (uint)((dword)(uVar3 >> 0x15) & 0x1fffff);
+      end = (uint)((dword)(uVar3 >> 0x2a) & 0x1fffff);
+    }
+    iVar2 = 1;
+    while (iVar2 < (int)~r0) {
+      uVar3 = *(uint *)(logMaxPagesPerSum + iVar2 * 8);
+      if ((int)uVar3 < 0) {
+        si = 0x200000;
+        mi = 0x200000;
+        ei = 0x200000;
+      }
+      else {
+        si = (uint)((dword)uVar3 & 0x1fffff);
+        mi = (uint)((dword)(uVar3 >> 0x15) & 0x1fffff);
+        ei = (uint)((dword)(uVar3 >> 0x2a) & 0x1fffff);
+      }
+      uVar4 = iVar2 << ((byte)in_RDI & 0x3f);
+      iVar2 = iVar2 + 1;
+      uVar3 = 1 << ((byte)in_RDI & 0x3f) & -(uint)(in_RDI < 0x40);
+      uVar1 = uVar3 + end;
+      if (start == (uVar4 & -(uint)(in_RDI < 0x40))) {
+        start = start + si;
+      }
+      if (max < si + end) {
+        max = si + end;
+      }
+      if (max < mi) {
+        max = mi;
+      }
+      end = ei;
+      if (ei == uVar3) {
+        end = uVar1;
+      }
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime___pageAlloc__sysInit(runtime_pageAlloc *p,bool test)
+
+{
+  runtime_pallocData (*extraout_RAX) [8192];
+  void *r;
+  int l;
+  uint shift;
+  void *~r0;
+  uintptr b;
+  runtime_pageAlloc *prVar1;
+  uint uVar2;
+  int entries;
+  runtime_pageAlloc *extraout_RSI;
+  int extraout_RDI;
+  int iVar3;
+  int extraout_R8;
+  runtime_pallocData (*parVar4) [8192];
+  runtime_pallocData (*extraout_R9) [8192];
+  runtime_pallocData (**extraout_R11) [8192];
+  int unaff_R14;
+  runtime_pageAlloc *prStack0000000000000008;
+  string in_stack_ffffffffffffff98;
+  uint local_30;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined4 local_18;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  prStack0000000000000008 = p;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_30 = runtime_levelShift[0];
+  local_28 = (undefined4)runtime_levelShift[1];
+  uStack_24 = runtime_levelShift[1]._4_4_;
+  uStack_20 = (undefined4)runtime_levelShift[2];
+  uStack_1c = runtime_levelShift[2]._4_4_;
+  local_18 = (undefined4)runtime_levelShift[3];
+  uStack_14 = runtime_levelShift[3]._4_4_;
+  uStack_10 = (undefined4)runtime_levelShift[4];
+  uStack_c = runtime_levelShift[4]._4_4_;
+  l = 0;
+  while( true ) {
+    if (4 < l) {
+      return;
+    }
+    shift = (&local_30)[l] - 0x30;
+    ~r0 = (void *)-shift;
+    uVar2 = 1 << ((byte)~r0 & 0x3f) & -(uint)(~r0 < (void *)0x40);
+    runtime_sysReserve((void *)0x0,(runtime_physPageSize + uVar2 * 8) - 1 & -runtime_physPageSize,
+                       ~r0);
+    if (extraout_RAX == (runtime_pallocData (*) [8192])0x0) break;
+    iVar3 = l * 3;
+    prStack0000000000000008->summary[l].len = 0;
+    prStack0000000000000008->summary[l].cap = uVar2;
+    prVar1 = prStack0000000000000008;
+    parVar4 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_R9;
+      extraout_R11[1] = extraout_RSI->chunks[extraout_R8 + -0xf];
+      prVar1 = extraout_RSI;
+      l = extraout_RDI;
+      iVar3 = extraout_R8;
+      parVar4 = extraout_R9;
+    }
+    prVar1->chunks[iVar3 + -0xf] = parVar4;
+    l = l + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_throw(in_stack_ffffffffffffff98);
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime___pageAlloc__sysGrow(runtime_pageAlloc *p,uintptr base,uintptr limit)
+
+{
+  uint uVar1;
+  uint uVar2;
+  runtime_pallocSum *prVar3;
+  runtime_addrRange *prVar4;
+  runtime_addrRange ~r0;
+  runtime_addrRange ~r0_00;
+  uint extraout_RAX;
+  int inUseIndex;
+  int ~r0_01;
+  int extraout_RAX_00;
+  int needIdxBase;
+  uintptr baseOffset;
+  void *extraout_RAX_01;
+  void *extraout_RAX_02;
+  int extraout_RAX_03;
+  int level;
+  int ~r1;
+  uint extraout_RBX;
+  int needIdxLimit;
+  uintptr extraout_RBX_00;
+  uintptr extraout_RBX_01;
+  runtime_pageAlloc *extraout_RSI;
+  runtime_pageAlloc *~r0_02;
+  runtime_offAddr v;
+  runtime_offAddr rVar5;
+  int iVar6;
+  uintptr limitOffset;
+  uintptr uVar7;
+  int unaff_R14;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  runtime_addrRange in_stack_ffffffffffffff60;
+  runtime_addrRange in_stack_ffffffffffffff70;
+  runtime_offAddr in_stack_ffffffffffffff80;
+  runtime_offAddr in_stack_ffffffffffffff88;
+  int l;
+  undefined local_30 [16];
+  undefined local_20 [16];
+  undefined *local_10;
+  
+  uStack0000000000000018 = limit;
+  uStack0000000000000010 = base;
+  while (local_20 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((uStack0000000000000010 & 0x3fffff) == 0) && ((uStack0000000000000018 & 0x3fffff) == 0)) {
+    local_30._8_8_ = p;
+    local_30._0_8_ = runtime___pageAlloc__sysGrow_func2;
+    local_20._8_8_ = &PTR_runtime___pageAlloc__sysGrow_func1_008eb238;
+    local_20._0_8_ = runtime___pageAlloc__sysGrow_func3;
+    local_10 = local_30;
+    runtime___addrRanges__findSucc(&p->inUse,uStack0000000000000010,0x8eb238);
+    level = 0;
+    ~r0_02 = extraout_RSI;
+    while( true ) {
+      if (4 < level) {
+        runtime___scavengeIndex__sysGrow
+                  (&(p->scav).index,uStack0000000000000010,uStack0000000000000018,p->sysStat,
+                   (uintptr)~r0_02);
+        p->summaryMappedReady = p->summaryMappedReady + extraout_RAX_03;
+        return;
+      }
+      runtime_makeAddrRange(uStack0000000000000010,uStack0000000000000018,in_stack_ffffffffffffff60)
+      ;
+      runtime___pageAlloc__sysGrow_func1(level,in_stack_ffffffffffffff60,~r0_01,~r1);
+      if (p->summary[level].len < (int)extraout_RBX) {
+        if ((uint)p->summary[level].cap < extraout_RBX) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceAcap();
+        }
+        p->summary[level].len = extraout_RBX;
+      }
+      prVar3 = p->summary[level].array;
+      if (p->summary[level].len == 0) break;
+      v.a = (int)prVar3 + (extraout_RAX_00 << 3 & -runtime_physPageSize);
+      rVar5.a = (int)prVar3 +
+                ((runtime_physPageSize + extraout_RBX * 8) - 1 & -runtime_physPageSize);
+      if (0 < (int)extraout_RAX) {
+        uVar1 = extraout_RAX - 1;
+        if ((uint)(p->inUse).ranges.len <= uVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        prVar4 = (p->inUse).ranges.array;
+        (*(code *)local_20._0_8_)(level,prVar4[uVar1].base.a,prVar4[uVar1].limit.a);
+        ~r0.limit.a = v.a;
+        ~r0.base.a = rVar5.a;
+        in_stack_ffffffffffffff80.a = rVar5.a;
+        in_stack_ffffffffffffff88.a = v.a;
+        runtime_addrRange_subtract(in_stack_ffffffffffffff60,in_stack_ffffffffffffff70,~r0);
+        v.a = (uintptr)extraout_RAX_01;
+        rVar5.a = extraout_RBX_00;
+      }
+      uVar1 = (p->inUse).ranges.len;
+      if ((int)extraout_RAX < (int)uVar1) {
+        if (uVar1 <= extraout_RAX) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        prVar4 = (p->inUse).ranges.array;
+        (*(code *)local_20._0_8_)(level,prVar4[extraout_RAX].base.a,prVar4[extraout_RAX].limit.a);
+        ~r0_00.limit.a = in_stack_ffffffffffffff88.a;
+        ~r0_00.base.a = in_stack_ffffffffffffff80.a;
+        runtime_addrRange_subtract(in_stack_ffffffffffffff60,in_stack_ffffffffffffff70,~r0_00);
+        v.a = (uintptr)extraout_RAX_02;
+        rVar5.a = extraout_RBX_01;
+      }
+      uVar1 = v.a + 0x800000000000;
+      uVar2 = rVar5.a + 0x800000000000;
+      if (uVar1 < uVar2) {
+        iVar6 = rVar5.a - v.a;
+      }
+      else {
+        iVar6 = 0;
+      }
+      if (iVar6 != 0) {
+        if (uVar1 < uVar2) {
+          uVar7 = rVar5.a - v.a;
+        }
+        else {
+          uVar7 = 0;
+        }
+        runtime_sysMap((void *)v.a,uVar7,p->sysStat);
+        if (uVar1 < uVar2) {
+          uVar7 = rVar5.a - v.a;
+          iVar6 = rVar5.a - v.a;
+        }
+        else {
+          uVar7 = 0;
+          iVar6 = 0;
+        }
+        LOCK();
+        runtime_gcController.mappedReady.value = runtime_gcController.mappedReady.value + iVar6;
+        UNLOCK();
+        runtime_sysUsedOS((void *)v.a,uVar7);
+        if (uVar1 < uVar2) {
+          iVar6 = rVar5.a - v.a;
+        }
+        else {
+          iVar6 = 0;
+        }
+        p->summaryMappedReady = p->summaryMappedReady + iVar6;
+      }
+      level = level + 1;
+      ~r0_02 = p;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  runtime_printlock();
+  runtime_printstring((string)in_stack_ffffffffffffff60);
+  runtime_printhex(uStack0000000000000010);
+  runtime_printstring((string)in_stack_ffffffffffffff60);
+  runtime_printhex(uStack0000000000000018);
+  runtime_printnl();
+  runtime_printunlock();
+                    // WARNING: Subroutine does not return
+  runtime_throw((string)in_stack_ffffffffffffff60);
+}
+
+
+
+void runtime___pageAlloc__sysGrow_func3(int level,runtime_addrRange r,runtime_addrRange ~r0)
+
+{
+  code **ppcVar1;
+  int sumIdxBase;
+  int in_RDX;
+  int sumIdxLimit;
+  func_int__runtime_addrRange___int__int_ **addrRangeToSummaryRange;
+  func_int__int__int__runtime_addrRange **summaryRangeToSumAddrRange;
+  int unaff_R14;
+  undefined auVar2 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  ppcVar1 = *(code ***)(in_RDX + 0x10);
+  auVar2 = (***(code ***)(in_RDX + 8))();
+  (**ppcVar1)(level,auVar2._0_8_,auVar2._8_8_);
+  return;
+}
+
+
+
+void runtime___pageAlloc__sysGrow_func2
+               (int level,int sumIdxBase,int sumIdxLimit,runtime_addrRange ~r0)
+
+{
+  int in_RDX;
+  runtime_pageAlloc *p;
+  uintptr baseOffset;
+  uintptr limitOffset;
+  
+  if (4 < (uint)level) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (*(int *)(*(int *)(in_RDX + 8) + 8 + level * 0x18) != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void runtime___scavengeIndex__sysGrow
+               (runtime_scavengeIndex *s,uintptr base,uintptr limit,runtime_sysMemStat *sysStat,
+               uintptr ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  runtime_atomicScavChunkData *prVar3;
+  runtime_addrRange ~r0_00;
+  void *v;
+  uint uVar4;
+  int extraout_RBX;
+  int iVar5;
+  runtime_offAddr rVar6;
+  uintptr uVar7;
+  runtime_offAddr rVar8;
+  uintptr haveMin;
+  uintptr haveMax;
+  uint uVar9;
+  int unaff_R14;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  runtime_addrRange in_stack_ffffffffffffff90;
+  runtime_addrRange in_stack_ffffffffffffffa0;
+  
+  uStack0000000000000018 = limit;
+  uStack0000000000000010 = base;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((uStack0000000000000010 & 0x3fffff) != 0) || ((uStack0000000000000018 & 0x3fffff) != 0)) {
+    runtime_printlock();
+    runtime_printstring((string)in_stack_ffffffffffffff90);
+    runtime_printhex(uStack0000000000000010);
+    runtime_printstring((string)in_stack_ffffffffffffff90);
+    runtime_printhex(uStack0000000000000018);
+    runtime_printnl();
+    runtime_printunlock();
+                    // WARNING: Subroutine does not return
+    runtime_throw((string)in_stack_ffffffffffffff90);
+  }
+  uVar1 = (s->min).value;
+  uVar2 = (s->max).value;
+  uVar9 = -(runtime_physPageSize >> 3);
+  rVar8.a = ((uStack0000000000000018 + 0x800000000000 >> 0x16) + (runtime_physPageSize >> 3)) - 1 &
+            uVar9;
+  rVar6.a = uStack0000000000000010 + 0x800000000000 >> 0x16 & uVar9;
+  if (rVar8.a < uVar1) {
+    rVar8.a = uVar1;
+  }
+  if ((uVar2 != 0) && (uVar2 < rVar6.a)) {
+    rVar6.a = uVar2;
+  }
+  if ((s->chunks).len == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  prVar3 = (s->chunks).array;
+  runtime_makeAddrRange
+            ((uintptr)(prVar3 + uVar1),(uintptr)(prVar3 + uVar2),in_stack_ffffffffffffff90);
+  if ((s->chunks).len == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  prVar3 = (s->chunks).array;
+  runtime_makeAddrRange
+            ((uintptr)(prVar3 + rVar6.a),(uintptr)(prVar3 + rVar8.a),in_stack_ffffffffffffff90);
+  ~r0_00.limit.a = rVar8.a;
+  ~r0_00.base.a = rVar6.a;
+  runtime_addrRange_subtract(in_stack_ffffffffffffff90,in_stack_ffffffffffffffa0,~r0_00);
+  uVar9 = (int)v + 0x800000000000;
+  uVar4 = extraout_RBX + 0x800000000000;
+  if (uVar9 < uVar4) {
+    iVar5 = extraout_RBX - (int)v;
+  }
+  else {
+    iVar5 = 0;
+  }
+  if (iVar5 != 0) {
+    if (uVar9 < uVar4) {
+      uVar7 = extraout_RBX - (int)v;
+    }
+    else {
+      uVar7 = 0;
+    }
+    runtime_sysMap(v,uVar7,sysStat);
+    if (uVar9 < uVar4) {
+      uVar7 = extraout_RBX - (int)v;
+      iVar5 = extraout_RBX - (int)v;
+    }
+    else {
+      uVar7 = 0;
+      iVar5 = 0;
+    }
+    LOCK();
+    runtime_gcController.mappedReady.value = runtime_gcController.mappedReady.value + iVar5;
+    UNLOCK();
+    runtime_sysUsedOS(v,uVar7);
+    if ((uVar1 == 0) || (rVar6.a < uVar1)) {
+      LOCK();
+      (s->min).value = rVar6.a;
+      UNLOCK();
+    }
+    if ((uVar2 == 0) || (uVar2 < rVar8.a)) {
+      LOCK();
+      (s->max).value = rVar8.a;
+      UNLOCK();
+    }
+  }
+  return;
+}
+
+
+
+void runtime___scavengeIndex__sysInit
+               (runtime_scavengeIndex *s,bool test,runtime_sysMemStat *sysStat,uintptr ~r0)
+
+{
+  runtime_atomicScavChunkData *extraout_RAX;
+  void *r;
+  runtime_atomicScavChunkData *extraout_RSI;
+  runtime_atomicScavChunkData *prVar1;
+  runtime_scavengeIndex *extraout_RDI;
+  runtime_atomicScavChunkData **extraout_R11;
+  int unaff_R14;
+  runtime_scavengeIndex *prStack0000000000000008;
+  
+  prStack0000000000000008 = s;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_sysReserve((void *)0x0,0x20000000,sysStat);
+  (prStack0000000000000008->chunks).len = 0x4000000;
+  (prStack0000000000000008->chunks).cap = 0x4000000;
+  prVar1 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RSI;
+    extraout_R11[1] = (extraout_RDI->chunks).array;
+    prVar1 = extraout_RSI;
+    prStack0000000000000008 = extraout_RDI;
+  }
+  (prStack0000000000000008->chunks).array = prVar1;
+  return;
+}
+
+
+
+void runtime___pageCache__alloc(runtime_pageCache *c,uintptr npages,uintptr ~r0,uintptr ~r1)
+
+{
+  uint uVar1;
+  uintptr i;
+  uintptr extraout_RCX;
+  uint64 scav;
+  uint uVar2;
+  uintptr extraout_RDI;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0 = extraout_RCX;
+    ~r1 = extraout_RDI;
+  }
+  uVar1 = c->cache;
+  if (uVar1 != 0) {
+    if (npages == 1) {
+      uVar2 = 0;
+      if (uVar1 != 0) {
+        for (; (uVar1 >> uVar2 & 1) == 0; uVar2 = uVar2 + 1) {
+        }
+      }
+      uVar2 = ~(1 << ((byte)uVar2 & 0x3f) & -(uint)(uVar2 < 0x40));
+      c->cache = uVar1 & uVar2;
+      c->scav = c->scav & uVar2;
+      return;
+    }
+    runtime___pageCache__allocN(c,npages,~r0,~r1);
+    return;
+  }
+  return;
+}
+
+
+
+void runtime___pageCache__allocN(runtime_pageCache *c,uintptr npages,uintptr ~r0,uintptr ~r1)
+
+{
+  uint k;
+  uint p;
+  uint i;
+  uint uVar1;
+  uint64 mask;
+  uint64 uVar2;
+  int scav;
+  int unaff_R14;
+  runtime_pageCache *prStack0000000000000008;
+  
+  prStack0000000000000008 = c;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = npages - 1;
+  uVar2 = prStack0000000000000008->cache;
+  k = 1;
+  do {
+    if (uVar1 == 0) {
+LAB_00432218:
+      i = 0;
+      if (uVar2 != 0) {
+        for (; (uVar2 >> i & 1) == 0; i = i + 1) {
+        }
+      }
+      if (uVar2 == 0) {
+        i = 0x40;
+      }
+LAB_00432225:
+      if (0x3f < i) {
+        return;
+      }
+      uVar1 = (-(uint)(npages < 0x40) & 1 << ((byte)npages & 0x3f)) - 1 << ((byte)i & 0x3f);
+      if (runtime_x86HasPOPCNT == false) {
+        runtime_internal_sys_OnesCount64(prStack0000000000000008->scav & uVar1,npages);
+      }
+      uVar1 = ~uVar1;
+      prStack0000000000000008->cache = prStack0000000000000008->cache & uVar1;
+      prStack0000000000000008->scav = prStack0000000000000008->scav & uVar1;
+      return;
+    }
+    if (uVar1 <= k) {
+      uVar2 = uVar2 & uVar2 >> ((byte)uVar1 & 0x3f);
+      goto LAB_00432218;
+    }
+    uVar2 = uVar2 & uVar2 >> ((byte)k & 0x3f);
+    if (uVar2 == 0) {
+      i = 0x40;
+      goto LAB_00432225;
+    }
+    uVar1 = uVar1 - k;
+    k = k << 1;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+

@@ -1,0 +1,1000 @@
+  uint32 *extraout_RAX;
+  void *~r0;
+  undefined8 in_RDI;
+  undefined8 extraout_RDI;
+  int unaff_R14;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  google_golang_org_grpc_internal_transport_Stream *pgStack0000000000000010;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  pgStack0000000000000008 = t;
+  pgStack0000000000000010 = s;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  google_golang_org_grpc_internal_transport___inFlow__maybeAdjust
+            (pgStack0000000000000010->fc,n,n,(uint32)in_RDI);
+  if (extraout_EAX != 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00851dc0,~r0);
+    *extraout_RAX = pgStack0000000000000010->id;
+    extraout_RAX[1] = extraout_EAX;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffffd0,
+               true,in_stack_ffffffffffffffe0);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__updateWindow
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               google_golang_org_grpc_internal_transport_Stream *s,uint32 n)
+
+{
+  uint32 extraout_EAX;
+  uint32 w;
+  uint32 *extraout_RAX;
+  void *~r0;
+  int unaff_R14;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  google_golang_org_grpc_internal_transport_Stream *pgStack0000000000000010;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  pgStack0000000000000008 = t;
+  pgStack0000000000000010 = s;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  google_golang_org_grpc_internal_transport___inFlow__onRead(pgStack0000000000000010->fc,n,n);
+  if (extraout_EAX != 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00851dc0,~r0);
+    *extraout_RAX = pgStack0000000000000010->id;
+    extraout_RAX[1] = extraout_EAX;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffffd0,
+               true,in_stack_ffffffffffffffe0);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__updateFlowControl
+               (google_golang_org_grpc_internal_transport_http2Server *t,uint32 n)
+
+{
+  sync_Mutex *m;
+  sync_Mutex *psVar1;
+  google_golang_org_grpc_internal_transport_trInFlow *~r0;
+  uint32 d;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined2 *extraout_RAX_01;
+  undefined2 *extraout_RAX_02;
+  undefined2 *puVar2;
+  google_golang_org_grpc_internal_transport_Stream *s;
+  sdword sVar3;
+  int32 new;
+  runtime_hmap *h;
+  void *~r0_00;
+  void *~r0_01;
+  undefined8 *extraout_RDI;
+  undefined8 *puVar4;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  bool bVar5;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  uint32 uStack0000000000000010;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffff60;
+  error in_stack_ffffffffffffff70;
+  runtime_hiter local_68;
+  
+  pgStack0000000000000008 = t;
+  uStack0000000000000010 = n;
+  while (&local_68.offset <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  m = &pgStack0000000000000008->mu;
+  LOCK();
+  bVar5 = (pgStack0000000000000008->mu).state == 0;
+  if (bVar5) {
+    (pgStack0000000000000008->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar5) {
+    sync___Mutex__lockSlow(m);
+  }
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_0082d940,h,&local_68);
+  while (local_68.key != (void *)0x0) {
+                    // WARNING: Load size is inaccurate
+    google_golang_org_grpc_internal_transport___inFlow__newLimit
+              (*(google_golang_org_grpc_internal_transport_inFlow **)(*local_68.elem + 0x98),
+               uStack0000000000000010);
+    runtime_mapiternext(&local_68);
+  }
+  pgStack0000000000000008->initialWindowSize = uStack0000000000000010;
+  LOCK();
+  psVar1 = &pgStack0000000000000008->mu;
+  sVar3 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar3 = sVar3 + -1;
+  if (sVar3 != 0) {
+    sync___Mutex__unlockSlow(m,sVar3);
+  }
+  ~r0 = pgStack0000000000000008->fc;
+  sVar3 = uStack0000000000000010 - ~r0->limit;
+  ~r0->limit = uStack0000000000000010;
+  LOCK();
+  ~r0->effectiveWindowSize = uStack0000000000000010 - ~r0->unacked;
+  UNLOCK();
+  runtime_newobject((internal_abi_Type *)&DAT_00851dc0,~r0);
+  *(sdword *)(extraout_RAX + 4) = sVar3;
+  google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+            (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffff60,true,
+             in_stack_ffffffffffffff70);
+  runtime_newobject((internal_abi_Type *)&DAT_00841de0,~r0_00);
+  runtime_newobject((internal_abi_Type *)&DAT_00817c80,~r0_01);
+  *extraout_RAX_01 = 4;
+  *(uint32 *)(extraout_RAX_01 + 2) = uStack0000000000000010;
+  extraout_RAX_00[1] = 1;
+  extraout_RAX_00[2] = 1;
+  puVar2 = extraout_RAX_01;
+  puVar4 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_02;
+    extraout_R11[1] = *extraout_RDI;
+    puVar2 = extraout_RAX_02;
+    puVar4 = extraout_RDI;
+  }
+  *puVar4 = puVar2;
+  google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+            (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffff60,true,
+             in_stack_ffffffffffffff70);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handleData
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               golang_org_x_net_http2_DataFrame *f)
+
+{
+  uint32 uVar1;
+  undefined8 uVar2;
+  google_golang_org_grpc_internal_transport_trInFlow *pgVar3;
+  __uint8 p;
+  google_golang_org_grpc_internal_transport_recvMsg r;
+  google_golang_org_grpc_internal_transport_recvMsg r_00;
+  error ~r1;
+  error ~r1_00;
+  error ~r1_01;
+  error ~r1_02;
+  error err;
+  char extraout_AL;
+  bool sendBDPPing;
+  uint32 extraout_EAX;
+  uint32 w_2;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  google_golang_org_grpc_internal_transport_Stream *s_00;
+  google_golang_org_grpc_internal_transport_Stream *s;
+  char extraout_BL;
+  bool ok;
+  int extraout_RAX_01;
+  uint32 *extraout_RAX_02;
+  internal_abi_Type *have;
+  char cVar4;
+  undefined8 in_RCX;
+  undefined8 extraout_RCX;
+  void *~r0;
+  bytes_Buffer *b;
+  bytes_Buffer *buffer;
+  undefined ~r1_1;
+  undefined extraout_SIL;
+  uint32 size;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  undefined extraout_DIL_01;
+  undefined ~r0_1;
+  undefined8 in_RDI;
+  undefined8 extraout_RDI;
+  uint32 w;
+  uint32 w_1;
+  int unaff_R14;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  google_golang_org_grpc_internal_transport_Stream *pgStack0000000000000010;
+  interface___ in_stack_ffffffffffffff80;
+  runtime_itab *in_stack_ffffffffffffff90;
+  void *in_stack_ffffffffffffff98;
+  undefined7 in_stack_ffffffffffffffa0;
+  char in_stack_ffffffffffffffa7;
+  uint32 uStack_38;
+  
+  pgStack0000000000000008 = t;
+  pgStack0000000000000010 = (google_golang_org_grpc_internal_transport_Stream *)f;
+  while (~r0_1 = (undefined)in_RDI, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RCX = extraout_RCX;
+    in_RDI = extraout_RDI;
+  }
+  uVar2 = *(undefined8 *)pgStack0000000000000010;
+  uStack_38 = (uint32)((uint)uVar2 >> 0x20);
+  if (pgStack0000000000000008->bdpEst ==
+      (google_golang_org_grpc_internal_transport_bdpEstimator *)0x0) {
+    cVar4 = '\0';
+  }
+  else {
+    google_golang_org_grpc_internal_transport___bdpEstimator__add
+              (pgStack0000000000000008->bdpEst,uStack_38,SUB81(in_RCX,0),(bool)~r0_1);
+    cVar4 = extraout_AL;
+    ~r0_1 = extraout_DIL;
+  }
+  pgVar3 = pgStack0000000000000008->fc;
+  w = pgVar3->unacked + uStack_38;
+  pgVar3->unacked = w;
+  if (w < pgVar3->limit >> 2) {
+    LOCK();
+    pgVar3->effectiveWindowSize = pgVar3->limit - w;
+    UNLOCK();
+    w = 0;
+  }
+  else {
+    pgVar3->unacked = 0;
+    LOCK();
+    pgVar3->effectiveWindowSize = pgVar3->limit;
+    UNLOCK();
+  }
+  if (w != 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00851dc0,pgStack0000000000000010);
+    *(uint32 *)(extraout_RAX + 4) = w;
+    ~r1.data = in_stack_ffffffffffffff98;
+    ~r1.tab = in_stack_ffffffffffffff90;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (pgStack0000000000000008->controlBuf,(func___bool **)0x0,
+               (google_golang_org_grpc_internal_transport_cbItem)in_stack_ffffffffffffff80,true,~r1)
+    ;
+    ~r0_1 = extraout_DIL_00;
+    in_stack_ffffffffffffffa7 = cVar4;
+  }
+  ~r1_1 = (undefined)((uint)uVar2 >> 0x20);
+  if (cVar4 != '\0') {
+    pgVar3 = pgStack0000000000000008->fc;
+    uVar1 = pgVar3->unacked;
+    pgVar3->unacked = 0;
+    LOCK();
+    pgVar3->effectiveWindowSize = pgVar3->limit;
+    UNLOCK();
+    if (uVar1 != 0) {
+      runtime_newobject((internal_abi_Type *)&DAT_00851dc0,pgStack0000000000000010);
+      *(uint32 *)(extraout_RAX_00 + 4) = uVar1;
+      ~r1_00.data = in_stack_ffffffffffffff98;
+      ~r1_00.tab = in_stack_ffffffffffffff90;
+      google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+                (pgStack0000000000000008->controlBuf,(func___bool **)0x0,
+                 (google_golang_org_grpc_internal_transport_cbItem)in_stack_ffffffffffffff80,true,
+                 ~r1_00);
+    }
+    ~r1_01.data = in_stack_ffffffffffffff98;
+    ~r1_01.tab = in_stack_ffffffffffffff90;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (pgStack0000000000000008->controlBuf,(func___bool **)0x0,
+               (google_golang_org_grpc_internal_transport_cbItem)in_stack_ffffffffffffff80,false,
+               ~r1_01);
+    ~r1_1 = extraout_SIL;
+    ~r0_1 = extraout_DIL_01;
+  }
+  google_golang_org_grpc_internal_transport___http2Server__getStream
+            (pgStack0000000000000008,(golang_org_x_net_http2_Frame)in_stack_ffffffffffffff80,
+             (google_golang_org_grpc_internal_transport_Stream *)
+             go_itab__golang_org_x_net_http2_DataFrame_golang_org_x_net_http2_Frame,
+             pgStack0000000000000010,(bool)~r0_1,(bool)~r1_1);
+  if (extraout_BL == '\0') {
+    return;
+  }
+  if (s_00->state == 2) {
+    google_golang_org_grpc_internal_transport___http2Server__closeStream
+              (pgStack0000000000000008,s_00,true,5,false);
+    return;
+  }
+  if (uStack_38 != 0) {
+    google_golang_org_grpc_internal_transport___inFlow__onData
+              (s_00->fc,uStack_38,(error)in_stack_ffffffffffffff80);
+    if (extraout_RAX_01 != 0) {
+      google_golang_org_grpc_internal_transport___http2Server__closeStream
+                (pgStack0000000000000008,s_00,true,3,false);
+      return;
+    }
+    if ((*(uint *)pgStack0000000000000010 & 0x80000) != 0) {
+      if (*(char *)&pgStack0000000000000010->id == '\0') {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffff80);
+      }
+      google_golang_org_grpc_internal_transport___inFlow__onRead
+                (s_00->fc,uStack_38 - (sdword)pgStack0000000000000010->ct,(uint32)s_00);
+      if (extraout_EAX != 0) {
+        runtime_newobject((internal_abi_Type *)&DAT_00851dc0,~r0);
+        *extraout_RAX_02 = s_00->id;
+        extraout_RAX_02[1] = extraout_EAX;
+        ~r1_02.data = in_stack_ffffffffffffff98;
+        ~r1_02.tab = in_stack_ffffffffffffff90;
+        google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+                  (pgStack0000000000000008->controlBuf,(func___bool **)0x0,
+                   (google_golang_org_grpc_internal_transport_cbItem)in_stack_ffffffffffffff80,true,
+                   ~r1_02);
+      }
+    }
+    if (*(char *)&pgStack0000000000000010->id == '\0') {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff80);
+    }
+    if (pgStack0000000000000010->ct != (google_golang_org_grpc_internal_transport_http2Client *)0x0)
+    {
+      sync___Pool__Get(&pgStack0000000000000008->bufferPool->pool,in_stack_ffffffffffffff80);
+      if (have != (internal_abi_Type *)&DAT_0089f320) {
+                    // WARNING: Subroutine does not return
+        runtime_panicdottypeE
+                  (have,(internal_abi_Type *)&DAT_0089f320,(internal_abi_Type *)&DAT_00821120);
+      }
+      (b->buf).len = 0;
+      b->off = 0;
+      b->lastRead = 0;
+      if (*(char *)&pgStack0000000000000010->id == '\0') {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffff80);
+      }
+      p.cap = (int)in_stack_ffffffffffffff90;
+      p.array = (uint8 *)in_stack_ffffffffffffff80._type;
+      p.len = (int)in_stack_ffffffffffffff80.data;
+      err.data._0_7_ = in_stack_ffffffffffffffa0;
+      err.tab = (runtime_itab *)in_stack_ffffffffffffff98;
+      err.data._7_1_ = in_stack_ffffffffffffffa7;
+      bytes___Buffer__Write(b,p,(int)(pgStack0000000000000010->st).data,err);
+      r.err.data = in_stack_ffffffffffffff90;
+      r.buffer = (bytes_Buffer *)in_stack_ffffffffffffff80._type;
+      r.err.tab = (runtime_itab *)in_stack_ffffffffffffff80.data;
+      google_golang_org_grpc_internal_transport___recvBuffer__put(s_00->buf,r);
+    }
+  }
+  if ((*(byte *)((int)&pgStack0000000000000010->id + 2) & 1) != 0) {
+    LOCK();
+    if (s_00->state == 0) {
+      s_00->state = 2;
+    }
+    UNLOCK();
+    r_00.err.data = in_stack_ffffffffffffff90;
+    r_00.buffer = (bytes_Buffer *)in_stack_ffffffffffffff80._type;
+    r_00.err.tab = (runtime_itab *)in_stack_ffffffffffffff80.data;
+    google_golang_org_grpc_internal_transport___recvBuffer__put(s_00->buf,r_00);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handleRSTStream
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               golang_org_x_net_http2_RSTStreamFrame *f)
+
+{
+  undefined4 uVar1;
+  google_golang_org_grpc_internal_transport_Stream *s_00;
+  google_golang_org_grpc_internal_transport_Stream *s;
+  bool ok;
+  undefined4 *extraout_RAX;
+  void *~r0;
+  undefined8 in_RSI;
+  undefined8 extraout_RSI;
+  undefined8 in_RDI;
+  undefined8 extraout_RDI;
+  int unaff_R14;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  google_golang_org_grpc_internal_transport_Stream *pgStack0000000000000010;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd0;
+  
+  pgStack0000000000000008 = t;
+  pgStack0000000000000010 = (google_golang_org_grpc_internal_transport_Stream *)f;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    in_RDI = extraout_RDI;
+  }
+  google_golang_org_grpc_internal_transport___http2Server__getStream
+            (pgStack0000000000000008,in_stack_ffffffffffffffc0,
+             (google_golang_org_grpc_internal_transport_Stream *)
+             go_itab__golang_org_x_net_http2_RSTStreamFrame_golang_org_x_net_http2_Frame,
+             pgStack0000000000000010,SUB81(in_RDI,0),SUB81(in_RSI,0));
+  ok = SUB81(~r0,0);
+  if (ok != false) {
+    google_golang_org_grpc_internal_transport___http2Server__closeStream
+              (pgStack0000000000000008,s_00,false,0,false);
+    return;
+  }
+  uVar1 = *(undefined4 *)&(pgStack0000000000000010->st).tab;
+  runtime_newobject((internal_abi_Type *)&DAT_00876820,~r0);
+  *extraout_RAX = uVar1;
+  *(undefined *)(extraout_RAX + 1) = 0;
+  extraout_RAX[2] = 0;
+  *(undefined ***)(extraout_RAX + 4) =
+       &PTR_google_golang_org_grpc_internal_transport___http2Server__handleRSTStream_func1_008eb868;
+  google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+            (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffffc0,true,
+             in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handleSettings
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               golang_org_x_net_http2_SettingsFrame *f)
+
+{
+  golang_org_x_net_http2_Setting **extraout_RAX;
+  golang_org_x_net_http2_Setting **extraout_RAX_00;
+  golang_org_x_net_http2_Setting **ppgVar1;
+  void *~r0;
+  golang_org_x_net_http2_Setting *extraout_RSI;
+  golang_org_x_net_http2_Setting **extraout_R11;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffff78;
+  error in_stack_ffffffffffffff88;
+  undefined local_68 [16];
+  __func__ updateFuncs;
+  __golang_org_x_net_http2_Setting ss;
+  undefined local_28 [16];
+  undefined local_18 [16];
+  
+  pgStack0000000000000008 = t;
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((f->FrameHeader).Flags & 1) == 0) {
+    ss.cap = 0;
+    updateFuncs.cap = 0;
+    local_28._8_8_ = &updateFuncs;
+    local_28._0_8_ = google_golang_org_grpc_internal_transport___http2Server__handleSettings_func1;
+    local_18._8_8_ = &ss;
+    local_18._0_8_ = pgStack0000000000000008;
+    ss._0_16_ = in_XMM15;
+    golang_org_x_net_http2___SettingsFrame__ForeachSetting
+              (f,(func_golang_org_x_net_http2_Setting__error **)local_28,in_stack_ffffffffffffff78);
+    runtime_newobject((internal_abi_Type *)&DAT_00841ce0,~r0);
+    extraout_RAX[1] = (golang_org_x_net_http2_Setting *)ss.len;
+    extraout_RAX[2] = (golang_org_x_net_http2_Setting *)ss.cap;
+    ppgVar1 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RSI;
+      ppgVar1 = extraout_RAX_00;
+      ss.array = extraout_RSI;
+    }
+    *ppgVar1 = ss.array;
+    local_68._8_8_ = &updateFuncs;
+    local_68._0_8_ = google_golang_org_grpc_internal_transport___http2Server__handleSettings_func2;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (pgStack0000000000000008->controlBuf,(func___bool **)local_68,
+               in_stack_ffffffffffffff78,true,in_stack_ffffffffffffff88);
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___http2Server__handleSettings_func2(bool ~r0)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  __func__ *_updateFuncs;
+  int in_RDX;
+  func__ **f;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  iVar1 = **(int **)(in_RDX + 8);
+  iVar2 = (*(int **)(in_RDX + 8))[1];
+  for (iVar3 = 0; iVar3 < iVar2; iVar3 = iVar3 + 1) {
+    (***(code ***)(iVar1 + iVar3 * 8))();
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport___http2Server__handleSettings_func1
+               (golang_org_x_net_http2_Setting s,error ~r0)
+
+{
+  code *pcVar1;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  code **extraout_RAX_01;
+  code **extraout_RAX_02;
+  void *extraout_RAX_03;
+  void *extraout_RAX_04;
+  void *pvVar2;
+  code **extraout_RAX_05;
+  code **ppcVar3;
+  void *extraout_RCX;
+  google_golang_org_grpc_internal_transport_http2Server *t;
+  void *extraout_RCX_00;
+  int in_RDX;
+  __golang_org_x_net_http2_Setting *_ss;
+  void **ppvVar4;
+  void *in_RBX;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  void *extraout_RBX_03;
+  __func__ *_updateFuncs;
+  void *pvVar5;
+  void *extraout_R8;
+  void **extraout_R11;
+  code **extraout_R11_00;
+  void **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffff90;
+  
+  while( true ) {
+    if (*(undefined **)(unaff_R14 + 0x10) < &stack0x00000000) break;
+    runtime_morestack();
+    s = (golang_org_x_net_http2_Setting)((uint)s & 0xffff);
+    in_RBX = (void *)((uint)in_RBX & 0xffffffff);
+  }
+  ppvVar4 = *(void ***)(in_RDX + 8);
+  if (s.ID == 6) {
+    pcVar1 = *(code **)(in_RDX + 0x10);
+    runtime_newobject((internal_abi_Type *)&DAT_0085a4a0,in_RBX);
+    *extraout_RAX_01 =
+         google_golang_org_grpc_internal_transport___http2Server__handleSettings_func1_1;
+    ppcVar3 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = pcVar1;
+      ppcVar3 = extraout_RAX_02;
+    }
+    ppcVar3[1] = pcVar1;
+    *(undefined2 *)(ppcVar3 + 2) = 6;
+    *(sdword *)((int)ppcVar3 + 0x14) = (sdword)in_RBX;
+    pvVar5 = (void *)((int)ppvVar4[1] + 1);
+    pvVar2 = *ppvVar4;
+    if (ppvVar4[2] < pvVar5) {
+      runtime_growslice(pvVar2,(int)pvVar5,(int)ppvVar4[2],1,(internal_abi_Type *)&DAT_007ffee0,
+                        in_stack_ffffffffffffff90);
+      ppvVar4[2] = extraout_RCX_00;
+      pvVar2 = extraout_RAX_03;
+      pvVar5 = extraout_RBX_01;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_04;
+        extraout_R11_01[1] = *ppvVar4;
+        pvVar2 = extraout_RAX_04;
+        pvVar5 = extraout_RBX_02;
+      }
+      *ppvVar4 = pvVar2;
+    }
+    ppvVar4[1] = pvVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = extraout_RAX_05;
+      extraout_R11_02[1] = *(undefined8 *)((int)extraout_R8 + (int)extraout_RBX_03 * 8 + -8);
+      ppcVar3 = extraout_RAX_05;
+      pvVar5 = extraout_RBX_03;
+      pvVar2 = extraout_R8;
+    }
+    *(code ***)((int)pvVar2 + (int)pvVar5 * 8 + -8) = ppcVar3;
+  }
+  else {
+    ppvVar4 = *(void ***)(in_RDX + 0x18);
+    pvVar5 = (void *)((int)ppvVar4[1] + 1);
+    pvVar2 = *ppvVar4;
+    if (ppvVar4[2] < pvVar5) {
+      runtime_growslice(pvVar2,(int)pvVar5,(int)ppvVar4[2],1,(internal_abi_Type *)&DAT_00867760,
+                        in_stack_ffffffffffffff90);
+      ppvVar4[2] = extraout_RCX;
+      pvVar2 = extraout_RAX;
+      pvVar5 = extraout_RBX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        extraout_R11[1] = *ppvVar4;
+        pvVar2 = extraout_RAX_00;
+        pvVar5 = extraout_RBX_00;
+      }
+      *ppvVar4 = pvVar2;
+      in_RBX = (void *)((uint)in_RBX & 0xffffffff);
+    }
+    ppvVar4[1] = pvVar5;
+    *(golang_org_x_net_http2_SettingID *)((int)pvVar2 + (int)pvVar5 * 8 + -8) = s.ID;
+    *(sdword *)((int)pvVar2 + (int)pvVar5 * 8 + -4) = (sdword)in_RBX;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handleSettings_func1_1(void)
+
+{
+  undefined4 uVar1;
+  undefined4 *extraout_RAX;
+  undefined4 *extraout_RAX_00;
+  undefined4 *puVar2;
+  google_golang_org_grpc_internal_transport_http2Server *t;
+  int extraout_RCX;
+  int iVar3;
+  int in_RDX;
+  void *in_RBX;
+  void *extraout_RBX;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+    in_RBX = extraout_RBX;
+  }
+  iVar3 = *(int *)(in_RDX + 8);
+  uVar1 = *(undefined4 *)(in_RDX + 0x14);
+  runtime_newobject((internal_abi_Type *)&DAT_008078e0,in_RBX);
+  puVar2 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = *(undefined8 *)(extraout_RCX + 0x110);
+    puVar2 = extraout_RAX_00;
+    iVar3 = extraout_RCX;
+  }
+  *(undefined4 **)(iVar3 + 0x110) = puVar2;
+  *puVar2 = uVar1;
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handlePing
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               golang_org_x_net_http2_PingFrame *f)
+
+{
+  sync_Mutex *psVar1;
+  google_golang_org_grpc_internal_transport_cbItem it;
+  google_golang_org_grpc_internal_transport_cbItem it_00;
+  time_Time ~r0;
+  time_Time t_00;
+  time_Time t_01;
+  time_Time t_02;
+  time_Time t_03;
+  error ~r1;
+  error ~r1_00;
+  time_Time ~r0_00;
+  time_Time u;
+  time_Time ~r0_01;
+  time_Time u_00;
+  bool ~r0_02;
+  char extraout_AL;
+  bool ~r0_03;
+  char extraout_AL_00;
+  undefined *extraout_RAX;
+  google_golang_org_grpc_internal_transport_ping *pingAck;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined4 *extraout_RAX_02;
+  undefined4 *extraout_RAX_03;
+  undefined4 *extraout_RAX_04;
+  undefined4 *puVar2;
+  dword dVar3;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *~r0_05;
+  void *~r0_06;
+  int iVar4;
+  int ns;
+  sdword sVar5;
+  int32 new;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  bool bVar6;
+  runtime_itab *in_stack_ffffffffffffff58;
+  void *in_stack_ffffffffffffff60;
+  time_Location *in_stack_ffffffffffffff68;
+  void *in_stack_ffffffffffffff70;
+  undefined in_stack_ffffffffffffff78 [16];
+  code *local_38;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack_30;
+  undefined local_28 [24];
+  code **local_10;
+  void *~r0_04;
+  
+  while (local_28 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((f->FrameHeader).Flags & 1) != 0) {
+    if ((*(int *)f->Data == *(int *)google_golang_org_grpc_internal_transport_goAwayPing->data) &&
+       (t->drainEvent != (google_golang_org_grpc_internal_grpcsync_Event *)0x0)) {
+      google_golang_org_grpc_internal_grpcsync___Event__Fire(t->drainEvent,SUB81(f,0));
+      return;
+    }
+    if (t->bdpEst != (google_golang_org_grpc_internal_transport_bdpEstimator *)0x0) {
+      google_golang_org_grpc_internal_transport___bdpEstimator__calculate(t->bdpEst,*&f->Data);
+    }
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00851e60,f);
+  *extraout_RAX = 1;
+  if (f->Data != extraout_RAX + 1) {
+    *(undefined8 *)(extraout_RAX + 1) = *(undefined8 *)f->Data;
+  }
+  it.data = in_stack_ffffffffffffff60;
+  it.tab = in_stack_ffffffffffffff58;
+  ~r1.data = in_stack_ffffffffffffff70;
+  ~r1.tab = (runtime_itab *)in_stack_ffffffffffffff68;
+  google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+            (t->controlBuf,(func___bool **)0x0,it,false,~r1);
+  ~r0.ext = (int64)in_stack_ffffffffffffff60;
+  ~r0.wall = (uint64)in_stack_ffffffffffffff58;
+  ~r0.loc = in_stack_ffffffffffffff68;
+  time_Now(~r0);
+  local_38 = google_golang_org_grpc_internal_transport___http2Server__handlePing_func1;
+  local_10 = &local_38;
+  LOCK();
+  bVar6 = t->resetPingStrikes == 1;
+  if (bVar6) {
+    t->resetPingStrikes = 0;
+  }
+  UNLOCK();
+  pgStack_30 = t;
+  if (bVar6) {
+    t->pingStrikes = 0;
+    google_golang_org_grpc_internal_transport___http2Server__handlePing_func1();
+    return;
+  }
+  LOCK();
+  bVar6 = (t->mu).state == 0;
+  if (bVar6) {
+    (t->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar6) {
+    sync___Mutex__lockSlow(&t->mu);
+  }
+  if (t->activeStreams == (map_uint32__google_golang_org_grpc_internal_transport_Stream)0x0) {
+    iVar4 = 0;
+  }
+  else {
+    iVar4 = t->activeStreams->count;
+  }
+  LOCK();
+  psVar1 = &t->mu;
+  sVar5 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar5 = sVar5 + -1;
+  if (sVar5 != 0) {
+    sync___Mutex__unlockSlow(&t->mu,sVar5);
+  }
+  if ((iVar4 < 1) && ((t->kep).PermitWithoutStream == false)) {
+    t_00.ext = (int64)in_stack_ffffffffffffff60;
+    t_00.wall = (uint64)in_stack_ffffffffffffff58;
+    t_00.loc = in_stack_ffffffffffffff68;
+    ~r0_00.ext = in_stack_ffffffffffffff78._0_8_;
+    ~r0_00.loc = (time_Location *)in_stack_ffffffffffffff78._8_8_;
+    ~r0_00.wall = (uint64)in_stack_ffffffffffffff70;
+    time_Time_Add(t_00,(t->lastPingAt).wall,~r0_00);
+    t_01.ext = (int64)in_stack_ffffffffffffff60;
+    t_01.wall = (uint64)in_stack_ffffffffffffff58;
+    t_01.loc = in_stack_ffffffffffffff68;
+    u.ext = in_stack_ffffffffffffff78._0_8_;
+    u.loc = (time_Location *)in_stack_ffffffffffffff78._8_8_;
+    u.wall = (uint64)in_stack_ffffffffffffff70;
+    time_Time_After(t_01,u,~r0_02);
+    ~r0_04 = extraout_RBX;
+    if (extraout_AL != '\0') {
+      dVar3 = t->pingStrikes + 1;
+      ~r0_04 = (void *)(uint)dVar3;
+      t->pingStrikes = (uint8)dVar3;
+    }
+  }
+  else {
+    t_02.ext = (int64)in_stack_ffffffffffffff60;
+    t_02.wall = (uint64)in_stack_ffffffffffffff58;
+    t_02.loc = in_stack_ffffffffffffff68;
+    ~r0_01.ext = in_stack_ffffffffffffff78._0_8_;
+    ~r0_01.loc = (time_Location *)in_stack_ffffffffffffff78._8_8_;
+    ~r0_01.wall = (uint64)in_stack_ffffffffffffff70;
+    time_Time_Add(t_02,(t->lastPingAt).wall,~r0_01);
+    t_03.ext = (int64)in_stack_ffffffffffffff60;
+    t_03.wall = (uint64)in_stack_ffffffffffffff58;
+    t_03.loc = in_stack_ffffffffffffff68;
+    u_00.ext = in_stack_ffffffffffffff78._0_8_;
+    u_00.loc = (time_Location *)in_stack_ffffffffffffff78._8_8_;
+    u_00.wall = (uint64)in_stack_ffffffffffffff70;
+    time_Time_After(t_03,u_00,~r0_03);
+    ~r0_04 = extraout_RBX_00;
+    if (extraout_AL_00 != '\0') {
+      dVar3 = t->pingStrikes + 1;
+      ~r0_04 = (void *)(uint)dVar3;
+      t->pingStrikes = (uint8)dVar3;
+    }
+  }
+  if (2 < t->pingStrikes) {
+    runtime_newobject((internal_abi_Type *)&DAT_00814ce0,~r0_04);
+    *extraout_RAX_00 = 0x796e616d5f6f6f74;
+    *(undefined8 *)((int)extraout_RAX_00 + 6) = 0x73676e69705f796e;
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0_05);
+    extraout_RAX_01[1] = 0x22;
+    *extraout_RAX_01 = &DAT_008c16e8;
+    runtime_newobject((internal_abi_Type *)&DAT_00876760,~r0_06);
+    *extraout_RAX_02 = 0xb;
+    *(undefined8 *)(extraout_RAX_02 + 4) = 0xe;
+    *(undefined8 *)(extraout_RAX_02 + 6) = 0xe;
+    puVar2 = extraout_RAX_02;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RAX_00;
+      puVar2 = extraout_RAX_03;
+    }
+    *(undefined8 **)(puVar2 + 2) = extraout_RAX_00;
+    *(undefined1 **)(puVar2 + 10) = go_itab__errors_errorString_error;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RAX_01;
+      puVar2 = extraout_RAX_04;
+    }
+    *(undefined8 **)(puVar2 + 0xc) = extraout_RAX_01;
+    it_00.data = in_stack_ffffffffffffff60;
+    it_00.tab = in_stack_ffffffffffffff58;
+    ~r1_00.data = in_stack_ffffffffffffff70;
+    ~r1_00.tab = (runtime_itab *)in_stack_ffffffffffffff68;
+    google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+              (t->controlBuf,(func___bool **)0x0,it_00,true,~r1_00);
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handlePing_func1(void)
+
+{
+  undefined8 uVar1;
+  google_golang_org_grpc_internal_transport_http2Server *t;
+  int extraout_RAX;
+  int iVar2;
+  int in_RDX;
+  undefined8 uVar3;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  iVar2 = *(int *)(in_RDX + 8);
+  uVar1 = *(undefined8 *)(in_RDX + 0x18);
+  uVar3 = *(undefined8 *)(in_RDX + 0x20);
+  *(undefined8 *)(iVar2 + 0xe0) = *(undefined8 *)(in_RDX + 0x10);
+  *(undefined8 *)(iVar2 + 0xe8) = uVar1;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = uVar3;
+    extraout_R11[1] = *(undefined8 *)(extraout_RAX + 0xf0);
+    iVar2 = extraout_RAX;
+  }
+  *(undefined8 *)(iVar2 + 0xf0) = uVar3;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_transport___http2Server__handleWindowUpdate
+               (google_golang_org_grpc_internal_transport_http2Server *t,
+               golang_org_x_net_http2_WindowUpdateFrame *f)
+
+{
+  uint32 uVar1;
+  uint32 *extraout_RAX;
+  int unaff_R14;
+  google_golang_org_grpc_internal_transport_http2Server *pgStack0000000000000008;
+  golang_org_x_net_http2_WindowUpdateFrame *pgStack0000000000000010;
+  google_golang_org_grpc_internal_transport_cbItem in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd0;
+  
+  pgStack0000000000000008 = t;
+  pgStack0000000000000010 = f;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (pgStack0000000000000010->FrameHeader).StreamID;
+  runtime_newobject((internal_abi_Type *)&DAT_00851d20,pgStack0000000000000010);
+  *extraout_RAX = uVar1;
+  extraout_RAX[1] = pgStack0000000000000010->Increment;
+  google_golang_org_grpc_internal_transport___controlBuffer__executeAndPut
+            (pgStack0000000000000008->controlBuf,(func___bool **)0x0,in_stack_ffffffffffffffc0,true,
+             in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_transport_appendHeaderFieldsFromMD
+               (__golang_org_x_net_http2_hpack_HeaderField headerFields,
+               google_golang_org_grpc_metadata_MD md,__golang_org_x_net_http2_hpack_HeaderField ~r0)
+
+{
+  int *piVar1;
+  int iVar2;
+  runtime_slice ~r0_00;
+  string v;
+  bool bVar3;
+  char extraout_AL;
+  undefined8 extraout_RAX;
+  google_golang_org_grpc_metadata_MD extraout_RAX_00;
+  uint in_RCX;
+  uint extraout_RCX;
+  uint oldCap;
+  uint in_RBX;
+  undefined8 extraout_RBX;
+  uint extraout_RBX_00;
+  runtime_hmap *in_RDI;
+  int iVar4;
+  int iVar5;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  string in_stack_fffffffffffffea8;
+  uint8 *in_stack_fffffffffffffeb8;
+  int in_stack_fffffffffffffec0;
+  string in_stack_fffffffffffffec8;
+  uint local_d8;
+  uint local_d0;
+  int local_c8;
+  int *local_c0;
+  google_golang_org_grpc_metadata_MD local_b8;
+  google_golang_org_grpc_metadata_MD local_b0;
+  int local_a8;
+  google_golang_org_grpc_metadata_MD local_a0;
+  google_golang_org_grpc_metadata_MD local_98;
+  int *local_90;
+  undefined4 uStack_88;
+  undefined4 uStack_84;
+  undefined4 local_80;
+  undefined4 uStack_7c;
+  undefined local_78 [8];
+  undefined8 uStack_70;
+  runtime_hiter local_68;

@@ -1,0 +1,1000 @@
+typedef struct net/http/httptrace.ClientTrace net/http/httptrace.ClientTrace, *Pnet/http/httptrace.ClientTrace;
+
+typedef struct net/http/httptrace.GotConnInfo net/http/httptrace.GotConnInfo, *Pnet/http/httptrace.GotConnInfo;
+
+typedef struct net/http/httptrace.DNSStartInfo net/http/httptrace.DNSStartInfo, *Pnet/http/httptrace.DNSStartInfo;
+
+typedef struct net/http/httptrace.DNSDoneInfo net/http/httptrace.DNSDoneInfo, *Pnet/http/httptrace.DNSDoneInfo;
+
+typedef struct net/http/httptrace.WroteRequestInfo net/http/httptrace.WroteRequestInfo, *Pnet/http/httptrace.WroteRequestInfo;
+
+struct net/http/httptrace.ClientTrace {
+    void (**GetConn)(struct string);
+    void (**GotConn)(struct net/http/httptrace.GotConnInfo);
+    void (**PutIdleConn)(error);
+    void (**GotFirstResponseByte)(void);
+    void (**Got100Continue)(void);
+    void (**Got1xxResponse)(int, net/textproto.MIMEHeader, error *);
+    void (**DNSStart)(struct net/http/httptrace.DNSStartInfo);
+    void (**DNSDone)(struct net/http/httptrace.DNSDoneInfo);
+    void (**ConnectStart)(struct string, struct string);
+    void (**ConnectDone)(struct string, struct string, error);
+    void (**TLSHandshakeStart)(void);
+    void (**TLSHandshakeDone)(struct crypto/tls.ConnectionState, error);
+    void (**WroteHeaderField)(struct string, struct []string);
+    void (**WroteHeaders)(void);
+    void (**Wait100Continue)(void);
+    void (**WroteRequest)(struct net/http/httptrace.WroteRequestInfo);
+};
+
+struct net/http/httptrace.GotConnInfo {
+    net.Conn Conn;
+    bool Reused;
+    bool WasIdle;
+    time.Duration IdleTime;
+};
+
+struct net/http/httptrace.DNSDoneInfo {
+    struct []net.IPAddr Addrs;
+    error Err;
+    bool Coalesced;
+};
+
+struct net/http/httptrace.DNSStartInfo {
+    struct string Host;
+};
+
+struct net/http/httptrace.WroteRequestInfo {
+    error Err;
+};
+
+typedef struct net.UnixConn net.UnixConn, *Pnet.UnixConn;
+
+struct net.UnixConn {
+    struct net.conn conn;
+};
+
+typedef struct []text/template.variable []text/template.variable, *P[]text/template.variable;
+
+struct []text/template.variable {
+    struct text/template.variable *array;
+    int len;
+    int cap;
+};
+
+typedef struct runtime.inlineUnwinder runtime.inlineUnwinder, *Pruntime.inlineUnwinder;
+
+typedef struct runtime.inlinedCall runtime.inlinedCall, *Pruntime.inlinedCall;
+
+struct runtime.inlineUnwinder {
+    struct runtime.funcInfo f;
+    struct runtime.pcvalueCache *cache;
+    struct runtime.inlinedCall (*inlTree)[1048576];
+};
+
+struct runtime.inlinedCall {
+    internal/abi.FuncID funcID;
+    uint8 _[3];
+    int32 nameOff;
+    int32 parentPc;
+    int32 startLine;
+};
+
+typedef struct google.golang.org/grpc/internal/binarylog.TruncatingMethodLogger google.golang.org/grpc/internal/binarylog.TruncatingMethodLogger, *Pgoogle.golang.org/grpc/internal/binarylog.TruncatingMethodLogger;
+
+typedef struct runtime.iface google.golang.org/grpc/internal/binarylog.Sink;
+
+struct google.golang.org/grpc/internal/binarylog.TruncatingMethodLogger {
+    uint64 headerMaxLen;
+    uint64 messageMaxLen;
+    uint64 callID;
+    struct google.golang.org/grpc/internal/binarylog.callIDGenerator *idWithinCallGen;
+    google.golang.org/grpc/internal/binarylog.Sink sink;
+};
+
+typedef struct google.golang.org/protobuf/internal/impl.int32Converter google.golang.org/protobuf/internal/impl.int32Converter, *Pgoogle.golang.org/protobuf/internal/impl.int32Converter;
+
+struct google.golang.org/protobuf/internal/impl.int32Converter {
+    reflect.Type goType;
+    struct google.golang.org/protobuf/reflect/protoreflect.Value def;
+};
+
+typedef uint32 hash/crc32.Table[256];
+
+typedef struct crypto/ecdsa.PublicKey crypto/ecdsa.PublicKey, *Pcrypto/ecdsa.PublicKey;
+
+struct crypto/ecdsa.PublicKey {
+    crypto/elliptic.Curve Curve;
+    struct math/big.Int *X;
+    struct math/big.Int *Y;
+};
+
+typedef struct google.golang.org/protobuf/internal/impl.legacyMessageWrapper google.golang.org/protobuf/internal/impl.legacyMessageWrapper, *Pgoogle.golang.org/protobuf/internal/impl.legacyMessageWrapper;
+
+struct google.golang.org/protobuf/internal/impl.legacyMessageWrapper {
+    google.golang.org/protobuf/reflect/protoreflect.ProtoMessage m;
+};
+
+typedef struct hash<string,google.golang.org/grpc/encoding.Codec> hash<string,google.golang.org/grpc/encoding.Codec>, *Phash<string,google.golang.org/grpc/encoding.Codec>;
+
+struct hash<string,google.golang.org/grpc/encoding.Codec> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<string,google.golang.org/grpc/encoding.Codec> *buckets;
+    struct bucket<string,google.golang.org/grpc/encoding.Codec> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct encoding/asn1.SyntaxError encoding/asn1.SyntaxError, *Pencoding/asn1.SyntaxError;
+
+struct encoding/asn1.SyntaxError {
+    struct string Msg;
+};
+
+typedef struct internal/reflectlite.ValueError internal/reflectlite.ValueError, *Pinternal/reflectlite.ValueError;
+
+struct internal/reflectlite.ValueError {
+    struct string Method;
+    internal/abi.Kind Kind;
+};
+
+typedef struct golang.org/x/net/http2.GoAwayFrame golang.org/x/net/http2.GoAwayFrame, *Pgolang.org/x/net/http2.GoAwayFrame;
+
+struct golang.org/x/net/http2.GoAwayFrame {
+    struct golang.org/x/net/http2.FrameHeader FrameHeader;
+    uint32 LastStreamID;
+    golang.org/x/net/http2.ErrCode ErrCode;
+    struct []uint8 debugData;
+};
+
+typedef struct noalg.map.iter[string]encoding/json.RawMessage noalg.map.iter[string]encoding/json.RawMessage, *Pnoalg.map.iter[string]encoding/json.RawMessage;
+
+typedef struct noalg.map.hdr[string]encoding/json.RawMessage noalg.map.hdr[string]encoding/json.RawMessage, *Pnoalg.map.hdr[string]encoding/json.RawMessage;
+
+typedef struct noalg.map.bucket[string]encoding/json.RawMessage noalg.map.bucket[string]encoding/json.RawMessage, *Pnoalg.map.bucket[string]encoding/json.RawMessage;
+
+struct noalg.map.bucket[string]encoding/json.RawMessage {
+    uint8 topbits[8];
+    noalg.[8]string keys;
+    noalg.[8]encoding/json.RawMessage elems;
+    void *overflow;
+};
+
+struct noalg.map.iter[string]encoding/json.RawMessage {
+    struct string *key;
+    struct encoding/json.RawMessage *elem;
+    void *t;
+    struct noalg.map.hdr[string]encoding/json.RawMessage *h;
+    struct noalg.map.bucket[string]encoding/json.RawMessage *buckets;
+    struct noalg.map.bucket[string]encoding/json.RawMessage *bptr;
+    void *overflow;
+    void *oldoverflow;
+    uintptr startBucket;
+    uint8 offset;
+    bool wrapped;
+    uint8 B;
+    uint8 i;
+    uintptr bucket;
+    uintptr checkBucket;
+};
+
+struct noalg.map.hdr[string]encoding/json.RawMessage {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct noalg.map.bucket[string]encoding/json.RawMessage *buckets;
+    struct noalg.map.bucket[string]encoding/json.RawMessage *oldbuckets;
+    uintptr nevacuate;
+    void *extra;
+};
+
+typedef struct google.golang.org/grpc/internal/credentials.clientHandshakeInfoKey google.golang.org/grpc/internal/credentials.clientHandshakeInfoKey, *Pgoogle.golang.org/grpc/internal/credentials.clientHandshakeInfoKey;
+
+struct google.golang.org/grpc/internal/credentials.clientHandshakeInfoKey {
+};
+
+typedef struct encoding/json.InvalidUnmarshalError encoding/json.InvalidUnmarshalError, *Pencoding/json.InvalidUnmarshalError;
+
+struct encoding/json.InvalidUnmarshalError {
+    reflect.Type Type;
+};
+
+typedef struct []runtime.statDep []runtime.statDep, *P[]runtime.statDep;
+
+struct []runtime.statDep {
+    runtime.statDep *array;
+    int len;
+    int cap;
+};
+
+typedef struct noalg.map.hdr[crypto/x509.sum224]bool noalg.map.hdr[crypto/x509.sum224]bool, *Pnoalg.map.hdr[crypto/x509.sum224]bool;
+
+struct noalg.map.hdr[crypto/x509.sum224]bool {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct noalg.map.bucket[crypto/x509.sum224]bool *buckets;
+    struct noalg.map.bucket[crypto/x509.sum224]bool *oldbuckets;
+    uintptr nevacuate;
+    void *extra;
+};
+
+typedef struct encoding/asn1.invalidUnmarshalError encoding/asn1.invalidUnmarshalError, *Pencoding/asn1.invalidUnmarshalError;
+
+struct encoding/asn1.invalidUnmarshalError {
+    reflect.Type Type;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/grpcsync.Event;_X1_*bool_} noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/grpcsync.Event;_X1_*bool_}, *Pnoalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/grpcsync.Event;_X1_*bool_};
+
+struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/grpcsync.Event;_X1_*bool_} { // Original name: noalg.struct { F uintptr; X0 *google.golang.org/grpc/internal/grpcsync.Event; X1 *bool }
+    uintptr F;
+    struct google.golang.org/grpc/internal/grpcsync.Event *X0;
+    bool *X1;
+};
+
+typedef struct []google.golang.org/protobuf/internal/impl.ExtensionInfo []google.golang.org/protobuf/internal/impl.ExtensionInfo, *P[]google.golang.org/protobuf/internal/impl.ExtensionInfo;
+
+struct []google.golang.org/protobuf/internal/impl.ExtensionInfo {
+    struct google.golang.org/protobuf/internal/impl.ExtensionInfo *array;
+    int len;
+    int cap;
+};
+
+typedef struct hash<crypto.Hash,[]uint8> hash<crypto.Hash,[]uint8>, *Phash<crypto.Hash,[]uint8>;
+
+typedef struct hash<crypto.Hash,[]uint8> *map[crypto.Hash][]uint8;
+
+typedef struct bucket<crypto.Hash,[]uint8> bucket<crypto.Hash,[]uint8>, *Pbucket<crypto.Hash,[]uint8>;
+
+struct hash<crypto.Hash,[]uint8> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<crypto.Hash,[]uint8> *buckets;
+    struct bucket<crypto.Hash,[]uint8> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct bucket<crypto.Hash,[]uint8> {
+    uint8 tophash[8];
+    crypto.Hash keys[8];
+    struct []uint8 values[8];
+    struct bucket<crypto.Hash,[]uint8> *overflow;
+};
+
+typedef struct noalg.map.hdr[string]*golang.org/x/net/trace.eventFamily noalg.map.hdr[string]*golang.org/x/net/trace.eventFamily, *Pnoalg.map.hdr[string]*golang.org/x/net/trace.eventFamily;
+
+typedef struct noalg.map.bucket[string]*golang.org/x/net/trace.eventFamily noalg.map.bucket[string]*golang.org/x/net/trace.eventFamily, *Pnoalg.map.bucket[string]*golang.org/x/net/trace.eventFamily;
+
+typedef struct golang.org/x/net/trace.eventFamily *noalg.[8]*golang.org/x/net/trace.eventFamily[8];
+
+struct noalg.map.hdr[string]*golang.org/x/net/trace.eventFamily {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct noalg.map.bucket[string]*golang.org/x/net/trace.eventFamily *buckets;
+    struct noalg.map.bucket[string]*golang.org/x/net/trace.eventFamily *oldbuckets;
+    uintptr nevacuate;
+    void *extra;
+};
+
+struct noalg.map.bucket[string]*golang.org/x/net/trace.eventFamily {
+    uint8 topbits[8];
+    noalg.[8]string keys;
+    noalg.[8]*golang.org/x/net/trace.eventFamily elems;
+    void *overflow;
+};
+
+typedef struct crypto/ecdsa.nistCurve[*crypto/internal/nistec.P384Point] crypto/ecdsa.nistCurve[*crypto/internal/nistec.P384Point], *Pcrypto/ecdsa.nistCurve[*crypto/internal/nistec.P384Point];
+
+struct crypto/ecdsa.nistCurve[*crypto/internal/nistec.P384Point] {
+    void (**newPoint)(struct crypto/internal/nistec.P384Point **);
+    crypto/elliptic.Curve curve;
+    struct crypto/internal/bigmod.Modulus *N;
+    struct []uint8 nMinus2;
+};
+
+typedef struct runtime.spanSet runtime.spanSet, *Pruntime.spanSet;
+
+struct runtime.spanSet {
+    struct runtime.mutex spineLock;
+    struct runtime.atomicSpanSetSpinePointer spine;
+    struct runtime/internal/atomic.Uintptr spineLen;
+    uintptr spineCap;
+    struct runtime.atomicHeadTailIndex index;
+};
+
+typedef struct runtime.iface google.golang.org/protobuf/internal/filedesc.resolverByIndex;
+
+typedef struct hash<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> hash<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor>, *Phash<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor>;
+
+typedef struct bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor>, *Pbucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor>;
+
+struct bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> {
+    uint8 tophash[8];
+    reflect.Type keys[8];
+    google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor values[8];
+    struct bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> *overflow;
+};
+
+struct hash<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> *buckets;
+    struct bucket<reflect.Type,google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct noalg.map.iter[google.golang.org/grpc/internal/grpcsync.Subscriber]bool noalg.map.iter[google.golang.org/grpc/internal/grpcsync.Subscriber]bool, *Pnoalg.map.iter[google.golang.org/grpc/internal/grpcsync.Subscriber]bool;
+
+struct noalg.map.iter[google.golang.org/grpc/internal/grpcsync.Subscriber]bool {
+    google.golang.org/grpc/internal/grpcsync.Subscriber *key;
+    bool *elem;
+    void *t;
+    struct noalg.map.hdr[google.golang.org/grpc/internal/grpcsync.Subscriber]bool *h;
+    struct noalg.map.bucket[google.golang.org/grpc/internal/grpcsync.Subscriber]bool *buckets;
+    struct noalg.map.bucket[google.golang.org/grpc/internal/grpcsync.Subscriber]bool *bptr;
+    void *overflow;
+    void *oldoverflow;
+    uintptr startBucket;
+    uint8 offset;
+    bool wrapped;
+    uint8 B;
+    uint8 i;
+    uintptr bucket;
+    uintptr checkBucket;
+};
+
+typedef struct google.golang.org/protobuf/internal/impl.mapInfo google.golang.org/protobuf/internal/impl.mapInfo, *Pgoogle.golang.org/protobuf/internal/impl.mapInfo;
+
+typedef struct google.golang.org/protobuf/internal/impl.mapConverter google.golang.org/protobuf/internal/impl.mapConverter, *Pgoogle.golang.org/protobuf/internal/impl.mapConverter;
+
+struct google.golang.org/protobuf/internal/impl.mapConverter {
+    reflect.Type goType;
+    google.golang.org/protobuf/internal/impl.Converter keyConv;
+    google.golang.org/protobuf/internal/impl.Converter valConv;
+};
+
+struct google.golang.org/protobuf/internal/impl.mapInfo {
+    reflect.Type goType;
+    uint64 keyWiretag;
+    uint64 valWiretag;
+    struct google.golang.org/protobuf/internal/impl.valueCoderFuncs keyFuncs;
+    struct google.golang.org/protobuf/internal/impl.valueCoderFuncs valFuncs;
+    struct google.golang.org/protobuf/reflect/protoreflect.Value keyZero;
+    google.golang.org/protobuf/reflect/protoreflect.Kind keyKind;
+    struct google.golang.org/protobuf/internal/impl.mapConverter *conv;
+};
+
+typedef struct otp/seedgen.GetSeedRequest otp/seedgen.GetSeedRequest, *Potp/seedgen.GetSeedRequest;
+
+struct otp/seedgen.GetSeedRequest {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    struct string Username;
+    struct string Password;
+};
+
+typedef struct text/template/parse.IdentifierNode text/template/parse.IdentifierNode, *Ptext/template/parse.IdentifierNode;
+
+struct text/template/parse.IdentifierNode {
+    text/template/parse.NodeType NodeType;
+    text/template/parse.Pos Pos;
+    struct text/template/parse.Tree *tr;
+    struct string Ident;
+};
+
+typedef struct vendor/golang.org/x/net/dns/dnsmessage.CNAMEResource vendor/golang.org/x/net/dns/dnsmessage.CNAMEResource, *Pvendor/golang.org/x/net/dns/dnsmessage.CNAMEResource;
+
+struct vendor/golang.org/x/net/dns/dnsmessage.CNAMEResource {
+    struct vendor/golang.org/x/net/dns/dnsmessage.Name CNAME;
+};
+
+typedef struct []runtime.arenaIdx []runtime.arenaIdx, *P[]runtime.arenaIdx;
+
+struct []runtime.arenaIdx {
+    runtime.arenaIdx *array;
+    int len;
+    int cap;
+};
+
+typedef struct noalg.map.hdr[*text/template/parse.ActionNode][]string noalg.map.hdr[*text/template/parse.ActionNode][]string, *Pnoalg.map.hdr[*text/template/parse.ActionNode][]string;
+
+typedef struct noalg.map.bucket[*text/template/parse.ActionNode][]string noalg.map.bucket[*text/template/parse.ActionNode][]string, *Pnoalg.map.bucket[*text/template/parse.ActionNode][]string;
+
+struct noalg.map.bucket[*text/template/parse.ActionNode][]string {
+    uint8 topbits[8];
+    noalg.[8]*text/template/parse.ActionNode keys;
+    noalg.[8][]string elems;
+    void *overflow;
+};
+
+struct noalg.map.hdr[*text/template/parse.ActionNode][]string {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct noalg.map.bucket[*text/template/parse.ActionNode][]string *buckets;
+    struct noalg.map.bucket[*text/template/parse.ActionNode][]string *oldbuckets;
+    uintptr nevacuate;
+    void *extra;
+};
+
+typedef struct vendor/golang.org/x/net/dns/dnsmessage.MXResource vendor/golang.org/x/net/dns/dnsmessage.MXResource, *Pvendor/golang.org/x/net/dns/dnsmessage.MXResource;
+
+struct vendor/golang.org/x/net/dns/dnsmessage.MXResource {
+    uint16 Pref;
+    struct vendor/golang.org/x/net/dns/dnsmessage.Name MX;
+};
+
+typedef struct runtime.iface google.golang.org/protobuf/reflect/protoreflect.MethodDescriptor;
+
+typedef struct runtime.iface interface_{_DecompressedSize([]uint8)_int_};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*string_} noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*string_}, *Pnoalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*string_};
+
+struct noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*string_} { // Original name: noalg.struct { F uintptr; X0 *uintptr; X1 *string }
+    uintptr F;
+    uintptr *X0;
+    struct string *X1;
+};
+
+typedef struct google.golang.org/protobuf/internal/filetype.resolverByIndex google.golang.org/protobuf/internal/filetype.resolverByIndex, *Pgoogle.golang.org/protobuf/internal/filetype.resolverByIndex;
+
+typedef struct google.golang.org/protobuf/internal/filetype.depIdxs google.golang.org/protobuf/internal/filetype.depIdxs, *Pgoogle.golang.org/protobuf/internal/filetype.depIdxs;
+
+typedef struct runtime.iface google.golang.org/protobuf/internal/filetype.fileRegistry;
+
+struct google.golang.org/protobuf/internal/filetype.depIdxs {
+    int32 *array;
+    int len;
+    int cap;
+};
+
+struct google.golang.org/protobuf/internal/filetype.resolverByIndex {
+    struct []interface_{} goTypes;
+    struct google.golang.org/protobuf/internal/filetype.depIdxs depIdxs;
+    google.golang.org/protobuf/internal/filetype.fileRegistry fileRegistry;
+};
+
+typedef struct syscall.SockaddrUnix syscall.SockaddrUnix, *Psyscall.SockaddrUnix;
+
+struct syscall.SockaddrUnix {
+    struct string Name;
+    struct syscall.RawSockaddrUnix raw;
+};
+
+typedef struct google.golang.org/grpc/internal/binarylog.ClientHalfClose google.golang.org/grpc/internal/binarylog.ClientHalfClose, *Pgoogle.golang.org/grpc/internal/binarylog.ClientHalfClose;
+
+struct google.golang.org/grpc/internal/binarylog.ClientHalfClose {
+    bool OnClientSide;
+};
+
+typedef struct hash<uint32,int32> hash<uint32,int32>, *Phash<uint32,int32>;
+
+typedef struct bucket<uint32,int32> bucket<uint32,int32>, *Pbucket<uint32,int32>;
+
+struct hash<uint32,int32> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<uint32,int32> *buckets;
+    struct bucket<uint32,int32> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct bucket<uint32,int32> {
+    uint8 tophash[8];
+    uint32 keys[8];
+    int32 values[8];
+    struct bucket<uint32,int32> *overflow;
+};
+
+typedef struct google.golang.org/grpc/internal/transport.Options google.golang.org/grpc/internal/transport.Options, *Pgoogle.golang.org/grpc/internal/transport.Options;
+
+struct google.golang.org/grpc/internal/transport.Options {
+    bool Last;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_google.golang.org/protobuf/encoding/prototext.encoder;_X1_string;_X2_*error;_X3_google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor_} noalg.struct_{_F_uintptr;_X0_google.golang.org/protobuf/encoding/prototext.encoder;_X1_string;_X2_*error;_X3_google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor_}, *Pnoalg.struct_{_F_uintptr;_X0_google.golang.org/protobuf/encoding/prototext.encoder;_X1_string;_X2_*error;_X3_google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor_};
+
+typedef struct google.golang.org/protobuf/encoding/prototext.encoder google.golang.org/protobuf/encoding/prototext.encoder, *Pgoogle.golang.org/protobuf/encoding/prototext.encoder;
+
+typedef struct google.golang.org/protobuf/internal/encoding/text.Encoder google.golang.org/protobuf/internal/encoding/text.Encoder, *Pgoogle.golang.org/protobuf/internal/encoding/text.Encoder;
+
+struct google.golang.org/protobuf/encoding/prototext.encoder {
+    struct google.golang.org/protobuf/internal/encoding/text.Encoder *Encoder;
+    struct google.golang.org/protobuf/encoding/prototext.MarshalOptions opts;
+};
+
+struct google.golang.org/protobuf/internal/encoding/text.Encoder {
+    struct google.golang.org/protobuf/internal/encoding/text.encoderState encoderState;
+    struct string indent;
+    uint8 delims[2];
+    bool outputASCII;
+};
+
+struct noalg.struct_{_F_uintptr;_X0_google.golang.org/protobuf/encoding/prototext.encoder;_X1_string;_X2_*error;_X3_google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor_} { // Original name: noalg.struct { F uintptr; X0 google.golang.org/protobuf/encoding/prototext.encoder; X1 string; X2 *error; X3 google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor }
+    uintptr F;
+    struct google.golang.org/protobuf/encoding/prototext.encoder X0;
+    struct string X1;
+    error *X2;
+    google.golang.org/protobuf/reflect/protoreflect.FieldDescriptor X3;
+};
+
+typedef struct text/template.state text/template.state, *Ptext/template.state;
+
+struct text/template.state {
+    struct text/template.Template *tmpl;
+    io.Writer wr;
+    text/template/parse.Node node;
+    struct []text/template.variable vars;
+    int depth;
+};
+
+typedef struct google.golang.org/grpc/internal/transport.closeConnection google.golang.org/grpc/internal/transport.closeConnection, *Pgoogle.golang.org/grpc/internal/transport.closeConnection;
+
+struct google.golang.org/grpc/internal/transport.closeConnection {
+};
+
+typedef struct runtime.iface io.WriterTo;
+
+typedef struct noalg.map.iter[string]*text/template/parse.Tree noalg.map.iter[string]*text/template/parse.Tree, *Pnoalg.map.iter[string]*text/template/parse.Tree;
+
+struct noalg.map.iter[string]*text/template/parse.Tree {
+    struct string *key;
+    struct text/template/parse.Tree **elem;
+    void *t;
+    struct noalg.map.hdr[string]*text/template/parse.Tree *h;
+    struct noalg.map.bucket[string]*text/template/parse.Tree *buckets;
+    struct noalg.map.bucket[string]*text/template/parse.Tree *bptr;
+    void *overflow;
+    void *oldoverflow;
+    uintptr startBucket;
+    uint8 offset;
+    bool wrapped;
+    uint8 B;
+    uint8 i;
+    uintptr bucket;
+    uintptr checkBucket;
+};
+
+typedef struct hash<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> hash<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser>, *Phash<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser>;
+
+typedef struct bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser>, *Pbucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser>;
+
+struct bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> {
+    uint8 tophash[8];
+    golang.org/x/net/http2.FrameType keys[8];
+    void (**values[8])(struct golang.org/x/net/http2.frameCache *, struct golang.org/x/net/http2.FrameHeader, void (**)(struct string), struct []uint8, golang.org/x/net/http2.Frame *, error *);
+    struct bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> *overflow;
+};
+
+struct hash<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> *buckets;
+    struct bucket<golang.org/x/net/http2.FrameType,golang.org/x/net/http2.frameParser> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct unicode.CaseRange unicode.CaseRange, *Punicode.CaseRange;
+
+typedef int32 unicode.d[3];
+
+struct unicode.CaseRange {
+    uint32 Lo;
+    uint32 Hi;
+    unicode.d Delta;
+};
+
+typedef struct crypto/elliptic.nistCurve[*crypto/internal/nistec.P521Point] crypto/elliptic.nistCurve[*crypto/internal/nistec.P521Point], *Pcrypto/elliptic.nistCurve[*crypto/internal/nistec.P521Point];
+
+struct crypto/elliptic.nistCurve[*crypto/internal/nistec.P521Point] {
+    void (**newPoint)(struct crypto/internal/nistec.P521Point **);
+    struct crypto/elliptic.CurveParams *params;
+};
+
+typedef struct net/http.errorReader net/http.errorReader, *Pnet/http.errorReader;
+
+struct net/http.errorReader {
+    error err;
+};
+
+typedef struct runtime.rtype runtime.rtype, *Pruntime.rtype;
+
+struct runtime.rtype {
+    struct internal/abi.Type *Type;
+};
+
+typedef struct runtime.iface os.timeout;
+
+typedef struct golang.org/x/net/http2.headerFieldValueError golang.org/x/net/http2.headerFieldValueError, *Pgolang.org/x/net/http2.headerFieldValueError;
+
+struct golang.org/x/net/http2.headerFieldValueError {
+    uint8 *str;
+    int len;
+};
+
+typedef struct google.golang.org/grpc/internal/transport.recvBufferReader google.golang.org/grpc/internal/transport.recvBufferReader, *Pgoogle.golang.org/grpc/internal/transport.recvBufferReader;
+
+struct google.golang.org/grpc/internal/transport.recvBufferReader {
+    void (**closeStream)(error);
+    context.Context ctx;
+    <-chan_struct_{} ctxDone;
+    struct google.golang.org/grpc/internal/transport.recvBuffer *recv;
+    struct bytes.Buffer *last;
+    error err;
+    void (**freeBuffer)(struct bytes.Buffer *);
+};
+
+typedef struct auth/auth_grpc.PingRequest auth/auth_grpc.PingRequest, *Pauth/auth_grpc.PingRequest;
+
+struct auth/auth_grpc.PingRequest {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    int64 Ping;
+};
+
+typedef struct encoding/asn1.StructuralError encoding/asn1.StructuralError, *Pencoding/asn1.StructuralError;
+
+struct encoding/asn1.StructuralError {
+    struct string Msg;
+};
+
+typedef struct runtime.notifyList runtime.notifyList, *Pruntime.notifyList;
+
+struct runtime.notifyList {
+    struct runtime/internal/atomic.Uint32 wait;
+    uint32 notify;
+    struct runtime.mutex lock;
+    struct runtime.sudog *head;
+    struct runtime.sudog *tail;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*[]string;_X1_string_} noalg.struct_{_F_uintptr;_X0_*[]string;_X1_string_}, *Pnoalg.struct_{_F_uintptr;_X0_*[]string;_X1_string_};
+
+struct noalg.struct_{_F_uintptr;_X0_*[]string;_X1_string_} { // Original name: noalg.struct { F uintptr; X0 *[]string; X1 string }
+    uintptr F;
+    struct []string *X0;
+    struct string X1;
+};
+
+typedef struct crypto/internal/nistec.P521Point *crypto/internal/nistec.p521Table[15];
+
+typedef struct []*net.MX []*net.MX, *P[]*net.MX;
+
+struct []*net.MX {
+    struct net.MX **array;
+    int len;
+    int cap;
+};
+
+typedef struct net/http/httptrace.clientEventContextKey net/http/httptrace.clientEventContextKey, *Pnet/http/httptrace.clientEventContextKey;
+
+struct net/http/httptrace.clientEventContextKey {
+};
+
+typedef struct google.golang.org/grpc/balancer/base.PickerBuildInfo google.golang.org/grpc/balancer/base.PickerBuildInfo, *Pgoogle.golang.org/grpc/balancer/base.PickerBuildInfo;
+
+struct google.golang.org/grpc/balancer/base.PickerBuildInfo {
+    map[google.golang.org/grpc/balancer.SubConn]google.golang.org/grpc/balancer/base.SubConnInfo ReadySCs;
+};
+
+typedef struct []*net.NS []*net.NS, *P[]*net.NS;
+
+struct []*net.NS {
+    struct net.NS **array;
+    int len;
+    int cap;
+};
+
+typedef struct []strings.span.1 []strings.span.1, *P[]strings.span.1;
+
+typedef struct strings.span.1 strings.span.1, *Pstrings.span.1;
+
+struct strings.span.1 { // Original name: strings.span·1
+    int start;
+    int end;
+};
+
+struct []strings.span.1 { // Original name: []strings.span·1
+    struct strings.span.1 *array;
+    int len;
+    int cap;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*bool;_X1_*net/http.Request;_X2_*error_} noalg.struct_{_F_uintptr;_X0_*bool;_X1_*net/http.Request;_X2_*error_}, *Pnoalg.struct_{_F_uintptr;_X0_*bool;_X1_*net/http.Request;_X2_*error_};
+
+struct noalg.struct_{_F_uintptr;_X0_*bool;_X1_*net/http.Request;_X2_*error_} { // Original name: noalg.struct { F uintptr; X0 *bool; X1 *net/http.Request; X2 *error }
+    uintptr F;
+    bool *X0;
+    struct net/http.Request *X1;
+    error *X2;
+};
+
+typedef struct hash<string,net/http.muxEntry> hash<string,net/http.muxEntry>, *Phash<string,net/http.muxEntry>;
+
+typedef struct hash<string,net/http.muxEntry> *map[string]net/http.muxEntry;
+
+struct hash<string,net/http.muxEntry> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<string,net/http.muxEntry> *buckets;
+    struct bucket<string,net/http.muxEntry> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct hash<golang.org/x/net/http2.ErrCode,string> hash<golang.org/x/net/http2.ErrCode,string>, *Phash<golang.org/x/net/http2.ErrCode,string>;
+
+typedef struct hash<golang.org/x/net/http2.ErrCode,string> *map[golang.org/x/net/http2.ErrCode]string;
+
+typedef struct bucket<golang.org/x/net/http2.ErrCode,string> bucket<golang.org/x/net/http2.ErrCode,string>, *Pbucket<golang.org/x/net/http2.ErrCode,string>;
+
+struct bucket<golang.org/x/net/http2.ErrCode,string> {
+    uint8 tophash[8];
+    golang.org/x/net/http2.ErrCode keys[8];
+    struct string values[8];
+    struct bucket<golang.org/x/net/http2.ErrCode,string> *overflow;
+};
+
+struct hash<golang.org/x/net/http2.ErrCode,string> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2.ErrCode,string> *buckets;
+    struct bucket<golang.org/x/net/http2.ErrCode,string> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct hash<net/http.http2SettingID,string> *map[net/http.http2SettingID]string;
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/transport.http2Client;_X1_*bool;_X2_*chan_struct_{};_X3_*google.golang.org/grpc/internal/transport.headerFrame;_X4_*bool;_X5_*google.golang.org/grpc/internal/transport.Stream_} noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/transport.http2Client;_X1_*bool;_X2_*chan_struct_{};_X3_*google.golang.org/grpc/internal/transport.headerFrame;_X4_*bool;_X5_*google.golang.org/grpc/internal/transport.Stream_}, *Pnoalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/transport.http2Client;_X1_*bool;_X2_*chan_struct_{};_X3_*google.golang.org/grpc/internal/transport.headerFrame;_X4_*bool;_X5_*google.golang.org/grpc/internal/transport.Stream_};
+
+struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/internal/transport.http2Client;_X1_*bool;_X2_*chan_struct_{};_X3_*google.golang.org/grpc/internal/transport.headerFrame;_X4_*bool;_X5_*google.golang.org/grpc/internal/transport.Stream_} { // Original name: noalg.struct { F uintptr; X0 *google.golang.org/grpc/internal/transport.http2Client; X1 *bool; X2 *chan struct {}; X3 *google.golang.org/grpc/internal/transport.headerFrame; X4 *bool; X5 *google.golang.org/grpc/internal/transport.Stream }
+    uintptr F;
+    struct google.golang.org/grpc/internal/transport.http2Client *X0;
+    bool *X1;
+    chan_struct_{} *X2;
+    struct google.golang.org/grpc/internal/transport.headerFrame *X3;
+    bool *X4;
+    struct google.golang.org/grpc/internal/transport.Stream *X5;
+};
+
+typedef struct noalg.map.iter[string]bool noalg.map.iter[string]bool, *Pnoalg.map.iter[string]bool;
+
+struct noalg.map.iter[string]bool {
+    struct string *key;
+    bool *elem;
+    void *t;
+    struct noalg.map.hdr[string]bool *h;
+    struct noalg.map.bucket[string]bool *buckets;
+    struct noalg.map.bucket[string]bool *bptr;
+    void *overflow;
+    void *oldoverflow;
+    uintptr startBucket;
+    uint8 offset;
+    bool wrapped;
+    uint8 B;
+    uint8 i;
+    uintptr bucket;
+    uintptr checkBucket;
+};
+
+typedef struct vendor/golang.org/x/sys/cpu.option vendor/golang.org/x/sys/cpu.option, *Pvendor/golang.org/x/sys/cpu.option;
+
+struct vendor/golang.org/x/sys/cpu.option {
+    struct string Name;
+    bool *Feature;
+    bool Specified;
+    bool Enable;
+    bool Required;
+};
+
+typedef struct sync.poolChain sync.poolChain, *Psync.poolChain;
+
+typedef struct sync.poolChainElt sync.poolChainElt, *Psync.poolChainElt;
+
+typedef struct sync.poolDequeue sync.poolDequeue, *Psync.poolDequeue;
+
+typedef struct []sync.eface []sync.eface, *P[]sync.eface;
+
+typedef struct sync.eface sync.eface, *Psync.eface;
+
+struct []sync.eface {
+    struct sync.eface *array;
+    int len;
+    int cap;
+};
+
+struct sync.poolDequeue {
+    uint64 headTail;
+    struct []sync.eface vals;
+};
+
+struct sync.poolChain {
+    struct sync.poolChainElt *head;
+    struct sync.poolChainElt *tail;
+};
+
+struct sync.eface {
+    void *typ;
+    void *val;
+};
+
+struct sync.poolChainElt {
+    struct sync.poolDequeue poolDequeue;
+    struct sync.poolChainElt *next;
+    struct sync.poolChainElt *prev;
+};
+
+typedef struct runtime.dbgVar runtime.dbgVar, *Pruntime.dbgVar;
+
+struct runtime.dbgVar {
+    struct string name;
+    int32 *value;
+    struct runtime/internal/atomic.Int32 *atomic;
+    int32 def;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*runtime.mspan_} noalg.struct_{_F_uintptr;_X0_*runtime.mspan_}, *Pnoalg.struct_{_F_uintptr;_X0_*runtime.mspan_};
+
+struct noalg.struct_{_F_uintptr;_X0_*runtime.mspan_} { // Original name: noalg.struct { F uintptr; X0 *runtime.mspan }
+    uintptr F;
+    struct runtime.mspan *X0;
+};
+
+typedef struct compress/flate.huffmanDecoder compress/flate.huffmanDecoder, *Pcompress/flate.huffmanDecoder;
+
+typedef struct [][]uint32 [][]uint32, *P[][]uint32;
+
+struct [][]uint32 {
+    struct []uint32 *array;
+    int len;
+    int cap;
+};
+
+struct compress/flate.huffmanDecoder {
+    int min;
+    uint32 chunks[512];
+    struct [][]uint32 links;
+    uint32 linkMask;
+};
+
+typedef struct crypto/ecdh.nistCurve[*crypto/internal/nistec.P384Point] crypto/ecdh.nistCurve[*crypto/internal/nistec.P384Point], *Pcrypto/ecdh.nistCurve[*crypto/internal/nistec.P384Point];
+
+struct crypto/ecdh.nistCurve[*crypto/internal/nistec.P384Point] {
+    struct string name;
+    void (**newPoint)(struct crypto/internal/nistec.P384Point **);
+    struct []uint8 scalarOrder;
+};
+
+typedef struct syscall.IfInfomsg syscall.IfInfomsg, *Psyscall.IfInfomsg;
+
+struct syscall.IfInfomsg {
+    uint8 Family;
+    uint8 X__ifi_pad;
+    uint16 Type;
+    int32 Index;
+    uint32 Flags;
+    uint32 Change;
+};
+
+typedef struct noalg.map.iter[*golang.org/x/net/trace.trace]bool noalg.map.iter[*golang.org/x/net/trace.trace]bool, *Pnoalg.map.iter[*golang.org/x/net/trace.trace]bool;
+
+struct noalg.map.iter[*golang.org/x/net/trace.trace]bool {
+    struct golang.org/x/net/trace.trace **key;
+    bool *elem;
+    void *t;
+    struct noalg.map.hdr[*golang.org/x/net/trace.trace]bool *h;
+    struct noalg.map.bucket[*golang.org/x/net/trace.trace]bool *buckets;
+    struct noalg.map.bucket[*golang.org/x/net/trace.trace]bool *bptr;
+    void *overflow;
+    void *oldoverflow;
+    uintptr startBucket;
+    uint8 offset;
+    bool wrapped;
+    uint8 B;
+    uint8 i;
+    uintptr bucket;
+    uintptr checkBucket;
+};
+
+typedef struct google.golang.org/protobuf/internal/impl.bytesConverter google.golang.org/protobuf/internal/impl.bytesConverter, *Pgoogle.golang.org/protobuf/internal/impl.bytesConverter;
+
+struct google.golang.org/protobuf/internal/impl.bytesConverter {
+    reflect.Type goType;
+    struct google.golang.org/protobuf/reflect/protoreflect.Value def;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*int_} noalg.struct_{_F_uintptr;_X0_*int_}, *Pnoalg.struct_{_F_uintptr;_X0_*int_};
+
+struct noalg.struct_{_F_uintptr;_X0_*int_} { // Original name: noalg.struct { F uintptr; X0 *int }
+    uintptr F;
+    int *X0;
+};
+
+typedef struct runtime.iface sort.Interface;
+
+typedef struct google.golang.org/protobuf/internal/filedesc.PlaceholderEnum google.golang.org/protobuf/internal/filedesc.PlaceholderEnum, *Pgoogle.golang.org/protobuf/internal/filedesc.PlaceholderEnum;
+
+struct google.golang.org/protobuf/internal/filedesc.PlaceholderEnum {
+    uint8 *str;
+    int len;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*internal/nettrace.Trace;_X1_*net.sysDialer;_X2_string;_X3_*error_} noalg.struct_{_F_uintptr;_X0_*internal/nettrace.Trace;_X1_*net.sysDialer;_X2_string;_X3_*error_}, *Pnoalg.struct_{_F_uintptr;_X0_*internal/nettrace.Trace;_X1_*net.sysDialer;_X2_string;_X3_*error_};
+
+struct noalg.struct_{_F_uintptr;_X0_*internal/nettrace.Trace;_X1_*net.sysDialer;_X2_string;_X3_*error_} { // Original name: noalg.struct { F uintptr; X0 *internal/nettrace.Trace; X1 *net.sysDialer; X2 string; X3 *error }
+    uintptr F;
+    struct internal/nettrace.Trace *X0;
+    struct net.sysDialer *X1;
+    struct string X2;
+    error *X3;
+};
+
+typedef struct runtime.errorAddressString runtime.errorAddressString, *Pruntime.errorAddressString;
+
+struct runtime.errorAddressString {
+    struct string msg;
+    uintptr addr;
+};
+
+typedef struct google.golang.org/grpc.idlePicker google.golang.org/grpc.idlePicker, *Pgoogle.golang.org/grpc.idlePicker;
+
+struct google.golang.org/grpc.idlePicker {
+    google.golang.org/grpc/balancer.SubConn subConn;
+};
+
+typedef struct []*crypto/tls.CipherSuite []*crypto/tls.CipherSuite, *P[]*crypto/tls.CipherSuite;
+
+struct []*crypto/tls.CipherSuite {
+    struct crypto/tls.CipherSuite **array;
+    int len;
+    int cap;
+};
+
+typedef struct runtime.gcControllerState runtime.gcControllerState, *Pruntime.gcControllerState;
+
+typedef struct internal/cpu.CacheLinePad internal/cpu.CacheLinePad, *Pinternal/cpu.CacheLinePad;
+
+struct internal/cpu.CacheLinePad {
+    uint8 _[64];
+};
+
+struct runtime.gcControllerState {

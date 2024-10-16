@@ -1,0 +1,1000 @@
+  uint extraout_RBX_02;
+  uint num_00;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  error *extraout_RBX_05;
+  error *extraout_RBX_06;
+  error *extraout_RBX_07;
+  error *dstLen;
+  int extraout_R8;
+  int extraout_R8_00;
+  uint uVar6;
+  int *extraout_R11;
+  int *extraout_R11_00;
+  int *extraout_R11_01;
+  int iVar7;
+  int unaff_R14;
+  undefined auVar8 [16];
+  string in_stack_ffffffffffffff30;
+  int in_stack_ffffffffffffff40;
+  error *local_50;
+  int local_48;
+  int local_40;
+  int local_38;
+  void *local_30;
+  void *local_28;
+  void *local_20;
+  void *local_18;
+  int local_10;
+  
+  while (&local_50 <= *(error ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (s == (crypto_x509_CertPool *)0x0) {
+    return;
+  }
+  runtime_mapaccess1_faststr
+            ((internal_abi_MapType *)&DAT_0082dc40,(runtime_hmap *)s->byName,
+             in_stack_ffffffffffffff30,(cert->RawIssuer).array);
+  local_10 = *extraout_RAX;
+  local_40 = extraout_RAX[1];
+  iVar7 = 0;
+  peVar3 = (error *)0x0;
+  peVar4 = (error *)0x0;
+  local_20 = (void *)0x0;
+  num = 0;
+  uVar6 = 0;
+  local_30 = (void *)0x0;
+  num_00 = 0;
+  oldCap = 0;
+  local_28 = (void *)0x0;
+  do {
+    if (local_40 <= iVar7) {
+      peVar4 = (error *)((int)&peVar3->tab + num_00 + num);
+      if (peVar4 != (error *)0x0) {
+        runtime_makeslice((internal_abi_Type *)&DAT_0088f220,0,(int)peVar4,local_20);
+        local_18 = oldPtr;
+        dstLen = peVar3;
+        iVar7 = extraout_R8;
+        if (peVar4 < peVar3) {
+          ~r0_03.cap = in_stack_ffffffffffffff40;
+          ~r0_03.array = in_stack_ffffffffffffff30.str;
+          ~r0_03.len = in_stack_ffffffffffffff30.len;
+          runtime_growslice(oldPtr,(int)peVar3,(int)peVar4,(int)peVar3,
+                            (internal_abi_Type *)&DAT_0088f220,~r0_03);
+          local_18 = extraout_RAX_06;
+          peVar4 = extraout_RCX_05;
+          dstLen = extraout_RBX_05;
+          iVar7 = extraout_R8_00;
+        }
+        local_50 = peVar4;
+        runtime_typedslicecopy
+                  ((internal_abi_Type *)&DAT_0088f220,local_18,(int)dstLen,local_20,(int)peVar3,
+                   iVar7);
+        peVar4 = (error *)((int)&dstLen->tab + num);
+        if (local_50 < peVar4) {
+          ~r0_04.cap = in_stack_ffffffffffffff40;
+          ~r0_04.array = in_stack_ffffffffffffff30.str;
+          ~r0_04.len = in_stack_ffffffffffffff30.len;
+          runtime_growslice(local_18,(int)peVar4,(int)local_50,num,
+                            (internal_abi_Type *)&DAT_0088f220,~r0_04);
+          local_18 = extraout_RAX_07;
+          local_50 = extraout_RCX_06;
+          peVar4 = extraout_RBX_06;
+        }
+        uVar6 = (int)dstLen << 3 & (int)dstLen - (int)local_50 >> 0x3f;
+        runtime_typedslicecopy
+                  ((internal_abi_Type *)&DAT_0088f220,(void *)((int)local_18 + uVar6),
+                   (int)peVar4 - (int)dstLen,local_30,num,uVar6);
+        peVar3 = (error *)((int)&peVar4->tab + num_00);
+        if (local_50 < peVar3) {
+          ~r0_05.cap = in_stack_ffffffffffffff40;
+          ~r0_05.array = in_stack_ffffffffffffff30.str;
+          ~r0_05.len = in_stack_ffffffffffffff30.len;
+          runtime_growslice(local_18,(int)peVar3,(int)local_50,num_00,
+                            (internal_abi_Type *)&DAT_0088f220,~r0_05);
+          local_18 = extraout_RAX_08;
+          local_50 = extraout_RCX_07;
+          peVar3 = extraout_RBX_07;
+        }
+        uVar6 = (int)peVar4 << 3 & (int)peVar4 - (int)local_50 >> 0x3f;
+        runtime_typedslicecopy
+                  ((internal_abi_Type *)&DAT_0088f220,(void *)((int)local_18 + uVar6),
+                   (int)peVar3 - (int)peVar4,local_28,num_00,uVar6);
+        return;
+      }
+      return;
+    }
+    uVar1 = *(uint *)(local_10 + iVar7 * 8);
+    if ((uint)(s->lazyCerts).len <= uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pfVar2 = *(s->lazyCerts).array[uVar1].getCert;
+    local_48 = iVar7;
+    auVar8 = (*pfVar2)((crypto_x509_Certificate **)pfVar2,peVar4);
+    iVar7 = auVar8._0_8_;
+    if (auVar8._8_8_ == 0) {
+      local_38 = iVar7;
+      if ((cert->AuthorityKeyId).len == *(int *)(iVar7 + 0x380)) {
+        runtime_memequal();
+        kidMatch = (bool)extraout_AL;
+      }
+      else {
+        kidMatch = false;
+      }
+      if (kidMatch == false) {
+        if (*(int *)(local_38 + 0x380) == 0) {
+          if ((cert->AuthorityKeyId).len == 0) {
+LAB_0068c79f:
+            num_00 = num_00 + 1;
+            pvVar5 = local_28;
+            if (oldCap < num_00) {
+              ~r0_02.cap = in_stack_ffffffffffffff40;
+              ~r0_02.array = in_stack_ffffffffffffff30.str;
+              ~r0_02.len = in_stack_ffffffffffffff30.len;
+              runtime_growslice(local_28,num_00,oldCap,1,(internal_abi_Type *)&DAT_0088f220,~r0_02);
+              oldCap = extraout_RCX_03;
+              pvVar5 = extraout_RAX_04;
+              num_00 = extraout_RBX_03;
+            }
+            iVar7 = local_38;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_01 = extraout_RAX_05;
+              extraout_R11_01[1] = *(int *)((int)pvVar5 + extraout_RBX_04 * 8 + -8);
+              iVar7 = extraout_RAX_05;
+              oldCap = extraout_RCX_04;
+              num_00 = extraout_RBX_04;
+            }
+            *(int *)((int)pvVar5 + num_00 * 8 + -8) = iVar7;
+            local_28 = pvVar5;
+            goto LAB_0068c4d4;
+          }
+        }
+        else if ((cert->AuthorityKeyId).len != 0) goto LAB_0068c79f;
+        num = num + 1;
+        pvVar5 = local_30;
+        if (uVar6 < num) {
+          ~r0_01.cap = in_stack_ffffffffffffff40;
+          ~r0_01.array = in_stack_ffffffffffffff30.str;
+          ~r0_01.len = in_stack_ffffffffffffff30.len;
+          runtime_growslice(local_30,num,uVar6,1,(internal_abi_Type *)&DAT_0088f220,~r0_01);
+          uVar6 = extraout_RCX_01;
+          pvVar5 = extraout_RAX_02;
+          num = extraout_RBX_01;
+        }
+        iVar7 = local_38;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = extraout_RAX_03;
+          extraout_R11_00[1] = *(int *)((int)pvVar5 + extraout_RBX_02 * 8 + -8);
+          iVar7 = extraout_RAX_03;
+          uVar6 = extraout_RCX_02;
+          num = extraout_RBX_02;
+        }
+        *(int *)((int)pvVar5 + num * 8 + -8) = iVar7;
+        local_30 = pvVar5;
+      }
+      else {
+        peVar3 = (error *)((int)&peVar3->tab + 1);
+        pvVar5 = local_20;
+        if (peVar4 < peVar3) {
+          ~r0_00.cap = in_stack_ffffffffffffff40;
+          ~r0_00.array = in_stack_ffffffffffffff30.str;
+          ~r0_00.len = in_stack_ffffffffffffff30.len;
+          runtime_growslice(local_20,(int)peVar3,(int)peVar4,1,(internal_abi_Type *)&DAT_0088f220,
+                            ~r0_00);
+          peVar4 = extraout_RCX;
+          pvVar5 = extraout_RAX_00;
+          peVar3 = extraout_RBX;
+        }
+        iVar7 = local_38;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RAX_01;
+          extraout_R11[1] = *(int *)((int)pvVar5 + (int)extraout_RBX_00 * 8 + -8);
+          iVar7 = extraout_RAX_01;
+          peVar4 = extraout_RCX_00;
+          peVar3 = extraout_RBX_00;
+        }
+        local_20 = pvVar5;
+        *(int *)((int)local_20 + (int)peVar3 * 8 + -8) = iVar7;
+      }
+    }
+LAB_0068c4d4:
+    iVar7 = local_48 + 1;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_x509___CertPool__AddCert(crypto_x509_CertPool *s,crypto_x509_Certificate *cert)
+
+{
+  uint oldCap;
+  string ~r0;
+  string s_00;
+  string s_01;
+  interface___ e;
+  interface___ e_00;
+  __uint8 data;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  __uint8 ~r0_02;
+  uint8 ~r0_03 [28];
+  void *extraout_RAX;
+  code **extraout_RAX_00;
+  code **extraout_RAX_01;
+  char *extraout_RAX_02;
+  undefined *extraout_RAX_03;
+  undefined8 extraout_RAX_04;
+  crypto_x509_lazyCert *extraout_RAX_05;
+  crypto_x509_lazyCert *extraout_RAX_06;
+  crypto_x509_lazyCert *oldPtr;
+  undefined8 extraout_RAX_07;
+  void **extraout_RAX_08;
+  void *extraout_RAX_09;
+  void *extraout_RAX_10;
+  void *pvVar1;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  void *extraout_RCX_01;
+  void *~r0_04;
+  int extraout_RBX;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  void *newLen;
+  void *extraout_RBX_02;
+  void *extraout_RBX_03;
+  int iVar2;
+  int extraout_RSI;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_05;
+  uint newLen_00;
+  crypto_x509_lazyCert *extraout_R8;
+  crypto_x509_Certificate **extraout_R11;
+  crypto_x509_lazyCert **extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  void **extraout_R11_02;
+  int unaff_R14;
+  undefined4 in_stack_ffffffffffffff48;
+  undefined4 in_stack_ffffffffffffff4c;
+  undefined4 in_stack_ffffffffffffff50;
+  undefined4 in_stack_ffffffffffffff54;
+  undefined4 in_stack_ffffffffffffff58;
+  undefined4 in_stack_ffffffffffffff5c;
+  undefined4 in_stack_ffffffffffffff60;
+  undefined in_stack_ffffffffffffff64 [12];
+  undefined in_stack_ffffffffffffff70 [12];
+  undefined local_60 [40];
+  undefined auStack_38 [16];
+  void *local_28;
+  void **local_20;
+  undefined8 local_18;
+  code **local_10;
+  
+  while (auStack_38 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (cert == (crypto_x509_Certificate *)0x0) {
+    e_00._type._4_4_ = in_stack_ffffffffffffff4c;
+    e_00._type._0_4_ = in_stack_ffffffffffffff48;
+    e_00.data._0_4_ = in_stack_ffffffffffffff50;
+    e_00.data._4_4_ = in_stack_ffffffffffffff54;
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(e_00);
+  }
+  data.array._4_4_ = in_stack_ffffffffffffff4c;
+  data.array._0_4_ = in_stack_ffffffffffffff48;
+  data.len._0_4_ = in_stack_ffffffffffffff50;
+  data.len._4_4_ = in_stack_ffffffffffffff54;
+  data.cap._0_4_ = in_stack_ffffffffffffff58;
+  data.cap._4_4_ = in_stack_ffffffffffffff5c;
+  ~r0_03[4] = in_stack_ffffffffffffff64[0];
+  ~r0_03[5] = in_stack_ffffffffffffff64[1];
+  ~r0_03[6] = in_stack_ffffffffffffff64[2];
+  ~r0_03[7] = in_stack_ffffffffffffff64[3];
+  ~r0_03[8] = in_stack_ffffffffffffff64[4];
+  ~r0_03[9] = in_stack_ffffffffffffff64[5];
+  ~r0_03[10] = in_stack_ffffffffffffff64[6];
+  ~r0_03[11] = in_stack_ffffffffffffff64[7];
+  ~r0_03[12] = in_stack_ffffffffffffff64[8];
+  ~r0_03[13] = in_stack_ffffffffffffff64[9];
+  ~r0_03[14] = in_stack_ffffffffffffff64[10];
+  ~r0_03[15] = in_stack_ffffffffffffff64[11];
+  ~r0_03[0] = (char)in_stack_ffffffffffffff60;
+  ~r0_03[1] = (char)((dword)in_stack_ffffffffffffff60 >> 8);
+  ~r0_03[2] = (char)((dword)in_stack_ffffffffffffff60 >> 0x10);
+  ~r0_03[3] = (char)((dword)in_stack_ffffffffffffff60 >> 0x18);
+  ~r0_03[16] = in_stack_ffffffffffffff70[0];
+  ~r0_03[17] = in_stack_ffffffffffffff70[1];
+  ~r0_03[18] = in_stack_ffffffffffffff70[2];
+  ~r0_03[19] = in_stack_ffffffffffffff70[3];
+  ~r0_03[20] = in_stack_ffffffffffffff70[4];
+  ~r0_03[21] = in_stack_ffffffffffffff70[5];
+  ~r0_03[22] = in_stack_ffffffffffffff70[6];
+  ~r0_03[23] = in_stack_ffffffffffffff70[7];
+  ~r0_03[24] = in_stack_ffffffffffffff70[8];
+  ~r0_03[25] = in_stack_ffffffffffffff70[9];
+  ~r0_03[26] = in_stack_ffffffffffffff70[10];
+  ~r0_03[27] = in_stack_ffffffffffffff70[11];
+  crypto_sha256_Sum224(data,~r0_03);
+  ~r0.str._4_4_ = in_stack_ffffffffffffff4c;
+  ~r0.str._0_4_ = in_stack_ffffffffffffff48;
+  ~r0.len._0_4_ = in_stack_ffffffffffffff50;
+  ~r0.len._4_4_ = in_stack_ffffffffffffff54;
+  runtime_slicebytetostring
+            ((runtime_tmpBuf *)0x0,(cert->RawSubject).array,(cert->RawSubject).len,~r0);
+  local_28 = extraout_RAX;
+  runtime_newobject((internal_abi_Type *)&DAT_00849660,~r0_04);
+  *extraout_RAX_00 = crypto_x509___CertPool__AddCert_func1;
+  local_10 = extraout_RAX_00;
+  pvVar1 = extraout_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = cert;
+    local_10 = extraout_RAX_01;
+    pvVar1 = extraout_RDI_00;
+  }
+  local_10[1] = (code *)cert;
+  if (local_10 == (code **)0x0) {
+    e._type._4_4_ = in_stack_ffffffffffffff4c;
+    e._type._0_4_ = in_stack_ffffffffffffff48;
+    e.data._0_4_ = in_stack_ffffffffffffff50;
+    e.data._4_4_ = in_stack_ffffffffffffff54;
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(e);
+  }
+  runtime_mapaccess1((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)s->haveSum,local_60,
+                     pvVar1);
+  if (*extraout_RAX_02 == '\0') {
+    runtime_mapassign((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)s->haveSum,local_60,
+                      ~r0_05);
+    *extraout_RAX_03 = 1;
+    s_00.str._4_4_ = in_stack_ffffffffffffff4c;
+    s_00.str._0_4_ = in_stack_ffffffffffffff48;
+    s_00.len._0_4_ = in_stack_ffffffffffffff50;
+    s_00.len._4_4_ = in_stack_ffffffffffffff54;
+    ~r0_02.array._4_4_ = in_stack_ffffffffffffff5c;
+    ~r0_02.array._0_4_ = in_stack_ffffffffffffff58;
+    ~r0_02.len._0_4_ = in_stack_ffffffffffffff60;
+    ~r0_02._12_12_ = in_stack_ffffffffffffff64;
+    runtime_stringtoslicebyte((runtime_tmpBuf *)0x0,s_00,~r0_02);
+    oldCap = (s->lazyCerts).cap;
+    newLen_00 = (s->lazyCerts).len + 1;
+    oldPtr = (s->lazyCerts).array;
+    local_18 = extraout_RAX_04;
+    if (oldCap < newLen_00) {
+      ~r0_00.array._4_4_ = in_stack_ffffffffffffff4c;
+      ~r0_00.array._0_4_ = in_stack_ffffffffffffff48;
+      ~r0_00.len._0_4_ = in_stack_ffffffffffffff50;
+      ~r0_00.len._4_4_ = in_stack_ffffffffffffff54;
+      ~r0_00.cap._0_4_ = in_stack_ffffffffffffff58;
+      ~r0_00.cap._4_4_ = in_stack_ffffffffffffff5c;
+      runtime_growslice(oldPtr,newLen_00,oldCap,1,(internal_abi_Type *)&DAT_00854d40,~r0_00);
+      (s->lazyCerts).cap = extraout_RCX_00;
+      oldPtr = extraout_RAX_05;
+      newLen_00 = extraout_RBX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX_06;
+        extraout_R11_00[1] = (s->lazyCerts).array;
+        oldPtr = extraout_RAX_06;
+        newLen_00 = extraout_RBX_01;
+      }
+      (s->lazyCerts).array = oldPtr;
+    }
+    (s->lazyCerts).len = newLen_00;
+    iVar2 = (newLen_00 - 8) * 0x20 + 0xe0;
+    oldPtr[newLen_00 - 1].rawSubject.len = extraout_RBX;
+    oldPtr[newLen_00 - 1].rawSubject.cap = extraout_RCX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier4();
+      *extraout_R11_01 = extraout_RAX_07;
+      extraout_R11_01[1] = *(undefined8 *)((int)&(extraout_R8->rawSubject).array + extraout_RSI);
+      extraout_R11_01[2] = local_10;
+      extraout_R11_01[3] = *(undefined8 *)((int)&extraout_R8->getCert + extraout_RSI);
+      local_18 = extraout_RAX_07;
+      iVar2 = extraout_RSI;
+      oldPtr = extraout_R8;
+    }
+    *(undefined8 *)((int)&(oldPtr->rawSubject).array + iVar2) = local_18;
+    *(code ***)((int)&oldPtr->getCert + iVar2) = local_10;
+    iVar2 = (s->lazyCerts).len;
+    s_01.str._4_4_ = in_stack_ffffffffffffff4c;
+    s_01.str._0_4_ = in_stack_ffffffffffffff48;
+    s_01.len._0_4_ = in_stack_ffffffffffffff50;
+    s_01.len._4_4_ = in_stack_ffffffffffffff54;
+    runtime_mapassign_faststr
+              ((internal_abi_MapType *)&DAT_0082dc40,(runtime_hmap *)s->byName,s_01,local_28);
+    newLen = (void *)((int)extraout_RAX_08[1] + 1);
+    pvVar1 = *extraout_RAX_08;
+    local_20 = extraout_RAX_08;
+    if (extraout_RAX_08[2] < newLen) {
+      ~r0_01.array._4_4_ = in_stack_ffffffffffffff4c;
+      ~r0_01.array._0_4_ = in_stack_ffffffffffffff48;
+      ~r0_01.len._0_4_ = in_stack_ffffffffffffff50;
+      ~r0_01.len._4_4_ = in_stack_ffffffffffffff54;
+      ~r0_01.cap._0_4_ = in_stack_ffffffffffffff58;
+      ~r0_01.cap._4_4_ = in_stack_ffffffffffffff5c;
+      runtime_growslice(pvVar1,(int)newLen,(int)extraout_RAX_08[2],1,
+                        (internal_abi_Type *)&DAT_00807760,~r0_01);
+      local_20[2] = extraout_RCX_01;
+      pvVar1 = extraout_RAX_09;
+      newLen = extraout_RBX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = extraout_RAX_10;
+        extraout_R11_02[1] = *local_20;
+        pvVar1 = extraout_RAX_10;
+        newLen = extraout_RBX_03;
+      }
+      *local_20 = pvVar1;
+    }
+    local_20[1] = newLen;
+    *(int *)((int)pvVar1 + (int)newLen * 8 + -8) = iVar2 + -1;
+  }
+  return;
+}
+
+
+
+void crypto_x509___CertPool__AddCert_func1(crypto_x509_Certificate *~r0,error ~r1)
+
+{
+  crypto_x509_Certificate *cert;
+  
+  return;
+}
+
+
+
+void crypto_x509___CertPool__AppendCertsFromPEM(crypto_x509_CertPool *s,__uint8 pemCerts,bool ok)
+
+{
+  int *piVar1;
+  crypto_x509_Certificate *pcVar2;
+  uint oldCap;
+  string ~r0;
+  string s_00;
+  string s_01;
+  interface___ e;
+  __uint8 data;
+  __uint8 der;
+  __uint8 data_00;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  __uint8 ~r0_02;
+  error ~r1;
+  __uint8 rest;
+  uint8 ~r0_03 [28];
+  int **extraout_RAX;
+  encoding_pem_Block *block;
+  crypto_x509_Certificate **extraout_RAX_00;
+  __uint8 *_certBytes;
+  crypto_x509_Certificate **extraout_RAX_01;
+  int extraout_RAX_02;
+  crypto_x509_Certificate *cert;
+  code *extraout_RAX_03;
+  struct___sync_Once__crypto_x509_v__crypto_x509_Certificate__ *_lazyCert;
+  void *extraout_RAX_04;
+  code **extraout_RAX_05;
+  code **extraout_RAX_06;
+  char *extraout_RAX_07;
+  undefined *extraout_RAX_08;
+  undefined8 extraout_RAX_09;
+  crypto_x509_lazyCert *extraout_RAX_10;
+  crypto_x509_lazyCert *extraout_RAX_11;
+  crypto_x509_lazyCert *oldPtr;
+  undefined8 extraout_RAX_12;
+  void **extraout_RAX_13;
+  void *extraout_RAX_14;
+  void *extraout_RAX_15;
+  void *pvVar3;
+  int in_RCX;
+  int extraout_RCX;
+  crypto_x509_Certificate *extraout_RCX_00;
+  crypto_x509_Certificate *~r0_04;
+  int extraout_RCX_01;
+  int extraout_RCX_02;
+  void *extraout_RCX_03;
+  crypto_x509_CertPool *pcVar4;
+  undefined7 in_register_00000019;
+  encoding_pem_Block *~r0_05;
+  int extraout_RBX;
+  void *~r0_06;
+  int extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  void *newLen;
+  void *extraout_RBX_03;
+  void *extraout_RBX_04;
+  int iVar5;
+  int extraout_RSI;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_07;
+  uint newLen_00;
+  crypto_x509_lazyCert *extraout_R8;
+  crypto_x509_Certificate **extraout_R11;
+  code **extraout_R11_00;
+  crypto_x509_lazyCert **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  void **extraout_R11_03;
+  int unaff_R14;
+  undefined4 in_stack_ffffffffffffff08;
+  undefined4 in_stack_ffffffffffffff0c;
+  undefined4 in_stack_ffffffffffffff10;
+  undefined4 in_stack_ffffffffffffff14;
+  undefined4 in_stack_ffffffffffffff18;
+  undefined4 in_stack_ffffffffffffff1c;
+  undefined4 in_stack_ffffffffffffff20;
+  undefined in_stack_ffffffffffffff24 [12];
+  int in_stack_ffffffffffffff30;
+  undefined4 in_stack_ffffffffffffff38;
+  undefined local_88 [16];
+  undefined local_78 [40];
+  void *local_50;
+  int local_48;
+  int **local_40;
+  void **local_38;
+  undefined8 local_30;
+  code **local_28;
+  encoding_pem_Block *local_20;
+  code *local_18;
+  crypto_x509_Certificate **local_10;
+  
+  while (local_20 = (encoding_pem_Block *)CONCAT71(in_register_00000019,ok),
+        local_78 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  while( true ) {
+    do {
+      do {
+        do {
+          if ((in_RCX == 0) ||
+             (data.array._4_4_ = in_stack_ffffffffffffff0c,
+             data.array._0_4_ = in_stack_ffffffffffffff08,
+             data.len._0_4_ = in_stack_ffffffffffffff10, data.len._4_4_ = in_stack_ffffffffffffff14,
+             data.cap._0_4_ = in_stack_ffffffffffffff18, data.cap._4_4_ = in_stack_ffffffffffffff1c,
+             rest._4_12_ = in_stack_ffffffffffffff24, rest.array._0_4_ = in_stack_ffffffffffffff20,
+             rest.cap = in_stack_ffffffffffffff30, encoding_pem_Decode(data,local_20,rest),
+             extraout_RAX == (int **)0x0)) {
+            return;
+          }
+          in_RCX = extraout_RCX;
+          local_20 = ~r0_05;
+        } while ((((extraout_RAX[1] != (int *)0xb) ||
+                  (piVar1 = *extraout_RAX, *piVar1 != 0x4349464954524543)) ||
+                 (*(short *)(piVar1 + 1) != 0x5441)) || (*(char *)((int)piVar1 + 10) != 'E'));
+        if (extraout_RAX[2] == (int *)0x0) {
+          iVar5 = 0;
+        }
+        else {
+          iVar5 = *extraout_RAX[2];
+        }
+      } while (iVar5 != 0);
+      local_40 = extraout_RAX;
+      runtime_newobject((internal_abi_Type *)&DAT_00801a20,~r0_05);
+      pcVar2 = (crypto_x509_Certificate *)local_40[5];
+      ~r0_04 = (crypto_x509_Certificate *)local_40[3];
+      extraout_RAX_00[1] = (crypto_x509_Certificate *)local_40[4];
+      extraout_RAX_00[2] = pcVar2;
+      local_10 = extraout_RAX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = extraout_RCX_00;
+        local_10 = extraout_RAX_01;
+        ~r0_04 = extraout_RCX_00;
+      }
+      *local_10 = ~r0_04;
+      der.array._4_4_ = in_stack_ffffffffffffff0c;
+      der.array._0_4_ = in_stack_ffffffffffffff08;
+      der.len._0_4_ = in_stack_ffffffffffffff10;
+      der.len._4_4_ = in_stack_ffffffffffffff14;
+      der.cap._0_4_ = in_stack_ffffffffffffff18;
+      der.cap._4_4_ = in_stack_ffffffffffffff1c;
+      ~r1._4_12_ = in_stack_ffffffffffffff24;
+      ~r1.tab._0_4_ = in_stack_ffffffffffffff20;
+      crypto_x509_ParseCertificate(der,~r0_04,~r1);
+    } while (extraout_RBX != 0);
+    local_48 = extraout_RAX_02;
+    runtime_newobject((internal_abi_Type *)&DAT_008496e0,(void *)0x0);
+    data_00.array._4_4_ = in_stack_ffffffffffffff0c;
+    data_00.array._0_4_ = in_stack_ffffffffffffff08;
+    data_00.len._0_4_ = in_stack_ffffffffffffff10;
+    data_00.len._4_4_ = in_stack_ffffffffffffff14;
+    data_00.cap._0_4_ = in_stack_ffffffffffffff18;
+    data_00.cap._4_4_ = in_stack_ffffffffffffff1c;
+    ~r0_03[4] = in_stack_ffffffffffffff24[0];
+    ~r0_03[5] = in_stack_ffffffffffffff24[1];
+    ~r0_03[6] = in_stack_ffffffffffffff24[2];
+    ~r0_03[7] = in_stack_ffffffffffffff24[3];
+    ~r0_03[8] = in_stack_ffffffffffffff24[4];
+    ~r0_03[9] = in_stack_ffffffffffffff24[5];
+    ~r0_03[10] = in_stack_ffffffffffffff24[6];
+    ~r0_03[11] = in_stack_ffffffffffffff24[7];
+    ~r0_03[12] = in_stack_ffffffffffffff24[8];
+    ~r0_03[13] = in_stack_ffffffffffffff24[9];
+    ~r0_03[14] = in_stack_ffffffffffffff24[10];
+    ~r0_03[15] = in_stack_ffffffffffffff24[11];
+    ~r0_03[0] = (char)in_stack_ffffffffffffff20;
+    ~r0_03[1] = (char)((dword)in_stack_ffffffffffffff20 >> 8);
+    ~r0_03[2] = (char)((dword)in_stack_ffffffffffffff20 >> 0x10);
+    ~r0_03[3] = (char)((dword)in_stack_ffffffffffffff20 >> 0x18);
+    ~r0_03[16] = (char)in_stack_ffffffffffffff30;
+    ~r0_03[17] = (char)((uint)in_stack_ffffffffffffff30 >> 8);
+    ~r0_03[18] = (char)((uint)in_stack_ffffffffffffff30 >> 0x10);
+    ~r0_03[19] = (char)((uint)in_stack_ffffffffffffff30 >> 0x18);
+    ~r0_03[20] = (char)((uint)in_stack_ffffffffffffff30 >> 0x20);
+    ~r0_03[21] = (char)((uint)in_stack_ffffffffffffff30 >> 0x28);
+    ~r0_03[22] = (char)((uint)in_stack_ffffffffffffff30 >> 0x30);
+    ~r0_03[23] = (char)((uint)in_stack_ffffffffffffff30 >> 0x38);
+    ~r0_03[24] = (char)in_stack_ffffffffffffff38;
+    ~r0_03[25] = (char)((dword)in_stack_ffffffffffffff38 >> 8);
+    ~r0_03[26] = (char)((dword)in_stack_ffffffffffffff38 >> 0x10);
+    ~r0_03[27] = (char)((dword)in_stack_ffffffffffffff38 >> 0x18);
+    local_18 = extraout_RAX_03;
+    crypto_sha256_Sum224(data_00,~r0_03);
+    ~r0.str._4_4_ = in_stack_ffffffffffffff0c;
+    ~r0.str._0_4_ = in_stack_ffffffffffffff08;
+    ~r0.len._0_4_ = in_stack_ffffffffffffff10;
+    ~r0.len._4_4_ = in_stack_ffffffffffffff14;
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,*(uint8 **)(local_48 + 0x48),*(int *)(local_48 + 0x50),~r0);
+    local_50 = extraout_RAX_04;
+    runtime_newobject((internal_abi_Type *)&DAT_0085b120,~r0_06);
+    *extraout_RAX_05 = crypto_x509___CertPool__AppendCertsFromPEM_func1;
+    local_28 = extraout_RAX_05;
+    pvVar3 = extraout_RDI;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = local_18;
+      extraout_R11_00[1] = (code *)local_10;
+      local_28 = extraout_RAX_06;
+      pvVar3 = extraout_RDI_00;
+    }
+    local_28[1] = local_18;
+    local_28[2] = (code *)local_10;
+    if (local_28 == (code **)0x0) break;
+    runtime_mapaccess1((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)s->haveSum,local_88,
+                       pvVar3);
+    if (*extraout_RAX_07 == '\0') {
+      runtime_mapassign((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)s->haveSum,local_88,
+                        ~r0_07);
+      *extraout_RAX_08 = 1;
+      s_00.str._4_4_ = in_stack_ffffffffffffff0c;
+      s_00.str._0_4_ = in_stack_ffffffffffffff08;
+      s_00.len._0_4_ = in_stack_ffffffffffffff10;
+      s_00.len._4_4_ = in_stack_ffffffffffffff14;
+      ~r0_02.array._4_4_ = in_stack_ffffffffffffff1c;
+      ~r0_02.array._0_4_ = in_stack_ffffffffffffff18;
+      ~r0_02.len._0_4_ = in_stack_ffffffffffffff20;
+      ~r0_02._12_12_ = in_stack_ffffffffffffff24;
+      runtime_stringtoslicebyte((runtime_tmpBuf *)0x0,s_00,~r0_02);
+      oldCap = (s->lazyCerts).cap;
+      newLen_00 = (s->lazyCerts).len + 1;
+      oldPtr = (s->lazyCerts).array;
+      local_30 = extraout_RAX_09;
+      pcVar4 = s;
+      if (oldCap < newLen_00) {
+        ~r0_00.array._4_4_ = in_stack_ffffffffffffff0c;
+        ~r0_00.array._0_4_ = in_stack_ffffffffffffff08;
+        ~r0_00.len._0_4_ = in_stack_ffffffffffffff10;
+        ~r0_00.len._4_4_ = in_stack_ffffffffffffff14;
+        ~r0_00.cap._0_4_ = in_stack_ffffffffffffff18;
+        ~r0_00.cap._4_4_ = in_stack_ffffffffffffff1c;
+        runtime_growslice(oldPtr,newLen_00,oldCap,1,(internal_abi_Type *)&DAT_00854d40,~r0_00);
+        (s->lazyCerts).cap = extraout_RCX_02;
+        oldPtr = extraout_RAX_10;
+        newLen_00 = extraout_RBX_01;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_01 = extraout_RAX_11;
+          extraout_R11_01[1] = (pcVar4->lazyCerts).array;
+          oldPtr = extraout_RAX_11;
+          newLen_00 = extraout_RBX_02;
+        }
+        (pcVar4->lazyCerts).array = oldPtr;
+      }
+      (pcVar4->lazyCerts).len = newLen_00;
+      iVar5 = (newLen_00 - 8) * 0x20 + 0xe0;
+      oldPtr[newLen_00 - 1].rawSubject.len = extraout_RBX_00;
+      oldPtr[newLen_00 - 1].rawSubject.cap = extraout_RCX_01;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier4();
+        *extraout_R11_02 = extraout_RAX_12;
+        extraout_R11_02[1] = *(undefined8 *)((int)&(extraout_R8->rawSubject).array + extraout_RSI);
+        extraout_R11_02[2] = local_28;
+        extraout_R11_02[3] = *(undefined8 *)((int)&extraout_R8->getCert + extraout_RSI);
+        local_30 = extraout_RAX_12;
+        iVar5 = extraout_RSI;
+        oldPtr = extraout_R8;
+      }
+      *(undefined8 *)((int)&(oldPtr->rawSubject).array + iVar5) = local_30;
+      *(code ***)((int)&oldPtr->getCert + iVar5) = local_28;
+      iVar5 = (pcVar4->lazyCerts).len;
+      s_01.str._4_4_ = in_stack_ffffffffffffff0c;
+      s_01.str._0_4_ = in_stack_ffffffffffffff08;
+      s_01.len._0_4_ = in_stack_ffffffffffffff10;
+      s_01.len._4_4_ = in_stack_ffffffffffffff14;
+      runtime_mapassign_faststr
+                ((internal_abi_MapType *)&DAT_0082dc40,(runtime_hmap *)pcVar4->byName,s_01,local_50)
+      ;
+      newLen = (void *)((int)extraout_RAX_13[1] + 1);
+      pvVar3 = *extraout_RAX_13;
+      local_38 = extraout_RAX_13;
+      if (extraout_RAX_13[2] < newLen) {
+        ~r0_01.array._4_4_ = in_stack_ffffffffffffff0c;
+        ~r0_01.array._0_4_ = in_stack_ffffffffffffff08;
+        ~r0_01.len._0_4_ = in_stack_ffffffffffffff10;
+        ~r0_01.len._4_4_ = in_stack_ffffffffffffff14;
+        ~r0_01.cap._0_4_ = in_stack_ffffffffffffff18;
+        ~r0_01.cap._4_4_ = in_stack_ffffffffffffff1c;
+        runtime_growslice(pvVar3,(int)newLen,(int)extraout_RAX_13[2],1,
+                          (internal_abi_Type *)&DAT_00807760,~r0_01);
+        local_38[2] = extraout_RCX_03;
+        pvVar3 = extraout_RAX_14;
+        newLen = extraout_RBX_03;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_03 = extraout_RAX_15;
+          extraout_R11_03[1] = *local_38;
+          pvVar3 = extraout_RAX_15;
+          newLen = extraout_RBX_04;
+        }
+        *local_38 = pvVar3;
+      }
+      local_38[1] = newLen;
+      *(int *)((int)pvVar3 + (int)newLen * 8 + -8) = iVar5 + -1;
+    }
+  }
+  e._type._4_4_ = in_stack_ffffffffffffff0c;
+  e._type._0_4_ = in_stack_ffffffffffffff08;
+  e.data._0_4_ = in_stack_ffffffffffffff10;
+  e.data._4_4_ = in_stack_ffffffffffffff14;
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(e);
+}
+
+
+
+void crypto_x509___CertPool__AppendCertsFromPEM_func1(crypto_x509_Certificate *~r0,error ~r1)
+
+{
+  struct___sync_Once__crypto_x509_v__crypto_x509_Certificate__ *_lazyCert;
+  int in_RDX;
+  __uint8 *_certBytes;
+  int unaff_R14;
+  undefined local_20 [16];
+  undefined8 local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  local_20._8_8_ = *(sync_Once **)(in_RDX + 8);
+  local_10 = *(undefined8 *)(in_RDX + 0x10);
+  local_20._0_8_ = crypto_x509___CertPool__AppendCertsFromPEM_func1_1;
+  if (*(uint32 *)local_20._8_8_ == 0) {
+    sync___Once__doSlow((sync_Once *)local_20._8_8_,(func__ **)local_20);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_x509___CertPool__AppendCertsFromPEM_func1_1(void)
+
+{
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 uVar1;
+  crypto_x509_Certificate **extraout_RAX_01;
+  crypto_x509_Certificate **ppcVar2;
+  undefined8 extraout_RCX;
+  int in_RDX;
+  struct___sync_Once__crypto_x509_v__crypto_x509_Certificate__ *_lazyCert;
+  __uint8 *_certBytes;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  __uint8 in_stack_ffffffffffffffd0;
+  runtime_itab *prVar3;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  ppcVar2 = *(crypto_x509_Certificate ***)(in_RDX + 0x10);
+  prVar3 = ((error *)(in_RDX + 8))->tab;
+  crypto_x509_ParseCertificate(in_stack_ffffffffffffffd0,*ppcVar2,*(error *)(in_RDX + 8));
+  uVar1 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = *(undefined8 *)&prVar3->hash;
+    uVar1 = extraout_RAX_00;
+  }
+  prVar3->hash = (sdword)uVar1;
+  prVar3->_[0] = (char)((uint)uVar1 >> 0x20);
+  prVar3->_[1] = (char)((uint)uVar1 >> 0x28);
+  prVar3->_[2] = (char)((uint)uVar1 >> 0x30);
+  prVar3->_[3] = (char)((uint)uVar1 >> 0x38);
+  *(undefined (*) [16])(ppcVar2 + 1) = in_XMM15;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RCX;
+    ppcVar2 = extraout_RAX_01;
+  }
+  *ppcVar2 = (crypto_x509_Certificate *)0x0;
+  return;
+}
+
+
+
+void crypto_x509___CertPool__Subjects(crypto_x509_CertPool *s,____uint8 ~r0)
+
+{
+  int iVar1;
+  int extraout_RAX;
+  int iVar2;
+  int extraout_RAX_00;
+  uint len;
+  uint extraout_RCX;
+  int iVar3;
+  int i;
+  int extraout_RBX;
+  crypto_x509_lazyCert *pcVar4;
+  crypto_x509_lazyCert *extraout_RSI;
+  void *in_RDI;
+  void *extraout_RDI;
+  int iVar5;
+  int extraout_R9;
+  uint8 *puVar6;
+  uint8 *extraout_R10;
+  uint8 **extraout_R11;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  if (s == (crypto_x509_CertPool *)0x0) {
+    len = 0;
+  }
+  else {
+    len = (s->lazyCerts).len;
+  }
+  runtime_makeslice((internal_abi_Type *)&DAT_00801a20,len,len,in_RDI);
+  pcVar4 = (s->lazyCerts).array;
+  iVar3 = (s->lazyCerts).len;
+  i = 0;
+  iVar2 = extraout_RAX;
+  while( true ) {
+    if (iVar3 <= i) {
+      return;
+    }
+    if (len <= (uint)i) break;
+    iVar1 = (pcVar4->rawSubject).cap;
+    iVar5 = i * 3;
+    puVar6 = (pcVar4->rawSubject).array;
+    *(int *)(iVar2 + 8 + i * 0x18) = (pcVar4->rawSubject).len;
+    *(int *)(iVar2 + 0x10 + i * 0x18) = iVar1;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_R10;
+      extraout_R11[1] = *(uint8 **)(extraout_RAX_00 + extraout_R9 * 8);
+      iVar2 = extraout_RAX_00;
+      len = extraout_RCX;
+      i = extraout_RBX;
+      pcVar4 = extraout_RSI;
+      iVar5 = extraout_R9;
+      puVar6 = extraout_R10;
+    }
+    *(uint8 **)(iVar2 + iVar5 * 8) = puVar6;
+    pcVar4 = pcVar4 + 1;
+    i = i + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void crypto_x509___CertPool__Equal(crypto_x509_CertPool *s,crypto_x509_CertPool *other,bool ~r0)
+
+{
+  char *extraout_RAX;
+  map_crypto_x509_sum224_bool h;
+  int iVar1;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_00;
+  int iVar2;
+  int unaff_R14;
+  crypto_x509_CertPool *pcStack0000000000000010;
+  undefined4 local_84;
+  undefined4 uStack_80;
+  undefined4 uStack_7c;
+  undefined4 uStack_78;
+  undefined4 uStack_74;
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  runtime_hiter local_68;
+  
+  pcStack0000000000000010 = other;
+  while (&local_68.offset <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((s == (crypto_x509_CertPool *)0x0) || (pcStack0000000000000010 == (crypto_x509_CertPool *)0x0)
+     ) {
+    return;
+  }
+  if (pcStack0000000000000010->systemPool == s->systemPool) {
+    h = s->haveSum;
+    if (h == (map_crypto_x509_sum224_bool)0x0) {
+      iVar1 = 0;
+    }
+    else {
+      iVar1 = h->count;
+    }
+    if (pcStack0000000000000010->haveSum == (map_crypto_x509_sum224_bool)0x0) {
+      iVar2 = 0;
+    }
+    else {
+      iVar2 = pcStack0000000000000010->haveSum->count;
+    }
+    if (iVar2 == iVar1) {
+      FUN_0046cdab();
+      runtime_mapiterinit((internal_abi_MapType *)&DAT_0082dbe0,(runtime_hmap *)h,&local_68);
+      ~r0_00 = extraout_RDI;
+      while( true ) {
+        if ((undefined4 *)local_68.key == (undefined4 *)0x0) {
+          return;
+        }
+                    // WARNING: Load size is inaccurate
+        local_84 = *local_68.key;
+        uStack_80 = *(undefined4 *)((int)local_68.key + 4);
+        uStack_7c = *(undefined4 *)((int)local_68.key + 8);
+        uStack_78 = *(undefined4 *)((int)local_68.key + 0xc);
+        uStack_74 = *(undefined4 *)((int)local_68.key + 0x10);
+        uStack_70 = *(undefined4 *)((int)local_68.key + 0x14);
+        uStack_6c = *(undefined4 *)((int)local_68.key + 0x18);
+        runtime_mapaccess1((internal_abi_MapType *)&DAT_0082dbe0,
+                           (runtime_hmap *)pcStack0000000000000010->haveSum,&local_84,~r0_00);
+        if (*extraout_RAX == '\0') break;
+        runtime_mapiternext(&local_68);
+        ~r0_00 = extraout_RDI_00;
+      }
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509_parseASN1String
+               (vendor_golang_org_x_crypto_cryptobyte_asn1_Tag tag,__uint8 value,string ~r0,
+               error ~r1)
+
+{
+  uint8 uVar1;
+  __uint8 p;
+  runtime_slice ~r0_00;
+  __uint16 s;
+  __int32 a;
+  __interface___ a_00;
+  __interface___ a_01;
+  __int32 buf;
+  error ~r0_01;
+  error ~r0_02;
+  __int32 ~r0_03;
+  uint8 b;
+  uint8 b_1;

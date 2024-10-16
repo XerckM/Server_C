@@ -1,0 +1,1000 @@
+  runtime_itab *prVar6;
+  void **ppvVar7;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar2 = *(int **)(in_RDX + 8);
+  puVar3 = *(undefined8 **)(in_RDX + 0x10);
+  ppvVar7 = *(void ***)(in_RDX + 0x18);
+  runtime_gorecover((uintptr)&stack0x00000008,in_stack_ffffffffffffff78);
+  if (extraout_RAX != (runtime_itab *)0x0) {
+    prVar6 = extraout_RAX;
+    iVar1 = (**(code **)(*piVar2 + 0x98))(piVar2[1]);
+    if (iVar1 == 0x16) {
+      auVar5 = (**(code **)(*piVar2 + 0x48))(piVar2[1]);
+      iVar1 = auVar5._8_8_;
+      *piVar2 = auVar5._0_8_;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RBX;
+        extraout_R11[1] = extraout_RCX[1];
+        piVar2 = extraout_RCX;
+        iVar1 = extraout_RBX;
+      }
+      piVar2[1] = iVar1;
+    }
+    runtime_convTstring((string)in_stack_ffffffffffffff78,*ppvVar7);
+    ~r0.data = ppvVar7;
+    ~r0.tab = prVar6;
+    fmt_Errorf((string)in_stack_ffffffffffffff78,in_stack_ffffffffffffff88,~r0);
+    *puVar3 = extraout_RAX_00;
+    uVar4 = extraout_RBX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RBX_01;
+      extraout_R11_00[1] = extraout_RCX_00[1];
+      puVar3 = extraout_RCX_00;
+      uVar4 = extraout_RBX_01;
+    }
+    puVar3[1] = uVar4;
+  }
+  return;
+}
+
+
+
+void flag_UnquoteUsage(flag_Flag *flag,string name,string usage)
+
+{
+  uint8 *puVar1;
+  uint uVar2;
+  void *pvVar3;
+  string ~r0;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  runtime_itab *~r0_00;
+  int i;
+  int j;
+  uint uVar4;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffc0;
+  uint8 *in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffd8;
+  runtime_itab *tab;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar1 = (flag->Usage).str;
+  uVar2 = (flag->Usage).len;
+  i = 0;
+  while( true ) {
+    if ((int)uVar2 <= i) goto LAB_007cd03d;
+    if (puVar1[i] == 0x60) break;
+    i = i + 1;
+  }
+  for (uVar4 = i + 1U; (int)uVar4 < (int)uVar2; uVar4 = uVar4 + 1) {
+    if (uVar2 <= uVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (puVar1[uVar4] == 0x60) {
+      if (uVar4 < i + 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      ~r0.len = in_stack_ffffffffffffffd8;
+      ~r0.str = in_stack_ffffffffffffffd0;
+      runtime_concatstring3
+                ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,
+                 in_stack_ffffffffffffffc0,~r0);
+      return;
+    }
+  }
+LAB_007cd03d:
+  tab = (flag->Value).tab;
+  if (tab != (runtime_itab *)0x0) {
+    pvVar3 = (flag->Value).data;
+    runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_0083f6e0,
+                       (runtime_iface)in_stack_ffffffffffffffa0,
+                       (runtime_iface)in_stack_ffffffffffffffb0);
+    if (extraout_RAX != 0) {
+      runtime_assertI2I((internal_abi_InterfaceType *)&DAT_0083f6e0,tab,~r0_00);
+      (**(code **)(extraout_RAX_00 + 0x18))(pvVar3);
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void flag___FlagSet__PrintDefaults(flag_FlagSet *f)
+
+{
+  error err;
+  error err_00;
+  void *pvVar1;
+  undefined1 *puVar2;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  flag_FlagSet *pfStack0000000000000008;
+  io_Writer in_stack_ffffffffffffff70;
+  __interface___ in_stack_ffffffffffffff80;
+  void *in_stack_ffffffffffffffa0;
+  __error isZeroValueErrs;
+  undefined local_20 [16];
+  flag_FlagSet *local_10;
+  
+  pfStack0000000000000008 = f;
+  while (isZeroValueErrs.len = in_XMM15._0_8_, &local_10 <= *(flag_FlagSet ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  isZeroValueErrs.array = (error *)0x0;
+  local_20._8_8_ = &isZeroValueErrs;
+  local_20._0_8_ = flag___FlagSet__PrintDefaults_func1;
+  local_10 = pfStack0000000000000008;
+  flag___FlagSet__VisitAll(pfStack0000000000000008,(func__flag_Flag_ **)local_20);
+  if (isZeroValueErrs.len != 0) {
+    puVar2 = (undefined1 *)(pfStack0000000000000008->output).tab;
+    if ((runtime_itab *)puVar2 == (runtime_itab *)0x0) {
+      puVar2 = go_itab__os_File_io_Writer;
+    }
+    err.data = in_stack_ffffffffffffffa0;
+    err.tab = (runtime_itab *)isZeroValueErrs.len;
+    fmt_Fprintln(in_stack_ffffffffffffff70,in_stack_ffffffffffffff80,(int)puVar2,err);
+    for (pvVar1 = (void *)0x0; (int)pvVar1 < isZeroValueErrs.len; pvVar1 = (void *)((int)pvVar1 + 1)
+        ) {
+      puVar2 = (undefined1 *)(pfStack0000000000000008->output).tab;
+      if ((runtime_itab *)puVar2 == (runtime_itab *)0x0) {
+        puVar2 = go_itab__os_File_io_Writer;
+      }
+      err_00.data = pvVar1;
+      err_00.tab = (runtime_itab *)isZeroValueErrs.len;
+      fmt_Fprintln(in_stack_ffffffffffffff70,in_stack_ffffffffffffff80,(int)puVar2,err_00);
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void flag___FlagSet__PrintDefaults_func1(flag_Flag *flag)
+
+{
+  runtime_slice ~r0;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  runtime_slice ~r0_02;
+  runtime_slice ~r0_03;
+  runtime_slice ~r0_04;
+  string format;
+  string usage;
+  string old;
+  error err;
+  string format_00;
+  string format_01;
+  __interface___ a;
+  string new;
+  __interface___ a_00;
+  __interface___ a_01;
+  __interface___ a_02;
+  error err_00;
+  string ~r0_05;
+  error err_01;
+  error err_02;
+  error err_03;
+  char extraout_AL;
+  bool isZero;
+  int **extraout_RAX;
+  strings_Builder *_b;
+  undefined8 extraout_RAX_00;
+  void *extraout_RAX_01;
+  void *extraout_RAX_02;
+  int *extraout_RAX_03;
+  void *extraout_RAX_04;
+  void *extraout_RAX_05;
+  int *extraout_RAX_06;
+  int *extraout_RAX_07;
+  int *extraout_RAX_08;
+  int *piVar1;
+  int *extraout_RAX_09;
+  int *extraout_RAX_10;
+  void *extraout_RAX_11;
+  void *extraout_RAX_12;
+  int *extraout_RAX_13;
+  void *extraout_RAX_14;
+  void *extraout_RAX_15;
+  void *extraout_RAX_16;
+  void *pvVar2;
+  undefined8 extraout_RAX_17;
+  undefined8 extraout_RAX_18;
+  undefined8 extraout_RAX_19;
+  __error *_isZeroValueErrs;
+  int extraout_RCX;
+  int *extraout_RCX_00;
+  int *extraout_RCX_01;
+  int extraout_RCX_02;
+  int *extraout_RCX_03;
+  int extraout_RCX_04;
+  int extraout_RCX_05;
+  int *extraout_RCX_06;
+  int extraout_RCX_07;
+  int *extraout_RCX_08;
+  int *piVar3;
+  undefined8 extraout_RCX_09;
+  void *extraout_RCX_10;
+  undefined8 extraout_RCX_11;
+  int in_RDX;
+  flag_FlagSet *f;
+  int **ppiVar4;
+  void **ppvVar5;
+  int iVar6;
+  undefined1 *n;
+  void *in_RBX;
+  size_t extraout_RBX;
+  size_t extraout_RBX_00;
+  size_t sVar7;
+  int *extraout_RBX_01;
+  size_t extraout_RBX_02;
+  size_t extraout_RBX_03;
+  size_t __n;
+  int *extraout_RBX_04;
+  int *extraout_RBX_05;
+  int *extraout_RBX_06;
+  void *extraout_RBX_07;
+  void *extraout_RBX_08;
+  int *extraout_RBX_09;
+  int extraout_RBX_10;
+  void *extraout_RBX_11;
+  void *extraout_RBX_12;
+  void *extraout_RBX_13;
+  int *extraout_RSI;
+  int **extraout_RSI_00;
+  int **extraout_RSI_01;
+  int *piVar8;
+  void *pvVar9;
+  undefined8 *extraout_R11;
+  int **extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int **extraout_R11_02;
+  undefined8 *extraout_R11_03;
+  int **extraout_R11_04;
+  undefined8 *extraout_R11_05;
+  int *piVar10;
+  int **extraout_R11_06;
+  undefined8 *extraout_R11_07;
+  int **extraout_R11_08;
+  void **extraout_R11_09;
+  undefined8 *extraout_R11_10;
+  int unaff_R14;
+  flag_Flag *pfStack0000000000000008;
+  interface___ in_stack_ffffffffffffff08;
+  runtime_itab *in_stack_ffffffffffffff18;
+  void *in_stack_ffffffffffffff20;
+  uint8 *in_stack_ffffffffffffff28;
+  runtime_itab *in_stack_ffffffffffffff30;
+  uint8 *in_stack_ffffffffffffff38;
+  runtime_itab *in_stack_ffffffffffffff40;
+  void *in_stack_ffffffffffffff48;
+  os_File *local_78;
+  int local_70;
+  void *local_68;
+  int local_60;
+  undefined8 local_58;
+  int *local_50;
+  void **local_48;
+  int **local_40;
+  undefined local_38 [16];
+  undefined local_28 [16];
+  undefined local_18 [16];
+  
+  pfStack0000000000000008 = flag;
+  while (&local_78 <= *(os_File ***)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+    in_RBX = extraout_RBX_13;
+  }
+  local_48 = *(void ***)(in_RDX + 8);
+  local_60 = *(int *)(in_RDX + 0x10);
+  runtime_newobject((internal_abi_Type *)&DAT_00851780,in_RBX);
+  extraout_RAX[1] = (int *)0x0;
+  local_40 = extraout_RAX;
+  runtime_convTstring((string)in_stack_ffffffffffffff08,(pfStack0000000000000008->Name).str);
+  local_38._8_8_ = extraout_RAX_00;
+  local_38._0_8_ = &DAT_008075e0;
+  format.len = (int)in_stack_ffffffffffffff20;
+  format.str = (uint8 *)in_stack_ffffffffffffff18;
+  a_00.len = (int)in_stack_ffffffffffffff30;
+  a_00.array = (interface___ *)in_stack_ffffffffffffff28;
+  a_00.cap = (int)in_stack_ffffffffffffff38;
+  err_01.data = in_stack_ffffffffffffff48;
+  err_01.tab = in_stack_ffffffffffffff40;
+  fmt_Fprintf((io_Writer)in_stack_ffffffffffffff08,format,a_00,0x95e860,err_01);
+  usage.len = (int)in_stack_ffffffffffffff20;
+  usage.str = (uint8 *)in_stack_ffffffffffffff18;
+  flag_UnquoteUsage(pfStack0000000000000008,(string)in_stack_ffffffffffffff08,usage);
+  local_70 = extraout_RCX;
+  if (extraout_RBX != 0) {
+    local_68 = extraout_RAX_01;
+    ppiVar4 = local_40;
+    sVar7 = extraout_RBX;
+    if (*local_40 == (int *)0x0) {
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = ppiVar4;
+        extraout_R11[1] = *ppiVar4;
+        local_68 = extraout_RAX_02;
+        sVar7 = extraout_RBX_00;
+      }
+      *ppiVar4 = (int *)ppiVar4;
+    }
+    else if (local_40 != (int **)*local_40) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff08);
+    }
+    piVar3 = ppiVar4[3];
+    piVar10 = ppiVar4[2];
+    piVar8 = (int *)((int)piVar10 + 1);
+    piVar1 = ppiVar4[1];
+    if (piVar3 < piVar8) {
+      ~r0.cap = (int)in_stack_ffffffffffffff18;
+      ~r0.array = in_stack_ffffffffffffff08._type;
+      ~r0.len = (int)in_stack_ffffffffffffff08.data;
+      runtime_growslice(piVar1,(int)piVar8,(int)piVar3,1,(internal_abi_Type *)&DAT_00807920,~r0);
+      ppiVar4 = local_40;
+      piVar3 = extraout_RCX_00;
+      piVar8 = extraout_RBX_01;
+      piVar1 = extraout_RAX_03;
+    }
+    *(undefined *)((int)piVar1 + (int)piVar10) = 0x20;
+    ppiVar4[2] = piVar8;
+    ppiVar4[3] = piVar3;
+    pvVar2 = local_68;
+    __n = sVar7;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RSI;
+      extraout_R11_00[1] = ppiVar4[1];
+      pvVar2 = extraout_RAX_04;
+      __n = extraout_RBX_02;
+      piVar1 = extraout_RSI;
+    }
+    ppiVar4[1] = piVar1;
+    if ((int **)*ppiVar4 == (int **)0x0) {
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = ppiVar4;
+        extraout_R11_01[1] = *ppiVar4;
+        pvVar2 = extraout_RAX_05;
+        __n = extraout_RBX_03;
+      }
+      *ppiVar4 = (int *)ppiVar4;
+    }
+    else if (ppiVar4 != (int **)*ppiVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff08);
+    }
+    piVar3 = ppiVar4[3];
+    piVar10 = ppiVar4[2];
+    piVar8 = (int *)((int)piVar10 + __n);
+    local_50 = ppiVar4[1];
+    if (piVar3 < piVar8) {
+      ~r0_00.cap = (int)in_stack_ffffffffffffff18;
+      ~r0_00.array = in_stack_ffffffffffffff08._type;
+      ~r0_00.len = (int)in_stack_ffffffffffffff08.data;
+      runtime_growslice(local_50,(int)piVar8,(int)piVar3,__n,(internal_abi_Type *)&DAT_00807920,
+                        ~r0_00);
+      pvVar2 = local_68;
+      __n = sVar7;
+      piVar3 = extraout_RCX_01;
+      piVar8 = extraout_RBX_04;
+      local_50 = extraout_RAX_06;
+    }
+    runtime_memmove((void *)((int)local_50 + (int)piVar10),pvVar2,__n);
+    local_40[2] = piVar8;
+    local_40[3] = piVar3;
+    ppiVar4 = local_40;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = local_50;
+      extraout_R11_02[1] = extraout_RSI_00[1];
+      ppiVar4 = extraout_RSI_00;
+    }
+    ppiVar4[1] = local_50;
+  }
+  iVar6 = local_70;
+  if ((int)local_40[2] < 5) {
+    ppiVar4 = local_40;
+    if ((int **)*local_40 == (int **)0x0) {
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = ppiVar4;
+        extraout_R11_03[1] = *ppiVar4;
+        iVar6 = extraout_RCX_02;
+      }
+      *ppiVar4 = (int *)ppiVar4;
+    }
+    else if (local_40 != (int **)*local_40) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff08);
+    }
+    piVar3 = ppiVar4[3];
+    piVar10 = ppiVar4[2];
+    piVar8 = (int *)((int)piVar10 + 1);
+    piVar1 = ppiVar4[1];
+    if (piVar3 < piVar8) {
+      ~r0_01.cap = (int)in_stack_ffffffffffffff18;
+      ~r0_01.array = in_stack_ffffffffffffff08._type;
+      ~r0_01.len = (int)in_stack_ffffffffffffff08.data;
+      runtime_growslice(piVar1,(int)piVar8,(int)piVar3,1,(internal_abi_Type *)&DAT_00807920,~r0_01);
+      piVar1 = extraout_RAX_07;
+      iVar6 = local_70;
+      ppiVar4 = local_40;
+      piVar3 = extraout_RCX_03;
+      piVar8 = extraout_RBX_05;
+    }
+    *(undefined *)((int)piVar1 + (int)piVar10) = 9;
+    ppiVar4[2] = piVar8;
+    ppiVar4[3] = piVar3;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = extraout_RAX_08;
+      extraout_R11_04[1] = ppiVar4[1];
+      piVar1 = extraout_RAX_08;
+      iVar6 = extraout_RCX_04;
+    }
+    ppiVar4[1] = piVar1;
+  }
+  else {
+    ppiVar4 = local_40;
+    if ((int **)*local_40 == (int **)0x0) {
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_05 = ppiVar4;
+        extraout_R11_05[1] = *ppiVar4;
+        iVar6 = extraout_RCX_05;
+      }
+      *ppiVar4 = (int *)ppiVar4;
+    }
+    else if (local_40 != (int **)*local_40) {
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff08);
+    }
+    piVar3 = ppiVar4[2];
+    piVar8 = (int *)((int)piVar3 + 6);
+    piVar10 = ppiVar4[3];
+    piVar1 = ppiVar4[1];
+    if (piVar10 < piVar8) {
+      ~r0_02.cap = (int)in_stack_ffffffffffffff18;
+      ~r0_02.array = in_stack_ffffffffffffff08._type;
+      ~r0_02.len = (int)in_stack_ffffffffffffff08.data;
+      runtime_growslice(piVar1,(int)piVar8,(int)piVar10,6,(internal_abi_Type *)&DAT_00807920,~r0_02)
+      ;
+      piVar1 = extraout_RAX_09;
+      iVar6 = local_70;
+      ppiVar4 = local_40;
+      piVar8 = extraout_RBX_06;
+      piVar10 = extraout_RCX_06;
+    }
+    *(undefined4 *)((int)piVar1 + (int)piVar3) = 0x2020200a;
+    *(undefined2 *)((int)piVar1 + 4 + (int)piVar3) = 0x920;
+    ppiVar4[2] = piVar8;
+    ppiVar4[3] = piVar10;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_06 = extraout_RAX_10;
+      extraout_R11_06[1] = ppiVar4[1];
+      piVar1 = extraout_RAX_10;
+      iVar6 = extraout_RCX_07;
+    }
+    ppiVar4[1] = piVar1;
+  }
+  old.len = (int)in_stack_ffffffffffffff20;
+  old.str = (uint8 *)in_stack_ffffffffffffff18;
+  new.len = (int)in_stack_ffffffffffffff30;
+  new.str = in_stack_ffffffffffffff28;
+  ~r0_05.len = (int)in_stack_ffffffffffffff40;
+  ~r0_05.str = in_stack_ffffffffffffff38;
+  strings_Replace((string)in_stack_ffffffffffffff08,old,new,iVar6,~r0_05);
+  pvVar2 = extraout_RAX_11;
+  ppiVar4 = local_40;
+  pvVar9 = extraout_RBX_07;
+  if ((int **)*local_40 == (int **)0x0) {
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_07 = ppiVar4;
+      extraout_R11_07[1] = *ppiVar4;
+      pvVar2 = extraout_RAX_12;
+      pvVar9 = extraout_RBX_08;
+    }
+    *ppiVar4 = (int *)ppiVar4;
+  }
+  else if (local_40 != (int **)*local_40) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff08);
+  }
+  piVar3 = ppiVar4[3];
+  piVar10 = ppiVar4[2];
+  piVar8 = (int *)((int)piVar10 + (int)pvVar9);
+  piVar1 = ppiVar4[1];
+  if (piVar3 < piVar8) {
+    ~r0_03.cap = (int)in_stack_ffffffffffffff18;
+    ~r0_03.array = in_stack_ffffffffffffff08._type;
+    ~r0_03.len = (int)in_stack_ffffffffffffff08.data;
+    runtime_growslice(piVar1,(int)piVar8,(int)piVar3,(int)pvVar9,(internal_abi_Type *)&DAT_00807920,
+                      ~r0_03);
+    piVar3 = extraout_RCX_08;
+    piVar8 = extraout_RBX_09;
+    piVar1 = extraout_RAX_13;
+    in_stack_ffffffffffffff48 = pvVar9;
+  }
+  local_50 = piVar1;
+  runtime_memmove((void *)((int)piVar1 + (int)piVar10),pvVar2,(size_t)pvVar9);
+  local_40[2] = piVar8;
+  local_40[3] = piVar3;
+  ppiVar4 = local_40;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_08 = local_50;
+    extraout_R11_08[1] = extraout_RSI_01[1];
+    ppiVar4 = extraout_RSI_01;
+  }
+  ppiVar4[1] = local_50;
+  err.data = in_stack_ffffffffffffff20;
+  err.tab = in_stack_ffffffffffffff18;
+  flag_isZeroValue(pfStack0000000000000008,(string)in_stack_ffffffffffffff08,
+                   SUB81((pfStack0000000000000008->DefValue).str,0),
+                   SUB81((pfStack0000000000000008->DefValue).len,0),err);
+  if (extraout_RBX_10 == 0) {
+    if (extraout_AL == '\0') {
+      if ((pfStack0000000000000008->Value).tab ==
+          (runtime_itab *)go_itab__flag_stringValue_flag_Value) {
+        runtime_convTstring((string)in_stack_ffffffffffffff08,
+                            (pfStack0000000000000008->DefValue).str);
+        local_38._8_8_ = extraout_RAX_17;
+        local_38._0_8_ = &DAT_008075e0;
+        format_00.len = (int)in_stack_ffffffffffffff20;
+        format_00.str = (uint8 *)in_stack_ffffffffffffff18;
+        a_01.len = (int)in_stack_ffffffffffffff30;
+        a_01.array = (interface___ *)in_stack_ffffffffffffff28;
+        a_01.cap = (int)in_stack_ffffffffffffff38;
+        err_02.data = in_stack_ffffffffffffff48;
+        err_02.tab = in_stack_ffffffffffffff40;
+        fmt_Fprintf((io_Writer)in_stack_ffffffffffffff08,format_00,a_01,0x95e860,err_02);
+      }
+      else {
+        runtime_convTstring((string)in_stack_ffffffffffffff08,
+                            (pfStack0000000000000008->DefValue).str);
+        local_38._8_8_ = extraout_RAX_18;
+        local_38._0_8_ = &DAT_008075e0;
+        format_01.len = (int)in_stack_ffffffffffffff20;
+        format_01.str = (uint8 *)in_stack_ffffffffffffff18;
+        a_02.len = (int)in_stack_ffffffffffffff30;
+        a_02.array = (interface___ *)in_stack_ffffffffffffff28;
+        a_02.cap = (int)in_stack_ffffffffffffff38;
+        err_03.data = in_stack_ffffffffffffff48;
+        err_03.tab = in_stack_ffffffffffffff40;
+        fmt_Fprintf((io_Writer)in_stack_ffffffffffffff08,format_01,a_02,0x95e860,err_03);
+      }
+    }
+  }
+  else {
+    pvVar9 = (void *)((int)local_48[1] + 1);
+    pvVar2 = *local_48;
+    local_58 = extraout_RCX_09;
+    ppvVar5 = local_48;
+    if (local_48[2] < pvVar9) {
+      ~r0_04.cap = (int)in_stack_ffffffffffffff18;
+      ~r0_04.array = in_stack_ffffffffffffff08._type;
+      ~r0_04.len = (int)in_stack_ffffffffffffff08.data;
+      runtime_growslice(pvVar2,(int)pvVar9,(int)local_48[2],1,(internal_abi_Type *)&DAT_00835ac0,
+                        ~r0_04);
+      local_48[2] = extraout_RCX_10;
+      pvVar2 = extraout_RAX_14;
+      ppvVar5 = local_48;
+      pvVar9 = extraout_RBX_11;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_09 = extraout_RAX_15;
+        extraout_R11_09[1] = *ppvVar5;
+        pvVar2 = extraout_RAX_15;
+        pvVar9 = extraout_RBX_12;
+      }
+      *ppvVar5 = pvVar2;
+    }
+    ppvVar5[1] = pvVar9;
+    iVar6 = ((int)pvVar9 + -1) * 0x10;
+    *(int *)((int)pvVar2 + iVar6) = extraout_RBX_10;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_10 = extraout_RCX_11;
+      extraout_R11_10[1] = *(undefined8 *)((int)extraout_RAX_16 + iVar6 + 8);
+      pvVar2 = extraout_RAX_16;
+      local_58 = extraout_RCX_11;
+    }
+    *(undefined8 *)((int)pvVar2 + iVar6 + 8) = local_58;
+  }
+  n = *(undefined1 **)(local_60 + 0x50);
+  if (n == (undefined1 *)0x0) {
+    n = go_itab__os_File_io_Writer;
+    local_78 = os_Stderr;
+  }
+  else {
+    local_78 = *(os_File **)(local_60 + 0x58);
+  }
+  piVar8 = local_40[1];
+  if ((int *)-(int)piVar8 < local_40[2]) {
+    if (piVar8 == (int *)0x0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicunsafestringnilptr();
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicunsafestringlen();
+  }
+  runtime_convTstring((string)in_stack_ffffffffffffff08,piVar8);
+  local_28._8_8_ = extraout_RAX_19;
+  local_28._0_8_ = &DAT_008075e0;
+  local_18._8_8_ = &PTR_DAT_0095ccd0;
+  local_18._0_8_ = &DAT_008075e0;
+  a.len = (int)in_stack_ffffffffffffff20;
+  a.array = (interface___ *)in_stack_ffffffffffffff18;
+  a.cap = (int)in_stack_ffffffffffffff28;
+  err_00.data = in_stack_ffffffffffffff38;
+  err_00.tab = in_stack_ffffffffffffff30;
+  fmt_Fprint((io_Writer)in_stack_ffffffffffffff08,a,(int)n,err_00);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void flag___FlagSet__defaultUsage(flag_FlagSet *f)
+
+{
+  error err;
+  error err_00;
+  undefined1 *puVar1;
+  os_File *poVar2;
+  int unaff_R14;
+  flag_FlagSet *pfStack0000000000000008;
+  string in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffb0;
+  __interface___ in_stack_ffffffffffffffc0;
+  runtime_itab *in_stack_ffffffffffffffd8;
+  void *in_stack_ffffffffffffffe0;
+  
+  pfStack0000000000000008 = f;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((pfStack0000000000000008->name).len == 0) {
+    puVar1 = (undefined1 *)(pfStack0000000000000008->output).tab;
+    if ((runtime_itab *)puVar1 == (runtime_itab *)0x0) {
+      puVar1 = go_itab__os_File_io_Writer;
+    }
+    err.data = in_stack_ffffffffffffffe0;
+    err.tab = in_stack_ffffffffffffffd8;
+    fmt_Fprintf((io_Writer)in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,
+                in_stack_ffffffffffffffc0,(int)puVar1,err);
+  }
+  else {
+    puVar1 = (undefined1 *)(pfStack0000000000000008->output).tab;
+    if ((runtime_itab *)puVar1 == (runtime_itab *)0x0) {
+      puVar1 = go_itab__os_File_io_Writer;
+      poVar2 = os_Stderr;
+    }
+    else {
+      poVar2 = (os_File *)(pfStack0000000000000008->output).data;
+    }
+    runtime_convTstring(in_stack_ffffffffffffffa0,(pfStack0000000000000008->name).str);
+    err_00.data = poVar2;
+    err_00.tab = (runtime_itab *)puVar1;
+    fmt_Fprintf((io_Writer)in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,
+                in_stack_ffffffffffffffc0,(int)puVar1,err_00);
+  }
+  flag___FlagSet__PrintDefaults(pfStack0000000000000008);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void flag_glob__func1(void)
+
+{
+  error err;
+  os_File *poVar1;
+  undefined1 *n;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffb0;
+  __interface___ in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  n = (undefined1 *)(flag_CommandLine->output).tab;
+  if ((runtime_itab *)n == (runtime_itab *)0x0) {
+    n = go_itab__os_File_io_Writer;
+    poVar1 = os_Stderr;
+  }
+  else {
+    poVar1 = (os_File *)(flag_CommandLine->output).data;
+  }
+  if (os_Args.len != 0) {
+    runtime_convTstring(in_stack_ffffffffffffffa0,(os_Args.array)->str);
+    err.data = poVar1;
+    err.tab = (runtime_itab *)n;
+    fmt_Fprintf((io_Writer)in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,
+                in_stack_ffffffffffffffc0,(int)n,err);
+    flag___FlagSet__PrintDefaults(flag_CommandLine);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void flag___FlagSet__Var(flag_FlagSet *f,flag_Value value,string name,string usage)
+
+{
+  __interface___ a;
+  string ~r0;
+  int extraout_RAX;
+  char **extraout_RAX_00;
+  flag_Flag *flag;
+  char **extraout_RAX_01;
+  char **extraout_RAX_02;
+  char **extraout_RAX_03;
+  char **extraout_RAX_04;
+  char **ppcVar1;
+  runtime_hmap *~r0_00;
+  map_string__flag_Flag extraout_RAX_05;
+  map_string__flag_Flag extraout_RAX_06;
+  map_string__flag_Flag phVar2;
+  undefined8 *extraout_RAX_07;
+  undefined8 *extraout_RAX_08;
+  undefined8 *puVar3;
+  undefined8 extraout_RAX_09;
+  undefined8 extraout_RAX_10;
+  void *x;
+  undefined8 extraout_RAX_11;
+  undefined8 extraout_RAX_12;
+  undefined8 extraout_RAX_13;
+  void *pvVar4;
+  undefined8 extraout_RAX_14;
+  undefined8 extraout_RAX_15;
+  char *in_RCX;
+  char *extraout_RCX;
+  char *extraout_RCX_00;
+  char *extraout_RCX_01;
+  char *~r0_01;
+  char extraout_BL;
+  bool alreadythere;
+  char *in_RBX;
+  char *in_RSI;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  undefined extraout_DIL_01;
+  undefined ~r1;
+  char *in_RDI;
+  char *extraout_RDI;
+  char *in_R8;
+  char *in_R9;
+  char **extraout_R11;
+  char **extraout_R11_00;
+  char **extraout_R11_01;
+  char **extraout_R11_02;
+  map_string__flag_Flag *extraout_R11_03;
+  undefined8 *extraout_R11_04;
+  int unaff_R14;
+  bool bVar5;
+  undefined auVar6 [16];
+  interface___ in_stack_ffffffffffffff70;
+  string in_stack_ffffffffffffff80;
+  int in_stack_ffffffffffffff90;
+  uint8 *in_stack_ffffffffffffff98;
+  int iVar7;
+  undefined local_38 [16];
+  undefined local_28 [16];
+  undefined local_18 [16];
+  
+  while (local_18 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RSI == (char *)0x0) {
+    bVar5 = false;
+  }
+  else {
+    bVar5 = *in_RDI == '-';
+  }
+  if (bVar5) {
+    runtime_convTstring((string)in_stack_ffffffffffffff70,in_RDI);
+    local_38._8_8_ = extraout_RAX_15;
+    local_38._0_8_ = &DAT_008075e0;
+    pvVar4 = (void *)flag___FlagSet__sprintf((char *)f,&DAT_008b957d,0x15,local_38,1,1);
+    runtime_convTstring((string)in_stack_ffffffffffffff70,pvVar4);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff70);
+  }
+  strings_Index((string)in_stack_ffffffffffffff70,in_stack_ffffffffffffff80,(int)in_RDI);
+  if (-1 < extraout_RAX) {
+    runtime_convTstring((string)in_stack_ffffffffffffff70,in_RDI);
+    local_38._8_8_ = extraout_RAX_14;
+    local_38._0_8_ = &DAT_008075e0;
+    pvVar4 = (void *)flag___FlagSet__sprintf((char *)f,&DAT_008b77ff,0x12,local_38,1,1);
+    runtime_convTstring((string)in_stack_ffffffffffffff70,pvVar4);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff70);
+  }
+  auVar6 = (**(code **)(in_RBX + 0x20))(in_RCX);
+  runtime_newobject((internal_abi_Type *)&DAT_00874ea0,auVar6._8_8_);
+  extraout_RAX_00[1] = in_RSI;
+  ppcVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = in_RDI;
+    ppcVar1 = extraout_RAX_01;
+    in_RSI = extraout_RDI;
+  }
+  ~r1 = SUB81(in_RSI,0);
+  *ppcVar1 = in_RDI;
+  ppcVar1[3] = in_R9;
+  ~r0_01 = in_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = in_R8;
+    ppcVar1 = extraout_RAX_02;
+    ~r0_01 = extraout_RCX;
+    ~r1 = extraout_DIL;
+  }
+  ppcVar1[2] = in_R8;
+  ppcVar1[4] = in_RBX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_01 = in_RCX;
+    ppcVar1 = extraout_RAX_03;
+    ~r0_01 = extraout_RCX_00;
+    ~r1 = extraout_DIL_00;
+  }
+  ppcVar1[5] = in_RCX;
+  ppcVar1[7] = auVar6._8_8_;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_02 = auVar6._0_8_;
+    ppcVar1 = extraout_RAX_04;
+    ~r0_01 = extraout_RCX_01;
+    ~r1 = extraout_DIL_01;
+  }
+  ppcVar1[6] = auVar6._0_8_;
+  runtime_mapaccess2_faststr
+            ((internal_abi_MapType *)&DAT_0082bcc0,(runtime_hmap *)f->formal,
+             (string)in_stack_ffffffffffffff70,~r0_01,(bool)~r1);
+  if (extraout_BL == '\0') {
+    runtime_mapaccess1_faststr
+              ((internal_abi_MapType *)&DAT_0082bd20,(runtime_hmap *)f->undef,
+               (string)in_stack_ffffffffffffff70,in_RDI);
+    iVar7._0_1_ = ~r0_00->flags;
+    iVar7._1_1_ = ~r0_00->B;
+    iVar7._2_2_ = ~r0_00->noverflow;
+    iVar7._4_4_ = ~r0_00->hash0;
+    if (iVar7 != 0) {
+      pvVar4 = (void *)~r0_00->count;
+      runtime_convTstring((string)in_stack_ffffffffffffff70,in_RDI);
+      local_28._8_8_ = extraout_RAX_09;
+      local_28._0_8_ = &DAT_008075e0;
+      runtime_convTstring((string)in_stack_ffffffffffffff70,pvVar4);
+      local_18._8_8_ = extraout_RAX_10;
+      local_18._0_8_ = &DAT_008075e0;
+      a.cap = in_stack_ffffffffffffff90;
+      a.array = (interface___ *)in_stack_ffffffffffffff80.str;
+      a.len = in_stack_ffffffffffffff80.len;
+      ~r0.len = iVar7;
+      ~r0.str = in_stack_ffffffffffffff98;
+      fmt_Sprintf((string)in_stack_ffffffffffffff70,a,~r0);
+      runtime_convTstring((string)in_stack_ffffffffffffff70,x);
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff70);
+    }
+    if (f->formal == (map_string__flag_Flag)0x0) {
+      runtime_makemap_small(~r0_00);
+      phVar2 = extraout_RAX_05;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = extraout_RAX_06;
+        extraout_R11_03[1] = f->formal;
+        phVar2 = extraout_RAX_06;
+      }
+      f->formal = phVar2;
+    }
+    runtime_mapassign_faststr
+              ((internal_abi_MapType *)&DAT_0082bcc0,(runtime_hmap *)f->formal,
+               (string)in_stack_ffffffffffffff70,in_RDI);
+    puVar3 = extraout_RAX_07;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = ppcVar1;
+      extraout_R11_04[1] = *extraout_RAX_08;
+      puVar3 = extraout_RAX_08;
+    }
+    *puVar3 = ppcVar1;
+    return;
+  }
+  if ((f->name).len == 0) {
+    runtime_convTstring((string)in_stack_ffffffffffffff70,in_RDI);
+    local_38._8_8_ = extraout_RAX_11;
+    local_38._0_8_ = &DAT_008075e0;
+    pvVar4 = (void *)flag___FlagSet__sprintf((char *)f,&DAT_008b7811,0x12,local_38,1,1);
+  }
+  else {
+    runtime_convTstring((string)in_stack_ffffffffffffff70,(f->name).str);
+    local_28._8_8_ = extraout_RAX_12;
+    local_28._0_8_ = &DAT_008075e0;
+    runtime_convTstring((string)in_stack_ffffffffffffff70,in_RDI);
+    local_18._8_8_ = extraout_RAX_13;
+    local_18._0_8_ = &DAT_008075e0;
+    pvVar4 = (void *)flag___FlagSet__sprintf((char *)f,&DAT_008b9592,0x15,local_28,2,2);
+  }
+  runtime_convTstring((string)in_stack_ffffffffffffff70,pvVar4);
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffff70);
+}
+
+
+
+int flag___FlagSet__sprintf(char *__s,char *__format,...)
+
+{
+  string ~r0;
+  error err;
+  void *x;
+  void *extraout_RBX;
+  undefined8 in_RDI;
+  undefined1 *n;
+  int unaff_R14;
+  char *pcStack0000000000000008;
+  char *pcStack0000000000000010;
+  undefined8 uStack0000000000000020;
+  string in_stack_ffffffffffffffa0;
+  __interface___ in_stack_ffffffffffffffb0;
+  uint8 *in_stack_ffffffffffffffc8;
+  int in_stack_ffffffffffffffd0;
+  void *pvVar1;
+  
+  pcStack0000000000000008 = __s;
+  pcStack0000000000000010 = __format;
+  uStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0.len = in_stack_ffffffffffffffd0;
+  ~r0.str = in_stack_ffffffffffffffc8;
+  fmt_Sprintf(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,~r0);
+  n = *(undefined1 **)(pcStack0000000000000008 + 0x50);
+  if ((runtime_itab *)n == (runtime_itab *)0x0) {
+    n = go_itab__os_File_io_Writer;
+  }
+  pvVar1 = extraout_RBX;
+  runtime_convTstring(in_stack_ffffffffffffffa0,x);
+  err.data = pvVar1;
+  err.tab = (runtime_itab *)n;
+  fmt_Fprintln((io_Writer)in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,(int)n,err);
+  return (int)x;
+}
+
+
+
+void flag___FlagSet__failf(flag_FlagSet *f,string format,__interface___ a,error ~r0)
+
+{
+  int iVar1;
+  int *extraout_RAX;

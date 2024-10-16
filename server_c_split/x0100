@@ -1,0 +1,1000 @@
+  }
+  if ((uVar1 == 0) || (uVar2 = uVar1, uVar1 <= v)) {
+    uVar2 = v;
+  }
+  runtime_printlock();
+  runtime_printstring(in_stack_ffffffffffffff98);
+  runtime_printhex(v);
+  runtime_printstring(in_stack_ffffffffffffff98);
+  runtime_printhex(uVar1);
+  runtime_printstring(in_stack_ffffffffffffff98);
+  runtime_printhex((uint64)frame);
+  runtime_printstring(in_stack_ffffffffffffff98);
+  runtime_printhex(bad);
+  runtime_printstring(in_stack_ffffffffffffff98);
+  runtime_printunlock();
+  local_20._8_8_ = iStack0000000000000018;
+  local_20._0_8_ = runtime_tracebackHexdump_func1;
+  local_10 = uStack0000000000000020;
+  p = (runtime_stkframe *)(lo - 0x100);
+  if ((runtime_stkframe *)(lo - 0x100) < (runtime_stkframe *)(v - 0x800)) {
+    p = (runtime_stkframe *)(v - 0x800);
+  }
+  uVar1 = uVar2 + 0x100;
+  if (v + 0x800 < uVar2 + 0x100) {
+    uVar1 = v + 0x800;
+  }
+  if (p < frame) {
+    p = frame;
+  }
+  if (bad < uVar1) {
+    uVar1 = bad;
+  }
+  runtime_hexdumpWords((uintptr)p,uVar1,(func_uintptr__uint8 **)local_20);
+  return;
+}
+
+
+
+void runtime_tracebackHexdump_func1(uintptr p,uint8 ~r0)
+
+{
+  runtime_stkframe *frame;
+  uintptr bad;
+  int in_RDX;
+  
+  if (*(uintptr *)(*(int *)(in_RDX + 8) + 0x30) == p) {
+    return;
+  }
+  if (*(uintptr *)(*(int *)(in_RDX + 8) + 0x28) != p) {
+    if (p == *(uintptr *)(in_RDX + 0x10)) {
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void runtime_isSystemGoroutine(runtime_g *gp,bool fixed,bool ~r0)
+
+{
+  char cVar1;
+  int extraout_RAX;
+  runtime_moduledata *md;
+  int unaff_R14;
+  char cStack0000000000000010;
+  runtime_funcInfo in_stack_ffffffffffffffe8;
+  
+  cStack0000000000000010 = fixed;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_findfunc(gp->startpc,in_stack_ffffffffffffffe8);
+  if (extraout_RAX == 0) {
+    return;
+  }
+  cVar1 = *(char *)(extraout_RAX + 0x28);
+  if ((cVar1 == '\x11') || (cVar1 == '\n')) {
+    return;
+  }
+  if (cVar1 != '\x10') {
+    runtime___moduledata__funcName
+              (md,*(int32 *)(extraout_RAX + 4),(string)in_stack_ffffffffffffffe8);
+    return;
+  }
+  if (cStack0000000000000010 != '\0') {
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_printCgoTraceback(runtime_cgoCallers *callers)
+
+{
+  uint64 v;
+  int iVar1;
+  uintptr c_1;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  runtime_cgoCallers *pauStack0000000000000008;
+  string in_stack_ffffffffffffff98;
+  uintptr c;
+  runtime_cgoSymbolizerArg arg;
+  
+  pauStack0000000000000008 = callers;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL_00;
+  }
+  if (runtime_cgoSymbolizer != (void *)0x0) {
+    arg.pc = in_XMM15._0_8_;
+    arg.lineno = in_XMM15._8_8_;
+    arg.file = (uint8 *)arg.pc;
+    for (iVar1 = 0; (iVar1 < 0x20 && ((*pauStack0000000000000008)[iVar1] != 0)); iVar1 = iVar1 + 1)
+    {
+      runtime_printOneCgoTraceback
+                ((*pauStack0000000000000008)[iVar1],
+                 (func____bool__bool_ **)&PTR_runtime_printCgoTraceback_func1_008eb5b0,&arg,
+                 (bool)in_DIL);
+      in_DIL = extraout_DIL;
+    }
+    arg.pc = 0;
+    runtime_callCgoSymbolizer(&arg);
+    return;
+  }
+  for (iVar1 = 0; (iVar1 < 0x20 && (v = (*pauStack0000000000000008)[iVar1], v != 0));
+      iVar1 = iVar1 + 1) {
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffff98);
+    runtime_printhex(v);
+    runtime_printnl();
+    runtime_printunlock();
+  }
+  return;
+}
+
+
+
+void runtime_printOneCgoTraceback
+               (uintptr pc,func____bool__bool_ **commitFrame,runtime_cgoSymbolizerArg *arg,bool ~r0)
+
+{
+  uint64 v;
+  char cVar1;
+  bool pr;
+  char extraout_BL;
+  bool stop;
+  int ~r0_00;
+  int ~r0_01;
+  int unaff_R14;
+  uintptr uStack0000000000000008;
+  func____bool__bool_ **ppfStack0000000000000010;
+  runtime_cgoSymbolizerArg *prStack0000000000000018;
+  string in_stack_ffffffffffffffa0;
+  runtime_stringStruct ss_1;
+  runtime_stringStruct ss;
+  
+  uStack0000000000000008 = pc;
+  prStack0000000000000018 = arg;
+  ppfStack0000000000000010 = commitFrame;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  prStack0000000000000018->pc = uStack0000000000000008;
+  do {
+    do {
+      cVar1 = (**ppfStack0000000000000010)
+                        ((bool *)*ppfStack0000000000000010,(bool *)ppfStack0000000000000010);
+      if (extraout_BL != '\0') {
+        return;
+      }
+    } while (cVar1 == '\0');
+    runtime_callCgoSymbolizer(prStack0000000000000018);
+    if (prStack0000000000000018->funcName == (uint8 *)0x0) {
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffa0);
+      runtime_printunlock();
+    }
+    else {
+      runtime_findnull(prStack0000000000000018->funcName,~r0_00);
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffa0);
+      runtime_printnl();
+      runtime_printunlock();
+    }
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printunlock();
+    if (prStack0000000000000018->file != (uint8 *)0x0) {
+      runtime_findnull(prStack0000000000000018->file,~r0_01);
+      v = prStack0000000000000018->lineno;
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffa0);
+      runtime_printstring(in_stack_ffffffffffffffa0);
+      runtime_printuint(v);
+      runtime_printsp();
+      runtime_printunlock();
+    }
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printhex(uStack0000000000000008);
+    runtime_printnl();
+    runtime_printunlock();
+  } while (prStack0000000000000018->more != 0);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_callCgoSymbolizer(runtime_cgoSymbolizerArg *arg)
+
+{
+  func_unsafe_Pointer__unsafe_Pointer__int32 **call;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((runtime_panicking.value == 0) && (*(int *)(*(int *)(unaff_R14 + 0x30) + 0xc0) == unaff_R14))
+  {
+    call = (func_unsafe_Pointer__unsafe_Pointer__int32 **)&PTR_runtime_cgocall_008eb270;
+  }
+  else {
+    call = (func_unsafe_Pointer__unsafe_Pointer__int32 **)&PTR_runtime_asmcgocall_008eb260;
+  }
+  (**call)(runtime_cgoSymbolizer,arg,(int32 *)call);
+  return;
+}
+
+
+
+void runtime_cgoContextPCs(uintptr ctxt,__uintptr buf)
+
+{
+  int in_RCX;
+  func_unsafe_Pointer__unsafe_Pointer__int32 **call;
+  int unaff_R14;
+  runtime_cgoTracebackArg arg;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (runtime_cgoTraceback == (void *)0x0) {
+    return;
+  }
+  if ((runtime_panicking.value == 0) && (*(int *)(*(int *)(unaff_R14 + 0x30) + 0xc0) == unaff_R14))
+  {
+    call = (func_unsafe_Pointer__unsafe_Pointer__int32 **)&PTR_runtime_cgocall_008eb270;
+  }
+  else {
+    call = (func_unsafe_Pointer__unsafe_Pointer__int32 **)&PTR_runtime_asmcgocall_008eb260;
+  }
+  if (in_RCX != 0) {
+    arg.sigContext = 0;
+    arg.context = ctxt;
+    (**call)(runtime_cgoTraceback,&arg,(int32 *)*call);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void runtime_rtype_string(runtime_rtype t,string ~r0)
+
+{
+  internal_abi_Name n;
+  internal_abi_Name in_RCX;
+  uint8 *extraout_RCX;
+  int extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RCX.Bytes = extraout_RCX;
+  }
+  runtime_resolveNameOff(t.Type,(t.Type)->Str,in_RCX);
+  internal_abi_Name_Name(n,in_stack_ffffffffffffffe0);
+  if (((t.Type)->TFlag & 2) != 0) {
+    if (extraout_RBX != 0) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  return;
+}
+
+
+
+void runtime_rtype_pkgpath(runtime_rtype t,string ~r0)
+
+{
+  internal_abi_Name n;
+  byte bVar1;
+  internal_abi_UncommonType *u;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((t.Type)->TFlag & 1) == 0) {
+    u = (internal_abi_UncommonType *)0x0;
+  }
+  else {
+    switch((t.Type)->Kind_ & 0x1f) {
+    case 0x11:
+      u = (internal_abi_UncommonType *)&t.Type[1].Equal;
+      break;
+    case 0x12:
+      u = (internal_abi_UncommonType *)&t.Type[1].Hash;
+      break;
+    case 0x13:
+      u = (internal_abi_UncommonType *)&t.Type[1].PtrBytes;
+      break;
+    case 0x14:
+      u = (internal_abi_UncommonType *)&t.Type[1].GCData;
+      break;
+    case 0x15:
+      u = (internal_abi_UncommonType *)&t.Type[1].Str;
+      break;
+    case 0x16:
+      u = (internal_abi_UncommonType *)&t.Type[1].PtrBytes;
+      break;
+    case 0x17:
+      u = (internal_abi_UncommonType *)&t.Type[1].PtrBytes;
+      break;
+    default:
+      u = (internal_abi_UncommonType *)(t.Type + 1);
+      break;
+    case 0x19:
+      u = (internal_abi_UncommonType *)&t.Type[1].GCData;
+    }
+  }
+  if (u != (internal_abi_UncommonType *)0x0) {
+    runtime_resolveNameOff(t.Type,u->PkgPath,(internal_abi_Name)u);
+    internal_abi_Name_Name(n,in_stack_ffffffffffffffe8);
+    return;
+  }
+  bVar1 = (t.Type)->Kind_ & 0x1f;
+  if (bVar1 == 0x14) {
+    internal_abi_Name_Name((uint8 *)t.Type[1].Size_,in_stack_ffffffffffffffe8);
+    return;
+  }
+  if (bVar1 == 0x19) {
+    internal_abi_Name_Name((uint8 *)t.Type[1].Size_,in_stack_ffffffffffffffe8);
+    return;
+  }
+  return;
+}
+
+
+
+void runtime_resolveNameOff(void *ptrInModule,internal_abi_NameOff off,internal_abi_Name ~r0)
+
+{
+  void *v;
+  void *v_00;
+  uint64 v_01;
+  uint64 v_02;
+  uintptr base;
+  uintptr res_1;
+  runtime_moduledata *prVar1;
+  runtime_moduledata *md;
+  void *res;
+  char extraout_BL;
+  bool found;
+  bool ~r1;
+  void *~r0_00;
+  int unaff_R14;
+  uint32 uStack0000000000000010;
+  string in_stack_ffffffffffffffb0;
+  runtime_moduledata *next;
+  
+  uStack0000000000000010 = off;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (uStack0000000000000010 == 0) {
+    return;
+  }
+  md = &runtime_firstmoduledata;
+  while( true ) {
+    if (md == (runtime_moduledata *)0x0) {
+      runtime_lock2(&runtime_reflectOffs.lock);
+      runtime_mapaccess2_fast32
+                ((internal_abi_MapType *)&DAT_0082ca40,(runtime_hmap *)runtime_reflectOffs.m,
+                 uStack0000000000000010,~r0_00,~r1);
+      runtime_unlock2(&runtime_reflectOffs.lock);
+      if (extraout_BL == '\0') {
+        runtime_printlock();
+        runtime_printstring(in_stack_ffffffffffffffb0);
+        runtime_printhex((int)(sdword)uStack0000000000000010);
+        runtime_printstring(in_stack_ffffffffffffffb0);
+        runtime_printhex((uint64)ptrInModule);
+        runtime_printstring(in_stack_ffffffffffffffb0);
+        runtime_printunlock();
+        for (prVar1 = &runtime_firstmoduledata; prVar1 != (runtime_moduledata *)0x0;
+            prVar1 = prVar1->next) {
+          v_01 = prVar1->types;
+          v_02 = prVar1->etypes;
+          runtime_printlock();
+          runtime_printstring(in_stack_ffffffffffffffb0);
+          runtime_printhex(v_01);
+          runtime_printstring(in_stack_ffffffffffffffb0);
+          runtime_printhex(v_02);
+          runtime_printnl();
+          runtime_printunlock();
+        }
+                    // WARNING: Subroutine does not return
+        runtime_throw(in_stack_ffffffffffffffb0);
+      }
+      return;
+    }
+    v = (void *)md->types;
+    if ((v <= ptrInModule) && (v_00 = (void *)md->etypes, ptrInModule < v_00)) break;
+    md = md->next;
+  }
+  if ((void *)((int)v + (int)(sdword)uStack0000000000000010) <= v_00) {
+    return;
+  }
+  runtime_printlock();
+  runtime_printstring(in_stack_ffffffffffffffb0);
+  runtime_printhex((int)(sdword)uStack0000000000000010);
+  runtime_printstring(in_stack_ffffffffffffffb0);
+  runtime_printhex((uint64)v);
+  runtime_printstring(in_stack_ffffffffffffffb0);
+  runtime_printhex((uint64)v_00);
+  runtime_printnl();
+  runtime_printunlock();
+                    // WARNING: Subroutine does not return
+  runtime_throw(in_stack_ffffffffffffffb0);
+}
+
+
+
+void runtime_resolveTypeOff(void *ptrInModule,internal_abi_TypeOff off,internal_abi_Type *~r0)
+
+{
+  uint64 uVar1;
+  uint v;
+  int iVar2;
+  uint64 v_00;
+  uintptr base;
+  int *extraout_RAX;
+  internal_abi_Type *t;
+  uintptr res;
+  int *extraout_RAX_00;
+  runtime_moduledata *prVar3;
+  runtime_moduledata *md;
+  void *res_1;
+  void *in_RDI;
+  void *~r0_00;
+  void *extraout_RDI;
+  int unaff_R14;
+  uint32 uStack0000000000000010;
+  string in_stack_ffffffffffffffb0;
+  runtime_moduledata *next_1;
+  
+  uStack0000000000000010 = off;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  if ((uStack0000000000000010 == 0) || (uStack0000000000000010 == 0xffffffff)) {
+    return;
+  }
+  for (md = &runtime_firstmoduledata; md != (runtime_moduledata *)0x0; md = md->next) {
+    if (((void *)md->types <= ptrInModule) && (ptrInModule < (void *)md->etypes)) goto LAB_00461956;
+  }
+  md = (runtime_moduledata *)0x0;
+LAB_00461956:
+  if (md == (runtime_moduledata *)0x0) {
+    runtime_lock2(&runtime_reflectOffs.lock);
+    runtime_mapaccess1_fast32
+              ((internal_abi_MapType *)&DAT_0082ca40,(runtime_hmap *)runtime_reflectOffs.m,
+               uStack0000000000000010,~r0_00);
+    iVar2 = *extraout_RAX_00;
+    runtime_unlock2(&runtime_reflectOffs.lock);
+    if (iVar2 != 0) {
+      return;
+    }
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex((int)(sdword)uStack0000000000000010);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex((uint64)ptrInModule);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printunlock();
+    for (prVar3 = &runtime_firstmoduledata; prVar3 != (runtime_moduledata *)0x0;
+        prVar3 = prVar3->next) {
+      uVar1 = prVar3->types;
+      v_00 = prVar3->etypes;
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffb0);
+      runtime_printhex(uVar1);
+      runtime_printstring(in_stack_ffffffffffffffb0);
+      runtime_printhex(v_00);
+      runtime_printnl();
+      runtime_printunlock();
+    }
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffb0);
+  }
+  runtime_mapaccess1_fast32
+            ((internal_abi_MapType *)&DAT_0082c9e0,(runtime_hmap *)md->typemap,
+             uStack0000000000000010,in_RDI);
+  if (*extraout_RAX != 0) {
+    return;
+  }
+  uVar1 = md->types;
+  v = md->etypes;
+  if (v < uVar1 + (int)(sdword)uStack0000000000000010) {
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex((int)(sdword)uStack0000000000000010);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(uVar1);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(v);
+    runtime_printnl();
+    runtime_printunlock();
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffb0);
+  }
+  return;
+}
+
+
+
+void runtime_rtype_textOff(runtime_rtype t,internal_abi_TextOff off,void *~r0)
+
+{
+  int iVar1;
+  uint64 v;
+  uint64 v_00;
+  uintptr base;
+  int *extraout_RAX;
+  runtime_moduledata *prVar2;
+  uintptr res;
+  runtime_moduledata *md;
+  void *res_1;
+  void *~r0_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb8;
+  runtime_moduledata *next_1;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (off == -1) {
+    return;
+  }
+  for (md = &runtime_firstmoduledata; md != (runtime_moduledata *)0x0; md = md->next) {
+    if (((internal_abi_Type *)md->types <= t.Type) && (t.Type < (internal_abi_Type *)md->etypes))
+    goto LAB_00461c16;
+  }
+  md = (runtime_moduledata *)0x0;
+LAB_00461c16:
+  if (md != (runtime_moduledata *)0x0) {
+    runtime___moduledata__textAddr(md,off,(uintptr)md);
+    return;
+  }
+  runtime_lock2(&runtime_reflectOffs.lock);
+  runtime_mapaccess1_fast32
+            ((internal_abi_MapType *)&DAT_0082ca40,(runtime_hmap *)runtime_reflectOffs.m,off,~r0_00)
+  ;
+  iVar1 = *extraout_RAX;
+  runtime_unlock2(&runtime_reflectOffs.lock);
+  if (iVar1 != 0) {
+    return;
+  }
+  runtime_printlock();
+  runtime_printstring(in_stack_ffffffffffffffb8);
+  runtime_printhex((int)off);
+  runtime_printstring(in_stack_ffffffffffffffb8);
+  runtime_printhex((uint64)t.Type);
+  runtime_printstring(in_stack_ffffffffffffffb8);
+  runtime_printunlock();
+  for (prVar2 = &runtime_firstmoduledata; prVar2 != (runtime_moduledata *)0x0; prVar2 = prVar2->next
+      ) {
+    v = prVar2->types;
+    v_00 = prVar2->etypes;
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffb8);
+    runtime_printhex(v);
+    runtime_printstring(in_stack_ffffffffffffffb8);
+    runtime_printhex(v_00);
+    runtime_printnl();
+    runtime_printunlock();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_throw(in_stack_ffffffffffffffb8);
+}
+
+
+
+void runtime_pkgPath(internal_abi_Name n,string ~r0)
+
+{
+  uint uVar1;
+  internal_abi_Name n_00;
+  int iVar2;
+  int i;
+  internal_abi_Name ~r0_00;
+  int i_1;
+  int v_1;
+  int l2;
+  uint8 x_1;
+  int iVar3;
+  int v;
+  int l;
+  int off;
+  int iVar4;
+  uint8 x;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe0;
+  dword local_c;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((n.Bytes != (uint8 *)0x0) && ((*n.Bytes & 4) != 0)) {
+    iVar2 = 0;
+    iVar3 = 0;
+    while( true ) {
+      uVar1 = iVar2 * 7;
+      if ((int)uVar1 < 0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicshift();
+      }
+      iVar3 = ((uint)(n.Bytes[iVar2 + 1] & 0x7f) << ((byte)uVar1 & 0x3f) & -(uint)(uVar1 < 0x40)) +
+              iVar3;
+      if ((n.Bytes[iVar2 + 1] & 0x80) == 0) break;
+      iVar2 = iVar2 + 1;
+    }
+    iVar4 = iVar3 + iVar2 + 2;
+    if ((*n.Bytes & 2) != 0) {
+      i_1 = 0;
+      v_1 = 0;
+      while( true ) {
+        uVar1 = i_1 * 7;
+        if ((int)uVar1 < 0) {
+                    // WARNING: Subroutine does not return
+          runtime_panicshift();
+        }
+        v_1 = v_1 + ((uint)(n.Bytes[iVar3 + iVar2 + i_1 + 2] & 0x7f) << ((byte)uVar1 & 0x3f) &
+                    -(uint)(uVar1 < 0x40));
+        if ((n.Bytes[iVar3 + iVar2 + i_1 + 2] & 0x80) == 0) break;
+        i_1 = i_1 + 1;
+      }
+      iVar4 = v_1 + i_1 + iVar3 + iVar2 + 3;
+    }
+    local_c = 0;
+    ~r0_00.Bytes = n.Bytes + iVar4;
+    if (&local_c != (dword *)~r0_00.Bytes) {
+      local_c = *(dword *)(n.Bytes + iVar4);
+      ~r0_00.Bytes = (uint8 *)(uint)local_c;
+    }
+    runtime_resolveNameOff(n.Bytes,local_c,~r0_00);
+    internal_abi_Name_Name(n_00,in_stack_ffffffffffffffe0);
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_typelinksinit(void)
+
+{
+  dword key;
+  runtime_moduledata *~r0;
+  int iVar1;
+  char extraout_AL;
+  uint32 ~r0_00;
+  undefined4 extraout_EAX;
+  runtime_hmap *extraout_RAX;
+  map_uint32____internal_abi_Type typehash;
+  runtime_hmap *h;
+  map_internal_abi_TypeOff__internal_abi_Type extraout_RAX_00;
+  map_internal_abi_TypeOff__internal_abi_Type tm;
+  map_internal_abi_TypeOff__internal_abi_Type *extraout_RAX_01;
+  map_internal_abi_TypeOff__internal_abi_Type *extraout_RAX_02;
+  map_internal_abi_TypeOff__internal_abi_Type extraout_RAX_03;
+  int *extraout_RAX_04;
+  void **extraout_RAX_05;
+  void *extraout_RAX_06;
+  void **extraout_RAX_07;
+  void **extraout_RAX_08;
+  void **ppvVar2;
+  internal_abi_Type **ppiVar3;
+  void **extraout_RAX_09;
+  internal_abi_Type **extraout_RAX_10;
+  internal_abi_Type **extraout_RAX_11;
+  int iVar4;
+  int extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar5;
+  int iVar6;
+  ___runtime_moduledata *p;
+  int32 tl_1;
+  int iVar7;
+  map_internal_abi_TypeOff__internal_abi_Type *pphVar8;
+  void *pvVar9;
+  int extraout_RBX;
+  uint newLen;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  int iVar10;
+  void *newLen_00;
+  void *extraout_RBX_03;
+  void *extraout_RBX_04;
+  runtime_moduledata **pprVar11;
+  int extraout_RSI;
+  bool ~r0_01;
+  runtime_hmap *in_RDI;
+  runtime_hmap *extraout_RDI;
+  runtime_moduledata *md;
+  runtime_moduledata *extraout_RDI_00;
+  runtime_moduledata *~r0_02;
+  void *extraout_RDI_01;
+  void *extraout_RDI_02;
+  void *~r0_03;
+  void *extraout_RDI_03;
+  void *extraout_RDI_04;
+  runtime_hmap *extraout_RDI_05;
+  runtime_moduledata *prev;
+  runtime_moduledata *prVar12;
+  undefined8 *extraout_R11;
+  map_internal_abi_TypeOff__internal_abi_Type *extraout_R11_00;
+  internal_abi_Type *t;
+  int *extraout_R11_01;
+  void **extraout_R11_02;
+  internal_abi_Type **extraout_R11_03;
+  int32 tl;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  struct___ _autotmp_45;
+  runtime_slice in_stack_fffffffffffffd50;
+  int local_230;
+  runtime_hmap *local_228;
+  map_internal_abi_TypeOff__internal_abi_Type local_220;
+  internal_abi_Type *candidate;
+  int local_210;
+  void *local_208;
+  internal_abi_Type *local_200;
+  int32 *local_1f8;
+  int local_1f0;
+  undefined local_1e8 [16];
+  undefined local_1d8 [32];
+  undefined local_1b8 [24];
+  void *pvStack_1a0;
+  undefined local_188 [144];
+  undefined local_f8 [240];
+  
+  while (&local_230 <= *(int **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI_05;
+  }
+  if (runtime_firstmoduledata.next == (runtime_moduledata *)0x0) {
+    return;
+  }
+  iVar6 = runtime_firstmoduledata.typelinks.len;
+  unique0x10000737 = in_XMM15;
+  if (runtime_firstmoduledata.typelinks.len < 9) {
+    pvStack_1a0 = in_XMM15._8_8_;
+    FUN_0046cd78();
+    local_1b8._16_8_ = local_f8;
+    iVar6 = extraout_RBX;
+    in_RDI = extraout_RDI;
+  }
+  runtime_makemap((internal_abi_MapType *)&DAT_0082cb60,iVar6,(runtime_hmap *)local_1b8,in_RDI);
+  if (runtime_modulesSlice == (___runtime_moduledata *)0x0) {
+    iVar6 = 0;
+    pprVar11 = (runtime_moduledata **)0x0;
+    iVar7 = 0;
+  }
+  else {
+    pprVar11 = runtime_modulesSlice->array;
+    iVar6 = runtime_modulesSlice->len;
+    iVar7 = runtime_modulesSlice->cap;
+  }
+  if (iVar6 == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  iVar7 = (uint)((dword)(-(iVar7 + -1) >> 0x3f) & 8) + (int)pprVar11;
+  iVar6 = iVar6 + -1;
+  iVar4 = 0;
+  h = extraout_RAX;
+  prVar12 = *pprVar11;
+  local_230 = iVar6;
+  local_228 = extraout_RAX;
+  local_1f0 = iVar7;
+  do {
+    if (iVar6 <= iVar4) {
+      return;
+    }
+    ~r0 = *(runtime_moduledata **)(iVar7 + iVar4 * 8);
+    local_1f8 = ((__int32 *)(&prVar12->textsectmap + 1))->array;
+    iVar1 = ((__int32 *)(&prVar12->textsectmap + 1))->len;
+    for (iVar10 = 0; iVar10 < iVar1; iVar10 = iVar10 + 1) {
+      if (*(map_internal_abi_TypeOff__internal_abi_Type *)(&prVar12->hasmain + 0x28) ==
+          (map_internal_abi_TypeOff__internal_abi_Type)0x0) {
+        local_210 = (int)local_1f8[iVar10] + (&prVar12->gcbss)[1];
+        ~r0_02 = ~r0;
+      }
+      else {
+        runtime_mapaccess1_fast32
+                  ((internal_abi_MapType *)&DAT_0082c9e0,
+                   (runtime_hmap *)
+                   *(map_internal_abi_TypeOff__internal_abi_Type *)(&prVar12->hasmain + 0x28),
+                   local_1f8[iVar10],~r0);
+        local_210 = *extraout_RAX_04;
+        h = local_228;
+        ~r0_02 = extraout_RDI_00;
+      }
+      runtime_mapaccess1_fast32
+                ((internal_abi_MapType *)&DAT_0082cb60,h,*(uint32 *)(local_210 + 0x10),~r0_02);
+      pvVar9 = *extraout_RAX_05;
+      for (iVar6 = 0; iVar6 < (int)extraout_RAX_05[1]; iVar6 = iVar6 + 1) {
+        if (*(int *)((int)pvVar9 + iVar6 * 8) == local_210) goto LAB_00462155;
+      }
+      pvVar5 = extraout_RAX_05[2];
+      newLen_00 = (void *)((int)extraout_RAX_05[1] + 1);
+      ~r0_03 = extraout_RDI_01;
+      if (pvVar5 < newLen_00) {
+        runtime_growslice(pvVar9,(int)newLen_00,(int)pvVar5,1,(internal_abi_Type *)&DAT_0089b1a0,
+                          in_stack_fffffffffffffd50);
+        pvVar5 = extraout_RCX_00;
+        pvVar9 = extraout_RAX_06;
+        newLen_00 = extraout_RBX_03;
+        ~r0_03 = extraout_RDI_02;
+      }
+      iVar6 = local_210;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RSI;
+        ~r0_03 = *(void **)((int)pvVar9 + (int)extraout_RBX_04 * 8 + -8);
+        extraout_R11_01[1] = (int)~r0_03;
+        newLen_00 = extraout_RBX_04;
+        iVar6 = extraout_RSI;
+      }
+      *(int *)((int)pvVar9 + (int)newLen_00 * 8 + -8) = iVar6;
+      local_208 = pvVar9;
+      runtime_mapassign_fast32
+                ((internal_abi_MapType *)&DAT_0082cb60,local_228,*(uint32 *)(iVar6 + 0x10),~r0_03);
+      extraout_RAX_07[1] = newLen_00;
+      extraout_RAX_07[2] = pvVar5;
+      ppvVar2 = extraout_RAX_07;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = local_208;
+        extraout_R11_02[1] = *extraout_RAX_08;
+        ppvVar2 = extraout_RAX_08;
+      }
+      *ppvVar2 = local_208;
+LAB_00462155:
+      h = local_228;
+      iVar7 = local_1f0;
+      iVar6 = local_230;
+    }
+    if (*(map_internal_abi_TypeOff__internal_abi_Type *)(&~r0->hasmain + 0x28) ==
+        (map_internal_abi_TypeOff__internal_abi_Type)0x0) {
+      runtime_makemap((internal_abi_MapType *)&DAT_0082c9e0,
+                      ((__int32 *)(&~r0->textsectmap + 1))->len,(runtime_hmap *)0x0,
+                      (runtime_hmap *)~r0);
+      newLen = runtime_pinnedTypemaps.len + 1;
+      local_220 = extraout_RAX_00;
+      pphVar8 = runtime_pinnedTypemaps.array;
+      if (((uint)runtime_pinnedTypemaps.cap < newLen) &&
+         (runtime_growslice(runtime_pinnedTypemaps.array,newLen,runtime_pinnedTypemaps.cap,1,
+                            (internal_abi_Type *)&DAT_0082c9e0,in_stack_fffffffffffffd50),
+         newLen = extraout_RBX_00, pphVar8 = extraout_RAX_01,
+         runtime_pinnedTypemaps.cap = extraout_RCX, runtime_writeBarrier._0_4_ != 0)) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_02;
+        extraout_R11[1] = runtime_pinnedTypemaps.array;
+        newLen = extraout_RBX_01;
+        pphVar8 = extraout_RAX_02;
+      }
+      runtime_pinnedTypemaps.array = pphVar8;
+      pphVar8 = runtime_pinnedTypemaps.array;
+      runtime_pinnedTypemaps.len = newLen;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier3();
+        *extraout_R11_00 = extraout_RAX_03;
+        extraout_R11_00[1] = pphVar8[extraout_RBX_02 - 1];
+        extraout_R11_00[2] = *(map_internal_abi_TypeOff__internal_abi_Type *)(&~r0->hasmain + 0x28);
+        local_220 = extraout_RAX_03;
+        newLen = extraout_RBX_02;
+      }
+      pphVar8[newLen - 1] = local_220;
+      *(map_internal_abi_TypeOff__internal_abi_Type *)(&~r0->hasmain + 0x28) = local_220;
+      local_1f8 = ((__int32 *)(&~r0->textsectmap + 1))->array;
+      iVar1 = ((__int32 *)(&~r0->textsectmap + 1))->len;
+      for (iVar10 = 0; h = local_228, iVar7 = local_1f0, iVar6 = local_230, iVar10 < iVar1;
+          iVar10 = iVar10 + 1) {
+        key = local_1f8[iVar10];
+        local_200 = (internal_abi_Type *)((int)(sdword)key + (&~r0->gcbss)[1]);
+        runtime_mapaccess1_fast32
+                  ((internal_abi_MapType *)&DAT_0082cb60,local_228,local_200->Hash,(void *)(uint)key
+                  );
+        local_208 = *extraout_RAX_09;
+        pvVar9 = extraout_RAX_09[1];
+        iVar6 = 0;
+        pvVar5 = extraout_RDI_03;
+        while( true ) {
+          candidate = local_200;
+          if ((int)pvVar9 <= iVar6) break;
+          candidate = *(internal_abi_Type **)((int)local_208 + iVar6 * 8);
+          local_1d8._8_8_ = in_XMM15._8_8_;
+          local_1e8._0_12_ = in_XMM15._0_12_;
+          ~r0_00 = FUN_0046cd99();
+          local_1d8._0_8_ = local_188;
+          runtime_fastrand(~r0_00);
+          local_1e8._12_4_ = extraout_EAX;
+          runtime_typesEqual(local_200,candidate,(map_runtime__typePair_struct___)local_1e8,~r0_01);
+          pvVar5 = extraout_RDI_04;
+          if (extraout_AL != '\0') break;
+          iVar6 = iVar6 + 1;
+        }
+        runtime_mapassign_fast32
+                  ((internal_abi_MapType *)&DAT_0082c9e0,
+                   (runtime_hmap *)
+                   *(map_internal_abi_TypeOff__internal_abi_Type *)(&~r0->hasmain + 0x28),key,pvVar5
+                  );
+        ppiVar3 = extraout_RAX_10;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_03 = candidate;
+          extraout_R11_03[1] = *extraout_RAX_11;
+          ppiVar3 = extraout_RAX_11;
+        }
+        *ppiVar3 = candidate;
+      }
+    }
+    iVar4 = iVar4 + 1;
+    prVar12 = ~r0;
+  } while( true );
+}
+
+
+
+// Local variable rt:runtime.rtype[RAX:8] conflicts with parameter, skipped.
+// Local variable rv:runtime.rtype[RBX:8] conflicts with parameter, skipped.
+// Local variable at:internal/abi.ArrayType *[RAX:8] conflicts with parameter, skipped.
+// Local variable av:internal/abi.ArrayType *[RBX:8] conflicts with parameter, skipped.
+// Local variable ct:internal/abi.ChanType *[RAX:8] conflicts with parameter, skipped.
+// Local variable cv:internal/abi.ChanType *[RBX:8] conflicts with parameter, skipped.
+// Local variable ft:internal/abi.FuncType *[RAX:8] conflicts with parameter, skipped.
+// Local variable fv:internal/abi.FuncType *[RBX:8] conflicts with parameter, skipped.
+// Local variable it:internal/abi.InterfaceType *[RAX:8] conflicts with parameter, skipped.
+// Local variable iv:internal/abi.InterfaceType *[RBX:8] conflicts with parameter, skipped.
+// Local variable mt:internal/abi.MapType *[RAX:8] conflicts with parameter, skipped.
+// Local variable mv:internal/abi.MapType *[RBX:8] conflicts with parameter, skipped.
+// Local variable pt:internal/abi.PtrType *[RAX:8] conflicts with parameter, skipped.
+// Local variable pv:internal/abi.PtrType *[RBX:8] conflicts with parameter, skipped.
+// Local variable st:internal/abi.SliceType *[RAX:8] conflicts with parameter, skipped.
+// Local variable sv:internal/abi.SliceType *[RBX:8] conflicts with parameter, skipped.
+// Local variable st_1:internal/abi.StructType *[RAX:8] conflicts with parameter, skipped.
+// Local variable sv_1:internal/abi.StructType *[RBX:8] conflicts with parameter, skipped.
+
+void runtime_typesEqual(internal_abi_Type *t,internal_abi_Type *v,
+                       map_runtime__typePair_struct___ seen,bool ~r0)
+
+{
+  byte bVar1;
+  ushort uVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  uintptr uVar7;
+  internal_abi_Type *t_00;
+  char extraout_AL;
+  char extraout_AL_11;
+  byte bVar11;
+  uint8 kind;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  char extraout_AL_02;
+  char extraout_AL_03;

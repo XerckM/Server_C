@@ -1,0 +1,1000 @@
+    xy[0].b = (runtime_bmap *)(t->BucketSize * oldbucket + (int)h->buckets);
+    xy[0].i = in_XMM15._8_8_;
+    xy[0].e = xy[0].b + 9;
+    xy[0].k = xy[0].b + 1;
+    if ((h->flags & 8) == 0) {
+      xy[1].b = (runtime_bmap *)((newbit_00 + oldbucket) * (uint)t->BucketSize + (int)h->buckets);
+      xy[1].i = xy[0].i;
+      xy[1].e = xy[1].b + 9;
+      xy[1].k = xy[1].b + 1;
+    }
+    for (; ~r0 != (runtime_bmap *)0x0; ~r0 = *(runtime_bmap **)(~r0[-1].tophash + t->BucketSize)) {
+      prVar7 = ~r0 + 9;
+      prVar4 = ~r0;
+      for (iVar9 = 0; prVar4 = prVar4 + 1, iVar9 < 8; iVar9 = iVar9 + 1) {
+        bVar1 = ~r0->tophash[iVar9];
+        if (bVar1 < 2) {
+          ~r0->tophash[iVar9] = 4;
+        }
+        else {
+          if (bVar1 < 5) {
+                    // WARNING: Subroutine does not return
+            runtime_throw(in_stack_ffffffffffffff60);
+          }
+          if ((h->flags & 8) == 0) {
+            uVar2 = (**t->Hasher)(prVar4,(uint)h->hash0,(uintptr *)*t->Hasher);
+            useY = (uVar2 >> (uVar5 & 0x3f) & 1) != 0;
+          }
+          else {
+            useY = 0;
+          }
+          ~r0->tophash[iVar9] = useY + 2;
+          uVar2 = (uint)useY;
+          if (1 < uVar2) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          iVar11 = uVar2 * 0x20;
+          if (xy[uVar2].i == 8) {
+            runtime___hmap__newoverflow(h,t,xy[uVar2].b,~r0);
+            xy[uVar2].b = extraout_RAX;
+            xy[uVar2].i = 0;
+            xy[uVar2].k = extraout_RAX + 1;
+            xy[uVar2].e = extraout_RAX + 9;
+          }
+          (xy[uVar2].b)->tophash[(dword)xy[uVar2].i & 7] = bVar1;
+          piVar3 = t;
+          prVar8 = prVar7;
+          if ((t->Key->PtrBytes == 0) || (runtime_writeBarrier.enabled == false)) {
+            *(undefined8 *)xy[uVar2].k = *(undefined8 *)prVar4->tophash;
+          }
+          else {
+            puVar6 = (undefined8 *)xy[uVar2].k;
+            uVar10 = *(undefined8 *)prVar4->tophash;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11 = uVar10;
+              extraout_R11[1] = *extraout_R9;
+              piVar3 = extraout_RAX_00;
+              puVar6 = extraout_R9;
+              prVar8 = extraout_R10;
+            }
+            *puVar6 = uVar10;
+          }
+          runtime_typedmemmove(piVar3->Elem,*(void **)((int)&xy[0].e + iVar11),prVar8);
+          xy[uVar2].i = xy[uVar2].i + 1;
+          xy[uVar2].k = (void *)((int)xy[uVar2].k + 8);
+          xy[uVar2].e = (void *)((int)xy[uVar2].e + (uint)t->ValueSize);
+        }
+        prVar7 = (runtime_bmap *)((int)prVar7->tophash + (uint)t->ValueSize);
+      }
+    }
+    if (((h->flags & 2) == 0) && (t->Bucket->PtrBytes != 0)) {
+      b_1 = (void *)((int)h->oldbuckets + t->BucketSize * oldbucket + 8);
+      runtime_memclrHasPointers(b_1,t->BucketSize - 8);
+    }
+  }
+  if (h->nevacuate == oldbucket) {
+    runtime_advanceEvacuationMark(h,t,newbit_00);
+  }
+  return;
+}
+
+
+
+void runtime_mapaccess1_faststr(internal_abi_MapType *t,runtime_hmap *h,string ky,void *~r0)
+
+{
+  void *pvVar1;
+  sdword *psVar2;
+  byte bVar3;
+  uint8 top;
+  char extraout_AL;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  uint uVar4;
+  uintptr hash;
+  uint uVar5;
+  uintptr m;
+  void *pvVar6;
+  runtime_bmap *b;
+  uint uVar7;
+  uintptr i;
+  uint8 h_1;
+  void *kptr;
+  void *kptr_2;
+  runtime_stringStruct *k_3;
+  uintptr keymaybe;
+  uintptr i_1;
+  runtime_stringStruct *k;
+  uintptr i_2;
+  runtime_bmap *b_1;
+  runtime_bmap *oldb;
+  runtime_stringStruct *k_2;
+  int in_RDI;
+  void *kptr_1;
+  runtime_stringStruct *k_1;
+  int iVar8;
+  void *c;
+  int unaff_R14;
+  bool bVar9;
+  sdword *psStack0000000000000018;
+  int iStack0000000000000020;
+  string in_stack_ffffffffffffffa0;
+  
+  psStack0000000000000018 = (sdword *)~r0;
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((h == (runtime_hmap *)0x0) || (h->count == 0)) {
+    return;
+  }
+  if ((h->flags & 4) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_fatal(in_stack_ffffffffffffffa0);
+  }
+  if (h->B != 0) {
+LAB_004173c4:
+    uVar4 = (**t->Hasher)(&stack0x00000018,(uint)h->hash0,(uintptr *)*t->Hasher);
+    pvVar1 = h->oldbuckets;
+    uVar7 = (1 << (h->B & 0x3f)) - 1;
+    pvVar6 = (void *)((uVar7 & uVar4) * (uint)t->BucketSize + (int)h->buckets);
+    if (pvVar1 != (void *)0x0) {
+      if ((h->flags & 8) == 0) {
+        uVar7 = uVar7 >> 1;
+      }
+      iVar8 = (uint)t->BucketSize * (uVar7 & uVar4);
+      h_1 = *(char *)((int)pvVar1 + iVar8) - 2;
+      if (2 < h_1) {
+        pvVar6 = (void *)((int)pvVar1 + iVar8);
+      }
+    }
+    uVar5 = uVar4 >> 0x38;
+    bVar3 = (byte)(uVar4 >> 0x38);
+    uVar7 = uVar5;
+    if (bVar3 < 5) {
+      uVar5 = (uint)(dword)(bVar3 + 5);
+      uVar7 = uVar5;
+    }
+    do {
+      if (pvVar6 == (void *)0x0) {
+        return;
+      }
+      k_3 = (runtime_stringStruct *)((int)pvVar6 + 8);
+      for (uVar4 = 0; uVar4 < 8; uVar4 = uVar4 + 1) {
+        if ((k_3->len == iStack0000000000000020) && (*(char *)(uVar4 + (int)pvVar6) == (char)uVar5))
+        {
+          if ((psStack0000000000000018 == (sdword *)k_3->str) ||
+             (runtime_memequal(), extraout_AL != '\0')) {
+            return;
+          }
+          uVar5 = uVar7 & 0xff;
+        }
+        k_3 = k_3 + 1;
+      }
+      pvVar6 = *(void **)((int)pvVar6 + (t->BucketSize - 8));
+    } while( true );
+  }
+  pvVar1 = h->buckets;
+  if (iStack0000000000000020 < 0x20) {
+    k = (runtime_stringStruct *)((int)pvVar1 + 8);
+    uVar7 = 0;
+    do {
+      if (7 < uVar7) {
+        return;
+      }
+      if ((k->len == iStack0000000000000020) && (1 < *(byte *)(uVar7 + (int)pvVar1))) {
+        if ((psStack0000000000000018 == (sdword *)k->str) ||
+           (runtime_memequal(), extraout_AL_01 != '\0')) {
+          return;
+        }
+      }
+      else if (*(char *)(uVar7 + (int)pvVar1) == '\0') {
+        return;
+      }
+      uVar7 = uVar7 + 1;
+      k = k + 1;
+    } while( true );
+  }
+  k_1 = (runtime_stringStruct *)((int)pvVar1 + 8);
+  uVar7 = 8;
+  for (keymaybe = 0; keymaybe < 8; keymaybe = keymaybe + 1) {
+    if ((k_1->len == iStack0000000000000020) && (1 < *(byte *)(keymaybe + (int)pvVar1))) {
+      psVar2 = (sdword *)k_1->str;
+      if (psStack0000000000000018 == psVar2) {
+        return;
+      }
+      if (((*psStack0000000000000018 == *psVar2) &&
+          (*(sdword *)((int)psStack0000000000000018 + iStack0000000000000020 + -4) ==
+           *(sdword *)((int)psVar2 + iStack0000000000000020 + -4))) &&
+         (bVar9 = uVar7 != 8, uVar7 = keymaybe, bVar9)) goto LAB_004173c4;
+    }
+    else if (*(char *)(keymaybe + (int)pvVar1) == '\0') break;
+    k_1 = k_1 + 1;
+  }
+  if ((uVar7 != 8) && (runtime_memequal(), extraout_AL_00 != '\0')) {
+    return;
+  }
+  return;
+}
+
+
+
+void runtime_mapaccess2_faststr
+               (internal_abi_MapType *t,runtime_hmap *h,string ky,void *~r0,bool ~r1)
+
+{
+  void *pvVar1;
+  sdword *psVar2;
+  byte bVar3;
+  uint8 top;
+  char extraout_AL;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  uint uVar4;
+  uintptr hash;
+  uint uVar5;
+  uintptr m;
+  void *pvVar6;
+  runtime_bmap *b;
+  uint uVar7;
+  uintptr i;
+  uint8 h_1;
+  void *kptr;
+  void *kptr_2;
+  runtime_stringStruct *k_3;
+  uintptr keymaybe;
+  uintptr i_1;
+  runtime_stringStruct *k;
+  uintptr i_2;
+  runtime_bmap *b_1;
+  runtime_bmap *oldb;
+  runtime_stringStruct *k_2;
+  undefined7 in_register_00000039;
+  void *kptr_1;
+  runtime_stringStruct *k_1;
+  int iVar8;
+  void *c;
+  int unaff_R14;
+  bool bVar9;
+  sdword *psStack0000000000000018;
+  int iStack0000000000000020;
+  string in_stack_ffffffffffffffa0;
+  
+  iStack0000000000000020 = CONCAT71(in_register_00000039,~r1);
+  psStack0000000000000018 = (sdword *)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((h == (runtime_hmap *)0x0) || (h->count == 0)) {
+    return;
+  }
+  if ((h->flags & 4) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_fatal(in_stack_ffffffffffffffa0);
+  }
+  if (h->B != 0) {
+LAB_00417786:
+    uVar4 = (**t->Hasher)(&stack0x00000018,(uint)h->hash0,(uintptr *)*t->Hasher);
+    pvVar1 = h->oldbuckets;
+    uVar7 = (1 << (h->B & 0x3f)) - 1;
+    pvVar6 = (void *)((uVar7 & uVar4) * (uint)t->BucketSize + (int)h->buckets);
+    if (pvVar1 != (void *)0x0) {
+      if ((h->flags & 8) == 0) {
+        uVar7 = uVar7 >> 1;
+      }
+      iVar8 = (uint)t->BucketSize * (uVar7 & uVar4);
+      h_1 = *(char *)((int)pvVar1 + iVar8) - 2;
+      if (2 < h_1) {
+        pvVar6 = (void *)((int)pvVar1 + iVar8);
+      }
+    }
+    uVar5 = uVar4 >> 0x38;
+    bVar3 = (byte)(uVar4 >> 0x38);
+    uVar7 = uVar5;
+    if (bVar3 < 5) {
+      uVar5 = (uint)(dword)(bVar3 + 5);
+      uVar7 = uVar5;
+    }
+    do {
+      if (pvVar6 == (void *)0x0) {
+        return;
+      }
+      k_3 = (runtime_stringStruct *)((int)pvVar6 + 8);
+      for (uVar4 = 0; uVar4 < 8; uVar4 = uVar4 + 1) {
+        if ((k_3->len == iStack0000000000000020) && (*(char *)(uVar4 + (int)pvVar6) == (char)uVar5))
+        {
+          if ((psStack0000000000000018 == (sdword *)k_3->str) ||
+             (runtime_memequal(), extraout_AL != '\0')) {
+            return;
+          }
+          uVar5 = uVar7 & 0xff;
+        }
+        k_3 = k_3 + 1;
+      }
+      pvVar6 = *(void **)((int)pvVar6 + (t->BucketSize - 8));
+    } while( true );
+  }
+  pvVar1 = h->buckets;
+  if (iStack0000000000000020 < 0x20) {
+    k = (runtime_stringStruct *)((int)pvVar1 + 8);
+    uVar7 = 0;
+    do {
+      if (7 < uVar7) {
+        return;
+      }
+      if ((k->len == iStack0000000000000020) && (1 < *(byte *)(uVar7 + (int)pvVar1))) {
+        if ((psStack0000000000000018 == (sdword *)k->str) ||
+           (runtime_memequal(), extraout_AL_01 != '\0')) {
+          return;
+        }
+      }
+      else if (*(char *)(uVar7 + (int)pvVar1) == '\0') {
+        return;
+      }
+      uVar7 = uVar7 + 1;
+      k = k + 1;
+    } while( true );
+  }
+  k_1 = (runtime_stringStruct *)((int)pvVar1 + 8);
+  uVar7 = 8;
+  for (keymaybe = 0; keymaybe < 8; keymaybe = keymaybe + 1) {
+    if ((k_1->len == iStack0000000000000020) && (1 < *(byte *)(keymaybe + (int)pvVar1))) {
+      psVar2 = (sdword *)k_1->str;
+      if (psStack0000000000000018 == psVar2) {
+        return;
+      }
+      if (((*psStack0000000000000018 == *psVar2) &&
+          (*(sdword *)((int)psStack0000000000000018 + iStack0000000000000020 + -4) ==
+           *(sdword *)((int)psVar2 + iStack0000000000000020 + -4))) &&
+         (bVar9 = uVar7 != 8, uVar7 = keymaybe, bVar9)) goto LAB_00417786;
+    }
+    else if (*(char *)(keymaybe + (int)pvVar1) == '\0') break;
+    k_1 = k_1 + 1;
+  }
+  if ((uVar7 != 8) && (runtime_memequal(), extraout_AL_00 != '\0')) {
+    return;
+  }
+  return;
+}
+
+
+
+void runtime_mapassign_faststr(internal_abi_MapType *t,runtime_hmap *h,string s,void *~r0)
+
+{
+  byte extraout_AL;
+  uint uVar2;
+  uintptr hash;
+  byte bVar1;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  void *pvVar3;
+  uint uVar4;
+  uint uVar5;
+  runtime_bmap *extraout_RAX_01;
+  void *elem;
+  uint uVar6;
+  uintptr bucket;
+  runtime_bmap *b;
+  runtime_bmap *insertb;
+  runtime_bmap *b_00;
+  void *insertk;
+  runtime_bmap *extraout_RCX;
+  runtime_bmap *prVar7;
+  runtime_hmap *extraout_RBX;
+  runtime_hmap *extraout_RBX_00;
+  void *extraout_RSI;
+  int in_RDI;
+  void *~r0_00;
+  runtime_bmap *prVar8;
+  void *extraout_RDI;
+  uintptr inserti;
+  runtime_bmap *ovf;
+  uintptr i;
+  runtime_stringStruct *k;
+  runtime_bmap *extraout_R9;
+  void **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  uint uVar9;
+  int unaff_R14;
+  void *pvStack0000000000000018;
+  int iStack0000000000000020;
+  interface___ in_stack_ffffffffffffff98;
+  uint8 top_1;
+  
+  pvStack0000000000000018 = ~r0;
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (h == (runtime_hmap *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff98);
+  }
+  if ((h->flags & 4) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_fatal((string)in_stack_ffffffffffffff98);
+  }
+  uVar2 = (**t->Hasher)(&stack0x00000018,(uint)h->hash0,(uintptr *)*t->Hasher);
+  h->flags = h->flags ^ 4;
+  if (h->buckets == (void *)0x0) {
+    runtime_mallocgc(t->Bucket->Size_,t->Bucket,true,~r0_00);
+    pvVar3 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = h->buckets;
+      pvVar3 = extraout_RAX_00;
+    }
+    h->buckets = pvVar3;
+  }
+  do {
+    uVar6 = (1 << (h->B & 0x3f)) - 1U & uVar2;
+    if (h->oldbuckets != (void *)0x0) {
+      runtime_growWork_faststr(t,h,uVar6);
+    }
+    uVar4 = uVar2 >> 0x38;
+    bVar1 = (byte)(uVar2 >> 0x38);
+    if (bVar1 < 5) {
+      uVar4 = (uint)(dword)(bVar1 + 5);
+    }
+    prVar8 = (runtime_bmap *)0x0;
+    inserti = 0;
+    uVar5 = uVar4;
+    prVar7 = (runtime_bmap *)(uVar6 * t->BucketSize + (int)h->buckets);
+    do {
+      b_00 = prVar7;
+      for (i = 0; i < 8; i = i + 1) {
+        bVar1 = b_00->tophash[i];
+        if ((byte)uVar5 == bVar1) {
+          prVar7 = b_00 + i * 2 + 1;
+          if (*(int *)b_00[i * 2 + 2].tophash == iStack0000000000000020) {
+            if (pvStack0000000000000018 == *(void **)prVar7->tophash) {
+              bVar1 = 0;
+            }
+            else {
+              runtime_memequal();
+              bVar1 = extraout_AL ^ 1;
+              uVar5 = uVar4 & 0xff;
+            }
+            if (bVar1 == 0) {
+              pvVar3 = pvStack0000000000000018;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_00 = extraout_RSI;
+                extraout_R11_00[1] = *(void **)extraout_R9->tophash;
+                h = extraout_RBX;
+                pvVar3 = extraout_RSI;
+                prVar7 = extraout_R9;
+              }
+              *(void **)prVar7->tophash = pvVar3;
+              goto LAB_00417e3b;
+            }
+          }
+        }
+        else {
+          if ((bVar1 < 2) && (prVar8 == (runtime_bmap *)0x0)) {
+            prVar8 = b_00;
+            inserti = i;
+          }
+          if (bVar1 == 0) goto LAB_00417c1e;
+        }
+      }
+      prVar7 = *(runtime_bmap **)(b_00[-1].tophash + t->BucketSize);
+    } while (*(runtime_bmap **)(b_00[-1].tophash + t->BucketSize) != (runtime_bmap *)0x0);
+LAB_00417c1e:
+    if (h->oldbuckets != (void *)0x0) goto LAB_00417dba;
+    uVar6 = h->count + 1;
+    bVar1 = h->B;
+    if (((int)uVar6 < 9) ||
+       (uVar9 = 1 << (bVar1 & 0x3f), uVar6 <= ((uVar9 >> 1) + (uVar9 & 0xfffffffffffffffe)) * 4)) {
+      if (0xf < bVar1) {
+        bVar1 = 0xf;
+      }
+      if (h->noverflow < (ushort)(1 << (bVar1 & 0xf))) {
+LAB_00417dba:
+        bVar1 = (byte)uVar5;
+        if (prVar8 == (runtime_bmap *)0x0) {
+          runtime___hmap__newoverflow(h,t,b_00,(runtime_bmap *)0x0);
+          inserti = 0;
+          prVar8 = extraout_RAX_01;
+          bVar1 = (byte)uVar4;
+        }
+        prVar8->tophash[(dword)inserti & 7] = bVar1;
+        prVar7 = prVar8 + inserti * 2 + 1;
+        *(int *)prVar8[inserti * 2 + 2].tophash = iStack0000000000000020;
+        pvVar3 = pvStack0000000000000018;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_01 = extraout_RDI;
+          extraout_R11_01[1] = *(void **)extraout_RCX->tophash;
+          prVar7 = extraout_RCX;
+          h = extraout_RBX_00;
+          pvVar3 = extraout_RDI;
+        }
+        *(void **)prVar7->tophash = pvVar3;
+        h->count = h->count + 1;
+LAB_00417e3b:
+        if ((h->flags & 4) != 0) {
+          h->flags = h->flags & 0xfb;
+          return;
+        }
+                    // WARNING: Subroutine does not return
+        runtime_fatal((string)in_stack_ffffffffffffff98);
+      }
+    }
+    runtime_hashGrow(t,h);
+  } while( true );
+}
+
+
+
+void runtime_mapdelete_faststr(internal_abi_MapType *t,runtime_hmap *h,string ky)
+
+{
+  uint8 uVar1;
+  int iVar2;
+  undefined auVar3 [16];
+  undefined auVar4 [16];
+  uint8 top;
+  uint uVar6;
+  uintptr hash;
+  byte extraout_AL;
+  byte bVar5;
+  uint uVar7;
+  void *e;
+  void *in_RCX;
+  uint uVar8;
+  uintptr bucket;
+  internal_abi_MapType *piVar9;
+  runtime_m *mp;
+  uint64 hi;
+  runtime_bmap *prVar10;
+  runtime_bmap *b;
+  runtime_bmap *extraout_RSI;
+  runtime_bmap *prVar11;
+  int in_RDI;
+  void *kptr;
+  runtime_stringStruct *k;
+  runtime_stringStruct *extraout_RDI;
+  uintptr i;
+  uint extraout_R8;
+  undefined8 extraout_R9;
+  runtime_bmap *c;
+  runtime_bmap *prVar12;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  void *pvStack0000000000000018;
+  int iStack0000000000000020;
+  string in_stack_ffffffffffffffa8;
+  
+  pvStack0000000000000018 = in_RCX;
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((h == (runtime_hmap *)0x0) || (h->count == 0)) {
+    return;
+  }
+  if ((h->flags & 4) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_fatal(in_stack_ffffffffffffffa8);
+  }
+  uVar6 = (**t->Hasher)(&stack0x00000018,(uint)h->hash0,(uintptr *)*t->Hasher);
+  h->flags = h->flags ^ 4;
+  uVar8 = (1 << (h->B & 0x3f)) - 1U & uVar6;
+  if (h->oldbuckets != (void *)0x0) {
+    runtime_growWork_faststr(t,h,uVar8);
+  }
+  uVar7 = uVar6 >> 0x38;
+  prVar10 = (runtime_bmap *)(t->BucketSize * uVar8 + (int)h->buckets);
+  bVar5 = (byte)(uVar6 >> 0x38);
+  c = prVar10;
+  uVar6 = uVar7;
+  if (bVar5 < 5) {
+    uVar7 = (uint)(dword)(bVar5 + 5);
+    uVar6 = uVar7;
+  }
+  for (; c != (runtime_bmap *)0x0; c = *(runtime_bmap **)(c[-1].tophash + t->BucketSize)) {
+    k = (runtime_stringStruct *)(c + 1);
+    for (uVar8 = 0; uVar8 < 8; uVar8 = uVar8 + 1) {
+      if ((k->len == iStack0000000000000020) && (c->tophash[uVar8] == (uint8)uVar7)) {
+        if (pvStack0000000000000018 == k->str) {
+          bVar5 = 0;
+        }
+        else {
+          runtime_memequal();
+          bVar5 = extraout_AL ^ 1;
+          uVar7 = uVar6 & 0xff;
+        }
+        if (bVar5 == 0) {
+          piVar9 = t;
+          prVar11 = c;
+          uVar6 = uVar8;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier1();
+            *extraout_R11 = extraout_R9;
+            prVar11 = extraout_RSI;
+            k = extraout_RDI;
+            uVar6 = extraout_R8;
+          }
+          k->str = (void *)0x0;
+          if (piVar9->Elem->PtrBytes == 0) {
+            runtime_memclrNoHeapPointers();
+          }
+          else {
+            runtime_memclrHasPointers
+                      (prVar11[0x11].tophash + piVar9->ValueSize * uVar6,piVar9->Elem->Size_);
+          }
+          c->tophash[uVar8] = 1;
+          if (uVar8 == 7) {
+            if (*(uint8 **)(c[-1].tophash + t->BucketSize) == (uint8 *)0x0) goto LAB_00418192;
+            uVar1 = **(uint8 **)(c[-1].tophash + t->BucketSize);
+          }
+          else {
+            uVar1 = c->tophash[uVar8 + 1];
+          }
+          if (uVar1 != 0) goto LAB_0041813d;
+          goto LAB_00418192;
+        }
+      }
+      k = k + 1;
+    }
+  }
+  goto LAB_00417ff4;
+LAB_00418192:
+  do {
+    if (7 < uVar8) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    c->tophash[uVar8] = 0;
+    if (uVar8 == 0) {
+      prVar11 = prVar10;
+      if (c == prVar10) break;
+      do {
+        prVar12 = prVar11;
+        prVar11 = *(runtime_bmap **)(prVar12[-1].tophash + t->BucketSize);
+      } while (c != prVar11);
+      uVar8 = 7;
+      c = prVar12;
+    }
+    else {
+      uVar8 = uVar8 - 1;
+    }
+    if (7 < uVar8) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+  } while (c->tophash[uVar8] == 1);
+LAB_0041813d:
+  iVar2 = h->count;
+  h->count = iVar2 + -1;
+  if (iVar2 == 1) {
+    uVar6 = *(int *)(*(int *)(unaff_R14 + 0x30) + 0x120) + 0xa0761d6478bd642f;
+    auVar3._8_8_ = 0;
+    auVar3._0_8_ = uVar6;
+    auVar4._8_8_ = 0;
+    auVar4._0_8_ = uVar6 ^ 0xe7037ed1a0b428db;
+    *(uint *)(*(int *)(unaff_R14 + 0x30) + 0x120) = uVar6;
+    h->hash0 = SUB164(auVar3 * auVar4,0) ^ SUB164(auVar3 * auVar4,8);
+  }
+LAB_00417ff4:
+  if ((h->flags & 4) == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_fatal(in_stack_ffffffffffffffa8);
+  }
+  h->flags = h->flags & 0xfb;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_growWork_faststr(internal_abi_MapType *t,runtime_hmap *h,uintptr bucket)
+
+{
+  uint8 oldB;
+  uint8 uVar1;
+  int unaff_R14;
+  runtime_hmap *prStack0000000000000010;
+  
+  prStack0000000000000010 = h;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = prStack0000000000000010->B;
+  if ((prStack0000000000000010->flags & 8) == 0) {
+    uVar1 = uVar1 - 1;
+  }
+  runtime_evacuate_faststr(t,prStack0000000000000010,(1 << (uVar1 & 0x3f)) - 1U & bucket);
+  if (prStack0000000000000010->oldbuckets != (void *)0x0) {
+    runtime_evacuate_faststr(t,prStack0000000000000010,prStack0000000000000010->nevacuate);
+  }
+  return;
+}
+
+
+
+// WARNING: Type propagation algorithm not settling
+// WARNING: Unknown calling convention
+
+void runtime_evacuate_faststr(internal_abi_MapType *t,runtime_hmap *h,uintptr oldbucket)
+
+{
+  byte bVar1;
+  uint uVar2;
+  uintptr hash;
+  runtime_bmap *extraout_RAX;
+  internal_abi_MapType *extraout_RAX_00;
+  internal_abi_MapType *piVar3;
+  void *b_1;
+  void *ptr;
+  uint8 h_1;
+  void *k;
+  uintptr n;
+  runtime_bmap *prVar4;
+  runtime_bmap *~r0;
+  runtime_bmap *b;
+  uint8 oldB;
+  uint8 uVar5;
+  uintptr newbit_00;
+  uintptr newbit;
+  undefined8 *extraout_R9;
+  undefined8 *puVar6;
+  void *e;
+  runtime_bmap *prVar7;
+  runtime_bmap *extraout_R10;
+  runtime_bmap *src;
+  int iVar8;
+  int i;
+  undefined8 *extraout_R11;
+  uint8 top;
+  uint8 useY;
+  int iVar9;
+  int unaff_R14;
+  undefined8 uVar10;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffff60;
+  runtime_evacDst xy [2];
+  
+  while (&xy[1].i <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0 = (runtime_bmap *)(t->BucketSize * oldbucket + (int)h->oldbuckets);
+  uVar5 = h->B;
+  if ((h->flags & 8) == 0) {
+    uVar5 = uVar5 - 1;
+  }
+  h_1 = ~r0->tophash[0] - 2;
+  newbit_00 = 1 << (uVar5 & 0x3f);
+  if (2 < h_1) {
+    xy[1].b = (runtime_bmap *)in_XMM15._0_8_;
+    xy[1].i = in_XMM15._8_8_;
+    xy[1].k = (void *)in_XMM15._0_8_;
+    xy[1].e = (void *)in_XMM15._8_8_;
+    xy[0].b = (runtime_bmap *)(t->BucketSize * oldbucket + (int)h->buckets);
+    xy[0].i = in_XMM15._8_8_;
+    xy[0].e = xy[0].b + 0x11;
+    xy[0].k = xy[0].b + 1;
+    if ((h->flags & 8) == 0) {
+      xy[1].b = (runtime_bmap *)((newbit_00 + oldbucket) * (uint)t->BucketSize + (int)h->buckets);
+      xy[1].i = xy[0].i;
+      xy[1].e = xy[1].b + 0x11;
+      xy[1].k = xy[1].b + 1;
+    }
+    for (; ~r0 != (runtime_bmap *)0x0; ~r0 = *(runtime_bmap **)(~r0[-1].tophash + t->BucketSize)) {
+      prVar4 = ~r0 + 1;
+      prVar7 = ~r0 + 0x11;
+      for (iVar8 = 0; iVar8 < 8; iVar8 = iVar8 + 1) {
+        bVar1 = ~r0->tophash[iVar8];
+        if (bVar1 < 2) {
+          ~r0->tophash[iVar8] = 4;
+        }
+        else {
+          if (bVar1 < 5) {
+                    // WARNING: Subroutine does not return
+            runtime_throw(in_stack_ffffffffffffff60);
+          }
+          if ((h->flags & 8) == 0) {
+            uVar2 = (**t->Hasher)(prVar4,(uint)h->hash0,(uintptr *)*t->Hasher);
+            useY = (uVar2 >> (uVar5 & 0x3f) & 1) != 0;
+          }
+          else {
+            useY = 0;
+          }
+          ~r0->tophash[iVar8] = useY + 2;
+          uVar2 = (uint)useY;
+          if (1 < uVar2) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          iVar9 = uVar2 * 0x20;
+          if (xy[uVar2].i == 8) {
+            runtime___hmap__newoverflow(h,t,xy[uVar2].b,~r0);
+            xy[uVar2].b = extraout_RAX;
+            xy[uVar2].i = 0;
+            xy[uVar2].k = extraout_RAX + 1;
+            xy[uVar2].e = extraout_RAX + 0x11;
+          }
+          (xy[uVar2].b)->tophash[(dword)xy[uVar2].i & 7] = bVar1;
+          puVar6 = (undefined8 *)xy[uVar2].k;
+          uVar10 = *(undefined8 *)prVar4->tophash;
+          puVar6[1] = *(undefined8 *)prVar4[1].tophash;
+          piVar3 = t;
+          src = prVar7;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11 = uVar10;
+            extraout_R11[1] = *extraout_R9;
+            piVar3 = extraout_RAX_00;
+            puVar6 = extraout_R9;
+            src = extraout_R10;
+          }
+          *puVar6 = uVar10;
+          runtime_typedmemmove(piVar3->Elem,*(void **)((int)&xy[0].e + iVar9),src);
+          xy[uVar2].i = xy[uVar2].i + 1;
+          xy[uVar2].k = (void *)((int)xy[uVar2].k + 0x10);
+          xy[uVar2].e = (void *)((int)xy[uVar2].e + (uint)t->ValueSize);
+        }
+        prVar4 = prVar4 + 2;
+        prVar7 = (runtime_bmap *)((int)prVar7->tophash + (uint)t->ValueSize);
+      }
+    }
+    if (((h->flags & 2) == 0) && (t->Bucket->PtrBytes != 0)) {
+      b_1 = (void *)((int)h->oldbuckets + t->BucketSize * oldbucket + 8);
+      runtime_memclrHasPointers(b_1,t->BucketSize - 8);
+    }
+  }
+  if (h->nevacuate == oldbucket) {
+    runtime_advanceEvacuationMark(h,t,newbit_00);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_typedmemmove(internal_abi_Type *typ,void *dst,void *src)
+
+{
+  if (src != dst) {
+    if ((runtime_writeBarrier.needed) && (typ->PtrBytes != 0)) {
+      runtime_bulkBarrierPreWrite((uintptr)dst,(uintptr)src,typ->PtrBytes);
+    }
+    runtime_memmove(dst,src,typ->Size_);
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_wbZero(internal_abi_Type *typ,void *dst)
+
+{
+  runtime_bulkBarrierPreWrite((uintptr)dst,0,typ->PtrBytes);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_wbMove(internal_abi_Type *typ,void *dst,void *src)
+
+{
+  runtime_bulkBarrierPreWrite((uintptr)dst,(uintptr)src,typ->PtrBytes);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_reflectcallmove
+               (internal_abi_Type *typ,void *dst,void *src,uintptr size,internal_abi_RegArgs *regs)
+
+{
+  int i;
+  int extraout_RAX;
+  internal_abi_RegArgs *piVar1;
+  void *extraout_RBX;
+  void *pvVar2;
+  uint uVar3;
+  void **extraout_R11;
+  internal_abi_RegArgs *piStack0000000000000028;
+  
+  piStack0000000000000028 = regs;
+  if ((((runtime_writeBarrier.needed) && (typ != (internal_abi_Type *)0x0)) && (typ->PtrBytes != 0))
+     && (7 < size)) {
+    runtime_bulkBarrierPreWrite((uintptr)dst,(uintptr)src,size);
+  }
+  runtime_memmove(dst,src,size);
+  i = 0;
+  piVar1 = piStack0000000000000028;
+  while( true ) {
+    if (8 < i) {
+      return;
+    }
+    if (1 < (uint)(i >> 3)) break;
+    uVar3 = i - (i & 0xfffffffffffffff8U);
+    if ((int)uVar3 < 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicshift();
+    }
+    if (((byte)(1 << ((byte)uVar3 & 0x1f)) & -(uVar3 < 0x20) & piVar1->ReturnIsPtr[i >> 3]) != 0) {
+      pvVar2 = (void *)piVar1->Ints[i];
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RBX;
+        extraout_R11[1] = piVar1->Ptrs[extraout_RAX];
+        i = extraout_RAX;
+        pvVar2 = extraout_RBX;
+      }
+      piVar1->Ptrs[i] = pvVar2;
+    }
+    i = i + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// Local variable n:int[RCX:8] conflicts with parameter, skipped.
+
+void runtime_typedslicecopy
+               (internal_abi_Type *typ,void *dstPtr,int dstLen,void *srcPtr,int srcLen,int ~r0)
+
+{
+  uintptr pwsize;
+  size_t __n;
+  uintptr size;
+  
+  if (srcLen < dstLen) {
+    dstLen = srcLen;
+  }
+  if (dstLen != 0) {
+    if (dstPtr != srcPtr) {
+      __n = dstLen * typ->Size_;
+      if (runtime_writeBarrier.needed) {
+        runtime_bulkBarrierPreWrite
+                  ((uintptr)dstPtr,(uintptr)srcPtr,(__n - typ->Size_) + typ->PtrBytes);
+      }
+      runtime_memmove(dstPtr,srcPtr,__n);
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_typedmemclr(internal_abi_Type *typ,void *ptr)
+
+{
+  if ((runtime_writeBarrier.needed) && (typ->PtrBytes != 0)) {
+    runtime_bulkBarrierPreWrite((uintptr)ptr,0,typ->PtrBytes);
+  }
+  runtime_memclrNoHeapPointers();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memclrHasPointers(void *ptr,uintptr n)
+
+{

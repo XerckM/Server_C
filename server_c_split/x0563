@@ -1,0 +1,1000 @@
+  pgVar2 = pgStack0000000000000008->gsb;
+  psVar1 = &pgVar2->mu;
+  LOCK();
+  bVar4 = psVar1->state == 0;
+  if (bVar4) {
+    psVar1->state = 1;
+  }
+  UNLOCK();
+  if (!bVar4) {
+    sync___Mutex__lockSlow(&pgVar2->mu);
+  }
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_0082d400,h,&local_68);
+  while ((int *)local_68.key != (int *)0x0) {
+                    // WARNING: Load size is inaccurate
+    (**(code **)(*local_68.key + 0x28))(*(int *)((int)local_68.key + 8));
+    runtime_mapiternext(&local_68);
+  }
+  pgVar2 = pgStack0000000000000008->gsb;
+  LOCK();
+  psVar1 = &pgVar2->mu;
+  sVar3 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar3 = sVar3 + -1;
+  if (sVar3 != 0) {
+    sync___Mutex__unlockSlow(&pgVar2->mu,sVar3);
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateState
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw,
+               google_golang_org_grpc_balancer_State state)
+
+{
+  sync_Mutex *psVar1;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer *pgVar2;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *pgVar3;
+  runtime_itab *in_RCX;
+  int in_RBX;
+  int extraout_RBX;
+  void *in_RDI;
+  void *extraout_RDI;
+  void **extraout_R11;
+  int unaff_R14;
+  bool bVar4;
+  void *pvStack0000000000000020;
+  undefined local_20 [16];
+  code **local_10;
+  
+  pvStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pgVar2 = bw->gsb;
+  psVar1 = &pgVar2->mu;
+  LOCK();
+  bVar4 = psVar1->state == 0;
+  if (bVar4) {
+    psVar1->state = 1;
+  }
+  UNLOCK();
+  if (!bVar4) {
+    sync___Mutex__lockSlow(&pgVar2->mu);
+  }
+  local_20._8_8_ = &bw->gsb->mu;
+  local_20._0_8_ =
+       google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateState_func1;
+  local_10 = (code **)local_20;
+  (bw->lastState).ConnectivityState = in_RBX;
+  (bw->lastState).Picker.tab = in_RCX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RDI;
+    extraout_R11[1] = (bw->lastState).Picker.data;
+    in_RBX = extraout_RBX;
+    pvStack0000000000000020 = extraout_RDI;
+  }
+  (bw->lastState).Picker.data = pvStack0000000000000020;
+  pgVar2 = bw->gsb;
+  pgVar3 = pgVar2->balancerCurrent;
+  if (bw != pgVar3) {
+    if (pgVar2->balancerPending != bw) {
+      (**local_10)();
+      return;
+    }
+    if (bw != pgVar3) {
+      if ((in_RBX != 1) || ((pgVar3->lastState).ConnectivityState != 2)) {
+        google_golang_org_grpc_internal_balancer_gracefulswitch___Balancer__swap(pgVar2);
+      }
+      (**local_10)();
+      return;
+    }
+  }
+  if ((in_RBX != 2) &&
+     (pgVar2->balancerPending !=
+      (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *)0x0)) {
+    google_golang_org_grpc_internal_balancer_gracefulswitch___Balancer__swap(pgVar2);
+    (**local_10)();
+    return;
+  }
+  (*(code *)(pgVar2->cc).tab[2].inter)((pgVar2->cc).data);
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateState_func1
+               (void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__NewSubConn
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw,
+               __google_golang_org_grpc_resolver_Address addrs,
+               google_golang_org_grpc_balancer_NewSubConnOptions opts,
+               google_golang_org_grpc_balancer_SubConn ~r0,error ~r1)
+
+{
+  sync_Mutex *psVar1;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer *pgVar2;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *extraout_RAX;
+  google_golang_org_grpc_balancer_SubConn *_sc;
+  code **extraout_RAX_00;
+  code **extraout_RAX_01;
+  code **ppcVar3;
+  runtime_itab *extraout_RAX_02;
+  undefined *extraout_RAX_03;
+  undefined8 in_RCX;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int iVar4;
+  sdword sVar5;
+  int32 new;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *key;
+  int32 new_1;
+  int32 new_2;
+  int32 new_3;
+  void *in_RBX;
+  void *extraout_RBX;
+  void *~r0_00;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *pvVar6;
+  undefined8 in_RSI;
+  undefined8 in_RDI;
+  undefined8 in_R8;
+  undefined in_R9B;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *in_R10;
+  func_google_golang_org_grpc_balancer_SubConnState_ **oldListener;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper **extraout_R11;
+  void **extraout_R11_00;
+  int unaff_R14;
+  bool bVar7;
+  google_golang_org_grpc_balancer_Balancer in_XMM15;
+  string in_stack_ffffffffffffff78;
+  __interface___ in_stack_ffffffffffffff88;
+  error in_stack_ffffffffffffffa0;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pgVar2 = bw->gsb;
+  psVar1 = &pgVar2->mu;
+  LOCK();
+  bVar7 = psVar1->state == 0;
+  if (bVar7) {
+    psVar1->state = 1;
+  }
+  UNLOCK();
+  if (!bVar7) {
+    sync___Mutex__lockSlow(&pgVar2->mu);
+  }
+  pgVar2 = bw->gsb;
+  if ((pgVar2->balancerCurrent != bw) && (pgVar2->balancerPending != bw)) {
+    LOCK();
+    psVar1 = &pgVar2->mu;
+    sVar5 = psVar1->state;
+    psVar1->state = psVar1->state + -1;
+    UNLOCK();
+    sVar5 = sVar5 + -1;
+    if (sVar5 != 0) {
+      sync___Mutex__unlockSlow(&pgVar2->mu,sVar5);
+    }
+    fmt_Errorf(in_stack_ffffffffffffff78,in_stack_ffffffffffffff88,in_stack_ffffffffffffffa0);
+    return;
+  }
+  LOCK();
+  psVar1 = &pgVar2->mu;
+  sVar5 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar5 = sVar5 + -1;
+  pvVar6 = in_RBX;
+  if (sVar5 != 0) {
+    sync___Mutex__unlockSlow(&pgVar2->mu,sVar5);
+    pvVar6 = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00846ae0,pvVar6);
+  extraout_RAX->Balancer = in_XMM15;
+  runtime_newobject((internal_abi_Type *)&DAT_0086b120,~r0_00);
+  *extraout_RAX_00 =
+       google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__NewSubConn_func1;
+  ppcVar3 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier3();
+    *extraout_R11 = bw;
+    extraout_R11[1] = extraout_RAX;
+    extraout_R11[2] = in_R10;
+    ppcVar3 = extraout_RAX_01;
+  }
+  ppcVar3[1] = (code *)bw;
+  ppcVar3[2] = (code *)extraout_RAX;
+  ppcVar3[3] = (code *)in_R10;
+  (*(code *)((bw->gsb->cc).tab)->fun[0])
+            ((bw->gsb->cc).data,in_RBX,in_RCX,in_RDI,in_RSI,in_R8,in_R9B,ppcVar3);
+  (extraout_RAX->Balancer).tab = extraout_RAX_02;
+  iVar4 = extraout_RCX;
+  key = extraout_RAX;
+  pvVar6 = extraout_RBX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RBX_01;
+    extraout_R11_00[1] = (key->Balancer).data;
+    iVar4 = extraout_RCX_00;
+    pvVar6 = extraout_RBX_01;
+  }
+  (key->Balancer).data = pvVar6;
+  if (iVar4 != 0) {
+    return;
+  }
+  pgVar2 = bw->gsb;
+  psVar1 = &pgVar2->mu;
+  LOCK();
+  bVar7 = psVar1->state == 0;
+  if (bVar7) {
+    psVar1->state = 1;
+  }
+  UNLOCK();
+  if (!bVar7) {
+    sync___Mutex__lockSlow(&pgVar2->mu);
+    key = extraout_RAX;
+  }
+  pgVar2 = bw->gsb;
+  if ((pgVar2->balancerCurrent != bw) && (pgVar2->balancerPending != bw)) {
+    (*(code *)(key->Balancer).tab[1]._type)((key->Balancer).data);
+    pgVar2 = bw->gsb;
+    LOCK();
+    psVar1 = &pgVar2->mu;
+    sVar5 = psVar1->state;
+    psVar1->state = psVar1->state + -1;
+    UNLOCK();
+    sVar5 = sVar5 + -1;
+    if (sVar5 != 0) {
+      sync___Mutex__unlockSlow(&pgVar2->mu,sVar5);
+    }
+    fmt_Errorf(in_stack_ffffffffffffff78,in_stack_ffffffffffffff88,in_stack_ffffffffffffffa0);
+    return;
+  }
+  runtime_mapassign((internal_abi_MapType *)&DAT_0082d400,(runtime_hmap *)bw->subconns,key,pgVar2);
+  *extraout_RAX_03 = 1;
+  pgVar2 = bw->gsb;
+  LOCK();
+  psVar1 = &pgVar2->mu;
+  sVar5 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar5 = sVar5 + -1;
+  if (sVar5 != 0) {
+    sync___Mutex__unlockSlow(&pgVar2->mu,sVar5);
+  }
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__NewSubConn_func1
+               (google_golang_org_grpc_balancer_SubConnState state)
+
+{
+  int in_RDX;
+  func_google_golang_org_grpc_balancer_SubConnState_ **oldListener;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw;
+  google_golang_org_grpc_balancer_SubConn *_sc;
+  int unaff_R14;
+  google_golang_org_grpc_balancer_SubConn in_stack_ffffffffffffffc0;
+  google_golang_org_grpc_balancer_SubConnState in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  google_golang_org_grpc_internal_balancer_gracefulswitch___Balancer__updateSubConnState
+            (*(google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer **)
+              (*(int *)(in_RDX + 8) + 0x10),in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,
+             (func_google_golang_org_grpc_balancer_SubConnState_ **)**(undefined8 **)(in_RDX + 0x10)
+            );
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__ResolveNow
+               (int bw,google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper
+                       *param_2,undefined param_3,undefined param_4,undefined param_5,
+               undefined param_6,undefined param_7,undefined param_8,undefined param_9,
+               undefined8 param_10)
+
+{
+  int extraout_RAX;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    param_2 = extraout_RBX;
+  }
+  google_golang_org_grpc_internal_balancer_gracefulswitch___Balancer__latestBalancer
+            (*(google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer **)(bw + 0x10),
+             param_2,(google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *)
+                     *(google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer **)
+                      (bw + 0x10));
+  if (extraout_RAX != bw) {
+    return;
+  }
+  (**(code **)(*(int *)(*(int *)(bw + 0x10) + 0xe8) + 0x28))
+            (*(undefined8 *)(*(int *)(bw + 0x10) + 0xf0));
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__RemoveSubConn
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw,
+               google_golang_org_grpc_balancer_SubConn sc)
+
+{
+  undefined8 in_RCX;
+  int in_RBX;
+  int unaff_R14;
+  undefined8 uStack0000000000000018;
+  
+  uStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (**(code **)(in_RBX + 0x28))(uStack0000000000000018);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateAddresses
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw,
+               google_golang_org_grpc_balancer_SubConn sc,
+               __google_golang_org_grpc_resolver_Address addrs)
+
+{
+  sync_Mutex *psVar1;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_Balancer *pgVar2;
+  sdword sVar3;
+  int32 new;
+  int32 new_1;
+  int unaff_R14;
+  bool bVar4;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pgVar2 = bw->gsb;
+  psVar1 = &pgVar2->mu;
+  LOCK();
+  bVar4 = psVar1->state == 0;
+  if (bVar4) {
+    psVar1->state = 1;
+  }
+  UNLOCK();
+  if (!bVar4) {
+    sync___Mutex__lockSlow(&pgVar2->mu);
+  }
+  pgVar2 = bw->gsb;
+  if ((pgVar2->balancerCurrent != bw) && (pgVar2->balancerPending != bw)) {
+    LOCK();
+    psVar1 = &pgVar2->mu;
+    sVar3 = psVar1->state;
+    psVar1->state = psVar1->state + -1;
+    UNLOCK();
+    sVar3 = sVar3 + -1;
+    if (sVar3 != 0) {
+      sync___Mutex__unlockSlow(&pgVar2->mu,sVar3);
+    }
+    return;
+  }
+  LOCK();
+  psVar1 = &pgVar2->mu;
+  sVar3 = psVar1->state;
+  psVar1->state = psVar1->state + -1;
+  UNLOCK();
+  sVar3 = sVar3 + -1;
+  if (sVar3 != 0) {
+    sync___Mutex__unlockSlow(&pgVar2->mu,sVar3);
+  }
+  (*(code *)(bw->gsb->cc).tab[1].fun[0])((bw->gsb->cc).data);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__Target
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper *bw,
+               string ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (**(code **)&(bw->gsb->cc).tab[1].hash)((bw->gsb->cc).data);
+  return;
+}
+
+
+
+void type__eq_google_golang_org_grpc_internal_balancer_gracefulswitch_lbConfig
+               (google_golang_org_grpc_internal_balancer_gracefulswitch_lbConfig *p,
+               google_golang_org_grpc_internal_balancer_gracefulswitch_lbConfig *q,bool r)
+
+{
+  runtime_itab *prVar1;
+  char extraout_AL;
+  char extraout_AL_00;
+  undefined in_DIL;
+  bool ~r0;
+  bool ~r0_00;
+  undefined extraout_DIL;
+  int unaff_R14;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_lbConfig *pgStack0000000000000008;
+  google_golang_org_grpc_internal_balancer_gracefulswitch_lbConfig *pgStack0000000000000010;
+  
+  pgStack0000000000000008 = p;
+  pgStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL;
+  }
+  prVar1 = (pgStack0000000000000008->LoadBalancingConfig).tab;
+  if (((((pgStack0000000000000010->LoadBalancingConfig).tab == prVar1) &&
+       (runtime_ifaceeq(prVar1,(pgStack0000000000000008->LoadBalancingConfig).data,
+                        (pgStack0000000000000010->LoadBalancingConfig).data,(bool)in_DIL),
+       extraout_AL != '\0')) &&
+      (prVar1 = (pgStack0000000000000008->childBuilder).tab,
+      (pgStack0000000000000010->childBuilder).tab == prVar1)) &&
+     ((runtime_ifaceeq(prVar1,(pgStack0000000000000008->childBuilder).data,
+                       (pgStack0000000000000010->childBuilder).data,~r0), extraout_AL_00 != '\0' &&
+      (prVar1 = (pgStack0000000000000008->childConfig).tab,
+      (pgStack0000000000000010->childConfig).tab == prVar1)))) {
+    runtime_ifaceeq(prVar1,(pgStack0000000000000008->childConfig).data,
+                    (pgStack0000000000000010->childConfig).data,~r0_00);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper_ResolverError(void)
+
+{
+  int *piVar1;
+  int in_RAX;
+  undefined8 in_RBX;
+  int unaff_R14;
+  undefined8 in_stack_00000008;
+  undefined8 in_stack_00000010;
+  int iStack0000000000000018;
+  undefined8 uStack0000000000000020;
+  undefined auStack_20 [24];
+  
+  iStack0000000000000018 = in_RAX;
+  uStack0000000000000020 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined8 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(iStack0000000000000018 + 0x20))
+            (uStack0000000000000020,in_stack_00000008,in_stack_00000010);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__ResolverError(void)
+
+{
+  int *piVar1;
+  int *in_RAX;
+  int unaff_R14;
+  int *piStack0000000000000008;
+  undefined auStack_20 [24];
+  
+  piStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  (**(code **)(*piStack0000000000000008 + 0x20))(piStack0000000000000008[1]);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper_UpdateClientConnState
+               (void)
+
+{
+  int *piVar1;
+  code *extraout_RCX;
+  int unaff_R14;
+  undefined auStack_60 [88];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_60;
+  }
+  FUN_0046d11a();
+  (*extraout_RCX)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateClientConnState
+               (void)
+
+{
+  int *piVar1;
+  code *extraout_RCX;
+  int unaff_R14;
+  undefined auStack_60 [88];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_60;
+  }
+  FUN_0046d11a();
+  (*extraout_RCX)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch_balancerWrapper_UpdateSubConnState
+               (void)
+
+{
+  int *piVar1;
+  int in_RAX;
+  undefined8 in_RBX;
+  int unaff_R14;
+  undefined8 in_stack_00000008;
+  undefined8 in_stack_00000010;
+  undefined8 in_stack_00000018;
+  undefined8 in_stack_00000020;
+  undefined8 in_stack_00000028;
+  int iStack0000000000000030;
+  undefined8 uStack0000000000000038;
+  undefined auStack_38 [48];
+  
+  iStack0000000000000030 = in_RAX;
+  uStack0000000000000038 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined8 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_38;
+  }
+  (**(code **)(iStack0000000000000030 + 0x30))
+            (uStack0000000000000038,in_stack_00000008,in_stack_00000010,in_stack_00000018,
+             in_stack_00000020,in_stack_00000028);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_balancer_gracefulswitch___balancerWrapper__UpdateSubConnState
+               (void)
+
+{
+  int *piVar1;
+  int *in_RAX;
+  int unaff_R14;
+  int *piStack0000000000000008;
+  undefined auStack_38 [48];
+  
+  piStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((int **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_38;
+  }
+  (**(code **)(*piStack0000000000000008 + 0x30))(piStack0000000000000008[1]);
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// DWARF original prototype: void
+// google.golang.org/grpc/internal/buffer.(*Unbounded).Put(google.golang.org/grpc/internal/buffer.Unbounded
+// * b, interface_{} t, error ~r0, error ~r0)
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Put
+               (google_golang_org_grpc_internal_buffer_Unbounded *b,interface___ t,error ~r0,
+               error ~r0_1)
+
+{
+  uint oldCap;
+  char extraout_AL;
+  interface___ *extraout_RAX;
+  interface___ *extraout_RAX_00;
+  interface___ *extraout_RAX_01;
+  interface___ *oldPtr;
+  undefined8 in_RCX;
+  int extraout_RCX;
+  undefined8 extraout_RCX_00;
+  internal_abi_Type *in_RBX;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  int iVar1;
+  int extraout_RSI;
+  uint newLen;
+  interface___ **extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  bool bVar2;
+  runtime_slice in_stack_ffffffffffffff68;
+  undefined local_30 [16];
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (local_20 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar2 = (b->mu).state == 0;
+  if (bVar2) {
+    (b->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar2) {
+    sync___Mutex__lockSlow(&b->mu);
+  }
+  local_20._8_8_ = &b->mu;
+  local_20._0_8_ = google_golang_org_grpc_internal_buffer___Unbounded__Put_func1;
+  local_10 = (code **)local_20;
+  if (b->closing != false) {
+    google_golang_org_grpc_internal_buffer___Unbounded__Put_func1();
+    return;
+  }
+  if (((b->backlog).len == 0) &&
+     (runtime_selectnbsend((runtime_hchan *)b->c,local_30,SUB81(in_RCX,0)), extraout_AL != '\0')) {
+    (**local_10)();
+    return;
+  }
+  oldCap = (b->backlog).cap;
+  newLen = (b->backlog).len + 1;
+  oldPtr = (b->backlog).array;
+  if (oldCap < newLen) {
+    runtime_growslice(oldPtr,newLen,oldCap,1,(internal_abi_Type *)&DAT_00821120,
+                      in_stack_ffffffffffffff68);
+    (b->backlog).cap = extraout_RCX;
+    oldPtr = extraout_RAX;
+    newLen = extraout_RBX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = (b->backlog).array;
+      oldPtr = extraout_RAX_00;
+      newLen = extraout_RBX_00;
+    }
+    (b->backlog).array = oldPtr;
+  }
+  (b->backlog).len = newLen;
+  iVar1 = (newLen - 1) * 0x10;
+  oldPtr[newLen - 1]._type = in_RBX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RCX_00;
+    extraout_R11_00[1] = *(undefined8 *)((int)&extraout_RAX_01->data + extraout_RSI);
+    oldPtr = extraout_RAX_01;
+    in_RCX = extraout_RCX_00;
+    iVar1 = extraout_RSI;
+  }
+  *(undefined8 *)((int)&oldPtr->data + iVar1) = in_RCX;
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Put_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Load
+               (google_golang_org_grpc_internal_buffer_Unbounded *b)
+
+{
+  sync_Mutex *m;
+  int iVar1;
+  char extraout_AL;
+  interface___ *extraout_RAX;
+  interface___ *piVar2;
+  int iVar3;
+  google_golang_org_grpc_internal_buffer_Unbounded *extraout_RBX;
+  google_golang_org_grpc_internal_buffer_Unbounded *extraout_RBX_00;
+  google_golang_org_grpc_internal_buffer_Unbounded *pgVar4;
+  interface___ *extraout_RSI;
+  undefined8 extraout_RDI;
+  undefined8 *extraout_R11;
+  interface___ **extraout_R11_00;
+  int unaff_R14;
+  bool bVar5;
+  google_golang_org_grpc_internal_buffer_Unbounded *pgStack0000000000000008;
+  undefined local_30 [16];
+  internal_abi_Type *local_20;
+  void *local_18;
+  code **local_10;
+  
+  pgStack0000000000000008 = b;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  m = &pgStack0000000000000008->mu;
+  LOCK();
+  bVar5 = (pgStack0000000000000008->mu).state == 0;
+  if (bVar5) {
+    (pgStack0000000000000008->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar5) {
+    sync___Mutex__lockSlow(m);
+  }
+  local_30._8_8_ = m;
+  local_30._0_8_ = google_golang_org_grpc_internal_buffer___Unbounded__Load_func1;
+  local_10 = (code **)local_30;
+  if ((pgStack0000000000000008->backlog).len == 0) {
+    if ((pgStack0000000000000008->closing != false) && (pgStack0000000000000008->closed == false)) {
+      runtime_closechan((runtime_hchan *)pgStack0000000000000008->c);
+    }
+  }
+  else {
+    piVar2 = (pgStack0000000000000008->backlog).array;
+    local_20 = piVar2->_type;
+    local_18 = piVar2->data;
+    runtime_selectnbsend((runtime_hchan *)pgStack0000000000000008->c,&local_20,SUB81(local_18,0));
+    if (extraout_AL != '\0') {
+      if ((pgStack0000000000000008->backlog).len == 0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      piVar2 = (pgStack0000000000000008->backlog).array;
+      piVar2->_type = (internal_abi_Type *)0x0;
+      pgVar4 = pgStack0000000000000008;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = extraout_RDI;
+        pgVar4 = extraout_RBX;
+        piVar2 = extraout_RSI;
+      }
+      piVar2->data = (void *)0x0;
+      iVar1 = (pgVar4->backlog).len;
+      if (iVar1 == 0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      iVar3 = (pgVar4->backlog).cap + -1;
+      (pgVar4->backlog).len = iVar1 + -1;
+      (pgVar4->backlog).cap = iVar3;
+      piVar2 = (interface___ *)
+               ((int)&((pgVar4->backlog).array)->_type + (uint)((dword)(-iVar3 >> 0x3f) & 0x10));
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX;
+        extraout_R11_00[1] = (extraout_RBX_00->backlog).array;
+        piVar2 = extraout_RAX;
+        pgVar4 = extraout_RBX_00;
+      }
+      (pgVar4->backlog).array = piVar2;
+    }
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Load_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Get
+               (google_golang_org_grpc_internal_buffer_Unbounded *b,<_chan_interface___ ~r0)
+
+{
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Close
+               (google_golang_org_grpc_internal_buffer_Unbounded *b)
+
+{
+  int unaff_R14;
+  bool bVar1;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar1 = (b->mu).state == 0;
+  if (bVar1) {
+    (b->mu).state = 1;
+  }
+  UNLOCK();
+  if (!bVar1) {
+    sync___Mutex__lockSlow(&b->mu);
+  }
+  local_20._8_8_ = &b->mu;
+  local_20._0_8_ = google_golang_org_grpc_internal_buffer___Unbounded__Close_func1;
+  local_10 = (code **)local_20;
+  if (b->closing != false) {
+    google_golang_org_grpc_internal_buffer___Unbounded__Close_func1();
+    return;
+  }
+  b->closing = true;
+  if ((b->backlog).len == 0) {
+    b->closed = true;
+    runtime_closechan((runtime_hchan *)b->c);
+  }
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void google_golang_org_grpc_internal_buffer___Unbounded__Close_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_grpcsync_NewCallbackSerializer
+               (context_Context ctx,google_golang_org_grpc_internal_grpcsync_CallbackSerializer *~r0
+               )
+
+{
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *puVar1;
+  undefined8 *extraout_RAX_03;
+  google_golang_org_grpc_internal_grpcsync_CallbackSerializer *cs;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar2;
+  runtime_funcval *extraout_RAX_05;
+  runtime_funcval *extraout_RAX_06;
+  runtime_funcval *extraout_RAX_07;
+  runtime_funcval *fn;
+  runtime_hchan *in_RCX;
+  runtime_hchan *~r0_00;
+  runtime_hchan *extraout_RCX;
+  uintptr in_RBX;
+  void *~r0_01;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  void *pvVar3;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  uintptr *extraout_R11_02;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();

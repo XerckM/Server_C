@@ -1,0 +1,1000 @@
+  undefined auVar15 [16];
+  undefined8 uStack0000000000000018;
+  __int in_stack_ffffffffffffff38;
+  uint local_58;
+  int local_50;
+  int local_48;
+  int local_40;
+  int local_38;
+  int local_30;
+  regexp_queue *local_28;
+  regexp_thread *local_20;
+  regexp_entry *local_18;
+  regexp_queue *local_10;
+  
+  uStack0000000000000018 = CONCAT71(in_register_00000009,~r0);
+  while (&local_48 <= *(int **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bVar1 = m->re->cond;
+  if (bVar1 == 0xff) {
+    return;
+  }
+  m->matched = false;
+  iVar7 = (m->matchcap).len;
+  for (i_1 = 0; i_1 < iVar7; i_1 = i_1 + 1) {
+    if ((uint)(m->matchcap).len <= (uint)i_1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    (m->matchcap).array[i_1] = -1;
+  }
+  auVar15 = (**(code **)(pos + 0x38))(uStack0000000000000018,in_RDI);
+  uVar6 = auVar15._0_8_;
+  r = auVar15._0_4_;
+  if (r == -1) {
+    dVar4 = 0xffffffff;
+    iVar7 = 0;
+    uVar12 = uVar6;
+  }
+  else {
+    dVar4 = (**(code **)(pos + 0x38))(uStack0000000000000018,in_RDI + auVar15._8_8_);
+    uVar12 = uVar6 & 0xffffffff;
+    iVar7 = extraout_RBX;
+  }
+  local_58 = 0;
+  if (in_RDI == 0) {
+    local_58 = uVar12 & 0xffffffff | 0xffffffff00000000;
+  }
+  else {
+    local_58 = (**(code **)(pos + 0x20))(uStack0000000000000018,in_RDI);
+    uVar12 = uVar6 & 0xffffffff;
+  }
+  local_28 = &m->q0;
+  local_10 = &m->q1;
+  iVar8 = auVar15._8_8_;
+  do {
+    iVar9 = iVar7;
+    c = (int32)uVar12;
+    prVar13 = local_10;
+    prVar2 = local_28;
+    if ((local_28->dense).len == 0) {
+      if ((((bVar1 & 4) != 0) && (prVar13 = local_10, prVar2 = local_28, in_RDI != 0)) ||
+         (prVar13 = local_10, prVar2 = local_28, m->matched != false)) {
+LAB_006ff5d4:
+        local_10 = prVar2;
+        local_28 = prVar13;
+        prVar11 = (local_28->dense).array;
+        iVar7 = (local_28->dense).len;
+        prVar13 = local_28;
+        prVar10 = m;
+        local_30 = iVar7;
+        for (iVar8 = 0; iVar8 < iVar7; iVar8 = iVar8 + 1) {
+          prVar14 = prVar11->t;
+          if (prVar14 != (regexp_thread *)0x0) {
+            uVar6 = (prVar10->pool).cap;
+            uVar12 = (prVar10->pool).len + 1;
+            oldPtr = (prVar10->pool).array;
+            if (uVar6 < uVar12) {
+              local_38 = iVar8;
+              local_20 = prVar14;
+              local_18 = prVar11;
+              runtime_growslice(oldPtr,uVar12,uVar6,1,(internal_abi_Type *)&DAT_007fe420,
+                                (runtime_slice)in_stack_ffffffffffffff38);
+              (m->pool).cap = extraout_RCX;
+              oldPtr = extraout_RAX;
+              prVar10 = m;
+              uVar12 = extraout_RBX_03;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11 = extraout_RAX_00;
+                extraout_R11[1] = (prVar10->pool).array;
+                oldPtr = extraout_RAX_00;
+                uVar12 = extraout_RBX_04;
+              }
+              (prVar10->pool).array = oldPtr;
+              iVar8 = local_38;
+              prVar11 = local_18;
+              prVar13 = local_28;
+              iVar7 = local_30;
+              prVar14 = local_20;
+              prVar10 = m;
+            }
+            (prVar10->pool).len = uVar12;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_00 = extraout_R9;
+              extraout_R11_00[1] = extraout_R10[extraout_RBX_05 - 1];
+              iVar8 = extraout_RAX_01;
+              uVar12 = extraout_RBX_05;
+              prVar13 = extraout_RSI;
+              iVar7 = extraout_R8;
+              prVar14 = extraout_R9;
+              oldPtr = extraout_R10;
+            }
+            oldPtr[uVar12 - 1] = prVar14;
+          }
+          prVar11 = prVar11 + 1;
+        }
+        (prVar13->dense).len = 0;
+        return;
+      }
+      local_30 = in_RDI;
+      if ((m->re->prefix).len == 0) {
+        cVar3 = '\0';
+        prVar13 = local_10;
+        local_10 = local_28;
+      }
+      else if (m->re->prefixRune == dVar4) {
+        cVar3 = '\0';
+        prVar13 = local_10;
+        local_10 = local_28;
+      }
+      else {
+        local_40 = iVar8;
+        local_38 = iVar9;
+        prVar13 = local_28;
+        local_28 = local_10;
+        local_10 = prVar13;
+        cVar3 = (**(code **)(pos + 0x18))(uStack0000000000000018);
+        iVar9 = local_38;
+        iVar8 = local_40;
+        prVar13 = local_28;
+      }
+      local_28 = prVar13;
+      in_RDI = local_30;
+      prVar13 = local_28;
+      prVar2 = local_10;
+      if (cVar3 != '\0') {
+        iVar7 = (**(code **)(pos + 0x30))(uStack0000000000000018,m->re,local_30,bVar1);
+        prVar13 = local_28;
+        prVar2 = local_10;
+        if (iVar7 < 0) goto LAB_006ff5d4;
+        local_48 = local_30 + iVar7;
+        c = (**(code **)(pos + 0x38))(uStack0000000000000018);
+        dVar4 = (**(code **)(pos + 0x38))(uStack0000000000000018,local_48 + extraout_RBX_00);
+        iVar9 = extraout_RBX_01;
+        iVar8 = extraout_RBX_00;
+        in_RDI = local_48;
+        prVar13 = local_28;
+        prVar2 = local_10;
+      }
+    }
+    local_10 = prVar2;
+    local_28 = prVar13;
+    local_50 = in_RDI;
+    local_48 = iVar8;
+    if (m->matched == false) {
+      if ((m->matchcap).len != 0) {
+        *(m->matchcap).array = in_RDI;
+      }
+      regexp___machine__add
+                (m,local_10,(uint32)m->p->Start,in_RDI,in_stack_ffffffffffffff38,
+                 (regexp_lazyFlag *)(m->matchcap).array,(regexp_thread *)(m->matchcap).len,
+                 (regexp_thread *)(m->matchcap).cap);
+    }
+    iVar7 = local_50 + local_48;
+    local_58 = CONCAT44(c,dVar4);
+    iVar8 = local_50;
+    local_50 = iVar7;
+    regexp___machine__step(m,local_10,local_28,iVar8,iVar7,c,&local_58);
+    prVar13 = local_28;
+    prVar2 = local_10;
+    if ((local_48 == 0) || (((m->matchcap).len == 0 && (m->matched != false)))) goto LAB_006ff5d4;
+    iVar7 = iVar9;
+    dVar5 = dVar4;
+    if (dVar4 != 0xffffffff) {
+      dVar5 = (**(code **)(pos + 0x38))(uStack0000000000000018,local_50 + iVar9);
+      iVar7 = extraout_RBX_02;
+    }
+    uVar12 = (uint)dVar4;
+    iVar8 = iVar9;
+    in_RDI = local_50;
+    dVar4 = dVar5;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___machine__step
+               (regexp_machine *m,regexp_queue *runq,regexp_queue *nextq,int pos,int nextPos,int32 c
+               ,regexp_lazyFlag *nextCond)
+
+{
+  bool bVar1;
+  byte bVar2;
+  regexp_syntax_Inst *i_00;
+  int *__dest;
+  int *__src;
+  runtime_slice ~r0;
+  __int cap;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  bool add;
+  regexp_thread **extraout_RAX;
+  regexp_thread **extraout_RAX_00;
+  regexp_machine *extraout_RAX_01;
+  int extraout_RAX_02;
+  regexp_thread *extraout_RAX_03;
+  regexp_thread **extraout_RAX_04;
+  regexp_thread **extraout_RAX_05;
+  regexp_machine *extraout_RAX_06;
+  regexp_thread **extraout_RAX_07;
+  regexp_thread **extraout_RAX_08;
+  regexp_thread **pprVar3;
+  regexp_machine *extraout_RAX_09;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  regexp_thread *extraout_RCX_02;
+  bool longest;
+  byte bVar4;
+  uint uVar5;
+  regexp_machine *prVar6;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  regexp_queue *extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  regexp_queue *extraout_RBX_04;
+  uint extraout_RBX_05;
+  uint extraout_RBX_06;
+  regexp_queue *extraout_RBX_07;
+  int extraout_RSI;
+  int extraout_RSI_00;
+  int pos_00;
+  uint uVar7;
+  uint extraout_RSI_01;
+  int extraout_RDI;
+  int extraout_RDI_00;
+  int iVar8;
+  int extraout_RDI_01;
+  sdword r;
+  uint uVar9;
+  uint extraout_R8;
+  uint extraout_R8_00;
+  int iVar10;
+  int extraout_R8_01;
+  regexp_thread **extraout_R9;
+  int j;
+  regexp_thread **extraout_R10;
+  regexp_thread **extraout_R10_00;
+  regexp_thread *extraout_R10_01;
+  regexp_thread *prVar11;
+  regexp_thread *t;
+  void **extraout_R11;
+  regexp_thread **extraout_R11_00;
+  regexp_thread *prVar12;
+  void **extraout_R11_01;
+  regexp_thread **extraout_R11_02;
+  void **extraout_R11_03;
+  regexp_thread **extraout_R11_04;
+  regexp_thread *prVar13;
+  regexp_syntax_Inst *i;
+  int iVar14;
+  int unaff_R14;
+  uint uVar15;
+  int iVar16;
+  int iVar17;
+  bool bVar18;
+  regexp_machine *prStack0000000000000008;
+  regexp_queue *prStack0000000000000010;
+  int iStack0000000000000020;
+  dword dStack0000000000000030;
+  interface___ in_stack_ffffffffffffff58;
+  int in_stack_ffffffffffffff68;
+  regexp_thread *local_28;
+  int local_20;
+  regexp_queue *local_18;
+  regexp_lazyFlag *local_10;
+  
+  uVar9 = (uint)(dword)c;
+  while (dStack0000000000000030 = (dword)uVar9, prStack0000000000000008 = m,
+        prStack0000000000000010 = runq, iStack0000000000000020 = pos,
+        &local_28 <= *(regexp_thread ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    uVar9 = (uint)dStack0000000000000030;
+    m = prStack0000000000000008;
+    runq = prStack0000000000000010;
+    pos = iStack0000000000000020;
+  }
+  bVar1 = m->re->longest;
+  uVar5 = (uint)bVar1;
+  j = 0;
+  pos_00 = nextPos;
+  local_18 = nextq;
+  local_10 = nextCond;
+  do {
+    if ((runq->dense).len <= j) {
+      (runq->dense).len = 0;
+      return;
+    }
+    prVar12 = (runq->dense).array[j].t;
+    iVar14 = j;
+    if (prVar12 != (regexp_thread *)0x0) {
+      bVar4 = (byte)uVar5;
+      if (((bVar4 != 0) && (m->matched != false)) && ((prVar12->cap).len != 0)) {
+        if ((m->matchcap).len == 0) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        if (*(m->matchcap).array < *(prVar12->cap).array) {
+          uVar7 = (m->pool).cap;
+          uVar15 = (m->pool).len + 1;
+          pprVar3 = (m->pool).array;
+          if (uVar7 < uVar15) {
+            ~r0.cap = in_stack_ffffffffffffff68;
+            ~r0.array = in_stack_ffffffffffffff58._type;
+            ~r0.len = (int)in_stack_ffffffffffffff58.data;
+            runtime_growslice(pprVar3,uVar15,uVar7,1,(internal_abi_Type *)&DAT_007fe420,~r0);
+            (prStack0000000000000008->pool).cap = extraout_RCX;
+            pprVar3 = extraout_RAX;
+            prVar6 = prStack0000000000000008;
+            uVar15 = extraout_RBX;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11 = extraout_RAX_00;
+              extraout_R11[1] = (prVar6->pool).array;
+              pprVar3 = extraout_RAX_00;
+              uVar15 = extraout_RBX_00;
+            }
+            (prVar6->pool).array = pprVar3;
+            uVar5 = (uint)bVar1;
+            uVar9 = (uint)dStack0000000000000030;
+            m = prStack0000000000000008;
+            nextq = local_18;
+            runq = prStack0000000000000010;
+            pos_00 = nextPos;
+            pos = iStack0000000000000020;
+          }
+          (m->pool).len = uVar15;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_00 = prVar12;
+            extraout_R11_00[1] = extraout_R10[uVar15 - 1];
+            m = extraout_RAX_01;
+            nextq = local_18;
+            runq = extraout_RBX_01;
+            pos_00 = extraout_RSI;
+            pos = extraout_RDI;
+            uVar9 = extraout_R8;
+            pprVar3 = extraout_R10;
+          }
+          pprVar3[uVar15 - 1] = prVar12;
+          iVar14 = j;
+          goto LAB_006ff7a2;
+        }
+      }
+      i_00 = prVar12->inst;
+      bVar2 = i_00->Op;
+      r = (sdword)uVar9;
+      if (bVar2 < 8) {
+        if (bVar2 == 4) {
+          uVar7 = (prVar12->cap).len;
+          if (uVar7 == 0) {
+            bVar18 = bVar4 == 0;
+          }
+          else {
+            if ((bVar4 != 0) && (m->matched != false)) {
+              if ((uint)(m->matchcap).len < 2) {
+                    // WARNING: Subroutine does not return
+                runtime_panicIndex();
+              }
+              if (pos <= (m->matchcap).array[1]) {
+                bVar18 = bVar4 == 0;
+                goto LAB_006ff9f9;
+              }
+            }
+            if (uVar7 < 2) {
+                    // WARNING: Subroutine does not return
+              runtime_panicIndex();
+            }
+            (prVar12->cap).array[1] = pos;
+            __dest = (m->matchcap).array;
+            iVar8 = (m->matchcap).len;
+            __src = (prVar12->cap).array;
+            iVar10 = (prVar12->cap).len;
+            if (iVar10 < iVar8) {
+              iVar8 = iVar10;
+            }
+            if (__dest != __src) {
+              runtime_memmove(__dest,__src,iVar8 << 3);
+              uVar5 = (uint)bVar1;
+              m = prStack0000000000000008;
+              nextq = local_18;
+              runq = prStack0000000000000010;
+              pos_00 = nextPos;
+              bVar4 = bVar1;
+            }
+            bVar18 = bVar4 == 0;
+            uVar9 = (uint)dStack0000000000000030;
+            pos = iStack0000000000000020;
+          }
+LAB_006ff9f9:
+          prVar13 = prVar12;
+          if (bVar18) {
+            uVar9 = (runq->dense).len;
+            if (uVar9 < j + 1U) {
+                    // WARNING: Subroutine does not return
+              runtime_panicSliceB();
+            }
+            iVar8 = (int)&((runq->dense).array)->pc +
+                    ((j + 1U) * 0x10 & -(((runq->dense).cap - j) + -1) >> 0x3f);
+            iVar16 = (uVar9 - j) + -1;
+            iVar17 = iVar16;
+            for (iVar10 = 0; iVar10 < iVar17; iVar10 = iVar10 + 1) {
+              prVar11 = *(regexp_thread **)(iVar8 + 8);
+              if (prVar11 != (regexp_thread *)0x0) {
+                uVar9 = (m->pool).cap;
+                uVar7 = (m->pool).len + 1;
+                pprVar3 = (m->pool).array;
+                if (uVar9 < uVar7) {
+                  ~r0_01.cap = in_stack_ffffffffffffff68;
+                  ~r0_01.array = in_stack_ffffffffffffff58._type;
+                  ~r0_01.len = (int)in_stack_ffffffffffffff58.data;
+                  local_28 = prVar11;
+                  local_20 = iVar8;
+                  runtime_growslice(pprVar3,uVar7,uVar9,1,(internal_abi_Type *)&DAT_007fe420,~r0_01)
+                  ;
+                  (prStack0000000000000008->pool).cap = extraout_RCX_01;
+                  pprVar3 = extraout_RAX_07;
+                  prVar6 = prStack0000000000000008;
+                  uVar7 = extraout_RBX_05;
+                  if (runtime_writeBarrier._0_4_ != 0) {
+                    runtime_gcWriteBarrier2();
+                    *extraout_R11_03 = extraout_RAX_08;
+                    extraout_R11_03[1] = (prVar6->pool).array;
+                    pprVar3 = extraout_RAX_08;
+                    uVar7 = extraout_RBX_06;
+                  }
+                  (prVar6->pool).array = pprVar3;
+                  uVar5 = (uint)bVar1;
+                  m = prStack0000000000000008;
+                  runq = prStack0000000000000010;
+                  iVar8 = local_20;
+                  prVar11 = local_28;
+                  prVar13 = prVar12;
+                  iVar14 = j;
+                  iVar17 = iVar16;
+                }
+                (m->pool).len = uVar7;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_04 = extraout_R10_01;
+                  extraout_R11_04[1] = extraout_R9[extraout_RSI_01 - 1];
+                  m = extraout_RAX_09;
+                  runq = extraout_RBX_07;
+                  uVar7 = extraout_RSI_01;
+                  iVar8 = extraout_RDI_01;
+                  iVar10 = extraout_R8_01;
+                  pprVar3 = extraout_R9;
+                  prVar11 = extraout_R10_01;
+                  prVar13 = extraout_RCX_02;
+                }
+                pprVar3[uVar7 - 1] = prVar11;
+                nextq = local_18;
+                pos_00 = nextPos;
+              }
+              iVar8 = iVar8 + 0x10;
+            }
+            (runq->dense).len = 0;
+            uVar9 = (uint)dStack0000000000000030;
+            pos = iStack0000000000000020;
+          }
+          m->matched = true;
+          bVar18 = false;
+          prVar12 = prVar13;
+        }
+        else {
+          if (bVar2 != 7) {
+LAB_006ffc66:
+                    // WARNING: Subroutine does not return
+            runtime_gopanic(in_stack_ffffffffffffff58);
+          }
+          regexp_syntax___Inst__MatchRunePos(i_00,r,(int)nextq);
+          bVar18 = extraout_RAX_02 != -1;
+          uVar5 = (uint)bVar1;
+          uVar9 = (uint)dStack0000000000000030;
+          m = prStack0000000000000008;
+          nextq = local_18;
+          runq = prStack0000000000000010;
+          pos_00 = nextPos;
+          pos = iStack0000000000000020;
+        }
+      }
+      else if (bVar2 == 8) {
+        if ((i_00->Rune).len == 0) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        bVar18 = *(i_00->Rune).array == r;
+      }
+      else if (bVar2 == 9) {
+        bVar18 = true;
+      }
+      else {
+        if (bVar2 != 10) goto LAB_006ffc66;
+        bVar18 = r != 10;
+      }
+      if (bVar18) {
+        cap.cap = in_stack_ffffffffffffff68;
+        cap.array = (int *)in_stack_ffffffffffffff58._type;
+        cap.len = (int)in_stack_ffffffffffffff58.data;
+        regexp___machine__add
+                  (m,nextq,i_00->Out,pos_00,cap,(regexp_lazyFlag *)(prVar12->cap).array,
+                   (regexp_thread *)(prVar12->cap).len,(regexp_thread *)(prVar12->cap).cap);
+        uVar5 = (uint)bVar1;
+        uVar9 = (uint)dStack0000000000000030;
+        m = prStack0000000000000008;
+        nextq = local_18;
+        runq = prStack0000000000000010;
+        pos_00 = nextPos;
+        pos = iStack0000000000000020;
+        prVar12 = extraout_RAX_03;
+        iVar14 = j;
+      }
+      if (prVar12 != (regexp_thread *)0x0) {
+        uVar7 = (m->pool).cap;
+        uVar15 = (m->pool).len + 1;
+        pprVar3 = (m->pool).array;
+        if (uVar7 < uVar15) {
+          ~r0_00.cap = in_stack_ffffffffffffff68;
+          ~r0_00.array = in_stack_ffffffffffffff58._type;
+          ~r0_00.len = (int)in_stack_ffffffffffffff58.data;
+          runtime_growslice(pprVar3,uVar15,uVar7,1,(internal_abi_Type *)&DAT_007fe420,~r0_00);
+          (prStack0000000000000008->pool).cap = extraout_RCX_00;
+          pprVar3 = extraout_RAX_04;
+          prVar6 = prStack0000000000000008;
+          uVar15 = extraout_RBX_02;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11_01 = extraout_RAX_05;
+            extraout_R11_01[1] = (prVar6->pool).array;
+            pprVar3 = extraout_RAX_05;
+            uVar15 = extraout_RBX_03;
+          }
+          (prVar6->pool).array = pprVar3;
+          uVar5 = (uint)bVar1;
+          uVar9 = (uint)dStack0000000000000030;
+          m = prStack0000000000000008;
+          nextq = local_18;
+          runq = prStack0000000000000010;
+          pos_00 = nextPos;
+          pos = iStack0000000000000020;
+          iVar14 = j;
+        }
+        (m->pool).len = uVar15;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_02 = prVar12;
+          extraout_R11_02[1] = extraout_R10_00[uVar15 - 1];
+          m = extraout_RAX_06;
+          nextq = local_18;
+          runq = extraout_RBX_04;
+          pos_00 = extraout_RSI_00;
+          pos = extraout_RDI_00;
+          uVar9 = extraout_R8_00;
+          pprVar3 = extraout_R10_00;
+        }
+        pprVar3[uVar15 - 1] = prVar12;
+      }
+    }
+LAB_006ff7a2:
+    j = iVar14 + 1;
+  } while( true );
+}
+
+
+
+void regexp___machine__add
+               (regexp_machine *m,regexp_queue *q,uint32 pc,int pos,__int cap,regexp_lazyFlag *cond,
+               regexp_thread *t,regexp_thread *~r0)
+
+{
+  uint uVar1;
+  byte bVar2;
+  dword dVar3;
+  regexp_syntax_Inst *prVar4;
+  regexp_lazyFlag rVar5;
+  int iVar6;
+  int cap_00;
+  regexp_lazyFlag *__dest;
+  __int cap_01;
+  __int cap_02;
+  char extraout_AL;
+  regexp_machine *m_00;
+  regexp_machine *extraout_RAX;
+  regexp_thread *extraout_RAX_00;
+  regexp_thread *extraout_RAX_01;
+  regexp_thread *extraout_RAX_02;
+  int *extraout_RAX_03;
+  int *extraout_RAX_04;
+  int *piVar7;
+  regexp_thread *extraout_RAX_05;
+  regexp_thread *prVar8;
+  dword extraout_ECX;
+  regexp_thread *prVar9;
+  uint uVar10;
+  int opos;
+  int n;
+  regexp_thread *t_1;
+  regexp_queue *q_00;
+  regexp_queue *extraout_RBX;
+  undefined8 extraout_RSI;
+  regexp_lazyFlag *extraout_RSI_00;
+  regexp_lazyFlag *extraout_RSI_01;
+  regexp_lazyFlag extraout_RDI;
+  void *~r0_00;
+  regexp_thread *extraout_R8;
+  regexp_thread *extraout_R8_00;
+  regexp_thread *extraout_R8_01;
+  regexp_thread *extraout_R9;
+  regexp_lazyFlag *in_R10;
+  regexp_lazyFlag *extraout_R10;
+  regexp_thread *in_R11;
+  undefined8 *extraout_R11;
+  regexp_syntax_Inst **extraout_R11_00;
+  int **extraout_R11_01;
+  regexp_syntax_Inst **extraout_R11_02;
+  regexp_thread **extraout_R11_03;
+  uint32 j;
+  regexp_entry *prVar11;
+  regexp_syntax_Inst *i;
+  regexp_syntax_Inst *prVar12;
+  uint uVar13;
+  int unaff_R14;
+  int iVar14;
+  int iVar15;
+  regexp_lazyFlag rStack0000000000000020;
+  regexp_lazyFlag *prStack0000000000000028;
+  regexp_thread *prStack0000000000000030;
+  regexp_thread *prStack0000000000000038;
+  regexp_lazyFlag *prStack0000000000000040;
+  interface___ in_stack_ffffffffffffff60;
+  int in_stack_ffffffffffffff70;
+  regexp_entry *local_20;
+  regexp_thread *local_18;
+  regexp_lazyFlag *local_10;
+  
+  while (m_00 = m, q_00 = q, local_18 = in_R11, rStack0000000000000020 = pos,
+        prStack0000000000000028 = cond, prStack0000000000000030 = t, prStack0000000000000038 = ~r0,
+        prStack0000000000000040 = in_R10, local_10 = cond,
+        &local_20 <= *(regexp_entry ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    cond = prStack0000000000000028;
+    pos = rStack0000000000000020;
+    t = prStack0000000000000030;
+    ~r0 = prStack0000000000000038;
+    in_R10 = prStack0000000000000040;
+  }
+  while( true ) {
+    while( true ) {
+      if (pc == 0) {
+        return;
+      }
+      uVar13 = (uint)pc;
+      if ((uint)(q_00->sparse).len <= uVar13) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      dVar3 = (q_00->sparse).array[uVar13];
+      uVar10 = (q_00->dense).len;
+      if (dVar3 < (dword)uVar10) {
+        if (uVar10 <= dVar3) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        if ((q_00->dense).array[dVar3].pc == pc) {
+          return;
+        }
+      }
+      uVar1 = uVar10 + 1;
+      if ((uint)(q_00->dense).cap < uVar1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (q_00->dense).len = uVar1;
+      if (uVar1 <= uVar10) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      prVar11 = (q_00->dense).array;
+      iVar14 = uVar10 << 4;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = extraout_RSI;
+        m_00 = extraout_RAX;
+        q_00 = extraout_RBX;
+        cond = local_10;
+        pos = extraout_RDI;
+        t = extraout_R8;
+        ~r0 = extraout_R9;
+        in_R10 = extraout_R10;
+        pc = extraout_ECX;
+      }
+      *(undefined8 *)((int)&prVar11->t + iVar14) = 0;
+      *(uint32 *)((int)&prVar11->pc + iVar14) = pc;
+      if ((uint)(q_00->sparse).len <= uVar13) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      (q_00->sparse).array[uVar13] = (uint32)uVar10;
+      if ((uint)(m_00->p->Inst).len <= uVar13) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      prVar4 = (m_00->p->Inst).array;
+      bVar2 = prVar4[uVar13].Op;
+      prVar12 = prVar4 + uVar13;
+      local_20 = prVar11;
+      if (3 < bVar2) break;
+      if (bVar2 < 2) {
+        cap_02.cap = in_stack_ffffffffffffff70;
+        cap_02.array = (int *)in_stack_ffffffffffffff60._type;
+        cap_02.len = (int)in_stack_ffffffffffffff60.data;
+        regexp___machine__add(m_00,q_00,prVar4[uVar13].Out,pos,cap_02,cond,t,~r0);
+        pc = prVar4[uVar13].Arg;
+        m_00 = m;
+        q_00 = q;
+        cond = local_10;
+        pos = rStack0000000000000020;
+        t = prStack0000000000000030;
+        ~r0 = prStack0000000000000038;
+        in_R10 = prStack0000000000000040;
+        local_18 = extraout_RAX_00;
+      }
+      else if (bVar2 == 2) {
+        uVar10 = (uint)prVar4[uVar13].Arg;
+        if ((int)uVar10 < (int)t) {
+          rVar5 = cond[uVar10];
+          cond[uVar10] = pos;
+          cap_01.cap = in_stack_ffffffffffffff70;
+          cap_01.array = (int *)in_stack_ffffffffffffff60._type;
+          cap_01.len = (int)in_stack_ffffffffffffff60.data;
+          regexp___machine__add(m_00,q_00,prVar4[uVar13].Out,pos,cap_01,cond,t,~r0);
+          if ((regexp_thread *)(uint)prVar4[uVar13].Arg < prStack0000000000000030) {
+            local_10[(int)(regexp_thread *)(uint)prVar4[uVar13].Arg] = rVar5;
+            return;
+          }
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        pc = prVar4[uVar13].Out;
+      }
+      else {
+        regexp_lazyFlag_match(*in_R10,(regexp_syntax_EmptyOp)prVar4[uVar13].Arg,SUB81(prVar4,0));
+        if (extraout_AL == '\0') {
+          return;
+        }
+        pc = prVar4[uVar13].Out;
+        m_00 = m;
+        q_00 = q;
+        cond = local_10;
+        pos = rStack0000000000000020;
+        t = prStack0000000000000030;
+        ~r0 = prStack0000000000000038;
+        in_R10 = prStack0000000000000040;
+      }
+    }
+    if (bVar2 < 6) break;
+    if (bVar2 != 6) {
+      if (10 < bVar2) {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffff60);
+      }
+      goto LAB_00700149;
+    }
+    pc = prVar4[uVar13].Out;
+  }
+  if (bVar2 != 4) {
+    return;
+  }
+LAB_00700149:
+  iVar15 = iVar14;
+  if (local_18 == (regexp_thread *)0x0) {
+    iVar6 = (m_00->pool).len;
+    if (iVar6 == 0) {
+      runtime_newobject((internal_abi_Type *)&DAT_00854f20,q_00);
+      iVar6 = (m->matchcap).len;
+      cap_00 = (m->matchcap).cap;
+      runtime_makeslice((internal_abi_Type *)&DAT_00807760,iVar6,cap_00,~r0_00);
+      (extraout_RAX_02->cap).len = iVar6;
+      (extraout_RAX_02->cap).cap = cap_00;
+      piVar7 = extraout_RAX_03;
+      prVar8 = extraout_RAX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_04;
+        extraout_R11_01[1] = (prVar8->cap).array;
+        piVar7 = extraout_RAX_04;
+      }
+      (prVar8->cap).array = piVar7;
+      cond = local_10;
+      t = prStack0000000000000030;
+    }
+    else {
+      prVar8 = (m_00->pool).array[iVar6 + -1];
+      (m_00->pool).len = iVar6 + -1;
+    }
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_02 = prVar12;
+      extraout_R11_02[1] = prVar8->inst;
+      cond = extraout_RSI_01;
+      t = extraout_R8_01;
+    }
+    prVar8->inst = prVar12;
+  }
+  else {
+    prVar8 = local_18;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = prVar12;
+      extraout_R11_00[1] = extraout_RAX_01->inst;
+      cond = extraout_RSI_00;
+      t = extraout_R8_00;
+      prVar8 = extraout_RAX_01;
+    }
+    prVar8->inst = prVar12;
+  }
+  if (t != (regexp_thread *)0x0) {
+    prVar9 = (regexp_thread *)(prVar8->cap).len;
+    if (prVar9 == (regexp_thread *)0x0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    __dest = (regexp_lazyFlag *)(prVar8->cap).array;
+    if (cond != __dest) {
+      if ((int)t < (int)prVar9) {
+        prVar9 = t;
+      }
+      if (cond != __dest) {
+        local_18 = prVar8;
+        runtime_memmove(__dest,cond,(int)prVar9 << 3);
+        prVar8 = local_18;
+        iVar15 = iVar14;
+      }
+    }
+  }
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_03 = extraout_RAX_05;
+    extraout_R11_03[1] = *(regexp_thread **)((int)&local_20->t + iVar15);
+    prVar8 = extraout_RAX_05;
+  }
+  *(regexp_thread **)((int)&local_20->t + iVar15) = prVar8;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp_freeOnePassMachine(regexp_onePassMachine *m)
+
+{
+  regexp_onePassMachine *extraout_RAX;
+  regexp_onePassMachine *extraout_RAX_00;
+  regexp_onePassMachine *extraout_RAX_01;
+  void *pvVar1;
+  uint8 *puVar2;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((m->inputs).bytes.str.array == (uint8 *)0x0) {
+    if ((m->inputs).reader.r.tab == (runtime_itab *)0x0) {
+      (m->inputs).string.str.len = 0;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        puVar2 = (m->inputs).string.str.str;
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = puVar2;
+        m = extraout_RAX_01;
+      }
+      (m->inputs).string.str.str = (uint8 *)0x0;
+    }
+    else {
+      (m->inputs).reader.r.tab = (runtime_itab *)0x0;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        pvVar1 = (m->inputs).reader.r.data;
+        runtime_gcWriteBarrier1();
+        *extraout_R11_00 = pvVar1;
+        m = extraout_RAX_00;
+      }
+      (m->inputs).reader.r.data = (void *)0x0;
+    }
+  }
+  else {
+    (m->inputs).bytes.str.len = in_XMM15._0_8_;
+    (m->inputs).bytes.str.cap = in_XMM15._8_8_;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      puVar2 = (m->inputs).bytes.str.array;
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar2;
+      m = extraout_RAX;
+    }
+    (m->inputs).bytes.str.array = (uint8 *)0x0;
+  }
+  sync___Pool__Put(&regexp_onePassPool,in_stack_ffffffffffffffe0);
+  return;
+}
+
+
+
+void regexp___Regexp__doOnePass
+               (regexp_Regexp *re,io_RuneReader ir,__uint8 ib,string is,int pos,int ncap,
+               __int dstCap,__int ~r0)
+
+{
+  byte bVar1;
+  runtime_itab *prVar2;
+  regexp_onePassProg *prVar3;
+  regexp_onePassInst *prVar4;
+  runtime_slice ~r0_00;
+  bool bVar5;
+  char extraout_AL;
+  char cVar6;
+  bool matched;
+  int32 r;
+  int32 r1;
+  char extraout_AL_00;
+  dword dVar7;
+  dword dVar8;
+  sdword r_00;
+  dword extraout_EAX;
+  undefined *extraout_RAX;
+  regexp_onePassMachine *extraout_RAX_00;
+  regexp_onePassMachine *m_1;
+  int *extraout_RAX_01;
+  int *extraout_RAX_02;
+  int *piVar9;
+  int i;
+  undefined1 *puVar10;
+  uint uVar11;
+  void *extraout_RAX_03;
+  int extraout_RAX_04;
+  uint8 *extraout_RCX;
+  uint uVar12;
+  uint extraout_RCX_00;
+  int iVar13;
+  regexp_onePassMachine *~r0_01;
+  regexp_onePassMachine *m;
+  regexp_onePassMachine *extraout_RBX;
+  regexp_onePassMachine *extraout_RBX_00;
+  regexp_onePassMachine *extraout_RBX_01;
+  int width;
+  int extraout_RBX_02;
+  int width1;
+  int extraout_RBX_03;
+  int extraout_RBX_04;
+  int iVar14;
+  int extraout_RBX_05;
+  int in_RSI;
+  regexp_onePassMachine *extraout_RSI;
+  uint uVar15;
+  uint8 *in_RDI;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *~r0_02;
+  size_t __n;
+  int in_R8;
+  uint8 *in_R9;
+  uint uVar16;
+  int in_R10;
+  regexp_lazyFlag f;
+  regexp_lazyFlag flag;
+  uint in_R11;
+  int **extraout_R11;
+  int *extraout_R11_00;
+  uint8 **extraout_R11_01;
+  uint8 **extraout_R11_02;
+  regexp_onePassInst *inst;
+  int pc;

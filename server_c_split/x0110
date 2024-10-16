@@ -1,0 +1,1000 @@
+void runtime_setg(void)
+
+{
+  int in_FS_OFFSET;
+  undefined8 in_stack_00000008;
+  
+  *(undefined8 *)(in_FS_OFFSET + -8) = in_stack_00000008;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention -- yet parameter storage is locked
+// DWARF original prototype: void runtime.abort(void)
+
+void runtime_abort(void)
+
+{
+  code *pcVar1;
+  
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  do {
+                    // WARNING: Do nothing block with infinite loop
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_stackcheck(void)
+
+{
+  int in_FS_OFFSET;
+  
+  if ((undefined *)(*(uint **)(in_FS_OFFSET + -8))[1] <= &stack0x00000000) {
+                    // WARNING: Subroutine does not return
+    runtime_abort();
+  }
+  if (&stack0x00000000 <= (undefined *)**(uint **)(in_FS_OFFSET + -8)) {
+                    // WARNING: Subroutine does not return
+    runtime_abort();
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_cputicks(void)
+
+{
+  if (internal_cpu_X86.HasRDTSCP) {
+    rdtscp();
+  }
+  else {
+    rdtsc();
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memhash(void)
+
+{
+  void *in_RAX;
+  uintptr in_RCX;
+  uintptr in_RBX;
+  uintptr in_RDI;
+  
+  if (runtime_useAeshash) {
+    aeshashbody();
+    return;
+  }
+  runtime_memhashFallback(in_RAX,in_RBX,in_RCX,in_RDI);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_strhash(void)
+
+{
+  void *in_RAX;
+  uintptr in_RCX;
+  uintptr in_RBX;
+  
+  if (runtime_useAeshash) {
+    aeshashbody();
+    return;
+  }
+  runtime_strhashFallback(in_RAX,in_RBX,in_RCX);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memhash32(void)
+
+{
+  undefined4 *in_RAX;
+  uintptr in_RCX;
+  uintptr in_RBX;
+  undefined auVar1 [16];
+  
+  if (runtime_useAeshash) {
+    auVar1._8_4_ = *in_RAX;
+    auVar1._0_8_ = in_RBX;
+    auVar1._12_4_ = 0;
+    auVar1 = aesenc(auVar1,runtime_aeskeysched._0_16_);
+    auVar1 = aesenc(auVar1,runtime_aeskeysched._16_16_);
+    aesenc(auVar1,runtime_aeskeysched._32_16_);
+    return;
+  }
+  runtime_memhash32Fallback(in_RAX,in_RBX,in_RCX);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_memhash64(void)
+
+{
+  undefined8 *in_RAX;
+  uintptr in_RCX;
+  uintptr in_RBX;
+  undefined auVar1 [16];
+  
+  if (runtime_useAeshash) {
+    auVar1._8_8_ = *in_RAX;
+    auVar1._0_8_ = in_RBX;
+    auVar1 = aesenc(auVar1,runtime_aeskeysched._0_16_);
+    auVar1 = aesenc(auVar1,runtime_aeskeysched._16_16_);
+    aesenc(auVar1,runtime_aeskeysched._32_16_);
+    return;
+  }
+  runtime_memhash64Fallback(in_RAX,in_RBX,in_RCX);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_checkASM(void)
+
+{
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_return0(void)
+
+{
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void _cgo_topofstack(void)
+
+{
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.goexit(void)
+
+void runtime_goexit(void)
+
+{
+  code *pcVar1;
+  
+  runtime_goexit1();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.sigpanic0(void)
+
+void runtime_sigpanic0(void)
+
+{
+                    // WARNING: Subroutine does not return
+  runtime_sigpanic();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier1(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier2(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier3(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier4(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier5(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier6(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier7(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_gcWriteBarrier8(void)
+
+{
+  gcWriteBarrier();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_debugCallV2(void)
+
+{
+  code *pcVar1;
+  string ~r0;
+  uint8 *unaff_retaddr;
+  int in_stack_ffffffffffffff68;
+  uint local_10;
+  
+  ~r0.len = in_stack_ffffffffffffff68;
+  ~r0.str = unaff_retaddr;
+  runtime_debugCallCheck((uintptr)unaff_retaddr,~r0);
+  if (in_stack_ffffffffffffff68 != 0) {
+    pcVar1 = (code *)swi(3);
+    (*pcVar1)();
+    return;
+  }
+  if (local_10 < 0x21) {
+    runtime_debugCallWrap(0x469f40);
+  }
+  else if (local_10 < 0x41) {
+    runtime_debugCallWrap(0x469fa0);
+  }
+  else if (local_10 < 0x81) {
+    runtime_debugCallWrap(0x46a000);
+  }
+  else if (local_10 < 0x101) {
+    runtime_debugCallWrap(0x46a060);
+  }
+  else if (local_10 < 0x201) {
+    runtime_debugCallWrap(0x46a0c0);
+  }
+  else if (local_10 < 0x401) {
+    runtime_debugCallWrap(0x46a120);
+  }
+  else if (local_10 < 0x801) {
+    runtime_debugCallWrap(0x46a180);
+  }
+  else if (local_10 < 0x1001) {
+    runtime_debugCallWrap(0x46a1e0);
+  }
+  else if (local_10 < 0x2001) {
+    runtime_debugCallWrap(0x46a260);
+  }
+  else if (local_10 < 0x4001) {
+    runtime_debugCallWrap(0x46a2e0);
+  }
+  else if (local_10 < 0x8001) {
+    runtime_debugCallWrap(0x46a360);
+  }
+  else {
+    if (0x10000 < local_10) {
+      pcVar1 = (code *)swi(3);
+      (*pcVar1)();
+      return;
+    }
+    runtime_debugCallWrap(0x46a3e0);
+  }
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_debugCallPanicked(void)
+
+{
+  code *pcVar1;
+  
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicIndex(void)
+
+void runtime_panicIndex(void)
+
+{
+  int in_RAX;
+  int in_RCX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicIndex(in_RAX,in_RCX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicIndexU(void)
+
+void runtime_panicIndexU(void)
+
+{
+  uint in_RAX;
+  int in_RCX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicIndexU(in_RAX,in_RCX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceAlen(void)
+
+void runtime_panicSliceAlen(void)
+
+{
+  int in_RCX;
+  int in_RDX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceAlen(in_RCX,in_RDX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceAlenU(void)
+
+void runtime_panicSliceAlenU(void)
+
+{
+  uint in_RCX;
+  int in_RDX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceAlenU(in_RCX,in_RDX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceAcap(void)
+
+void runtime_panicSliceAcap(void)
+
+{
+  int in_RCX;
+  int in_RDX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceAcap(in_RCX,in_RDX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceAcapU(void)
+
+void runtime_panicSliceAcapU(void)
+
+{
+  uint in_RCX;
+  int in_RDX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceAcapU(in_RCX,in_RDX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceB(void)
+
+void runtime_panicSliceB(void)
+
+{
+  int in_RAX;
+  int in_RCX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceB(in_RAX,in_RCX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceBU(void)
+
+void runtime_panicSliceBU(void)
+
+{
+  uint in_RAX;
+  int in_RCX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceBU(in_RAX,in_RCX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSlice3Alen(void)
+
+void runtime_panicSlice3Alen(void)
+
+{
+  int in_RDX;
+  int in_RBX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSlice3Alen(in_RDX,in_RBX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSlice3AlenU(void)
+
+void runtime_panicSlice3AlenU(void)
+
+{
+  uint in_RDX;
+  int in_RBX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSlice3AlenU(in_RDX,in_RBX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSlice3Acap(void)
+
+void runtime_panicSlice3Acap(void)
+
+{
+  int in_RDX;
+  int in_RBX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSlice3Acap(in_RDX,in_RBX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSlice3C(void)
+
+void runtime_panicSlice3C(void)
+
+{
+  int in_RAX;
+  int in_RCX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSlice3C(in_RAX,in_RCX);
+}
+
+
+
+// WARNING: Unknown calling convention
+// DWARF original prototype: void runtime.panicSliceConvert(void)
+
+void runtime_panicSliceConvert(void)
+
+{
+  int in_RDX;
+  int in_RBX;
+  
+                    // WARNING: Subroutine does not return
+  runtime_goPanicSliceConvert(in_RDX,in_RBX);
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_getfp(void)
+
+{
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_duffzero(void)
+
+{
+  undefined4 *in_RDI;
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  
+  *in_RDI = in_XMM15_Da;
+  in_RDI[1] = in_XMM15_Db;
+  in_RDI[2] = in_XMM15_Dc;
+  in_RDI[3] = in_XMM15_Dd;
+  in_RDI[4] = in_XMM15_Da;
+  in_RDI[5] = in_XMM15_Db;
+  in_RDI[6] = in_XMM15_Dc;
+  in_RDI[7] = in_XMM15_Dd;
+  in_RDI[8] = in_XMM15_Da;
+  in_RDI[9] = in_XMM15_Db;
+  in_RDI[10] = in_XMM15_Dc;
+  in_RDI[0xb] = in_XMM15_Dd;
+  in_RDI[0xc] = in_XMM15_Da;
+  in_RDI[0xd] = in_XMM15_Db;
+  in_RDI[0xe] = in_XMM15_Dc;
+  in_RDI[0xf] = in_XMM15_Dd;
+  in_RDI[0x10] = in_XMM15_Da;
+  in_RDI[0x11] = in_XMM15_Db;
+  in_RDI[0x12] = in_XMM15_Dc;
+  in_RDI[0x13] = in_XMM15_Dd;
+  in_RDI[0x14] = in_XMM15_Da;
+  in_RDI[0x15] = in_XMM15_Db;
+  in_RDI[0x16] = in_XMM15_Dc;
+  in_RDI[0x17] = in_XMM15_Dd;
+  in_RDI[0x18] = in_XMM15_Da;
+  in_RDI[0x19] = in_XMM15_Db;
+  in_RDI[0x1a] = in_XMM15_Dc;
+  in_RDI[0x1b] = in_XMM15_Dd;
+  in_RDI[0x1c] = in_XMM15_Da;
+  in_RDI[0x1d] = in_XMM15_Db;
+  in_RDI[0x1e] = in_XMM15_Dc;
+  in_RDI[0x1f] = in_XMM15_Dd;
+  in_RDI[0x20] = in_XMM15_Da;
+  in_RDI[0x21] = in_XMM15_Db;
+  in_RDI[0x22] = in_XMM15_Dc;
+  in_RDI[0x23] = in_XMM15_Dd;
+  in_RDI[0x24] = in_XMM15_Da;
+  in_RDI[0x25] = in_XMM15_Db;
+  in_RDI[0x26] = in_XMM15_Dc;
+  in_RDI[0x27] = in_XMM15_Dd;
+  in_RDI[0x28] = in_XMM15_Da;
+  in_RDI[0x29] = in_XMM15_Db;
+  in_RDI[0x2a] = in_XMM15_Dc;
+  in_RDI[0x2b] = in_XMM15_Dd;
+  in_RDI[0x2c] = in_XMM15_Da;
+  in_RDI[0x2d] = in_XMM15_Db;
+  in_RDI[0x2e] = in_XMM15_Dc;
+  in_RDI[0x2f] = in_XMM15_Dd;
+  in_RDI[0x30] = in_XMM15_Da;
+  in_RDI[0x31] = in_XMM15_Db;
+  in_RDI[0x32] = in_XMM15_Dc;
+  in_RDI[0x33] = in_XMM15_Dd;
+  in_RDI[0x34] = in_XMM15_Da;
+  in_RDI[0x35] = in_XMM15_Db;
+  in_RDI[0x36] = in_XMM15_Dc;
+  in_RDI[0x37] = in_XMM15_Dd;
+  in_RDI[0x38] = in_XMM15_Da;
+  in_RDI[0x39] = in_XMM15_Db;
+  in_RDI[0x3a] = in_XMM15_Dc;
+  in_RDI[0x3b] = in_XMM15_Dd;
+  in_RDI[0x3c] = in_XMM15_Da;
+  in_RDI[0x3d] = in_XMM15_Db;
+  in_RDI[0x3e] = in_XMM15_Dc;
+  in_RDI[0x3f] = in_XMM15_Dd;
+  in_RDI[0x40] = in_XMM15_Da;
+  in_RDI[0x41] = in_XMM15_Db;
+  in_RDI[0x42] = in_XMM15_Dc;
+  in_RDI[0x43] = in_XMM15_Dd;
+  in_RDI[0x44] = in_XMM15_Da;
+  in_RDI[0x45] = in_XMM15_Db;
+  in_RDI[0x46] = in_XMM15_Dc;
+  in_RDI[0x47] = in_XMM15_Dd;
+  in_RDI[0x48] = in_XMM15_Da;
+  in_RDI[0x49] = in_XMM15_Db;
+  in_RDI[0x4a] = in_XMM15_Dc;
+  in_RDI[0x4b] = in_XMM15_Dd;
+  in_RDI[0x4c] = in_XMM15_Da;
+  in_RDI[0x4d] = in_XMM15_Db;
+  in_RDI[0x4e] = in_XMM15_Dc;
+  in_RDI[0x4f] = in_XMM15_Dd;
+  in_RDI[0x50] = in_XMM15_Da;
+  in_RDI[0x51] = in_XMM15_Db;
+  in_RDI[0x52] = in_XMM15_Dc;
+  in_RDI[0x53] = in_XMM15_Dd;
+  in_RDI[0x54] = in_XMM15_Da;
+  in_RDI[0x55] = in_XMM15_Db;
+  in_RDI[0x56] = in_XMM15_Dc;
+  in_RDI[0x57] = in_XMM15_Dd;
+  in_RDI[0x58] = in_XMM15_Da;
+  in_RDI[0x59] = in_XMM15_Db;
+  in_RDI[0x5a] = in_XMM15_Dc;
+  in_RDI[0x5b] = in_XMM15_Dd;
+  in_RDI[0x5c] = in_XMM15_Da;
+  in_RDI[0x5d] = in_XMM15_Db;
+  in_RDI[0x5e] = in_XMM15_Dc;
+  in_RDI[0x5f] = in_XMM15_Dd;
+  in_RDI[0x60] = in_XMM15_Da;
+  in_RDI[0x61] = in_XMM15_Db;
+  in_RDI[0x62] = in_XMM15_Dc;
+  in_RDI[99] = in_XMM15_Dd;
+  in_RDI[100] = in_XMM15_Da;
+  in_RDI[0x65] = in_XMM15_Db;
+  in_RDI[0x66] = in_XMM15_Dc;
+  in_RDI[0x67] = in_XMM15_Dd;
+  in_RDI[0x68] = in_XMM15_Da;
+  in_RDI[0x69] = in_XMM15_Db;
+  in_RDI[0x6a] = in_XMM15_Dc;
+  in_RDI[0x6b] = in_XMM15_Dd;
+  in_RDI[0x6c] = in_XMM15_Da;
+  in_RDI[0x6d] = in_XMM15_Db;
+  in_RDI[0x6e] = in_XMM15_Dc;
+  in_RDI[0x6f] = in_XMM15_Dd;
+  in_RDI[0x70] = in_XMM15_Da;
+  in_RDI[0x71] = in_XMM15_Db;
+  in_RDI[0x72] = in_XMM15_Dc;
+  in_RDI[0x73] = in_XMM15_Dd;
+  in_RDI[0x74] = in_XMM15_Da;
+  in_RDI[0x75] = in_XMM15_Db;
+  in_RDI[0x76] = in_XMM15_Dc;
+  in_RDI[0x77] = in_XMM15_Dd;
+  in_RDI[0x78] = in_XMM15_Da;
+  in_RDI[0x79] = in_XMM15_Db;
+  in_RDI[0x7a] = in_XMM15_Dc;
+  in_RDI[0x7b] = in_XMM15_Dd;
+  in_RDI[0x7c] = in_XMM15_Da;
+  in_RDI[0x7d] = in_XMM15_Db;
+  in_RDI[0x7e] = in_XMM15_Dc;
+  in_RDI[0x7f] = in_XMM15_Dd;
+  in_RDI[0x80] = in_XMM15_Da;
+  in_RDI[0x81] = in_XMM15_Db;
+  in_RDI[0x82] = in_XMM15_Dc;
+  in_RDI[0x83] = in_XMM15_Dd;
+  in_RDI[0x84] = in_XMM15_Da;
+  in_RDI[0x85] = in_XMM15_Db;
+  in_RDI[0x86] = in_XMM15_Dc;
+  in_RDI[0x87] = in_XMM15_Dd;
+  in_RDI[0x88] = in_XMM15_Da;
+  in_RDI[0x89] = in_XMM15_Db;
+  in_RDI[0x8a] = in_XMM15_Dc;
+  in_RDI[0x8b] = in_XMM15_Dd;
+  in_RDI[0x8c] = in_XMM15_Da;
+  in_RDI[0x8d] = in_XMM15_Db;
+  in_RDI[0x8e] = in_XMM15_Dc;
+  in_RDI[0x8f] = in_XMM15_Dd;
+  in_RDI[0x90] = in_XMM15_Da;
+  in_RDI[0x91] = in_XMM15_Db;
+  in_RDI[0x92] = in_XMM15_Dc;
+  in_RDI[0x93] = in_XMM15_Dd;
+  in_RDI[0x94] = in_XMM15_Da;
+  in_RDI[0x95] = in_XMM15_Db;
+  in_RDI[0x96] = in_XMM15_Dc;
+  in_RDI[0x97] = in_XMM15_Dd;
+  in_RDI[0x98] = in_XMM15_Da;
+  in_RDI[0x99] = in_XMM15_Db;
+  in_RDI[0x9a] = in_XMM15_Dc;
+  in_RDI[0x9b] = in_XMM15_Dd;
+  in_RDI[0x9c] = in_XMM15_Da;
+  in_RDI[0x9d] = in_XMM15_Db;
+  in_RDI[0x9e] = in_XMM15_Dc;
+  in_RDI[0x9f] = in_XMM15_Dd;
+  in_RDI[0xa0] = in_XMM15_Da;
+  in_RDI[0xa1] = in_XMM15_Db;
+  in_RDI[0xa2] = in_XMM15_Dc;
+  in_RDI[0xa3] = in_XMM15_Dd;
+  in_RDI[0xa4] = in_XMM15_Da;
+  in_RDI[0xa5] = in_XMM15_Db;
+  in_RDI[0xa6] = in_XMM15_Dc;
+  in_RDI[0xa7] = in_XMM15_Dd;
+  in_RDI[0xa8] = in_XMM15_Da;
+  in_RDI[0xa9] = in_XMM15_Db;
+  in_RDI[0xaa] = in_XMM15_Dc;
+  in_RDI[0xab] = in_XMM15_Dd;
+  in_RDI[0xac] = in_XMM15_Da;
+  in_RDI[0xad] = in_XMM15_Db;
+  in_RDI[0xae] = in_XMM15_Dc;
+  in_RDI[0xaf] = in_XMM15_Dd;
+  in_RDI[0xb0] = in_XMM15_Da;
+  in_RDI[0xb1] = in_XMM15_Db;
+  in_RDI[0xb2] = in_XMM15_Dc;
+  in_RDI[0xb3] = in_XMM15_Dd;
+  in_RDI[0xb4] = in_XMM15_Da;
+  in_RDI[0xb5] = in_XMM15_Db;
+  in_RDI[0xb6] = in_XMM15_Dc;
+  in_RDI[0xb7] = in_XMM15_Dd;
+  in_RDI[0xb8] = in_XMM15_Da;
+  in_RDI[0xb9] = in_XMM15_Db;
+  in_RDI[0xba] = in_XMM15_Dc;
+  in_RDI[0xbb] = in_XMM15_Dd;
+  in_RDI[0xbc] = in_XMM15_Da;
+  in_RDI[0xbd] = in_XMM15_Db;
+  in_RDI[0xbe] = in_XMM15_Dc;
+  in_RDI[0xbf] = in_XMM15_Dd;
+  in_RDI[0xc0] = in_XMM15_Da;
+  in_RDI[0xc1] = in_XMM15_Db;
+  in_RDI[0xc2] = in_XMM15_Dc;
+  in_RDI[0xc3] = in_XMM15_Dd;
+  in_RDI[0xc4] = in_XMM15_Da;
+  in_RDI[0xc5] = in_XMM15_Db;
+  in_RDI[0xc6] = in_XMM15_Dc;
+  in_RDI[199] = in_XMM15_Dd;
+  in_RDI[200] = in_XMM15_Da;
+  in_RDI[0xc9] = in_XMM15_Db;
+  in_RDI[0xca] = in_XMM15_Dc;
+  in_RDI[0xcb] = in_XMM15_Dd;
+  in_RDI[0xcc] = in_XMM15_Da;
+  in_RDI[0xcd] = in_XMM15_Db;
+  in_RDI[0xce] = in_XMM15_Dc;
+  in_RDI[0xcf] = in_XMM15_Dd;
+  in_RDI[0xd0] = in_XMM15_Da;
+  in_RDI[0xd1] = in_XMM15_Db;
+  in_RDI[0xd2] = in_XMM15_Dc;
+  in_RDI[0xd3] = in_XMM15_Dd;
+  in_RDI[0xd4] = in_XMM15_Da;
+  in_RDI[0xd5] = in_XMM15_Db;
+  in_RDI[0xd6] = in_XMM15_Dc;
+  in_RDI[0xd7] = in_XMM15_Dd;
+  in_RDI[0xd8] = in_XMM15_Da;
+  in_RDI[0xd9] = in_XMM15_Db;
+  in_RDI[0xda] = in_XMM15_Dc;
+  in_RDI[0xdb] = in_XMM15_Dd;
+  in_RDI[0xdc] = in_XMM15_Da;
+  in_RDI[0xdd] = in_XMM15_Db;
+  in_RDI[0xde] = in_XMM15_Dc;
+  in_RDI[0xdf] = in_XMM15_Dd;
+  in_RDI[0xe0] = in_XMM15_Da;
+  in_RDI[0xe1] = in_XMM15_Db;
+  in_RDI[0xe2] = in_XMM15_Dc;
+  in_RDI[0xe3] = in_XMM15_Dd;
+  in_RDI[0xe4] = in_XMM15_Da;
+  in_RDI[0xe5] = in_XMM15_Db;
+  in_RDI[0xe6] = in_XMM15_Dc;
+  in_RDI[0xe7] = in_XMM15_Dd;
+  in_RDI[0xe8] = in_XMM15_Da;
+  in_RDI[0xe9] = in_XMM15_Db;
+  in_RDI[0xea] = in_XMM15_Dc;
+  in_RDI[0xeb] = in_XMM15_Dd;
+  in_RDI[0xec] = in_XMM15_Da;
+  in_RDI[0xed] = in_XMM15_Db;
+  in_RDI[0xee] = in_XMM15_Dc;
+  in_RDI[0xef] = in_XMM15_Dd;
+  in_RDI[0xf0] = in_XMM15_Da;
+  in_RDI[0xf1] = in_XMM15_Db;
+  in_RDI[0xf2] = in_XMM15_Dc;
+  in_RDI[0xf3] = in_XMM15_Dd;
+  in_RDI[0xf4] = in_XMM15_Da;
+  in_RDI[0xf5] = in_XMM15_Db;
+  in_RDI[0xf6] = in_XMM15_Dc;
+  in_RDI[0xf7] = in_XMM15_Dd;
+  in_RDI[0xf8] = in_XMM15_Da;
+  in_RDI[0xf9] = in_XMM15_Db;
+  in_RDI[0xfa] = in_XMM15_Dc;
+  in_RDI[0xfb] = in_XMM15_Dd;
+  in_RDI[0xfc] = in_XMM15_Da;
+  in_RDI[0xfd] = in_XMM15_Db;
+  in_RDI[0xfe] = in_XMM15_Dc;
+  in_RDI[0xff] = in_XMM15_Dd;
+  return;
+}
+
+
+
+void FUN_0046cca9(void)
+
+{
+  int in_RDI;
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  
+  *(undefined4 *)(in_RDI + 0x10) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x14) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x18) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x20) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x24) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x28) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x2c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x30) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x34) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x38) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x3c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x40) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x44) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x48) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x4c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x50) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x54) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x58) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x5c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x60) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 100) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x68) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x6c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x70) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x74) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x78) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x7c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x80) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x84) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x88) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x8c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x90) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x94) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x98) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x9c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xa0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xa4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0xa8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xac) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xb0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xb4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0xb8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xbc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xc0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xc4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 200) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xcc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xd0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xd4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0xd8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xdc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xe0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xe4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0xe8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xec) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0xf0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0xf4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0xf8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0xfc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x100) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x104) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x108) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x10c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x110) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x114) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x118) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x11c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x120) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x124) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x128) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 300) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x130) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x134) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x138) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x13c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x140) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x144) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x148) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x14c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x150) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x154) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x158) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x15c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x160) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x164) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x168) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x16c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x170) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x174) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x178) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x17c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x180) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x184) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x188) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x18c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 400) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x194) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x198) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x19c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1a0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x1a4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1a8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1ac) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1b0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x1b4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1b8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1bc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1c0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x1c4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1c8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1cc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1d0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x1d4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1d8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1dc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1e0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x1e4) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1e8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1ec) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x1f0) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 500) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x1f8) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x1fc) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x200) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x204) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x208) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x20c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x210) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x214) = in_XMM15_Db;
+  *(undefined4 *)(in_RDI + 0x218) = in_XMM15_Dc;
+  *(undefined4 *)(in_RDI + 0x21c) = in_XMM15_Dd;
+  *(undefined4 *)(in_RDI + 0x220) = in_XMM15_Da;
+  *(undefined4 *)(in_RDI + 0x224) = in_XMM15_Db;

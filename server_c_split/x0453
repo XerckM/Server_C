@@ -1,0 +1,1000 @@
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  uint64 x2;
+  uint64 x2_1;
+  uint64 x2_2;
+  uint uVar7;
+  uint64 x1;
+  uint uVar8;
+  uint64 x2_3;
+  
+  uVar7 = -arg1;
+  uVar8 = ~uVar7;
+  uVar1 = (*arg2)[1];
+  uVar2 = (*arg3)[1];
+  uVar3 = (*arg2)[2];
+  uVar4 = (*arg3)[2];
+  uVar5 = (*arg2)[3];
+  uVar6 = (*arg3)[3];
+  (*out1)[0] = (*arg2)[0] & uVar8 | (*arg3)[0] & uVar7;
+  (*out1)[1] = uVar1 & uVar8 | uVar2 & uVar7;
+  (*out1)[2] = uVar3 & uVar8 | uVar4 & uVar7;
+  (*out1)[3] = uVar8 & uVar5 | uVar7 & uVar6;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_fiat_p224ToBytes(uint8 (*out1) [28],uint64 (*arg1) [4])
+
+{
+  uint64 uVar1;
+  uint64 uVar2;
+  uint64 uVar3;
+  uint64 x2;
+  uint64 x3;
+  uint64 x1;
+  uint64 x4;
+  
+  uVar1 = (*arg1)[2];
+  uVar2 = (*arg1)[1];
+  uVar3 = (*arg1)[3];
+  *(uint64 *)*out1 = (*arg1)[0];
+  *(uint64 *)(*out1 + 8) = uVar2;
+  *(uint64 *)(*out1 + 0x10) = uVar1;
+  *(sdword *)(*out1 + 0x18) = (sdword)uVar3;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_fiat_p224FromBytes(uint64 (*out1) [4],uint8 (*arg1) [28])
+
+{
+  uint64 uVar1;
+  uint64 uVar2;
+  uint64 x50;
+  uint64 x51;
+  uint64 x52;
+  uint64 x43;
+  uint64 x44;
+  uint64 x45;
+  uint64 x46;
+  uint64 x47;
+  uint64 x48;
+  uint64 x49;
+  uint64 x29;
+  uint64 x30;
+  uint64 x31;
+  uint64 x32;
+  uint64 x33;
+  uint64 x34;
+  uint64 x35;
+  uint64 x36;
+  uint64 x37;
+  uint64 x38;
+  uint64 x39;
+  uint64 x40;
+  uint64 x41;
+  uint64 x42;
+  
+  x51 = (uint64)*(dword *)(*arg1 + 0x18);
+  uVar1 = *(uint64 *)(*arg1 + 0x10);
+  uVar2 = *(uint64 *)(*arg1 + 8);
+  (*out1)[0] = *(uint64 *)*arg1;
+  (*out1)[1] = uVar2;
+  (*out1)[2] = uVar1;
+  (*out1)[3] = x51;
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P224Element__Invert
+               (crypto_internal_nistec_fiat_P224Element *e,
+               crypto_internal_nistec_fiat_P224Element *x,
+               crypto_internal_nistec_fiat_P224Element *~r0)
+
+{
+  int iVar1;
+  int s;
+  int s_1;
+  int s_2;
+  int s_3;
+  int s_4;
+  int s_5;
+  int s_6;
+  int s_7;
+  int s_8;
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P224Element *pcStack0000000000000008;
+  crypto_internal_nistec_fiat_P224Element *pcStack0000000000000010;
+  uint64 local_88 [4];
+  uint64 local_68 [4];
+  uint64 local_48 [4];
+  undefined local_28 [8];
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined local_18 [8];
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  pcStack0000000000000008 = e;
+  pcStack0000000000000010 = x;
+  while (local_68 <= *(uint64 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  _local_28 = *(undefined (*) [16])pcStack0000000000000008->x;
+  _local_18 = *(undefined (*) [16])(pcStack0000000000000008->x + 2);
+  crypto_internal_nistec_fiat_p224Square
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             pcStack0000000000000010->x);
+  crypto_internal_nistec_fiat_p224Mul
+            (&local_48,pcStack0000000000000010->x,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  crypto_internal_nistec_fiat_p224Square
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,&local_48);
+  crypto_internal_nistec_fiat_p224Mul
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             pcStack0000000000000010->x,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  crypto_internal_nistec_fiat_p224Square
+            (&local_68,(crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  for (iVar1 = 1; iVar1 < 3; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul
+            (&local_68,(crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             &local_68);
+  crypto_internal_nistec_fiat_p224Square(&local_88,&local_68);
+  for (iVar1 = 1; iVar1 < 6; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_88,&local_88);
+  }
+  crypto_internal_nistec_fiat_p224Mul(&local_68,&local_68,&local_88);
+  for (iVar1 = 0; iVar1 < 2; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul(&local_48,&local_48,&local_68);
+  crypto_internal_nistec_fiat_p224Square(&local_68,&local_48);
+  for (iVar1 = 1; iVar1 < 3; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,&local_68);
+  crypto_internal_nistec_fiat_p224Square
+            (&local_68,(crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  for (iVar1 = 1; iVar1 < 0xe; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul(&local_48,&local_48,&local_68);
+  crypto_internal_nistec_fiat_p224Square(&local_68,&local_48);
+  for (iVar1 = 1; iVar1 < 0x11; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,&local_68);
+  crypto_internal_nistec_fiat_p224Square
+            (&local_68,(crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  for (iVar1 = 1; iVar1 < 0x30; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,&local_68);
+  crypto_internal_nistec_fiat_p224Square
+            (&local_68,(crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28);
+  for (iVar1 = 1; iVar1 < 0x1f; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_68,&local_68);
+  }
+  crypto_internal_nistec_fiat_p224Mul(&local_48,&local_48,&local_68);
+  for (iVar1 = 0; iVar1 < 0x61; iVar1 = iVar1 + 1) {
+    crypto_internal_nistec_fiat_p224Square(&local_48,&local_48);
+  }
+  crypto_internal_nistec_fiat_p224Mul
+            ((crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,
+             (crypto_internal_nistec_fiat_p224MontgomeryDomainFieldElement *)local_28,&local_48);
+  *(undefined4 *)pcStack0000000000000008->x = local_28._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 4) = local_28._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->x + 1) = uStack_20;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0xc) = uStack_1c;
+  *(undefined4 *)(pcStack0000000000000008->x + 2) = local_18._0_4_;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x14) = local_18._4_4_;
+  *(undefined4 *)(pcStack0000000000000008->x + 3) = uStack_10;
+  *(undefined4 *)((int)pcStack0000000000000008->x + 0x1c) = uStack_c;
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__One
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  
+  e->x[0] = 0xffffffff00000001;
+  e->x[1] = 0xffffffff;
+  e->x[2] = 1;
+  *(undefined4 *)(e->x + 3) = in_XMM15_Da;
+  *(undefined4 *)((int)e->x + 0x1c) = in_XMM15_Db;
+  *(undefined4 *)(e->x + 4) = in_XMM15_Dc;
+  *(undefined4 *)((int)e->x + 0x24) = in_XMM15_Dd;
+  e->x[5] = 0;
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Equal
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t,int ~r0)
+
+{
+  __uint8 ~r0_00;
+  __uint8 ~r0_01;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int iVar1;
+  int i;
+  uint8 v;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffff70 [16];
+  int in_stack_ffffffffffffff80;
+  int iVar2;
+  uint8 local_78 [48];
+  uint8 local_48 [56];
+  crypto_internal_nistec_fiat_P384Element *local_10;
+  
+  while (&local_10 <= *(crypto_internal_nistec_fiat_P384Element ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.cap = in_stack_ffffffffffffff80;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffff70._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffff70._8_8_;
+  local_10 = t;
+  crypto_internal_nistec_fiat___P384Element__bytes(e,(uint8 (*) [48])local_48,~r0_00);
+  ~r0_01.cap = extraout_RBX;
+  ~r0_01.array = (uint8 *)in_stack_ffffffffffffff70._0_8_;
+  ~r0_01.len = in_stack_ffffffffffffff70._8_8_;
+  iVar2 = extraout_RBX;
+  crypto_internal_nistec_fiat___P384Element__bytes(local_10,&local_78,~r0_01);
+  if (extraout_RBX_00 == iVar2) {
+    for (iVar1 = 0; iVar1 < iVar2; iVar1 = iVar1 + 1) {
+    }
+  }
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__IsZero
+               (crypto_internal_nistec_fiat_P384Element *e,int ~r0)
+
+{
+  __uint8 ~r0_00;
+  int iVar1;
+  int i;
+  uint8 v;
+  int extraout_RBX;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  undefined in_stack_ffffffffffffff88 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.cap = in_XMM15._0_8_;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffff88._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffff88._8_8_;
+  crypto_internal_nistec_fiat___P384Element__bytes
+            (e,(uint8 (*) [48])&stack0xffffffffffffff98,~r0_00);
+  if (extraout_RBX == 0x30) {
+    for (iVar1 = 0; iVar1 < 0x30; iVar1 = iVar1 + 1) {
+    }
+  }
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Set
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  uVar1 = *(undefined4 *)((int)t->x + 4);
+  uVar2 = *(undefined4 *)(t->x + 1);
+  uVar3 = *(undefined4 *)((int)t->x + 0xc);
+  *(undefined4 *)e->x = *(undefined4 *)t->x;
+  *(undefined4 *)((int)e->x + 4) = uVar1;
+  *(undefined4 *)(e->x + 1) = uVar2;
+  *(undefined4 *)((int)e->x + 0xc) = uVar3;
+  uVar1 = *(undefined4 *)((int)t->x + 0x14);
+  uVar2 = *(undefined4 *)(t->x + 3);
+  uVar3 = *(undefined4 *)((int)t->x + 0x1c);
+  *(undefined4 *)(e->x + 2) = *(undefined4 *)(t->x + 2);
+  *(undefined4 *)((int)e->x + 0x14) = uVar1;
+  *(undefined4 *)(e->x + 3) = uVar2;
+  *(undefined4 *)((int)e->x + 0x1c) = uVar3;
+  uVar1 = *(undefined4 *)((int)t->x + 0x24);
+  uVar2 = *(undefined4 *)(t->x + 5);
+  uVar3 = *(undefined4 *)((int)t->x + 0x2c);
+  *(undefined4 *)(e->x + 4) = *(undefined4 *)(t->x + 4);
+  *(undefined4 *)((int)e->x + 0x24) = uVar1;
+  *(undefined4 *)(e->x + 5) = uVar2;
+  *(undefined4 *)((int)e->x + 0x2c) = uVar3;
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Bytes
+               (crypto_internal_nistec_fiat_P384Element *e,__uint8 ~r0)
+
+{
+  __uint8 ~r0_00;
+  uint8 (*out) [48];
+  uint8 (*_out) [48];
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffe0 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_008193a0,in_RBX);
+  ~r0_00.cap = (int)e;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffe0._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffffe0._8_8_;
+  crypto_internal_nistec_fiat___P384Element__bytes(e,out,~r0_00);
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__bytes
+               (crypto_internal_nistec_fiat_P384Element *e,uint8 (*out) [48],__uint8 ~r0)
+
+{
+  uint8 uVar1;
+  int i;
+  uint8 *puVar2;
+  int unaff_R14;
+  uint64 local_38 [6];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384FromMontgomery(&local_38,e->x);
+  crypto_internal_nistec_fiat_p384ToBytes(out,&local_38);
+  i = 0;
+  while( true ) {
+    if (0x17 < i) {
+      return;
+    }
+    uVar1 = (*out)[i];
+    if (0x2f < (uint)-(i + -0x2f)) break;
+    puVar2 = (uint8 *)((int)out - (i + -0x2f));
+    (*out)[i] = *puVar2;
+    *puVar2 = uVar1;
+    i = i + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__SetBytes
+               (crypto_internal_nistec_fiat_P384Element *e,__uint8 v,
+               crypto_internal_nistec_fiat_P384Element *~r0,error ~r1)
+
+{
+  byte bVar1;
+  undefined uVar2;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  int i_1;
+  int in_RCX;
+  int i;
+  uint uVar3;
+  void *~r0_00;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  __uint8 in_stack_fffffffffffffec0;
+  uint64 local_128 [6];
+  uint8 local_f8 [48];
+  undefined local_c8 [16];
+  undefined local_b8 [16];
+  undefined local_a8 [16];
+  undefined local_98 [16];
+  undefined local_88 [32];
+  uint64 local_68 [6];
+  crypto_internal_nistec_fiat_P384Element local_38;
+  
+  while (local_c8 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RCX != 0x30) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0);
+    extraout_RAX_00[1] = 0x1c;
+    *extraout_RAX_00 = &DAT_008bdf59;
+    return;
+  }
+  local_98._8_8_ = in_XMM15._8_8_;
+  local_88._8_8_ = local_98._8_8_;
+  local_98._8_8_ = 0xffffffff;
+  local_98._0_8_ = 0xffffffff00000001;
+  local_88._0_8_ = 1;
+  crypto_internal_nistec_fiat_p384Sub
+            (local_38.x,&local_68,
+             (crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *)local_98);
+  crypto_internal_nistec_fiat___P384Element__bytes(&local_38,&local_f8,in_stack_fffffffffffffec0);
+  for (i = 0; i < 0x30; i = i + 1) {
+    bVar1 = *(byte *)((int)~r0->x + i);
+    if (~r0_00 <= (uint)i) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (bVar1 < *(byte *)(extraout_RAX + i)) break;
+    if (*(byte *)(extraout_RAX + i) < bVar1) {
+      runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0_00);
+      extraout_RAX_01[1] = 0x1c;
+      *extraout_RAX_01 = &DAT_008bdf59;
+      return;
+    }
+  }
+  local_c8 = in_XMM15;
+  local_b8 = in_XMM15;
+  local_a8 = in_XMM15;
+  if (~r0 != (crypto_internal_nistec_fiat_P384Element *)local_c8) {
+    local_c8 = *(undefined (*) [16])~r0->x;
+    local_b8 = *(undefined (*) [16])(~r0->x + 2);
+    local_a8 = *(undefined (*) [16])(~r0->x + 4);
+  }
+  i_1 = 0;
+  while( true ) {
+    if (0x17 < i_1) {
+      crypto_internal_nistec_fiat_p384FromBytes
+                (&local_128,(uint8 (*) [48])(crypto_internal_nistec_fiat_P384Element *)local_c8);
+      crypto_internal_nistec_fiat_p384ToMontgomery(e->x,&local_128);
+      return;
+    }
+    uVar3 = -(i_1 + -0x2f);
+    if (0x2f < uVar3) break;
+    uVar2 = local_c8[i_1];
+    local_c8[i_1] = local_c8[uVar3];
+    local_c8[uVar3] = uVar2;
+    i_1 = i_1 + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Add
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t1,
+               crypto_internal_nistec_fiat_P384Element *t2,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P384Element *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384Add(pcStack0000000000000008->x,t1->x,t2->x);
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Sub
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t1,
+               crypto_internal_nistec_fiat_P384Element *t2,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P384Element *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384Sub(pcStack0000000000000008->x,t1->x,t2->x);
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Mul
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t1,
+               crypto_internal_nistec_fiat_P384Element *t2,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P384Element *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384Mul(pcStack0000000000000008->x,t1->x,t2->x);
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Square
+               (crypto_internal_nistec_fiat_P384Element *e,
+               crypto_internal_nistec_fiat_P384Element *t,
+               crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P384Element *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = e;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384Square(pcStack0000000000000008->x,t->x);
+  return;
+}
+
+
+
+void crypto_internal_nistec_fiat___P384Element__Select
+               (crypto_internal_nistec_fiat_P384Element *v,
+               crypto_internal_nistec_fiat_P384Element *a,crypto_internal_nistec_fiat_P384Element *b
+               ,int cond,crypto_internal_nistec_fiat_P384Element *~r0)
+
+{
+  int unaff_R14;
+  crypto_internal_nistec_fiat_P384Element *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = v;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_nistec_fiat_p384Selectznz(pcStack0000000000000008->x,cond,b->x,a->x);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_internal_nistec_fiat_p384Mul
+               (crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *out1,
+               crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *arg1,
+               crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *arg2)
+
+{
+  undefined auVar1 [16];
+  undefined auVar2 [16];
+  undefined auVar3 [16];
+  undefined auVar4 [16];
+  undefined auVar5 [16];
+  undefined auVar6 [16];
+  undefined auVar7 [16];
+  undefined auVar8 [16];
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  undefined auVar11 [16];
+  undefined auVar12 [16];
+  undefined auVar13 [16];
+  undefined auVar14 [16];
+  undefined auVar15 [16];
+  undefined auVar16 [16];
+  undefined auVar17 [16];
+  undefined auVar18 [16];
+  undefined auVar19 [16];
+  undefined auVar20 [16];
+  undefined auVar21 [16];
+  undefined auVar22 [16];
+  undefined auVar23 [16];
+  undefined auVar24 [16];
+  undefined auVar25 [16];
+  undefined auVar26 [16];
+  undefined auVar27 [16];
+  undefined auVar28 [16];
+  undefined auVar29 [16];
+  undefined auVar30 [16];
+  undefined auVar31 [16];
+  undefined auVar32 [16];
+  undefined auVar33 [16];
+  undefined auVar34 [16];
+  undefined auVar35 [16];
+  undefined auVar36 [16];
+  undefined auVar37 [16];
+  undefined auVar38 [16];
+  undefined auVar39 [16];
+  undefined auVar40 [16];
+  undefined auVar41 [16];
+  undefined auVar42 [16];
+  undefined auVar43 [16];
+  undefined auVar44 [16];
+  undefined auVar45 [16];
+  undefined auVar46 [16];
+  undefined auVar47 [16];
+  undefined auVar48 [16];
+  undefined auVar49 [16];
+  undefined auVar50 [16];
+  undefined auVar51 [16];
+  undefined auVar52 [16];
+  undefined auVar53 [16];
+  undefined auVar54 [16];
+  undefined auVar55 [16];
+  undefined auVar56 [16];
+  undefined auVar57 [16];
+  undefined auVar58 [16];
+  undefined auVar59 [16];
+  undefined auVar60 [16];
+  undefined auVar61 [16];
+  undefined auVar62 [16];
+  undefined auVar63 [16];
+  undefined auVar64 [16];
+  undefined auVar65 [16];
+  undefined auVar66 [16];
+  undefined auVar67 [16];
+  undefined auVar68 [16];
+  undefined auVar69 [16];
+  undefined auVar70 [16];
+  undefined auVar71 [16];
+  undefined auVar72 [16];
+  undefined auVar73 [16];
+  undefined auVar74 [16];
+  undefined auVar75 [16];
+  undefined auVar76 [16];
+  undefined auVar77 [16];
+  undefined auVar78 [16];
+  undefined auVar79 [16];
+  undefined auVar80 [16];
+  undefined auVar81 [16];
+  undefined auVar82 [16];
+  undefined auVar83 [16];
+  undefined auVar84 [16];
+  undefined auVar85 [16];
+  undefined auVar86 [16];
+  undefined auVar87 [16];
+  undefined auVar88 [16];
+  undefined auVar89 [16];
+  undefined auVar90 [16];
+  undefined auVar91 [16];
+  undefined auVar92 [16];
+  undefined auVar93 [16];
+  undefined auVar94 [16];
+  undefined auVar95 [16];
+  undefined auVar96 [16];
+  uint uVar97;
+  uint uVar98;
+  uint uVar99;
+  uint uVar100;
+  uint uVar101;
+  uint uVar102;
+  uint uVar103;
+  uint uVar104;
+  uint uVar105;
+  uint uVar106;
+  uint uVar107;
+  uint uVar108;
+  uint uVar109;
+  uint uVar110;
+  uint uVar111;
+  uint uVar112;
+  uint uVar113;
+  uint uVar114;
+  uint uVar115;
+  uint uVar116;
+  uint uVar117;
+  uint uVar118;
+  uint uVar119;
+  uint uVar120;
+  uint uVar121;
+  uint uVar122;
+  uint uVar123;
+  uint uVar124;
+  uint uVar125;
+  uint uVar126;
+  uint uVar127;
+  uint64 x15;
+  uint uVar128;
+  uint uVar129;
+  uint uVar130;
+  uint uVar131;
+  uint uVar132;
+  uint uVar133;
+  uint64 x40;
+  uint uVar134;
+  uint uVar135;
+  uint uVar136;
+  uint64 x67;
+  uint64 x106;
+  uint64 x118;
+  uint64 x183;
+  uint64 x195;
+  uint64 x260;
+  uint64 x264;
+  uint64 x272;
+  uint64 x337;
+  uint64 x349;
+  uint64 x414;
+  uint64 x422;
+  uint64 x426;
+  uint64 x2_6;
+  uint uVar137;
+  uint64 x25;
+  uint64 x68;
+  uint64 x91;
+  uint64 x141;
+  uint64 x207;
+  uint64 x245;
+  uint64 x284;
+  uint64 x322;
+  uint64 x372;
+  uint64 x432;
+  uint64 x445;
+  uint64 x458;
+  uint64 x2_3;
+  uint64 x1;
+  uint uVar138;
+  uint uVar139;
+  uint uVar140;
+  uint uVar141;
+  uint uVar142;
+  uint uVar143;
+  uint uVar144;
+  uint uVar145;
+  uint uVar146;
+  uint uVar147;
+  uint uVar148;
+  uint uVar149;
+  uint uVar150;
+  uint uVar151;
+  uint uVar152;
+  uint uVar153;
+  uint uVar154;
+  uint uVar155;
+  uint uVar156;
+  uint uVar157;
+  uint uVar158;
+  uint uVar159;
+  uint uVar160;
+  uint uVar161;
+  uint uVar162;
+  uint uVar163;
+  uint64 x16;
+  uint uVar164;
+  uint uVar165;
+  uint uVar166;
+  uint uVar167;
+  uint uVar168;
+  uint64 x41;
+  uint uVar169;
+  uint uVar170;
+  uint uVar171;
+  uint uVar172;
+  uint64 x27;
+  uint64 x81;
+  uint64 x94;
+  uint64 x117;
+  uint64 x119;
+  uint64 x120;
+  uint64 x133;
+  uint64 x194;
+  uint64 x196;
+  uint64 x197;
+  uint64 x210;
+  uint64 x271;
+  uint64 x273;
+  uint64 x274;
+  uint64 x287;
+  uint64 x348;
+  uint64 x350;
+  uint64 x351;
+  uint64 x364;
+  uint64 x425;
+  uint64 x427;
+  uint64 x428;
+  uint64 x441;
+  uint64 x454;
+  uint64 x2_1;
+  uint64 x6;
+  uint64 x23;
+  uint64 x83;
+  uint64 x96;
+  uint64 x144;
+  uint64 x145;
+  uint64 x169;
+  uint64 x218;
+  uint64 x278;
+  uint64 x291;
+  uint64 x355;
+  uint64 x368;
+  uint64 x430;
+  uint64 x443;
+  uint64 x456;
+  uint64 x2_2;
+  uint64 x2;
+  uint64 x21;
+  uint64 x85;
+  uint64 x98;
+  uint64 x158;
+  uint64 x171;
+  uint64 x221;
+  uint64 x222;
+  uint64 x246;
+  uint64 x295;
+  uint64 x361;
+  uint64 x399;
+  uint64 x449;
+  uint64 x462;
+  uint64 x3;
+  uint64 x46;
+  uint64 x59;
+  uint64 x130;
+  uint64 x168;
+  uint64 x235;
+  uint64 x248;
+  uint64 x298;
+  uint64 x299;
+  uint64 x323;
+  uint64 x375;
+  uint64 x376;
+  uint64 x400;
+  uint64 x452;
+  uint64 x453;
+  uint64 x4;
+  uint uVar173;
+  uint64 x19;
+  uint64 x87;
+  uint64 x100;
+  uint64 x160;
+  uint64 x173;
+  uint64 x237;
+  uint64 x250;
+  uint64 x312;
+  uint64 x325;
+  uint64 x389;
+  uint64 x402;
+  uint64 x5;
+  uint64 x89;
+  uint64 x102;
+  uint64 x162;
+  uint64 x175;
+  uint64 x239;
+  uint64 x252;
+  uint64 x314;
+  uint64 x327;
+  uint64 x391;
+  uint64 x404;
+  uint64 x48;
+  uint64 x61;
+  uint64 x124;
+  uint64 x137;
+  uint64 x199;
+  uint64 x212;
+  uint64 x280;
+  uint64 x293;
+  uint64 x353;
+  uint64 x366;
+  uint64 x434;
+  uint64 x447;
+  uint64 x460;
+  uint64 x2_4;
+  uint64 x44;
+  uint64 x57;
+  uint64 x164;
+  uint64 x177;
+  uint64 x241;
+  uint64 x254;
+  uint64 x316;
+  uint64 x329;
+  uint64 x393;
+  uint64 x406;
+  uint64 x50;
+  uint64 x63;
+  uint64 x122;
+  uint64 x135;
+  uint64 x203;
+  uint64 x216;
+  uint64 x276;
+  uint64 x289;
+  uint64 x357;
+  uint64 x370;
+  uint64 x438;
+  uint64 x451;
+  uint64 x464;
+  uint64 x29;
+  uint64 x52;
+  uint64 x65;
+  uint64 x126;
+  uint64 x139;
+  uint64 x201;
+  uint64 x214;
+  uint64 x318;
+  uint64 x331;
+  uint64 x395;
+  uint64 x408;
+  int unaff_R14;
+  uint64 x54;
+  uint64 x92;
+  uint64 x166;
+  uint64 x179;
+  uint64 x243;
+  uint64 x256;
+  uint64 x320;
+  uint64 x333;
+  uint64 x397;
+  uint64 x410;
+  uint64 x2_5;
+  crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *pauStack0000000000000008;
+  crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *pauStack0000000000000010;
+  crypto_internal_nistec_fiat_p384MontgomeryDomainFieldElement *pauStack0000000000000018;
+  uint64 x9;
+  uint64 x80;
+  uint64 x8;
+  uint64 x79;
+  uint64 x78;
+  uint64 x77;
+  uint64 x76;
+  uint64 x75;
+  uint64 x74;
+  uint64 x73;
+  uint64 x72;
+  uint64 x71;
+  uint64 x70;
+  uint64 x7;
+  uint64 x69;
+  undefined local_368 [48];
+  uint64 x436;
+  uint64 x43;
+  uint64 x424;
+  uint64 x423;
+  uint64 x421;
+  uint64 x420;
+  uint64 x42;
+  uint64 x412;
+  uint64 x39;
+  uint64 x388;
+  uint64 x387;
+  uint64 x386;
+  uint64 x385;
+  uint64 x384;
+  uint64 x383;
+  uint64 x382;
+  uint64 x381;
+  uint64 x380;
+  uint64 x38;
+  uint64 x379;
+  uint64 x378;

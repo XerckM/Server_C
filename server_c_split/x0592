@@ -1,0 +1,1000 @@
+  }
+  net_http_newTransferWriter
+            (in_stack_fffffffffffffe40,(net_http_transferWriter *)&DAT_008727a0,
+             (error)in_stack_fffffffffffffe50);
+  if (extraout_RBX_03 != 0) {
+    return;
+  }
+  local_148 = t;
+  net_http___transferWriter__writeHeader
+            (t,(io_Writer)in_stack_fffffffffffffe40,in_RBX,(error)in_stack_fffffffffffffe50);
+  if (extraout_RAX_15 != 0) {
+    return;
+  }
+  net_http_Header_writeSubset
+            (r->Header,(io_Writer)in_stack_fffffffffffffe40,(map_string_bool)in_RBX,in_RCX,
+             (error)in_stack_fffffffffffffe50);
+  if (extraout_RAX_16 != 0) {
+    return;
+  }
+  net_http___transferWriter__shouldSendContentLength(local_148,~r0_00);
+  if ((((local_48 == 0) &&
+       (((local_38 == 0 || (local_40[1] != (sdword *)0x7)) ||
+        ((psVar1 = *local_40, *psVar1 != 0x6e756863 ||
+         ((*(short *)(psVar1 + 1) != 0x656b || (*(char *)((int)psVar1 + 6) != 'd')))))))) &&
+      ((extraout_AL_01 == '\0' &&
+       (((iVar2 = r->StatusCode, 99 < iVar2 - 100U && (iVar2 != 0xcc)) && (iVar2 != 0x130)))))) &&
+     (io_WriteString((io_Writer)in_stack_fffffffffffffe40,in_stack_fffffffffffffe50,(int)in_RBX,
+                     (error)in_stack_fffffffffffffe60), extraout_RBX_04 != 0)) {
+    return;
+  }
+  io_WriteString((io_Writer)in_stack_fffffffffffffe40,in_stack_fffffffffffffe50,(int)in_RBX,
+                 (error)in_stack_fffffffffffffe60);
+  if (extraout_RBX_05 != 0) {
+    return;
+  }
+  net_http___transferWriter__writeBody
+            (local_148,(io_Writer)in_stack_fffffffffffffe40,(error)in_stack_fffffffffffffe50);
+  if (extraout_RAX_17 == 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void net_http_foreachHeaderElement(string v,func_string_ **fn)
+
+{
+  char cVar1;
+  __string ~r0;
+  int extraout_RAX;
+  char **extraout_RAX_00;
+  char **ppcVar2;
+  code **in_RCX;
+  int iVar3;
+  int in_RBX;
+  int extraout_RBX;
+  int iVar4;
+  char *pcVar5;
+  char *pcVar6;
+  int unaff_R14;
+  code **ppcStack0000000000000018;
+  string in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffb0;
+  undefined in_stack_ffffffffffffffc0 [16];
+  int in_stack_ffffffffffffffd0;
+  int iVar7;
+  
+  ppcStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (; (in_RBX != 0 &&
+         ((((cVar1 = *(char *)fn, cVar1 == ' ' || (cVar1 == '\t')) || (cVar1 == '\n')) ||
+          (cVar1 == '\r')))); fn = (func_string_ **)((int)fn + (uint)((dword)(-in_RBX >> 0x3f) & 1))
+      ) {
+    in_RBX = in_RBX + -1;
+  }
+  while( true ) {
+    if (in_RBX == 0) {
+      return;
+    }
+    cVar1 = *(char *)((int)fn + in_RBX + -1);
+    if (((cVar1 != ' ') && (cVar1 != '\t')) && ((cVar1 != '\n' && (cVar1 != '\r')))) break;
+    in_RBX = in_RBX + -1;
+  }
+  if (in_RBX == 0) {
+    return;
+  }
+  strings_Index(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,(int)fn);
+  if (extraout_RAX < 0) {
+    (**ppcStack0000000000000018)(fn,in_RBX);
+    return;
+  }
+  ~r0.cap = in_stack_ffffffffffffffd0;
+  ~r0.array = (string *)in_stack_ffffffffffffffc0._0_8_;
+  ~r0.len = in_stack_ffffffffffffffc0._8_8_;
+  strings_genSplit(in_stack_ffffffffffffffa0,in_stack_ffffffffffffffb0,(int)fn,in_RBX,~r0);
+  iVar3 = 0;
+  ppcVar2 = extraout_RAX_00;
+  iVar4 = extraout_RBX;
+  iVar7 = extraout_RBX;
+  do {
+    if (iVar4 <= iVar3) {
+      return;
+    }
+    pcVar6 = ppcVar2[1];
+    for (pcVar5 = *ppcVar2;
+        (pcVar6 != (char *)0x0 &&
+        (((cVar1 = *pcVar5, cVar1 == ' ' || (cVar1 == '\t')) || ((cVar1 == '\n' || (cVar1 == '\r')))
+         ))); pcVar5 = pcVar5 + ((dword)(-(int)pcVar6 >> 0x3f) & 1)) {
+      pcVar6 = pcVar6 + -1;
+    }
+    for (; pcVar6 != (char *)0x0; pcVar6 = pcVar6 + -1) {
+      cVar1 = (pcVar5 + -1)[(int)pcVar6];
+      if ((((cVar1 != ' ') && (cVar1 != '\t')) && (cVar1 != '\n')) && (cVar1 != '\r')) {
+        if (pcVar6 != (char *)0x0) {
+          iVar4 = iVar7;
+          (**ppcStack0000000000000018)(pcVar5,pcVar6);
+          iVar7 = iVar4;
+        }
+        break;
+      }
+    }
+    ppcVar2 = ppcVar2 + 2;
+    iVar3 = iVar3 + 1;
+  } while( true );
+}
+
+
+
+void net_http_HandlerFunc_ServeHTTP
+               (net_http_HandlerFunc **f,net_http_ResponseWriter w,net_http_Request *r)
+
+{
+  int unaff_R14;
+  net_http_ResponseWriter in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (**f)(in_stack_ffffffffffffffe0,r);
+  return;
+}
+
+
+
+void net_http_Error(net_http_ResponseWriter w,string error,int code)
+
+{
+  __interface___ a;
+  error err;
+  runtime_hmap *prVar1;
+  void *~r0;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  void *~r0_00;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar2;
+  int n;
+  void *in_RCX;
+  undefined8 in_RBX;
+  void *~r0_01;
+  runtime_itab *~r0_02;
+  void *in_RSI;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffff88;
+  string in_stack_ffffffffffffff98;
+  int in_stack_ffffffffffffffa8;
+  runtime_itab *prVar3;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  prVar1 = (runtime_hmap *)(**(code **)(code + 0x18))(in_RBX);
+  net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff88,in_stack_ffffffffffffff98);
+  runtime_newobject((internal_abi_Type *)&DAT_008117e0,~r0_01);
+  extraout_RAX[1] = 0x19;
+  *extraout_RAX = &DAT_008bbdde;
+  runtime_mapassign_faststr
+            ((internal_abi_MapType *)&DAT_00873760,prVar1,in_stack_ffffffffffffff88,~r0);
+  extraout_RAX_00[1] = 1;
+  extraout_RAX_00[2] = 1;
+  puVar2 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX;
+    extraout_R11[1] = *extraout_RAX_01;
+    puVar2 = extraout_RAX_01;
+  }
+  *puVar2 = extraout_RAX;
+  prVar1 = (runtime_hmap *)(**(code **)(code + 0x18))(in_RBX);
+  net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffff88,in_stack_ffffffffffffff98);
+  prVar3 = ~r0_02;
+  runtime_newobject((internal_abi_Type *)&DAT_008117e0,~r0_02);
+  extraout_RAX_02[1] = 7;
+  *extraout_RAX_02 = &DAT_008b0bab;
+  runtime_mapassign_faststr
+            ((internal_abi_MapType *)&DAT_00873760,prVar1,in_stack_ffffffffffffff88,~r0_00);
+  extraout_RAX_03[1] = 1;
+  extraout_RAX_03[2] = 1;
+  puVar2 = extraout_RAX_03;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RAX_02;
+    extraout_R11_00[1] = *extraout_RAX_04;
+    puVar2 = extraout_RAX_04;
+  }
+  *puVar2 = extraout_RAX_02;
+  (**(code **)(code + 0x28))(in_RBX,in_RSI);
+  runtime_convTstring(in_stack_ffffffffffffff88,in_RCX);
+  runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834a40,(runtime_itab *)code,
+                  (runtime_itab *)&DAT_008075e0);
+  a.cap = in_stack_ffffffffffffffa8;
+  a.array = (interface___ *)in_stack_ffffffffffffff98.str;
+  a.len = in_stack_ffffffffffffff98.len;
+  err.data = in_RSI;
+  err.tab = prVar3;
+  fmt_Fprintln((io_Writer)in_stack_ffffffffffffff88,a,n,err);
+  return;
+}
+
+
+
+void net_http_NotFound(net_http_ResponseWriter w,net_http_Request *r)
+
+{
+  int unaff_R14;
+  net_http_ResponseWriter in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_http_Error(in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,(int)r);
+  return;
+}
+
+
+
+void net_http_Redirect(net_http_ResponseWriter w,net_http_Request *r,string url,int code)
+
+{
+  sdword *psVar1;
+  uint uVar2;
+  string rawURL;
+  string ky;
+  string s;
+  string s_00;
+  string s_01;
+  string s_02;
+  string s_03;
+  string s_04;
+  string ~r0;
+  string a0;
+  string val;
+  io_Writer w_00;
+  string s_05;
+  string path;
+  string a0_00;
+  string a0_01;
+  string a0_02;
+  __interface___ a;
+  string a2;
+  string ~r0_00;
+  string ~r0_01;
+  string ~r0_02;
+  error err;
+  string a3;
+  string ~r0_03;
+  undefined extraout_AL;
+  char extraout_AL_00;
+  int extraout_RAX;
+  net_url_URL *u;
+  net_http_Header h;
+  char extraout_BL;
+  bool hadCT;
+  undefined8 extraout_RAX_00;
+  void *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  int *extraout_RAX_04;
+  int *extraout_RAX_05;
+  int *piVar3;
+  void *extraout_RAX_06;
+  undefined8 *extraout_RAX_07;
+  undefined8 *extraout_RAX_08;
+  undefined8 *extraout_RAX_09;
+  undefined8 *puVar4;
+  void *x;
+  undefined8 extraout_RAX_10;
+  int n;
+  uint extraout_RAX_11;
+  int i;
+  net_url_URL *extraout_RAX_12;
+  bool trailing;
+  char cVar5;
+  sdword **in_RCX;
+  runtime_itab *~r0_04;
+  int extraout_RBX;
+  undefined8 extraout_RBX_00;
+  void *~r0_05;
+  void *~r0_06;
+  int extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint in_RSI;
+  net_url_URL *in_RDI;
+  int in_R8;
+  undefined1 *puVar6;
+  uint uVar7;
+  int i_2;
+  undefined8 *extraout_R11;
+  int *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int i_1;
+  int unaff_R14;
+  uint uStack0000000000000028;
+  uint8 *in_stack_fffffffffffffef0;
+  runtime_itab *prVar8;
+  int in_stack_fffffffffffffef8;
+  undefined *puVar9;
+  string in_stack_ffffffffffffff00;
+  uint8 *in_stack_ffffffffffffff10;
+  runtime_itab *in_stack_ffffffffffffff18;
+  uint8 *in_stack_ffffffffffffff20;
+  int in_stack_ffffffffffffff28;
+  string in_stack_ffffffffffffff30;
+  undefined in_stack_ffffffffffffff40 [14];
+  undefined local_90 [8];
+  int local_88;
+  uint local_80;
+  int local_78;
+  undefined8 local_68;
+  net_url_URL *local_50;
+  int local_48;
+  runtime_hmap *local_40;
+  undefined8 *local_38;
+  undefined8 *local_30;
+  void *local_28;
+  net_http_Request *local_20;
+  undefined local_18 [16];
+  
+  uStack0000000000000028 = in_RSI;
+  while (local_90 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  rawURL.len = in_stack_fffffffffffffef8;
+  rawURL.str = in_stack_fffffffffffffef0;
+  local_78 = in_R8;
+  local_20 = r;
+  net_url_Parse(rawURL,in_RDI,(error)in_stack_ffffffffffffff00);
+  if (((extraout_RBX == 0) && (*(int *)(extraout_RAX + 8) == 0)) &&
+     (*(int *)(extraout_RAX + 0x30) == 0)) {
+    uVar7 = *(uint *)(in_RCX[2] + 0x10);
+    puVar6 = *(undefined1 **)(in_RCX[2] + 0xe);
+    if (uVar7 == 0) {
+      uVar7 = 1;
+      puVar6 = &go_string__;
+    }
+    i_1 = uVar7;
+    if ((uStack0000000000000028 == 0) || (*(char *)&(in_RDI->Scheme).str != '/')) {
+      do {
+        uVar2 = i_1;
+        i_1 = uVar2 - 1;
+        if (i_1 < 0) break;
+      } while (puVar6[i_1] != '/');
+      if (uVar7 < uVar2) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      a0_02.len = in_stack_fffffffffffffef8;
+      a0_02.str = in_stack_fffffffffffffef0;
+      ~r0_02.len = (int)in_stack_ffffffffffffff18;
+      ~r0_02.str = in_stack_ffffffffffffff10;
+      runtime_concatstring2((runtime_tmpBuf *)0x0,a0_02,in_stack_ffffffffffffff00,~r0_02);
+      uStack0000000000000028 = extraout_RBX_02;
+      in_RDI = extraout_RAX_12;
+    }
+    s_05.len = in_stack_fffffffffffffef8;
+    s_05.str = in_stack_fffffffffffffef0;
+    local_80 = uStack0000000000000028;
+    local_50 = in_RDI;
+    strings_Index(s_05,in_stack_ffffffffffffff00,(int)in_RDI);
+    if (extraout_RAX_11 == 0xffffffffffffffff) {
+      local_88 = 0;
+      local_48 = 0;
+    }
+    else {
+      if (local_80 < extraout_RAX_11) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      local_88 = local_80 - extraout_RAX_11;
+      local_48 = (int)&(local_50->Scheme).str + (-local_88 >> 0x3f & extraout_RAX_11);
+      local_80 = extraout_RAX_11;
+    }
+    if (local_80 == 0) {
+      trailing = false;
+    }
+    else {
+      runtime_memequal();
+      trailing = (bool)extraout_AL;
+    }
+    path.len = in_stack_fffffffffffffef8;
+    path.str = in_stack_fffffffffffffef0;
+    path_Clean(path,in_stack_ffffffffffffff00);
+    if (trailing != false) {
+      if (extraout_RBX_01 == 0) {
+        cVar5 = '\0';
+      }
+      else {
+        runtime_memequal();
+        cVar5 = extraout_AL_00;
+      }
+      if (cVar5 == '\0') {
+        a0_00.len = in_stack_fffffffffffffef8;
+        a0_00.str = in_stack_fffffffffffffef0;
+        ~r0_00.len = (int)in_stack_ffffffffffffff18;
+        ~r0_00.str = in_stack_ffffffffffffff10;
+        runtime_concatstring2((runtime_tmpBuf *)0x0,a0_00,in_stack_ffffffffffffff00,~r0_00);
+      }
+    }
+    a0_01.len = in_stack_fffffffffffffef8;
+    a0_01.str = in_stack_fffffffffffffef0;
+    ~r0_01.len = (int)in_stack_ffffffffffffff18;
+    ~r0_01.str = in_stack_ffffffffffffff10;
+    runtime_concatstring2((runtime_tmpBuf *)0x0,a0_01,in_stack_ffffffffffffff00,~r0_01);
+  }
+  local_40 = (runtime_hmap *)(*(code *)(local_20->Proto).str)(code);
+  ky.len = in_stack_fffffffffffffef8;
+  ky.str = in_stack_fffffffffffffef0;
+  runtime_mapaccess2_faststr
+            ((internal_abi_MapType *)&DAT_008909e0,local_40,ky,
+             "Content-Typegrpc-timeoutGrpc-MessageAddr: \'%s\', Cookie.Valuemax-forwardshttp2debug=1http2debug=2status code Multi-StatusNot ModifiedUnauthorizedI\'m a teapotNot ExtendedPUSH_PROMISECONTINUATION152587890625762939453125Cypro_MinoanMeetei_MayekPahawh_HmongSora_SompengSyloti_NagriRCodeSuccessRCodeRefusedprotobuf_keyprotobuf_val (sensitive)grpc_config=ECDSA-SHA256ECDSA-SHA384ECDSA-SHA512SSL_CERT_DIRTYPE_UNKNOWNempty objectMime-VersionX-ImforwardsX-Powered-By/dev/urandomautocompleteFieldNumbersSERIALNUMBERinvalid baseInstAltMatchunexpected )altmatch -> anynotnl -> caller error{{continue}}block clauseCircleMinus;CircleTimes;Equilibrium;GreaterLess;LeftCeiling;LessGreater;MediumSpace;NotPrecedes;NotSucceeds;OverBracket;RightVector;Rrightarrow;RuleDelayed;SmallCircle;SquareUnion;SubsetEqual;UpDownArrow;Updownarrow;VerticalBar;backepsilon;blacksquare;circledcirc;circleddash;curlyeqprec;curlyeqsucc;diamondsuit;eqslantless;expectation;nRightarrow;nrightarrow;preccurlyeq;precnapprox;quaternions;straightphi;succcurlyeq;succnapprox;thickapprox;updownarrow;NotLessLess;NotSuperset;invalid kindavx5124fmapsavx512bitalgping_responsegot a GetSeedgraceful_stop %v deadline:/etc/zoneinfoparsing time  out of range is too large (default %q) (default %v)Usage of %s:\nlame referral/etc/servicesdalTLDpSugct?profMemActiveprofMemFuturetraceStackTabexecRInternaltestRInternalGC sweep waitSIGQUIT: quitSIGKILL: killout of memory is nil, not value method bad map state span.base()=bad flushGen , not pointer != sweepgen  MB globals,  work.nproc=  work.nwait=  nStackRoots= flushedWork double unlock s.spanclass= MB) workers=min too large-byte block (runtime: val=runtime: seq= failed with timer_settimefatal error:  idlethreads= syscalltick=load64 failedxadd64 failedxchg64 failedmp.g0 stack [nil stackbase}\n\tsched={pc:, gp->status= pluginpath= : unknown pc  called from level 3 resetexchange fulltimer expiredsrmount errorreserved_namedefault_valuephp_namespace<unknown: %T>AlreadyExistsUnimplementedUNIMPLEMENTED\"UNAVAILABLE\"INVALID_STATE in host nameGrpc-Enco..." /* TRUNCATED STRING LITERAL */
+             ,true);
+  s.len = in_stack_fffffffffffffef8;
+  s.str = in_stack_fffffffffffffef0;
+  cVar5 = extraout_BL;
+  net_http_hexEscapeNonASCII(s,in_stack_ffffffffffffff00);
+  s_00.len = in_stack_fffffffffffffef8;
+  s_00.str = in_stack_fffffffffffffef0;
+  local_68 = extraout_RAX_00;
+  net_textproto_CanonicalMIMEHeaderKey(s_00,in_stack_ffffffffffffff00);
+  local_28 = extraout_RAX_01;
+  runtime_newobject((internal_abi_Type *)&DAT_008117e0,~r0_05);
+  extraout_RAX_02[1] = extraout_RBX_00;
+  local_30 = extraout_RAX_02;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = local_68;
+    local_30 = extraout_RAX_03;
+  }
+  *local_30 = local_68;
+  s_01.len = in_stack_fffffffffffffef8;
+  s_01.str = in_stack_fffffffffffffef0;
+  runtime_mapassign_faststr((internal_abi_MapType *)&DAT_00873760,local_40,s_01,local_28);
+  extraout_RAX_04[1] = 1;
+  extraout_RAX_04[2] = 1;
+  piVar3 = extraout_RAX_04;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = (int)local_30;
+    extraout_R11_00[1] = *extraout_RAX_05;
+    piVar3 = extraout_RAX_05;
+  }
+  *piVar3 = (int)local_30;
+  if (cVar5 == '\0') {
+    psVar1 = *in_RCX;
+    if ((((in_RCX[1] == (sdword *)&DAT_00000003) && (*(short *)psVar1 == 0x4547)) &&
+        (*(char *)((int)psVar1 + 2) == 'T')) ||
+       ((in_RCX[1] == (sdword *)0x4 && (*psVar1 == 0x44414548)))) {
+      s_02.len = in_stack_fffffffffffffef8;
+      s_02.str = in_stack_fffffffffffffef0;
+      net_textproto_CanonicalMIMEHeaderKey(s_02,in_stack_ffffffffffffff00);
+      local_28 = extraout_RAX_06;
+      runtime_newobject((internal_abi_Type *)&DAT_008117e0,~r0_06);
+      extraout_RAX_07[1] = 0x18;
+      *extraout_RAX_07 = &DAT_008bb54d;
+      s_03.len = in_stack_fffffffffffffef8;
+      s_03.str = in_stack_fffffffffffffef0;
+      local_38 = extraout_RAX_07;
+      runtime_mapassign_faststr((internal_abi_MapType *)&DAT_00873760,local_40,s_03,local_28);
+      extraout_RAX_08[1] = 1;
+      extraout_RAX_08[2] = 1;
+      puVar4 = extraout_RAX_08;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = local_38;
+        extraout_R11_01[1] = *extraout_RAX_09;
+        puVar4 = extraout_RAX_09;
+      }
+      *puVar4 = local_38;
+    }
+  }
+  (*(code *)local_20->ProtoMajor)(code,local_78);
+  if ((((cVar5 == '\0') && (in_RCX[1] == (sdword *)&DAT_00000003)) && (*(short *)*in_RCX == 0x4547))
+     && (*(char *)((int)*in_RCX + 2) == 'T')) {
+    s_04.len = in_stack_fffffffffffffef8;
+    s_04.str = in_stack_fffffffffffffef0;
+    strings___Replacer__Replace(net_http_htmlReplacer,s_04,in_stack_ffffffffffffff00);
+    ~r0.len = in_stack_fffffffffffffef8;
+    ~r0.str = in_stack_fffffffffffffef0;
+    net_http_StatusText(local_78,~r0);
+    prVar8 = (runtime_itab *)&DAT_008afa30;
+    puVar9 = &DAT_00000006;
+    a0.len = 6;
+    a0.str = &DAT_008afa30;
+    a2.len = (int)in_stack_ffffffffffffff18;
+    a2.str = in_stack_ffffffffffffff10;
+    a3.len = in_stack_ffffffffffffff28;
+    a3.str = in_stack_ffffffffffffff20;
+    ~r0_03.len._6_1_ = trailing;
+    ~r0_03._0_14_ = in_stack_ffffffffffffff40;
+    ~r0_03.len._7_1_ = cVar5;
+    runtime_concatstring5
+              ((runtime_tmpBuf *)0x0,a0,in_stack_ffffffffffffff00,a2,a3,in_stack_ffffffffffffff30,
+               ~r0_03);
+    val.len = (int)puVar9;
+    val.str = (uint8 *)prVar8;
+    runtime_convTstring(val,x);
+    local_18._8_8_ = extraout_RAX_10;
+    local_18._0_8_ = &DAT_008075e0;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834a40,(runtime_itab *)local_20,~r0_04);
+    w_00.data = puVar9;
+    w_00.tab = prVar8;
+    a.cap = (int)in_stack_ffffffffffffff10;
+    a.array = (interface___ *)in_stack_ffffffffffffff00.str;
+    a.len = in_stack_ffffffffffffff00.len;
+    err.data = in_stack_ffffffffffffff20;
+    err.tab = in_stack_ffffffffffffff18;
+    fmt_Fprintln(w_00,a,n,err);
+  }
+  return;
+}
+
+
+
+void net_http___redirectHandler__ServeHTTP
+               (net_http_redirectHandler *rh,net_http_ResponseWriter w,net_http_Request *r)
+
+{
+  int in_RCX;
+  int unaff_R14;
+  int iStack0000000000000018;
+  net_http_ResponseWriter in_stack_ffffffffffffffc8;
+  string in_stack_ffffffffffffffd8;
+  
+  iStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_http_Redirect(in_stack_ffffffffffffffc8,r,in_stack_ffffffffffffffd8,iStack0000000000000018);
+  return;
+}
+
+
+
+void net_http_cleanPath(string p,string ~r0)
+
+{
+  string ~r0_00;
+  string ~r0_01;
+  char extraout_AL;
+  char *in_RAX;
+  char *extraout_RAX;
+  char *extraout_RAX_00;
+  uint in_RBX;
+  uint extraout_RBX;
+  int extraout_RBX_00;
+  char cVar1;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffc0;
+  uint8 *in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX == 0) {
+    return;
+  }
+  if (*in_RAX != '/') {
+    ~r0_00.len = in_stack_ffffffffffffffd8;
+    ~r0_00.str = in_stack_ffffffffffffffd0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+    in_RAX = extraout_RAX;
+    in_RBX = extraout_RBX;
+  }
+  path_Clean(in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0);
+  if (in_RBX <= in_RBX - 1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if ((in_RAX[in_RBX - 1] == '/') && ((extraout_RBX_00 != 1 || (*extraout_RAX_00 != '/')))) {
+    if (in_RBX == extraout_RBX_00 + 1U) {
+      if ((int)in_RBX < extraout_RBX_00) {
+        cVar1 = '\0';
+      }
+      else {
+        runtime_memequal();
+        cVar1 = extraout_AL;
+      }
+      if (cVar1 != '\0') {
+        return;
+      }
+    }
+    ~r0_01.len = in_RBX;
+    ~r0_01.str = in_stack_ffffffffffffffd0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_01);
+  }
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void net_http_stripHostPort(string h,string ~r0)
+
+{
+  error err;
+  string port;
+  runtime_itab *in_RAX;
+  int extraout_RAX;
+  void *in_RBX;
+  uint8 *unaff_RBP;
+  int extraout_RSI;
+  int unaff_R14;
+  int unaff_retaddr;
+  string in_stack_ffffffffffffffd8;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  strings_Index(in_stack_ffffffffffffffd8,in_stack_ffffffffffffffe8,(int)in_RAX);
+  if (-1 < extraout_RAX) {
+    port.len = unaff_retaddr;
+    port.str = unaff_RBP;
+    err.data = in_RBX;
+    err.tab = in_RAX;
+    net_SplitHostPort(in_stack_ffffffffffffffd8,in_stack_ffffffffffffffe8,port,err);
+    if (extraout_RSI != 0) {
+      return;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net_http___ServeMux__redirectToPathSlash
+               (net_http_ServeMux *mux,string host,string path,net_url_URL *u,net_url_URL *~r0,
+               bool ~r1)
+
+{
+  sync_atomic_Int32 *psVar1;
+  string ~r0_00;
+  string ~r0_01;
+  string ~r0_02;
+  int iVar2;
+  void *~r0_03;
+  undefined8 extraout_RAX;
+  int extraout_RAX_00;
+  int extraout_RAX_01;
+  int extraout_RAX_02;
+  undefined8 extraout_RCX;
+  undefined8 uVar3;
+  bool shouldRedirect;
+  char extraout_BL;
+  bool exist;
+  bool ~r1_00;
+  char extraout_BL_00;
+  bool exist_1;
+  void **ppvVar4;
+  void *~r0_04;
+  int in_RSI;
+  undefined7 in_register_00000039;
+  sdword sVar5;
+  int32 r;
+  int in_R8;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  char cVar6;
+  int iStack0000000000000028;
+  int iStack0000000000000030;
+  string in_stack_ffffffffffffff48;
+  string in_stack_ffffffffffffff58;
+  undefined in_stack_ffffffffffffff68 [15];
+  char in_stack_ffffffffffffff77;
+  uint8 local_80 [32];
+  uint8 local_60 [32];
+  undefined8 local_40;
+  map_string_net_http_muxEntry local_38;
+  void **local_30;
+  undefined local_28 [32];
+  
+  iStack0000000000000028 = in_RSI;
+  iStack0000000000000030 = in_R8;
+  while (&local_38 <= *(map_string_net_http_muxEntry **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  psVar1 = &(mux->mu).readerCount;
+  sVar5 = psVar1->v;
+  psVar1->v = psVar1->v + 1;
+  UNLOCK();
+  if ((sdword)(sVar5 + 1) < 0) {
+    sync_runtime_SemacquireRWMutexR(&(mux->mu).readerSem,false,0);
+  }
+  local_28._8_8_ = iStack0000000000000028;
+  local_28._0_8_ = CONCAT71(in_register_00000039,~r1);
+  ~r0_00.len._7_1_ = in_stack_ffffffffffffff77;
+  ~r0_00._0_15_ = in_stack_ffffffffffffff68;
+  runtime_concatstring2(&local_60,in_stack_ffffffffffffff48,in_stack_ffffffffffffff58,~r0_00);
+  ppvVar4 = (void **)local_28;
+  for (iVar2 = 0; iVar2 < 2; iVar2 = iVar2 + 1) {
+    local_30 = ppvVar4;
+    runtime_mapaccess2_faststr
+              ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)mux->m,
+               in_stack_ffffffffffffff48,*ppvVar4,SUB81(ppvVar4[1],0));
+    if (extraout_BL != '\0') {
+      cVar6 = false;
+      goto code_r0x006d52bf;
+    }
+    ppvVar4 = local_30 + 2;
+  }
+  if (iStack0000000000000028 == 0) {
+    cVar6 = false;
+  }
+  else {
+    ppvVar4 = (void **)local_28;
+    for (iVar2 = 0; iVar2 < 2; iVar2 = iVar2 + 1) {
+      local_38 = mux->m;
+      ~r0_01.len._7_1_ = in_stack_ffffffffffffff77;
+      ~r0_01._0_15_ = in_stack_ffffffffffffff68;
+      local_30 = ppvVar4;
+      runtime_concatstring2(&local_80,in_stack_ffffffffffffff48,in_stack_ffffffffffffff58,~r0_01);
+      runtime_mapaccess2_faststr
+                ((internal_abi_MapType *)&DAT_0082de80,(runtime_hmap *)local_38,
+                 in_stack_ffffffffffffff48,~r0_03,~r1_00);
+      if (extraout_BL_00 != '\0') {
+        cVar6 = *(char *)(iStack0000000000000028 + -1 + CONCAT71(in_register_00000039,~r1)) != '/';
+        goto code_r0x006d52bf;
+      }
+      ppvVar4 = local_30 + 2;
+    }
+    cVar6 = false;
+  }
+code_r0x006d52bf:
+  LOCK();
+  psVar1 = &(mux->mu).readerCount;
+  sVar5 = psVar1->v;
+  psVar1->v = psVar1->v + -1;
+  UNLOCK();
+  sVar5 = sVar5 + -1;
+  if (sVar5 < 0) {
+    sync___RWMutex__rUnlockSlow(&mux->mu,sVar5);
+    in_stack_ffffffffffffff77 = cVar6;
+  }
+  if (cVar6 == '\0') {
+    return;
+  }
+  ~r0_02.len._7_1_ = in_stack_ffffffffffffff77;
+  ~r0_02._0_15_ = in_stack_ffffffffffffff68;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffff48,in_stack_ffffffffffffff58,~r0_02);
+  local_40 = extraout_RAX;
+  runtime_newobject((internal_abi_Type *)&DAT_00895b20,~r0_04);
+  *(void **)(extraout_RAX_00 + 0x40) = ~r0_04;
+  iVar2 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = local_40;
+    iVar2 = extraout_RAX_01;
+  }
+  *(undefined8 *)(iVar2 + 0x38) = local_40;
+  uVar3 = *(undefined8 *)(iStack0000000000000030 + 0x60);
+  *(undefined8 *)(iVar2 + 0x68) = *(undefined8 *)(iStack0000000000000030 + 0x68);
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RCX;
+    iVar2 = extraout_RAX_02;
+    uVar3 = extraout_RCX;
+  }
+  *(undefined8 *)(iVar2 + 0x60) = uVar3;
+  return;
+}
+
+
+
+void net_http___ServeMux__Handler
+               (net_http_ServeMux *mux,net_http_Request *r,net_http_Handler h,string pattern)
+
+{
+  sdword *psVar1;
+  net_url_URL *pnVar2;
+  string pattern_00;
+  string pattern_01;
+  string pattern_02;
+  char extraout_AL;
+  net_url_URL *u_00;
+  net_url_URL *u;
+  char extraout_BL;
+  bool ok;
+  undefined8 extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *puVar3;
+  net_url_URL *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  net_url_URL *u_01;
+  net_url_URL *u_1;
+  char extraout_BL_00;
+  bool ok_1;
+  undefined8 extraout_RAX_04;
+  undefined8 *extraout_RAX_05;
+  undefined8 *extraout_RAX_06;
+  undefined8 extraout_RAX_07;
+  undefined8 *extraout_RAX_08;
+  undefined8 *extraout_RAX_09;
+  void *~r0;
+  net_url_URL *~r0_00;
+  int extraout_RBX;
+  void *~r0_01;
+  void *~r0_02;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int unaff_R14;
+  string in_stack_fffffffffffffec0;
+  string in_stack_fffffffffffffed0;
+  net_http_Handler in_stack_fffffffffffffee0;
+  uint8 *in_stack_fffffffffffffef0;
+  void *pvVar4;
+  int in_stack_fffffffffffffef8;
+  undefined local_c0 [8];
+  uint8 *local_b8;
+  net_url_URL *local_b0;
+  net_http_ServeMux *local_a0;
+  net_url_URL local_98;
+  
+  while (local_c0 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_a0 = mux;
+  if (((((r->Method).len == 7) && (psVar1 = (sdword *)(r->Method).str, *psVar1 == 0x4e4e4f43)) &&
+      (*(short *)(psVar1 + 1) == 0x4345)) && (*(char *)((int)psVar1 + 6) == 'T')) {
+    pnVar2 = r->URL;
+    net_http___ServeMux__redirectToPathSlash
+              (mux,in_stack_fffffffffffffec0,in_stack_fffffffffffffed0,
+               (net_url_URL *)(pnVar2->Host).str,(net_url_URL *)(pnVar2->Host).len,
+               SUB81((pnVar2->Path).str,0));
+    if (extraout_BL == '\0') {
+      pattern_00.len = in_stack_fffffffffffffef8;
+      pattern_00.str = in_stack_fffffffffffffef0;
+      net_http___ServeMux__handler
+                (local_a0,in_stack_fffffffffffffec0,in_stack_fffffffffffffed0,
+                 in_stack_fffffffffffffee0,pattern_00);
+      return;
+    }
+    net_url___URL__String(u_00,in_stack_fffffffffffffec0);
+    runtime_newobject((internal_abi_Type *)&DAT_00852d60,~r0);
+    extraout_RAX_00[1] = ~r0;
+    puVar3 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RAX;
+      puVar3 = extraout_RAX_01;
+    }
+    *puVar3 = extraout_RAX;
+    puVar3[2] = 0x12d;
+    return;
+  }
+  net_http_stripHostPort(in_stack_fffffffffffffec0,in_stack_fffffffffffffed0);
+  local_b0 = extraout_RAX_02;
+  net_http_cleanPath(in_stack_fffffffffffffec0,in_stack_fffffffffffffed0);
+  local_b8 = extraout_RAX_03;
+  net_http___ServeMux__redirectToPathSlash
+            (local_a0,in_stack_fffffffffffffec0,in_stack_fffffffffffffed0,local_b0,~r0_00,
+             SUB81(extraout_RAX_03,0));
+  if (extraout_BL_00 != '\0') {
+    net_url___URL__String(u_01,in_stack_fffffffffffffec0);
+    pvVar4 = ~r0_02;
+    runtime_newobject((internal_abi_Type *)&DAT_00852d60,~r0_02);
+    extraout_RAX_08[1] = pvVar4;
+    puVar3 = extraout_RAX_08;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = extraout_RAX_07;
+      puVar3 = extraout_RAX_09;
+    }
+    *puVar3 = extraout_RAX_07;
+    puVar3[2] = 0x12d;
+    return;
+  }
+  if (((r->URL->Path).len == extraout_RBX) && (runtime_memequal(), extraout_AL != '\0')) {
+    pattern_02.len = in_stack_fffffffffffffef8;
+    pattern_02.str = in_stack_fffffffffffffef0;
+    net_http___ServeMux__handler
+              (local_a0,in_stack_fffffffffffffec0,in_stack_fffffffffffffed0,
+               in_stack_fffffffffffffee0,pattern_02);
+    return;
+  }
+  pattern_01.len = in_stack_fffffffffffffef8;
+  pattern_01.str = in_stack_fffffffffffffef0;
+  net_http___ServeMux__handler
+            (local_a0,in_stack_fffffffffffffec0,in_stack_fffffffffffffed0,in_stack_fffffffffffffee0,
+             pattern_01);
+  FUN_0046cd99();
+  local_98.Path.str = local_b8;
+  local_98.RawQuery.str = (r->URL->RawQuery).str;
+  local_98.RawQuery.len = (r->URL->RawQuery).len;
+  net_url___URL__String(&local_98,in_stack_fffffffffffffec0);
+  pvVar4 = ~r0_01;
+  runtime_newobject((internal_abi_Type *)&DAT_00852d60,~r0_01);
+  extraout_RAX_05[1] = pvVar4;
+  puVar3 = extraout_RAX_05;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = extraout_RAX_04;
+    puVar3 = extraout_RAX_06;
+  }
+  *puVar3 = extraout_RAX_04;
+  puVar3[2] = 0x12d;
+  return;
+}
+
+
+
+void net_http___ServeMux__handler
+               (net_http_ServeMux *mux,string host,string path,net_http_Handler h,string pattern)
+
+{
+  sync_atomic_Int32 *psVar1;
+  sdword sVar2;
+  int iVar3;
+  string ~r0;
+  char extraout_AL;
+  char extraout_AL_00;
+  void *~r0_00;
+  runtime_itab **extraout_RAX;
+  runtime_itab **extraout_RAX_00;
+  int iVar4;
+  runtime_itab *prVar5;
+  char cVar6;
+  char extraout_BL;
+  bool ok;
+  char extraout_BL_00;
+  bool ok_1;
+  int extraout_RBX;
+  runtime_itab *prVar7;
+  int in_RSI;
+  void *in_RDI;
+  net_http_muxEntry *pnVar8;
+  int unaff_R14;
+  runtime_itab *in_XMM15_Qa;
+  runtime_itab *prVar9;
+  int in_XMM15_Qb;
+  string in_stack_ffffffffffffff08;
+  string in_stack_ffffffffffffff18;
+  undefined in_stack_ffffffffffffff28 [15];
+  uint8 local_90 [24];
+  undefined local_78 [16];
+  void *local_68;
+  runtime_itab *local_60;
+  void *local_58;
+  runtime_itab *local_50;
+  net_http_muxEntry *local_48;
+  string pattern_local;
+  net_http_Handler h_local;
+  undefined local_20 [16];
+  code **local_10;
+  
+  while (local_78 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pattern_local.len = in_XMM15_Qb;
+  pattern_local.str = (uint8 *)in_XMM15_Qa;
+  LOCK();
+  psVar1 = &(mux->mu).readerCount;
+  sVar2 = psVar1->v;
+  psVar1->v = psVar1->v + 1;
+  UNLOCK();
+  prVar9 = in_XMM15_Qa;
+  if ((sdword)(sVar2 + 1) < 0) {
+    sync_runtime_SemacquireRWMutexR(&(mux->mu).readerSem,false,0);
+  }
+  local_20._8_8_ = mux;
+  local_20._0_8_ = net_http___ServeMux__handler_func1;

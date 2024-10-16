@@ -1,0 +1,1000 @@
+  regexp_syntax___parser__checkLimits(p_00,re_00);
+  return;
+}
+
+
+
+void regexp_syntax___parser__maybeConcat
+               (regexp_syntax_parser *p,int32 r,regexp_syntax_Flags flags,bool ~r0)
+
+{
+  int iVar1;
+  regexp_syntax_Regexp **pprVar2;
+  int iVar3;
+  int num;
+  int32 *__src;
+  int32 *extraout_RAX;
+  uint extraout_RCX;
+  regexp_syntax_Regexp *extraout_RCX_00;
+  regexp_syntax_Regexp *key;
+  regexp_syntax_Regexp *extraout_RCX_01;
+  regexp_syntax_Regexp *prVar4;
+  int n;
+  int32 *piVar5;
+  uint extraout_RBX;
+  int32 extraout_ESI;
+  regexp_syntax_Regexp *extraout_RSI;
+  regexp_syntax_parser *extraout_RSI_00;
+  regexp_syntax_Regexp *re2;
+  regexp_syntax_Regexp *re1;
+  uint oldCap;
+  int32 **extraout_R11;
+  int32 **extraout_R11_00;
+  regexp_syntax_Regexp **extraout_R11_01;
+  uint newLen;
+  int unaff_R14;
+  regexp_syntax_parser *prStack0000000000000008;
+  int32 iStack0000000000000010;
+  regexp_syntax_Flags rStack0000000000000014;
+  runtime_slice in_stack_ffffffffffffff98;
+  
+  prStack0000000000000008 = p;
+  iStack0000000000000010 = r;
+  rStack0000000000000014 = flags;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar1 = (prStack0000000000000008->stack).len;
+  if (iVar1 < 2) {
+    return;
+  }
+  pprVar2 = (prStack0000000000000008->stack).array;
+  key = pprVar2[iVar1 + -1];
+  prVar4 = pprVar2[iVar1 + -2];
+  if (((key->Op != 3) || (prVar4->Op != 3)) || ((prVar4->Flags & 1) != (key->Flags & 1))) {
+    return;
+  }
+  oldCap = (prVar4->Rune).cap;
+  iVar3 = (prVar4->Rune).len;
+  num = (key->Rune).len;
+  newLen = iVar3 + num;
+  piVar5 = (prVar4->Rune).array;
+  __src = (key->Rune).array;
+  if (oldCap < newLen) {
+    runtime_growslice(piVar5,newLen,oldCap,num,(internal_abi_Type *)&DAT_008077e0,
+                      in_stack_ffffffffffffff98);
+    oldCap = extraout_RCX;
+    newLen = extraout_RBX;
+    piVar5 = extraout_RAX;
+  }
+  runtime_memmove(piVar5 + iVar3,__src,num << 2);
+  (prVar4->Rune).len = newLen;
+  (prVar4->Rune).cap = oldCap;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = piVar5;
+    extraout_R11[1] = (extraout_RSI->Rune).array;
+    prVar4 = extraout_RSI;
+  }
+  (prVar4->Rune).array = piVar5;
+  if (iStack0000000000000010 < 0) {
+    if ((uint)(prStack0000000000000008->stack).cap < iVar1 - 1U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    (prStack0000000000000008->stack).len = iVar1 - 1U;
+    if (prStack0000000000000008->height != (map__regexp_syntax_Regexp_int)0x0) {
+      runtime_mapdelete_fast64
+                ((internal_abi_MapType *)&DAT_00830520,
+                 (runtime_hmap *)prStack0000000000000008->height,(uint64)key);
+    }
+    prVar4 = prStack0000000000000008->free;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier4();
+      *extraout_R11_01 = extraout_RCX_01;
+      extraout_R11_01[1] = key->Sub0[0];
+      extraout_R11_01[2] = key;
+      extraout_R11_01[3] = extraout_RSI_00->free;
+      prVar4 = extraout_RCX_01;
+      prStack0000000000000008 = extraout_RSI_00;
+    }
+    key->Sub0[0] = prVar4;
+    prStack0000000000000008->free = key;
+    return;
+  }
+  (key->Rune).len = 1;
+  (key->Rune).cap = 2;
+  piVar5 = key->Rune0;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = piVar5;
+    extraout_R11_00[1] = (extraout_RCX_00->Rune).array;
+    key = extraout_RCX_00;
+    iStack0000000000000010 = extraout_ESI;
+  }
+  (key->Rune).array = piVar5;
+  *(key->Rune).array = iStack0000000000000010;
+  key->Flags = rStack0000000000000014;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp_syntax___parser__literal(regexp_syntax_parser *p,int32 r)
+
+{
+  regexp_syntax_Regexp *prVar1;
+  undefined4 extraout_EAX;
+  int extraout_RAX;
+  regexp_syntax_Regexp *extraout_RAX_00;
+  regexp_syntax_parser *extraout_RAX_01;
+  regexp_syntax_parser *p_00;
+  undefined8 extraout_RCX;
+  regexp_syntax_Regexp *re;
+  regexp_syntax_Regexp *extraout_RCX_00;
+  int32 *piVar2;
+  undefined4 in_register_0000001c;
+  void *~r0;
+  regexp_syntax_Regexp *re_1;
+  void *dst;
+  undefined8 *extraout_R11;
+  int32 **extraout_R11_00;
+  int unaff_R14;
+  undefined auVar3 [12];
+  regexp_syntax_parser *prStack0000000000000008;
+  dword dStack0000000000000010;
+  
+  ~r0 = (void *)CONCAT44(in_register_0000001c,r);
+  prStack0000000000000008 = p;
+  while (dStack0000000000000010 = (dword)~r0, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10))
+  {
+    runtime_morestack_noctxt();
+    ~r0 = (void *)(uint)dStack0000000000000010;
+  }
+  re = prStack0000000000000008->free;
+  if (re == (regexp_syntax_Regexp *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00893c00,~r0);
+    auVar3._8_4_ = dStack0000000000000010;
+    auVar3._0_8_ = prStack0000000000000008;
+    prStack0000000000000008->numRegexp = prStack0000000000000008->numRegexp + 1;
+    re = extraout_RAX_00;
+  }
+  else {
+    prVar1 = re->Sub0[0];
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX;
+      extraout_R11[1] = *(undefined8 *)(extraout_RAX + 0x20);
+      runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+    }
+    prStack0000000000000008->free = prVar1;
+    auVar3 = FUN_0046cda6();
+  }
+  re->Op = 3;
+  re->Flags = *auVar3._0_8_;
+  if ((*auVar3._0_8_ & 1) != 0) {
+    regexp_syntax_minFoldRune(auVar3._8_4_,auVar3._8_4_);
+    auVar3._8_4_ = extraout_EAX;
+    auVar3._0_8_ = prStack0000000000000008;
+  }
+  p_00 = auVar3._0_8_;
+  re->Rune0[0] = auVar3._8_4_;
+  (re->Rune).len = 1;
+  (re->Rune).cap = 2;
+  piVar2 = re->Rune0;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = piVar2;
+    extraout_R11_00[1] = (extraout_RCX_00->Rune).array;
+    p_00 = extraout_RAX_01;
+    re = extraout_RCX_00;
+  }
+  (re->Rune).array = piVar2;
+  regexp_syntax___parser__push(p_00,re,re);
+  return;
+}
+
+
+
+// Local variable min:int32[EAX:4] conflicts with parameter, skipped.
+// Local variable r0:int32[EAX:4] conflicts with parameter, skipped.
+
+void regexp_syntax_minFoldRune(int32 r,int32 ~r0)
+
+{
+  int32 r_00;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 uVar1;
+  int32 iVar2;
+  int32 extraout_EBX;
+  int32 extraout_EBX_00;
+  int32 ~r0_00;
+  int32 extraout_EBX_01;
+  int unaff_R14;
+  int32 iStack0000000000000008;
+  
+  iStack0000000000000008 = r;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0 = extraout_EBX_01;
+  }
+  if ((dword)(iStack0000000000000008 - 0x41U) < 0x1e903) {
+    unicode_SimpleFold(iStack0000000000000008,~r0);
+    uVar1 = extraout_RAX;
+    ~r0_00 = extraout_EBX;
+    iVar2 = iStack0000000000000008;
+    while (r_00 = (int32)uVar1, iStack0000000000000008 != r_00) {
+      unicode_SimpleFold(r_00,~r0_00);
+      uVar1 = extraout_RAX_00;
+      ~r0_00 = extraout_EBX_00;
+      if (r_00 < iVar2) {
+        iVar2 = r_00;
+      }
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void regexp_syntax___parser__op
+               (regexp_syntax_parser *p,regexp_syntax_Op op,regexp_syntax_Regexp *~r0)
+
+{
+  regexp_syntax_Regexp *prVar1;
+  int extraout_RAX;
+  regexp_syntax_parser *p_00;
+  regexp_syntax_Regexp *extraout_RAX_00;
+  undefined8 extraout_RCX;
+  regexp_syntax_Regexp *re;
+  regexp_syntax_Op extraout_BL;
+  regexp_syntax_Op rVar2;
+  undefined7 in_register_00000019;
+  void *~r0_00;
+  regexp_syntax_Regexp *re_1;
+  void *dst;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  regexp_syntax_parser *prStack0000000000000008;
+  regexp_syntax_Op rStack0000000000000010;
+  
+  ~r0_00 = (void *)CONCAT71(in_register_00000019,op);
+  prStack0000000000000008 = p;
+  while (rStack0000000000000010 = (regexp_syntax_Op)~r0_00,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0_00 = (void *)(uint)rStack0000000000000010;
+  }
+  re = prStack0000000000000008->free;
+  if (re == (regexp_syntax_Regexp *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00893c00,~r0_00);
+    prStack0000000000000008->numRegexp = prStack0000000000000008->numRegexp + 1;
+    p_00 = prStack0000000000000008;
+    re = extraout_RAX_00;
+    rVar2 = rStack0000000000000010;
+  }
+  else {
+    prVar1 = re->Sub0[0];
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX;
+      extraout_R11[1] = *(undefined8 *)(extraout_RAX + 0x20);
+      runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+    }
+    prStack0000000000000008->free = prVar1;
+    p_00 = (regexp_syntax_parser *)FUN_0046cda6();
+    rVar2 = extraout_BL;
+  }
+  re->Op = rVar2;
+  re->Flags = p_00->flags;
+  regexp_syntax___parser__push(p_00,re,re);
+  return;
+}
+
+
+
+void regexp_syntax___parser__repeat
+               (regexp_syntax_parser *p,regexp_syntax_Op op,int min,int max,string before,
+               string after,string lastRepeat,string ~r0,error ~r1)
+
+{
+  regexp_syntax_Regexp *prVar1;
+  char extraout_AL;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  int extraout_RAX_05;
+  regexp_syntax_Regexp *extraout_RAX_06;
+  regexp_syntax_parser *extraout_RAX_07;
+  regexp_syntax_parser *extraout_RAX_08;
+  regexp_syntax_parser *extraout_RAX_09;
+  undefined8 *extraout_RAX_10;
+  undefined8 *extraout_RAX_11;
+  undefined8 *puVar2;
+  int extraout_RCX;
+  int iVar3;
+  regexp_syntax_Regexp *re_1;
+  regexp_syntax_Regexp *dst;
+  regexp_syntax_Regexp *re;
+  regexp_syntax_Op extraout_BL;
+  regexp_syntax_Op rVar4;
+  undefined7 in_register_00000019;
+  void *~r0_00;
+  undefined8 in_RSI;
+  regexp_syntax_Regexp **extraout_RDI;
+  regexp_syntax_Regexp **extraout_RDI_00;
+  regexp_syntax_Regexp **extraout_RDI_01;
+  regexp_syntax_Regexp **pprVar5;
+  uint in_R8;
+  char *in_R9;
+  void *in_R10;
+  regexp_syntax_Flags flags;
+  ushort uVar6;
+  ushort extraout_R11W;
+  uint8 **extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  regexp_syntax_Regexp **extraout_R11_02;
+  int *extraout_R11_03;
+  regexp_syntax_Regexp **extraout_R11_04;
+  regexp_syntax_Regexp **extraout_R11_05;
+  undefined8 *extraout_R11_06;
+  int n;
+  int iVar7;
+  regexp_syntax_Regexp *sub;
+  regexp_syntax_Regexp *prVar8;
+  int unaff_R14;
+  regexp_syntax_Regexp *prVar9;
+  int iVar10;
+  
+  ~r0_00 = (void *)CONCAT71(in_register_00000019,op);
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0_00 = (void *)((uint)~r0_00 & 0xff);
+  }
+  uVar6 = p->flags;
+  if ((uVar6 & 0x40) != 0) {
+    if ((in_R10 != (void *)0x0) && (*in_R9 == '?')) {
+      in_R10 = (void *)((int)in_R10 + -1);
+      uVar6 = uVar6 ^ 0x20;
+    }
+    if (before.len != 0) {
+      if ((uint)before.len < (uint)(before.len - (int)in_R10)) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      runtime_newobject((internal_abi_Type *)&DAT_00855c40,~r0_00);
+      extraout_RAX[1] = 0x22;
+      *extraout_RAX = &DAT_008c1a3a;
+      extraout_RAX[3] = before.len - (int)in_R10;
+      puVar2 = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = before.str;
+        puVar2 = extraout_RAX_00;
+      }
+      puVar2[2] = before.str;
+      return;
+    }
+  }
+  iVar7 = (p->stack).len;
+  if (iVar7 == 0) {
+    if (in_R8 < in_R8 - (int)in_R10) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    runtime_newobject((internal_abi_Type *)&DAT_00855c40,~r0_00);
+    extraout_RAX_01[1] = 0x27;
+    *extraout_RAX_01 = &DAT_008c453e;
+    extraout_RAX_01[3] = in_R8 - (int)in_R10;
+    puVar2 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = in_RSI;
+      puVar2 = extraout_RAX_02;
+    }
+    puVar2[2] = in_RSI;
+    return;
+  }
+  prVar8 = (p->stack).array[iVar7 + -1];
+  if (prVar8->Op < 0x80) {
+    re = p->free;
+    iVar10 = max;
+    if (re == (regexp_syntax_Regexp *)0x0) {
+      runtime_newobject((internal_abi_Type *)&DAT_00893c00,~r0_00);
+      p->numRegexp = p->numRegexp + 1;
+      iVar3 = min;
+      re = extraout_RAX_06;
+      rVar4 = (regexp_syntax_Op)~r0_00;
+    }
+    else {
+      prVar1 = re->Sub0[0];
+      if (runtime_writeBarrier._0_4_ != 0) {
+        dst = re;
+        prVar9 = prVar1;
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = prVar9;
+        extraout_R11_02[1] = *(regexp_syntax_Regexp **)(extraout_RAX_05 + 0x20);
+        runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+      }
+      p->free = prVar1;
+      p = (regexp_syntax_parser *)FUN_0046cda6();
+      iVar3 = extraout_RCX;
+      rVar4 = extraout_BL;
+      uVar6 = extraout_R11W;
+    }
+    re->Op = rVar4;
+    re->Min = iVar3;
+    re->Max = iVar10;
+    re->Flags = uVar6;
+    (re->Sub).len = 1;
+    (re->Sub).cap = 1;
+    pprVar5 = re->Sub0;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_03 = (int)extraout_RDI;
+      extraout_R11_03[1] = (int)(re->Sub).array;
+      p = extraout_RAX_07;
+      pprVar5 = extraout_RDI;
+    }
+    (re->Sub).array = pprVar5;
+    pprVar5 = (re->Sub).array;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_04 = prVar8;
+      extraout_R11_04[1] = *extraout_RDI_00;
+      p = extraout_RAX_08;
+      pprVar5 = extraout_RDI_00;
+    }
+    *pprVar5 = prVar8;
+    if ((uint)(p->stack).len <= iVar7 - 1U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pprVar5 = (p->stack).array;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_05 = re;
+      extraout_R11_05[1] = extraout_RDI_01[iVar7 + -1];
+      p = extraout_RAX_09;
+      pprVar5 = extraout_RDI_01;
+    }
+    pprVar5[iVar7 + -1] = re;
+    regexp_syntax___parser__checkLimits(p,re);
+    if (((regexp_syntax_Op)~r0_00 == 0x11) &&
+       (((1 < min || (1 < max)) && (regexp_syntax_repeatIsValid(re,1000,true), extraout_AL == '\0'))
+       )) {
+      if (in_R8 < in_R8 - (int)in_R10) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      runtime_newobject((internal_abi_Type *)&DAT_00855c40,in_R10);
+      extraout_RAX_10[1] = 0x14;
+      *extraout_RAX_10 = &DAT_008b9383;
+      extraout_RAX_10[3] = in_R8 - (int)in_R10;
+      puVar2 = extraout_RAX_10;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_06 = in_RSI;
+        puVar2 = extraout_RAX_11;
+      }
+      puVar2[2] = in_RSI;
+      return;
+    }
+    return;
+  }
+  if (in_R8 < in_R8 - (int)in_R10) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlen();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00855c40,~r0_00);
+  extraout_RAX_03[1] = 0x27;
+  *extraout_RAX_03 = &DAT_008c453e;
+  extraout_RAX_03[3] = in_R8 - (int)in_R10;
+  puVar2 = extraout_RAX_03;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_01 = in_RSI;
+    puVar2 = extraout_RAX_04;
+  }
+  puVar2[2] = in_RSI;
+  return;
+}
+
+
+
+void regexp_syntax_repeatIsValid(regexp_syntax_Regexp *re,int n,bool ~r0)
+
+{
+  regexp_syntax_Regexp **pprVar1;
+  regexp_syntax_Regexp *re_00;
+  char extraout_AL;
+  int m;
+  int iVar2;
+  regexp_syntax_Regexp *sub;
+  int iVar3;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (re->Op == 0x11) {
+    iVar2 = re->Max;
+    if (iVar2 == 0) {
+      return;
+    }
+    if (iVar2 < 0) {
+      iVar2 = re->Min;
+    }
+    if (n < iVar2) {
+      return;
+    }
+    if (0 < iVar2) {
+      n = n / iVar2;
+    }
+  }
+  iVar2 = (re->Sub).len;
+  pprVar1 = (re->Sub).array;
+  iVar3 = 0;
+  while( true ) {
+    if (iVar2 <= iVar3) {
+      return;
+    }
+    re_00 = pprVar1[iVar3];
+    regexp_syntax_repeatIsValid(re_00,n,SUB81(re_00,0));
+    if (extraout_AL == '\0') break;
+    iVar3 = iVar3 + 1;
+  }
+  return;
+}
+
+
+
+void regexp_syntax___parser__concat(regexp_syntax_parser *p,regexp_syntax_Regexp *~r0)
+
+{
+  uint uVar1;
+  regexp_syntax_Regexp **pprVar2;
+  regexp_syntax_Regexp *prVar3;
+  int extraout_RAX;
+  regexp_syntax_parser *p_00;
+  regexp_syntax_Regexp *extraout_RAX_00;
+  regexp_syntax_Regexp *re_00;
+  regexp_syntax_Regexp *re_01;
+  int i;
+  uint uVar4;
+  undefined8 extraout_RCX;
+  regexp_syntax_Regexp *~r0_00;
+  undefined8 in_RDI;
+  regexp_syntax_Regexp *re;
+  void *dst;
+  undefined8 extraout_RDI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  regexp_syntax_parser *prStack0000000000000008;
+  ___regexp_syntax_Regexp in_stack_ffffffffffffffc0;
+  
+  prStack0000000000000008 = p;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  regexp_syntax___parser__maybeConcat(prStack0000000000000008,-1,0,SUB81(in_RDI,0));
+  uVar1 = (prStack0000000000000008->stack).len;
+  pprVar2 = (prStack0000000000000008->stack).array;
+  uVar4 = uVar1;
+  while ((0 < (int)uVar4 && (pprVar2[uVar4 - 1]->Op < 0x80))) {
+    uVar4 = uVar4 - 1;
+  }
+  if (uVar4 <= uVar1) {
+    (prStack0000000000000008->stack).len = uVar4;
+    if ((regexp_syntax_Regexp *)(uVar1 - uVar4) == (regexp_syntax_Regexp *)0x0) {
+      re_00 = prStack0000000000000008->free;
+      if (re_00 == (regexp_syntax_Regexp *)0x0) {
+        runtime_newobject((internal_abi_Type *)&DAT_00893c00,(void *)0x0);
+        prStack0000000000000008->numRegexp = prStack0000000000000008->numRegexp + 1;
+        re_00 = extraout_RAX_00;
+        p_00 = prStack0000000000000008;
+      }
+      else {
+        prVar3 = re_00->Sub0[0];
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RCX;
+          extraout_R11[1] = *(undefined8 *)(extraout_RAX + 0x20);
+          runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+        }
+        prStack0000000000000008->free = prVar3;
+        p_00 = (regexp_syntax_parser *)FUN_0046cda6();
+      }
+      re_00->Op = 2;
+      regexp_syntax___parser__push(p_00,re_00,(regexp_syntax_Regexp *)p_00);
+      return;
+    }
+    regexp_syntax___parser__collapse
+              (prStack0000000000000008,in_stack_ffffffffffffffc0,
+               (char)pprVar2 +
+               ((byte)(uVar4 << 3) &
+               (byte)((int)-((prStack0000000000000008->stack).cap - uVar4) >> 0x3f)),
+               (regexp_syntax_Regexp *)(uVar1 - uVar4));
+    regexp_syntax___parser__push(prStack0000000000000008,re_01,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void regexp_syntax___parser__alternate(regexp_syntax_parser *p,regexp_syntax_Regexp *~r0)
+
+{
+  uint uVar1;
+  regexp_syntax_Regexp **pprVar2;
+  regexp_syntax_Regexp *prVar3;
+  int extraout_RAX;
+  regexp_syntax_Regexp *extraout_RAX_00;
+  regexp_syntax_Regexp *re_00;
+  int i;
+  uint uVar4;
+  undefined8 extraout_RCX;
+  regexp_syntax_Regexp *~r0_00;
+  int iVar5;
+  regexp_syntax_Regexp *prVar6;
+  regexp_syntax_Regexp *re;
+  void *dst;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  ___regexp_syntax_Regexp in_stack_ffffffffffffffa8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (p->stack).len;
+  pprVar2 = (p->stack).array;
+  uVar4 = uVar1;
+  while ((0 < (int)uVar4 && (pprVar2[uVar4 - 1]->Op < 0x80))) {
+    uVar4 = uVar4 - 1;
+  }
+  if (uVar4 <= uVar1) {
+    (p->stack).len = uVar4;
+    prVar6 = (regexp_syntax_Regexp *)(uVar1 - uVar4);
+    iVar5 = (int)pprVar2 + (uVar4 << 3 & (int)-((p->stack).cap - uVar4) >> 0x3f);
+    if (prVar6 == (regexp_syntax_Regexp *)0x0) {
+      prVar6 = p->free;
+      if (prVar6 == (regexp_syntax_Regexp *)0x0) {
+        runtime_newobject((internal_abi_Type *)&DAT_00893c00,(void *)0x0);
+        p->numRegexp = p->numRegexp + 1;
+        prVar6 = extraout_RAX_00;
+      }
+      else {
+        prVar3 = prVar6->Sub0[0];
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RCX;
+          extraout_R11[1] = *(undefined8 *)(extraout_RAX + 0x20);
+          runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+        }
+        p->free = prVar3;
+        p = (regexp_syntax_parser *)FUN_0046cda6();
+      }
+      prVar6->Op = 1;
+      regexp_syntax___parser__push(p,prVar6,(regexp_syntax_Regexp *)p);
+      return;
+    }
+    regexp_syntax_cleanAlt(*(regexp_syntax_Regexp **)(iVar5 + -8 + (int)prVar6 * 8));
+    regexp_syntax___parser__collapse(p,in_stack_ffffffffffffffa8,(regexp_syntax_Op)iVar5,prVar6);
+    regexp_syntax___parser__push(p,re_00,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp_syntax_cleanAlt(regexp_syntax_Regexp *re)
+
+{
+  sdword *extraout_RAX;
+  sdword *extraout_RAX_00;
+  sdword *__src;
+  undefined8 extraout_RAX_01;
+  undefined8 extraout_RAX_02;
+  int32 *extraout_RAX_03;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  regexp_syntax_Regexp *prVar1;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  uint newLen;
+  uint extraout_RBX_01;
+  uint uVar2;
+  int iVar3;
+  regexp_syntax_Regexp *extraout_RSI;
+  int32 *oldPtr;
+  sdword **extraout_R11;
+  undefined8 *extraout_R11_00;
+  undefined8 *extraout_R11_01;
+  int32 **extraout_R11_02;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  regexp_syntax_Regexp *prStack0000000000000008;
+  __int32 in_stack_ffffffffffffffb0;
+  
+  prStack0000000000000008 = re;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (prStack0000000000000008->Op == 4) {
+    regexp_syntax_cleanClass(&prStack0000000000000008->Rune,in_stack_ffffffffffffffb0);
+    (prStack0000000000000008->Rune).len = extraout_RBX;
+    (prStack0000000000000008->Rune).cap = extraout_RCX;
+    __src = extraout_RAX;
+    iVar3 = extraout_RCX;
+    prVar1 = prStack0000000000000008;
+    newLen = extraout_RBX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = (prVar1->Rune).array;
+      __src = extraout_RAX_00;
+      iVar3 = extraout_RCX_00;
+      newLen = extraout_RBX_00;
+    }
+    (prVar1->Rune).array = __src;
+    if (((newLen == 2) && (*__src == 0)) && (__src[1] == 0x10ffff)) {
+      (prVar1->Rune).len = in_XMM15._0_8_;
+      (prVar1->Rune).cap = in_XMM15._8_8_;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_00 = extraout_RAX_01;
+      }
+      (prVar1->Rune).array = (int32 *)0x0;
+      prVar1->Op = 6;
+      return;
+    }
+    if (((newLen == 4) && (*__src == 0)) &&
+       ((__src[1] == 9 && ((__src[2] == 0xb && (__src[3] == 0x10ffff)))))) {
+      (prVar1->Rune).len = in_XMM15._0_8_;
+      (prVar1->Rune).cap = in_XMM15._8_8_;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = extraout_RAX_02;
+      }
+      (prVar1->Rune).array = (int32 *)0x0;
+      prVar1->Op = 5;
+      return;
+    }
+    if (100 < (int)(iVar3 - newLen)) {
+      oldPtr = prVar1->Rune0;
+      if (newLen < 3) {
+        iVar3 = 2;
+        uVar2 = newLen;
+      }
+      else {
+        runtime_growslice(oldPtr,newLen,2,newLen,(internal_abi_Type *)&DAT_008077e0,
+                          (runtime_slice)in_stack_ffffffffffffffb0);
+        uVar2 = extraout_RBX_01;
+        iVar3 = extraout_RCX_01;
+        oldPtr = extraout_RAX_03;
+      }
+      runtime_memmove(oldPtr,__src,newLen << 2);
+      (prStack0000000000000008->Rune).len = uVar2;
+      (prStack0000000000000008->Rune).cap = iVar3;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = oldPtr;
+        extraout_R11_02[1] = (extraout_RSI->Rune).array;
+        prStack0000000000000008 = extraout_RSI;
+      }
+      (prStack0000000000000008->Rune).array = oldPtr;
+    }
+  }
+  return;
+}
+
+
+
+void regexp_syntax___parser__collapse
+               (regexp_syntax_parser *p,___regexp_syntax_Regexp subs,regexp_syntax_Op op,
+               regexp_syntax_Regexp *~r0)
+
+{
+  int iVar1;
+  int num;
+  regexp_syntax_Regexp **srcPtr;
+  int extraout_RAX;
+  regexp_syntax_parser *extraout_RAX_00;
+  regexp_syntax_Regexp *extraout_RAX_01;
+  regexp_syntax_parser *extraout_RAX_02;
+  regexp_syntax_Regexp **extraout_RAX_03;
+  regexp_syntax_Regexp **extraout_RAX_04;
+  regexp_syntax_Regexp **pprVar2;
+  regexp_syntax_parser *extraout_RAX_05;
+  regexp_syntax_Regexp **extraout_RAX_06;
+  regexp_syntax_parser *extraout_RAX_07;
+  regexp_syntax_parser *p_00;
+  regexp_syntax_Regexp **extraout_RAX_08;
+  regexp_syntax_Regexp **extraout_RAX_09;
+  regexp_syntax_Regexp *extraout_RCX;
+  regexp_syntax_Regexp *extraout_RCX_00;
+  regexp_syntax_Regexp *prVar3;
+  int extraout_RCX_01;
+  regexp_syntax_Regexp *extraout_RCX_02;
+  uint extraout_RCX_03;
+  int extraout_RCX_04;
+  regexp_syntax_Regexp *extraout_RCX_05;
+  regexp_syntax_Regexp *prVar4;
+  regexp_syntax_Regexp *re;
+  undefined7 in_register_00000019;
+  void *~r0_00;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *pvVar5;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  void *extraout_RBX_03;
+  uint extraout_RBX_04;
+  int extraout_RBX_05;
+  int extraout_RBX_06;
+  byte in_SIL;
+  uint extraout_RSI;
+  uint uVar6;
+  uint extraout_RSI_00;
+  uint extraout_RSI_01;
+  regexp_syntax_parser *extraout_RSI_02;
+  regexp_syntax_Regexp *re_1;
+  void *dst;
+  int iVar7;
+  int extraout_RDI;
+  regexp_syntax_Regexp **extraout_R8;
+  regexp_syntax_Regexp *sub;
+  regexp_syntax_Regexp *extraout_R8_00;
+  regexp_syntax_Regexp *key;
+  regexp_syntax_Regexp *extraout_R8_01;
+  regexp_syntax_Regexp *extraout_R8_02;
+  regexp_syntax_Regexp *extraout_R8_03;
+  regexp_syntax_Regexp **extraout_R9;
+  uint newLen;
+  uint extraout_R10;
+  uint uVar8;
+  regexp_syntax_Regexp **extraout_R11;
+  int *extraout_R11_00;
+  void **extraout_R11_01;
+  regexp_syntax_Regexp **extraout_R11_02;
+  void **extraout_R11_03;
+  regexp_syntax_Regexp **extraout_R11_04;
+  undefined8 *extraout_R11_05;
+  regexp_syntax_Regexp **extraout_R11_06;
+  int unaff_R14;
+  byte bStack0000000000000028;
+  ___regexp_syntax_Regexp in_stack_ffffffffffffff70;
+  ___regexp_syntax_Regexp in_stack_ffffffffffffff88;
+  regexp_syntax_Regexp *local_10;
+  
+  ~r0_00 = (void *)CONCAT71(in_register_00000019,op);
+  bStack0000000000000028 = in_SIL;
+  while (&local_10 <= *(regexp_syntax_Regexp ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (~r0 == (regexp_syntax_Regexp *)&DAT_00000001) {
+    return;
+  }
+  re = p->free;
+  if (re == (regexp_syntax_Regexp *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_00893c00,~r0_00);
+    p->numRegexp = p->numRegexp + 1;
+    uVar6 = (uint)bStack0000000000000028;
+    p_00 = p;
+    prVar3 = ~r0;
+    re = extraout_RAX_01;
+    pvVar5 = ~r0_00;
+  }
+  else {
+    prVar3 = re->Sub0[0];
+    if (runtime_writeBarrier._0_4_ != 0) {
+      local_10 = prVar3;
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = prVar3;
+      extraout_R11[1] = *(regexp_syntax_Regexp **)(extraout_RAX + 0x20);
+      runtime_wbZero((internal_abi_Type *)&DAT_00893c00,dst);
+      prVar3 = local_10;
+    }
+    p->free = prVar3;
+    FUN_0046cda6();
+    p_00 = extraout_RAX_00;
+    prVar3 = extraout_RCX;
+    pvVar5 = extraout_RBX;
+    uVar6 = extraout_RSI;
+  }
+  re->Op = (regexp_syntax_Op)uVar6;
+  (re->Sub).len = 0;
+  (re->Sub).cap = 1;
+  pprVar2 = re->Sub0;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = (int)extraout_R8;
+    extraout_R11_00[1] = (int)(re->Sub).array;
+    p_00 = extraout_RAX_02;
+    prVar3 = extraout_RCX_00;
+    pvVar5 = extraout_RBX_00;
+    uVar6 = extraout_RSI_00;
+    pprVar2 = extraout_R8;
+  }
+  (re->Sub).array = pprVar2;
+  prVar4 = re;
+  for (iVar7 = 0; iVar7 < (int)prVar3; iVar7 = iVar7 + 1) {
+    key = *(regexp_syntax_Regexp **)((int)pvVar5 + iVar7 * 8);
+    if (key->Op == (regexp_syntax_Op)uVar6) {
+      iVar1 = (prVar4->Sub).len;
+      uVar8 = (prVar4->Sub).cap;
+      num = (key->Sub).len;
+      uVar6 = iVar1 + num;
+      pprVar2 = (prVar4->Sub).array;
+      srcPtr = (key->Sub).array;
+      prVar3 = key;
+      if (uVar8 < uVar6) {
+        runtime_growslice(pprVar2,uVar6,uVar8,num,(internal_abi_Type *)&DAT_00865800,
+                          (runtime_slice)in_stack_ffffffffffffff70);
+        prVar3 = extraout_R8_01;
+        uVar8 = extraout_RCX_03;
+        uVar6 = extraout_RBX_04;
+        pprVar2 = extraout_RAX_06;
+      }
+      runtime_typedslicecopy
+                ((internal_abi_Type *)&DAT_00865800,
+                 (void *)((int)pprVar2 + (iVar1 << 3 & (int)(iVar1 - uVar8) >> 0x3f)),uVar6 - iVar1,
+                 srcPtr,num,(int)prVar3);
+      (re->Sub).len = uVar6;
+      (re->Sub).cap = uVar8;
+      prVar4 = re;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = pprVar2;
+        extraout_R11_03[1] = (extraout_R8_02->Sub).array;
+        prVar4 = extraout_R8_02;
+      }
+      (prVar4->Sub).array = pprVar2;
+      if (p->height != (map__regexp_syntax_Regexp_int)0x0) {
+        runtime_mapdelete_fast64
+                  ((internal_abi_MapType *)&DAT_00830520,(runtime_hmap *)p->height,(uint64)key);
+        prVar4 = re;
+      }
+      prVar3 = p->free;
+      p_00 = p;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier4();
+        *extraout_R11_04 = prVar3;
+        extraout_R11_04[1] = key->Sub0[0];
+        extraout_R11_04[2] = key;
+        extraout_R11_04[3] = extraout_RAX_07->free;
+        p_00 = extraout_RAX_07;
+        prVar4 = extraout_R8_03;
+      }
+      key->Sub0[0] = prVar3;
+      p_00->free = key;
+      uVar6 = (uint)bStack0000000000000028;
+      prVar3 = ~r0;
+      pvVar5 = ~r0_00;
+    }
+    else {
+      uVar8 = (prVar4->Sub).cap;
+      newLen = (prVar4->Sub).len + 1;
+      pprVar2 = (prVar4->Sub).array;
+      if (uVar8 < newLen) {
+        runtime_growslice(pprVar2,newLen,uVar8,1,(internal_abi_Type *)&DAT_00865800,
+                          (runtime_slice)in_stack_ffffffffffffff70);
+        (re->Sub).cap = extraout_RCX_01;
+        pprVar2 = extraout_RAX_03;
+        prVar4 = re;

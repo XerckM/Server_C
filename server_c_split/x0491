@@ -1,0 +1,1000 @@
+    iVar2 = 0x3f;
+    if (uVar3 != 0) {
+      for (; uVar3 >> iVar2 == 0; iVar2 = iVar2 + -1) {
+      }
+    }
+    if (uVar3 == 0) {
+      iVar2 = -1;
+    }
+    pmVar1 = (math_big_Word *)((in_R10 + -1) * 0x40 + iVar2 + 1);
+  }
+  if (z.array < pmVar1) {
+    if (((in_RCX == 0) || (in_R11 == 0)) || (in_R9 + in_R11 * 8 + -8 != n + in_RCX * 8 + -8)) {
+      in_XMM0_Qa = math_big_nat_trunc(in_XMM0_Qa);
+      in_R10 = extraout_RBX_02;
+      in_R11 = extraout_RCX_00;
+    }
+    else {
+      in_XMM0_Qa = math_big_nat_trunc(in_XMM0_Qa);
+      in_R10 = extraout_RBX_01;
+      in_R11 = extraout_RCX;
+    }
+  }
+  iVar2 = math_big_nat_cmp(in_RDI,in_RSI);
+  if (-1 < iVar2) {
+    ~r0_01.len = in_R10;
+    ~r0_01.array = (math_big_Word *)in_R11;
+    ~r0_01.cap = (int)in_RSI;
+    math_big_nat_sub(in_stack_ffffffffffffff78,in_stack_ffffffffffffff90,in_stack_ffffffffffffffa8,
+                     ~r0_01);
+    return;
+  }
+  ~r0_00.len = in_R10;
+  ~r0_00.array = (math_big_Word *)in_R11;
+  ~r0_00.cap = (int)in_RSI;
+  math_big_nat_sub(in_stack_ffffffffffffff78,in_stack_ffffffffffffff90,in_stack_ffffffffffffffa8,
+                   ~r0_00);
+  oldPtr = extraout_RAX_01;
+  oldCap = extraout_RCX_01;
+  uVar3 = extraout_RBX_03;
+  while ((math_big_Word *)(uVar3 * 0x40) < z.array) {
+    uVar3 = uVar3 + 1;
+    if (oldCap < uVar3) {
+      runtime_growslice(oldPtr,uVar3,oldCap,1,(internal_abi_Type *)&DAT_00808860,
+                        (runtime_slice)in_stack_ffffffffffffff78);
+      oldPtr = extraout_RAX_02;
+      oldCap = extraout_RCX_02;
+      uVar3 = extraout_RBX_04;
+    }
+    *(undefined8 *)((int)oldPtr + uVar3 * 8 + -8) = 0;
+  }
+  for (i = 0; i < (int)uVar3; i = i + 1) {
+    *(uint *)((int)oldPtr + i * 8) = ~*(uint *)((int)oldPtr + i * 8);
+  }
+  math_big_nat_trunc(in_XMM0_Qa);
+  ~r0_02.len = in_R10;
+  ~r0_02.array = (math_big_Word *)in_R11;
+  ~r0_02.cap = (int)in_RSI;
+  math_big_nat_add(in_stack_ffffffffffffff78,in_stack_ffffffffffffff90,in_stack_ffffffffffffffa8,
+                   ~r0_02);
+  return;
+}
+
+
+
+void math_big_nat_scan(math_big_nat z,io_ByteScanner r,int base,bool fracOk,math_big_nat res,int b,
+                      int count,error err)
+
+{
+  undefined auVar1 [16];
+  math_big_nat z_00;
+  math_big_nat z_01;
+  __interface___ a;
+  math_big_nat x;
+  math_big_nat x_00;
+  string ~r0;
+  math_big_nat ~r0_00;
+  math_big_nat ~r0_01;
+  byte bVar2;
+  uint8 ch;
+  char extraout_AL;
+  math_big_Word max;
+  math_big_Word extraout_RAX;
+  uint uVar3;
+  math_big_Word extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  void *x_01;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  void *extraout_RCX_01;
+  void *extraout_RCX_02;
+  uint extraout_RCX_03;
+  void *pvVar4;
+  uint extraout_RCX_04;
+  int i;
+  bool invalSep;
+  undefined7 in_register_00000019;
+  runtime_itab *extraout_RBX;
+  runtime_itab *extraout_RBX_00;
+  runtime_itab *extraout_RBX_01;
+  runtime_itab *extraout_RBX_02;
+  math_big_Word extraout_RBX_03;
+  runtime_itab *prVar5;
+  uint extraout_RBX_04;
+  int32 prev;
+  undefined8 in_RSI;
+  math_big_Word d1;
+  uint uVar6;
+  int i_1;
+  uint64 in_R8;
+  char in_R9B;
+  int n;
+  int dp;
+  int prefix;
+  math_big_Word mVar7;
+  int unaff_R14;
+  math_big_Word b1;
+  math_big_Word bn;
+  math_big_Word di;
+  interface___ in_stack_ffffffffffffff10;
+  interface___ *in_stack_ffffffffffffff20;
+  undefined in_stack_ffffffffffffff28 [16];
+  uint8 *in_stack_ffffffffffffff38;
+  int in_stack_ffffffffffffff40;
+  unkbyte10 in_stack_ffffffffffffff48;
+  byte bVar8;
+  int local_90;
+  byte local_70 [8];
+  math_big_Word local_68;
+  void *local_60;
+  int local_50;
+  runtime_itab *local_48;
+  math_big_Word local_40;
+  uint local_38;
+  math_big_Word local_30;
+  math_big_Word local_28;
+  void *local_20;
+  undefined local_18 [16];
+  
+  while (local_70 <= *(byte **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_R8 != 0) {
+    if (in_R9B == '\0') {
+      if (0x3c < in_R8 - 2) goto LAB_0064aa38;
+    }
+    else if ((((in_R8 != 2) && (in_R8 != 8)) && (in_R8 != 10)) && (in_R8 != 0x10)) {
+LAB_0064aa38:
+      runtime_convT64(in_R8,(void *)CONCAT71(in_register_00000019,fracOk));
+      local_18._8_8_ = extraout_RAX_01;
+      local_18._0_8_ = &DAT_00807760;
+      a.len = in_stack_ffffffffffffff28._0_8_;
+      a.cap = in_stack_ffffffffffffff28._8_8_;
+      a.array = in_stack_ffffffffffffff20;
+      ~r0.len = in_stack_ffffffffffffff40;
+      ~r0.str = in_stack_ffffffffffffff38;
+      fmt_Sprintf((string)in_stack_ffffffffffffff10,a,~r0);
+      runtime_convTstring((string)in_stack_ffffffffffffff10,x_01);
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffff10);
+    }
+  }
+  bVar2 = (**(code **)(count + 0x18))(in_RSI);
+  local_20 = extraout_RCX;
+  local_48 = extraout_RBX;
+  if (in_R8 != 0) {
+    prev = 0x2e;
+    local_50 = 0;
+    prefix = 0;
+    local_68 = in_R8;
+    goto LAB_0064a44f;
+  }
+  if (extraout_RBX != (runtime_itab *)0x0) {
+    prev = 0x2e;
+    local_50 = 0;
+    prefix = 0;
+    local_68 = 10;
+    goto LAB_0064a44f;
+  }
+  if (bVar2 != 0x30) {
+    prev = 0x2e;
+    local_50 = 0;
+    prefix = 0;
+    local_68 = 10;
+    goto LAB_0064a44f;
+  }
+  bVar2 = (**(code **)(count + 0x18))(in_RSI);
+  local_20 = extraout_RCX_00;
+  local_48 = extraout_RBX_00;
+  if (extraout_RBX_00 == (runtime_itab *)0x0) {
+    if (bVar2 < 0x59) {
+      if (bVar2 == 0x42) {
+LAB_0064a33f:
+        prefix = 0x62;
+        local_68 = 2;
+      }
+      else if (bVar2 == 0x4f) {
+LAB_0064a364:
+        prefix = 0x6f;
+        local_68 = 8;
+      }
+      else {
+        if (bVar2 == 0x58) goto LAB_0064a387;
+LAB_0064a3a6:
+        prefix = 0x30;
+        if (in_R9B != '\0') {
+          prefix = 0;
+        }
+        local_68 = 8;
+        if (in_R9B != '\0') {
+          local_68 = 10;
+        }
+      }
+    }
+    else {
+      if (bVar2 == 0x62) goto LAB_0064a33f;
+      if (bVar2 == 0x6f) goto LAB_0064a364;
+      if (bVar2 != 0x78) goto LAB_0064a3a6;
+LAB_0064a387:
+      prefix = 0x78;
+      local_68 = 0x10;
+    }
+    if (prefix == 0) {
+      local_50 = 1;
+    }
+    else {
+      if (prefix != 0x30) {
+        local_30 = local_68;
+        bVar2 = (**(code **)(count + 0x18))(in_RSI,0,count,10);
+        local_20 = extraout_RCX_01;
+        local_48 = extraout_RBX_01;
+        local_68 = local_30;
+      }
+      local_50 = 0;
+    }
+  }
+  else {
+    local_68 = 10;
+    local_50 = 1;
+    prefix = 0;
+  }
+  prev = 0x30;
+LAB_0064a44f:
+  if (local_68 == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdivide();
+  }
+  auVar1._8_8_ = 0;
+  auVar1._0_8_ = local_68;
+  n = 1;
+  for (bn = local_68; bn <= SUB168((ZEXT816(0) << 0x40 | ZEXT816(0xffffffffffffffff)) / auVar1,0);
+      bn = bn * local_68) {
+    n = n + 1;
+  }
+  bVar8 = 0;
+  local_90 = 0;
+  local_40 = 0;
+  local_60 = local_20;
+  local_38 = b;
+  local_30 = local_68;
+  do {
+    local_28 = base;
+    if (local_48 != (runtime_itab *)0x0) {
+LAB_0064a840:
+      pvVar4 = local_20;
+      prVar5 = local_48;
+      if ((io_EOF.tab == local_48) &&
+         (runtime_ifaceeq(local_48,local_20,io_EOF.data,SUB81(local_50,0)), pvVar4 = local_20,
+         prVar5 = local_48, extraout_AL != '\0')) {
+        pvVar4 = (void *)0x0;
+        prVar5 = (runtime_itab *)0x0;
+      }
+      if ((prVar5 == (runtime_itab *)0x0) && ((bVar8 != 0 || (prev == 0x5f)))) {
+        pvVar4 = math_big_errInvalSep.data;
+        prVar5 = math_big_errInvalSep.tab;
+      }
+      if ((local_50 == 0) &&
+         (pvVar4 = math_big_errNoDigits.data, prVar5 = math_big_errNoDigits.tab, prefix == 0x30)) {
+        return;
+      }
+      uVar6 = local_40;
+      mVar7 = local_28;
+      uVar3 = local_38;
+      if (0 < local_90) {
+        for (; 0 < local_90; local_90 = local_90 >> 1) {
+        }
+        z_01.cap = (int)in_stack_ffffffffffffff20;
+        z_01.array = &(in_stack_ffffffffffffff10._type)->Size_;
+        z_01.len = (int)in_stack_ffffffffffffff10.data;
+        x_00.cap = (int)in_stack_ffffffffffffff38;
+        x_00.array = (math_big_Word *)in_stack_ffffffffffffff28._0_8_;
+        x_00.len = in_stack_ffffffffffffff28._8_8_;
+        ~r0_01._8_10_ = in_stack_ffffffffffffff48;
+        ~r0_01.array = (math_big_Word *)in_stack_ffffffffffffff40;
+        ~r0_01.cap._2_1_ = bVar8;
+        ~r0_01.cap._3_1_ = in_R9B;
+        ~r0_01.cap._4_4_ = prev;
+        local_48 = prVar5;
+        local_20 = pvVar4;
+        math_big_nat_mulAddWW(z_01,x_00,local_28,local_40,~r0_01);
+        uVar6 = extraout_RBX_04;
+        mVar7 = extraout_RAX_00;
+        uVar3 = extraout_RCX_04;
+      }
+      for (; (0 < (int)uVar6 && (*(int *)((mVar7 - 8) + uVar6 * 8) == 0)); uVar6 = uVar6 - 1) {
+      }
+      if (uVar3 < uVar6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      return;
+    }
+    if ((bVar2 == 0x2e) && (in_R9B != '\0')) {
+      bVar8 = prev == 0x5f | bVar8;
+      in_R9B = '\0';
+      prev = 0x2e;
+      uVar6 = 0x2e;
+    }
+    else if ((bVar2 == 0x5f) && (in_R8 == 0)) {
+      bVar8 = prev != 0x30 | bVar8;
+      prev = 0x5f;
+      uVar6 = local_30;
+    }
+    else {
+      if ((byte)(bVar2 - 0x30) < 10) {
+        uVar6 = (uint)(byte)(bVar2 - 0x30);
+      }
+      else if ((byte)(bVar2 + 0x9f) < 0x1a) {
+        uVar6 = (uint)(byte)(bVar2 + 0xa9);
+      }
+      else if ((byte)(bVar2 + 0xbf) < 0x1a) {
+        if ((int)local_30 < 0x25) {
+          uVar6 = (uint)(byte)(bVar2 - 0x37);
+        }
+        else {
+          uVar6 = (uint)(byte)(bVar2 - 0x1d);
+        }
+      }
+      else {
+        uVar6 = 0x3f;
+      }
+      if (local_30 <= uVar6) {
+        (**(code **)(count + 0x20))();
+        goto LAB_0064a840;
+      }
+      local_90 = local_90 + 1;
+      if (n == local_90) {
+        z_00.cap = (int)in_stack_ffffffffffffff20;
+        z_00.array = &(in_stack_ffffffffffffff10._type)->Size_;
+        z_00.len = (int)in_stack_ffffffffffffff10.data;
+        x.cap = (int)in_stack_ffffffffffffff38;
+        x.array = (math_big_Word *)in_stack_ffffffffffffff28._0_8_;
+        x.len = in_stack_ffffffffffffff28._8_8_;
+        ~r0_00._8_10_ = in_stack_ffffffffffffff48;
+        ~r0_00.array = (math_big_Word *)in_stack_ffffffffffffff40;
+        ~r0_00.cap._2_1_ = bVar8;
+        ~r0_00.cap._3_1_ = in_R9B;
+        ~r0_00.cap._4_4_ = prev;
+        math_big_nat_mulAddWW(z_00,x,base,local_40,~r0_00);
+        local_90 = 0;
+        local_38 = extraout_RCX_03;
+        local_40 = extraout_RBX_03;
+        base = extraout_RAX;
+      }
+      local_50 = local_50 + 1;
+      prev = 0x30;
+      uVar6 = local_30;
+    }
+    mVar7 = local_40;
+    local_40 = local_38;
+    local_38 = mVar7;
+    local_28 = base;
+    local_70[0] = (**(code **)(count + 0x18))(in_RSI,uVar6);
+    mVar7 = local_38;
+    local_38 = local_40;
+    local_40 = mVar7;
+    local_20 = extraout_RCX_02;
+    local_48 = extraout_RBX_02;
+    base = local_28;
+    bVar2 = local_70[0];
+  } while( true );
+}
+
+
+
+// Local variable b:math/big.Word[RSI:8] conflicts with parameter, skipped.
+
+void math_big_nat_itoa(math_big_nat x,bool neg,int base,__uint8 ~r0)
+
+{
+  uint uVar1;
+  undefined auVar2 [16];
+  interface___ e;
+  __math_big_divisor ~r0_00;
+  math_big_nat q;
+  undefined7 in_register_00000001;
+  uint *__src;
+  int extraout_RAX;
+  math_big_Word max;
+  undefined *extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  uint *extraout_RAX_02;
+  int iVar3;
+  uint shift;
+  int extraout_RCX;
+  uint uVar4;
+  int i;
+  math_big_Word bb;
+  undefined8 extraout_RBX;
+  uint uVar5;
+  uint in_RSI;
+  math_big_Word w;
+  int ndigits;
+  int iVar6;
+  byte in_DIL;
+  void *~r0_01;
+  uint uVar7;
+  math_big_Word mask;
+  void *~r0_02;
+  uint *__dest;
+  int i_1;
+  math_big_Word bb_00;
+  uint top;
+  uint uVar8;
+  int k;
+  uint nbits;
+  int unaff_R14;
+  double dVar9;
+  internal_abi_Type *in_stack_ffffffffffffff20;
+  void *in_stack_ffffffffffffff28;
+  int in_stack_ffffffffffffff30;
+  __uint8 in_stack_ffffffffffffff38;
+  __math_big_divisor in_stack_ffffffffffffff50;
+  math_big_Word local_60;
+  math_big_Word mStack_58;
+  int iStack_50;
+  uint uStack_48;
+  int local_40;
+  uint local_38;
+  uint local_30;
+  uint uStack_28;
+  undefined8 uStack_20;
+  uint *puStack_18;
+  int iStack_10;
+  
+  __src = (uint *)CONCAT71(in_register_00000001,neg);
+  while (&local_60 <= *(math_big_Word **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (0x3c < in_RSI - 2) {
+    e.data = in_stack_ffffffffffffff28;
+    e._type = in_stack_ffffffffffffff20;
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(e);
+  }
+  if (base == 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_008143e0,(void *)0x0);
+    *extraout_RAX_00 = 0x30;
+    return;
+  }
+  local_30 = (uint)in_DIL;
+  local_38 = -in_RSI & in_RSI;
+  uVar8 = __src[base + -1] >> 1 | __src[base + -1];
+  uVar8 = uVar8 >> 2 | uVar8;
+  uVar8 = uVar8 >> 4 | uVar8;
+  uVar8 = uVar8 >> 8 | uVar8;
+  uVar8 = uVar8 >> 0x10 | uVar8;
+  uVar8 = uVar8 >> 0x20 | uVar8;
+  local_40 = (base + -1) * 0x40;
+  dVar9 = math_log2((double)in_RSI);
+  iVar3 = 0x3f;
+  if (uVar8 != 0) {
+    for (; uVar8 >> iVar3 == 0; iVar3 = iVar3 + -1) {
+    }
+  }
+  if (uVar8 == 0) {
+    iVar3 = -1;
+  }
+  iVar3 = (int)((double)(iVar3 + local_40 + 1) / dVar9);
+  uStack_48 = iVar3 + 1;
+  if (local_30 != 0) {
+    uStack_48 = iVar3 + 2;
+  }
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,uStack_48,uStack_48,~r0_01);
+  iStack_10 = extraout_RAX;
+  if (in_RSI == local_38) {
+    uVar4 = *__src;
+    uVar1 = 0;
+    if (in_RSI != 0) {
+      for (; (in_RSI >> uVar1 & 1) == 0; uVar1 = uVar1 + 1) {
+      }
+    }
+    shift._0_1_ = (byte)uVar1;
+    local_38 = -(uint)(uVar1 < 0x40);
+    uVar7 = (1 << ((byte)shift & 0x3f) & local_38) - 1;
+    nbits = 0x40;
+    uVar8 = uStack_48;
+    for (k = 1; uVar5 = uVar8, k < base; k = k + 1) {
+      for (; uVar1 <= nbits; nbits = nbits - uVar1) {
+        if (0x3d < (uVar4 & uVar7)) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        if (uStack_48 <= uVar5 - 1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((uVar5 - 1) + extraout_RAX) =
+             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+             [uVar4 & uVar7];
+        uVar4 = uVar4 >> ((byte)shift & 0x3f) & local_38;
+        uVar5 = uVar5 - 1;
+      }
+      if (nbits == 0) {
+        uVar4 = __src[k];
+        nbits = 0x40;
+        uVar8 = uVar5;
+      }
+      else {
+        uVar4 = (uVar4 | __src[k] << ((byte)nbits & 0x3f) & -(uint)(nbits < 0x40)) & uVar7;
+        if (0x3d < uVar4) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        uVar8 = uVar5 - 1;
+        if (uStack_48 <= uVar8) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((uVar5 - 1) + extraout_RAX) =
+             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+             [uVar4];
+        uVar4 = uVar1 - nbits;
+        nbits = -(uVar4 - 0x40);
+        uVar4 = __src[k] >> ((byte)uVar4 & 0x3f) & -(uint)(uVar4 < 0x40);
+      }
+    }
+    for (; uVar4 != 0; uVar4 = uVar4 >> ((byte)shift & 0x3f) & local_38) {
+      if (0x3d < (uVar4 & uVar7)) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      if (uStack_48 <= uVar8 - 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      *(char *)((uVar8 - 1) + extraout_RAX) =
+           "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+           [uVar4 & uVar7];
+      uVar8 = uVar8 - 1;
+    }
+  }
+  else {
+    auVar2._8_8_ = 0;
+    auVar2._0_8_ = in_RSI;
+    ndigits = 1;
+    for (bb = in_RSI; bb <= SUB168((ZEXT816(0) << 0x40 | ZEXT816(0xffffffffffffffff)) / auVar2,0);
+        bb = bb * in_RSI) {
+      ndigits = ndigits + 1;
+    }
+    ~r0_00.len = (int)in_stack_ffffffffffffff28;
+    ~r0_00.array = (math_big_divisor *)in_stack_ffffffffffffff20;
+    ~r0_00.cap = in_stack_ffffffffffffff30;
+    math_big_divisors(base,in_RSI,ndigits,bb,~r0_00);
+    uStack_20 = extraout_RAX_01;
+    if (base == 1) {
+      uStack_28 = 0;
+      __dest = &uStack_28;
+      bb_00 = 1;
+      iVar3 = 1;
+    }
+    else {
+      bb_00 = base + 4;
+      runtime_makeslice((internal_abi_Type *)&DAT_00808860,base,bb_00,~r0_02);
+      iVar3 = base;
+      __dest = extraout_RAX_02;
+    }
+    iVar6 = iVar3;
+    if (base < iVar3) {
+      iVar6 = base;
+    }
+    if (__src != __dest) {
+      local_60 = bb_00;
+      local_40 = iVar3;
+      puStack_18 = __dest;
+      runtime_memmove(__dest,__src,iVar6 << 3);
+      __dest = puStack_18;
+      bb_00 = local_60;
+      iVar3 = local_40;
+    }
+    q.len = extraout_RBX;
+    q.array = (math_big_Word *)uStack_20;
+    q.cap = extraout_RCX;
+    math_big_nat_convertWords
+              (q,in_stack_ffffffffffffff38,(math_big_Word)__dest,iVar3,bb_00,
+               in_stack_ffffffffffffff50);
+    uVar8 = 0;
+    while( true ) {
+      if (uStack_48 <= uVar8) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      if (*(char *)(uVar8 + iStack_10) != '0') break;
+      uVar8 = uVar8 + 1;
+    }
+  }
+  if (in_DIL != 0) {
+    if (uStack_48 <= uVar8 - 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    *(undefined *)((uVar8 - 1) + iStack_10) = 0x2d;
+    uVar8 = uVar8 - 1;
+  }
+  if (uStack_48 < uVar8) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  return;
+}
+
+
+
+void math_big_nat_convertWords
+               (math_big_nat q,__uint8 s,math_big_Word b,int ndigits,math_big_Word bb,
+               __math_big_divisor table)
+
+{
+  interface___ e;
+  math_big_nat z;
+  math_big_nat z_00;
+  math_big_nat q_00;
+  math_big_Word extraout_RAX;
+  math_big_Word extraout_RAX_00;
+  math_big_Word extraout_RBX;
+  math_big_Word extraout_RBX_00;
+  int i;
+  int j_1;
+  int j;
+  int ndigits_00;
+  int in_RDI;
+  uint extraout_RDI;
+  math_big_Word r;
+  uint extraout_RDI_00;
+  math_big_Word b_00;
+  math_big_Word bb_00;
+  uint in_R9;
+  int i_1;
+  int maxLength;
+  int minLength;
+  int in_R10;
+  uint top;
+  uint uVar1;
+  int index;
+  void *pvVar2;
+  void *pvVar3;
+  int unaff_R14;
+  int iVar4;
+  bool bVar5;
+  div_t dVar6;
+  uint uStack0000000000000050;
+  int iStack0000000000000058;
+  internal_abi_Type *in_stack_ffffffffffffff10;
+  void *in_stack_ffffffffffffff18;
+  int in_stack_ffffffffffffff20;
+  math_big_nat in_stack_ffffffffffffff28;
+  __math_big_divisor in_stack_ffffffffffffff40;
+  math_big_Word local_70;
+  void *pvStack_68;
+  uint local_60;
+  int h;
+  math_big_Word mStack_48;
+  void *pvStack_40;
+  uint local_38;
+  uint local_30;
+  math_big_Word mStack_20;
+  math_big_Word local_18;
+  math_big_Word mStack_10;
+  
+  uStack0000000000000050 = in_R9;
+  iStack0000000000000058 = in_R10;
+  while (&local_70 <= *(math_big_Word **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (q.array != (math_big_Word *)0x0) {
+    local_70 = 0;
+    local_18 = 0;
+    pvVar2 = (void *)(q.len + -1);
+    while (math_big_leafSize < ndigits) {
+      if ((int)(ndigits - 1U) < 0) {
+        maxLength = 0;
+      }
+      else {
+        local_38 = *(uint *)((b - 8) + ndigits * 8);
+        uVar1 = local_38 >> 1 | local_38;
+        uVar1 = uVar1 >> 2 | uVar1;
+        uVar1 = uVar1 >> 4 | uVar1;
+        uVar1 = uVar1 >> 8 | uVar1;
+        uVar1 = uVar1 >> 0x10 | uVar1;
+        uVar1 = uVar1 >> 0x20 | uVar1;
+        iVar4 = 0x3f;
+        if (uVar1 != 0) {
+          for (; uVar1 >> iVar4 == 0; iVar4 = iVar4 + -1) {
+          }
+        }
+        if (uVar1 == 0) {
+          iVar4 = -1;
+        }
+        maxLength = iVar4 + (ndigits - 1U) * 0x40 + 1;
+      }
+      do {
+        pvVar3 = pvVar2;
+        if ((int)pvVar3 < 1) break;
+        if ((uint)q.len <= (void *)((int)pvVar3 - 1U)) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        pvVar2 = (void *)((int)pvVar3 - 1U);
+      } while (maxLength >> 1 < (int)q.array[(int)pvVar3 * 5 + -2]);
+      if ((uint)q.len <= pvVar3) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      local_30 = i;
+      if ((int)q.array[(int)pvVar3 * 5 + 3] < maxLength) {
+        bVar5 = false;
+      }
+      else {
+        pvStack_68 = pvVar3;
+        mStack_20 = b;
+        iVar4 = math_big_nat_cmp((void *)q.array[(int)pvVar3 * 5],
+                                 (void *)q.array[(int)pvVar3 * 5 + 1]);
+        bVar5 = -1 < iVar4;
+        b = mStack_20;
+        pvVar3 = pvStack_68;
+      }
+      if ((bVar5) && (pvVar3 = (void *)((int)pvVar3 + -1), (int)pvVar3 < 0)) {
+        e.data = in_stack_ffffffffffffff18;
+        e._type = in_stack_ffffffffffffff10;
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(e);
+      }
+      if ((uint)q.len <= pvVar3) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      mStack_48 = (int)pvVar3 * 5;
+      pvStack_40 = pvVar3;
+      dVar6 = math_big_nat_div(b,ndigits);
+      if (local_30 < local_30 - q.array[mStack_48 + 4]) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      q_00.len = (int)pvStack_40;
+      q_00.array = q.array;
+      q_00.cap = q.cap;
+      in_stack_ffffffffffffff10 = (internal_abi_Type *)q.array;
+      in_stack_ffffffffffffff18 = pvStack_40;
+      in_stack_ffffffffffffff20 = q.cap;
+      local_70 = bb_00;
+      h = local_30 - q.array[mStack_48 + 4];
+      mStack_48 = dVar6.rem;
+      local_18 = b_00;
+      mStack_10 = dVar6.quot;
+      math_big_nat_convertWords
+                (q_00,(__uint8)in_stack_ffffffffffffff28,b_00,ndigits_00,bb_00,
+                 in_stack_ffffffffffffff40);
+      b = mStack_10;
+      ndigits = mStack_48;
+      i = h;
+      pvVar2 = pvStack_40;
+    }
+  }
+  local_30 = i;
+  if (uStack0000000000000050 == 10) {
+    while (uVar1 = local_30, ndigits != 0) {
+      z_00.len = (int)in_stack_ffffffffffffff18;
+      z_00.array = &in_stack_ffffffffffffff10->Size_;
+      z_00.cap = in_stack_ffffffffffffff20;
+      local_60 = i;
+      math_big_nat_divW(z_00,in_stack_ffffffffffffff28,b,(math_big_nat)in_stack_ffffffffffffff40,
+                        ndigits);
+      iVar4 = 0;
+      uVar1 = extraout_RDI_00;
+      i = local_60;
+      while ((b = extraout_RAX_00, ndigits = extraout_RBX_00, iVar4 < iStack0000000000000058 &&
+             (0 < i))) {
+        if (local_30 <= i - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((i - 1U) + in_RDI) = (char)uVar1 + (char)(uVar1 / 10) * -10 + '0';
+        iVar4 = iVar4 + 1;
+        uVar1 = uVar1 / 10;
+        i = i - 1U;
+      }
+    }
+  }
+  else {
+    while (uVar1 = local_30, ndigits != 0) {
+      z.len = (int)in_stack_ffffffffffffff18;
+      z.array = &in_stack_ffffffffffffff10->Size_;
+      z.cap = in_stack_ffffffffffffff20;
+      local_60 = i;
+      math_big_nat_divW(z,in_stack_ffffffffffffff28,b,(math_big_nat)in_stack_ffffffffffffff40,
+                        ndigits);
+      iVar4 = 0;
+      uVar1 = extraout_RDI;
+      i = local_60;
+      while ((b = extraout_RAX, ndigits = extraout_RBX, iVar4 < iStack0000000000000058 && (0 < i)))
+      {
+        if (uStack0000000000000050 == 0) {
+                    // WARNING: Subroutine does not return
+          runtime_panicdivide();
+        }
+        if (0x3d < uVar1 % uStack0000000000000050) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        if (local_30 <= i - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((i - 1U) + in_RDI) =
+             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+             [uVar1 % uStack0000000000000050];
+        iVar4 = iVar4 + 1;
+        uVar1 = uVar1 / uStack0000000000000050;
+        i = i - 1U;
+      }
+    }
+  }
+  while( true ) {
+    if (i < 1) {
+      return;
+    }
+    if (uVar1 <= i - 1U) break;
+    *(undefined *)((i - 1U) + in_RDI) = 0x30;
+    i = i - 1U;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void math_big_nat_expWW(math_big_nat z,math_big_Word x,math_big_Word y,math_big_nat ~r0)
+
+{
+  math_big_nat z_00;
+  math_big_nat ~r0_00;
+  undefined auVar1 [24];
+  int in_RSI;
+  int in_RDI;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  undefined in_stack_ffffffffffffff99 [23];
+  math_big_nat in_stack_ffffffffffffffb0;
+  math_big_nat in_stack_ffffffffffffffc8;
+  undefined8 in_stack_ffffffffffffffe0;
+  int in_stack_ffffffffffffffe8;
+  int in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RDI == 0) {
+    in_RDI = in_stack_fffffffffffffff0;
+  }
+  if (in_RSI == 0) {
+    in_RSI = in_stack_ffffffffffffffe8;
+  }
+  z_00.cap = 0;
+  z_00.array = (math_big_Word *)in_XMM15._0_8_;
+  z_00.len = in_XMM15._8_8_;
+  auVar1[23] = 0;
+  auVar1._0_23_ = in_stack_ffffffffffffff99;
+  ~r0_00.len = in_RSI;
+  ~r0_00.array = (math_big_Word *)in_stack_ffffffffffffffe0;
+  ~r0_00.cap = in_RDI;
+  math_big_nat_expNN(z_00,(math_big_nat)(auVar1 << 8),in_stack_ffffffffffffffb0,
+                     in_stack_ffffffffffffffc8,SUB81(x,0),~r0_00);
+  return;
+}
+
+
+
+void math_big_divisors(int m,math_big_Word b,int ndigits,math_big_Word bb,__math_big_divisor ~r0)
+
+{
+  sdword sVar1;
+  math_big_nat z;
+  math_big_nat z_00;
+  math_big_nat ~r0_00;
+  math_big_nat x;
+  math_big_nat ~r0_01;
+  math_big_divisor *extraout_RAX;
+  math_big_divisor *pmVar2;
+  math_big_Word *extraout_RAX_00;
+  math_big_Word *extraout_RAX_01;
+  math_big_Word *pmVar3;
+  math_big_Word *extraout_RAX_02;
+  math_big_Word *extraout_RAX_03;
+  math_big_Word *extraout_RAX_04;
+  math_big_Word *extraout_RAX_05;
+  int len;
+  int iVar4;
+  math_big_Word *extraout_RAX_06;
+  math_big_Word *extraout_RAX_07;
+  int extraout_RAX_08;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int iVar5;
+  int k;
+  sdword new_00;
+  int32 new;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  math_big_Word *extraout_RBX_01;
+  math_big_divisor *extraout_RSI;
+  undefined *~r0_02;
+  int i;
+  math_big_Word *extraout_R8;
+  int words;
+  math_big_divisor *extraout_R9;
+  uint top;
+  int iVar6;
+  int i_1;
+  math_big_Word **extraout_R11;
+  math_big_Word **extraout_R11_00;
+  uint uVar7;
+  math_big_Word **extraout_R11_01;
+  int unaff_R14;
+  bool bVar8;
+  math_big_Word *in_stack_ffffffffffffff30;
+  int in_stack_ffffffffffffff38;
+  int in_stack_ffffffffffffff40;
+  math_big_Word *in_stack_ffffffffffffff48;
+  int in_stack_ffffffffffffff50;
+  int in_stack_ffffffffffffff58;
+  math_big_Word in_stack_ffffffffffffff60;
+  undefined8 in_stack_ffffffffffffff68;
+  int in_stack_ffffffffffffff70;
+  int local_50;
+  uint local_48;
+  int local_40;
+  int local_38;
+  math_big_Word local_30;
+  math_big_Word *local_28;
+  math_big_Word *local_20;
+  math_big_divisor *local_18;
+  math_big_Word *local_10;
+  
+  while (&local_50 <= *(int **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((math_big_leafSize == 0) || (m <= math_big_leafSize)) {
+    return;
+  }
+  words = math_big_leafSize;
+  for (local_48 = 1; (words < m >> 1 && ((int)local_48 < 0x40)); local_48 = local_48 + 1) {
+    words = words << 1;
+  }
+  local_30 = bb;
+  if (b == 10) {
+    LOCK();
+    bVar8 = math_big_cacheBase10.Mutex.state == 0;
+    if (bVar8) {
+      math_big_cacheBase10.Mutex.state = 1;
+    }
+    UNLOCK();
+    if (!bVar8) {
+      sync___Mutex__lockSlow(&math_big_cacheBase10.Mutex);
+    }
+    if (0x40 < local_48) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    pmVar2 = math_big_cacheBase10.table;
+  }
+  else {
+    runtime_makeslice((internal_abi_Type *)&DAT_008655c0,local_48,local_48,(void *)bb);
+    pmVar2 = extraout_RAX;
+  }
+  if (local_48 <= local_48 - 1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  local_18 = pmVar2;
+  if (pmVar2[local_48 - 1].ndigits == 0) {
+    uVar7 = local_48;
+    for (i = 0; i < (int)uVar7; i = i + 1) {
+      if (pmVar2[i].ndigits == 0) {
+        local_40 = i;
+        local_38 = i * 5;
+        if (i == 0) {
+          z.len = in_stack_ffffffffffffff38;
+          z.array = in_stack_ffffffffffffff30;
+          z.cap = in_stack_ffffffffffffff40;
+          ~r0_00.len = in_stack_ffffffffffffff50;
+          ~r0_00.array = in_stack_ffffffffffffff48;

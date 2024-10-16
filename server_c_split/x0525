@@ -1,0 +1,1000 @@
+       uVar3 >> 0x38 | (uVar3 & 0xff000000000000) >> 0x28 | (uVar3 & 0xff0000000000) >> 0x18 |
+       (uVar3 & 0xff00000000) >> 8 | (uVar3 & 0xff000000) << 8 | (uVar3 & 0xff0000) << 0x18 |
+       (uVar3 & 0xff00) << 0x28 | uVar3 << 0x38;
+  return;
+}
+
+
+
+void crypto_sha256___digest__UnmarshalBinary(crypto_sha256_digest *d,__uint8 b,error ~r0)
+
+{
+  dword dVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  int in_RCX;
+  uint uVar8;
+  uint uVar9;
+  sdword *in_RBX;
+  undefined *__src;
+  int in_RDI;
+  uint uVar10;
+  uint uVar11;
+  uint uVar12;
+  uint uVar13;
+  uint uVar14;
+  uint uVar15;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (3 < in_RCX) {
+    if (d->is224 != false) {
+      if (*in_RBX != 0x2616873) goto LAB_00678a39;
+      if (d->is224 != false) goto LAB_00678a67;
+    }
+    if (*in_RBX == 0x3616873) {
+LAB_00678a67:
+      if (in_RCX == 0x6c) {
+        uVar9 = (uint)((dword)(-(in_RDI + -4) >> 0x3f) & 4);
+        dVar1 = *(dword *)((int)in_RBX + uVar9);
+        uVar13 = (uint)((dword)(-(in_RDI + -8) >> 0x3f) & 4);
+        iVar2 = uVar13 + uVar9;
+        uVar14 = (uint)((dword)(-(in_RDI + -0xc) >> 0x3f) & 4);
+        iVar3 = uVar14 + iVar2;
+        uVar15 = (uint)((dword)(-(in_RDI + -0x10) >> 0x3f) & 4);
+        iVar4 = uVar15 + iVar3;
+        uVar8 = (uint)((dword)(-(in_RDI + -0x14) >> 0x3f) & 4);
+        iVar5 = uVar8 + iVar4;
+        uVar10 = (uint)((dword)(-(in_RDI + -0x18) >> 0x3f) & 4);
+        iVar6 = uVar10 + iVar5;
+        uVar11 = (uint)((dword)(-(in_RDI + -0x1c) >> 0x3f) & 4);
+        iVar7 = uVar11 + iVar6;
+        uVar12 = (uint)((dword)(-(in_RDI + -0x20) >> 0x3f) & 4);
+        __src = (undefined *)
+                ((int)in_RBX + (uint)((dword)(-(in_RDI + -0x24) >> 0x3f) & 4) + uVar12 + iVar7);
+        d->h[0] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar13 + uVar9);
+        d->h[1] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar14 + iVar2);
+        d->h[2] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar15 + iVar3);
+        d->h[3] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar8 + iVar4);
+        d->h[4] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar10 + iVar5);
+        d->h[5] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar11 + iVar6);
+        d->h[6] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        dVar1 = *(dword *)((int)in_RBX + uVar12 + iVar7);
+        d->h[7] = dVar1 >> 0x18 | (dVar1 & 0xff0000) >> 8 | (dVar1 & 0xff00) << 8 | dVar1 << 0x18;
+        if (d->x != __src) {
+          runtime_memmove(d->x,__src,0x40);
+        }
+        uVar8 = *(uint *)(__src + ((dword)(-(in_RDI + -100) >> 0x3f) & 0x40));
+        uVar9 = uVar8 >> 0x38 | (uVar8 & 0xff000000000000) >> 0x28 |
+                (uVar8 & 0xff0000000000) >> 0x18 | (uVar8 & 0xff00000000) >> 8;
+        d->len = uVar9 | (uVar8 & 0xff000000) << 8 | (uVar8 & 0xff0000) << 0x18 |
+                 (uVar8 & 0xff00) << 0x28 | uVar8 << 0x38;
+        d->nx = (uint)((dword)uVar9 & 0x3f);
+        return;
+      }
+      runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+      extraout_RAX_00[1] = 0x26;
+      *extraout_RAX_00 = &DAT_008c3c9d;
+      return;
+    }
+  }
+LAB_00678a39:
+  runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+  extraout_RAX[1] = 0x2c;
+  *extraout_RAX = &DAT_008c6ada;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_sha256___digest__Reset(crypto_sha256_digest *d)
+
+{
+  undefined4 in_XMM15_Da;
+  undefined4 in_XMM15_Db;
+  undefined4 in_XMM15_Dc;
+  undefined4 in_XMM15_Dd;
+  
+  if (d->is224 == false) {
+    *(undefined8 *)d->h = 0xbb67ae856a09e667;
+    *(undefined8 *)(d->h + 2) = 0xa54ff53a3c6ef372;
+    *(undefined8 *)(d->h + 4) = 0x9b05688c510e527f;
+    *(undefined8 *)(d->h + 6) = 0x5be0cd191f83d9ab;
+  }
+  else {
+    *(undefined8 *)d->h = 0x367cd507c1059ed8;
+    *(undefined8 *)(d->h + 2) = 0xf70e59393070dd17;
+    *(undefined8 *)(d->h + 4) = 0x68581511ffc00b31;
+    *(undefined8 *)(d->h + 6) = 0xbefa4fa464f98fa7;
+  }
+  *(undefined4 *)&d->nx = in_XMM15_Da;
+  *(undefined4 *)((int)&d->nx + 4) = in_XMM15_Db;
+  *(undefined4 *)&d->len = in_XMM15_Dc;
+  *(undefined4 *)((int)&d->len + 4) = in_XMM15_Dd;
+  return;
+}
+
+
+
+void crypto_sha256_New(hash_Hash ~r0)
+
+{
+  crypto_sha256_digest *d_00;
+  crypto_sha256_digest *d;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00881d20,in_RBX);
+  crypto_sha256___digest__Reset(d_00);
+  return;
+}
+
+
+
+void crypto_sha256_New224(hash_Hash ~r0)
+
+{
+  crypto_sha256_digest *d_00;
+  crypto_sha256_digest *d;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00881d20,in_RBX);
+  d_00->is224 = true;
+  crypto_sha256___digest__Reset(d_00);
+  return;
+}
+
+
+
+void crypto_sha256___digest__Size(crypto_sha256_digest *d,int ~r0)
+
+{
+  if (d->is224 != false) {
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_sha256___digest__BlockSize(crypto_sha256_digest *d,int ~r0)
+
+{
+  return;
+}
+
+
+
+void crypto_sha256___digest__Write(crypto_sha256_digest *d,__uint8 p,int nn,error err)
+
+{
+  uint uVar1;
+  uint in_RCX;
+  int iVar2;
+  int n;
+  size_t __n;
+  int in_RDI;
+  int n_1;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_boring_sig_StandardCrypto();
+  d->len = d->len + in_RCX;
+  uVar1 = d->nx;
+  if (0 < (int)uVar1) {
+    if (0x40 < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    iVar2 = uVar1 - 0x40;
+    n = -iVar2;
+    if (SBORROW8(in_RCX,-iVar2) != (int)(in_RCX + iVar2) < 0) {
+      n = in_RCX;
+    }
+    if ((uint8 *)nn != d->x + (iVar2 >> 0x3f & uVar1)) {
+      runtime_memmove(d->x + (iVar2 >> 0x3f & uVar1),(void *)nn,n);
+    }
+    iVar2 = d->nx + n;
+    d->nx = iVar2;
+    if (iVar2 == 0x40) {
+      crypto_sha256_block();
+      d->nx = 0;
+    }
+    if (in_RCX < (uint)n) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    in_RDI = in_RDI - n;
+    in_RCX = in_RCX - n;
+    nn = nn + (-in_RDI >> 0x3f & n);
+  }
+  if (0x3f < (int)in_RCX) {
+    crypto_sha256_block();
+    nn = nn + ((int)((in_RCX & 0xffffffffffffffc0) - in_RDI) >> 0x3f & in_RCX & 0xffffffffffffffc0);
+    in_RCX = in_RCX - (in_RCX & 0xffffffffffffffc0);
+  }
+  if (in_RCX != 0) {
+    __n = 0x40;
+    if ((int)in_RCX < 0x40) {
+      __n = in_RCX;
+    }
+    if ((uint8 *)nn != d->x) {
+      runtime_memmove(d->x,(void *)nn,__n);
+    }
+    d->nx = __n;
+  }
+  return;
+}
+
+
+
+void crypto_sha256___digest__Sum(crypto_sha256_digest *d,__uint8 in,__uint8 ~r0)
+
+{
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  uint8 ~r0_02 [32];
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  int in_RCX;
+  void *in_RBX;
+  uint in_RDI;
+  int unaff_R14;
+  undefined4 in_stack_ffffffffffffff20;
+  undefined4 in_stack_ffffffffffffff24;
+  undefined4 in_stack_ffffffffffffff28;
+  undefined4 in_stack_ffffffffffffff2c;
+  undefined4 in_stack_ffffffffffffff30;
+  undefined4 in_stack_ffffffffffffff34;
+  undefined4 in_stack_ffffffffffffff38;
+  undefined4 in_stack_ffffffffffffff3c;
+  undefined local_a8 [32];
+  crypto_sha256_digest local_88;
+  
+  while (local_88.x + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  crypto_internal_boring_sig_StandardCrypto();
+  local_88.h._0_8_ = *(undefined8 *)d->h;
+  FUN_0046d0fe();
+  ~r0_02[4] = (char)in_stack_ffffffffffffff24;
+  ~r0_02[5] = (char)((dword)in_stack_ffffffffffffff24 >> 8);
+  ~r0_02[6] = (char)((dword)in_stack_ffffffffffffff24 >> 0x10);
+  ~r0_02[7] = (char)((dword)in_stack_ffffffffffffff24 >> 0x18);
+  ~r0_02[0] = (char)in_stack_ffffffffffffff20;
+  ~r0_02[1] = (char)((dword)in_stack_ffffffffffffff20 >> 8);
+  ~r0_02[2] = (char)((dword)in_stack_ffffffffffffff20 >> 0x10);
+  ~r0_02[3] = (char)((dword)in_stack_ffffffffffffff20 >> 0x18);
+  ~r0_02[8] = (char)in_stack_ffffffffffffff28;
+  ~r0_02[9] = (char)((dword)in_stack_ffffffffffffff28 >> 8);
+  ~r0_02[10] = (char)((dword)in_stack_ffffffffffffff28 >> 0x10);
+  ~r0_02[11] = (char)((dword)in_stack_ffffffffffffff28 >> 0x18);
+  ~r0_02[12] = (char)in_stack_ffffffffffffff2c;
+  ~r0_02[13] = (char)((dword)in_stack_ffffffffffffff2c >> 8);
+  ~r0_02[14] = (char)((dword)in_stack_ffffffffffffff2c >> 0x10);
+  ~r0_02[15] = (char)((dword)in_stack_ffffffffffffff2c >> 0x18);
+  ~r0_02[16] = (char)in_stack_ffffffffffffff30;
+  ~r0_02[17] = (char)((dword)in_stack_ffffffffffffff30 >> 8);
+  ~r0_02[18] = (char)((dword)in_stack_ffffffffffffff30 >> 0x10);
+  ~r0_02[19] = (char)((dword)in_stack_ffffffffffffff30 >> 0x18);
+  ~r0_02[20] = (char)in_stack_ffffffffffffff34;
+  ~r0_02[21] = (char)((dword)in_stack_ffffffffffffff34 >> 8);
+  ~r0_02[22] = (char)((dword)in_stack_ffffffffffffff34 >> 0x10);
+  ~r0_02[23] = (char)((dword)in_stack_ffffffffffffff34 >> 0x18);
+  ~r0_02[24] = (char)in_stack_ffffffffffffff38;
+  ~r0_02[25] = (char)((dword)in_stack_ffffffffffffff38 >> 8);
+  ~r0_02[26] = (char)((dword)in_stack_ffffffffffffff38 >> 0x10);
+  ~r0_02[27] = (char)((dword)in_stack_ffffffffffffff38 >> 0x18);
+  ~r0_02[28] = (char)in_stack_ffffffffffffff3c;
+  ~r0_02[29] = (char)((dword)in_stack_ffffffffffffff3c >> 8);
+  ~r0_02[30] = (char)((dword)in_stack_ffffffffffffff3c >> 0x10);
+  ~r0_02[31] = (char)((dword)in_stack_ffffffffffffff3c >> 0x18);
+  crypto_sha256___digest__checkSum(&local_88,~r0_02);
+  if (local_88.is224 == false) {
+    if (in_RDI < in_RCX + 0x20U) {
+      ~r0_01.array._4_4_ = in_stack_ffffffffffffff24;
+      ~r0_01.array._0_4_ = in_stack_ffffffffffffff20;
+      ~r0_01.len._0_4_ = in_stack_ffffffffffffff28;
+      ~r0_01.len._4_4_ = in_stack_ffffffffffffff2c;
+      ~r0_01.cap._0_4_ = in_stack_ffffffffffffff30;
+      ~r0_01.cap._4_4_ = in_stack_ffffffffffffff34;
+      runtime_growslice(in_RBX,in_RCX + 0x20U,in_RDI,0x20,(internal_abi_Type *)&DAT_00807920,~r0_01)
+      ;
+      in_RBX = extraout_RAX_00;
+    }
+    runtime_memmove((void *)(in_RCX + (int)in_RBX),local_a8,0x20);
+    return;
+  }
+  if (in_RDI < in_RCX + 0x1cU) {
+    ~r0_00.array._4_4_ = in_stack_ffffffffffffff24;
+    ~r0_00.array._0_4_ = in_stack_ffffffffffffff20;
+    ~r0_00.len._0_4_ = in_stack_ffffffffffffff28;
+    ~r0_00.len._4_4_ = in_stack_ffffffffffffff2c;
+    ~r0_00.cap._0_4_ = in_stack_ffffffffffffff30;
+    ~r0_00.cap._4_4_ = in_stack_ffffffffffffff34;
+    runtime_growslice(in_RBX,in_RCX + 0x1cU,in_RDI,0x1c,(internal_abi_Type *)&DAT_00807920,~r0_00);
+    in_RBX = extraout_RAX;
+  }
+  runtime_memmove((void *)((int)in_RBX + in_RCX),local_a8,0x1c);
+  return;
+}
+
+
+
+// WARNING: Type propagation algorithm not settling
+
+void crypto_sha256___digest__checkSum(crypto_sha256_digest *d,uint8 ~r0 [32])
+
+{
+  int iVar1;
+  uint64 uVar2;
+  __uint8 p;
+  error err;
+  uint64 len;
+  uint uVar3;
+  uint64 t;
+  uint uVar4;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffff70;
+  int in_stack_ffffffffffffff80;
+  undefined8 in_stack_ffffffffffffff88;
+  undefined4 in_stack_ffffffffffffff90;
+  undefined4 in_stack_ffffffffffffff94;
+  undefined8 local_50;
+  undefined8 uStack_48;
+  undefined8 uStack_40;
+  undefined auStack_10 [8];
+  
+  while (auStack_10 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar2 = d->len;
+  local_50._1_7_ = in_XMM15._1_7_;
+  uStack_48 = in_XMM15._0_8_;
+  uStack_40 = in_XMM15._8_8_;
+  local_50._0_1_ = 0x80;
+  uVar4 = (uint)((dword)uVar2 & 0x3f);
+  iVar1 = uVar4 - 0x78;
+  if (uVar4 < 0x38) {
+    iVar1 = uVar4 - 0x38;
+  }
+  uVar4 = -iVar1;
+  if (0x48 < uVar4 + 8) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlenU();
+  }
+  if (uVar4 + 8 < uVar4) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceBU();
+  }
+  uVar3 = uVar2 << 3;
+  *(uint *)((int)&local_50 + (uVar4 & (int)(uVar4 - 0x48) >> 0x3f)) =
+       uVar3 >> 0x38 | (uVar3 & 0xff000000000000) >> 0x28 | (uVar3 & 0xff0000000000) >> 0x18 |
+       (uVar3 & 0xff00000000) >> 8 | (uVar3 & 0xff000000) << 8 | (uVar3 & 0xff0000) << 0x18 |
+       (uVar3 & 0xff00) << 0x28 | uVar2 << 0x3b;
+  p.cap = in_stack_ffffffffffffff80;
+  p.array = (uint8 *)in_stack_ffffffffffffff70._type;
+  p.len = (int)in_stack_ffffffffffffff70.data;
+  err.data._0_4_ = in_stack_ffffffffffffff90;
+  err.tab = (runtime_itab *)in_stack_ffffffffffffff88;
+  err.data._4_4_ = in_stack_ffffffffffffff94;
+  crypto_sha256___digest__Write(d,p,(int)&local_50,err);
+  if (d->nx == 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffff70);
+}
+
+
+
+void crypto_sha256_Sum224(__uint8 data,uint8 ~r0 [28])
+
+{
+  __uint8 p;
+  uint8 ~r0_00 [32];
+  error err;
+  int in_RAX;
+  int in_RCX;
+  int unaff_R14;
+  dword dStack000000000000003c;
+  undefined4 in_stack_ffffffffffffff38;
+  undefined4 in_stack_ffffffffffffff3c;
+  undefined4 in_stack_ffffffffffffff40;
+  undefined4 in_stack_ffffffffffffff44;
+  undefined4 in_stack_ffffffffffffff48;
+  undefined4 in_stack_ffffffffffffff4c;
+  undefined4 in_stack_ffffffffffffff50;
+  undefined4 in_stack_ffffffffffffff54;
+  void *in_stack_ffffffffffffff58;
+  crypto_sha256_digest local_80;
+  
+  while (dStack000000000000003c = (dword)((uint)in_RCX >> 0x20),
+        local_80.x + 0x18 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RCX = (uint)dStack000000000000003c << 0x20;
+  }
+  FUN_0046cda6();
+  local_80.is224 = true;
+  crypto_sha256___digest__Reset(&local_80);
+  p.array._4_4_ = in_stack_ffffffffffffff3c;
+  p.array._0_4_ = in_stack_ffffffffffffff38;
+  p.len._0_4_ = in_stack_ffffffffffffff40;
+  p.len._4_4_ = in_stack_ffffffffffffff44;
+  p.cap._0_4_ = in_stack_ffffffffffffff48;
+  p.cap._4_4_ = in_stack_ffffffffffffff4c;
+  err.tab._4_4_ = in_stack_ffffffffffffff54;
+  err.tab._0_4_ = in_stack_ffffffffffffff50;
+  err.data = in_stack_ffffffffffffff58;
+  crypto_sha256___digest__Write(&local_80,p,in_RAX,err);
+  ~r0_00[4] = (char)in_stack_ffffffffffffff3c;
+  ~r0_00[5] = (char)((dword)in_stack_ffffffffffffff3c >> 8);
+  ~r0_00[6] = (char)((dword)in_stack_ffffffffffffff3c >> 0x10);
+  ~r0_00[7] = (char)((dword)in_stack_ffffffffffffff3c >> 0x18);
+  ~r0_00[0] = (char)in_stack_ffffffffffffff38;
+  ~r0_00[1] = (char)((dword)in_stack_ffffffffffffff38 >> 8);
+  ~r0_00[2] = (char)((dword)in_stack_ffffffffffffff38 >> 0x10);
+  ~r0_00[3] = (char)((dword)in_stack_ffffffffffffff38 >> 0x18);
+  ~r0_00[8] = (char)in_stack_ffffffffffffff40;
+  ~r0_00[9] = (char)((dword)in_stack_ffffffffffffff40 >> 8);
+  ~r0_00[10] = (char)((dword)in_stack_ffffffffffffff40 >> 0x10);
+  ~r0_00[11] = (char)((dword)in_stack_ffffffffffffff40 >> 0x18);
+  ~r0_00[12] = (char)in_stack_ffffffffffffff44;
+  ~r0_00[13] = (char)((dword)in_stack_ffffffffffffff44 >> 8);
+  ~r0_00[14] = (char)((dword)in_stack_ffffffffffffff44 >> 0x10);
+  ~r0_00[15] = (char)((dword)in_stack_ffffffffffffff44 >> 0x18);
+  ~r0_00[16] = (char)in_stack_ffffffffffffff48;
+  ~r0_00[17] = (char)((dword)in_stack_ffffffffffffff48 >> 8);
+  ~r0_00[18] = (char)((dword)in_stack_ffffffffffffff48 >> 0x10);
+  ~r0_00[19] = (char)((dword)in_stack_ffffffffffffff48 >> 0x18);
+  ~r0_00[20] = (char)in_stack_ffffffffffffff4c;
+  ~r0_00[21] = (char)((dword)in_stack_ffffffffffffff4c >> 8);
+  ~r0_00[22] = (char)((dword)in_stack_ffffffffffffff4c >> 0x10);
+  ~r0_00[23] = (char)((dword)in_stack_ffffffffffffff4c >> 0x18);
+  ~r0_00[24] = (char)in_stack_ffffffffffffff50;
+  ~r0_00[25] = (char)((dword)in_stack_ffffffffffffff50 >> 8);
+  ~r0_00[26] = (char)((dword)in_stack_ffffffffffffff50 >> 0x10);
+  ~r0_00[27] = (char)((dword)in_stack_ffffffffffffff50 >> 0x18);
+  ~r0_00[28] = (char)in_stack_ffffffffffffff54;
+  ~r0_00[29] = (char)((dword)in_stack_ffffffffffffff54 >> 8);
+  ~r0_00[30] = (char)((dword)in_stack_ffffffffffffff54 >> 0x10);
+  ~r0_00[31] = (char)((dword)in_stack_ffffffffffffff54 >> 0x18);
+  crypto_sha256___digest__checkSum(&local_80,~r0_00);
+  return;
+}
+
+
+
+int crypto_sha256_init(EVP_PKEY_CTX *ctx)
+
+{
+  uint uVar1;
+  
+  crypto_sha256_useAVX2 = internal_cpu_X86.HasBMI2;
+  if (!internal_cpu_X86.HasAVX2) {
+    crypto_sha256_useAVX2 = (bool)'\0';
+  }
+  if (crypto_sha256_useAVX2 == false) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = (uint)internal_cpu_X86.HasSHA;
+  }
+  crypto_sha256_useSHA = (bool)(char)uVar1;
+  return uVar1;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_sha256_block(void)
+
+{
+  dword dVar1;
+  dword dVar2;
+  dword dVar3;
+  dword dVar4;
+  dword dVar5;
+  dword dVar6;
+  undefined *puVar7;
+  dword dVar8;
+  sdword sVar9;
+  dword dVar10;
+  sdword sVar11;
+  dword dVar12;
+  dword dVar13;
+  dword dVar14;
+  dword dVar15;
+  dword dVar16;
+  dword dVar17;
+  dword dVar18;
+  dword dVar19;
+  dword dVar20;
+  dword dVar21;
+  dword dVar22;
+  dword dVar23;
+  dword dVar24;
+  dword dVar25;
+  dword dVar26;
+  dword dVar27;
+  dword dVar28;
+  dword dVar29;
+  uint uVar30;
+  dword dVar31;
+  dword dVar32;
+  dword dVar33;
+  dword dVar34;
+  dword dVar35;
+  dword dVar36;
+  dword dVar37;
+  dword dVar38;
+  dword dVar39;
+  dword dVar40;
+  dword dVar41;
+  dword dVar42;
+  dword dVar43;
+  dword dVar44;
+  dword dVar45;
+  dword dVar46;
+  dword dVar47;
+  dword dVar48;
+  dword dVar49;
+  dword dVar50;
+  dword dVar51;
+  dword dVar52;
+  dword dVar53;
+  dword dVar54;
+  dword dVar55;
+  dword dVar56;
+  dword dVar57;
+  dword dVar58;
+  int in_FS_OFFSET;
+  undefined auVar59 [16];
+  undefined auVar60 [16];
+  undefined auVar61 [16];
+  undefined auVar62 [16];
+  undefined auVar63 [16];
+  undefined auVar64 [16];
+  undefined auVar65 [16];
+  undefined auVar66 [16];
+  undefined auVar67 [16];
+  undefined auVar68 [16];
+  undefined auVar69 [16];
+  undefined auVar70 [16];
+  undefined auVar71 [16];
+  undefined auVar72 [16];
+  undefined auVar73 [16];
+  undefined auVar74 [16];
+  undefined auVar75 [16];
+  undefined auVar76 [16];
+  undefined auVar77 [16];
+  undefined auVar78 [16];
+  undefined auVar79 [16];
+  undefined auVar80 [16];
+  undefined auVar81 [16];
+  undefined auVar82 [16];
+  undefined auVar83 [16];
+  undefined auVar84 [16];
+  undefined auVar85 [16];
+  undefined auVar86 [32];
+  undefined auVar87 [16];
+  undefined auVar88 [16];
+  undefined auVar89 [32];
+  undefined auVar90 [16];
+  undefined auVar91 [16];
+  undefined auVar92 [16];
+  undefined auVar93 [16];
+  undefined auVar94 [32];
+  undefined auVar95 [32];
+  undefined auVar96 [16];
+  undefined auVar97 [16];
+  undefined auVar98 [16];
+  undefined auVar99 [16];
+  undefined auVar100 [32];
+  undefined auVar101 [32];
+  undefined auVar102 [16];
+  undefined auVar103 [16];
+  undefined auVar104 [16];
+  undefined auVar105 [16];
+  undefined auVar106 [16];
+  undefined auVar107 [16];
+  undefined auVar108 [16];
+  undefined auVar109 [16];
+  undefined auVar110 [16];
+  undefined auVar111 [16];
+  undefined auVar112 [16];
+  undefined auVar113 [32];
+  undefined auVar114 [32];
+  undefined (*in_stack_00000008) [16];
+  undefined (*in_stack_00000010) [32];
+  uint in_stack_00000018;
+  sdword local_220 [8];
+  sdword local_200 [8];
+  sdword local_1e0 [8];
+  sdword local_1c0 [8];
+  undefined local_1a0 [384];
+  undefined (*local_20) [32];
+  undefined (*local_18) [32];
+  
+  while (local_1a0 <= *(undefined **)(*(int *)(in_FS_OFFSET + -8) + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (crypto_sha256_useSHA == true) {
+    if ((in_stack_00000018 & 0xffffffffffffffc0) != 0) {
+      puVar7 = *in_stack_00000010;
+      auVar90 = vmovdqu_avx(*in_stack_00000008);
+      auVar59 = vmovdqu_avx(in_stack_00000008[1]);
+      auVar60._4_4_ = auVar90._0_4_;
+      auVar60._0_4_ = auVar90._4_4_;
+      auVar60._8_4_ = auVar90._12_4_;
+      auVar60._12_4_ = auVar90._8_4_;
+      auVar90._4_4_ = auVar59._8_4_;
+      auVar90._0_4_ = auVar59._12_4_;
+      auVar90._8_4_ = auVar59._4_4_;
+      auVar90._12_4_ = auVar59._0_4_;
+      auVar86._16_16_ = auVar60;
+      auVar86._0_16_ = auVar90;
+      auVar90 = pblendw(auVar90,auVar60,0xf0);
+      auVar86 = ZEXT1632(auVar86._8_16_);
+      auVar89 = ZEXT1632(auVar90);
+      do {
+        auVar90 = vmovdqu_avx(*(undefined (*) [16])*in_stack_00000010);
+        auVar59 = pshufb(auVar90,flip_mask._0_16_);
+        auVar87._0_4_ = auVar59._0_4_ + 0x428a2f98;
+        auVar87._4_4_ = auVar59._4_4_ + 0x71374491;
+        auVar87._8_4_ = auVar59._8_4_ + 0xb5c0fbcf;
+        auVar87._12_4_ = auVar59._12_4_ + 0xe9b5dba5;
+        auVar100._16_16_ = auVar89._16_16_;
+        auVar91 = sha256rnds2_sha(auVar89._0_16_,auVar86._0_16_,auVar87);
+        auVar92._4_4_ = auVar87._12_4_;
+        auVar92._0_4_ = auVar87._8_4_;
+        auVar92._8_4_ = auVar87._0_4_;
+        auVar92._12_4_ = auVar87._0_4_;
+        auVar94._16_16_ = auVar86._16_16_;
+        auVar87 = sha256rnds2_sha(auVar86._0_16_,auVar91,auVar92);
+        auVar90 = vmovdqu_avx(*(undefined (*) [16])(*in_stack_00000010 + 0x10));
+        auVar60 = pshufb(auVar90,flip_mask._0_16_);
+        auVar96._0_4_ = auVar60._0_4_ + 0x3956c25b;
+        auVar96._4_4_ = auVar60._4_4_ + 0x59f111f1;
+        auVar96._8_4_ = auVar60._8_4_ + 0x923f82a4;
+        auVar96._12_4_ = auVar60._12_4_ + 0xab1c5ed5;
+        auVar92 = sha256rnds2_sha(auVar91,auVar87,auVar96);
+        auVar91._4_4_ = auVar96._12_4_;
+        auVar91._0_4_ = auVar96._8_4_;
+        auVar91._8_4_ = auVar96._0_4_;
+        auVar91._12_4_ = auVar96._0_4_;
+        auVar87 = sha256rnds2_sha(auVar87,auVar92,auVar91);
+        auVar96 = sha256msg1_sha(auVar59,auVar60);
+        auVar90 = vmovdqu_avx(*(undefined (*) [16])in_stack_00000010[1]);
+        auVar59 = pshufb(auVar90,flip_mask._0_16_);
+        auVar105._0_4_ = auVar59._0_4_ + 0xd807aa98;
+        auVar105._4_4_ = auVar59._4_4_ + 0x12835b01;
+        auVar105._8_4_ = auVar59._8_4_ + 0x243185be;
+        auVar105._12_4_ = auVar59._12_4_ + 0x550c7dc3;
+        auVar92 = sha256rnds2_sha(auVar92,auVar87,auVar105);
+        auVar109._4_4_ = auVar105._12_4_;
+        auVar109._0_4_ = auVar105._8_4_;
+        auVar109._8_4_ = auVar105._0_4_;
+        auVar109._12_4_ = auVar105._0_4_;
+        auVar87 = sha256rnds2_sha(auVar87,auVar92,auVar109);
+        auVar91 = sha256msg1_sha(auVar60,auVar59);
+        auVar90 = vmovdqu_avx(*(undefined (*) [16])(in_stack_00000010[1] + 0x10));
+        auVar90 = pshufb(auVar90,flip_mask._0_16_);
+        auVar61._0_4_ = auVar90._0_4_ + 0x72be5d74;
+        auVar61._4_4_ = auVar90._4_4_ + 0x80deb1fe;
+        auVar61._8_4_ = auVar90._8_4_ + 0x9bdc06a7;
+        auVar61._12_4_ = auVar90._12_4_ + 0xc19bf174;
+        auVar92 = sha256rnds2_sha(auVar92,auVar87,auVar61);
+        auVar97._0_4_ = auVar96._0_4_ + auVar59._4_4_;
+        auVar97._4_4_ = auVar96._4_4_ + auVar59._8_4_;
+        auVar97._8_4_ = auVar96._8_4_ + auVar59._12_4_;
+        auVar97._12_4_ = auVar96._12_4_ + auVar90._0_4_;
+        auVar96 = sha256msg2_sha(auVar97,auVar90);
+        auVar62._4_4_ = auVar61._12_4_;
+        auVar62._0_4_ = auVar61._8_4_;
+        auVar62._8_4_ = auVar61._0_4_;
+        auVar62._12_4_ = auVar61._0_4_;
+        auVar60 = sha256rnds2_sha(auVar87,auVar92,auVar62);
+        auVar105 = sha256msg1_sha(auVar59,auVar90);
+        auVar59._0_4_ = auVar96._0_4_ + 0xe49b69c1;
+        auVar59._4_4_ = auVar96._4_4_ + 0xefbe4786;
+        auVar59._8_4_ = auVar96._8_4_ + 0xfc19dc6;
+        auVar59._12_4_ = auVar96._12_4_ + 0x240ca1cc;
+        auVar87 = sha256rnds2_sha(auVar92,auVar60,auVar59);
+        auVar102._0_4_ = auVar91._0_4_ + auVar90._4_4_;
+        auVar102._4_4_ = auVar91._4_4_ + auVar90._8_4_;
+        auVar102._8_4_ = auVar91._8_4_ + auVar90._12_4_;
+        auVar102._12_4_ = auVar91._12_4_ + auVar96._0_4_;
+        auVar92 = sha256msg2_sha(auVar102,auVar96);
+        auVar63._4_4_ = auVar59._12_4_;
+        auVar63._0_4_ = auVar59._8_4_;
+        auVar63._8_4_ = auVar59._0_4_;
+        auVar63._12_4_ = auVar59._0_4_;
+        auVar59 = sha256rnds2_sha(auVar60,auVar87,auVar63);
+        auVar109 = sha256msg1_sha(auVar90,auVar96);
+        auVar64._0_4_ = auVar92._0_4_ + 0x2de92c6f;
+        auVar64._4_4_ = auVar92._4_4_ + 0x4a7484aa;
+        auVar64._8_4_ = auVar92._8_4_ + 0x5cb0a9dc;
+        auVar64._12_4_ = auVar92._12_4_ + 0x76f988da;
+        auVar60 = sha256rnds2_sha(auVar87,auVar59,auVar64);
+        auVar106._0_4_ = auVar105._0_4_ + auVar96._4_4_;
+        auVar106._4_4_ = auVar105._4_4_ + auVar96._8_4_;
+        auVar106._8_4_ = auVar105._8_4_ + auVar96._12_4_;
+        auVar106._12_4_ = auVar105._12_4_ + auVar92._0_4_;
+        auVar91 = sha256msg2_sha(auVar106,auVar92);
+        auVar65._4_4_ = auVar64._12_4_;
+        auVar65._0_4_ = auVar64._8_4_;
+        auVar65._8_4_ = auVar64._0_4_;
+        auVar65._12_4_ = auVar64._0_4_;
+        auVar90 = sha256rnds2_sha(auVar59,auVar60,auVar65);
+        auVar87 = sha256msg1_sha(auVar96,auVar92);
+        auVar66._0_4_ = auVar91._0_4_ + 0x983e5152;
+        auVar66._4_4_ = auVar91._4_4_ + 0xa831c66d;
+        auVar66._8_4_ = auVar91._8_4_ + 0xb00327c8;
+        auVar66._12_4_ = auVar91._12_4_ + 0xbf597fc7;
+        auVar59 = sha256rnds2_sha(auVar60,auVar90,auVar66);
+        auVar110._0_4_ = auVar109._0_4_ + auVar92._4_4_;
+        auVar110._4_4_ = auVar109._4_4_ + auVar92._8_4_;
+        auVar110._8_4_ = auVar109._8_4_ + auVar92._12_4_;
+        auVar110._12_4_ = auVar109._12_4_ + auVar91._0_4_;
+        auVar105 = sha256msg2_sha(auVar110,auVar91);
+        auVar67._4_4_ = auVar66._12_4_;
+        auVar67._0_4_ = auVar66._8_4_;
+        auVar67._8_4_ = auVar66._0_4_;
+        auVar67._12_4_ = auVar66._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar67);
+        auVar92 = sha256msg1_sha(auVar92,auVar91);
+        auVar68._0_4_ = auVar105._0_4_ + 0xc6e00bf3;
+        auVar68._4_4_ = auVar105._4_4_ + 0xd5a79147;
+        auVar68._8_4_ = auVar105._8_4_ + 0x6ca6351;
+        auVar68._12_4_ = auVar105._12_4_ + 0x14292967;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar68);
+        auVar98._0_4_ = auVar87._0_4_ + auVar91._4_4_;
+        auVar98._4_4_ = auVar87._4_4_ + auVar91._8_4_;
+        auVar98._8_4_ = auVar87._8_4_ + auVar91._12_4_;
+        auVar98._12_4_ = auVar87._12_4_ + auVar105._0_4_;
+        auVar60 = sha256msg2_sha(auVar98,auVar105);
+        auVar69._4_4_ = auVar68._12_4_;
+        auVar69._0_4_ = auVar68._8_4_;
+        auVar69._8_4_ = auVar68._0_4_;
+        auVar69._12_4_ = auVar68._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar69);
+        auVar96 = sha256msg1_sha(auVar91,auVar105);
+        auVar70._0_4_ = auVar60._0_4_ + 0x27b70a85;
+        auVar70._4_4_ = auVar60._4_4_ + 0x2e1b2138;
+        auVar70._8_4_ = auVar60._8_4_ + 0x4d2c6dfc;
+        auVar70._12_4_ = auVar60._12_4_ + 0x53380d13;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar70);
+        auVar103._0_4_ = auVar92._0_4_ + auVar105._4_4_;
+        auVar103._4_4_ = auVar92._4_4_ + auVar105._8_4_;
+        auVar103._8_4_ = auVar92._8_4_ + auVar105._12_4_;
+        auVar103._12_4_ = auVar92._12_4_ + auVar60._0_4_;
+        auVar87 = sha256msg2_sha(auVar103,auVar60);
+        auVar71._4_4_ = auVar70._12_4_;
+        auVar71._0_4_ = auVar70._8_4_;
+        auVar71._8_4_ = auVar70._0_4_;
+        auVar71._12_4_ = auVar70._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar71);
+        auVar91 = sha256msg1_sha(auVar105,auVar60);
+        auVar72._0_4_ = auVar87._0_4_ + 0x650a7354;
+        auVar72._4_4_ = auVar87._4_4_ + 0x766a0abb;
+        auVar72._8_4_ = auVar87._8_4_ + 0x81c2c92e;
+        auVar72._12_4_ = auVar87._12_4_ + 0x92722c85;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar72);
+        auVar107._0_4_ = auVar96._0_4_ + auVar60._4_4_;
+        auVar107._4_4_ = auVar96._4_4_ + auVar60._8_4_;
+        auVar107._8_4_ = auVar96._8_4_ + auVar60._12_4_;
+        auVar107._12_4_ = auVar96._12_4_ + auVar87._0_4_;
+        auVar92 = sha256msg2_sha(auVar107,auVar87);
+        auVar73._4_4_ = auVar72._12_4_;
+        auVar73._0_4_ = auVar72._8_4_;
+        auVar73._8_4_ = auVar72._0_4_;
+        auVar73._12_4_ = auVar72._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar73);
+        auVar60 = sha256msg1_sha(auVar60,auVar87);
+        auVar74._0_4_ = auVar92._0_4_ + 0xa2bfe8a1;
+        auVar74._4_4_ = auVar92._4_4_ + 0xa81a664b;
+        auVar74._8_4_ = auVar92._8_4_ + 0xc24b8b70;
+        auVar74._12_4_ = auVar92._12_4_ + 0xc76c51a3;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar74);
+        auVar111._0_4_ = auVar91._0_4_ + auVar87._4_4_;
+        auVar111._4_4_ = auVar91._4_4_ + auVar87._8_4_;
+        auVar111._8_4_ = auVar91._8_4_ + auVar87._12_4_;
+        auVar111._12_4_ = auVar91._12_4_ + auVar92._0_4_;
+        auVar96 = sha256msg2_sha(auVar111,auVar92);
+        auVar75._4_4_ = auVar74._12_4_;
+        auVar75._0_4_ = auVar74._8_4_;
+        auVar75._8_4_ = auVar74._0_4_;
+        auVar75._12_4_ = auVar74._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar75);
+        auVar87 = sha256msg1_sha(auVar87,auVar92);
+        auVar76._0_4_ = auVar96._0_4_ + 0xd192e819;
+        auVar76._4_4_ = auVar96._4_4_ + 0xd6990624;
+        auVar76._8_4_ = auVar96._8_4_ + 0xf40e3585;
+        auVar76._12_4_ = auVar96._12_4_ + 0x106aa070;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar76);
+        auVar99._0_4_ = auVar60._0_4_ + auVar92._4_4_;
+        auVar99._4_4_ = auVar60._4_4_ + auVar92._8_4_;
+        auVar99._8_4_ = auVar60._8_4_ + auVar92._12_4_;
+        auVar99._12_4_ = auVar60._12_4_ + auVar96._0_4_;
+        auVar60 = sha256msg2_sha(auVar99,auVar96);
+        auVar77._4_4_ = auVar76._12_4_;
+        auVar77._0_4_ = auVar76._8_4_;
+        auVar77._8_4_ = auVar76._0_4_;
+        auVar77._12_4_ = auVar76._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar77);
+        auVar92 = sha256msg1_sha(auVar92,auVar96);
+        auVar78._0_4_ = auVar60._0_4_ + 0x19a4c116;
+        auVar78._4_4_ = auVar60._4_4_ + 0x1e376c08;
+        auVar78._8_4_ = auVar60._8_4_ + 0x2748774c;
+        auVar78._12_4_ = auVar60._12_4_ + 0x34b0bcb5;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar78);
+        auVar104._0_4_ = auVar87._0_4_ + auVar96._4_4_;
+        auVar104._4_4_ = auVar87._4_4_ + auVar96._8_4_;
+        auVar104._8_4_ = auVar87._8_4_ + auVar96._12_4_;
+        auVar104._12_4_ = auVar87._12_4_ + auVar60._0_4_;
+        auVar87 = sha256msg2_sha(auVar104,auVar60);
+        auVar79._4_4_ = auVar78._12_4_;
+        auVar79._0_4_ = auVar78._8_4_;
+        auVar79._8_4_ = auVar78._0_4_;
+        auVar79._12_4_ = auVar78._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar79);
+        auVar96 = sha256msg1_sha(auVar96,auVar60);
+        auVar80._0_4_ = auVar87._0_4_ + 0x391c0cb3;
+        auVar80._4_4_ = auVar87._4_4_ + 0x4ed8aa4a;
+        auVar80._8_4_ = auVar87._8_4_ + 0x5b9cca4f;
+        auVar80._12_4_ = auVar87._12_4_ + 0x682e6ff3;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar80);
+        auVar108._0_4_ = auVar92._0_4_ + auVar60._4_4_;
+        auVar108._4_4_ = auVar92._4_4_ + auVar60._8_4_;
+        auVar108._8_4_ = auVar92._8_4_ + auVar60._12_4_;
+        auVar108._12_4_ = auVar92._12_4_ + auVar87._0_4_;
+        auVar60 = sha256msg2_sha(auVar108,auVar87);
+        auVar81._4_4_ = auVar80._12_4_;
+        auVar81._0_4_ = auVar80._8_4_;
+        auVar81._8_4_ = auVar80._0_4_;
+        auVar81._12_4_ = auVar80._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar81);
+        auVar82._0_4_ = auVar60._0_4_ + 0x748f82ee;
+        auVar82._4_4_ = auVar60._4_4_ + 0x78a5636f;
+        auVar82._8_4_ = auVar60._8_4_ + 0x84c87814;
+        auVar82._12_4_ = auVar60._12_4_ + 0x8cc70208;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar82);
+        auVar112._0_4_ = auVar96._0_4_ + auVar87._4_4_;
+        auVar112._4_4_ = auVar96._4_4_ + auVar87._8_4_;
+        auVar112._8_4_ = auVar96._8_4_ + auVar87._12_4_;
+        auVar112._12_4_ = auVar96._12_4_ + auVar60._0_4_;
+        auVar60 = sha256msg2_sha(auVar112,auVar60);
+        auVar83._4_4_ = auVar82._12_4_;
+        auVar83._0_4_ = auVar82._8_4_;
+        auVar83._8_4_ = auVar82._0_4_;
+        auVar83._12_4_ = auVar82._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar83);
+        auVar84._0_4_ = auVar60._0_4_ + 0x90befffa;
+        auVar84._4_4_ = auVar60._4_4_ + 0xa4506ceb;
+        auVar84._8_4_ = auVar60._8_4_ + 0xbef9a3f7;
+        auVar84._12_4_ = auVar60._12_4_ + 0xc67178f2;
+        auVar59 = sha256rnds2_sha(auVar59,auVar90,auVar84);
+        auVar85._4_4_ = auVar84._12_4_;
+        auVar85._0_4_ = auVar84._8_4_;
+        auVar85._8_4_ = auVar84._0_4_;
+        auVar85._12_4_ = auVar84._0_4_;
+        auVar90 = sha256rnds2_sha(auVar90,auVar59,auVar85);
+        auVar94._0_4_ = auVar90._0_4_ + auVar86._0_4_;
+        auVar94._4_4_ = auVar90._4_4_ + auVar86._4_4_;
+        auVar94._8_4_ = auVar90._8_4_ + auVar86._8_4_;
+        auVar94._12_4_ = auVar90._12_4_ + auVar86._12_4_;
+        auVar100._0_4_ = auVar59._0_4_ + auVar89._0_4_;
+        auVar100._4_4_ = auVar59._4_4_ + auVar89._4_4_;
+        auVar100._8_4_ = auVar59._8_4_ + auVar89._8_4_;
+        auVar100._12_4_ = auVar59._12_4_ + auVar89._12_4_;
+        in_stack_00000010 = in_stack_00000010 + 2;
+        auVar86 = auVar94;
+        auVar89 = auVar100;
+      } while ((undefined (*) [32])(puVar7 + (in_stack_00000018 & 0xffffffffffffffc0)) !=
+               in_stack_00000010);
+      auVar88._4_4_ = auVar94._8_4_;
+      auVar88._0_4_ = auVar94._12_4_;
+      auVar88._8_4_ = auVar94._4_4_;
+      auVar88._12_4_ = auVar94._0_4_;
+      auVar93._4_4_ = auVar100._0_4_;
+      auVar93._0_4_ = auVar100._4_4_;
+      auVar93._8_4_ = auVar100._12_4_;
+      auVar93._12_4_ = auVar100._8_4_;
+      auVar90 = pblendw(auVar88,auVar93,0xf0);
+      auVar89._16_16_ = auVar93;
+      auVar89._0_16_ = auVar88;
+      auVar90 = vmovdqu_avx(auVar90);
+      *in_stack_00000008 = auVar90;
+      auVar90 = vmovdqu_avx(auVar89._8_16_);
+      in_stack_00000008[1] = auVar90;
+    }
+    return;
+  }
+  if (crypto_sha256_useAVX2 != true) {
+    puVar7 = *in_stack_00000010;
+    if (in_stack_00000010 != (undefined (*) [32])(puVar7 + (in_stack_00000018 & 0xffffffffffffffc0))
+       ) {
+      dVar31 = *(dword *)*in_stack_00000008;
+      dVar34 = *(dword *)(*in_stack_00000008 + 4);
+      dVar38 = *(dword *)(*in_stack_00000008 + 8);
+      sVar11 = *(sdword *)(*in_stack_00000008 + 0xc);
+      dVar29 = *(dword *)in_stack_00000008[1];
+      dVar28 = *(dword *)(in_stack_00000008[1] + 4);
+      dVar27 = *(dword *)(in_stack_00000008[1] + 8);
+      sVar9 = *(sdword *)(in_stack_00000008[1] + 0xc);
+      do {
+        dVar26 = *(dword *)*in_stack_00000010;
+        dVar8 = dVar26 >> 0x18 | (dVar26 & 0xff0000) >> 8 | (dVar26 & 0xff00) << 8 | dVar26 << 0x18;
+        sVar9 = (~dVar29 & dVar27 ^ dVar29 & dVar28) +
+                sVar9 + dVar8 + 0x428a2f98 +
+                ((dVar29 >> 0x19 | dVar29 << 7) ^
+                (dVar29 >> 6 | dVar29 << 0x1a) ^ (dVar29 >> 0xb | dVar29 << 0x15));
+        dVar42 = sVar11 + sVar9;
+        dVar56 = (dVar38 & dVar34 ^ dVar31 & dVar38 ^ dVar34 & dVar31) +
+                 ((dVar31 >> 2 | dVar31 << 0x1e) ^ (dVar31 >> 0xd | dVar31 << 0x13) ^
+                 (dVar31 >> 0x16 | dVar31 << 10)) + sVar9;
+        dVar26 = *(dword *)(*in_stack_00000010 + 4);
+        dVar37 = dVar26 >> 0x18 | (dVar26 & 0xff0000) >> 8 | (dVar26 & 0xff00) << 8;
+        dVar10 = dVar37 | dVar26 << 0x18;
+        sVar11 = (~dVar42 & dVar28 ^ dVar42 & dVar29) +
+                 dVar27 + dVar10 + 0x71374491 +
+                 ((dVar42 >> 0x19 | dVar42 * 0x80) ^
+                 (dVar42 >> 6 | dVar42 * 0x4000000) ^ (dVar42 >> 0xb | dVar42 * 0x200000));
+        dVar38 = dVar38 + sVar11;
+        dVar53 = (dVar34 & dVar31 ^ dVar56 & dVar34 ^ dVar31 & dVar56) +
+                 ((dVar56 >> 2 | dVar56 * 0x40000000) ^ (dVar56 >> 0xd | dVar56 * 0x80000) ^
+                 (dVar56 >> 0x16 | dVar56 * 0x400)) + sVar11;
+        dVar27 = *(dword *)(*in_stack_00000010 + 8);
+        dVar33 = dVar27 >> 0x18 | (dVar27 & 0xff0000) >> 8 | (dVar27 & 0xff00) << 8;
+        dVar12 = dVar33 | dVar27 << 0x18;
+        sVar11 = (~dVar38 & dVar29 ^ dVar38 & dVar42) +
+                 dVar28 + dVar12 + -0x4a3f0431 +
+                 ((dVar38 >> 0x19 | dVar38 * 0x80) ^
+                 (dVar38 >> 6 | dVar38 * 0x4000000) ^ (dVar38 >> 0xb | dVar38 * 0x200000));
+        dVar34 = dVar34 + sVar11;
+        dVar50 = (dVar31 & dVar56 ^ dVar53 & dVar31 ^ dVar56 & dVar53) +
+                 ((dVar53 >> 2 | dVar53 * 0x40000000) ^ (dVar53 >> 0xd | dVar53 * 0x80000) ^
+                 (dVar53 >> 0x16 | dVar53 * 0x400)) + sVar11;
+        dVar28 = *(dword *)(*in_stack_00000010 + 0xc);
+        dVar41 = dVar28 >> 0x18 | (dVar28 & 0xff0000) >> 8 | (dVar28 & 0xff00) << 8;
+        dVar13 = dVar41 | dVar28 << 0x18;
+        sVar11 = (~dVar34 & dVar42 ^ dVar34 & dVar38) +
+                 dVar29 + dVar13 + -0x164a245b +
+                 ((dVar34 >> 0x19 | dVar34 * 0x80) ^
+                 (dVar34 >> 6 | dVar34 * 0x4000000) ^ (dVar34 >> 0xb | dVar34 * 0x200000));
+        dVar31 = dVar31 + sVar11;
+        dVar47 = (dVar56 & dVar53 ^ dVar50 & dVar56 ^ dVar53 & dVar50) +
+                 ((dVar50 >> 2 | dVar50 * 0x40000000) ^ (dVar50 >> 0xd | dVar50 * 0x80000) ^
+                 (dVar50 >> 0x16 | dVar50 * 0x400)) + sVar11;

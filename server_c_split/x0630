@@ -1,0 +1,1000 @@
+}
+
+
+
+void regexp___Regexp__ReplaceAllLiteralString(regexp_Regexp *re,string src,string repl,string ~r0)
+
+{
+  __uint8 bsrc;
+  uint8 *ptr;
+  int n;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa0;
+  int in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffb8;
+  __uint8 in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bsrc.cap = in_stack_ffffffffffffffb0;
+  bsrc.array = in_stack_ffffffffffffffa0.str;
+  bsrc.len = in_stack_ffffffffffffffa0.len;
+  regexp___Regexp__replaceAll
+            (re,bsrc,in_stack_ffffffffffffffb8,0,(func___uint8____int____uint8 **)0x0,
+             in_stack_ffffffffffffffc8);
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,ptr,n,in_stack_ffffffffffffffa0);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllLiteralString_func1(__uint8 dst,__int match,__uint8 ~r0)
+
+{
+  size_t __n;
+  void *__src;
+  void *in_RAX;
+  void *extraout_RAX;
+  uint in_RCX;
+  int in_RDX;
+  int in_RBX;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffffa8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  __n = *(size_t *)(in_RDX + 0x10);
+  __src = *(void **)(in_RDX + 8);
+  if (in_RCX < in_RBX + __n) {
+    runtime_growslice(in_RAX,in_RBX + __n,in_RCX,__n,(internal_abi_Type *)&DAT_00807920,
+                      in_stack_ffffffffffffffa8);
+    in_RAX = extraout_RAX;
+  }
+  runtime_memmove((void *)((int)in_RAX + in_RBX),__src,__n);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllStringFunc
+               (regexp_Regexp *re,string src,func_string__string **repl,string ~r0)
+
+{
+  __uint8 bsrc;
+  uint8 *ptr;
+  int n;
+  int unaff_R14;
+  string in_stack_ffffffffffffff98;
+  int in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb0;
+  __uint8 in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  bsrc.cap = in_stack_ffffffffffffffa8;
+  bsrc.array = in_stack_ffffffffffffff98.str;
+  bsrc.len = in_stack_ffffffffffffff98.len;
+  regexp___Regexp__replaceAll
+            (re,bsrc,in_stack_ffffffffffffffb0,0,(func___uint8____int____uint8 **)0x0,
+             in_stack_ffffffffffffffc0);
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,ptr,n,in_stack_ffffffffffffff98);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllStringFunc_func1(__uint8 dst,__int match,__uint8 ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  void *in_RAX;
+  void *extraout_RAX;
+  uint in_RCX;
+  int in_RDX;
+  func_string__string **repl;
+  int in_RBX;
+  size_t __n;
+  uint in_RSI;
+  uint *in_RDI;
+  int unaff_R14;
+  undefined auVar3 [16];
+  runtime_slice in_stack_ffffffffffffffb0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  if (in_RSI == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (in_RSI < 2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  uVar1 = in_RDI[1];
+  if (*(uint *)(in_RDX + 0x18) < uVar1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlen();
+  }
+  uVar2 = *in_RDI;
+  if (uVar1 < uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  auVar3 = (***(code ***)(in_RDX + 8))
+                     (*(int *)(in_RDX + 0x10) + (uVar2 & (int)-(uVar1 - uVar2) >> 0x3f),
+                      uVar1 - uVar2);
+  __n = auVar3._8_8_;
+  if (in_RCX < in_RBX + __n) {
+    runtime_growslice(in_RAX,in_RBX + __n,in_RCX,__n,(internal_abi_Type *)&DAT_00807920,
+                      in_stack_ffffffffffffffb0);
+    in_RAX = extraout_RAX;
+  }
+  runtime_memmove((void *)(in_RBX + (int)in_RAX),auVar3._0_8_,__n);
+  return;
+}
+
+
+
+void regexp___Regexp__replaceAll
+               (regexp_Regexp *re,__uint8 bsrc,string src,int nmatch,
+               func___uint8____int____uint8 **repl,__uint8 ~r0)
+
+{
+  uint8 *puVar1;
+  func___uint8____int____uint8 **ppfVar2;
+  func___uint8____int____uint8 **ppfVar3;
+  io_RuneReader r;
+  string s;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  __uint8 p;
+  runtime_slice ~r0_02;
+  runtime_slice ~r0_03;
+  __uint8 b;
+  size_t sVar4;
+  void *extraout_RAX;
+  int (*_dstCap) [2];
+  uint *extraout_RAX_00;
+  void *extraout_RAX_01;
+  void *extraout_RAX_02;
+  void *extraout_RAX_03;
+  void *extraout_RAX_04;
+  void *extraout_RAX_05;
+  func___uint8____int____uint8 **ppfVar5;
+  undefined8 extraout_RCX;
+  uint8 *extraout_RCX_00;
+  uint8 *extraout_RCX_01;
+  uint8 *extraout_RCX_02;
+  uint8 *extraout_RCX_03;
+  uint8 *extraout_RCX_04;
+  func___uint8____int____uint8 **ppfVar6;
+  uint extraout_RBX;
+  uint8 *extraout_RBX_00;
+  uint8 *extraout_RBX_01;
+  uint8 *extraout_RBX_02;
+  int extraout_RBX_03;
+  int width;
+  int extraout_RBX_04;
+  int iVar7;
+  uint8 *extraout_RBX_05;
+  uint8 *puVar8;
+  uint8 *extraout_RBX_06;
+  int in_RSI;
+  void *pvVar9;
+  runtime_itab *prVar10;
+  func___uint8____int____uint8 **in_RDI;
+  func___uint8____int____uint8 **in_R8;
+  int endPos;
+  uint8 *puVar11;
+  runtime_itab *in_R9;
+  code **in_R10;
+  func___uint8____int____uint8 **ppfVar12;
+  void *pvVar13;
+  int unaff_R14;
+  runtime_itab *in_stack_ffffffffffffff20;
+  void *in_stack_ffffffffffffff28;
+  int in_stack_ffffffffffffff30;
+  int in_stack_ffffffffffffff40;
+  string in_stack_ffffffffffffff48;
+  __int in_stack_ffffffffffffff58;
+  __int in_stack_ffffffffffffff70;
+  int searchPos;
+  int lastMatchEnd;
+  uint8 *local_60;
+  uint8 *local_58;
+  uint local_50;
+  undefined8 local_48;
+  uint8 *local_40;
+  runtime_itab *local_38;
+  void *local_30;
+  uint *local_28;
+  void *local_20;
+  void *local_18;
+  void *local_10;
+  
+  while (&local_60 <= *(uint8 ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_38 = (runtime_itab *)re->prog->NumCap;
+  runtime_newobject((internal_abi_Type *)&DAT_00810420,(void *)nmatch);
+  ppfVar5 = in_R8;
+  if (nmatch != 0) {
+    ppfVar5 = repl;
+  }
+  if ((int)local_38 < (int)in_R9) {
+    in_R9 = local_38;
+  }
+  local_60 = (uint8 *)0x0;
+  ppfVar12 = (func___uint8____int____uint8 **)0x0;
+  ppfVar2 = (func___uint8____int____uint8 **)0x0;
+  puVar11 = (uint8 *)0x0;
+  pvVar9 = (void *)0x0;
+  local_38 = in_R9;
+  local_10 = extraout_RAX;
+  while (ppfVar6 = ppfVar2, (int)ppfVar6 <= (int)ppfVar5) {
+    in_stack_ffffffffffffff30 = 0;
+    r.data = local_10;
+    r.tab = local_38;
+    b.cap = in_stack_ffffffffffffff40;
+    b.array = (uint8 *)SUB168(ZEXT816(2) << 0x40,0);
+    b.len = SUB168(ZEXT816(2) << 0x40,8);
+    in_stack_ffffffffffffff20 = local_38;
+    in_stack_ffffffffffffff28 = local_10;
+    local_58 = puVar11;
+    local_30 = pvVar9;
+    regexp___Regexp__doExecute
+              (re,r,b,in_stack_ffffffffffffff48,0,0,in_stack_ffffffffffffff58,
+               in_stack_ffffffffffffff70);
+    puVar11 = local_58;
+    pvVar9 = local_30;
+    if (extraout_RBX == 0) break;
+    local_50 = extraout_RBX;
+    local_48 = extraout_RCX;
+    local_28 = extraout_RAX_00;
+    if (nmatch == 0) {
+      ppfVar2 = (func___uint8____int____uint8 **)*extraout_RAX_00;
+      if (in_R8 < ppfVar2) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      if (ppfVar2 < ppfVar12) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      local_40 = (uint8 *)((int)ppfVar2 - (int)ppfVar12);
+      puVar11 = local_60 + (int)local_40;
+      pvVar13 = (void *)((-(int)local_40 >> 0x3f & (uint)ppfVar12) + in_RSI);
+      puVar8 = local_58;
+      if (local_58 < puVar11) {
+        ~r0_01.len = (int)in_stack_ffffffffffffff28;
+        ~r0_01.array = in_stack_ffffffffffffff20;
+        ~r0_01.cap = in_stack_ffffffffffffff30;
+        local_20 = pvVar13;
+        runtime_growslice(local_30,(int)puVar11,(int)local_58,(int)local_40,
+                          (internal_abi_Type *)&DAT_00807920,~r0_01);
+        pvVar9 = extraout_RAX_02;
+        puVar11 = extraout_RBX_01;
+        pvVar13 = local_20;
+        puVar8 = extraout_RCX_01;
+      }
+      puVar1 = (uint8 *)((int)pvVar9 + (int)local_60);
+      local_60 = puVar11;
+      sVar4 = (size_t)local_40;
+      local_40 = puVar8;
+      local_18 = pvVar9;
+      runtime_memmove(puVar1,pvVar13,sVar4);
+    }
+    else {
+      ppfVar2 = (func___uint8____int____uint8 **)*extraout_RAX_00;
+      if (in_RDI < ppfVar2) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      if (ppfVar2 < ppfVar12) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      local_40 = (uint8 *)((int)ppfVar2 - (int)ppfVar12);
+      puVar11 = local_60 + (int)local_40;
+      local_18 = (void *)(((int)ppfVar12 - (int)in_RDI >> 0x3f & (uint)ppfVar12) + nmatch);
+      puVar8 = local_58;
+      if (local_58 < puVar11) {
+        ~r0_00.len = (int)in_stack_ffffffffffffff28;
+        ~r0_00.array = in_stack_ffffffffffffff20;
+        ~r0_00.cap = in_stack_ffffffffffffff30;
+        runtime_growslice(local_30,(int)puVar11,(int)local_58,(int)local_40,
+                          (internal_abi_Type *)&DAT_00807920,~r0_00);
+        pvVar9 = extraout_RAX_01;
+        puVar11 = extraout_RBX_00;
+        puVar8 = extraout_RCX_00;
+      }
+      puVar1 = (uint8 *)((int)pvVar9 + (int)local_60);
+      local_60 = puVar11;
+      sVar4 = (size_t)local_40;
+      local_40 = puVar8;
+      pvVar13 = local_18;
+      local_18 = pvVar9;
+      runtime_memmove(puVar1,pvVar13,sVar4);
+    }
+    if (local_50 < 2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (((int)ppfVar12 < (int)local_28[1]) || (*local_28 == 0)) {
+      (**in_R10)(local_18,local_60,local_40,local_28,local_50,local_48);
+      local_40 = extraout_RCX_02;
+      local_60 = extraout_RBX_02;
+      local_18 = extraout_RAX_03;
+    }
+    ppfVar12 = (func___uint8____int____uint8 **)local_28[1];
+    if (nmatch == 0) {
+      if (in_R8 < ppfVar6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      s.len = (int)in_stack_ffffffffffffff28;
+      s.str = (uint8 *)in_stack_ffffffffffffff20;
+      unicode_utf8_DecodeRuneInString
+                (s,(sdword)in_RSI + ((dword)(-((int)in_R8 - (int)ppfVar6) >> 0x3f) & (dword)ppfVar6)
+                 ,(int)in_R8 - (int)ppfVar6);
+      iVar7 = extraout_RBX_04;
+    }
+    else {
+      if (repl < ppfVar6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      p.len = (int)in_stack_ffffffffffffff28;
+      p.array = (uint8 *)in_stack_ffffffffffffff20;
+      p.cap = in_stack_ffffffffffffff30;
+      unicode_utf8_DecodeRune
+                (p,((dword)(-((int)in_RDI - (int)ppfVar6) >> 0x3f) & (dword)ppfVar6) +
+                   (sdword)nmatch,(int)repl - (int)ppfVar6);
+      iVar7 = extraout_RBX_03;
+    }
+    ppfVar3 = (func___uint8____int____uint8 **)local_28[1];
+    ppfVar2 = (func___uint8____int____uint8 **)(iVar7 + (int)ppfVar6);
+    puVar11 = local_40;
+    pvVar9 = local_18;
+    if (((int)(func___uint8____int____uint8 **)(iVar7 + (int)ppfVar6) <= (int)ppfVar3) &&
+       (ppfVar2 = (func___uint8____int____uint8 **)((int)ppfVar6 + 1),
+       (int)(func___uint8____int____uint8 **)((int)ppfVar6 + 1) <= (int)ppfVar3)) {
+      ppfVar2 = ppfVar3;
+    }
+  }
+  if (nmatch == 0) {
+    if (in_R8 < ppfVar12) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    prVar10 = (runtime_itab *)((int)in_R8 - (int)ppfVar12);
+    puVar8 = prVar10->_ + (int)(local_60 + -0x14);
+    pvVar13 = (void *)(in_RSI + ((uint)ppfVar12 & -(int)prVar10 >> 0x3f));
+    if (puVar11 < puVar8) {
+      ~r0_03.len = (int)in_stack_ffffffffffffff28;
+      ~r0_03.array = in_stack_ffffffffffffff20;
+      ~r0_03.cap = in_stack_ffffffffffffff30;
+      local_38 = prVar10;
+      local_20 = pvVar13;
+      runtime_growslice(pvVar9,(int)puVar8,(int)puVar11,(int)prVar10,
+                        (internal_abi_Type *)&DAT_00807920,~r0_03);
+      pvVar13 = local_20;
+      puVar8 = extraout_RBX_06;
+      prVar10 = local_38;
+      puVar11 = extraout_RCX_04;
+      pvVar9 = extraout_RAX_05;
+    }
+    puVar1 = (uint8 *)((int)pvVar9 + (int)local_60);
+    local_60 = puVar8;
+    local_58 = puVar11;
+    local_30 = pvVar9;
+    runtime_memmove(puVar1,pvVar13,(size_t)prVar10);
+  }
+  else {
+    if (repl < ppfVar12) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    prVar10 = (runtime_itab *)((int)repl - (int)ppfVar12);
+    puVar8 = prVar10->_ + (int)(local_60 + -0x14);
+    pvVar13 = (void *)(nmatch + ((uint)ppfVar12 & (int)ppfVar12 - (int)in_RDI >> 0x3f));
+    if (puVar11 < puVar8) {
+      ~r0_02.len = (int)in_stack_ffffffffffffff28;
+      ~r0_02.array = in_stack_ffffffffffffff20;
+      ~r0_02.cap = in_stack_ffffffffffffff30;
+      local_38 = prVar10;
+      local_18 = pvVar13;
+      runtime_growslice(pvVar9,(int)puVar8,(int)puVar11,(int)prVar10,
+                        (internal_abi_Type *)&DAT_00807920,~r0_02);
+      pvVar13 = local_18;
+      puVar8 = extraout_RBX_05;
+      prVar10 = local_38;
+      puVar11 = extraout_RCX_03;
+      pvVar9 = extraout_RAX_04;
+    }
+    puVar1 = (uint8 *)((int)pvVar9 + (int)local_60);
+    local_60 = puVar8;
+    local_58 = puVar11;
+    local_30 = pvVar9;
+    runtime_memmove(puVar1,pvVar13,(size_t)prVar10);
+  }
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAll(regexp_Regexp *re,__uint8 src,__uint8 repl,__uint8 ~r0)
+
+{
+  __uint8 bsrc;
+  string src_00;
+  func___uint8____int____uint8 **in_RCX;
+  int n;
+  int in_RBX;
+  undefined8 in_RSI;
+  undefined8 in_R8;
+  int in_R9;
+  int unaff_R14;
+  undefined uVar1;
+  undefined7 in_stack_ffffffffffffff79;
+  int in_stack_ffffffffffffff80;
+  __uint8 in_stack_ffffffffffffff88;
+  string srepl;
+  undefined local_28 [32];
+  
+  while (local_28 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = 0x24;
+  internal_bytealg_IndexByte();
+  local_28._8_8_ = in_RBX;
+  local_28._0_8_ = re;
+  bsrc.len = in_R8;
+  bsrc.array = (uint8 *)in_RSI;
+  bsrc.cap = in_R9;
+  src_00.str._1_7_ = in_stack_ffffffffffffff79;
+  src_00.str._0_1_ = uVar1;
+  src_00.len = in_stack_ffffffffffffff80;
+  regexp___Regexp__replaceAll(re,bsrc,src_00,in_RBX,in_RCX,in_stack_ffffffffffffff88);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAll_func1(__uint8 dst,__int match,__uint8 ~r0)
+
+{
+  __uint8 dst_00;
+  string template;
+  __uint8 ~r0_00;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined8 uVar1;
+  int in_RDX;
+  undefined8 *puVar2;
+  undefined8 extraout_RBX;
+  uint8 *in_RSI;
+  int in_RDI;
+  int in_R8;
+  undefined8 *extraout_R11;
+  string *_srepl;
+  int unaff_R14;
+  regexp_Regexp *re;
+  regexp_Regexp *re_00;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffff60;
+  __uint8 in_stack_ffffffffffffff88;
+  string in_stack_ffffffffffffffa0;
+  __int in_stack_ffffffffffffffb0;
+  undefined8 in_stack_ffffffffffffffc8;
+  undefined8 in_stack_ffffffffffffffd0;
+  undefined8 uVar3;
+  int in_stack_ffffffffffffffd8;
+  int iVar4;
+  undefined8 local_20;
+  regexp_Regexp *local_18;
+  undefined8 *local_10;
+  
+  while (&local_20 <= *(undefined8 **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  uVar3 = *(undefined8 *)(in_RDX + 0x38);
+  iVar4 = *(int *)(in_RDX + 0x40);
+  re_00 = *(regexp_Regexp **)(in_RDX + 0x28);
+  if ((*(undefined8 **)(in_RDX + 8))[1] != *(int *)(in_RDX + 0x18)) {
+    local_20 = *(undefined8 *)(in_RDX + 0x30);
+    local_18 = *(regexp_Regexp **)(in_RDX + 0x28);
+    local_10 = *(undefined8 **)(in_RDX + 8);
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,*(uint8 **)(in_RDX + 0x10),*(int *)(in_RDX + 0x18),
+               in_stack_ffffffffffffff60);
+    local_10[1] = extraout_RBX;
+    uVar1 = extraout_RAX;
+    puVar2 = local_10;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = *puVar2;
+      uVar1 = extraout_RAX_00;
+    }
+    *puVar2 = uVar1;
+    re_00 = local_18;
+    in_stack_ffffffffffffffd0 = uVar3;
+    in_stack_ffffffffffffffd8 = iVar4;
+  }
+  dst_00.cap = in_RDI;
+  dst_00.array = (uint8 *)in_XMM15._0_8_;
+  dst_00.len = in_XMM15._8_8_;
+  template.len = in_R8;
+  template.str = in_RSI;
+  ~r0_00.len = in_stack_ffffffffffffffd0;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffffc8;
+  ~r0_00.cap = in_stack_ffffffffffffffd8;
+  regexp___Regexp__expand
+            (re_00,dst_00,template,in_stack_ffffffffffffff88,in_stack_ffffffffffffffa0,
+             in_stack_ffffffffffffffb0,~r0_00);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllLiteral(regexp_Regexp *re,__uint8 src,__uint8 repl,__uint8 ~r0)
+
+{
+  func___uint8____int____uint8 **in_RCX;
+  int in_RBX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff98;
+  string in_stack_ffffffffffffffb0;
+  __uint8 in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  regexp___Regexp__replaceAll
+            (re,in_stack_ffffffffffffff98,in_stack_ffffffffffffffb0,in_RBX,in_RCX,
+             in_stack_ffffffffffffffc0);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllLiteral_func1(__uint8 dst,__int match,__uint8 ~r0)
+
+{
+  size_t __n;
+  void *__src;
+  void *in_RAX;
+  void *extraout_RAX;
+  uint in_RCX;
+  int in_RDX;
+  int in_RBX;
+  int unaff_R14;
+  runtime_slice in_stack_ffffffffffffffa8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  __n = *(size_t *)(in_RDX + 0x10);
+  __src = *(void **)(in_RDX + 8);
+  if (in_RCX < in_RBX + __n) {
+    runtime_growslice(in_RAX,in_RBX + __n,in_RCX,__n,(internal_abi_Type *)&DAT_00807920,
+                      in_stack_ffffffffffffffa8);
+    in_RAX = extraout_RAX;
+  }
+  runtime_memmove((void *)((int)in_RAX + in_RBX),__src,__n);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllFunc
+               (regexp_Regexp *re,__uint8 src,func___uint8____uint8 **repl,__uint8 ~r0)
+
+{
+  func___uint8____int____uint8 **in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff90;
+  string in_stack_ffffffffffffffa8;
+  __uint8 in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  regexp___Regexp__replaceAll
+            (re,in_stack_ffffffffffffff90,in_stack_ffffffffffffffa8,(int)repl,in_RCX,
+             in_stack_ffffffffffffffb8);
+  return;
+}
+
+
+
+void regexp___Regexp__ReplaceAllFunc_func1(__uint8 dst,__int match,__uint8 ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  void *in_RAX;
+  void *extraout_RAX;
+  uint in_RCX;
+  int in_RDX;
+  func___uint8____uint8 **repl;
+  int in_RBX;
+  size_t __n;
+  uint in_RSI;
+  int iVar3;
+  uint *in_RDI;
+  int unaff_R14;
+  undefined auVar4 [16];
+  runtime_slice in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  if (in_RSI == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (in_RSI < 2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  uVar1 = in_RDI[1];
+  if (*(uint *)(in_RDX + 0x20) < uVar1) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  uVar2 = *in_RDI;
+  if (uVar1 < uVar2) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  iVar3 = *(uint *)(in_RDX + 0x20) - uVar2;
+  auVar4 = (***(code ***)(in_RDX + 8))
+                     (*(int *)(in_RDX + 0x10) + (uVar2 & -iVar3 >> 0x3f),uVar1 - uVar2,iVar3);
+  __n = auVar4._8_8_;
+  if (in_RCX < in_RBX + __n) {
+    runtime_growslice(in_RAX,in_RBX + __n,in_RCX,__n,(internal_abi_Type *)&DAT_00807920,
+                      in_stack_ffffffffffffffb8);
+    in_RAX = extraout_RAX;
+  }
+  runtime_memmove((void *)(in_RBX + (int)in_RAX),auVar4._0_8_,__n);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp_init_0(void)
+
+{
+  int iVar1;
+  uint8 b;
+  byte bVar2;
+  dword dVar3;
+  
+  for (iVar1 = 0; iVar1 < 0xe; iVar1 = iVar1 + 1) {
+    dVar3 = (byte)"goal , cons/mark  maxTrigger= pages/byte\n s.sweepgen= allocCount end tracegc\ntimer_deletens} value: {}, want {r1= [recovered]bad recoverybad g statusentersyscallwirep: p->m=) p->status=releasep: m= sysmonwait= preemptoff=cas64 failedGOTRACEBACK= m->gsignal=-byte limit\nruntime: sp=abi mismatchillegal seekinvalid slothost is downnot pollable<unknown:%d>Sfixed32KindSfixed64Kindmessage_typejava_packageoptimize_forswift_prefixruby_packagedebug_redactdouble_valuestring_valueverificationis_extension has no name has no typereflect.CopyOUT_OF_RANGENormalSocketgrpc-messageContent-Typegrpc-timeoutGrpc-MessageAddr: \'%s\', Cookie.Valuemax-forwardshttp2debug=1http2debug=2status code Multi-StatusNot ModifiedUnauthorizedI\'m a teapotNot ExtendedPUSH_PROMISECONTINUATION152587890625762939453125Cypro_MinoanMeetei_MayekPahawh_HmongSora_SompengSyloti_NagriRCodeSuccessRCodeRefusedprotobuf_keyprotobuf_val (sensitive)grpc_config=ECDSA-SHA256ECDSA-SHA384ECDSA-SHA512SSL_CERT_DIRTYPE_UNKNOWNempty objectMime-VersionX-ImforwardsX-Powered-By/dev/urandomautocompleteFieldNumbersSERIALNUMBERinvalid baseInstAltMatchunexpected )altmatch -> anynotnl -> caller error{{continue}}block clauseCircleMinus;CircleTimes;Equilibrium;GreaterLess;LeftCeiling;LessGreater;MediumSpace;NotPrecedes;NotSucceeds;OverBracket;RightVector;Rrightarrow;RuleDelayed;SmallCircle;SquareUnion;SubsetEqual;UpDownArrow;Updownarrow;VerticalBar;backepsilon;blacksquare;circledcirc;circleddash;curlyeqprec;curlyeqsucc;diamondsuit;eqslantless;expectation;nRightarrow;nrightarrow;preccurlyeq;precnapprox;quaternions;straightphi;succcurlyeq;succnapprox;thickapprox;updownarrow;NotLessLess;NotSuperset;invalid kindavx5124fmapsavx512bitalgping_responsegot a GetSeedgraceful_stop %v deadline:/etc/zoneinfoparsing time  out of range is too large (default %q) (default %v)Usage of %s:\nlame referral/etc/servicesdalTLDpSugct?profMemActiveprofMemFuturetraceStackTabexecRInternaltestRInternalGC sweep waitSIGQUIT: quitSIGKILL: killout of memory is nil, not value method bad map state span.base()=bad flushGen..." /* TRUNCATED STRING LITERAL */
+                  [iVar1 + 0x1385] & 0xf;
+    bVar2 = (byte)"goal , cons/mark  maxTrigger= pages/byte\n s.sweepgen= allocCount end tracegc\ntimer_deletens} value: {}, want {r1= [recovered]bad recoverybad g statusentersyscallwirep: p->m=) p->status=releasep: m= sysmonwait= preemptoff=cas64 failedGOTRACEBACK= m->gsignal=-byte limit\nruntime: sp=abi mismatchillegal seekinvalid slothost is downnot pollable<unknown:%d>Sfixed32KindSfixed64Kindmessage_typejava_packageoptimize_forswift_prefixruby_packagedebug_redactdouble_valuestring_valueverificationis_extension has no name has no typereflect.CopyOUT_OF_RANGENormalSocketgrpc-messageContent-Typegrpc-timeoutGrpc-MessageAddr: \'%s\', Cookie.Valuemax-forwardshttp2debug=1http2debug=2status code Multi-StatusNot ModifiedUnauthorizedI\'m a teapotNot ExtendedPUSH_PROMISECONTINUATION152587890625762939453125Cypro_MinoanMeetei_MayekPahawh_HmongSora_SompengSyloti_NagriRCodeSuccessRCodeRefusedprotobuf_keyprotobuf_val (sensitive)grpc_config=ECDSA-SHA256ECDSA-SHA384ECDSA-SHA512SSL_CERT_DIRTYPE_UNKNOWNempty objectMime-VersionX-ImforwardsX-Powered-By/dev/urandomautocompleteFieldNumbersSERIALNUMBERinvalid baseInstAltMatchunexpected )altmatch -> anynotnl -> caller error{{continue}}block clauseCircleMinus;CircleTimes;Equilibrium;GreaterLess;LeftCeiling;LessGreater;MediumSpace;NotPrecedes;NotSucceeds;OverBracket;RightVector;Rrightarrow;RuleDelayed;SmallCircle;SquareUnion;SubsetEqual;UpDownArrow;Updownarrow;VerticalBar;backepsilon;blacksquare;circledcirc;circleddash;curlyeqprec;curlyeqsucc;diamondsuit;eqslantless;expectation;nRightarrow;nrightarrow;preccurlyeq;precnapprox;quaternions;straightphi;succcurlyeq;succnapprox;thickapprox;updownarrow;NotLessLess;NotSuperset;invalid kindavx5124fmapsavx512bitalgping_responsegot a GetSeedgraceful_stop %v deadline:/etc/zoneinfoparsing time  out of range is too large (default %q) (default %v)Usage of %s:\nlame referral/etc/servicesdalTLDpSugct?profMemActiveprofMemFuturetraceStackTabexecRInternaltestRInternalGC sweep waitSIGQUIT: quitSIGKILL: killout of memory is nil, not value method bad map state span.base()=bad flushGen..." /* TRUNCATED STRING LITERAL */
+                  [iVar1 + 0x1385] >> 4;
+    regexp_specialBytes[dVar3] = regexp_specialBytes[dVar3] | (byte)(1 << bVar2) & -(bVar2 < 0x20);
+  }
+  return;
+}
+
+
+
+void regexp___Regexp__allMatches(regexp_Regexp *re,string s,__uint8 b,int n,func___int_ **deliver)
+
+{
+  io_RuneReader r;
+  runtime_slice ~r0;
+  __uint8 b_00;
+  int *extraout_RAX;
+  int *extraout_RAX_00;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  uint extraout_RBX;
+  int extraout_RBX_00;
+  int width;
+  int extraout_RBX_01;
+  uint newLen;
+  uint extraout_RBX_02;
+  func___int_ **in_RSI;
+  int in_RDI;
+  int in_R8;
+  int in_R9;
+  int iVar1;
+  code **in_R10;
+  int pos;
+  bool accept;
+  int prevMatchEnd;
+  int unaff_R14;
+  int iVar2;
+  bool bVar3;
+  undefined in_XMM15 [16];
+  int iStack0000000000000030;
+  int iStack0000000000000038;
+  code **ppcStack0000000000000040;
+  runtime_itab *prVar4;
+  void *pvVar5;
+  uint uVar6;
+  int in_stack_ffffffffffffff30;
+  string in_stack_ffffffffffffff38;
+  __int in_stack_ffffffffffffff48;
+  __int in_stack_ffffffffffffff60;
+  uint local_70;
+  int i;
+  func___int_ **local_60;
+  int local_58;
+  int local_50;
+  int local_48;
+  int local_40;
+  int *local_38;
+  regexp_inputString is;
+  regexp_inputBytes ib;
+  
+  iStack0000000000000030 = in_R8;
+  iStack0000000000000038 = in_R9;
+  ppcStack0000000000000040 = in_R10;
+  while (&local_70 <= *(uint **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_60 = deliver;
+  if (in_RDI != 0) {
+    local_60 = in_RSI;
+  }
+  i = 0;
+  pos = 0;
+  prevMatchEnd = -1;
+  while( true ) {
+    if ((iStack0000000000000038 <= i) || ((int)local_60 < pos)) {
+      return;
+    }
+    prVar4 = (runtime_itab *)re->prog->NumCap;
+    pvVar5 = in_XMM15._0_8_;
+    uVar6 = in_XMM15._8_8_;
+    r.data = pvVar5;
+    r.tab = prVar4;
+    b_00.len = 0;
+    b_00.array = (uint8 *)uVar6;
+    b_00.cap = in_stack_ffffffffffffff30;
+    regexp___Regexp__doExecute
+              (re,r,b_00,in_stack_ffffffffffffff38,0,0,in_stack_ffffffffffffff48,
+               in_stack_ffffffffffffff60);
+    if (extraout_RBX == 0) {
+      return;
+    }
+    if (extraout_RBX < 2) break;
+    local_38 = extraout_RAX;
+    local_70 = extraout_RCX;
+    if (pos == extraout_RAX[1]) {
+      local_40 = *extraout_RAX;
+      if (in_RDI == 0) {
+        is.str.str = (uint8 *)n;
+        is.str.len = (int)deliver;
+        regexp___inputString__step(&is,pos,(int32)n,0);
+        iVar1 = extraout_RBX_01;
+      }
+      else {
+        ib.str.cap = iStack0000000000000030;
+        regexp___inputBytes__step(&ib,pos,(int32)in_RSI,in_RDI);
+        iVar1 = extraout_RBX_00;
+      }
+      bVar3 = local_40 != prevMatchEnd;
+      iVar2 = pos + iVar1;
+      pos = (int)local_60 + 1;
+      if (0 < iVar1) {
+        pos = iVar2;
+      }
+    }
+    else {
+      bVar3 = true;
+      pos = extraout_RAX[1];
+    }
+    prevMatchEnd = local_38[1];
+    if (bVar3) {
+      local_50 = pos;
+      local_48 = prevMatchEnd;
+      if (local_38 == (int *)0x0) {
+        local_70 = 0;
+        newLen = 0;
+        local_38 = (int *)0x0;
+      }
+      else {
+        iVar1 = (re->numSubexp + 1) * 2;
+        newLen = extraout_RBX;
+        local_58 = iVar1;
+        while ((int)newLen < iVar1) {
+          newLen = newLen + 1;
+          if (local_70 < newLen) {
+            ~r0.len = (int)pvVar5;
+            ~r0.array = prVar4;
+            ~r0.cap = uVar6;
+            runtime_growslice(local_38,newLen,local_70,1,(internal_abi_Type *)&DAT_00807760,~r0);
+            local_38 = extraout_RAX_00;
+            local_70 = extraout_RCX_00;
+            newLen = extraout_RBX_02;
+            iVar1 = local_58;
+          }
+          local_38[newLen - 1] = -1;
+        }
+      }
+      (**ppcStack0000000000000040)(local_38,newLen,local_70);
+      i = i + 1;
+      pos = local_50;
+      prevMatchEnd = local_48;
+    }
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void regexp___Regexp__Find(regexp_Regexp *re,__uint8 b,__uint8 ~r0)
+
+{
+  io_RuneReader r;
+  __uint8 b_00;
+  uint *extraout_RAX;
+  uint extraout_RBX;
+  uint in_RDI;
+  int unaff_R14;
+  int in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffa8;
+  __int in_stack_ffffffffffffffb8;
+  __int in_stack_ffffffffffffffd0;
+  undefined local_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r.data = local_18;
+  r.tab = (runtime_itab *)0x2;
+  b_00.cap = in_stack_ffffffffffffffa0;
+  b_00.array = (uint8 *)SUB168(ZEXT816(2) << 0x40,0);
+  b_00.len = SUB168(ZEXT816(2) << 0x40,8);
+  regexp___Regexp__doExecute
+            (re,r,b_00,in_stack_ffffffffffffffa8,0,0,in_stack_ffffffffffffffb8,
+             in_stack_ffffffffffffffd0);
+  if (extraout_RAX == (uint *)0x0) {
+    return;
+  }
+  if (extraout_RBX == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (1 < extraout_RBX) {
+    if (in_RDI < extraout_RAX[1]) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSlice3Acap();
+    }
+    if (*extraout_RAX <= extraout_RAX[1]) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSlice3C();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void regexp___Regexp__FindIndex(regexp_Regexp *re,__uint8 b,__int loc)
+
+{
+  io_RuneReader r;
+  __uint8 b_00;
+  int extraout_RAX;
+  uint extraout_RCX;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  int in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffb8;
+  __int in_stack_ffffffffffffffc8;
+  __int in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r.data = in_XMM15._0_8_;
+  r.tab = (runtime_itab *)0x2;
+  b_00.len = 0;
+  b_00.array = (uint8 *)in_XMM15._8_8_;
+  b_00.cap = in_stack_ffffffffffffffb0;
+  regexp___Regexp__doExecute
+            (re,r,b_00,in_stack_ffffffffffffffb8,0,0,in_stack_ffffffffffffffc8,
+             in_stack_ffffffffffffffe0);
+  if (extraout_RAX != 0) {
+    if (1 < extraout_RCX) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  return;
+}
+
+
+
+void regexp___Regexp__FindString(regexp_Regexp *re,string s,string ~r0)
+
+{
+  io_RuneReader r;
+  __uint8 b;
+  uint *extraout_RAX;
+  uint in_RCX;
+  uint extraout_RBX;
+  int unaff_R14;
+  int in_stack_ffffffffffffffa0;
+  string in_stack_ffffffffffffffa8;
+  __int in_stack_ffffffffffffffb8;
+  __int in_stack_ffffffffffffffd0;
+  undefined local_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r.data = local_18;
+  r.tab = (runtime_itab *)0x2;
+  b.cap = in_stack_ffffffffffffffa0;
+  b.array = (uint8 *)SUB168(ZEXT816(2) << 0x40,0);
+  b.len = SUB168(ZEXT816(2) << 0x40,8);
+  regexp___Regexp__doExecute
+            (re,r,b,in_stack_ffffffffffffffa8,0,0,in_stack_ffffffffffffffb8,
+             in_stack_ffffffffffffffd0);
+  if (extraout_RAX == (uint *)0x0) {
+    return;
+  }
+  if (extraout_RBX == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (1 < extraout_RBX) {
+    if (in_RCX < extraout_RAX[1]) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    if (*extraout_RAX <= extraout_RAX[1]) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void regexp___Regexp__FindStringIndex(regexp_Regexp *re,string s,__int loc)
+
+{
+  io_RuneReader r;
+  __uint8 b;
+  int extraout_RAX;
+  uint extraout_RCX;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  int in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffb8;
+  __int in_stack_ffffffffffffffc8;
+  __int in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r.data = in_XMM15._0_8_;
+  r.tab = (runtime_itab *)0x2;
+  b.len = 0;
+  b.array = (uint8 *)in_XMM15._8_8_;
+  b.cap = in_stack_ffffffffffffffb0;

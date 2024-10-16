@@ -1,0 +1,1000 @@
+    sync___Once__doSlow(&net_mptcpOnce,(func__ **)&PTR_net_initMPTCPavailable_008eb130);
+  }
+  if ((net_mptcpAvailable != false) &&
+     (net___sysDialer__doDialTCPProto
+                (sd,in_stack_ffffffffffffffb0,laddr,raddr,(int)~r0,in_RSI,in_stack_ffffffffffffffc0)
+     , extraout_RBX == 0)) {
+    return;
+  }
+  net___sysDialer__dialTCP(sd,in_stack_ffffffffffffffb0,laddr,raddr,~r0,in_stack_ffffffffffffffc0);
+  return;
+}
+
+
+
+void net___sysListener__listenMPTCP
+               (net_sysListener *sl,context_Context ctx,net_TCPAddr *laddr,net_TCPListener *~r0,
+               error ~r1)
+
+{
+  net_TCPListener *dial;
+  int extraout_RBX;
+  net_TCPListener *in_RDI;
+  int unaff_R14;
+  context_Context in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (net_mptcpOnce.done == 0) {
+    sync___Once__doSlow(&net_mptcpOnce,(func__ **)&PTR_net_initMPTCPavailable_008eb130);
+  }
+  if ((net_mptcpAvailable != false) &&
+     (net___sysListener__listenTCPProto
+                (sl,in_stack_ffffffffffffffc0,laddr,(int)~r0,in_RDI,in_stack_ffffffffffffffd0),
+     extraout_RBX == 0)) {
+    return;
+  }
+  net___sysListener__listenTCPProto
+            (sl,in_stack_ffffffffffffffc0,laddr,(int)~r0,in_RDI,in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+void net_isUsingMultipathTCP(net_netFD *fd,bool ~r0)
+
+{
+  error ~r1_1;
+  error ~r1_1_00;
+  char cVar1;
+  char extraout_AL;
+  int proto;
+  void *x;
+  void *pvVar2;
+  undefined1 *extraout_RBX;
+  int in_RSI;
+  int extraout_RSI;
+  undefined in_DIL;
+  bool ~r0_00;
+  undefined extraout_DIL;
+  undefined ~r0_01;
+  undefined extraout_DIL_00;
+  undefined7 in_register_00000039;
+  undefined7 extraout_var;
+  int unaff_R14;
+  error in_stack_ffffffffffffffd0;
+  runtime_itab *in_stack_ffffffffffffffe0;
+  void *in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    in_DIL = extraout_DIL_00;
+    in_register_00000039 = extraout_var;
+  }
+  if (net_hasSOLMPTCP == false) {
+    ~r1_1_00.data = in_stack_ffffffffffffffe8;
+    ~r1_1_00.tab = in_stack_ffffffffffffffe0;
+    internal_poll___FD__GetsockoptInt
+              (&fd->pfd,1,0x26,CONCAT71(in_register_00000039,in_DIL),in_RSI,
+               in_stack_ffffffffffffffd0,~r1_1_00);
+    return;
+  }
+  ~r1_1.data = in_stack_ffffffffffffffe8;
+  ~r1_1.tab = in_stack_ffffffffffffffe0;
+  internal_poll___FD__GetsockoptInt
+            (&fd->pfd,0x11c,1,CONCAT71(in_register_00000039,in_DIL),in_RSI,in_stack_ffffffffffffffd0
+             ,~r1_1);
+  pvVar2 = x;
+  if (extraout_RBX == go_itab_syscall_Errno_error) {
+    runtime_ifaceeq((runtime_itab *)go_itab_syscall_Errno_error,x,&DAT_0095c658,~r0_00);
+    ~r0_01 = extraout_DIL;
+    cVar1 = extraout_AL;
+  }
+  else {
+    cVar1 = '\0';
+    ~r0_01 = ~r0_00;
+  }
+  if ((cVar1 == '\0') && (extraout_RBX == go_itab_syscall_Errno_error)) {
+    runtime_ifaceeq((runtime_itab *)go_itab_syscall_Errno_error,pvVar2,&DAT_0095c680,(bool)~r0_01);
+  }
+  return;
+}
+
+
+
+void net___conn__Read(net_conn *c,__uint8 b,int ~r0,error ~r1)
+
+{
+  error err;
+  byte extraout_AL;
+  byte bVar1;
+  int n;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar2;
+  void *x;
+  net_conn *extraout_RCX;
+  net_conn *extraout_RCX_00;
+  uint8 *puVar3;
+  void *pvVar4;
+  runtime_itab *tab;
+  bool ~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  void **extraout_R11_02;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc0;
+  runtime_itab *in_stack_ffffffffffffffd8;
+  void *in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    err.data = in_stack_ffffffffffffffe0;
+    err.tab = in_stack_ffffffffffffffd8;
+    net___netFD__Read(c->fd,in_stack_ffffffffffffffc0,~r0,err);
+    if (tab != (runtime_itab *)0x0) {
+      if (io_EOF.tab == tab) {
+        runtime_ifaceeq(tab,x,io_EOF.data,~r0_00);
+        bVar1 = extraout_AL ^ 1;
+      }
+      else {
+        bVar1 = 1;
+      }
+      if (bVar1 != 0) {
+        runtime_newobject((internal_abi_Type *)&DAT_0087daa0,tab);
+        extraout_RAX[1] = 4;
+        *extraout_RAX = &DAT_008ae587;
+        puVar3 = (c->fd->net).str;
+        extraout_RAX[3] = (c->fd->net).len;
+        puVar2 = extraout_RAX;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11 = puVar3;
+          puVar2 = extraout_RAX_00;
+          c = extraout_RCX;
+        }
+        puVar2[2] = puVar3;
+        pvVar4 = (c->fd->laddr).data;
+        puVar2[4] = (c->fd->laddr).tab;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_00 = pvVar4;
+          puVar2 = extraout_RAX_01;
+          c = extraout_RCX_00;
+        }
+        puVar2[5] = pvVar4;
+        pvVar4 = (c->fd->raddr).data;
+        puVar2[6] = (c->fd->raddr).tab;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_01 = pvVar4;
+          puVar2 = extraout_RAX_02;
+        }
+        puVar2[7] = pvVar4;
+        puVar2[8] = tab;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11_02 = x;
+          puVar2 = extraout_RAX_03;
+        }
+        puVar2[9] = x;
+      }
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__Write(net_conn *c,__uint8 b,int ~r0,error ~r1)
+
+{
+  error err;
+  int n;
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  undefined8 extraout_RCX;
+  net_conn *extraout_RCX_00;
+  net_conn *extraout_RCX_01;
+  uint8 *puVar2;
+  void *pvVar3;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc0;
+  runtime_itab *in_stack_ffffffffffffffd8;
+  void *in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    err.data = in_stack_ffffffffffffffe0;
+    err.tab = in_stack_ffffffffffffffd8;
+    net___netFD__Write(c->fd,in_stack_ffffffffffffffc0,~r0,err);
+    if (~r0_00 != (void *)0x0) {
+      runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+      extraout_RAX[1] = 5;
+      *extraout_RAX = &DAT_008aec5f;
+      puVar2 = (c->fd->net).str;
+      extraout_RAX[3] = (c->fd->net).len;
+      puVar1 = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = puVar2;
+        puVar1 = extraout_RAX_00;
+        c = extraout_RCX_00;
+      }
+      puVar1[2] = puVar2;
+      pvVar3 = (c->fd->laddr).data;
+      puVar1[4] = (c->fd->laddr).tab;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_00 = pvVar3;
+        puVar1 = extraout_RAX_01;
+        c = extraout_RCX_01;
+      }
+      puVar1[5] = pvVar3;
+      pvVar3 = (c->fd->raddr).data;
+      puVar1[6] = (c->fd->raddr).tab;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = pvVar3;
+        puVar1 = extraout_RAX_02;
+      }
+      puVar1[7] = pvVar3;
+      puVar1[8] = ~r0_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_02 = extraout_RCX;
+        puVar1 = extraout_RAX_03;
+      }
+      puVar1[9] = extraout_RCX;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__Close(net_conn *c,error ~r0)
+
+{
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  net_conn *extraout_RCX_00;
+  void *extraout_RCX_01;
+  void *pvVar2;
+  uint8 *puVar3;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  void **extraout_R11_02;
+  int unaff_R14;
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    net___netFD__Close(c->fd,in_stack_ffffffffffffffd8);
+    if (extraout_RAX != 0) {
+      runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+      extraout_RAX_00[1] = 5;
+      *extraout_RAX_00 = &DAT_008aec73;
+      puVar3 = (c->fd->net).str;
+      extraout_RAX_00[3] = (c->fd->net).len;
+      puVar1 = extraout_RAX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11 = puVar3;
+        puVar1 = extraout_RAX_01;
+        c = extraout_RCX;
+      }
+      puVar1[2] = puVar3;
+      pvVar2 = (c->fd->laddr).data;
+      puVar1[4] = (c->fd->laddr).tab;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_00 = pvVar2;
+        puVar1 = extraout_RAX_02;
+        c = extraout_RCX_00;
+      }
+      puVar1[5] = pvVar2;
+      pvVar2 = (c->fd->raddr).data;
+      puVar1[6] = (c->fd->raddr).tab;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_01 = extraout_RCX_01;
+        puVar1 = extraout_RAX_03;
+        pvVar2 = extraout_RCX_01;
+      }
+      puVar1[7] = pvVar2;
+      puVar1[8] = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_02 = ~r0_00;
+        puVar1 = extraout_RAX_04;
+      }
+      puVar1[9] = ~r0_00;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__LocalAddr(net_conn *c,net_Addr ~r0)
+
+{
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__RemoteAddr(net_conn *c,net_Addr ~r0)
+
+{
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__SetDeadline(net_conn *c,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar2;
+  void *pvVar3;
+  uint8 *puVar4;
+  int in_RBX;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  time_Time in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd8;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  int iVar5;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    ~r0_1.data = in_stack_fffffffffffffff0;
+    ~r0_1.tab = in_stack_ffffffffffffffe8;
+    internal_poll_setDeadlineImpl
+              (&c->fd->pfd,in_stack_ffffffffffffffc0,in_RBX,in_stack_ffffffffffffffd8,~r0_1);
+    if (extraout_RAX == 0) {
+      return;
+    }
+    iVar5 = extraout_RAX;
+    pvVar3 = ~r0_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX_00[1] = 3;
+    *extraout_RAX_00 = &DAT_008ae336;
+    puVar4 = (c->fd->net).str;
+    extraout_RAX_00[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar4;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX;
+    }
+    puVar1[2] = puVar4;
+    *(undefined (*) [16])(puVar1 + 4) = in_XMM15;
+    pvVar2 = (c->fd->laddr).data;
+    puVar1[6] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_00;
+      puVar1 = extraout_RAX_02;
+      pvVar2 = extraout_RCX_00;
+    }
+    puVar1[7] = pvVar2;
+    puVar1[8] = iVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar3;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = pvVar3;
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__SetReadDeadline(net_conn *c,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar2;
+  void *pvVar3;
+  uint8 *puVar4;
+  int in_RBX;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  time_Time in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd8;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  int iVar5;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    ~r0_1.data = in_stack_fffffffffffffff0;
+    ~r0_1.tab = in_stack_ffffffffffffffe8;
+    internal_poll_setDeadlineImpl
+              (&c->fd->pfd,in_stack_ffffffffffffffc0,in_RBX,in_stack_ffffffffffffffd8,~r0_1);
+    if (extraout_RAX == 0) {
+      return;
+    }
+    iVar5 = extraout_RAX;
+    pvVar3 = ~r0_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX_00[1] = 3;
+    *extraout_RAX_00 = &DAT_008ae336;
+    puVar4 = (c->fd->net).str;
+    extraout_RAX_00[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar4;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX;
+    }
+    puVar1[2] = puVar4;
+    *(undefined (*) [16])(puVar1 + 4) = in_XMM15;
+    pvVar2 = (c->fd->laddr).data;
+    puVar1[6] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_00;
+      puVar1 = extraout_RAX_02;
+      pvVar2 = extraout_RCX_00;
+    }
+    puVar1[7] = pvVar2;
+    puVar1[8] = iVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar3;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = pvVar3;
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__SetWriteDeadline(net_conn *c,time_Time t,error ~r0)
+
+{
+  error ~r0_1;
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar2;
+  void *pvVar3;
+  uint8 *puVar4;
+  int in_RBX;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  time_Time in_stack_ffffffffffffffc0;
+  error in_stack_ffffffffffffffd8;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  int iVar5;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    ~r0_1.data = in_stack_fffffffffffffff0;
+    ~r0_1.tab = in_stack_ffffffffffffffe8;
+    internal_poll_setDeadlineImpl
+              (&c->fd->pfd,in_stack_ffffffffffffffc0,in_RBX,in_stack_ffffffffffffffd8,~r0_1);
+    if (extraout_RAX == 0) {
+      return;
+    }
+    iVar5 = extraout_RAX;
+    pvVar3 = ~r0_00;
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX_00[1] = 3;
+    *extraout_RAX_00 = &DAT_008ae336;
+    puVar4 = (c->fd->net).str;
+    extraout_RAX_00[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar4;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX;
+    }
+    puVar1[2] = puVar4;
+    *(undefined (*) [16])(puVar1 + 4) = in_XMM15;
+    pvVar2 = (c->fd->laddr).data;
+    puVar1[6] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_00;
+      puVar1 = extraout_RAX_02;
+      pvVar2 = extraout_RCX_00;
+    }
+    puVar1[7] = pvVar2;
+    puVar1[8] = iVar5;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar3;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = pvVar3;
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__SetReadBuffer(net_conn *c,int bytes,error ~r0)
+
+{
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar2;
+  uint8 *puVar3;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    net_setReadBuffer(c->fd,bytes,in_stack_ffffffffffffffd8);
+    if (extraout_RAX == 0) {
+      return;
+    }
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX_00[1] = 3;
+    *extraout_RAX_00 = &DAT_008ae336;
+    puVar3 = (c->fd->net).str;
+    extraout_RAX_00[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar3;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX;
+    }
+    puVar1[2] = puVar3;
+    *(undefined (*) [16])(puVar1 + 4) = in_XMM15;
+    pvVar2 = (c->fd->laddr).data;
+    puVar1[6] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_00;
+      puVar1 = extraout_RAX_02;
+      pvVar2 = extraout_RCX_00;
+    }
+    puVar1[7] = pvVar2;
+    puVar1[8] = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = ~r0_00;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = ~r0_00;
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__SetWriteBuffer(net_conn *c,int bytes,error ~r0)
+
+{
+  int extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  net_conn *extraout_RCX;
+  void *extraout_RCX_00;
+  void *pvVar2;
+  uint8 *puVar3;
+  void *~r0_00;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  error in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (net_conn *)0x0) && (c->fd != (net_netFD *)0x0)) {
+    net_setWriteBuffer(c->fd,bytes,in_stack_ffffffffffffffd8);
+    if (extraout_RAX == 0) {
+      return;
+    }
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0_00);
+    extraout_RAX_00[1] = 3;
+    *extraout_RAX_00 = &DAT_008ae336;
+    puVar3 = (c->fd->net).str;
+    extraout_RAX_00[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar3;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX;
+    }
+    puVar1[2] = puVar3;
+    *(undefined (*) [16])(puVar1 + 4) = in_XMM15;
+    pvVar2 = (c->fd->laddr).data;
+    puVar1[6] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_00;
+      puVar1 = extraout_RAX_02;
+      pvVar2 = extraout_RCX_00;
+    }
+    puVar1[7] = pvVar2;
+    puVar1[8] = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = ~r0_00;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = ~r0_00;
+    return;
+  }
+  return;
+}
+
+
+
+void net___conn__File(net_conn *c,os_File *f,error err)
+
+{
+  undefined8 *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  undefined8 *puVar1;
+  undefined8 extraout_RCX;
+  net_conn *extraout_RCX_00;
+  net_conn *extraout_RCX_01;
+  uint8 *puVar2;
+  void *pvVar3;
+  void *~r0;
+  uint8 **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  undefined8 *extraout_R11_02;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net___netFD__dup((int)c->fd);
+  if (~r0 != (void *)0x0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0087daa0,~r0);
+    extraout_RAX[1] = 4;
+    *extraout_RAX = &DAT_008ae59b;
+    puVar2 = (c->fd->net).str;
+    extraout_RAX[3] = (c->fd->net).len;
+    puVar1 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = puVar2;
+      puVar1 = extraout_RAX_00;
+      c = extraout_RCX_00;
+    }
+    puVar1[2] = puVar2;
+    pvVar3 = (c->fd->laddr).data;
+    puVar1[4] = (c->fd->laddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = pvVar3;
+      puVar1 = extraout_RAX_01;
+      c = extraout_RCX_01;
+    }
+    puVar1[5] = pvVar3;
+    pvVar3 = (c->fd->raddr).data;
+    puVar1[6] = (c->fd->raddr).tab;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_01 = pvVar3;
+      puVar1 = extraout_RAX_02;
+    }
+    puVar1[7] = pvVar3;
+    puVar1[8] = ~r0;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_02 = extraout_RCX;
+      puVar1 = extraout_RAX_03;
+    }
+    puVar1[9] = extraout_RCX;
+  }
+  return;
+}
+
+
+
+void net_listenerBacklog(int ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (net_listenerBacklogCache.Once.done == 0) {
+    sync___Once__doSlow(&net_listenerBacklogCache.Once,
+                        (func__ **)&PTR_net_listenerBacklog_func1_008eb150);
+  }
+  return;
+}
+
+
+
+void net_canceledError_Error(string ~r0)
+
+{
+  return;
+}
+
+
+
+void net_canceledError_Is(error err,bool ~r0)
+
+{
+  undefined7 in_register_00000001;
+  void *in_RBX;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL;
+  }
+  if (context_Canceled.tab == (runtime_itab *)CONCAT71(in_register_00000001,~r0)) {
+    runtime_ifaceeq((runtime_itab *)CONCAT71(in_register_00000001,~r0),in_RBX,context_Canceled.data,
+                    (bool)in_DIL);
+  }
+  return;
+}
+
+
+
+void net___OpError__Unwrap(net_OpError *e,error ~r0)
+
+{
+  return;
+}
+
+
+
+void net___OpError__Error(net_OpError *e,string ~r0)
+
+{
+  runtime_itab *prVar1;
+  string ~r0_00;
+  string ~r0_01;
+  string ~r0_02;
+  int iVar2;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int extraout_RBX_01;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffc0;
+  string in_stack_ffffffffffffffd0;
+  uint8 *in_stack_ffffffffffffffe0;
+  int in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (e != (net_OpError *)0x0) {
+    iVar2 = (e->Op).len;
+    if ((e->Net).len != 0) {
+      ~r0_00.len = in_stack_ffffffffffffffe8;
+      ~r0_00.str = in_stack_ffffffffffffffe0;
+      runtime_concatstring3
+                ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+                 in_stack_ffffffffffffffd0,~r0_00);
+      iVar2 = extraout_RBX;
+    }
+    prVar1 = (e->Source).tab;
+    if (prVar1 != (runtime_itab *)0x0) {
+      (*(code *)prVar1[1].inter)((e->Source).data);
+      ~r0_01.len = iVar2;
+      ~r0_01.str = in_stack_ffffffffffffffe0;
+      runtime_concatstring3
+                ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+                 in_stack_ffffffffffffffd0,~r0_01);
+      iVar2 = extraout_RBX_00;
+    }
+    if ((e->Addr).tab != (runtime_itab *)0x0) {
+      if ((e->Source).tab == (runtime_itab *)0x0) {
+        runtime_concatstring2
+                  ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+                   in_stack_ffffffffffffffd0);
+      }
+      else {
+        runtime_concatstring2
+                  ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+                   in_stack_ffffffffffffffd0);
+      }
+      (*(code *)(e->Addr).tab[1].inter)((e->Addr).data);
+      runtime_concatstring2
+                ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+                 in_stack_ffffffffffffffd0);
+      iVar2 = extraout_RBX_01;
+    }
+    (*(code *)((e->Err).tab)->fun[0])((e->Err).data);
+    ~r0_02.len = iVar2;
+    ~r0_02.str = in_stack_ffffffffffffffe0;
+    runtime_concatstring3
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,
+               in_stack_ffffffffffffffd0,~r0_02);
+    return;
+  }
+  return;
+}
+
+
+
+void net___OpError__Timeout(net_OpError *e,bool ~r0)
+
+{
+  int extraout_RAX;
+  int extraout_RAX_00;
+  os_SyscallError *ne;
+  undefined8 extraout_RBX;
+  undefined8 extraout_RBX_00;
+  int unaff_R14;
+  runtime_iface in_stack_ffffffffffffffd0;
+  runtime_iface in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((e->Err).tab != (runtime_itab *)go_itab__os_SyscallError_error) {
+    runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_008357c0,in_stack_ffffffffffffffd0,
+                       in_stack_ffffffffffffffe0);
+    if (extraout_RAX_00 != 0) {
+      (**(code **)(extraout_RAX_00 + 0x18))(extraout_RBX_00);
+    }
+    return;
+  }
+  runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_008357c0,in_stack_ffffffffffffffd0,
+                     in_stack_ffffffffffffffe0);
+  if (extraout_RAX != 0) {
+    (**(code **)(extraout_RAX + 0x18))(extraout_RBX);
+  }
+  return;
+}
+
+
+
+void net___OpError__Temporary(net_OpError *e,bool ~r0)
+
+{
+  sdword *psVar1;
+  int iVar2;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  os_SyscallError *ne;
+  syscall_Errno se;
+  undefined8 extraout_RBX;
+  undefined8 extraout_RBX_00;
+  int unaff_R14;
+  runtime_iface in_stack_ffffffffffffffd0;
+  runtime_iface in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+                    // WARNING: Load size is inaccurate
+  if (((((e->Op).len == 6) && (psVar1 = (sdword *)(e->Op).str, *psVar1 == 0x65636361)) &&
+      (*(short *)(psVar1 + 1) == 0x7470)) &&
+     (((e->Err).tab == (runtime_itab *)go_itab_syscall_Errno_error &&
+      ((iVar2 = *(e->Err).data, iVar2 == 0x68 || (iVar2 == 0x67)))))) {
+    return;
+  }
+  if ((e->Err).tab != (runtime_itab *)go_itab__os_SyscallError_error) {
+    runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_00835740,in_stack_ffffffffffffffd0,
+                       in_stack_ffffffffffffffe0);
+    if (extraout_RAX_00 != 0) {
+      (**(code **)(extraout_RAX_00 + 0x18))(extraout_RBX_00);
+    }
+    return;

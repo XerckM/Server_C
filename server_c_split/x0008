@@ -1,0 +1,1000 @@
+};
+
+struct google.golang.org/grpc/internal/status.Status {
+    struct google.golang.org/genproto/googleapis/rpc/status.Status *s;
+};
+
+struct []google.golang.org/grpc/internal/transport.recvMsg {
+    struct google.golang.org/grpc/internal/transport.recvMsg *array;
+    int len;
+    int cap;
+};
+
+struct golang.org/x/net/http2/hpack.headerFieldTable {
+    struct []golang.org/x/net/http2/hpack.HeaderField ents;
+    uint64 evictCount;
+    map[string]uint64 byName;
+    map[golang.org/x/net/http2/hpack.pairNameValue]uint64 byNameValue;
+};
+
+struct golang.org/x/net/http2.Framer {
+    io.Reader r;
+    golang.org/x/net/http2.Frame lastFrame;
+    error errDetail;
+    void (**countError)(struct string);
+    uint32 lastHeaderStream;
+    uint32 maxReadSize;
+    uint8 headerBuf[9];
+    void (**getReadBuf)(uint32, struct []uint8 *);
+    struct []uint8 readBuf;
+    uint32 maxWriteSize;
+    io.Writer w;
+    struct []uint8 wbuf;
+    bool AllowIllegalWrites;
+    bool AllowIllegalReads;
+    struct golang.org/x/net/http2/hpack.Decoder *ReadMetaHeaders;
+    uint32 MaxHeaderListSize;
+    bool logReads;
+    bool logWrites;
+    struct golang.org/x/net/http2.Framer *debugFramer;
+    struct bytes.Buffer *debugFramerBuf;
+    void (**debugReadLoggerf)(struct string, struct []interface_{}, ...);
+    void (**debugWriteLoggerf)(struct string, struct []interface_{}, ...);
+    struct golang.org/x/net/http2.frameCache *frameCache;
+};
+
+struct google.golang.org/grpc/internal/transport.Stream {
+    uint32 id;
+    google.golang.org/grpc/internal/transport.ServerTransport st;
+    struct google.golang.org/grpc/internal/transport.http2Client *ct;
+    context.Context ctx;
+    void (**cancel)(void);
+    chan_struct_{} done;
+    void (**doneFunc)(void);
+    <-chan_struct_{} ctxDone;
+    struct string method;
+    struct string recvCompress;
+    struct string sendCompress;
+    struct google.golang.org/grpc/internal/transport.recvBuffer *buf;
+    io.Reader trReader;
+    struct google.golang.org/grpc/internal/transport.inFlow *fc;
+    struct google.golang.org/grpc/internal/transport.writeQuota *wq;
+    struct string clientAdvertisedCompressors;
+    void (**requestRead)(int);
+    chan_struct_{} headerChan;
+    uint32 headerChanClosed;
+    bool headerValid;
+    int headerWireLength;
+    struct sync.Mutex hdrMu;
+    google.golang.org/grpc/metadata.MD header;
+    google.golang.org/grpc/metadata.MD trailer;
+    bool noHeaders;
+    uint32 headerSent;
+    google.golang.org/grpc/internal/transport.streamState state;
+    struct google.golang.org/grpc/internal/status.Status *status;
+    uint32 bytesReceived;
+    uint32 unprocessed;
+    struct string contentSubtype;
+};
+
+struct golang.org/x/net/http2/hpack.dynamicTable {
+    struct golang.org/x/net/http2/hpack.headerFieldTable table;
+    uint32 size;
+    uint32 maxSize;
+    uint32 allowedMaxSize;
+};
+
+struct golang.org/x/net/http2/hpack.Encoder {
+    struct golang.org/x/net/http2/hpack.dynamicTable dynTab;
+    uint32 minSize;
+    uint32 maxSizeLimit;
+    bool tableSizeUpdate;
+    io.Writer w;
+    struct []uint8 buf;
+};
+
+struct google.golang.org/grpc/internal/transport.inFlow {
+    struct sync.Mutex mu;
+    uint32 limit;
+    uint32 pendingData;
+    uint32 pendingUpdate;
+    uint32 delta;
+};
+
+struct google.golang.org/grpc/internal/transport.itemList {
+    struct google.golang.org/grpc/internal/transport.itemNode *head;
+    struct google.golang.org/grpc/internal/transport.itemNode *tail;
+};
+
+struct golang.org/x/net/http2.FrameHeader {
+    bool valid;
+    golang.org/x/net/http2.FrameType Type;
+    golang.org/x/net/http2.Flags Flags;
+    uint32 Length;
+    uint32 StreamID;
+};
+
+struct google.golang.org/grpc/internal/transport.recvBuffer {
+    chan_google.golang.org/grpc/internal/transport.recvMsg c;
+    struct sync.Mutex mu;
+    struct []google.golang.org/grpc/internal/transport.recvMsg backlog;
+    error err;
+};
+
+struct google.golang.org/grpc/internal/transport.outStreamList {
+    struct google.golang.org/grpc/internal/transport.outStream *head;
+    struct google.golang.org/grpc/internal/transport.outStream *tail;
+};
+
+struct golang.org/x/net/http2/hpack.HeaderField {
+    struct string Name;
+    struct string Value;
+    bool Sensitive;
+};
+
+struct google.golang.org/protobuf/internal/impl.MessageState {
+    google.golang.org/protobuf/internal/pragma.DoNotCopy DoNotCopy;
+    google.golang.org/protobuf/internal/pragma.DoNotCompare DoNotCompare;
+    struct google.golang.org/protobuf/internal/pragma.NoUnkeyedLiterals NoUnkeyedLiterals;
+    struct google.golang.org/protobuf/internal/impl.MessageInfo *atomicMessageInfo;
+};
+
+struct bucket<string,uint64> {
+    uint8 tophash[8];
+    struct string keys[8];
+    uint64 values[8];
+    struct bucket<string,uint64> *overflow;
+};
+
+struct google.golang.org/grpc/internal/transport.bdpEstimator {
+    struct time.Time sentAt;
+    struct sync.Mutex mu;
+    uint32 bdp;
+    uint32 sample;
+    float64 bwMax;
+    bool isSent;
+    void (**updateFlowControl)(uint32);
+    uint64 sampleCount;
+    float64 rtt;
+};
+
+struct google.golang.org/grpc/internal/transport.loopyWriter {
+    google.golang.org/grpc/internal/transport.side side;
+    struct google.golang.org/grpc/internal/transport.controlBuffer *cbuf;
+    uint32 sendQuota;
+    uint32 oiws;
+    map[uint32]*google.golang.org/grpc/internal/transport.outStream estdStreams;
+    struct google.golang.org/grpc/internal/transport.outStreamList *activeStreams;
+    struct google.golang.org/grpc/internal/transport.framer *framer;
+    struct bytes.Buffer *hBuf;
+    struct golang.org/x/net/http2/hpack.Encoder *hEnc;
+    struct google.golang.org/grpc/internal/transport.bdpEstimator *bdpEst;
+    bool draining;
+    net.Conn conn;
+    struct google.golang.org/grpc/internal/grpclog.PrefixLogger *logger;
+    void (**ssGoAwayHandler)(struct google.golang.org/grpc/internal/transport.goAway *, bool *, error *);
+};
+
+struct []func(error) {
+    void (***array)(error);
+    int len;
+    int cap;
+};
+
+struct google.golang.org/grpc/internal/transport.bufWriter {
+    struct sync.Pool *pool;
+    struct []uint8 buf;
+    int offset;
+    int batchSize;
+    net.Conn conn;
+    error err;
+};
+
+struct google.golang.org/grpc/internal/transport.CallHdr {
+    struct string Host;
+    struct string Method;
+    struct string SendCompress;
+    google.golang.org/grpc/credentials.PerRPCCredentials Creds;
+    struct string ContentSubtype;
+    int PreviousAttempts;
+    void (**DoneFunc)(void);
+};
+
+struct google.golang.org/grpc/internal/transport.outStream {
+    uint32 id;
+    google.golang.org/grpc/internal/transport.outStreamState state;
+    struct google.golang.org/grpc/internal/transport.itemList *itl;
+    int bytesOutStanding;
+    struct google.golang.org/grpc/internal/transport.writeQuota *wq;
+    struct google.golang.org/grpc/internal/transport.outStream *next;
+    struct google.golang.org/grpc/internal/transport.outStream *prev;
+};
+
+struct hash<uint32,*google.golang.org/grpc/internal/transport.Stream> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<uint32,*google.golang.org/grpc/internal/transport.Stream> *buckets;
+    struct bucket<uint32,*google.golang.org/grpc/internal/transport.Stream> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct hash<uint32,*google.golang.org/grpc/internal/transport.outStream> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<uint32,*google.golang.org/grpc/internal/transport.outStream> *buckets;
+    struct bucket<uint32,*google.golang.org/grpc/internal/transport.outStream> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct []*google.golang.org/protobuf/types/known/anypb.Any {
+    struct google.golang.org/protobuf/types/known/anypb.Any **array;
+    int len;
+    int cap;
+};
+
+struct google.golang.org/grpc/internal/transport.goAway {
+    golang.org/x/net/http2.ErrCode code;
+    struct []uint8 debugData;
+    bool headsUp;
+    error closeConn;
+};
+
+struct google.golang.org/grpc/internal/transport.framer {
+    struct google.golang.org/grpc/internal/transport.bufWriter *writer;
+    struct golang.org/x/net/http2.Framer *fr;
+};
+
+struct google.golang.org/grpc/internal/transport.trInFlow {
+    uint32 limit;
+    uint32 unacked;
+    uint32 effectiveWindowSize;
+};
+
+struct google.golang.org/grpc.callInfo {
+    struct string compressorType;
+    bool failFast;
+    int *maxReceiveMessageSize;
+    int *maxSendMessageSize;
+    google.golang.org/grpc/credentials.PerRPCCredentials creds;
+    struct string contentSubtype;
+    google.golang.org/grpc.baseCodec codec;
+    int maxRetryRPCBufferSize;
+    struct []func(error) onFinish;
+};
+
+struct golang.org/x/net/http2/hpack.Decoder {
+    struct golang.org/x/net/http2/hpack.dynamicTable dynTab;
+    void (**emit)(struct golang.org/x/net/http2/hpack.HeaderField);
+    bool emitEnabled;
+    int maxStrLen;
+    struct []uint8 buf;
+    struct bytes.Buffer saveBuf;
+    bool firstField;
+};
+
+struct hash<string,uint64> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<string,uint64> *buckets;
+    struct bucket<string,uint64> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct google.golang.org/grpc/internal/transport.recvMsg {
+    struct bytes.Buffer *buffer;
+    error err;
+};
+
+struct waitq<google.golang.org/grpc/internal/transport.recvMsg> {
+    struct sudog<google.golang.org/grpc/internal/transport.recvMsg> *first;
+    struct sudog<google.golang.org/grpc/internal/transport.recvMsg> *last;
+};
+
+struct bucket<uint32,*google.golang.org/grpc/internal/transport.outStream> {
+    uint8 tophash[8];
+    uint32 keys[8];
+    struct google.golang.org/grpc/internal/transport.outStream *values[8];
+    struct bucket<uint32,*google.golang.org/grpc/internal/transport.outStream> *overflow;
+};
+
+struct google.golang.org/genproto/googleapis/rpc/status.Status {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    int32 Code;
+    struct string Message;
+    struct []*google.golang.org/protobuf/types/known/anypb.Any Details;
+};
+
+struct google.golang.org/grpc/internal/transport.itemNode {
+    interface_{} it;
+    struct google.golang.org/grpc/internal/transport.itemNode *next;
+};
+
+struct hchan<google.golang.org/grpc/internal/transport.recvMsg> {
+    uint qcount;
+    uint dataqsiz;
+    void *buf;
+    uint16 elemsize;
+    uint32 closed;
+    struct internal/abi.Type *elemtype;
+    uint sendx;
+    uint recvx;
+    struct waitq<google.golang.org/grpc/internal/transport.recvMsg> recvq;
+    struct waitq<google.golang.org/grpc/internal/transport.recvMsg> sendq;
+    struct runtime.mutex lock;
+};
+
+struct hash<golang.org/x/net/http2/hpack.pairNameValue,uint64> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2/hpack.pairNameValue,uint64> *buckets;
+    struct bucket<golang.org/x/net/http2/hpack.pairNameValue,uint64> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct google.golang.org/protobuf/types/known/anypb.Any {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    struct string TypeUrl;
+    struct []uint8 Value;
+};
+
+struct golang.org/x/net/http2.DataFrame {
+    struct golang.org/x/net/http2.FrameHeader FrameHeader;
+    struct []uint8 data;
+};
+
+struct golang.org/x/net/http2.frameCache {
+    struct golang.org/x/net/http2.DataFrame dataFrame;
+};
+
+struct sudog<google.golang.org/grpc/internal/transport.recvMsg> {
+    struct runtime.g *g;
+    struct runtime.sudog *next;
+    struct runtime.sudog *prev;
+    struct google.golang.org/grpc/internal/transport.recvMsg *elem;
+    int64 acquiretime;
+    int64 releasetime;
+    uint32 ticket;
+    bool isSelect;
+    bool success;
+    struct runtime.sudog *parent;
+    struct runtime.sudog *waitlink;
+    struct runtime.sudog *waittail;
+    struct runtime.hchan *c;
+};
+
+struct google.golang.org/grpc/internal/transport.writeQuota {
+    int32 quota;
+    chan_struct_{} ch;
+    <-chan_struct_{} done;
+    void (**replenish)(int);
+};
+
+struct google.golang.org/grpc/internal/grpclog.PrefixLogger {
+    google.golang.org/grpc/internal/grpclog.DepthLoggerV2 logger;
+    struct string prefix;
+};
+
+struct google.golang.org/grpc.parser {
+    io.Reader r;
+    uint8 header[5];
+    google.golang.org/grpc.SharedBufferPool recvBufferPool;
+};
+
+struct google.golang.org/grpc/internal/transport.controlBuffer {
+    chan_struct_{} ch;
+    <-chan_struct_{} done;
+    struct sync.Mutex mu;
+    bool consumerWaiting;
+    struct google.golang.org/grpc/internal/transport.itemList *list;
+    error err;
+    int transportResponseFrames;
+    struct sync/atomic.Value trfChan;
+};
+
+typedef struct sync.Mutex google.golang.org/protobuf/internal/pragma.DoNotCopy[0];
+
+typedef struct net._Ctype_struct_addrinfo net._Ctype_struct_addrinfo, *Pnet._Ctype_struct_addrinfo;
+
+typedef struct net._Ctype_struct_sockaddr net._Ctype_struct_sockaddr, *Pnet._Ctype_struct_sockaddr;
+
+struct net._Ctype_struct_sockaddr {
+    net._Ctype_ushort sa_family;
+    net._Ctype_char sa_data[14];
+};
+
+struct net._Ctype_struct_addrinfo {
+    net._Ctype_int ai_flags;
+    net._Ctype_int ai_family;
+    net._Ctype_int ai_socktype;
+    net._Ctype_int ai_protocol;
+    net._Ctype_uint ai_addrlen;
+    struct net._Ctype_struct_sockaddr *ai_addr;
+    net._Ctype_char *ai_canonname;
+    struct net._Ctype_struct_addrinfo *ai_next;
+};
+
+typedef struct crypto/elliptic.CurveParams crypto/elliptic.CurveParams, *Pcrypto/elliptic.CurveParams;
+
+struct crypto/elliptic.CurveParams {
+    struct math/big.Int *P;
+    struct math/big.Int *N;
+    struct math/big.Int *B;
+    struct math/big.Int *Gx;
+    struct math/big.Int *Gy;
+    int BitSize;
+    struct string Name;
+};
+
+typedef struct google.golang.org/grpc.csAttempt google.golang.org/grpc.csAttempt, *Pgoogle.golang.org/grpc.csAttempt;
+
+typedef struct google.golang.org/grpc.clientStream google.golang.org/grpc.clientStream, *Pgoogle.golang.org/grpc.clientStream;
+
+typedef struct google.golang.org/grpc/balancer.PickResult google.golang.org/grpc/balancer.PickResult, *Pgoogle.golang.org/grpc/balancer.PickResult;
+
+typedef struct google.golang.org/grpc/balancer.DoneInfo google.golang.org/grpc/balancer.DoneInfo, *Pgoogle.golang.org/grpc/balancer.DoneInfo;
+
+typedef struct google.golang.org/grpc.traceInfo google.golang.org/grpc.traceInfo, *Pgoogle.golang.org/grpc.traceInfo;
+
+typedef struct google.golang.org/grpc.retryThrottler google.golang.org/grpc.retryThrottler, *Pgoogle.golang.org/grpc.retryThrottler;
+
+typedef struct []google.golang.org/grpc/internal/binarylog.MethodLogger []google.golang.org/grpc/internal/binarylog.MethodLogger, *P[]google.golang.org/grpc/internal/binarylog.MethodLogger;
+
+typedef struct []func(*google.golang.org/grpc.csAttempt)_error []func(*google.golang.org/grpc.csAttempt)_error, *P[]func(*google.golang.org/grpc.csAttempt)_error;
+
+typedef struct runtime.iface google.golang.org/grpc.traceLog;
+
+typedef struct google.golang.org/grpc.firstLine google.golang.org/grpc.firstLine, *Pgoogle.golang.org/grpc.firstLine;
+
+typedef struct runtime.iface google.golang.org/grpc/internal/binarylog.MethodLogger;
+
+struct []func(*google.golang.org/grpc.csAttempt)_error { // Original name: []func(*google.golang.org/grpc.csAttempt) error
+    void (***array)(struct google.golang.org/grpc.csAttempt *, error *);
+    int len;
+    int cap;
+};
+
+struct google.golang.org/grpc.firstLine {
+    struct sync.Mutex mu;
+    bool client;
+    net.Addr remoteAddr;
+    time.Duration deadline;
+};
+
+struct google.golang.org/grpc.traceInfo {
+    google.golang.org/grpc.traceLog tr;
+    struct google.golang.org/grpc.firstLine firstLine;
+};
+
+struct google.golang.org/grpc/balancer.PickResult {
+    google.golang.org/grpc/balancer.SubConn SubConn;
+    void (**Done)(struct google.golang.org/grpc/balancer.DoneInfo);
+    google.golang.org/grpc/metadata.MD Metadata;
+};
+
+struct []google.golang.org/grpc/internal/binarylog.MethodLogger {
+    google.golang.org/grpc/internal/binarylog.MethodLogger *array;
+    int len;
+    int cap;
+};
+
+struct google.golang.org/grpc.clientStream {
+    struct google.golang.org/grpc/internal/transport.CallHdr *callHdr;
+    struct []google.golang.org/grpc.CallOption opts;
+    struct google.golang.org/grpc.callInfo *callInfo;
+    struct google.golang.org/grpc.ClientConn *cc;
+    struct google.golang.org/grpc.StreamDesc *desc;
+    google.golang.org/grpc.baseCodec codec;
+    google.golang.org/grpc.Compressor cp;
+    google.golang.org/grpc/encoding.Compressor comp;
+    void (**cancel)(void);
+    bool sentLast;
+    struct google.golang.org/grpc/internal/serviceconfig.MethodConfig *methodConfig;
+    context.Context ctx;
+    struct google.golang.org/grpc.retryThrottler *retryThrottler;
+    struct []google.golang.org/grpc/internal/binarylog.MethodLogger binlogs;
+    bool serverHeaderBinlogged;
+    struct sync.Mutex mu;
+    bool firstAttempt;
+    int numRetries;
+    int numRetriesSincePushback;
+    bool finished;
+    struct google.golang.org/grpc.csAttempt *attempt;
+    bool committed;
+    void (**onCommit)(void);
+    struct []func(*google.golang.org/grpc.csAttempt)_error buffer;
+    int bufferSize;
+};
+
+struct google.golang.org/grpc.retryThrottler {
+    float64 max;
+    float64 thresh;
+    float64 ratio;
+    struct sync.Mutex mu;
+    float64 tokens;
+};
+
+struct google.golang.org/grpc.csAttempt {
+    context.Context ctx;
+    struct google.golang.org/grpc.clientStream *cs;
+    google.golang.org/grpc/internal/transport.ClientTransport t;
+    struct google.golang.org/grpc/internal/transport.Stream *s;
+    struct google.golang.org/grpc.parser *p;
+    struct google.golang.org/grpc/balancer.PickResult pickResult;
+    bool finished;
+    google.golang.org/grpc.Decompressor dc;
+    google.golang.org/grpc/encoding.Compressor decomp;
+    bool decompSet;
+    struct sync.Mutex mu;
+    struct google.golang.org/grpc.traceInfo *trInfo;
+    struct []google.golang.org/grpc/stats.Handler statsHandlers;
+    struct time.Time beginTime;
+    bool allowTransparentRetry;
+    bool drop;
+};
+
+struct google.golang.org/grpc/balancer.DoneInfo {
+    error Err;
+    google.golang.org/grpc/metadata.MD Trailer;
+    bool BytesSent;
+    bool BytesReceived;
+    interface_{} ServerLoad;
+};
+
+typedef struct runtime.traceAlloc runtime.traceAlloc, *Pruntime.traceAlloc;
+
+struct runtime.traceAlloc {
+    runtime.traceAllocBlockPtr head;
+    uintptr off;
+};
+
+typedef struct go.shape.struct_{_sync.m_map[interface_{}]*sync.entry;_sync.amended_bool_} go.shape.struct_{_sync.m_map[interface_{}]*sync.entry;_sync.amended_bool_}, *Pgo.shape.struct_{_sync.m_map[interface_{}]*sync.entry;_sync.amended_bool_};
+
+typedef struct hash<interface_{},*sync.entry> hash<interface_{},*sync.entry>, *Phash<interface_{},*sync.entry>;
+
+typedef struct hash<interface_{},*sync.entry> *map[interface_{}]*sync.entry;
+
+typedef struct bucket<interface_{},*sync.entry> bucket<interface_{},*sync.entry>, *Pbucket<interface_{},*sync.entry>;
+
+typedef struct sync.entry sync.entry, *Psync.entry;
+
+typedef struct sync/atomic.Pointer[interface_{}] sync/atomic.Pointer[interface_{}], *Psync/atomic.Pointer[interface_{}];
+
+struct go.shape.struct_{_sync.m_map[interface_{}]*sync.entry;_sync.amended_bool_} { // Original name: go.shape.struct { sync.m map[interface {}]*sync.entry; sync.amended bool }
+    map[interface_{}]*sync.entry m;
+    bool amended;
+};
+
+struct sync/atomic.Pointer[interface_{}] { // Original name: sync/atomic.Pointer[interface {}]
+    struct sync/atomic.noCopy _;
+    interface_{} *_[0];
+    void *v;
+};
+
+struct sync.entry {
+    struct sync/atomic.Pointer[interface_{}] p;
+};
+
+struct hash<interface_{},*sync.entry> { // Original name: hash<interface {},*sync.entry>
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<interface_{},*sync.entry> *buckets;
+    struct bucket<interface_{},*sync.entry> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct bucket<interface_{},*sync.entry> { // Original name: bucket<interface {},*sync.entry>
+    uint8 tophash[8];
+    interface_{} keys[8];
+    struct sync.entry *values[8];
+    struct bucket<interface_{},*sync.entry> *overflow;
+};
+
+typedef struct google.golang.org/grpc.dropError google.golang.org/grpc.dropError, *Pgoogle.golang.org/grpc.dropError;
+
+struct google.golang.org/grpc.dropError {
+    error error;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.bucket_} noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.bucket_}, *Pnoalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.bucket_};
+
+typedef struct runtime.bucket runtime.bucket, *Pruntime.bucket;
+
+struct runtime.bucket {
+    struct runtime/internal/sys.NotInHeap _;
+    struct runtime.bucket *next;
+    struct runtime.bucket *allnext;
+    runtime.bucketType typ;
+    uintptr hash;
+    uintptr size;
+    uintptr nstk;
+};
+
+struct noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.bucket_} { // Original name: noalg.struct { F uintptr; X0 unsafe.Pointer; X1 *runtime.bucket }
+    uintptr F;
+    void *X0;
+    struct runtime.bucket *X1;
+};
+
+typedef struct noalg.map.bucket[*golang.org/x/net/trace.trace]bool noalg.map.bucket[*golang.org/x/net/trace.trace]bool, *Pnoalg.map.bucket[*golang.org/x/net/trace.trace]bool;
+
+typedef struct golang.org/x/net/trace.trace *noalg.[8]*golang.org/x/net/trace.trace[8];
+
+struct noalg.map.bucket[*golang.org/x/net/trace.trace]bool {
+    uint8 topbits[8];
+    noalg.[8]*golang.org/x/net/trace.trace keys;
+    noalg.[8]bool elems;
+    void *overflow;
+};
+
+typedef struct crypto/internal/nistec.P384Point crypto/internal/nistec.P384Point, *Pcrypto/internal/nistec.P384Point;
+
+typedef struct crypto/internal/nistec.P384Point *crypto/internal/nistec.p384Table[15];
+
+typedef struct crypto/internal/nistec/fiat.P384Element crypto/internal/nistec/fiat.P384Element, *Pcrypto/internal/nistec/fiat.P384Element;
+
+typedef uint64 crypto/internal/nistec/fiat.p384MontgomeryDomainFieldElement[6];
+
+struct crypto/internal/nistec/fiat.P384Element {
+    crypto/internal/nistec/fiat.p384MontgomeryDomainFieldElement x;
+};
+
+struct crypto/internal/nistec.P384Point {
+    struct crypto/internal/nistec/fiat.P384Element *x;
+    struct crypto/internal/nistec/fiat.P384Element *y;
+    struct crypto/internal/nistec/fiat.P384Element *z;
+};
+
+typedef struct noalg.map.bucket[string]*html/template.Template noalg.map.bucket[string]*html/template.Template, *Pnoalg.map.bucket[string]*html/template.Template;
+
+struct noalg.map.bucket[string]*html/template.Template {
+    uint8 topbits[8];
+    noalg.[8]string keys;
+    noalg.[8]*html/template.Template elems;
+    void *overflow;
+};
+
+typedef struct regexp/syntax.ErrorCode regexp/syntax.ErrorCode, *Pregexp/syntax.ErrorCode;
+
+struct regexp/syntax.ErrorCode {
+    uint8 *str;
+    int len;
+};
+
+typedef struct runtime.stackWorkBuf runtime.stackWorkBuf, *Pruntime.stackWorkBuf;
+
+typedef struct runtime.stackWorkBufHdr runtime.stackWorkBufHdr, *Pruntime.stackWorkBufHdr;
+
+typedef struct runtime.workbufhdr runtime.workbufhdr, *Pruntime.workbufhdr;
+
+typedef struct runtime.lfnode runtime.lfnode, *Pruntime.lfnode;
+
+struct runtime.lfnode {
+    uint64 next;
+    uintptr pushcnt;
+};
+
+struct runtime.workbufhdr {
+    struct runtime.lfnode node;
+    int nobj;
+};
+
+struct runtime.stackWorkBufHdr {
+    struct runtime/internal/sys.NotInHeap _;
+    struct runtime.workbufhdr workbufhdr;
+    struct runtime.stackWorkBuf *next;
+};
+
+struct runtime.stackWorkBuf {
+    struct runtime/internal/sys.NotInHeap _;
+    struct runtime.stackWorkBufHdr stackWorkBufHdr;
+    uintptr obj[252];
+};
+
+typedef struct io.nopCloser io.nopCloser, *Pio.nopCloser;
+
+struct io.nopCloser {
+    io.Reader Reader;
+};
+
+typedef struct crypto/internal/nistec.P224Point crypto/internal/nistec.P224Point, *Pcrypto/internal/nistec.P224Point;
+
+typedef struct crypto/internal/nistec/fiat.P224Element crypto/internal/nistec/fiat.P224Element, *Pcrypto/internal/nistec/fiat.P224Element;
+
+typedef uint64 crypto/internal/nistec/fiat.p224MontgomeryDomainFieldElement[4];
+
+struct crypto/internal/nistec/fiat.P224Element {
+    crypto/internal/nistec/fiat.p224MontgomeryDomainFieldElement x;
+};
+
+struct crypto/internal/nistec.P224Point {
+    struct crypto/internal/nistec/fiat.P224Element *x;
+    struct crypto/internal/nistec/fiat.P224Element *y;
+    struct crypto/internal/nistec/fiat.P224Element *z;
+};
+
+typedef struct net.ParseError net.ParseError, *Pnet.ParseError;
+
+struct net.ParseError {
+    struct string Type;
+    struct string Text;
+};
+
+typedef struct strconv.floatInfo strconv.floatInfo, *Pstrconv.floatInfo;
+
+struct strconv.floatInfo {
+    uint mantbits;
+    uint expbits;
+    int bias;
+};
+
+typedef struct struct_{_runtime.fill_uint64;_runtime.capacity_uint64_} struct_{_runtime.fill_uint64;_runtime.capacity_uint64_}, *Pstruct_{_runtime.fill_uint64;_runtime.capacity_uint64_};
+
+struct struct_{_runtime.fill_uint64;_runtime.capacity_uint64_} { // Original name: struct { runtime.fill uint64; runtime.capacity uint64 }
+    uint64 fill;
+    uint64 capacity;
+};
+
+typedef struct runtime.iface runtime.stringer;
+
+typedef struct runtime.iface google.golang.org/protobuf/internal/order.FieldRanger;
+
+typedef struct runtime.iface net.temporary;
+
+typedef struct [][]int [][]int, *P[][]int;
+
+struct [][]int {
+    struct []int *array;
+    int len;
+    int cap;
+};
+
+typedef struct google.golang.org/grpc/internal/transport.ServerConfig google.golang.org/grpc/internal/transport.ServerConfig, *Pgoogle.golang.org/grpc/internal/transport.ServerConfig;
+
+typedef struct google.golang.org/grpc/tap.Info google.golang.org/grpc/tap.Info, *Pgoogle.golang.org/grpc/tap.Info;
+
+typedef struct google.golang.org/grpc/keepalive.ServerParameters google.golang.org/grpc/keepalive.ServerParameters, *Pgoogle.golang.org/grpc/keepalive.ServerParameters;
+
+typedef struct google.golang.org/grpc/keepalive.EnforcementPolicy google.golang.org/grpc/keepalive.EnforcementPolicy, *Pgoogle.golang.org/grpc/keepalive.EnforcementPolicy;
+
+struct google.golang.org/grpc/tap.Info {
+    struct string FullMethodName;
+    google.golang.org/grpc/metadata.MD Header;
+};
+
+struct google.golang.org/grpc/keepalive.ServerParameters {
+    time.Duration MaxConnectionIdle;
+    time.Duration MaxConnectionAge;
+    time.Duration MaxConnectionAgeGrace;
+    time.Duration Time;
+    time.Duration Timeout;
+};
+
+struct google.golang.org/grpc/keepalive.EnforcementPolicy {
+    time.Duration MinTime;
+    bool PermitWithoutStream;
+};
+
+struct google.golang.org/grpc/internal/transport.ServerConfig {
+    uint32 MaxStreams;
+    time.Duration ConnectionTimeout;
+    google.golang.org/grpc/credentials.TransportCredentials Credentials;
+    void (**InTapHandle)(context.Context, struct google.golang.org/grpc/tap.Info *, context.Context *, error *);
+    struct []google.golang.org/grpc/stats.Handler StatsHandlers;
+    struct google.golang.org/grpc/keepalive.ServerParameters KeepaliveParams;
+    struct google.golang.org/grpc/keepalive.EnforcementPolicy KeepalivePolicy;
+    int32 InitialWindowSize;
+    int32 InitialConnWindowSize;
+    int WriteBufferSize;
+    int ReadBufferSize;
+    bool SharedWriteBuffer;
+    struct google.golang.org/grpc/internal/channelz.Server *ChannelzParent;
+    uint32 *MaxHeaderListSize;
+    uint32 *HeaderTableSize;
+};
+
+typedef struct []runtime.vdsoSymbolKey []runtime.vdsoSymbolKey, *P[]runtime.vdsoSymbolKey;
+
+typedef struct runtime.vdsoSymbolKey runtime.vdsoSymbolKey, *Pruntime.vdsoSymbolKey;
+
+struct runtime.vdsoSymbolKey {
+    struct string name;
+    uint32 symHash;
+    uint32 gnuHash;
+    uintptr *ptr;
+};
+
+struct []runtime.vdsoSymbolKey {
+    struct runtime.vdsoSymbolKey *array;
+    int len;
+    int cap;
+};
+
+typedef struct google.golang.org/grpc.UnaryServerInfo google.golang.org/grpc.UnaryServerInfo, *Pgoogle.golang.org/grpc.UnaryServerInfo;
+
+struct google.golang.org/grpc.UnaryServerInfo {
+    interface_{} Server;
+    struct string FullMethod;
+};
+
+typedef struct google.golang.org/grpc/internal/status.Error google.golang.org/grpc/internal/status.Error, *Pgoogle.golang.org/grpc/internal/status.Error;
+
+struct google.golang.org/grpc/internal/status.Error {
+    struct google.golang.org/grpc/internal/status.Status *s;
+};
+
+typedef struct vendor/golang.org/x/net/idna.labelIter vendor/golang.org/x/net/idna.labelIter, *Pvendor/golang.org/x/net/idna.labelIter;
+
+struct vendor/golang.org/x/net/idna.labelIter {
+    struct string orig;
+    struct []string slice;
+    int curStart;
+    int curEnd;
+    int i;
+};
+
+typedef struct google.golang.org/genproto/googleapis/rpc/status.x.1 google.golang.org/genproto/googleapis/rpc/status.x.1, *Pgoogle.golang.org/genproto/googleapis/rpc/status.x.1;
+
+struct google.golang.org/genproto/googleapis/rpc/status.x.1 { // Original name: google.golang.org/genproto/googleapis/rpc/status.x·1
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/balancer/base.baseBalancer;_X1_*google.golang.org/grpc/balancer.SubConn_} noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/balancer/base.baseBalancer;_X1_*google.golang.org/grpc/balancer.SubConn_}, *Pnoalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/balancer/base.baseBalancer;_X1_*google.golang.org/grpc/balancer.SubConn_};
+
+typedef struct google.golang.org/grpc/balancer/base.baseBalancer google.golang.org/grpc/balancer/base.baseBalancer, *Pgoogle.golang.org/grpc/balancer/base.baseBalancer;
+
+typedef struct runtime.iface google.golang.org/grpc/balancer/base.PickerBuilder;
+
+typedef struct google.golang.org/grpc/balancer.ConnectivityStateEvaluator google.golang.org/grpc/balancer.ConnectivityStateEvaluator, *Pgoogle.golang.org/grpc/balancer.ConnectivityStateEvaluator;
+
+typedef struct google.golang.org/grpc/resolver.AddressMap google.golang.org/grpc/resolver.AddressMap, *Pgoogle.golang.org/grpc/resolver.AddressMap;
+
+typedef struct hash<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> hash<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State>, *Phash<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State>;
+
+typedef struct hash<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> *map[google.golang.org/grpc/balancer.SubConn]google.golang.org/grpc/connectivity.State;
+
+typedef struct hash<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> hash<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList>, *Phash<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList>;
+
+typedef struct hash<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> *map[google.golang.org/grpc/resolver.Address]google.golang.org/grpc/resolver.addressMapEntryList;
+
+typedef struct bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State>, *Pbucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State>;
+
+typedef struct bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList>, *Pbucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList>;
+
+typedef struct google.golang.org/grpc/resolver.addressMapEntryList google.golang.org/grpc/resolver.addressMapEntryList, *Pgoogle.golang.org/grpc/resolver.addressMapEntryList;
+
+typedef struct google.golang.org/grpc/resolver.addressMapEntry google.golang.org/grpc/resolver.addressMapEntry, *Pgoogle.golang.org/grpc/resolver.addressMapEntry;
+
+struct hash<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> *buckets;
+    struct bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct hash<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> *buckets;
+    struct bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc/balancer/base.baseBalancer;_X1_*google.golang.org/grpc/balancer.SubConn_} { // Original name: noalg.struct { F uintptr; X0 *google.golang.org/grpc/balancer/base.baseBalancer; X1 *google.golang.org/grpc/balancer.SubConn }
+    uintptr F;
+    struct google.golang.org/grpc/balancer/base.baseBalancer *X0;
+    google.golang.org/grpc/balancer.SubConn *X1;
+};
+
+struct google.golang.org/grpc/balancer/base.baseBalancer {
+    google.golang.org/grpc/balancer.ClientConn cc;
+    google.golang.org/grpc/balancer/base.PickerBuilder pickerBuilder;
+    struct google.golang.org/grpc/balancer.ConnectivityStateEvaluator *csEvltr;
+    google.golang.org/grpc/connectivity.State state;
+    struct google.golang.org/grpc/resolver.AddressMap *subConns;
+    map[google.golang.org/grpc/balancer.SubConn]google.golang.org/grpc/connectivity.State scStates;
+    google.golang.org/grpc/balancer.Picker picker;
+    struct google.golang.org/grpc/balancer/base.Config config;
+    error resolverErr;
+    error connErr;
+};
+
+struct google.golang.org/grpc/resolver.addressMapEntryList {
+    struct google.golang.org/grpc/resolver.addressMapEntry **array;
+    int len;
+    int cap;
+};
+
+struct bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> {
+    uint8 tophash[8];
+    struct google.golang.org/grpc/resolver.Address keys[8];
+    struct google.golang.org/grpc/resolver.addressMapEntryList values[8];
+    struct bucket<google.golang.org/grpc/resolver.Address,google.golang.org/grpc/resolver.addressMapEntryList> *overflow;
+};
+
+struct google.golang.org/grpc/balancer.ConnectivityStateEvaluator {
+    uint64 numReady;
+    uint64 numConnecting;
+    uint64 numTransientFailure;
+    uint64 numIdle;
+};
+
+struct google.golang.org/grpc/resolver.addressMapEntry {
+    struct google.golang.org/grpc/resolver.Address addr;
+    interface_{} value;
+};
+
+struct google.golang.org/grpc/resolver.AddressMap {
+    map[google.golang.org/grpc/resolver.Address]google.golang.org/grpc/resolver.addressMapEntryList m;
+};
+
+struct bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> {
+    uint8 tophash[8];
+    google.golang.org/grpc/balancer.SubConn keys[8];
+    google.golang.org/grpc/connectivity.State values[8];
+    struct bucket<google.golang.org/grpc/balancer.SubConn,google.golang.org/grpc/connectivity.State> *overflow;
+};
+
+typedef struct hash<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string> hash<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string>, *Phash<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string>;
+
+typedef struct bucket<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string> bucket<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string>, *Pbucket<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string>;
+
+typedef struct hash<golang.org/x/net/http2.Flags,string> hash<golang.org/x/net/http2.Flags,string>, *Phash<golang.org/x/net/http2.Flags,string>;
+
+typedef struct hash<golang.org/x/net/http2.Flags,string> *map[golang.org/x/net/http2.Flags]string;
+
+typedef struct bucket<golang.org/x/net/http2.Flags,string> bucket<golang.org/x/net/http2.Flags,string>, *Pbucket<golang.org/x/net/http2.Flags,string>;
+
+struct hash<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string> *buckets;
+    struct bucket<golang.org/x/net/http2.FrameType,map[golang.org/x/net/http2.Flags]string> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct hash<golang.org/x/net/http2.Flags,string> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2.Flags,string> *buckets;
+    struct bucket<golang.org/x/net/http2.Flags,string> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;

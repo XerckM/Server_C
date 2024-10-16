@@ -1,0 +1,1000 @@
+void crypto_x509_checkChainForKeyUsage
+               (___crypto_x509_Certificate chain,__crypto_x509_ExtKeyUsage keyUsages,bool ~r0)
+
+{
+  int iVar1;
+  undefined7 in_register_00000001;
+  void *__dest;
+  int i;
+  int in_RBX;
+  crypto_x509_Certificate *cert;
+  int in_RSI;
+  int usagesRemaining;
+  int iVar2;
+  void *in_RDI;
+  int i_1;
+  int iVar3;
+  crypto_x509_ExtKeyUsage requestedUsage;
+  int iVar4;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_mallocgc(in_RSI << 3,(internal_abi_Type *)0x0,false,in_RDI);
+  runtime_memmove(__dest,in_RDI,in_RSI << 3);
+  iVar2 = in_RSI;
+  if (in_RBX == 0) {
+    return;
+  }
+LAB_00699577:
+  do {
+    do {
+      in_RBX = in_RBX + -1;
+      if (in_RBX < 0) {
+        return;
+      }
+      iVar1 = *(int *)(CONCAT71(in_register_00000001,~r0) + in_RBX * 8);
+    } while ((*(int *)(iVar1 + 0x338) == 0) && (*(int *)(iVar1 + 0x350) == 0));
+    for (iVar3 = 0; iVar3 < *(int *)(iVar1 + 0x338); iVar3 = iVar3 + 1) {
+      if (*(int *)(*(int *)(iVar1 + 0x330) + iVar3 * 8) == 0) goto LAB_00699577;
+    }
+    for (i_1 = 0; i_1 < in_RSI; i_1 = i_1 + 1) {
+      iVar3 = *(int *)((int)__dest + i_1 * 8);
+      if (iVar3 != -1) {
+        for (iVar4 = 0; iVar4 < *(int *)(iVar1 + 0x338); iVar4 = iVar4 + 1) {
+          if (*(int *)(*(int *)(iVar1 + 0x330) + iVar4 * 8) == iVar3) goto LAB_006995d8;
+        }
+        *(undefined8 *)((int)__dest + i_1 * 8) = 0xffffffffffffffff;
+        if (iVar2 == 1) {
+          return;
+        }
+        iVar2 = iVar2 + -1;
+      }
+LAB_006995d8:
+    }
+  } while( true );
+}
+
+
+
+void crypto_x509_SignatureAlgorithm_String(crypto_x509_SignatureAlgorithm algo,string ~r0)
+
+{
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  *psVar1;
+  int iVar2;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa8;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  details;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar2 = 0;
+  psVar1 = crypto_x509_signatureAlgorithmDetails.array;
+  while( true ) {
+    if (crypto_x509_signatureAlgorithmDetails.len <= iVar2) {
+      strconv_FormatInt(algo,10,in_stack_ffffffffffffffa8);
+      return;
+    }
+    if (psVar1->algo == algo) break;
+    psVar1 = psVar1 + 1;
+    iVar2 = iVar2 + 1;
+  }
+  return;
+}
+
+
+
+void crypto_x509_PublicKeyAlgorithm_String(crypto_x509_PublicKeyAlgorithm algo,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (algo - 1U < 4) {
+    return;
+  }
+  strconv_FormatInt(algo,10,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+// WARNING: Variable defined which should be unmapped: details
+
+void crypto_x509_getSignatureAlgorithmFromAI
+               (crypto_x509_pkix_AlgorithmIdentifier ai,crypto_x509_SignatureAlgorithm ~r0)
+
+{
+  int iVar1;
+  __uint8 rest;
+  __uint8 rest_00;
+  error err;
+  error err_00;
+  byte extraout_AL;
+  int i;
+  int i_1;
+  int *extraout_RAX;
+  crypto_x509_pssParameters *_params;
+  int *extraout_RAX_00;
+  crypto_x509_pkix_AlgorithmIdentifier *_mgf1HashFunc;
+  byte bVar2;
+  int i_2;
+  int i_3;
+  byte extraout_AL_00;
+  int i_4;
+  int i_5;
+  int i_6;
+  int iVar3;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  *psVar4;
+  void *~r0_00;
+  int extraout_RDI;
+  int extraout_RDI_00;
+  int i_7;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffff70;
+  interface___ in_stack_ffffffffffffff88;
+  string in_stack_ffffffffffffff98;
+  undefined8 local_50;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  details;
+  
+  while (&details.hash <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (crypto_x509_oidSignatureEd25519.len == ai.Algorithm.len) {
+    for (i = 0; i < ai.Algorithm.len; i = i + 1) {
+      if (crypto_x509_oidSignatureEd25519.array[i] != ai.Algorithm.array[i]) goto LAB_006997e2;
+    }
+    if (ai.Parameters.FullBytes.len != 0) {
+      return;
+    }
+  }
+LAB_006997e2:
+  if (crypto_x509_oidSignatureRSAPSS.len != ai.Algorithm.len) {
+LAB_00699816:
+    iVar3 = 0;
+    psVar4 = crypto_x509_signatureAlgorithmDetails.array;
+    do {
+      if (crypto_x509_signatureAlgorithmDetails.len <= iVar3) {
+        return;
+      }
+      if ((psVar4->oid).len == ai.Algorithm.len) {
+        i_7 = 0;
+        while( true ) {
+          if (ai.Algorithm.len <= i_7) {
+            return;
+          }
+          if ((psVar4->oid).array[i_7] != ai.Algorithm.array[i_7]) break;
+          i_7 = i_7 + 1;
+        }
+      }
+      psVar4 = psVar4 + 1;
+      iVar3 = iVar3 + 1;
+    } while( true );
+  }
+  for (i_1 = 0; i_1 < ai.Algorithm.len; i_1 = i_1 + 1) {
+    if (crypto_x509_oidSignatureRSAPSS.array[i_1] != ai.Algorithm.array[i_1]) goto LAB_00699816;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_008781a0,crypto_x509_oidSignatureRSAPSS.array);
+  rest.len = local_50;
+  rest.array = (uint8 *)extraout_RAX;
+  rest.cap._0_4_ = (undefined4)details.algo;
+  rest.cap._4_4_ = details.algo._4_4_;
+  err.tab._4_4_ = details.name.str._4_4_;
+  err.tab._0_4_ = details.name.str._0_4_;
+  err.data._0_4_ = (undefined4)details.name.len;
+  err.data._4_4_ = details.name.len._4_4_;
+  encoding_asn1_UnmarshalWithParams
+            (in_stack_ffffffffffffff70,in_stack_ffffffffffffff88,in_stack_ffffffffffffff98,rest,err)
+  ;
+  if (extraout_RDI != 0) {
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00855a60,~r0_00);
+  rest_00.len = (int)extraout_RAX_00;
+  rest_00.array = (uint8 *)extraout_RAX;
+  rest_00.cap._0_4_ = (undefined4)details.algo;
+  rest_00.cap._4_4_ = details.algo._4_4_;
+  err_00.tab._4_4_ = details.name.str._4_4_;
+  err_00.tab._0_4_ = details.name.str._0_4_;
+  err_00.data._0_4_ = (undefined4)details.name.len;
+  err_00.data._4_4_ = details.name.len._4_4_;
+  encoding_asn1_UnmarshalWithParams
+            (in_stack_ffffffffffffff70,in_stack_ffffffffffffff88,in_stack_ffffffffffffff98,rest_00,
+             err_00);
+  if (extraout_RDI_00 != 0) {
+    return;
+  }
+  if (extraout_RAX[10] == 0) {
+    bVar2 = 0;
+  }
+  else {
+    if (encoding_asn1_NullBytes.len == extraout_RAX[10]) {
+      runtime_memequal();
+      bVar2 = extraout_AL;
+    }
+    else {
+      bVar2 = 0;
+    }
+    bVar2 = bVar2 ^ 1;
+  }
+  if (bVar2 == 0) {
+    if (crypto_x509_oidMGF1.len == extraout_RAX[0xd]) {
+      for (i_2 = 0; i_2 < extraout_RAX[0xd]; i_2 = i_2 + 1) {
+        if (crypto_x509_oidMGF1.array[i_2] != *(int *)(extraout_RAX[0xc] + i_2 * 8)) {
+          bVar2 = 1;
+          goto LAB_006999f1;
+        }
+      }
+      if (extraout_RAX[1] == extraout_RAX_00[1]) {
+        for (i_3 = 0; i_3 < extraout_RAX_00[1]; i_3 = i_3 + 1) {
+          if (*(int *)(*extraout_RAX + i_3 * 8) != *(int *)(*extraout_RAX_00 + i_3 * 8)) {
+            bVar2 = 1;
+            goto LAB_006999f1;
+          }
+        }
+        if (extraout_RAX_00[10] == 0) {
+          bVar2 = 0;
+        }
+        else {
+          if (encoding_asn1_NullBytes.len == extraout_RAX_00[10]) {
+            runtime_memequal();
+            bVar2 = extraout_AL_00;
+          }
+          else {
+            bVar2 = 0;
+          }
+          bVar2 = bVar2 ^ 1;
+        }
+      }
+      else {
+        bVar2 = 1;
+      }
+    }
+    else {
+      bVar2 = 1;
+    }
+  }
+  else {
+    bVar2 = 1;
+  }
+LAB_006999f1:
+  if ((bVar2 != 0) || (extraout_RAX[0x19] != 1)) {
+    return;
+  }
+  iVar3 = extraout_RAX[1];
+  iVar1 = *extraout_RAX;
+  if (crypto_x509_oidSHA256.len == iVar3) {
+    for (i_4 = 0; i_4 < iVar3; i_4 = i_4 + 1) {
+      if (crypto_x509_oidSHA256.array[i_4] != *(int *)(iVar1 + i_4 * 8)) goto LAB_00699a46;
+    }
+    if (extraout_RAX[0x18] == 0x20) {
+      return;
+    }
+  }
+LAB_00699a46:
+  if (crypto_x509_oidSHA384.len == iVar3) {
+    for (i_5 = 0; i_5 < iVar3; i_5 = i_5 + 1) {
+      if (crypto_x509_oidSHA384.array[i_5] != *(int *)(iVar1 + i_5 * 8)) goto LAB_00699a89;
+    }
+    if (extraout_RAX[0x18] == 0x30) {
+      return;
+    }
+  }
+LAB_00699a89:
+  if (crypto_x509_oidSHA512.len == iVar3) {
+    for (i_6 = 0; i_6 < iVar3; i_6 = i_6 + 1) {
+      if (crypto_x509_oidSHA512.array[i_6] != *(int *)(iVar1 + i_6 * 8)) {
+        return;
+      }
+    }
+    if (extraout_RAX[0x18] == 0x40) {
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509_getPublicKeyAlgorithmFromOID
+               (encoding_asn1_ObjectIdentifier oid,crypto_x509_PublicKeyAlgorithm ~r0)
+
+{
+  int i;
+  int i_1;
+  int i_2;
+  int i_3;
+  int in_RBX;
+  
+  if (crypto_x509_oidPublicKeyRSA.len == in_RBX) {
+    i = 0;
+    while( true ) {
+      if (in_RBX <= i) {
+        return;
+      }
+      if (crypto_x509_oidPublicKeyRSA.array[i] != *(int *)(~r0 + i * 8)) break;
+      i = i + 1;
+    }
+  }
+  if (crypto_x509_oidPublicKeyDSA.len == in_RBX) {
+    i_1 = 0;
+    while( true ) {
+      if (in_RBX <= i_1) {
+        return;
+      }
+      if (crypto_x509_oidPublicKeyDSA.array[i_1] != *(int *)(~r0 + i_1 * 8)) break;
+      i_1 = i_1 + 1;
+    }
+  }
+  if (crypto_x509_oidPublicKeyECDSA.len == in_RBX) {
+    i_2 = 0;
+    while( true ) {
+      if (in_RBX <= i_2) {
+        return;
+      }
+      if (crypto_x509_oidPublicKeyECDSA.array[i_2] != *(int *)(~r0 + i_2 * 8)) break;
+      i_2 = i_2 + 1;
+    }
+  }
+  if (crypto_x509_oidPublicKeyEd25519.len == in_RBX) {
+    i_3 = 0;
+    while( true ) {
+      if (in_RBX <= i_3) {
+        return;
+      }
+      if (crypto_x509_oidPublicKeyEd25519.array[i_3] != *(int *)(~r0 + i_3 * 8)) break;
+      i_3 = i_3 + 1;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509_namedCurveFromOID(encoding_asn1_ObjectIdentifier oid,crypto_elliptic_Curve ~r0)
+
+{
+  int in_RAX;
+  int i;
+  int i_1;
+  int i_2;
+  int i_3;
+  int in_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (crypto_x509_oidNamedCurveP224.len == in_RBX) {
+    i = 0;
+    while( true ) {
+      if (in_RBX <= i) {
+        if (crypto_elliptic_initonce.done == 0) {
+          sync___Once__doSlow(&crypto_elliptic_initonce,
+                              (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);
+        }
+        return;
+      }
+      if (crypto_x509_oidNamedCurveP224.array[i] != *(int *)(in_RAX + i * 8)) break;
+      i = i + 1;
+    }
+  }
+  if (crypto_x509_oidNamedCurveP256.len == in_RBX) {
+    i_1 = 0;
+    while( true ) {
+      if (in_RBX <= i_1) {
+        if (crypto_elliptic_initonce.done == 0) {
+          sync___Once__doSlow(&crypto_elliptic_initonce,
+                              (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);
+        }
+        return;
+      }
+      if (crypto_x509_oidNamedCurveP256.array[i_1] != *(int *)(in_RAX + i_1 * 8)) break;
+      i_1 = i_1 + 1;
+    }
+  }
+  if (crypto_x509_oidNamedCurveP384.len == in_RBX) {
+    i_2 = 0;
+    while( true ) {
+      if (in_RBX <= i_2) {
+        if (crypto_elliptic_initonce.done == 0) {
+          sync___Once__doSlow(&crypto_elliptic_initonce,
+                              (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);
+        }
+        return;
+      }
+      if (crypto_x509_oidNamedCurveP384.array[i_2] != *(int *)(in_RAX + i_2 * 8)) break;
+      i_2 = i_2 + 1;
+    }
+  }
+  if (crypto_x509_oidNamedCurveP521.len == in_RBX) {
+    i_3 = 0;
+    while( true ) {
+      if (in_RBX <= i_3) {
+        if (crypto_elliptic_initonce.done == 0) {
+          sync___Once__doSlow(&crypto_elliptic_initonce,
+                              (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);
+        }
+        return;
+      }
+      if (crypto_x509_oidNamedCurveP521.array[i_3] != *(int *)(in_RAX + i_3 * 8)) break;
+      i_3 = i_3 + 1;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509_InsecureAlgorithmError_Error(crypto_x509_InsecureAlgorithmError e,string ~r0)
+
+{
+  __interface___ a;
+  string ~r0_00;
+  string ~r0_01;
+  uint8 *puVar1;
+  undefined *puVar2;
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffb0;
+  string in_stack_ffffffffffffffc0;
+  uint8 *in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  if ((e == 3) || (e == 9)) {
+    puVar1 = (uint8 *)0x2f;
+    puVar2 = &DAT_008c7e2d;
+  }
+  else {
+    puVar1 = (uint8 *)0x0;
+    puVar2 = (undefined *)0x0;
+  }
+  runtime_convT64(e,in_RBX);
+  a.cap = (int)in_stack_ffffffffffffffd0;
+  a.array = (interface___ *)in_stack_ffffffffffffffc0.str;
+  a.len = in_stack_ffffffffffffffc0.len;
+  ~r0_01.len = (int)puVar2;
+  ~r0_01.str = puVar1;
+  fmt_Sprintf(in_stack_ffffffffffffffb0,a,~r0_01);
+  ~r0_00.len = (int)puVar1;
+  ~r0_00.str = in_stack_ffffffffffffffd0;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb0,in_stack_ffffffffffffffc0,~r0_00);
+  return;
+}
+
+
+
+void crypto_x509_ConstraintViolationError_Error(string ~r0)
+
+{
+  return;
+}
+
+
+
+void crypto_x509___Certificate__Equal
+               (crypto_x509_Certificate *c,crypto_x509_Certificate *other,bool ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((c != (crypto_x509_Certificate *)0x0) && (other != (crypto_x509_Certificate *)0x0)) {
+    if ((other->Raw).len == (c->Raw).len) {
+      runtime_memequal();
+    }
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_x509___Certificate__CheckSignatureFrom
+               (crypto_x509_Certificate *c,crypto_x509_Certificate *parent,error ~r0)
+
+{
+  undefined auVar1 [24];
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffa9 [23];
+  __uint8 in_stack_ffffffffffffffc0;
+  crypto_PublicKey in_stack_ffffffffffffffd8;
+  error in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((parent->Version != 3) || (parent->BasicConstraintsValid != false)) &&
+     ((parent->BasicConstraintsValid == false || (parent->IsCA != false)))) {
+    if ((parent->KeyUsage != 0) && (((dword)parent->KeyUsage >> 5 & 1) == 0)) {
+      return;
+    }
+    if (parent->PublicKeyAlgorithm == 0) {
+      return;
+    }
+    auVar1[23] = 0;
+    auVar1._0_23_ = in_stack_ffffffffffffffa9;
+    crypto_x509_checkSignature
+              (c->SignatureAlgorithm,(__uint8)(auVar1 << 8),in_stack_ffffffffffffffc0,
+               in_stack_ffffffffffffffd8,SUB81((c->RawTBSCertificate).array,0),
+               in_stack_ffffffffffffffe8);
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_x509___Certificate__CheckSignature
+               (crypto_x509_Certificate *c,crypto_x509_SignatureAlgorithm algo,__uint8 signed,
+               __uint8 signature,error ~r0)
+
+{
+  __uint8 signed_00;
+  bool in_CL;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffffa9 [23];
+  __uint8 in_stack_ffffffffffffffc0;
+  crypto_PublicKey in_stack_ffffffffffffffd8;
+  error in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  signed_00._1_23_ = in_stack_ffffffffffffffa9;
+  signed_00.array._0_1_ = 1;
+  crypto_x509_checkSignature
+            (algo,signed_00,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd8,in_CL,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_x509_signaturePublicKeyAlgoMismatchError
+               (crypto_x509_PublicKeyAlgorithm expectedPubKeyAlgo,interface___ pubKey,error ~r0)
+
+{
+  error ~r0_00;
+  uint8 *extraout_RAX;
+  uint8 *x;
+  runtime_itab *in_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffa8;
+  __interface___ in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (expectedPubKeyAlgo - 1U < 4) {
+    x = crypto_x509_publicKeyAlgoName[expectedPubKeyAlgo].str;
+  }
+  else {
+    strconv_FormatInt(expectedPubKeyAlgo,10,in_stack_ffffffffffffffa8);
+    x = extraout_RAX;
+  }
+  runtime_convTstring(in_stack_ffffffffffffffa8,x);
+  ~r0_00.data = &DAT_008075e0;
+  ~r0_00.tab = in_RBX;
+  fmt_Errorf(in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,~r0_00);
+  return;
+}
+
+
+
+void crypto_x509_checkSignature
+               (crypto_x509_SignatureAlgorithm algo,__uint8 signed,__uint8 signature,
+               crypto_PublicKey publicKey,bool allowSHA1,error err)
+
+{
+  sdword sVar1;
+  runtime_itab *ctx;
+  __uint8 digest;
+  __uint8 hashed;
+  __uint8 hash;
+  __uint8 val;
+  error ~r0;
+  error ~r0_00;
+  error ~r0_01;
+  __uint8 sig;
+  __uint8 sig_00;
+  __uint8 sig_01;
+  char extraout_AL;
+  char *extraout_RAX;
+  int extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *extraout_RAX_02;
+  size_t in_RCX;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  *psVar2;
+  undefined7 in_register_00000019;
+  crypto_rsa_PSSOptions *opts;
+  undefined *x;
+  undefined8 extraout_RBX;
+  void *~r0_02;
+  void *~r0_03;
+  crypto_x509_PublicKeyAlgorithm pubKeyAlgo;
+  undefined8 in_RDI;
+  undefined *in_R10;
+  crypto_ecdsa_PublicKey *in_R11;
+  crypto_rsa_PublicKey *pub;
+  int iVar3;
+  int unaff_R14;
+  crypto_Hash hashType;
+  undefined auVar4 [16];
+  interface___ in_stack_ffffffffffffff18;
+  runtime_itab *in_stack_ffffffffffffff28;
+  uint8 *in_stack_ffffffffffffff30;
+  undefined in_stack_ffffffffffffff38 [16];
+  error in_stack_ffffffffffffff48;
+  crypto_x509_PublicKeyAlgorithm local_80;
+  undefined local_68 [16];
+  undefined8 local_58;
+  undefined *local_50;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  details;
+  
+  opts = (crypto_rsa_PSSOptions *)CONCAT71(in_register_00000019,allowSHA1);
+  while (local_68 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  hashType = 0;
+  local_80 = 0;
+  psVar2 = crypto_x509_signatureAlgorithmDetails.array;
+  for (iVar3 = 0; iVar3 < crypto_x509_signatureAlgorithmDetails.len; iVar3 = iVar3 + 1) {
+    details.algo._0_4_ = *(undefined4 *)&psVar2->algo;
+    details.algo._4_4_ = *(undefined4 *)((int)&psVar2->algo + 4);
+    details.name.str._0_4_ = *(undefined4 *)&(psVar2->name).str;
+    details.name.str._4_4_ = *(undefined4 *)((int)&(psVar2->name).str + 4);
+    details.name.len._0_4_ = *(undefined4 *)&(psVar2->name).len;
+    details.name.len._4_4_ = *(undefined4 *)((int)&(psVar2->name).len + 4);
+    details.oid.array._0_4_ = *(undefined4 *)&(psVar2->oid).array;
+    details.oid.array._4_4_ = *(undefined4 *)((int)&(psVar2->oid).array + 4);
+    details.oid.len._0_4_ = *(undefined4 *)&(psVar2->oid).len;
+    details.oid.len._4_4_ = *(undefined4 *)((int)&(psVar2->oid).len + 4);
+    details.oid.cap._0_4_ = *(undefined4 *)&(psVar2->oid).cap;
+    details.oid.cap._4_4_ = *(undefined4 *)((int)&(psVar2->oid).cap + 4);
+    details.pubKeyAlgo._0_4_ = *(undefined4 *)&psVar2->pubKeyAlgo;
+    details.pubKeyAlgo._4_4_ = *(undefined4 *)((int)&psVar2->pubKeyAlgo + 4);
+    details.hash._0_4_ = *(undefined4 *)&psVar2->hash;
+    details.hash._4_4_ = *(undefined4 *)((int)&psVar2->hash + 4);
+    if (psVar2->algo == algo) {
+      local_80 = psVar2->pubKeyAlgo;
+      hashType = psVar2->hash;
+    }
+    psVar2 = psVar2 + 1;
+  }
+  if (hashType == 0) {
+    if (local_80 != 4) {
+      return;
+    }
+LAB_0069a4f6:
+    if (in_R10 != (undefined *)0x0) {
+      sVar1 = *(sdword *)(in_R10 + 0x10);
+      if (sVar1 == 0x4bcec15d) {
+        if (in_R10 == &DAT_0083a2c0) {
+          if (local_80 != 1) {
+            ~r0.data = in_stack_ffffffffffffff30;
+            ~r0.tab = in_stack_ffffffffffffff28;
+            crypto_x509_signaturePublicKeyAlgoMismatchError(local_80,in_stack_ffffffffffffff18,~r0);
+            return;
+          }
+          if (2 < algo - 0xdU) {
+            hashed.cap = (int)in_stack_ffffffffffffff28;
+            hashed.array = (uint8 *)in_stack_ffffffffffffff18._type;
+            hashed.len = (int)in_stack_ffffffffffffff18.data;
+            sig_00.len = in_stack_ffffffffffffff38._0_8_;
+            sig_00.cap = in_stack_ffffffffffffff38._8_8_;
+            sig_00.array = in_stack_ffffffffffffff30;
+            crypto_rsa_VerifyPKCS1v15
+                      ((crypto_rsa_PublicKey *)in_R11,hashType,hashed,sig_00,
+                       in_stack_ffffffffffffff48);
+            return;
+          }
+          local_68 = ZEXT816(0xffffffffffffffff);
+          digest.cap = (int)in_stack_ffffffffffffff28;
+          digest.array = (uint8 *)in_stack_ffffffffffffff18._type;
+          digest.len = (int)in_stack_ffffffffffffff18.data;
+          sig.len = in_stack_ffffffffffffff38._0_8_;
+          sig.cap = in_stack_ffffffffffffff38._8_8_;
+          sig.array = in_stack_ffffffffffffff30;
+          crypto_rsa_VerifyPSS
+                    ((crypto_rsa_PublicKey *)in_R11,hashType,digest,sig,opts,
+                     in_stack_ffffffffffffff48);
+          return;
+        }
+      }
+      else if (sVar1 == -0x73842c73) {
+        if (in_R10 == &DAT_0087ab80) {
+          if (local_80 != 3) {
+            ~r0_00.data = in_stack_ffffffffffffff30;
+            ~r0_00.tab = in_stack_ffffffffffffff28;
+            crypto_x509_signaturePublicKeyAlgoMismatchError
+                      (local_80,in_stack_ffffffffffffff18,~r0_00);
+            return;
+          }
+          hash.cap = (int)in_stack_ffffffffffffff28;
+          hash.array = (uint8 *)in_stack_ffffffffffffff18._type;
+          hash.len = (int)in_stack_ffffffffffffff18.data;
+          sig_01.len = in_stack_ffffffffffffff38._0_8_;
+          sig_01.cap = in_stack_ffffffffffffff38._8_8_;
+          sig_01.array = in_stack_ffffffffffffff30;
+          crypto_ecdsa_VerifyASN1(in_R11,hash,sig_01,SUB81(opts,0));
+          if (extraout_AL == '\0') {
+            runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0_02);
+            extraout_RAX_01[1] = 0x20;
+            *extraout_RAX_01 = &DAT_008c05b3;
+            return;
+          }
+          return;
+        }
+      }
+      else if ((sVar1 == -0x3f261b5c) && (in_R10 == &DAT_0082a0a0)) {
+        ctx = (in_R11->Curve).tab;
+        if (local_80 != 4) {
+          val.cap = (int)in_stack_ffffffffffffff28;
+          val.array = (uint8 *)in_stack_ffffffffffffff18._type;
+          val.len = (int)in_stack_ffffffffffffff18.data;
+          runtime_convTslice(val,ctx);
+          ~r0_01.data = in_stack_ffffffffffffff30;
+          ~r0_01.tab = in_stack_ffffffffffffff28;
+          crypto_x509_signaturePublicKeyAlgoMismatchError(local_80,in_stack_ffffffffffffff18,~r0_01)
+          ;
+          return;
+        }
+        iVar3 = crypto_ed25519_verify
+                          ((EVP_PKEY_CTX *)ctx,(uchar *)(in_R11->Curve).data,(size_t)in_R11->X,
+                           (uchar *)opts,in_RCX);
+        if ((char)iVar3 == '\0') {
+          runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0_03);
+          extraout_RAX_02[1] = 0x22;
+          *extraout_RAX_02 = &DAT_008c194c;
+          return;
+        }
+        return;
+      }
+    }
+    return;
+  }
+  if (hashType == 2) {
+    runtime_convT64(algo,opts);
+    return;
+  }
+  local_50 = in_R10;
+  if ((hashType == 3) && ((char)signed.array == '\0')) {
+    internal_godebug___Setting__Value(crypto_x509_x509sha1,(string)in_stack_ffffffffffffff18);
+    if ((x != &DAT_00000001) || (*extraout_RAX != '1')) {
+      runtime_convT64(algo,x);
+      return;
+    }
+    internal_godebug___Setting__IncNonDefault(crypto_x509_x509sha1);
+  }
+  if (hashType < 0x14) {
+    if ((uint)crypto_hashes.len <= hashType) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    if (crypto_hashes.array[hashType] != (func___hash_Hash **)0x0) {
+      crypto_Hash_New(hashType,(hash_Hash)in_stack_ffffffffffffff18);
+      local_58 = extraout_RBX;
+      (**(code **)(extraout_RAX_00 + 0x38))(extraout_RBX,opts,in_RCX,in_RDI);
+      auVar4 = (**(code **)(extraout_RAX_00 + 0x30))(local_58,0,0);
+      in_RCX = auVar4._8_8_;
+      opts = auVar4._0_8_;
+      in_R10 = local_50;
+      goto LAB_0069a4f6;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509___Certificate__CheckCRLSignature
+               (crypto_x509_Certificate *c,crypto_x509_pkix_CertificateList *crl,error ~r0)
+
+{
+  __uint8 signed;
+  encoding_asn1_BitString b;
+  crypto_x509_pkix_AlgorithmIdentifier ai;
+  __uint8 signature;
+  __uint8 ~r0_00;
+  crypto_PublicKey publicKey;
+  crypto_x509_SignatureAlgorithm ~r0_01;
+  crypto_x509_SignatureAlgorithm algo_00;
+  crypto_x509_SignatureAlgorithm algo;
+  int unaff_R14;
+  undefined in_stack_ffffffffffffff30;
+  undefined in_stack_ffffffffffffff31 [23];
+  uint8 *in_stack_ffffffffffffff48;
+  undefined in_stack_ffffffffffffff50 [16];
+  internal_abi_Type *in_stack_ffffffffffffff60;
+  void *in_stack_ffffffffffffff68;
+  error in_stack_ffffffffffffff70;
+  undefined in_stack_ffffffffffffff80 [16];
+  undefined local_50 [72];
+  
+  while (local_50 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046d10c();
+  ~r0_01 = FUN_0046d10c();
+  ai.Algorithm._1_23_ = in_stack_ffffffffffffff31;
+  ai.Algorithm.array._0_1_ = in_stack_ffffffffffffff30;
+  ai.Parameters.Class = (int)in_stack_ffffffffffffff48;
+  ai.Parameters.Tag = in_stack_ffffffffffffff50._0_8_;
+  ai.Parameters.IsCompound = (bool)in_stack_ffffffffffffff50[8];
+  ai.Parameters._17_7_ = in_stack_ffffffffffffff50._9_7_;
+  ai.Parameters.Bytes.array = (uint8 *)in_stack_ffffffffffffff60;
+  ai.Parameters.Bytes.len = (int)in_stack_ffffffffffffff68;
+  ai.Parameters._40_16_ = (undefined  [16])in_stack_ffffffffffffff70;
+  ai.Parameters.FullBytes.len = in_stack_ffffffffffffff80._0_8_;
+  ai.Parameters.FullBytes.cap = in_stack_ffffffffffffff80._8_8_;
+  crypto_x509_getSignatureAlgorithmFromAI(ai,~r0_01);
+  b.Bytes._1_23_ = in_stack_ffffffffffffff31;
+  b.Bytes.array._0_1_ = in_stack_ffffffffffffff30;
+  b.BitLength = (int)in_stack_ffffffffffffff48;
+  ~r0_00.cap = (int)in_stack_ffffffffffffff60;
+  ~r0_00.array = (uint8 *)in_stack_ffffffffffffff50._0_8_;
+  ~r0_00.len = in_stack_ffffffffffffff50._8_8_;
+  encoding_asn1_BitString_RightAlign(b,~r0_00);
+  signed._1_23_ = in_stack_ffffffffffffff31;
+  signed.array._0_1_ = 1;
+  signature.len = in_stack_ffffffffffffff50._0_8_;
+  signature.cap = in_stack_ffffffffffffff50._8_8_;
+  signature.array = in_stack_ffffffffffffff48;
+  publicKey.data = in_stack_ffffffffffffff68;
+  publicKey._type = in_stack_ffffffffffffff60;
+  crypto_x509_checkSignature
+            (algo_00,signed,signature,publicKey,SUB81((crl->TBSCertList).Raw.array,0),
+             in_stack_ffffffffffffff70);
+  return;
+}
+
+
+
+void crypto_x509_UnhandledCriticalExtension_Error
+               (crypto_x509_UnhandledCriticalExtension h,string ~r0)
+
+{
+  return;
+}
+
+
+
+void crypto_x509_isIA5String(string s,error ~r0)
+
+{
+  int32 extraout_EAX;
+  void *in_RAX;
+  void *extraout_RAX;
+  int pos;
+  int32 r;
+  int in_RBX;
+  int extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  error ~r0_00;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pos = 0;
+  do {
+    if (in_RBX <= pos) {
+      return;
+    }
+    r = (int32)*(byte *)((int)in_RAX + pos);
+    if (*(byte *)((int)in_RAX + pos) < 0x80) {
+      pos = pos + 1;
+    }
+    else {
+      runtime_decoderune(in_stack_ffffffffffffffc0,(int)in_RAX,(int32)in_RBX,pos);
+      pos = extraout_RBX;
+      r = extraout_EAX;
+    }
+  } while (r < 0x80);
+  runtime_convTstring(in_stack_ffffffffffffffc0,in_RAX);
+  ~r0_00.data = extraout_RAX;
+  ~r0_00.tab = (runtime_itab *)&DAT_008075e0;
+  fmt_Errorf(in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  return;
+}
+
+
+
+void crypto_x509_signingParamsForPublicKey
+               (interface___ pub,crypto_x509_SignatureAlgorithm requestedSigAlgo,
+               crypto_Hash hashFunc,crypto_x509_pkix_AlgorithmIdentifier sigAlgo,error err)
+
+{
+  sdword sVar1;
+  uint64 key;
+  char extraout_AL;
+  char extraout_AL_00;
+  char extraout_AL_01;
+  char extraout_AL_02;
+  undefined *extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined1 *puVar2;
+  undefined8 *extraout_RAX_02;
+  undefined8 *extraout_RAX_03;
+  char **extraout_RAX_04;
+  undefined8 *extraout_RAX_05;
+  int in_RCX;
+  int extraout_RCX;
+  int *~r0;
+  void *extraout_RBX;
+  void *x;
+  crypto_x509_PublicKeyAlgorithm pubType;
+  undefined extraout_DIL;
+  undefined extraout_DIL_00;
+  undefined extraout_DIL_01;
+  undefined extraout_DIL_02;
+  undefined extraout_DIL_03;
+  undefined extraout_DIL_04;
+  undefined extraout_DIL_05;
+  undefined extraout_DIL_06;
+  undefined ~r0_00;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  *psVar3;
+  int iVar4;
+  int unaff_R14;
+  struct___crypto_x509_algo_crypto_x509_SignatureAlgorithm__crypto_x509_name_string__crypto_x509_oid_encoding_asn1_ObjectIdentifier__crypto_x509_pubKeyAlgo_crypto_x509_PublicKeyAlgorithm__crypto_x509_hash_crypto_Hash__
+  details;
+  
+  while (&details.hash <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cdab();
+  if (extraout_RAX != (undefined *)0x0) {
+    sVar1 = *(sdword *)(extraout_RAX + 0x10);
+    if (sVar1 == 0x4bcec15d) {
+      if (extraout_RAX == &DAT_0083a2c0) {
+        puVar2 = (undefined1 *)0x0;
+        pubType = 1;
+        in_RCX = extraout_RCX;
+        goto LAB_0069ae22;
+      }
+    }
+    else if (sVar1 == -0x73842c73) {
+      if (extraout_RAX == &DAT_0087ab80) {
+        puVar2 = (undefined1 *)*~r0;
+        x = (void *)~r0[1];
+        ~r0_00 = extraout_DIL;
+        if (crypto_elliptic_initonce.done == 0) {
+          sync___Once__doSlow(&crypto_elliptic_initonce,
+                              (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);
+          ~r0_00 = extraout_DIL_00;
+        }
+        if ((puVar2 == 
+             go_itab__crypto_elliptic_nistCurve__crypto_internal_nistec_P224Point__crypto_elliptic_Curve
+            ) && (runtime_ifaceeq((runtime_itab *)
+                                  go_itab__crypto_elliptic_nistCurve__crypto_internal_nistec_P224Point__crypto_elliptic_Curve
+                                  ,x,crypto_elliptic_p224,(bool)~r0_00), ~r0_00 = extraout_DIL_01,
+                 extraout_AL != '\0')) {
+LAB_0069ac35:
+          puVar2 = (undefined1 *)0x0;
+        }
+        else {
+          if (crypto_elliptic_initonce.done == 0) {
+            sync___Once__doSlow(&crypto_elliptic_initonce,
+                                (func__ **)&PTR_crypto_elliptic_initAll_008ec8f8);

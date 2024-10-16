@@ -1,0 +1,1000 @@
+        }
+      }
+      LOCK();
+      d->recent[dVar2][(dword)ch & 3] = h;
+      UNLOCK();
+      return;
+    }
+    if (d->recent[dVar2][i] == h) break;
+    i = i + 1;
+  }
+  return;
+}
+
+
+
+void type__eq_internal_bisect_cond(internal_bisect_cond *p,internal_bisect_cond *q,bool r)
+
+{
+  if ((q->mask == p->mask) && (q->bits == p->bits)) {
+    return;
+  }
+  return;
+}
+
+
+
+// DWARF original name: type:.eq.[2]interface {}
+
+void type__eq__2_interface___(interface___ (*p) [2],interface___ (*q) [2],bool r)
+
+{
+  internal_abi_Type *t;
+  internal_abi_Type *piVar1;
+  char extraout_AL;
+  int iVar2;
+  int unaff_R14;
+  interface___ (*paiStack0000000000000008) [2];
+  interface___ (*paiStack0000000000000010) [2];
+  
+  paiStack0000000000000008 = p;
+  paiStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar2 = 0;
+  while( true ) {
+    if (1 < iVar2) {
+      return;
+    }
+    t = (*paiStack0000000000000008)[iVar2]._type;
+    piVar1 = (*paiStack0000000000000010)[iVar2]._type;
+    if (piVar1 != t) break;
+    runtime_efaceeq(t,(*paiStack0000000000000008)[iVar2].data,
+                    (*paiStack0000000000000010)[iVar2].data,SUB81(piVar1,0));
+    if (extraout_AL == '\0') {
+      return;
+    }
+    iVar2 = iVar2 + 1;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug___Setting__IncNonDefault(internal_godebug_Setting *s)
+
+{
+  sync_atomic_Uint64 *psVar1;
+  int unaff_R14;
+  internal_godebug_Setting *piStack0000000000000008;
+  undefined local_18 [16];
+  
+  piStack0000000000000008 = s;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_18._8_8_ = piStack0000000000000008;
+  local_18._0_8_ = internal_godebug___Setting__register_fm;
+  if ((piStack0000000000000008->setting->nonDefaultOnce).done == 0) {
+    sync___Once__doSlow(&piStack0000000000000008->setting->nonDefaultOnce,(func__ **)local_18);
+  }
+  LOCK();
+  psVar1 = &piStack0000000000000008->setting->nonDefault;
+  psVar1->v = psVar1->v + 1;
+  UNLOCK();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug___Setting__register(internal_godebug_Setting *s)
+
+{
+  internal_godebugs_Info *piVar1;
+  string ~r0;
+  code **extraout_RAX;
+  code **extraout_RAX_00;
+  code **ppcVar2;
+  func___uint64 **read;
+  void *x;
+  int iVar3;
+  sync_atomic_Uint64 *extraout_RCX;
+  sync_atomic_Uint64 *psVar4;
+  void *in_RBX;
+  void *extraout_RBX;
+  sync_atomic_Uint64 **extraout_R11;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc8;
+  uint8 *in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  piVar1 = s->setting->info;
+  if ((piVar1 != (internal_godebugs_Info *)0x0) && (piVar1->Opaque == false)) {
+    iVar3 = (s->name).len;
+    if ((iVar3 != 0) && (*(s->name).str == 0x23)) {
+      iVar3 = iVar3 + -1;
+      in_RBX = (void *)(uint)((dword)(-iVar3 >> 0x3f) & 1);
+    }
+    runtime_newobject((internal_abi_Type *)&DAT_00847fe0,in_RBX);
+    *extraout_RAX = sync_atomic___Uint64__Load_fm;
+    psVar4 = &s->setting->nonDefault;
+    ppcVar2 = extraout_RAX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = extraout_RCX;
+      ppcVar2 = extraout_RAX_00;
+      psVar4 = extraout_RCX;
+    }
+    ppcVar2[1] = (code *)psVar4;
+    ~r0.len = iVar3;
+    ~r0.str = in_stack_ffffffffffffffd8;
+    runtime_concatstring3
+              ((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,
+               in_stack_ffffffffffffffc8,~r0);
+    internal_godebug_registerMetric((string)in_stack_ffffffffffffffa8,read);
+    return;
+  }
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,
+             in_stack_ffffffffffffffc8);
+  runtime_convTstring((string)in_stack_ffffffffffffffa8,x);
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffa8);
+}
+
+
+
+void internal_godebug___Setting__Value(internal_godebug_Setting *s,string ~r0)
+
+{
+  internal_bisect_Matcher *m;
+  char extraout_AL;
+  int unaff_R14;
+  internal_bisect_Writer in_stack_ffffffffffffffc0;
+  undefined local_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_18._8_8_ = s;
+  local_18._0_8_ = internal_godebug___Setting__Value_func1;
+  if ((s->once).done == 0) {
+    sync___Once__doSlow(&s->once,(func__ **)local_18);
+  }
+  m = *(internal_bisect_Matcher **)((int)(s->setting->value).v + 0x10);
+  if ((m != (internal_bisect_Matcher *)0x0) &&
+     (internal_bisect___Matcher__stack(m,in_stack_ffffffffffffffc0,true), extraout_AL == '\0')) {
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug___Setting__Value_func1(void)
+
+{
+  string ~r0;
+  internal_godebug_setting *extraout_RAX;
+  internal_godebug_setting *extraout_RAX_00;
+  internal_godebug_setting *piVar1;
+  void *x;
+  internal_godebug_Setting *s;
+  int in_RDX;
+  internal_godebug_setting **extraout_R11;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffc8;
+  string in_stack_ffffffffffffffd8;
+  uint8 *in_stack_ffffffffffffffe8;
+  internal_godebug_setting **ppiVar2;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  ppiVar2 = *(internal_godebug_setting ***)(in_RDX + 8);
+  piVar1 = *ppiVar2;
+  if ((ppiVar2[1] != (internal_godebug_setting *)0x0) && (*(char *)&(piVar1->value).v == '#')) {
+    piVar1 = (internal_godebug_setting *)
+             ((int)&(piVar1->value).v +
+             (uint)((dword)(-(int)((int)&ppiVar2[1][-1].info + 7) >> 0x3f) & 1));
+  }
+  internal_godebug_lookup((string)in_stack_ffffffffffffffc8,piVar1);
+  piVar1 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = ppiVar2[4];
+    piVar1 = extraout_RAX_00;
+  }
+  ppiVar2[4] = piVar1;
+  if ((piVar1->info == (internal_godebugs_Info *)0x0) &&
+     ((ppiVar2[1] == (internal_godebug_setting *)0x0 || (*(char *)&((*ppiVar2)->value).v != '#'))))
+  {
+    ~r0.len = (int)ppiVar2;
+    ~r0.str = in_stack_ffffffffffffffe8;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffffc8,in_stack_ffffffffffffffd8,~r0
+              );
+    runtime_convTstring((string)in_stack_ffffffffffffffc8,x);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffc8);
+  }
+  return;
+}
+
+
+
+void internal_godebug_lookup(string name,internal_godebug_setting *~r0)
+
+{
+  uint uVar1;
+  interface___ actual;
+  char extraout_AL;
+  internal_abi_Type *have;
+  void **extraout_RAX;
+  internal_godebug_setting *s;
+  int extraout_RAX_00;
+  void **extraout_RAX_01;
+  void **ptr;
+  internal_abi_Type *have_00;
+  char extraout_CL;
+  bool ok;
+  char extraout_CL_00;
+  bool loaded;
+  uint uVar2;
+  int iVar3;
+  internal_godebugs_Info *piVar4;
+  internal_godebugs_Info *extraout_RCX;
+  void *in_RBX;
+  void *~r0_00;
+  int iVar5;
+  int m;
+  internal_godebugs_Info **extraout_R11;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffff80;
+  interface___ in_stack_ffffffffffffff90;
+  internal_abi_Type *in_stack_ffffffffffffffa0;
+  void *in_stack_ffffffffffffffa8;
+  void *pvVar6;
+  int lo;
+  int hi;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sync___Map__Load(&internal_godebug_cache,in_stack_ffffffffffffff80,in_stack_ffffffffffffff90,true)
+  ;
+  if (extraout_CL != '\0') {
+    if (have != (internal_abi_Type *)&DAT_007f8120) {
+                    // WARNING: Subroutine does not return
+      runtime_panicdottypeE
+                (have,(internal_abi_Type *)&DAT_007f8120,(internal_abi_Type *)&DAT_00821120);
+    }
+    return;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00875560,~r0_00);
+  iVar5 = 0;
+  uVar1 = internal_godebugs_All.len;
+  do {
+    uVar2 = uVar1;
+    if ((int)uVar2 <= iVar5) {
+      piVar4 = (internal_godebugs_Info *)0x0;
+LAB_0049b1a4:
+      ptr = extraout_RAX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RCX;
+        extraout_R11[1] = (internal_godebugs_Info *)extraout_RAX_01[4];
+        ptr = extraout_RAX_01;
+        piVar4 = extraout_RCX;
+      }
+      ptr[4] = piVar4;
+      sync_atomic_StorePointer(ptr,&internal_godebug_empty);
+      runtime_convTstring((string)in_stack_ffffffffffffff80,~r0);
+      actual.data = in_stack_ffffffffffffffa8;
+      actual._type = in_stack_ffffffffffffffa0;
+      sync___Map__LoadOrStore
+                (&internal_godebug_cache,in_stack_ffffffffffffff80,in_stack_ffffffffffffff90,actual,
+                 true);
+      if (extraout_CL_00 == '\0') {
+        return;
+      }
+      if (have_00 != (internal_abi_Type *)&DAT_007f8120) {
+                    // WARNING: Subroutine does not return
+        runtime_panicdottypeE
+                  (have_00,(internal_abi_Type *)&DAT_007f8120,(internal_abi_Type *)&DAT_00821120);
+      }
+      return;
+    }
+    iVar3 = (int)(uVar2 - iVar5) >> 1;
+    uVar1 = iVar3 + iVar5;
+    if ((uint)internal_godebugs_All.len <= uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    pvVar6 = (void *)internal_godebugs_All.array[uVar1].Name.len;
+    if ((in_RBX == pvVar6) &&
+       (runtime_memequal(), in_stack_ffffffffffffffa8 = pvVar6, extraout_AL != '\0')) {
+      if ((uint)internal_godebugs_All.len <= uVar1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      piVar4 = internal_godebugs_All.array + uVar1;
+      goto LAB_0049b1a4;
+    }
+    runtime_cmpstring();
+    if (-1 < extraout_RAX_00) {
+      iVar5 = iVar3 + iVar5 + 1;
+      uVar1 = uVar2;
+    }
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug_init_0(void)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  internal_godebug_setUpdate((func_string__string_ **)&PTR_internal_godebug_update_008eb1f0);
+  internal_godebug_setNewIncNonDefault
+            ((func_string__func__ **)&PTR_internal_godebug_newIncNonDefault_008eb1e8);
+  return;
+}
+
+
+
+void internal_godebug_newIncNonDefault(string name,func__ **~r0)
+
+{
+  internal_godebug_Setting *extraout_RAX;
+  internal_godebug_Setting *s;
+  internal_godebug_Setting *extraout_RAX_00;
+  internal_godebug_Setting *s_00;
+  code **extraout_RAX_01;
+  code **extraout_RAX_02;
+  code **ppcVar1;
+  void *in_RBX;
+  void *~r0_00;
+  undefined8 *extraout_R11;
+  internal_godebug_Setting **extraout_R11_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_0085e480,in_RBX);
+  (extraout_RAX->name).len = (int)in_RBX;
+  s_00 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = ~r0;
+    s_00 = extraout_RAX_00;
+  }
+  (s_00->name).str = (uint8 *)~r0;
+  internal_godebug___Setting__Value(s_00,in_stack_ffffffffffffffe0);
+  runtime_newobject((internal_abi_Type *)&DAT_00848060,~r0_00);
+  *extraout_RAX_01 = internal_godebug___Setting__IncNonDefault_fm;
+  ppcVar1 = extraout_RAX_01;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11_00 = s_00;
+    ppcVar1 = extraout_RAX_02;
+  }
+  ppcVar1[1] = (code *)s_00;
+  return;
+}
+
+
+
+void internal_godebug_update(string def,string env)
+
+{
+  undefined auVar1 [16];
+  undefined4 extraout_EAX;
+  int unaff_R14;
+  bool bVar2;
+  undefined8 in_XMM15_Qa;
+  bucket<> *in_XMM15_Qb;
+  string in_stack_fffffffffffffee8;
+  undefined local_f8 [16];
+  undefined local_e8 [16];
+  undefined local_d8 [16];
+  undefined local_c8 [32];
+  undefined local_a8 [16];
+  undefined local_98 [136];
+  code **local_10;
+  
+  while (local_98 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  LOCK();
+  bVar2 = internal_godebug_updateMu.state == 0;
+  if (bVar2) {
+    internal_godebug_updateMu.state = 1;
+  }
+  UNLOCK();
+  if (!bVar2) {
+    sync___Mutex__lockSlow(&internal_godebug_updateMu);
+  }
+  local_f8._8_8_ = &internal_godebug_updateMu;
+  local_f8._0_8_ = internal_godebug_update_func2;
+  local_10 = (code **)local_f8;
+  auVar1._8_8_ = in_XMM15_Qb;
+  auVar1._0_8_ = in_XMM15_Qa;
+  local_d8._0_12_ = auVar1._0_12_;
+  local_c8._8_8_ = in_XMM15_Qb;
+  FUN_0046cd99();
+  local_c8._0_8_ = local_a8;
+  runtime_fastrand((uint32)local_a8);
+  local_d8._12_4_ = extraout_EAX;
+  internal_godebug_parse((map_string_bool)local_d8,in_stack_fffffffffffffee8);
+  internal_godebug_parse((map_string_bool)local_d8,in_stack_fffffffffffffee8);
+  local_e8._8_8_ = local_d8;
+  local_e8._0_8_ = internal_godebug_update_func1;
+  sync___Map__Range(&internal_godebug_cache,(func_interface_____interface_____bool **)local_e8);
+  (**local_10)();
+  return;
+}
+
+
+
+void internal_godebug_update_func1(interface___ name,interface___ s,bool ~r0)
+
+{
+  undefined7 in_register_00000001;
+  char *extraout_RAX;
+  internal_abi_Type *in_RCX;
+  int in_RDX;
+  map_string_bool did;
+  void **in_RBX;
+  void **in_RDI;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  if ((internal_abi_Type *)CONCAT71(in_register_00000001,~r0) == (internal_abi_Type *)&DAT_008075e0)
+  {
+    runtime_mapaccess1_faststr
+              ((internal_abi_MapType *)&DAT_0082c920,*(runtime_hmap **)(in_RDX + 8),
+               in_stack_ffffffffffffffd0,*in_RBX);
+    if (*extraout_RAX == '\0') {
+      if (in_RCX != (internal_abi_Type *)&DAT_007f8120) {
+                    // WARNING: Subroutine does not return
+        runtime_panicdottypeE
+                  (in_RCX,(internal_abi_Type *)&DAT_007f8120,(internal_abi_Type *)&DAT_00821120);
+      }
+      sync_atomic_StorePointer(in_RDI,&internal_godebug_empty);
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicdottypeE
+            ((internal_abi_Type *)CONCAT71(in_register_00000001,~r0),
+             (internal_abi_Type *)&DAT_008075e0,(internal_abi_Type *)&DAT_00821120);
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug_update_func2(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  sync___Mutex__Unlock(*(sync_Mutex **)(in_RDX + 8));
+  return;
+}
+
+
+
+void internal_godebug_parse(map_string_bool did,string s)
+
+{
+  uint uVar1;
+  char *extraout_RAX;
+  undefined *extraout_RAX_00;
+  int *extraout_RAX_01;
+  internal_godebug_value *v;
+  int *extraout_RAX_02;
+  int *extraout_RAX_03;
+  int *new;
+  int *extraout_RAX_04;
+  int *piVar2;
+  int extraout_RAX_05;
+  int extraout_RAX_06;
+  int iVar3;
+  void **ptr;
+  int in_RCX;
+  int end;
+  uint uVar4;
+  undefined8 extraout_RCX;
+  int extraout_RCX_00;
+  internal_bisect_Matcher *~r0;
+  internal_bisect_Matcher *extraout_RCX_01;
+  uint uVar5;
+  int in_RBX;
+  void *~r0_00;
+  int j;
+  uint uVar6;
+  int i;
+  int eq;
+  uint uVar7;
+  internal_godebug_setting *~r0_01;
+  int iVar8;
+  undefined8 *extraout_R11;
+  int *extraout_R11_00;
+  int *extraout_R11_01;
+  int *extraout_R11_02;
+  int unaff_R14;
+  string in_stack_ffffffffffffff88;
+  error in_stack_ffffffffffffff98;
+  
+  end = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar4 = end;
+  uVar5 = end;
+  uVar7 = 0xffffffffffffffff;
+  uVar1 = end;
+  do {
+    while( true ) {
+      uVar6 = uVar1 - 1;
+      if ((int)uVar6 < -1) {
+        return;
+      }
+      if ((uVar6 == 0xffffffffffffffff) || (*(char *)(in_RBX + uVar6) == ',')) break;
+      uVar1 = uVar6;
+      if (*(char *)(in_RBX + uVar6) == '=') {
+        uVar7 = uVar6;
+      }
+    }
+    if (-1 < (int)uVar7) {
+      if (uVar5 < uVar7) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      if (uVar7 < uVar1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      ~r0_01 = (internal_godebug_setting *)((uVar1 & (int)-((uVar7 - uVar6) + -1) >> 0x3f) + in_RBX)
+      ;
+      if (uVar5 < uVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      if (uVar4 < uVar7 + 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      runtime_mapaccess1_faststr
+                ((internal_abi_MapType *)&DAT_0082c920,(runtime_hmap *)did,in_stack_ffffffffffffff88
+                 ,~r0_01);
+      iVar3 = (uVar4 - uVar7) + -1;
+      iVar8 = (uVar7 + 1 & -iVar3 >> 0x3f) + in_RBX;
+      uVar5 = end;
+      if (*extraout_RAX == '\0') {
+        runtime_mapassign_faststr
+                  ((internal_abi_MapType *)&DAT_0082c920,(runtime_hmap *)did,
+                   in_stack_ffffffffffffff88,~r0_01);
+        *extraout_RAX_00 = 1;
+        runtime_newobject((internal_abi_Type *)&DAT_0084f660,~r0_00);
+        new = extraout_RAX_01;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier1();
+          *extraout_R11 = extraout_RCX;
+          new = extraout_RAX_02;
+        }
+        new[2] = 0;
+        new[1] = iVar3;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = iVar8;
+          extraout_R11_00[1] = *extraout_RAX_03;
+          new = extraout_RAX_03;
+          iVar3 = extraout_RCX_00;
+        }
+        *new = iVar8;
+        for (j = 0; j < iVar3; j = j + 1) {
+          if (*(char *)(j + iVar8) == '#') {
+            new[1] = j;
+            ~r0 = (internal_bisect_Matcher *)
+                  (((int)-(((uVar4 - uVar7) - j) + -2) >> 0x3f & j + 1U) + iVar8);
+            piVar2 = new;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_01 = iVar8;
+              extraout_R11_01[1] = *extraout_RAX_04;
+              piVar2 = extraout_RAX_04;
+              ~r0 = extraout_RCX_01;
+            }
+            *piVar2 = iVar8;
+            internal_bisect_New(in_stack_ffffffffffffff88,~r0,in_stack_ffffffffffffff98);
+            iVar3 = extraout_RAX_05;
+            if (runtime_writeBarrier._0_4_ != 0) {
+              runtime_gcWriteBarrier2();
+              *extraout_R11_02 = extraout_RAX_06;
+              extraout_R11_02[1] = new[2];
+              iVar3 = extraout_RAX_06;
+            }
+            new[2] = iVar3;
+            break;
+          }
+        }
+        internal_godebug_lookup(in_stack_ffffffffffffff88,~r0_01);
+        sync_atomic_StorePointer(ptr,new);
+        uVar5 = end;
+      }
+    }
+    uVar4 = uVar6;
+    uVar7 = 0xffffffffffffffff;
+    uVar1 = uVar6;
+  } while( true );
+}
+
+
+
+void internal_godebug___runtimeStderr__Write(__uint8 b,int ~r0,error ~r1)
+
+{
+  size_t in_RCX;
+  void *in_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RCX != 0) {
+    runtime_write(2,in_RBX,in_RCX);
+  }
+  return;
+}
+
+
+
+void sync_atomic___Pointer_internal_godebug_value___CompareAndSwap
+               (_param9 x,_param10 old,_param10 new,bool swapped)
+
+{
+  int *piVar1;
+  undefined extraout_DIL;
+  int unaff_R14;
+  _param9 in_stack_00000008;
+  _param10 in_stack_00000010;
+  _param10 in_stack_00000018;
+  undefined auStack_20 [24];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = x;
+    in_stack_00000010 = old;
+    in_stack_00000018 = new;
+    runtime_morestack_noctxt();
+    x = in_stack_00000008;
+    new = in_stack_00000018;
+    old = in_stack_00000010;
+    swapped = (bool)extraout_DIL;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param9 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  sync_atomic_CompareAndSwapPointer(&x->v,old,new,swapped);
+  return;
+}
+
+
+
+void sync_atomic___Pointer_internal_godebug_value___Swap(_param5 x,_param6 new,_param7 old)
+
+{
+  int *piVar1;
+  _param7 extraout_RCX;
+  int unaff_R14;
+  _param5 in_stack_00000008;
+  _param6 in_stack_00000010;
+  undefined auStack_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = x;
+    in_stack_00000010 = new;
+    runtime_morestack_noctxt();
+    x = in_stack_00000008;
+    old = extraout_RCX;
+    new = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param5 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  sync_atomic_SwapPointer(&x->v,new,old);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync_atomic___Pointer_internal_godebug_value___Store(_param3 x,_param4 val)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  _param3 in_stack_00000008;
+  _param4 in_stack_00000010;
+  undefined auStack_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = x;
+    in_stack_00000010 = val;
+    runtime_morestack_noctxt();
+    x = in_stack_00000008;
+    val = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param3 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  sync_atomic_StorePointer(&x->v,val);
+  return;
+}
+
+
+
+void sync_atomic___Pointer_internal_godebug_value___Load(_param0 x,_param1 ~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)register0x00000020;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug___Setting__IncNonDefault_fm(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  internal_godebug___Setting__IncNonDefault(*(internal_godebug_Setting **)(in_RDX + 8));
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void sync_atomic___Uint64__Load_fm(void)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)register0x00000020;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void internal_godebug___Setting__register_fm(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  undefined auStack_10 [8];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_10;
+  }
+  internal_godebug___Setting__register(*(internal_godebug_Setting **)(in_RDX + 8));
+  return;
+}
+
+
+
+void type__eq_internal_godebug_value(internal_godebug_value *p,internal_godebug_value *q,bool r)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((q->text).len == (p->text).len) && (q->bisect == p->bisect)) {
+    runtime_memequal();
+  }
+  return;
+}
+
+
+
+void type__eq_sync_atomic_Pointer_internal_godebug_value_
+               (sync_atomic_Pointer_internal_godebug_value_ *p,
+               sync_atomic_Pointer_internal_godebug_value_ *q,bool r)
+
+{
+  return;
+}
+
+
+
+void type__eq_internal_godebug_setting
+               (internal_godebug_setting *p,internal_godebug_setting *q,bool r)
+
+{
+  if (((((q->value).v == (p->value).v) && ((q->nonDefaultOnce).done == (p->nonDefaultOnce).done)) &&
+      ((q->nonDefaultOnce).m.state == (p->nonDefaultOnce).m.state)) &&
+     (((q->nonDefaultOnce).m.sema == (p->nonDefaultOnce).m.sema &&
+      ((q->nonDefault).v == (p->nonDefault).v)))) {
+    return;
+  }
+  return;
+}
+
+
+
+void type__eq_internal_godebug_Setting
+               (internal_godebug_Setting *p,internal_godebug_Setting *q,bool r)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((((q->name).len == (p->name).len) && ((q->once).done == (p->once).done)) &&
+      ((q->once).m.state == (p->once).m.state)) &&
+     (((q->once).m.sema == (p->once).m.sema && (q->setting == p->setting)))) {
+    runtime_memequal();
+  }
+  return;
+}
+
+
+
+void math_rand___Rand__ExpFloat64(math_rand_Rand *r,float64 ~r0)
+
+{
+  int iVar1;
+  uint32 i;
+  uint uVar2;
+  int unaff_R14;
+  float64 x;
+  float64 f_1;
+  float64 f;
+  math_rand_Rand *pmStack0000000000000008;
+  double local_28;
+  
+  pmStack0000000000000008 = r;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  while( true ) {
+    iVar1 = (*(code *)((pmStack0000000000000008->src).tab)->fun[0])
+                      ((pmStack0000000000000008->src).data);
+    uVar2 = iVar1 >> 0x1f & 0xff;
+    if ((dword)(iVar1 >> 0x1f) < math_rand_ke[uVar2]) {
+      return;
+    }
+    if ((sdword)uVar2 == 0) break;
+    iVar1 = (*(code *)((pmStack0000000000000008->src).tab)->fun[0])
+                      ((pmStack0000000000000008->src).data);
+    math_archExp();
+    if ((float)math_rand_fe[uVar2] +
+        (float)iVar1 * 1.084202e-19 *
+        ((float)math_rand_fe[(dword)((sdword)uVar2 - 1)] - (float)math_rand_fe[uVar2]) <
+        (float)local_28) {
+      return;
+    }
+  }
+  (*(code *)((pmStack0000000000000008->src).tab)->fun[0])((pmStack0000000000000008->src).data);
+  math_archLog();
+  return;
+}
+
+
+
+void math_rand___Rand__NormFloat64(math_rand_Rand *r,float64 ~r0)
+
+{
+  dword dVar1;
+  int iVar2;
+  dword dVar3;
+  int32 i;
+  int unaff_R14;
+  float64 x;
+  double dVar4;
+  float64 y;
+  float64 f_1;
+  float64 f_2;
+  float64 f;
+  math_rand_Rand *pmStack0000000000000008;
+  double local_40;
+  
+  pmStack0000000000000008 = r;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  while( true ) {
+    iVar2 = (*(code *)((pmStack0000000000000008->src).tab)->fun[0])
+                      ((pmStack0000000000000008->src).data);
+    dVar1 = (dword)(iVar2 >> 0x1f);
+    dVar3 = dVar1;
+    if ((sdword)dVar1 < 0) {
+      dVar3 = -dVar1;
+    }
+    if (dVar3 < math_rand_kn[dVar1 & 0x7f]) break;
+    if ((iVar2 >> 0x1f & 0x7fU) == 0) {
+      do {
+        (*(code *)((pmStack0000000000000008->src).tab)->fun[0])((pmStack0000000000000008->src).data)
+        ;
+        math_archLog();
+        dVar4 = (double)((uint)local_40 ^ 0x8000000000000000) * 0.2904764516147432;
+        (*(code *)((pmStack0000000000000008->src).tab)->fun[0])((pmStack0000000000000008->src).data)
+        ;
+        math_archLog();
+        y = (float64)((double)((uint)local_40 ^ 0x8000000000000000) +
+                     (double)((uint)local_40 ^ 0x8000000000000000));
+      } while ((double)y < dVar4 * dVar4);
+      if (0 < (sdword)dVar1) {
+        return;

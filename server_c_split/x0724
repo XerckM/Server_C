@@ -1,0 +1,1000 @@
+
+void text_tabwriter___Writer__addLine(text_tabwriter_Writer *b,bool flushed)
+
+{
+  uint uVar1;
+  uint oldCap;
+  int cap;
+  __text_tabwriter_cell *extraout_RAX;
+  __text_tabwriter_cell *extraout_RAX_00;
+  __text_tabwriter_cell *p_Var2;
+  text_tabwriter_Writer *extraout_RAX_01;
+  text_tabwriter_cell *extraout_RAX_02;
+  text_tabwriter_cell *extraout_RAX_03;
+  text_tabwriter_cell *ptVar3;
+  int extraout_RCX;
+  __text_tabwriter_cell *extraout_RCX_00;
+  int iVar4;
+  int n_1;
+  void *~r0;
+  char extraout_BL;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  uint newLen;
+  undefined8 extraout_RSI;
+  int n;
+  __text_tabwriter_cell *extraout_R9;
+  __text_tabwriter_cell **extraout_R11;
+  undefined8 *extraout_R11_00;
+  text_tabwriter_cell **extraout_R11_01;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  text_tabwriter_Writer *ptStack0000000000000008;
+  runtime_slice in_stack_ffffffffffffffa0;
+  
+  while( true ) {
+    ptStack0000000000000008 = b;
+    if (*(undefined **)(unaff_R14 + 0x10) < &stack0x00000000) break;
+    runtime_morestack_noctxt();
+    b = ptStack0000000000000008;
+  }
+  uVar1 = (b->lines).len;
+  oldCap = (b->lines).cap;
+  newLen = uVar1 + 1;
+  if ((int)oldCap < (int)newLen) {
+    p_Var2 = (b->lines).array;
+    if (oldCap < newLen) {
+      runtime_growslice(p_Var2,newLen,oldCap,1,(internal_abi_Type *)&DAT_00805280,
+                        in_stack_ffffffffffffffa0);
+      (ptStack0000000000000008->lines).cap = extraout_RCX;
+      p_Var2 = extraout_RAX;
+      b = ptStack0000000000000008;
+      newLen = extraout_RBX;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        extraout_R11[1] = (b->lines).array;
+        p_Var2 = extraout_RAX_00;
+        newLen = extraout_RBX_00;
+      }
+      (b->lines).array = p_Var2;
+    }
+    (b->lines).len = newLen;
+    iVar4 = newLen * 3;
+    p_Var2[newLen - 1].len = in_XMM15._0_8_;
+    p_Var2[newLen - 1].cap = in_XMM15._8_8_;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RSI;
+      b = extraout_RAX_01;
+      p_Var2 = extraout_R9;
+      flushed = (bool)extraout_BL;
+    }
+    (&p_Var2[-1].array)[iVar4] = (text_tabwriter_cell *)0x0;
+  }
+  else {
+    if (oldCap < newLen) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    (b->lines).len = newLen;
+    if (newLen <= uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    (b->lines).array[uVar1].len = 0;
+  }
+  if ((flushed == false) && (iVar4 = (b->lines).len, 1 < iVar4)) {
+    p_Var2 = (b->lines).array;
+    ~r0 = (void *)(iVar4 * 3);
+    cap = p_Var2[iVar4 + -2].len;
+    if (p_Var2[iVar4 + -1].cap < cap) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00864cc0,0,cap,~r0);
+      if ((uint)(ptStack0000000000000008->lines).len <= iVar4 - 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      p_Var2 = (ptStack0000000000000008->lines).array;
+      p_Var2[iVar4 + -1].len = 0;
+      p_Var2[iVar4 + -1].cap = cap;
+      ptVar3 = extraout_RAX_02;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_03;
+        extraout_R11_01[1] = (&extraout_RCX_00[-1].array)[(int)~r0];
+        ptVar3 = extraout_RAX_03;
+        p_Var2 = extraout_RCX_00;
+      }
+      (&p_Var2[-1].array)[(int)~r0] = ptVar3;
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void text_tabwriter___Writer__reset(text_tabwriter_Writer *b)
+
+{
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (b->buf).len = 0;
+  b->pos = in_XMM15._0_8_;
+  (b->cell).size = in_XMM15._8_8_;
+  (b->cell).width = 0;
+  (b->cell).htab = false;
+  b->endChar = 0;
+  (b->lines).len = 0;
+  (b->widths).len = 0;
+  text_tabwriter___Writer__addLine(b,true);
+  return;
+}
+
+
+
+void text_tabwriter___Writer__Init
+               (text_tabwriter_Writer *b,io_Writer output,int minwidth,int tabwidth,int padding,
+               uint8 padchar,uint flags,text_tabwriter_Writer *~r0)
+
+{
+  text_tabwriter_Writer *extraout_RAX;
+  void *extraout_RCX;
+  int i;
+  int7 in_register_00000031;
+  int iVar1;
+  int extraout_RSI;
+  int extraout_RDI;
+  uint extraout_R8;
+  uint8 uVar2;
+  uint8 extraout_R9B;
+  uint in_R10;
+  uint extraout_R10;
+  void **extraout_R11;
+  int unaff_R14;
+  void *pvStack0000000000000018;
+  interface___ in_stack_ffffffffffffffe8;
+  
+  iVar1 = CONCAT71(in_register_00000031,padchar);
+  while (uVar2 = (uint8)~r0, pvStack0000000000000018 = (void *)tabwidth,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0 = (text_tabwriter_Writer *)((uint)~r0 & 0xff);
+    tabwidth = (int)pvStack0000000000000018;
+  }
+  if (((-1 < padding) && (-1 < in_register_00000031)) && (-1 < (int)flags)) {
+    (b->output).tab = (runtime_itab *)minwidth;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX;
+      extraout_R11[1] = (extraout_RAX->output).data;
+      b = extraout_RAX;
+      tabwidth = (int)extraout_RCX;
+      iVar1 = extraout_RSI;
+      padding = extraout_RDI;
+      flags = extraout_R8;
+      in_R10 = extraout_R10;
+      uVar2 = extraout_R9B;
+    }
+    (b->output).data = (void *)tabwidth;
+    b->minwidth = padding;
+    b->tabwidth = iVar1;
+    b->padding = flags;
+    for (i = 0; i < 8; i = i + 1) {
+      b->padbytes[i] = uVar2;
+    }
+    if (uVar2 == 9) {
+      in_R10 = in_R10 & 0xfffffffffffffffb;
+    }
+    b->flags = in_R10;
+    text_tabwriter___Writer__reset(b);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffe8);
+}
+
+
+
+void text_tabwriter___Writer__write0(text_tabwriter_Writer *b,__uint8 buf)
+
+{
+  int extraout_RAX;
+  int n;
+  int in_RCX;
+  void *extraout_RCX;
+  runtime_itab *extraout_RBX;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffc8;
+  undefined local_18 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (*(code *)((b->output).tab)->fun[0])((b->output).data);
+  local_18._8_8_ = extraout_RCX;
+  local_18._0_8_ = extraout_RBX;
+  if ((extraout_RAX != in_RCX) &&
+     (local_18._8_8_ = extraout_RCX, local_18._0_8_ = extraout_RBX,
+     extraout_RBX == (runtime_itab *)0x0)) {
+    local_18._8_8_ = io_ErrShortWrite.data;
+    local_18._0_8_ = io_ErrShortWrite.tab;
+  }
+  if ((runtime_itab *)local_18._0_8_ == (runtime_itab *)0x0) {
+    return;
+  }
+  runtime_convT((internal_abi_Type *)&DAT_00845060,local_18,(void *)local_18._8_8_);
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffc8);
+}
+
+
+
+void text_tabwriter___Writer__writeN(text_tabwriter_Writer *b,__uint8 src,int n)
+
+{
+  int in_RCX;
+  uint in_RSI;
+  uint in_RDI;
+  int unaff_R14;
+  uint uStack0000000000000020;
+  __uint8 in_stack_ffffffffffffffc8;
+  
+  uStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (; in_RCX < (int)in_RSI; in_RSI = in_RSI - in_RCX) {
+    text_tabwriter___Writer__write0(b,in_stack_ffffffffffffffc8);
+  }
+  if (uStack0000000000000020 < in_RSI) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  text_tabwriter___Writer__write0(b,in_stack_ffffffffffffffc8);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void text_tabwriter___Writer__writePadding
+               (text_tabwriter_Writer *b,int textw,int cellw,bool useTabs)
+
+{
+  int iVar1;
+  __uint8 src;
+  __uint8 src_00;
+  int iVar2;
+  int n;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffd0;
+  int in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((b->padbytes[0] != 9) && (!useTabs)) {
+    src_00.cap = in_stack_ffffffffffffffe0;
+    src_00.array = (uint8 *)in_stack_ffffffffffffffd0._type;
+    src_00.len = (int)in_stack_ffffffffffffffd0.data;
+    text_tabwriter___Writer__writeN(b,src_00,(int)b->padbytes);
+    return;
+  }
+  iVar1 = b->tabwidth;
+  if (iVar1 == 0) {
+    return;
+  }
+  iVar2 = iVar1 + cellw + -1;
+  if (iVar1 == -1) {
+    iVar2 = -iVar2;
+  }
+  else {
+    iVar2 = iVar2 / iVar1;
+  }
+  if (-1 < iVar2 * iVar1 - textw) {
+    src.cap = in_stack_ffffffffffffffe0;
+    src.array = (uint8 *)in_stack_ffffffffffffffd0._type;
+    src.len = (int)in_stack_ffffffffffffffd0.data;
+    text_tabwriter___Writer__writeN(b,src,(int)text_tabwriter_tabs.array);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_gopanic(in_stack_ffffffffffffffd0);
+}
+
+
+
+// Local variable i:int[RCX:8] conflicts with parameter, skipped.
+
+void text_tabwriter___Writer__writeLines
+               (text_tabwriter_Writer *b,int pos0,int line0,int line1,int pos)
+
+{
+  uint uVar1;
+  __text_tabwriter_cell *p_Var2;
+  int iVar3;
+  int iVar4;
+  int textw;
+  text_tabwriter_Writer *b_00;
+  int iVar5;
+  bool useTabs;
+  text_tabwriter_cell *ptVar6;
+  int unaff_R14;
+  bool useTabs_00;
+  text_tabwriter_Writer *ptStack0000000000000008;
+  int iStack0000000000000020;
+  __uint8 in_stack_ffffffffffffff98;
+  int j;
+  
+  ptStack0000000000000008 = b;
+  iStack0000000000000020 = line1;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  while( true ) {
+    while( true ) {
+      if (iStack0000000000000020 <= line0) {
+        return;
+      }
+      if ((uint)(ptStack0000000000000008->lines).len <= (uint)line0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      p_Var2 = (ptStack0000000000000008->lines).array;
+      ptVar6 = p_Var2[line0].array;
+      iVar3 = p_Var2[line0].len;
+      useTabs_00 = ((dword)ptStack0000000000000008->flags >> 4 & 1) != 0;
+      b_00 = ptStack0000000000000008;
+      for (iVar5 = 0; iVar5 < iVar3; iVar5 = iVar5 + 1) {
+        iVar4 = ptVar6->size;
+        textw = ptVar6->width;
+        if ((0 < iVar5) && (((dword)b_00->flags >> 5 & 1) != 0)) {
+          text_tabwriter___Writer__write0(b_00,in_stack_ffffffffffffff98);
+          b_00 = ptStack0000000000000008;
+        }
+        if (iVar4 == 0) {
+          if (iVar5 < (b_00->widths).len) {
+            text_tabwriter___Writer__writePadding(b_00,textw,(b_00->widths).array[iVar5],useTabs_00)
+            ;
+            b_00 = ptStack0000000000000008;
+          }
+        }
+        else {
+          if (((dword)b_00->flags >> 2 & 1) == 0) {
+            if ((uint)(b_00->buf).cap < (uint)(pos0 + iVar4)) {
+                    // WARNING: Subroutine does not return
+              runtime_panicSliceAcap();
+            }
+            if ((uint)(pos0 + iVar4) < (uint)pos0) {
+                    // WARNING: Subroutine does not return
+              runtime_panicSliceB();
+            }
+            text_tabwriter___Writer__write0(b_00,in_stack_ffffffffffffff98);
+            if (iVar5 < (ptStack0000000000000008->widths).len) {
+              text_tabwriter___Writer__writePadding
+                        (ptStack0000000000000008,textw,
+                         (ptStack0000000000000008->widths).array[iVar5],false);
+            }
+          }
+          else {
+            if (iVar5 < (b_00->widths).len) {
+              text_tabwriter___Writer__writePadding(b_00,textw,(b_00->widths).array[iVar5],false);
+              b_00 = ptStack0000000000000008;
+            }
+            if ((uint)(b_00->buf).cap < (uint)(pos0 + iVar4)) {
+                    // WARNING: Subroutine does not return
+              runtime_panicSliceAcap();
+            }
+            if ((uint)(pos0 + iVar4) < (uint)pos0) {
+                    // WARNING: Subroutine does not return
+              runtime_panicSliceB();
+            }
+            text_tabwriter___Writer__write0(b_00,in_stack_ffffffffffffff98);
+          }
+          pos0 = pos0 + iVar4;
+          useTabs_00 = false;
+          b_00 = ptStack0000000000000008;
+        }
+        ptVar6 = ptVar6 + 1;
+      }
+      line0 = line0 + 1;
+      if ((b_00->lines).len == line0) break;
+      text_tabwriter___Writer__write0(b_00,in_stack_ffffffffffffff98);
+    }
+    uVar1 = pos0 + (b_00->cell).size;
+    if ((uint)(b_00->buf).cap < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    if (uVar1 < (uint)pos0) break;
+    text_tabwriter___Writer__write0(b_00,in_stack_ffffffffffffff98);
+    pos0 = pos0 + (ptStack0000000000000008->cell).size;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// Local variable this:int[RCX:8] conflicts with parameter, skipped.
+
+void text_tabwriter___Writer__format(text_tabwriter_Writer *b,int pos0,int line0,int line1,int pos)
+
+{
+  int iVar1;
+  __text_tabwriter_cell *p_Var2;
+  text_tabwriter_cell *ptVar3;
+  int iVar4;
+  bool bVar5;
+  int pos0_00;
+  int *extraout_RAX;
+  int *extraout_RAX_00;
+  int *oldPtr;
+  int extraout_RAX_01;
+  int extraout_RCX;
+  uint uVar6;
+  int column;
+  bool discardable;
+  text_tabwriter_Writer *b_00;
+  uint newLen;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  int width;
+  int pos_00;
+  uint line1_00;
+  int **extraout_R11;
+  int iVar7;
+  int w;
+  int unaff_R14;
+  text_tabwriter_Writer *ptStack0000000000000008;
+  int iStack0000000000000020;
+  runtime_slice in_stack_ffffffffffffff90;
+  
+  while (ptStack0000000000000008 = b, iStack0000000000000020 = line1,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    b = ptStack0000000000000008;
+    line1 = iStack0000000000000020;
+  }
+  iVar1 = (b->widths).len;
+  uVar6 = line0;
+  do {
+    if (line1 <= line0) {
+      text_tabwriter___Writer__writeLines(b,pos0,uVar6,line1,uVar6);
+      return;
+    }
+    if ((uint)(b->lines).len <= (uint)line0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    line1_00 = line0;
+    if (iVar1 < (b->lines).array[line0].len + -1) {
+      text_tabwriter___Writer__writeLines(b,pos0,uVar6,line0,uVar6);
+      pos_00 = ptStack0000000000000008->minwidth;
+      bVar5 = true;
+      for (; (int)line1_00 < iStack0000000000000020; line1_00 = line1_00 + 1) {
+        if ((uint)(ptStack0000000000000008->lines).len <= line1_00) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        p_Var2 = (ptStack0000000000000008->lines).array;
+        ptVar3 = p_Var2[line1_00].array;
+        if (p_Var2[line1_00].len + -1 <= iVar1) break;
+        iVar4 = ptVar3[iVar1].width;
+        iVar7 = ptStack0000000000000008->padding + iVar4;
+        if (pos_00 < iVar7) {
+          pos_00 = iVar7;
+        }
+        if ((0 < iVar4) || (ptVar3[iVar1].htab != false)) {
+          bVar5 = false;
+        }
+      }
+      if ((bVar5) && (((dword)ptStack0000000000000008->flags >> 3 & 1) != 0)) {
+        pos_00 = 0;
+      }
+      uVar6 = (ptStack0000000000000008->widths).cap;
+      newLen = (ptStack0000000000000008->widths).len + 1;
+      oldPtr = (ptStack0000000000000008->widths).array;
+      b_00 = ptStack0000000000000008;
+      if (uVar6 < newLen) {
+        runtime_growslice(oldPtr,newLen,uVar6,1,(internal_abi_Type *)&DAT_00807760,
+                          in_stack_ffffffffffffff90);
+        (ptStack0000000000000008->widths).cap = extraout_RCX;
+        oldPtr = extraout_RAX;
+        b_00 = ptStack0000000000000008;
+        newLen = extraout_RBX;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = extraout_RAX_00;
+          extraout_R11[1] = (b_00->widths).array;
+          oldPtr = extraout_RAX_00;
+          newLen = extraout_RBX_00;
+        }
+        (b_00->widths).array = oldPtr;
+      }
+      (b_00->widths).len = newLen;
+      oldPtr[newLen - 1] = pos_00;
+      text_tabwriter___Writer__format(b_00,pos0_00,line0,line1_00,pos_00);
+      uVar6 = (ptStack0000000000000008->widths).len - 1;
+      if ((uint)(ptStack0000000000000008->widths).cap < uVar6) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (ptStack0000000000000008->widths).len = uVar6;
+      b = ptStack0000000000000008;
+      pos0 = extraout_RAX_01;
+      uVar6 = line1_00;
+      line1 = iStack0000000000000020;
+    }
+    line0 = line1_00 + 1;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void text_tabwriter___Writer__endEscape(text_tabwriter_Writer *b)
+
+{
+  int *piVar1;
+  uint8 uVar2;
+  uint uVar3;
+  int extraout_RAX;
+  int iVar4;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar2 = b->endChar;
+  if (uVar2 == 0x3b) {
+    piVar1 = &(b->cell).width;
+    *piVar1 = *piVar1 + 1;
+  }
+  else if ((uVar2 != 0x3e) && (uVar2 == 0xff)) {
+    uVar3 = b->pos;
+    if ((uint)(b->buf).len < uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    unicode_utf8_RuneCount
+              (in_stack_ffffffffffffffe0,
+               (int)((b->buf).array + (uVar3 & (int)-((b->buf).cap - uVar3) >> 0x3f)));
+    iVar4 = extraout_RAX + (b->cell).width;
+    (b->cell).width = iVar4;
+    b->pos = (b->buf).len;
+    if (((dword)b->flags >> 1 & 1) == 0) {
+      (b->cell).width = iVar4 + -2;
+    }
+  }
+  b->pos = (b->buf).len;
+  b->endChar = 0;
+  return;
+}
+
+
+
+void text_tabwriter___Writer__handlePanic(text_tabwriter_Writer *b,error *err,string op)
+
+{
+  string ~r0;
+  undefined *extraout_RAX;
+  undefined *puVar1;
+  void *x;
+  sdword *in_RCX;
+  undefined8 extraout_RCX;
+  undefined8 uVar2;
+  undefined8 *extraout_RBX;
+  int in_RDI;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  sdword *psStack0000000000000018;
+  int iStack0000000000000020;
+  interface___ in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc8;
+  uint8 *in_stack_ffffffffffffffd8;
+  undefined *in_stack_ffffffffffffffe0;
+  
+  psStack0000000000000018 = in_RCX;
+  op.len = (int)err;
+  iStack0000000000000020 = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    op.str = (uint8 *)b;
+    runtime_morestack_noctxt();
+    b = (text_tabwriter_Writer *)op.str;
+  }
+  runtime_gorecover((uintptr)&op,in_stack_ffffffffffffffb8);
+  if (extraout_RAX != (undefined *)0x0) {
+    puVar1 = extraout_RAX;
+    if (((iStack0000000000000020 == 5) && (*psStack0000000000000018 == 0x73756c46)) &&
+       (*(char *)(psStack0000000000000018 + 1) == 'h')) {
+      text_tabwriter___Writer__reset(b);
+      in_stack_ffffffffffffffe0 = puVar1;
+    }
+    if (puVar1 != &DAT_00845060) {
+      ~r0.len = (int)in_stack_ffffffffffffffe0;
+      ~r0.str = in_stack_ffffffffffffffd8;
+      runtime_concatstring2
+                ((runtime_tmpBuf *)0x0,(string)in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8,
+                 ~r0);
+      runtime_convTstring((string)in_stack_ffffffffffffffb8,x);
+                    // WARNING: Subroutine does not return
+      runtime_gopanic(in_stack_ffffffffffffffb8);
+    }
+    uVar2 = extraout_RBX[1];
+    *(undefined8 *)op.len = *extraout_RBX;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX;
+      extraout_R11[1] = *(undefined8 *)(op.len + 8);
+      uVar2 = extraout_RCX;
+    }
+    *(undefined8 *)(op.len + 8) = uVar2;
+    return;
+  }
+  return;
+}
+
+
+
+void text_tabwriter___Writer__Flush(text_tabwriter_Writer *b,error ~r0)
+
+{
+  error err;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  err.data = unaff_RBP;
+  err.tab = in_stack_fffffffffffffff0;
+  text_tabwriter___Writer__flush(b,err);
+  return;
+}
+
+
+
+void text_tabwriter___Writer__flush(text_tabwriter_Writer *b,error err)
+
+{
+  int unaff_R14;
+  error err_local;
+  undefined local_28 [16];
+  error *local_18;
+  code **local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_28._8_8_ = b;
+  local_28._0_8_ = text_tabwriter___Writer__flush_func1;
+  local_18 = &err_local;
+  local_10 = (code **)local_28;
+  text_tabwriter___Writer__flushNoDefers(b);
+  (**local_10)();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void text_tabwriter___Writer__flush_func1(void)
+
+{
+  int *piVar1;
+  int in_RDX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xffffffffffffffd8;
+  }
+  text_tabwriter___Writer__handlePanic
+            (*(text_tabwriter_Writer **)(in_RDX + 8),*(error **)(in_RDX + 0x10),
+             in_stack_ffffffffffffffd8);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void text_tabwriter___Writer__flushNoDefers(text_tabwriter_Writer *b)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  text_tabwriter_cell *extraout_RAX;
+  text_tabwriter_cell *extraout_RAX_00;
+  text_tabwriter_cell *oldPtr;
+  int extraout_RCX;
+  int iVar4;
+  uint newLen;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  text_tabwriter_cell *in_RSI;
+  text_tabwriter_cell *extraout_RSI;
+  text_tabwriter_cell *extraout_RSI_00;
+  text_tabwriter_cell *extraout_RSI_01;
+  __text_tabwriter_cell *extraout_R8;
+  __text_tabwriter_cell *p_Var5;
+  text_tabwriter_cell **extraout_R11;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  text_tabwriter_Writer *ptStack0000000000000008;
+  runtime_slice in_stack_ffffffffffffff98;
+  
+  ptStack0000000000000008 = b;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI_01;
+  }
+  if (0 < (ptStack0000000000000008->cell).size) {
+    if (ptStack0000000000000008->endChar != 0) {
+      text_tabwriter___Writer__endEscape(ptStack0000000000000008);
+      in_RSI = extraout_RSI;
+    }
+    (ptStack0000000000000008->cell).htab = false;
+    uVar1 = (ptStack0000000000000008->lines).len;
+    if (uVar1 <= uVar1 - 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    iVar4 = uVar1 * 3;
+    p_Var5 = (ptStack0000000000000008->lines).array;
+    newLen = p_Var5[uVar1 - 1].len + 1;
+    oldPtr = p_Var5[uVar1 - 1].array;
+    iVar2 = (ptStack0000000000000008->cell).size;
+    iVar3 = (ptStack0000000000000008->cell).width;
+    if ((uint)p_Var5[uVar1 - 1].cap < newLen) {
+      runtime_growslice(oldPtr,newLen,p_Var5[uVar1 - 1].cap,1,(internal_abi_Type *)&DAT_00864cc0,
+                        in_stack_ffffffffffffff98);
+      p_Var5[uVar1 - 1].cap = extraout_RCX;
+      oldPtr = extraout_RAX;
+      newLen = extraout_RBX;
+      in_RSI = extraout_RSI_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_00;
+        in_RSI = (&extraout_R8[-1].array)[iVar4];
+        extraout_R11[1] = in_RSI;
+        oldPtr = extraout_RAX_00;
+        newLen = extraout_RBX_00;
+        p_Var5 = extraout_R8;
+      }
+      (&p_Var5[-1].array)[iVar4] = oldPtr;
+    }
+    *(uint *)((int)p_Var5 + iVar4 * 8 + -0x10) = newLen;
+    oldPtr[newLen - 1].size = iVar2;
+    oldPtr[newLen - 1].width = iVar3;
+    oldPtr[newLen - 1].htab = false;
+    (ptStack0000000000000008->cell).size = in_XMM15._0_8_;
+    (ptStack0000000000000008->cell).width = in_XMM15._8_8_;
+    (ptStack0000000000000008->cell).htab = false;
+  }
+  text_tabwriter___Writer__format
+            (ptStack0000000000000008,0,0,(ptStack0000000000000008->lines).len,(int)in_RSI);
+  text_tabwriter___Writer__reset(ptStack0000000000000008);
+  return;
+}
+
+
+
+// DWARF original prototype: void text/tabwriter.(*Writer).Write(text/tabwriter.Writer * b, []uint8
+// buf, int n, int n, error err)
+
+void text_tabwriter___Writer__Write(text_tabwriter_Writer *b,__uint8 buf,int n,int n_1,error err)
+
+{
+  int *piVar1;
+  uint8 *puVar2;
+  byte bVar3;
+  undefined auVar4 [16];
+  uint8 *extraout_RAX;
+  int extraout_RAX_00;
+  text_tabwriter_cell *extraout_RAX_01;
+  text_tabwriter_cell *extraout_RAX_02;
+  text_tabwriter_cell *oldPtr;
+  uint8 *extraout_RAX_03;
+  int extraout_RAX_04;
+  uint8 *extraout_RAX_05;
+  int extraout_RAX_06;
+  uint8 *extraout_RAX_07;
+  text_tabwriter_Writer *extraout_RAX_08;
+  text_tabwriter_Writer *ptVar5;
+  uint8 *extraout_RAX_09;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  undefined8 extraout_RCX_01;
+  uint extraout_RCX_02;
+  uint extraout_RCX_03;
+  uint extraout_RCX_04;
+  uint extraout_RCX_05;
+  uint uVar6;
+  uint extraout_RCX_06;
+  uint extraout_RCX_07;
+  int i;
+  uint uVar7;
+  size_t sVar8;
+  uint uVar9;
+  uint8 *puVar10;
+  uint extraout_RBX;
+  uint newLen;
+  uint extraout_RBX_00;
+  uint extraout_RBX_01;
+  uint extraout_RBX_02;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  uint extraout_RBX_05;
+  uint extraout_RSI;
+  uint extraout_RSI_00;
+  uint extraout_RSI_01;
+  text_tabwriter_Writer *extraout_RSI_02;
+  uint in_RDI;
+  __text_tabwriter_cell *extraout_R8;
+  __text_tabwriter_cell *p_Var11;
+  void *pvVar12;
+  uint8 ch;
+  int iVar13;
+  uint8 **extraout_R11;
+  text_tabwriter_cell **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  uint8 **extraout_R11_02;
+  uint8 **extraout_R11_03;
+  uint8 **extraout_R11_04;
+  int unaff_R14;
+  undefined8 in_XMM15_Qa;
+  undefined8 in_XMM15_Qb;
+  __uint8 in_stack_fffffffffffffee8;
+  uint local_a8;
+  uint local_98;
+  int local_90;
+  int local_88;
+  uint local_80;
+  uint local_78;
+  void *local_70;
+  void *local_68;
+  void *local_60;
+  void *local_58;
+  void *local_50;
+  __text_tabwriter_cell *local_48;
+  uint8 *local_40;
+  error err_local;
+  undefined local_28 [16];
+  error *local_18;
+  code **local_10;
+  
+  while (&local_98 <= *(uint **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_28._8_8_ = b;
+  local_28._0_8_ = text_tabwriter___Writer__Write_func1;
+  local_18 = &err_local;
+  local_10 = (code **)local_28;
+  local_a8 = 0;
+  i = 0;
+  do {
+    if (n_1 <= i) {
+      if ((uint)n_1 < local_a8) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      sVar8 = n_1 - local_a8;
+      uVar9 = (b->buf).cap;
+      local_78 = (b->buf).len;
+      uVar6 = sVar8 + local_78;
+      pvVar12 = (void *)(n + ((int)(local_a8 - in_RDI) >> 0x3f & local_a8));
+      puVar10 = (b->buf).array;
+      if (uVar9 < uVar6) {
+        local_70 = pvVar12;
+        runtime_growslice(puVar10,uVar6,uVar9,sVar8,(internal_abi_Type *)&DAT_00807920,
+                          (runtime_slice)in_stack_fffffffffffffee8);
+        puVar10 = extraout_RAX_09;
+        pvVar12 = local_70;
+        uVar9 = extraout_RCX_07;
+        uVar6 = extraout_RBX_05;
+      }
+      puVar2 = puVar10 + local_78;
+      local_80 = uVar6;
+      local_78 = uVar9;
+      local_40 = puVar10;
+      runtime_memmove(puVar2,pvVar12,sVar8);
+      (b->buf).len = local_80;
+      (b->buf).cap = local_78;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_04 = local_40;
+        extraout_R11_04[1] = (extraout_RSI_02->buf).array;
+        b = extraout_RSI_02;
+      }
+      (b->buf).array = local_40;
+      (b->cell).size = (b->cell).size + sVar8;
+      (**local_10)();
+      return;
+    }
+    bVar3 = *(byte *)(n + i);
+    local_98 = i;
+    if (b->endChar == 0) {
+      if (bVar3 < 0x27) {
+        if ((byte)(bVar3 - 9) < 4) {
+          if ((uint)i < local_a8) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceB();
+          }
+          sVar8 = i - local_a8;
+          uVar9 = (b->buf).cap;
+          local_78 = (b->buf).len;
+          uVar6 = sVar8 + local_78;
+          pvVar12 = (void *)(((int)(local_a8 - in_RDI) >> 0x3f & local_a8) + n);
+          puVar10 = (b->buf).array;
+          if (uVar9 < uVar6) {
+            local_50 = pvVar12;
+            runtime_growslice(puVar10,uVar6,uVar9,sVar8,(internal_abi_Type *)&DAT_00807920,
+                              (runtime_slice)in_stack_fffffffffffffee8);
+            pvVar12 = local_50;
+            uVar9 = extraout_RCX;
+            uVar6 = extraout_RBX;
+            puVar10 = extraout_RAX;
+          }
+          puVar2 = puVar10 + local_78;
+          local_80 = uVar6;
+          local_78 = uVar9;
+          local_40 = puVar10;
+          runtime_memmove(puVar2,pvVar12,sVar8);
+          (b->buf).len = local_80;
+          (b->buf).cap = local_78;
+          uVar6 = local_80;
+          ptVar5 = b;
+          uVar9 = local_78;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11 = local_40;
+            extraout_R11[1] = (ptVar5->buf).array;
+            uVar6 = extraout_RCX_00;
+            uVar9 = extraout_RSI;
+          }
+          (ptVar5->buf).array = local_40;
+          (ptVar5->cell).size = (ptVar5->cell).size + sVar8;
+          uVar7 = ptVar5->pos;
+          if (uVar6 < uVar7) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceB();
+          }
+          local_78 = local_98 + 1;
+          unicode_utf8_RuneCount
+                    (in_stack_fffffffffffffee8,
+                     (int)(local_40 + ((int)-(uVar9 - uVar7) >> 0x3f & uVar7)));
+          piVar1 = &(b->cell).width;
+          *piVar1 = *piVar1 + extraout_RAX_00;
+          b->pos = (b->buf).len;
+          local_a8 = local_78;
+          (b->cell).htab = bVar3 == 9;
+          uVar6 = (b->lines).len;
+          if (uVar6 <= uVar6 - 1) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          uVar7 = uVar6 * 3;
+          p_Var11 = (b->lines).array;
+          newLen = p_Var11[uVar6 - 1].len + 1;
+          oldPtr = p_Var11[uVar6 - 1].array;
+          iVar13 = (b->cell).size;
+          uVar9 = (b->cell).width;
+          if ((uint)p_Var11[uVar6 - 1].cap < newLen) {

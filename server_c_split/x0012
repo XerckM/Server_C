@@ -1,0 +1,1000 @@
+typedef struct runtime.Frames runtime.Frames, *Pruntime.Frames;
+
+typedef struct []runtime.Frame []runtime.Frame, *P[]runtime.Frame;
+
+typedef struct runtime.Frame runtime.Frame, *Pruntime.Frame;
+
+typedef struct runtime.Func runtime.Func, *Pruntime.Func;
+
+typedef struct runtime.funcInfo runtime.funcInfo, *Pruntime.funcInfo;
+
+typedef struct runtime._func runtime._func, *Pruntime._func;
+
+typedef struct runtime.moduledata runtime.moduledata, *Pruntime.moduledata;
+
+typedef struct runtime.pcHeader runtime.pcHeader, *Pruntime.pcHeader;
+
+typedef struct []runtime.functab []runtime.functab, *P[]runtime.functab;
+
+typedef struct []runtime.textsect []runtime.textsect, *P[]runtime.textsect;
+
+typedef struct []*runtime.itab []*runtime.itab, *P[]*runtime.itab;
+
+typedef struct []runtime.ptabEntry []runtime.ptabEntry, *P[]runtime.ptabEntry;
+
+typedef struct []runtime.modulehash []runtime.modulehash, *P[]runtime.modulehash;
+
+typedef struct []*runtime.initTask []*runtime.initTask, *P[]*runtime.initTask;
+
+typedef struct runtime.bitvector runtime.bitvector, *Pruntime.bitvector;
+
+typedef struct hash<internal/abi.TypeOff,*internal/abi.Type> hash<internal/abi.TypeOff,*internal/abi.Type>, *Phash<internal/abi.TypeOff,*internal/abi.Type>;
+
+typedef struct hash<internal/abi.TypeOff,*internal/abi.Type> *map[internal/abi.TypeOff]*internal/abi.Type;
+
+typedef struct runtime.functab runtime.functab, *Pruntime.functab;
+
+typedef struct runtime.textsect runtime.textsect, *Pruntime.textsect;
+
+typedef struct runtime.ptabEntry runtime.ptabEntry, *Pruntime.ptabEntry;
+
+typedef struct runtime.modulehash runtime.modulehash, *Pruntime.modulehash;
+
+typedef struct runtime.initTask runtime.initTask, *Pruntime.initTask;
+
+typedef struct bucket<internal/abi.TypeOff,*internal/abi.Type> bucket<internal/abi.TypeOff,*internal/abi.Type>, *Pbucket<internal/abi.TypeOff,*internal/abi.Type>;
+
+struct []runtime.modulehash {
+    struct runtime.modulehash *array;
+    int len;
+    int cap;
+};
+
+struct runtime.bitvector {
+    int32 n;
+    uint8 *bytedata;
+};
+
+struct runtime.pcHeader {
+    uint32 magic;
+    uint8 pad1;
+    uint8 pad2;
+    uint8 minLC;
+    uint8 ptrSize;
+    int nfunc;
+    uint nfiles;
+    uintptr textStart;
+    uintptr funcnameOffset;
+    uintptr cuOffset;
+    uintptr filetabOffset;
+    uintptr pctabOffset;
+    uintptr pclnOffset;
+};
+
+struct []runtime.functab {
+    struct runtime.functab *array;
+    int len;
+    int cap;
+};
+
+struct []runtime.textsect {
+    struct runtime.textsect *array;
+    int len;
+    int cap;
+};
+
+struct []runtime.ptabEntry {
+    struct runtime.ptabEntry *array;
+    int len;
+    int cap;
+};
+
+struct []*runtime.itab {
+    struct runtime.itab **array;
+    int len;
+    int cap;
+};
+
+struct []*runtime.initTask {
+    struct runtime.initTask **array;
+    int len;
+    int cap;
+};
+
+struct runtime.moduledata {
+    struct runtime/internal/sys.NotInHeap NotInHeap;
+    struct runtime.pcHeader *pcHeader;
+    struct []uint8 funcnametab;
+    struct []uint32 cutab;
+    struct []uint8 filetab;
+    struct []uint8 pctab;
+    struct []uint8 pclntable;
+    struct []runtime.functab ftab;
+    uintptr findfunctab;
+    uintptr minpc;
+    uintptr maxpc;
+    uintptr text;
+    uintptr etext;
+    uintptr noptrdata;
+    uintptr enoptrdata;
+    uintptr data;
+    uintptr edata;
+    uintptr bss;
+    uintptr ebss;
+    uintptr noptrbss;
+    uintptr enoptrbss;
+    uintptr covctrs;
+    uintptr ecovctrs;
+    uintptr end;
+    uintptr gcdata;
+    uintptr gcbss;
+    uintptr types;
+    uintptr etypes;
+    uintptr rodata;
+    uintptr gofunc;
+    struct []runtime.textsect textsectmap;
+    struct []int32 typelinks;
+    struct []*runtime.itab itablinks;
+    struct []runtime.ptabEntry ptab;
+    struct string pluginpath;
+    struct []runtime.modulehash pkghashes;
+    struct []*runtime.initTask inittasks;
+    struct string modulename;
+    struct []runtime.modulehash modulehashes;
+    uint8 hasmain;
+    struct runtime.bitvector gcdatamask;
+    struct runtime.bitvector gcbssmask;
+    map[internal/abi.TypeOff]*internal/abi.Type typemap;
+    bool bad;
+    struct runtime.moduledata *next;
+};
+
+struct runtime.functab {
+    uint32 entryoff;
+    uint32 funcoff;
+};
+
+struct runtime.funcInfo {
+    struct runtime._func *_func;
+    struct runtime.moduledata *datap;
+};
+
+struct runtime.initTask {
+    uint32 state;
+    uint32 nfns;
+};
+
+struct runtime.Frame {
+    uintptr PC;
+    struct runtime.Func *Func;
+    struct string Function;
+    struct string File;
+    int Line;
+    int startLine;
+    uintptr Entry;
+    struct runtime.funcInfo funcInfo;
+};
+
+struct []runtime.Frame {
+    struct runtime.Frame *array;
+    int len;
+    int cap;
+};
+
+struct runtime.Frames {
+    struct []uintptr callers;
+    struct []runtime.Frame frames;
+    struct runtime.Frame frameStore[2];
+};
+
+struct runtime.modulehash {
+    struct string modulename;
+    struct string linktimehash;
+    struct string *runtimehash;
+};
+
+struct runtime.Func {
+    struct struct_{} opaque;
+};
+
+struct hash<internal/abi.TypeOff,*internal/abi.Type> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<internal/abi.TypeOff,*internal/abi.Type> *buckets;
+    struct bucket<internal/abi.TypeOff,*internal/abi.Type> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct runtime._func {
+    struct runtime/internal/sys.NotInHeap NotInHeap;
+    uint32 entryOff;
+    int32 nameOff;
+    int32 args;
+    uint32 deferreturn;
+    uint32 pcsp;
+    uint32 pcfile;
+    uint32 pcln;
+    uint32 npcdata;
+    uint32 cuOffset;
+    int32 startLine;
+    internal/abi.FuncID funcID;
+    internal/abi.FuncFlag flag;
+    uint8 _[1];
+    uint8 nfuncdata;
+};
+
+struct runtime.textsect {
+    uintptr vaddr;
+    uintptr end;
+    uintptr baseaddr;
+};
+
+struct runtime.ptabEntry {
+    internal/abi.NameOff name;
+    internal/abi.TypeOff typ;
+};
+
+struct bucket<internal/abi.TypeOff,*internal/abi.Type> {
+    uint8 tophash[8];
+    internal/abi.TypeOff keys[8];
+    struct internal/abi.Type *values[8];
+    struct bucket<internal/abi.TypeOff,*internal/abi.Type> *overflow;
+};
+
+typedef struct runtime.heapArena runtime.heapArena, *Pruntime.heapArena;
+
+typedef struct runtime.checkmarksMap runtime.checkmarksMap, *Pruntime.checkmarksMap;
+
+struct runtime.heapArena {
+    struct runtime/internal/sys.NotInHeap _;
+    uintptr bitmap[131072];
+    uint8 noMorePtrs[16384];
+    struct runtime.mspan *spans[8192];
+    uint8 pageInUse[1024];
+    uint8 pageMarks[1024];
+    uint8 pageSpecials[1024];
+    struct runtime.checkmarksMap *checkmarks;
+    uintptr zeroedBase;
+};
+
+struct runtime.checkmarksMap {
+    struct runtime/internal/sys.NotInHeap _;
+    uint8 b[1048576];
+};
+
+typedef struct crypto/rsa.PSSOptions crypto/rsa.PSSOptions, *Pcrypto/rsa.PSSOptions;
+
+struct crypto/rsa.PSSOptions {
+    int SaltLength;
+    crypto.Hash Hash;
+};
+
+typedef struct auth/auth_grpc.PingResponse auth/auth_grpc.PingResponse, *Pauth/auth_grpc.PingResponse;
+
+struct auth/auth_grpc.PingResponse {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    int64 Response;
+};
+
+typedef struct google.golang.org/grpc/backoff.Config google.golang.org/grpc/backoff.Config, *Pgoogle.golang.org/grpc/backoff.Config;
+
+struct google.golang.org/grpc/backoff.Config {
+    time.Duration BaseDelay;
+    float64 Multiplier;
+    float64 Jitter;
+    time.Duration MaxDelay;
+};
+
+typedef struct reflect.sliceType reflect.sliceType, *Preflect.sliceType;
+
+typedef struct internal/abi.SliceType internal/abi.SliceType, *Pinternal/abi.SliceType;
+
+struct internal/abi.SliceType {
+    struct internal/abi.Type Type;
+    struct internal/abi.Type *Elem;
+};
+
+struct reflect.sliceType {
+    struct internal/abi.SliceType SliceType;
+};
+
+typedef struct text/template.variable text/template.variable, *Ptext/template.variable;
+
+struct text/template.variable {
+    struct string name;
+    struct reflect.Value value;
+};
+
+typedef struct runtime.itimerspec runtime.itimerspec, *Pruntime.itimerspec;
+
+typedef struct runtime.timespec runtime.timespec, *Pruntime.timespec;
+
+struct runtime.timespec {
+    int64 tv_sec;
+    int64 tv_nsec;
+};
+
+struct runtime.itimerspec {
+    struct runtime.timespec it_interval;
+    struct runtime.timespec it_value;
+};
+
+typedef struct mime/multipart.sectionReadCloser mime/multipart.sectionReadCloser, *Pmime/multipart.sectionReadCloser;
+
+typedef struct io.SectionReader io.SectionReader, *Pio.SectionReader;
+
+struct io.SectionReader {
+    io.ReaderAt r;
+    int64 base;
+    int64 off;
+    int64 limit;
+};
+
+struct mime/multipart.sectionReadCloser {
+    struct io.SectionReader *SectionReader;
+    io.Closer Closer;
+};
+
+typedef struct golang.org/x/net/http2.Setting golang.org/x/net/http2.Setting, *Pgolang.org/x/net/http2.Setting;
+
+struct golang.org/x/net/http2.Setting {
+    golang.org/x/net/http2.SettingID ID;
+    uint32 Val;
+};
+
+typedef struct net.policyTableEntry net.policyTableEntry, *Pnet.policyTableEntry;
+
+struct net.policyTableEntry {
+    struct net/netip.Prefix Prefix;
+    uint8 Precedence;
+    uint8 Label;
+};
+
+typedef struct google.golang.org/protobuf/internal/impl.mapEntryType google.golang.org/protobuf/internal/impl.mapEntryType, *Pgoogle.golang.org/protobuf/internal/impl.mapEntryType;
+
+struct google.golang.org/protobuf/internal/impl.mapEntryType {
+    google.golang.org/protobuf/reflect/protoreflect.MessageDescriptor desc;
+    interface_{} valType;
+};
+
+typedef struct text/template.ExecError text/template.ExecError, *Ptext/template.ExecError;
+
+struct text/template.ExecError {
+    struct string Name;
+    error Err;
+};
+
+typedef struct otp/seedgen.PingResponse otp/seedgen.PingResponse, *Potp/seedgen.PingResponse;
+
+struct otp/seedgen.PingResponse {
+    struct google.golang.org/protobuf/internal/impl.MessageState state;
+    int32 sizeCache;
+    struct []uint8 unknownFields;
+    int64 Response;
+};
+
+typedef struct bucket<google.golang.org/grpc/internal/channelz.RefChannelType,string> bucket<google.golang.org/grpc/internal/channelz.RefChannelType,string>, *Pbucket<google.golang.org/grpc/internal/channelz.RefChannelType,string>;
+
+struct bucket<google.golang.org/grpc/internal/channelz.RefChannelType,string> {
+    uint8 tophash[8];
+    google.golang.org/grpc/internal/channelz.RefChannelType keys[8];
+    struct string values[8];
+    struct bucket<google.golang.org/grpc/internal/channelz.RefChannelType,string> *overflow;
+};
+
+typedef struct reflect.abiStep reflect.abiStep, *Preflect.abiStep;
+
+struct reflect.abiStep {
+    reflect.abiStepKind kind;
+    uintptr offset;
+    uintptr size;
+    uintptr stkOff;
+    int ireg;
+    int freg;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*runtime.pageAlloc;_X2_runtime.chunkIdx;_X3_uint;_X4_uintptr_} noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*runtime.pageAlloc;_X2_runtime.chunkIdx;_X3_uint;_X4_uintptr_}, *Pnoalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*runtime.pageAlloc;_X2_runtime.chunkIdx;_X3_uint;_X4_uintptr_};
+
+typedef struct runtime.pageAlloc runtime.pageAlloc, *Pruntime.pageAlloc;
+
+typedef struct runtime.pallocData runtime.pallocData, *Pruntime.pallocData;
+
+typedef struct runtime.addrRanges runtime.addrRanges, *Pruntime.addrRanges;
+
+typedef struct struct_{_runtime.index_runtime.scavengeIndex;_runtime.releasedBg_runtime/internal/atomic.Uintptr;_runtime.releasedEager_runtime/internal/atomic.Uintptr_} struct_{_runtime.index_runtime.scavengeIndex;_runtime.releasedBg_runtime/internal/atomic.Uintptr;_runtime.releasedEager_runtime/internal/atomic.Uintptr_}, *Pstruct_{_runtime.index_runtime.scavengeIndex;_runtime.releasedBg_runtime/internal/atomic.Uintptr;_runtime.releasedEager_runtime/internal/atomic.Uintptr_};
+
+typedef uint64 runtime.pageBits[8];
+
+typedef struct []runtime.addrRange []runtime.addrRange, *P[]runtime.addrRange;
+
+typedef struct runtime.scavengeIndex runtime.scavengeIndex, *Pruntime.scavengeIndex;
+
+typedef struct runtime/internal/atomic.Uintptr runtime/internal/atomic.Uintptr, *Pruntime/internal/atomic.Uintptr;
+
+typedef struct []runtime.atomicScavChunkData []runtime.atomicScavChunkData, *P[]runtime.atomicScavChunkData;
+
+typedef struct runtime.atomicOffAddr runtime.atomicOffAddr, *Pruntime.atomicOffAddr;
+
+typedef struct runtime.atomicScavChunkData runtime.atomicScavChunkData, *Pruntime.atomicScavChunkData;
+
+struct runtime.pallocData {
+    runtime.pallocBits pallocBits;
+    runtime.pageBits scavenged;
+};
+
+struct noalg.struct_{_F_uintptr;_X0_*uintptr;_X1_*runtime.pageAlloc;_X2_runtime.chunkIdx;_X3_uint;_X4_uintptr_} { // Original name: noalg.struct { F uintptr; X0 *uintptr; X1 *runtime.pageAlloc; X2 runtime.chunkIdx; X3 uint; X4 uintptr }
+    uintptr F;
+    uintptr *X0;
+    struct runtime.pageAlloc *X1;
+    runtime.chunkIdx X2;
+    uint X3;
+    uintptr X4;
+};
+
+struct []runtime.addrRange {
+    struct runtime.addrRange *array;
+    int len;
+    int cap;
+};
+
+struct runtime.atomicOffAddr {
+    struct runtime/internal/atomic.Int64 a;
+};
+
+struct []runtime.atomicScavChunkData {
+    struct runtime.atomicScavChunkData *array;
+    int len;
+    int cap;
+};
+
+struct runtime.addrRanges {
+    struct []runtime.addrRange ranges;
+    uintptr totalBytes;
+    runtime.sysMemStat *sysStat;
+};
+
+struct runtime/internal/atomic.Uintptr {
+    struct runtime/internal/atomic.noCopy noCopy;
+    uintptr value;
+};
+
+struct runtime.scavengeIndex {
+    struct []runtime.atomicScavChunkData chunks;
+    struct runtime/internal/atomic.Uintptr min;
+    struct runtime/internal/atomic.Uintptr max;
+    struct runtime/internal/atomic.Uintptr minHeapIdx;
+    struct runtime.atomicOffAddr searchAddrBg;
+    struct runtime.atomicOffAddr searchAddrForce;
+    struct runtime.offAddr freeHWM;
+    uint32 gen;
+    bool test;
+};
+
+struct struct_{_runtime.index_runtime.scavengeIndex;_runtime.releasedBg_runtime/internal/atomic.Uintptr;_runtime.releasedEager_runtime/internal/atomic.Uintptr_} { // Original name: struct { runtime.index runtime.scavengeIndex; runtime.releasedBg runtime/internal/atomic.Uintptr; runtime.releasedEager runtime/internal/atomic.Uintptr }
+    struct runtime.scavengeIndex index;
+    struct runtime/internal/atomic.Uintptr releasedBg;
+    struct runtime/internal/atomic.Uintptr releasedEager;
+};
+
+struct runtime.pageAlloc {
+    struct []runtime.pallocSum summary[5];
+    struct runtime.pallocData (*chunks[8192])[8192];
+    struct runtime.offAddr searchAddr;
+    runtime.chunkIdx start;
+    runtime.chunkIdx end;
+    struct runtime.addrRanges inUse;
+    struct struct_{_runtime.index_runtime.scavengeIndex;_runtime.releasedBg_runtime/internal/atomic.Uintptr;_runtime.releasedEager_runtime/internal/atomic.Uintptr_} scav;
+    struct runtime.mutex *mheapLock;
+    runtime.sysMemStat *sysStat;
+    uintptr summaryMappedReady;
+    bool chunkHugePages;
+    bool test;
+};
+
+struct runtime.atomicScavChunkData {
+    struct runtime/internal/atomic.Uint64 value;
+};
+
+typedef struct hchan<net.result[go.shape.int].1> hchan<net.result[go.shape.int].1>, *Phchan<net.result[go.shape.int].1>;
+
+typedef struct waitq<net.result[go.shape.int].1> waitq<net.result[go.shape.int].1>, *Pwaitq<net.result[go.shape.int].1>;
+
+typedef struct sudog<net.result[go.shape.int].1> sudog<net.result[go.shape.int].1>, *Psudog<net.result[go.shape.int].1>;
+
+typedef struct net.result[go.shape.int].1 net.result[go.shape.int].1, *Pnet.result[go.shape.int].1;
+
+struct sudog<net.result[go.shape.int].1> { // Original name: sudog<net.result[go.shape.int]·1>
+    struct runtime.g *g;
+    struct runtime.sudog *next;
+    struct runtime.sudog *prev;
+    struct net.result[go.shape.int].1 *elem;
+    int64 acquiretime;
+    int64 releasetime;
+    uint32 ticket;
+    bool isSelect;
+    bool success;
+    struct runtime.sudog *parent;
+    struct runtime.sudog *waitlink;
+    struct runtime.sudog *waittail;
+    struct runtime.hchan *c;
+};
+
+struct waitq<net.result[go.shape.int].1> { // Original name: waitq<net.result[go.shape.int]·1>
+    struct sudog<net.result[go.shape.int].1> *first;
+    struct sudog<net.result[go.shape.int].1> *last;
+};
+
+struct hchan<net.result[go.shape.int].1> { // Original name: hchan<net.result[go.shape.int]·1>
+    uint qcount;
+    uint dataqsiz;
+    void *buf;
+    uint16 elemsize;
+    uint32 closed;
+    struct internal/abi.Type *elemtype;
+    uint sendx;
+    uint recvx;
+    struct waitq<net.result[go.shape.int].1> recvq;
+    struct waitq<net.result[go.shape.int].1> sendq;
+    struct runtime.mutex lock;
+};
+
+struct net.result[go.shape.int].1 { // Original name: net.result[go.shape.int]·1
+    go.shape.int res;
+    error err;
+};
+
+typedef struct compress/flate.byFreq compress/flate.byFreq, *Pcompress/flate.byFreq;
+
+typedef struct compress/flate.literalNode compress/flate.literalNode, *Pcompress/flate.literalNode;
+
+struct compress/flate.literalNode {
+    uint16 literal;
+    int32 freq;
+};
+
+struct compress/flate.byFreq {
+    struct compress/flate.literalNode *array;
+    int len;
+    int cap;
+};
+
+typedef struct hash<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> hash<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}>, *Phash<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}>;
+
+typedef struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}>, *Pbucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}>;
+
+struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> { // Original name: bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface {}>
+    uint8 tophash[8];
+    struct google.golang.org/protobuf/reflect/protoreflect.FullName keys[8];
+    interface_{} values[8];
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> *overflow;
+};
+
+struct hash<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> { // Original name: hash<google.golang.org/protobuf/reflect/protoreflect.FullName,interface {}>
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> *buckets;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,interface_{}> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct golang.org/x/net/trace.eventFamily golang.org/x/net/trace.eventFamily, *Pgolang.org/x/net/trace.eventFamily;
+
+typedef struct golang.org/x/net/trace.eventLogs golang.org/x/net/trace.eventLogs, *Pgolang.org/x/net/trace.eventLogs;
+
+struct golang.org/x/net/trace.eventLogs {
+    struct golang.org/x/net/trace.eventLog **array;
+    int len;
+    int cap;
+};
+
+struct golang.org/x/net/trace.eventFamily {
+    struct sync.RWMutex mu;
+    struct golang.org/x/net/trace.eventLogs eventLogs;
+};
+
+typedef struct bucket<google.golang.org/protobuf/internal/filedesc.Edition,google.golang.org/protobuf/internal/filedesc.EditionFeatures> bucket<google.golang.org/protobuf/internal/filedesc.Edition,google.golang.org/protobuf/internal/filedesc.EditionFeatures>, *Pbucket<google.golang.org/protobuf/internal/filedesc.Edition,google.golang.org/protobuf/internal/filedesc.EditionFeatures>;
+
+struct bucket<google.golang.org/protobuf/internal/filedesc.Edition,google.golang.org/protobuf/internal/filedesc.EditionFeatures> {
+    uint8 tophash[8];
+    google.golang.org/protobuf/internal/filedesc.Edition keys[8];
+    struct google.golang.org/protobuf/internal/filedesc.EditionFeatures values[8];
+    struct bucket<google.golang.org/protobuf/internal/filedesc.Edition,google.golang.org/protobuf/internal/filedesc.EditionFeatures> *overflow;
+};
+
+typedef struct crypto/x509.SystemRootsError crypto/x509.SystemRootsError, *Pcrypto/x509.SystemRootsError;
+
+struct crypto/x509.SystemRootsError {
+    error Err;
+};
+
+typedef struct vendor/golang.org/x/net/dns/dnsmessage.PTRResource vendor/golang.org/x/net/dns/dnsmessage.PTRResource, *Pvendor/golang.org/x/net/dns/dnsmessage.PTRResource;
+
+struct vendor/golang.org/x/net/dns/dnsmessage.PTRResource {
+    struct vendor/golang.org/x/net/dns/dnsmessage.Name PTR;
+};
+
+typedef struct internal/nettrace.Trace internal/nettrace.Trace, *Pinternal/nettrace.Trace;
+
+struct internal/nettrace.Trace {
+    void (**DNSStart)(struct string);
+    void (**DNSDone)(struct []interface_{}, bool, error);
+    void (**ConnectStart)(struct string, struct string);
+    void (**ConnectDone)(struct string, struct string, error);
+};
+
+typedef struct google.golang.org/grpc/internal/transport.headerFrame google.golang.org/grpc/internal/transport.headerFrame, *Pgoogle.golang.org/grpc/internal/transport.headerFrame;
+
+typedef struct google.golang.org/grpc/internal/transport.cleanupStream google.golang.org/grpc/internal/transport.cleanupStream, *Pgoogle.golang.org/grpc/internal/transport.cleanupStream;
+
+struct google.golang.org/grpc/internal/transport.cleanupStream {
+    uint32 streamID;
+    bool rst;
+    golang.org/x/net/http2.ErrCode rstCode;
+    void (**onWrite)(void);
+};
+
+struct google.golang.org/grpc/internal/transport.headerFrame {
+    uint32 streamID;
+    struct []golang.org/x/net/http2/hpack.HeaderField hf;
+    bool endStream;
+    void (**initStream)(uint32, error *);
+    void (**onWrite)(void);
+    struct google.golang.org/grpc/internal/transport.writeQuota *wq;
+    struct google.golang.org/grpc/internal/transport.cleanupStream *cleanup;
+    void (**onOrphaned)(error);
+};
+
+typedef struct golang.org/x/net/http2.PriorityParam golang.org/x/net/http2.PriorityParam, *Pgolang.org/x/net/http2.PriorityParam;
+
+struct golang.org/x/net/http2.PriorityParam {
+    uint32 StreamDep;
+    bool Exclusive;
+    uint8 Weight;
+};
+
+typedef struct runtime.sigTabT runtime.sigTabT, *Pruntime.sigTabT;
+
+struct runtime.sigTabT {
+    int32 flags;
+    struct string name;
+};
+
+typedef struct net.NS net.NS, *Pnet.NS;
+
+struct net.NS {
+    struct string Host;
+};
+
+typedef struct runtime.writeHeapBits runtime.writeHeapBits, *Pruntime.writeHeapBits;
+
+struct runtime.writeHeapBits {
+    uintptr addr;
+    uintptr mask;
+    uintptr valid;
+    uintptr low;
+};
+
+typedef struct net.MX net.MX, *Pnet.MX;
+
+struct net.MX {
+    struct string Host;
+    uint16 Pref;
+};
+
+typedef struct struct_{_runtime.root_runtime.semaRoot;_runtime.pad_[40]uint8_} struct_{_runtime.root_runtime.semaRoot;_runtime.pad_[40]uint8_}, *Pstruct_{_runtime.root_runtime.semaRoot;_runtime.pad_[40]uint8_};
+
+typedef struct runtime.semaRoot runtime.semaRoot, *Pruntime.semaRoot;
+
+struct runtime.semaRoot {
+    struct runtime.mutex lock;
+    struct runtime.sudog *treap;
+    struct runtime/internal/atomic.Uint32 nwait;
+};
+
+struct struct_{_runtime.root_runtime.semaRoot;_runtime.pad_[40]uint8_} { // Original name: struct { runtime.root runtime.semaRoot; runtime.pad [40]uint8 }
+    struct runtime.semaRoot root;
+    uint8 pad[40];
+};
+
+typedef struct runtime.iface interface_{_RegisterEnum(google.golang.org/protobuf/reflect/protoreflect.EnumType)_error;_RegisterExtension(google.golang.org/protobuf/reflect/protoreflect.ExtensionType)_error;_RegisterMessage(google.golang.org/protobuf/reflect/protoreflect.MessageType)_error_};
+
+typedef struct runtime.scavengerState runtime.scavengerState, *Pruntime.scavengerState;
+
+typedef struct runtime.piController runtime.piController, *Pruntime.piController;
+
+struct runtime.piController {
+    float64 kp;
+    float64 ti;
+    float64 tt;
+    float64 min;
+    float64 max;
+    float64 errIntegral;
+    bool errOverflow;
+    bool inputOverflow;
+};
+
+struct runtime.scavengerState {
+    struct runtime.mutex lock;
+    struct runtime.g *g;
+    bool parked;
+    struct runtime.timer *timer;
+    struct runtime/internal/atomic.Uint32 sysmonWake;
+    float64 targetCPUFraction;
+    float64 sleepRatio;
+    struct runtime.piController sleepController;
+    int64 controllerCooldown;
+    bool printControllerReset;
+    void (**sleepStub)(int64, int64 *);
+    void (**scavenge)(uintptr, uintptr *, int64 *);
+    void (**shouldStop)(bool *);
+    void (**gomaxprocs)(int32 *);
+};
+
+typedef struct hash<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code> hash<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code>, *Phash<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code>;
+
+typedef struct hash<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code> *map[golang.org/x/net/http2.ErrCode]google.golang.org/grpc/codes.Code;
+
+struct hash<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code> *buckets;
+    struct bucket<golang.org/x/net/http2.ErrCode,google.golang.org/grpc/codes.Code> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct runtime.gcTrigger runtime.gcTrigger, *Pruntime.gcTrigger;
+
+struct runtime.gcTrigger {
+    runtime.gcTriggerKind kind;
+    int64 now;
+    uint32 n;
+};
+
+typedef struct google.golang.org/grpc/credentials.TLSChannelzSecurityValue google.golang.org/grpc/credentials.TLSChannelzSecurityValue, *Pgoogle.golang.org/grpc/credentials.TLSChannelzSecurityValue;
+
+struct google.golang.org/grpc/credentials.TLSChannelzSecurityValue {
+    google.golang.org/grpc/credentials.ChannelzSecurityValue ChannelzSecurityValue;
+    struct string StandardName;
+    struct []uint8 LocalCertificate;
+    struct []uint8 RemoteCertificate;
+};
+
+typedef struct sync/atomic.Pointer[internal/godebug.value] sync/atomic.Pointer[internal/godebug.value], *Psync/atomic.Pointer[internal/godebug.value];
+
+typedef struct internal/godebug.value internal/godebug.value, *Pinternal/godebug.value;
+
+struct sync/atomic.Pointer[internal/godebug.value] {
+    struct sync/atomic.noCopy _;
+    struct internal/godebug.value *_[0];
+    void *v;
+};
+
+struct internal/godebug.value {
+    struct string text;
+    struct internal/bisect.Matcher *bisect;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.m_} noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.m_}, *Pnoalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.m_};
+
+struct noalg.struct_{_F_uintptr;_X0_unsafe.Pointer;_X1_*runtime.m_} { // Original name: noalg.struct { F uintptr; X0 unsafe.Pointer; X1 *runtime.m }
+    uintptr F;
+    void *X0;
+    struct runtime.m *X1;
+};
+
+typedef struct noalg.map.hdr[string]struct_{} noalg.map.hdr[string]struct_{}, *Pnoalg.map.hdr[string]struct_{};
+
+typedef struct noalg.map.bucket[string]struct_{} noalg.map.bucket[string]struct_{}, *Pnoalg.map.bucket[string]struct_{};
+
+struct noalg.map.bucket[string]struct_{} { // Original name: noalg.map.bucket[string]struct {}
+    uint8 topbits[8];
+    noalg.[8]string keys;
+    noalg.[8]struct_{} elems;
+    void *overflow;
+};
+
+struct noalg.map.hdr[string]struct_{} { // Original name: noalg.map.hdr[string]struct {}
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct noalg.map.bucket[string]struct_{} *buckets;
+    struct noalg.map.bucket[string]struct_{} *oldbuckets;
+    uintptr nevacuate;
+    void *extra;
+};
+
+typedef struct noalg.map.bucket[crypto/x509.sum224]bool noalg.map.bucket[crypto/x509.sum224]bool, *Pnoalg.map.bucket[crypto/x509.sum224]bool;
+
+typedef uint8 crypto/x509.sum224[28];
+
+typedef crypto/x509.sum224 noalg.[8]crypto/x509.sum224[8];
+
+struct noalg.map.bucket[crypto/x509.sum224]bool {
+    uint8 topbits[8];
+    noalg.[8]crypto/x509.sum224 keys;
+    noalg.[8]bool elems;
+    uintptr overflow;
+};
+
+typedef struct hash<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> hash<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber>, *Phash<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber>;
+
+typedef struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber>, *Pbucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber>;
+
+typedef struct hash<google.golang.org/protobuf/encoding/protowire.Number,google.golang.org/protobuf/reflect/protoreflect.ExtensionType> *google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber;
+
+struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> {
+    uint8 tophash[8];
+    struct google.golang.org/protobuf/reflect/protoreflect.FullName keys[8];
+    google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber values[8];
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> *overflow;
+};
+
+struct hash<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> *buckets;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.FullName,google.golang.org/protobuf/reflect/protoregistry.extensionsByNumber> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct hash<string,*flag.Flag> hash<string,*flag.Flag>, *Phash<string,*flag.Flag>;
+
+typedef struct hash<string,*flag.Flag> *map[string]*flag.Flag;
+
+typedef struct bucket<string,*flag.Flag> bucket<string,*flag.Flag>, *Pbucket<string,*flag.Flag>;
+
+struct hash<string,*flag.Flag> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<string,*flag.Flag> *buckets;
+    struct bucket<string,*flag.Flag> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+struct bucket<string,*flag.Flag> {
+    uint8 tophash[8];
+    struct string keys[8];
+    struct flag.Flag *values[8];
+    struct bucket<string,*flag.Flag> *overflow;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_[]encoding/json.reflectWithString_} noalg.struct_{_F_uintptr;_X0_[]encoding/json.reflectWithString_}, *Pnoalg.struct_{_F_uintptr;_X0_[]encoding/json.reflectWithString_};
+
+typedef struct []encoding/json.reflectWithString []encoding/json.reflectWithString, *P[]encoding/json.reflectWithString;
+
+typedef struct encoding/json.reflectWithString encoding/json.reflectWithString, *Pencoding/json.reflectWithString;
+
+struct encoding/json.reflectWithString {
+    struct reflect.Value k;
+    struct reflect.Value v;
+    struct string ks;
+};
+
+struct []encoding/json.reflectWithString {
+    struct encoding/json.reflectWithString *array;
+    int len;
+    int cap;
+};
+
+struct noalg.struct_{_F_uintptr;_X0_[]encoding/json.reflectWithString_} { // Original name: noalg.struct { F uintptr; X0 []encoding/json.reflectWithString }
+    uintptr F;
+    struct []encoding/json.reflectWithString X0;
+};
+
+typedef struct bucket<string,google.golang.org/grpc.ServiceInfo> bucket<string,google.golang.org/grpc.ServiceInfo>, *Pbucket<string,google.golang.org/grpc.ServiceInfo>;
+
+typedef struct google.golang.org/grpc.ServiceInfo google.golang.org/grpc.ServiceInfo, *Pgoogle.golang.org/grpc.ServiceInfo;
+
+typedef struct []google.golang.org/grpc.MethodInfo []google.golang.org/grpc.MethodInfo, *P[]google.golang.org/grpc.MethodInfo;
+
+typedef struct google.golang.org/grpc.MethodInfo google.golang.org/grpc.MethodInfo, *Pgoogle.golang.org/grpc.MethodInfo;
+
+struct google.golang.org/grpc.MethodInfo {
+    struct string Name;
+    bool IsClientStream;
+    bool IsServerStream;
+};
+
+struct []google.golang.org/grpc.MethodInfo {
+    struct google.golang.org/grpc.MethodInfo *array;
+    int len;
+    int cap;
+};
+
+struct google.golang.org/grpc.ServiceInfo {
+    struct []google.golang.org/grpc.MethodInfo Methods;
+    interface_{} Metadata;
+};
+
+struct bucket<string,google.golang.org/grpc.ServiceInfo> {
+    uint8 tophash[8];
+    struct string keys[8];
+    struct google.golang.org/grpc.ServiceInfo values[8];
+    struct bucket<string,google.golang.org/grpc.ServiceInfo> *overflow;
+};
+
+typedef struct runtime.iface google.golang.org/grpc/encoding.Codec;
+
+typedef struct internal/reflectlite.rtype internal/reflectlite.rtype, *Pinternal/reflectlite.rtype;
+
+struct internal/reflectlite.rtype {
+    struct internal/abi.Type *Type;
+};
+
+typedef struct hash<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> hash<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type>, *Phash<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type>;
+
+typedef struct hash<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> *map[google.golang.org/protobuf/reflect/protoreflect.Kind]google.golang.org/protobuf/encoding/protowire.Type;
+
+typedef struct bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type>, *Pbucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type>;
+
+struct bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> {
+    uint8 tophash[8];
+    google.golang.org/protobuf/reflect/protoreflect.Kind keys[8];
+    google.golang.org/protobuf/encoding/protowire.Type values[8];
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> *overflow;
+};
+
+struct hash<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> {
+    int count;
+    uint8 flags;
+    uint8 B;
+    uint16 noverflow;
+    uint32 hash0;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> *buckets;
+    struct bucket<google.golang.org/protobuf/reflect/protoreflect.Kind,google.golang.org/protobuf/encoding/protowire.Type> *oldbuckets;
+    uintptr nevacuate;
+    struct runtime.mapextra *extra;
+};
+
+typedef struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc.ServiceConfig;_X1_string;_X2_*google.golang.org/grpc.ServiceConfig;_X3_string_} noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc.ServiceConfig;_X1_string;_X2_*google.golang.org/grpc.ServiceConfig;_X3_string_}, *Pnoalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc.ServiceConfig;_X1_string;_X2_*google.golang.org/grpc.ServiceConfig;_X3_string_};
+
+struct noalg.struct_{_F_uintptr;_X0_*google.golang.org/grpc.ServiceConfig;_X1_string;_X2_*google.golang.org/grpc.ServiceConfig;_X3_string_} { // Original name: noalg.struct { F uintptr; X0 *google.golang.org/grpc.ServiceConfig; X1 string; X2 *google.golang.org/grpc.ServiceConfig; X3 string }
+    uintptr F;
+    struct google.golang.org/grpc.ServiceConfig *X0;
+    struct string X1;
+    struct google.golang.org/grpc.ServiceConfig *X2;
+    struct string X3;
+};
+
+typedef struct regexp.Regexp regexp.Regexp, *Pregexp.Regexp;
+
+typedef struct regexp/syntax.Prog regexp/syntax.Prog, *Pregexp/syntax.Prog;
+
+typedef struct regexp.onePassProg regexp.onePassProg, *Pregexp.onePassProg;
+
+typedef struct []regexp/syntax.Inst []regexp/syntax.Inst, *P[]regexp/syntax.Inst;
+
+typedef struct []regexp.onePassInst []regexp.onePassInst, *P[]regexp.onePassInst;
+
+struct []regexp.onePassInst {
+    struct regexp.onePassInst *array;
+    int len;
+    int cap;
+};
+
+struct []regexp/syntax.Inst {
+    struct regexp/syntax.Inst *array;

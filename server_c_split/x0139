@@ -1,0 +1,1000 @@
+
+int time_open(char *__file,int __oflag,...)
+
+{
+  int iVar1;
+  int fd;
+  int extraout_RBX;
+  int unaff_R14;
+  char *pcStack0000000000000008;
+  
+  pcStack0000000000000008 = __file;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar1 = syscall_openat(-100,pcStack0000000000000008,__oflag,0,0);
+  if (extraout_RBX != 0) {
+    return 0;
+  }
+  return iVar1;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void time_closefd(uintptr fd)
+
+{
+  error err;
+  void *unaff_RBP;
+  int unaff_R14;
+  runtime_itab *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  err.data = unaff_RBP;
+  err.tab = in_stack_fffffffffffffff0;
+  syscall_Close(fd,err);
+  return;
+}
+
+
+
+void time_preadn(uintptr fd,__uint8 buf,int off,error ~r0)
+
+{
+  uint uVar1;
+  int m;
+  undefined8 *extraout_RAX;
+  size_t in_RCX;
+  int whence;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int in_RSI;
+  int in_RDI;
+  int unaff_R14;
+  error in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  whence = 0;
+  if (in_RSI < 0) {
+    whence = 2;
+  }
+  syscall_Seek(fd,in_RSI,whence,in_RDI,in_stack_ffffffffffffffb8);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  while( true ) {
+    if (in_RCX == 0) {
+      return;
+    }
+    uVar1 = syscall_read(fd,(void *)off,in_RCX);
+    if ((int)uVar1 < 1) break;
+    if (in_RCX < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    in_RDI = in_RDI - uVar1;
+    in_RCX = in_RCX - uVar1;
+    off = off + (-in_RDI >> 0x3f & uVar1);
+  }
+  if (extraout_RBX_00 == 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,(void *)0x0);
+    extraout_RAX[1] = 10;
+    *extraout_RAX = &DAT_008b3105;
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void time___Time__addSec(time_Time *t,int64 d)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint64 uVar3;
+  uint uVar4;
+  int64 sum;
+  int64 dsec;
+  
+  uVar3 = t->wall;
+  if ((int)uVar3 < 0) {
+    uVar4 = (uVar3 << 1) >> 0x1f;
+    uVar1 = uVar4 + d;
+    if (uVar1 < 0x200000000) {
+      t->wall = uVar1 * 0x40000000 | (uint)((dword)uVar3 & 0x3fffffff) | 0x8000000000000000;
+      return;
+    }
+    t->ext = uVar4 + 0xdd7b17f80;
+    t->wall = t->wall & 0x3fffffff;
+  }
+  iVar2 = t->ext + d;
+  if (0 < d == t->ext < iVar2) {
+    t->ext = iVar2;
+  }
+  else if (d < 1) {
+    t->ext = -0x7fffffffffffffff;
+  }
+  else {
+    t->ext = 0x7fffffffffffffff;
+  }
+  return;
+}
+
+
+
+void time_Time_After(time_Time t,time_Time u,bool ~r0)
+
+{
+  uint7 in_register_00000001;
+  int64 ts;
+  int64 us;
+  uint in_RDI;
+  
+  if ((int)((uint)in_register_00000001 << 8 & in_RDI) < 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Time_Before(time_Time t,time_Time u,bool ~r0)
+
+{
+  uint7 in_register_00000001;
+  int64 ts;
+  int64 us;
+  uint in_RDI;
+  
+  if ((int)((uint)in_register_00000001 << 8 & in_RDI) < 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Time_Compare(time_Time t,time_Time u,int ~r0)
+
+{
+  int64 tc;
+  int in_RBX;
+  int64 uc;
+  uint in_RDI;
+  
+  if (-1 < (int)(~r0 & in_RDI)) {
+    if (~r0 < 0) {
+      in_RBX = ((uint)(~r0 << 1) >> 0x1f) + 0xdd7b17f80;
+    }
+    if ((int)in_RDI < 0) {
+      uc = ((in_RDI << 1) >> 0x1f) + 0xdd7b17f80;
+    }
+    if (in_RBX == uc) {
+      in_RBX = (int)(sdword)((dword)~r0 & 0x3fffffff);
+      uc = (int64)(sdword)((dword)in_RDI & 0x3fffffff);
+    }
+  }
+  if (in_RBX < uc) {
+    return;
+  }
+  if (in_RBX <= uc) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Time_Equal(time_Time t,time_Time u,bool ~r0)
+
+{
+  uint7 in_register_00000001;
+  uint in_RDI;
+  
+  if (-1 < (int)((uint)in_register_00000001 << 8 & in_RDI)) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Month_String(time_Month m,string ~r0)
+
+{
+  string ~r0_00;
+  int n;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd8 [12];
+  undefined4 uVar1;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (m - 1U < 0xc) {
+    if ((uint)time_longMonthNames.len <= m - 1U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    return;
+  }
+  uVar1 = in_XMM15._0_4_;
+  if (m == 0) {
+    n = 0x13;
+  }
+  else {
+    n = 0x14;
+    while (m != 0) {
+      if (0x13 < n - 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      (&stack0xffffffffffffffe3)[n] = (char)m + (char)((uint)m / 10) * -10 + '0';
+      m = (uint)m / 10;
+      n = n - 1U;
+    }
+  }
+  if (0x14 < (uint)n) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  ~r0_00.len._4_4_ = uVar1;
+  ~r0_00._0_12_ = in_stack_ffffffffffffffd8;
+  runtime_concatstring3
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,
+             in_stack_ffffffffffffffc8,~r0_00);
+  return;
+}
+
+
+
+void time_Weekday_String(time_Weekday d,string ~r0)
+
+{
+  string ~r0_00;
+  int n;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd8 [12];
+  undefined4 uVar1;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((uint)d < 7) {
+    if ((uint)time_longDayNames.len <= (uint)d) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    return;
+  }
+  uVar1 = in_XMM15._0_4_;
+  if (d == 0) {
+    n = 0x13;
+  }
+  else {
+    n = 0x14;
+    while (d != 0) {
+      if (0x13 < n - 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      (&stack0xffffffffffffffe3)[n] = (char)d + (char)((uint)d / 10) * -10 + '0';
+      d = (uint)d / 10;
+      n = n - 1U;
+    }
+  }
+  if (0x14 < (uint)n) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  ~r0_00.len._4_4_ = uVar1;
+  ~r0_00._0_12_ = in_stack_ffffffffffffffd8;
+  runtime_concatstring3
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8,
+             in_stack_ffffffffffffffc8,~r0_00);
+  return;
+}
+
+
+
+void time_Time_IsZero(time_Time t,bool ~r0)
+
+{
+  return;
+}
+
+
+
+int time_Time_abs(int __x)
+
+{
+  time_zone *end;
+  time_Location *extraout_RAX;
+  time_Location *l;
+  time_Location *in_RCX;
+  time_Location *offset_00;
+  int *sec_00;
+  int extraout_RCX;
+  int offset;
+  time_Location *in_RBX;
+  int64 sec;
+  int64 in_RDI;
+  int64 extraout_RDI;
+  int64 extraout_RDI_00;
+  undefined in_R8B;
+  undefined extraout_R8B;
+  undefined extraout_R8B_00;
+  int unaff_R14;
+  int iStack0000000000000008;
+  time_Location *ptStack0000000000000010;
+  string in_stack_ffffffffffffffe0;
+  
+  iStack0000000000000008 = __x;
+  l = in_RCX;
+  ptStack0000000000000010 = in_RBX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI_00;
+    in_R8B = extraout_R8B_00;
+  }
+  if ((l == (time_Location *)0x0) || (l == &time_localLoc)) {
+    time___Location__get(l,ptStack0000000000000010);
+    l = extraout_RAX;
+    in_RDI = extraout_RDI;
+    in_R8B = extraout_R8B;
+  }
+  offset_00 = ptStack0000000000000010;
+  if (iStack0000000000000008 < 0) {
+    offset_00 = (time_Location *)(((uint)(iStack0000000000000008 << 1) >> 0x1f) + 0xdd7b17f80);
+  }
+  sec_00 = &offset_00[-0x239c7afe].tx.len;
+  if (l != &time_utcLoc) {
+    end = l->cacheZone;
+    if (((end == (time_zone *)0x0) || ((int)sec_00 < l->cacheStart)) || (l->cacheEnd <= (int)sec_00)
+       ) {
+      time___Location__lookup
+                (l,(int64)sec_00,in_stack_ffffffffffffffe0,(int)offset_00,in_RDI,(int64)end,
+                 (bool)in_R8B);
+      sec_00 = (int *)((int)offset_00 + extraout_RCX + -0xe7791f700);
+    }
+    else {
+      sec_00 = (int *)((int)offset_00 + end->offset + -0xe7791f700);
+    }
+  }
+  return (int)(sec_00 + 0xfffffffc35b3920);
+}
+
+
+
+void time_Time_locabs(time_Time t,string name,int offset,uint64 abs)
+
+{
+  int sec_00;
+  time_Location *extraout_RAX;
+  time_Location *l;
+  time_Location *extraout_RCX;
+  time_Location *offset_00;
+  int64 sec;
+  int64 in_RDI;
+  int64 extraout_RDI;
+  int64 extraout_RDI_00;
+  int unaff_R14;
+  string in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI_00;
+  }
+  if ((l == (time_Location *)0x0) || (offset_00 = l, l == &time_localLoc)) {
+    time___Location__get(l,(time_Location *)abs);
+    l = extraout_RAX;
+    offset_00 = extraout_RCX;
+    in_RDI = extraout_RDI;
+  }
+  if (offset < 0) {
+    abs = ((uint)(offset << 1) >> 0x1f) + 0xdd7b17f80;
+  }
+  sec_00 = abs - 0xe7791f700;
+  if ((l != &time_utcLoc) &&
+     (((l->cacheZone == (time_zone *)0x0 || (sec_00 < l->cacheStart)) || (l->cacheEnd <= sec_00))))
+  {
+    time___Location__lookup
+              (l,sec_00,in_stack_ffffffffffffffe0,(int)offset_00,in_RDI,-0xe7791f700,
+               SUB81(l->cacheZone,0));
+  }
+  return;
+}
+
+
+
+void time_Time_Date(time_Time t,int year,time_Month month,int day)
+
+{
+  int in_RSI;
+  int extraout_RSI;
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+  }
+  time_Time_date(in_stack_ffffffffffffffd8,SUB81(year,0),month,day,1,in_RSI);
+  return;
+}
+
+
+
+void time_Time_Year(time_Time t,int ~r0)
+
+{
+  int year;
+  time_Month in_RCX;
+  int in_RBX;
+  int in_RSI;
+  int extraout_RSI;
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+  }
+  time_Time_date(in_stack_ffffffffffffffd8,SUB81(~r0,0),in_RBX,in_RCX,0,in_RSI);
+  return;
+}
+
+
+
+void time_Time_Month(time_Time t,time_Month ~r0)
+
+{
+  time_Month in_RCX;
+  int in_RBX;
+  time_Month month;
+  int in_RSI;
+  int extraout_RSI;
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+  }
+  time_Time_date(in_stack_ffffffffffffffd8,SUB81(~r0,0),in_RBX,in_RCX,1,in_RSI);
+  return;
+}
+
+
+
+void time_Time_Day(time_Time t,int ~r0)
+
+{
+  time_Month in_RCX;
+  int day;
+  int in_RBX;
+  int in_RSI;
+  int extraout_RSI;
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+  }
+  time_Time_date(in_stack_ffffffffffffffd8,SUB81(~r0,0),in_RBX,in_RCX,1,in_RSI);
+  return;
+}
+
+
+
+void time_Time_Weekday(time_Time t,time_Weekday ~r0)
+
+{
+  uint64 sec;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  time_Time_abs(~r0);
+  return;
+}
+
+
+
+void time_Time_ISOWeek(time_Time t,int year,int week)
+
+{
+  int day;
+  uint64 abs;
+  int year_00;
+  uint64 sec;
+  int iVar1;
+  int iVar2;
+  time_Weekday d;
+  int yday;
+  int yday_00;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  day = time_Time_abs(year);
+  year_00 = day + ((day + 0x15180U) / 0x93a80) * -0x93a80;
+  iVar1 = ((year_00 + SUB168(SEXT816(-0x3dd1baf98d76b549) * SEXT816(year_00 + 0x15180),8) + 0x15180
+           >> 0x10) - (year_00 + 0x15180 >> 0x3f)) + -4;
+  iVar2 = -iVar1;
+  if (iVar1 == -4) {
+    iVar2 = -3;
+  }
+  time_absDate(iVar2 * 0x15180 + day,false,year_00,-3,day,yday_00);
+  return;
+}
+
+
+
+void time_Time_Clock(time_Time t,int hour,int min,int sec)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  time_Time_abs(hour);
+  return;
+}
+
+
+
+void time_Time_Hour(time_Time t,int ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  time_Time_abs(~r0);
+  return;
+}
+
+
+
+void time_Time_Minute(time_Time t,int ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  time_Time_abs(~r0);
+  return;
+}
+
+
+
+void time_Time_Second(time_Time t,int ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  time_Time_abs(~r0);
+  return;
+}
+
+
+
+void time_Time_Nanosecond(time_Time t,int ~r0)
+
+{
+  return;
+}
+
+
+
+void time_Time_YearDay(time_Time t,int ~r0)
+
+{
+  time_Month in_RCX;
+  int in_RBX;
+  int in_RSI;
+  int extraout_RSI;
+  int yday;
+  int unaff_R14;
+  time_Time in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+  }
+  time_Time_date(in_stack_ffffffffffffffd8,SUB81(~r0,0),in_RBX,in_RCX,0,in_RSI);
+  return;
+}
+
+
+
+// Local variable u:uint64[RAX:8] conflicts with parameter, skipped.
+
+void time_Duration_String(time_Duration d,string ~r0)
+
+{
+  bool bVar1;
+  uint uVar2;
+  int prec;
+  int w_2;
+  int w_3;
+  int w_4;
+  int w_1;
+  int w;
+  uint uVar3;
+  int w_6;
+  int iVar4;
+  int i;
+  uint64 digit_1;
+  uint uVar5;
+  uint uVar6;
+  int w_5;
+  uint uVar7;
+  uint64 digit;
+  bool print;
+  int i_1;
+  bool print_1;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  string in_stack_ffffffffffffffc0;
+  char acStack_2a [18];
+  undefined local_18 [14];
+  undefined uStack_a;
+  undefined uStack_9;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar5 = d;
+  if (d < 0) {
+    uVar5 = -d;
+  }
+  _local_18 = in_XMM15._0_15_;
+  if (uVar5 < 1000000000) {
+    if (uVar5 == 0) {
+      return;
+    }
+    local_18 = in_XMM15._0_14_;
+    if (uVar5 < 1000) {
+      uStack_a = 0x6e;
+      uStack_9 = 0x73;
+      prec = 0;
+      w = 0x1e;
+    }
+    else if (uVar5 < 1000000) {
+      local_18._0_13_ = in_XMM15._0_13_;
+      stack0xfffffffffffffff5 = 0xb5c2;
+      uStack_9 = 0x73;
+      prec = 3;
+      w = 0x1d;
+    }
+    else {
+      uStack_a = 0x6d;
+      uStack_9 = 0x73;
+      prec = 6;
+      w = 0x1e;
+    }
+    w_1 = w;
+    bVar1 = false;
+    for (iVar4 = 0; iVar4 < prec; iVar4 = iVar4 + 1) {
+      uVar7 = uVar5 % 10;
+      if (bVar1 || uVar7 != 0) {
+        if ((uint)w <= w_1 - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[w_1 + 1] = (char)uVar7 + '0';
+        w_1 = w_1 - 1U;
+      }
+      uVar5 = uVar5 / 10;
+      bVar1 = bVar1 || uVar7 != 0;
+    }
+    if (bVar1) {
+      if ((uint)w <= w_1 - 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      acStack_2a[w_1 + 1] = '.';
+      w_1 = w_1 - 1U;
+    }
+    if (0x20 < (uint)w_1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    uVar7 = w_1;
+    if (uVar5 == 0) {
+      uVar7 = w_1 - 1;
+      if ((uint)w_1 <= uVar7) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      acStack_2a[w_1 + 1] = '0';
+    }
+    else {
+      while (uVar5 != 0) {
+        if ((uint)w_1 <= uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[uVar7 + 1] = (char)uVar5 + (char)(uVar5 / 10) * -10 + '0';
+        uVar7 = uVar7 - 1;
+        uVar5 = uVar5 / 10;
+      }
+    }
+  }
+  else {
+    uStack_9 = 0x73;
+    w_2 = 0x1f;
+    bVar1 = false;
+    for (iVar4 = 0; iVar4 < 9; iVar4 = iVar4 + 1) {
+      uVar7 = uVar5 % 10;
+      if (bVar1 || uVar7 != 0) {
+        if (0x1e < w_2 - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[w_2 + 1] = (char)uVar7 + '0';
+        w_2 = w_2 - 1U;
+      }
+      uVar5 = uVar5 / 10;
+      bVar1 = bVar1 || uVar7 != 0;
+    }
+    if (bVar1) {
+      if (0x1e < w_2 - 1U) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      acStack_2a[w_2 + 1] = '.';
+      w_2 = w_2 - 1U;
+    }
+    if (0x20 < (uint)w_2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    uVar3 = uVar5 / 0x3c;
+    uVar5 = uVar5 % 0x3c;
+    uVar7 = w_2;
+    if (uVar5 == 0) {
+      uVar7 = w_2 - 1;
+      if ((uint)w_2 <= uVar7) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      acStack_2a[w_2 + 1] = '0';
+    }
+    else {
+      while (uVar5 != 0) {
+        if ((uint)w_2 <= uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[uVar7 + 1] = (char)uVar5 + (char)(uVar5 / 10) * -10 + '0';
+        uVar7 = uVar7 - 1;
+        uVar5 = uVar5 / 10;
+      }
+    }
+    if (uVar3 != 0) {
+      uVar5 = uVar7 - 1;
+      if (0x1f < uVar5) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      acStack_2a[uVar7 + 1] = 'm';
+      uVar6 = uVar3 % 0x3c;
+      uVar2 = uVar5;
+      if (uVar6 == 0) {
+        if (uVar5 <= uVar7 - 2) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[uVar7] = '0';
+        uVar7 = uVar7 - 2;
+      }
+      else {
+        while (uVar7 = uVar2, uVar6 != 0) {
+          if (uVar5 <= uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          acStack_2a[uVar7 + 1] = (char)uVar6 + (char)(uVar6 / 10) * -10 + '0';
+          uVar2 = uVar7 - 1;
+          uVar6 = uVar6 / 10;
+        }
+      }
+      if (uVar3 / 0x3c != 0) {
+        uVar5 = uVar7 - 1;
+        if (0x1f < uVar5) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        acStack_2a[uVar7 + 1] = 'h';
+        uVar7 = uVar5;
+        uVar3 = uVar3 / 0x3c;
+        while (uVar3 != 0) {
+          if (uVar5 <= uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          acStack_2a[uVar7 + 1] = (char)uVar3 + (char)(uVar3 / 10) * -10 + '0';
+          uVar7 = uVar7 - 1;
+          uVar3 = uVar3 / 10;
+        }
+      }
+    }
+  }
+  if (d < 0) {
+    if (0x1f < uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    acStack_2a[uVar7 + 1] = '-';
+    uVar7 = uVar7 - 1;
+  }
+  if (uVar7 < 0x21) {
+    runtime_slicebytetostring
+              ((runtime_tmpBuf *)0x0,
+               (uint8 *)(acStack_2a + (uVar7 & (int)(uVar7 - 0x20) >> 0x3f) + 2),-(uVar7 - 0x20),
+               in_stack_ffffffffffffffc0);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void time_Duration_Nanoseconds(time_Duration d,int64 ~r0)
+
+{
+  return;
+}
+
+
+
+void time_Duration_Microseconds(time_Duration d,int64 ~r0)
+
+{
+  return;
+}
+
+
+
+void time_Duration_Milliseconds(time_Duration d,int64 ~r0)
+
+{
+  return;
+}
+
+
+
+void time_Duration_Seconds(time_Duration d,float64 ~r0)
+
+{
+  time_Duration nsec;
+  time_Duration sec;
+  
+  return;
+}
+
+
+
+void time_Duration_Minutes(time_Duration d,float64 ~r0)
+
+{
+  time_Duration nsec;
+  time_Duration min;
+  
+  return;
+}
+
+
+
+void time_Duration_Hours(time_Duration d,float64 ~r0)
+
+{
+  time_Duration nsec;
+  time_Duration hour;
+  
+  return;
+}
+
+
+
+void time_Duration_Truncate(time_Duration d,time_Duration m,time_Duration ~r0)
+
+{
+  if (m < 1) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Duration_Round(time_Duration d,time_Duration m,time_Duration ~r0)
+
+{
+  time_Duration d1;
+  time_Duration d1_1;
+  int iVar1;
+  time_Duration r;
+  
+  if (m < 1) {
+    return;
+  }
+  iVar1 = d % m;
+  if (-1 < d) {
+    if ((uint)(iVar1 * 2) < (uint)m) {
+      return;
+    }
+    if (d < (d + m) - iVar1) {
+      return;
+    }
+    return;
+  }
+  if ((uint)(iVar1 * -2) < (uint)m) {
+    return;
+  }
+  if ((d - m) - iVar1 < d) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Duration_Abs(time_Duration d,time_Duration ~r0)
+
+{
+  if (-1 < d) {
+    return;
+  }
+  if (d == -0x8000000000000000) {
+    return;
+  }
+  return;
+}
+
+
+
+void time_Time_Add(time_Time t,time_Duration d,time_Time ~r0)
+
+{
+  sdword sVar1;
+  dword dVar2;
+  int64 dsec;
+  int d_00;
+  sdword sVar3;
+  int32 nsec;
+  int in_RDI;
+  int64 te;
+  int unaff_R14;
+  

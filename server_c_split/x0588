@@ -1,0 +1,1000 @@
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_textproto_CanonicalMIMEHeaderKey(in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0);
+  runtime_mapdelete_faststr
+            ((internal_abi_MapType *)&DAT_00873760,(runtime_hmap *)h,in_stack_ffffffffffffffd0);
+  return;
+}
+
+
+
+void net_http_Header_Write(net_http_Header h,io_Writer w,error ~r0)
+
+{
+  net_http_httptrace_ClientTrace *in_RCX;
+  map_string_bool in_RBX;
+  int unaff_R14;
+  io_Writer in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_http_Header_writeSubset(h,in_stack_ffffffffffffffd0,in_RBX,in_RCX,in_stack_ffffffffffffffe0);
+  return;
+}
+
+
+
+void net_http_Header_Clone(net_http_Header h,net_http_Header ~r0)
+
+{
+  runtime_hmap *h_00;
+  void *extraout_RAX;
+  runtime_hmap *h_01;
+  net_http_Header h2;
+  void *extraout_RAX_00;
+  int n;
+  void **extraout_RAX_01;
+  void **extraout_RAX_02;
+  void **ppvVar1;
+  undefined8 *extraout_RAX_03;
+  undefined8 *extraout_RAX_04;
+  undefined8 *puVar2;
+  void *pvVar3;
+  void *len;
+  undefined8 extraout_RCX;
+  void *pvVar4;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  runtime_hmap *~r0_00;
+  void **extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  net_http_Header phStack0000000000000008;
+  string in_stack_ffffffffffffff28;
+  int nv;
+  undefined local_68 [96];
+  
+  phStack0000000000000008 = h;
+  while (local_68 + 0x10 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (phStack0000000000000008 == (net_http_Header)0x0) {
+    return;
+  }
+  h_00 = (runtime_hmap *)FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_008909e0,h_00,(runtime_hiter *)local_68);
+  len = (void *)0x0;
+  pvVar3 = extraout_RDI;
+  while ((void **)local_68._0_8_ != (void **)0x0) {
+    pvVar3 = *(void **)(local_68._8_8_ + 8);
+    runtime_mapiternext((runtime_hiter *)local_68);
+    len = (void *)((int)len + (int)pvVar3);
+    pvVar3 = extraout_RDI_00;
+  }
+  runtime_makeslice((internal_abi_Type *)&DAT_008075e0,(int)len,(int)len,pvVar3);
+  runtime_makemap((internal_abi_MapType *)&DAT_008909e0,phStack0000000000000008->count,
+                  (runtime_hmap *)0x0,~r0_00);
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)phStack0000000000000008,
+                      (runtime_hiter *)local_68);
+  pvVar3 = extraout_RAX;
+  do {
+    if ((void **)local_68._0_8_ == (void **)0x0) {
+      return;
+    }
+    pvVar4 = *(void **)local_68._0_8_;
+    if (*(void **)local_68._8_8_ == (void *)0x0) {
+      runtime_mapassign_faststr
+                ((internal_abi_MapType *)&DAT_008909e0,h_01,in_stack_ffffffffffffff28,pvVar4);
+      *(undefined (*) [16])(extraout_RAX_03 + 1) = in_XMM15;
+      puVar2 = extraout_RAX_03;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier1();
+        *extraout_R11_00 = extraout_RCX;
+        puVar2 = extraout_RAX_04;
+      }
+      *puVar2 = 0;
+    }
+    else {
+      runtime_typedslicecopy
+                ((internal_abi_Type *)&DAT_008075e0,pvVar3,(int)len,*(void **)local_68._8_8_,
+                 (int)*(void **)(local_68._8_8_ + 8),local_68._8_8_);
+      if (len < extraout_RAX_00) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSlice3Acap();
+      }
+      runtime_mapassign_faststr
+                ((internal_abi_MapType *)&DAT_008909e0,h_01,in_stack_ffffffffffffff28,pvVar4);
+      extraout_RAX_01[1] = extraout_RAX_00;
+      extraout_RAX_01[2] = extraout_RAX_00;
+      ppvVar1 = extraout_RAX_01;
+      pvVar4 = extraout_RAX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = pvVar3;
+        extraout_R11[1] = *extraout_RAX_02;
+        ppvVar1 = extraout_RAX_02;
+      }
+      *ppvVar1 = pvVar3;
+      if (len < pvVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      len = (void *)((int)len - (int)pvVar4);
+      pvVar3 = (void *)((int)pvVar3 + ((int)pvVar4 << 4 & -(int)len >> 0x3f));
+    }
+    runtime_mapiternext((runtime_hiter *)local_68);
+  } while( true );
+}
+
+
+
+void net_http_stringWriter_WriteString(net_http_stringWriter w,string s,int n,error err)
+
+{
+  __uint8 ~r0;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RCX;
+  undefined8 in_RBX;
+  undefined8 extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc8;
+  undefined in_stack_ffffffffffffffd8 [16];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0.cap = n;
+  ~r0.array = (uint8 *)in_stack_ffffffffffffffd8._0_8_;
+  ~r0.len = in_stack_ffffffffffffffd8._8_8_;
+  runtime_stringtoslicebyte((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffc8,~r0);
+  (**(code **)(n + 0x18))(in_RBX,extraout_RAX,extraout_RBX,extraout_RCX);
+  return;
+}
+
+
+
+void net_http___headerSorter__Len(net_http_headerSorter *s,int ~r0)
+
+{
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void net_http___headerSorter__Swap(net_http_headerSorter *s,int i,int j)
+
+{
+  uint uVar1;
+  net_http_keyValues *pnVar2;
+  uint uVar3;
+  net_http_keyValues *pnVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  int unaff_R14;
+  uint8 *local_30;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined4 local_18;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (s->kvs).len;
+  if (uVar1 <= (uint)i) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  pnVar2 = (s->kvs).array;
+  local_30 = pnVar2[i].key.str;
+  local_28 = *(undefined4 *)&pnVar2[i].key.len;
+  uStack_24 = *(undefined4 *)((int)&pnVar2[i].key.len + 4);
+  uStack_20 = *(undefined4 *)&pnVar2[i].values.array;
+  uStack_1c = *(undefined4 *)((int)&pnVar2[i].values.array + 4);
+  local_18 = *(undefined4 *)&pnVar2[i].values.len;
+  uStack_14 = *(undefined4 *)((int)&pnVar2[i].values.len + 4);
+  uStack_10 = *(undefined4 *)&pnVar2[i].values.cap;
+  uStack_c = *(undefined4 *)((int)&pnVar2[i].values.cap + 4);
+  uVar3 = (s->kvs).len;
+  if (uVar3 <= (uint)j) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  pnVar4 = (s->kvs).array;
+  if ((uint)i < uVar3) {
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbMove((internal_abi_Type *)&DAT_00852c20,pnVar4 + i,pnVar4 + j);
+    }
+    pnVar4[i].key.str = pnVar4[j].key.str;
+    uVar5 = *(undefined4 *)((int)&pnVar4[j].key.len + 4);
+    uVar6 = *(undefined4 *)&pnVar4[j].values.array;
+    uVar7 = *(undefined4 *)((int)&pnVar4[j].values.array + 4);
+    *(undefined4 *)&pnVar4[i].key.len = *(undefined4 *)&pnVar4[j].key.len;
+    *(undefined4 *)((int)&pnVar4[i].key.len + 4) = uVar5;
+    *(undefined4 *)&pnVar4[i].values.array = uVar6;
+    *(undefined4 *)((int)&pnVar4[i].values.array + 4) = uVar7;
+    uVar5 = *(undefined4 *)((int)&pnVar4[j].values.len + 4);
+    uVar6 = *(undefined4 *)&pnVar4[j].values.cap;
+    uVar7 = *(undefined4 *)((int)&pnVar4[j].values.cap + 4);
+    *(undefined4 *)&pnVar4[i].values.len = *(undefined4 *)&pnVar4[j].values.len;
+    *(undefined4 *)((int)&pnVar4[i].values.len + 4) = uVar5;
+    *(undefined4 *)&pnVar4[i].values.cap = uVar6;
+    *(undefined4 *)((int)&pnVar4[i].values.cap + 4) = uVar7;
+    if ((uint)j < uVar1) {
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_wbMove((internal_abi_Type *)&DAT_00852c20,pnVar2 + j,&local_30);
+      }
+      pnVar2[j].key.str = local_30;
+      *(undefined4 *)&pnVar2[j].key.len = local_28;
+      *(undefined4 *)((int)&pnVar2[j].key.len + 4) = uStack_24;
+      *(undefined4 *)&pnVar2[j].values.array = uStack_20;
+      *(undefined4 *)((int)&pnVar2[j].values.array + 4) = uStack_1c;
+      *(undefined4 *)&pnVar2[j].values.len = local_18;
+      *(undefined4 *)((int)&pnVar2[j].values.len + 4) = uStack_14;
+      *(undefined4 *)&pnVar2[j].values.cap = uStack_10;
+      *(undefined4 *)((int)&pnVar2[j].values.cap + 4) = uStack_c;
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void net_http___headerSorter__Less(net_http_headerSorter *s,int i,int j,bool ~r0)
+
+{
+  uint uVar1;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = (s->kvs).len;
+  if ((uint)i < uVar1) {
+    if ((uint)j < uVar1) {
+      runtime_cmpstring();
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void net_http_glob__func14(interface___ ~r0)
+
+{
+  void *in_RBX;
+  void *extraout_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX;
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00842be0,in_RBX);
+  return;
+}
+
+
+
+void net_http_Header_sortedKeyValues
+               (net_http_Header h,map_string_bool exclude,__net_http_keyValues kvs,
+               net_http_headerSorter *hs)
+
+{
+  undefined8 uVar1;
+  runtime_slice ~r0;
+  undefined auVar2 [16];
+  internal_abi_Type *have;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  void *pvVar3;
+  char *extraout_RAX_01;
+  void *extraout_RAX_02;
+  void *pvVar4;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  void **ppvVar5;
+  void **extraout_RBX;
+  void *newLen;
+  void *extraout_RBX_00;
+  void **extraout_RBX_01;
+  int iVar6;
+  void *~r0_00;
+  void **extraout_R11;
+  void **extraout_R11_00;
+  int unaff_R14;
+  interface___ in_stack_fffffffffffffec8;
+  int in_stack_fffffffffffffed8;
+  void *local_b8;
+  void *local_b0;
+  void *local_a8;
+  void **local_a0;
+  map_string_bool local_98;
+  void *local_90;
+  undefined4 uStack_88;
+  undefined4 uStack_84;
+  undefined4 local_80;
+  undefined4 uStack_7c;
+  undefined local_78 [8];
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  runtime_hiter local_68;
+  
+  while (&local_b8 <= *(void ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_98 = exclude;
+  sync___Pool__Get(&net_http_headerSorterPool,in_stack_fffffffffffffec8);
+  if (have != (internal_abi_Type *)&DAT_00842c60) {
+                    // WARNING: Subroutine does not return
+    runtime_panicdottypeE
+              (have,(internal_abi_Type *)&DAT_00842c60,(internal_abi_Type *)&DAT_00821120);
+  }
+  if (h == (net_http_Header)0x0) {
+    iVar6 = 0;
+  }
+  else {
+    iVar6 = h->count;
+  }
+  local_a0 = extraout_RBX;
+  if ((int)extraout_RBX[2] < iVar6) {
+    if (h == (net_http_Header)0x0) {
+      pvVar3 = (void *)0x0;
+    }
+    else {
+      pvVar3 = (void *)h->count;
+    }
+    runtime_makeslice((internal_abi_Type *)&DAT_00852c20,0,(int)pvVar3,~r0_00);
+    local_a0[1] = (void *)0x0;
+    local_a0[2] = pvVar3;
+    pvVar3 = extraout_RAX;
+    ppvVar5 = local_a0;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = *ppvVar5;
+      pvVar3 = extraout_RAX_00;
+    }
+    *ppvVar5 = pvVar3;
+  }
+  local_a8 = *local_a0;
+  pvVar3 = local_a0[2];
+  FUN_0046cdab();
+  runtime_mapiterinit((internal_abi_MapType *)&DAT_008909e0,(runtime_hmap *)h,&local_68);
+  newLen = (void *)0x0;
+  pvVar4 = local_a8;
+  while (local_a8 = pvVar4, (void **)local_68.key != (void **)0x0) {
+                    // WARNING: Load size is inaccurate
+    local_b8 = *local_68.key;
+    pvVar4 = *(void **)((int)local_68.key + 8);
+                    // WARNING: Load size is inaccurate
+    uVar1 = *local_68.elem;
+    auVar2 = *(undefined (*) [16])((int)local_68.elem + 8);
+    runtime_mapaccess1_faststr
+              ((internal_abi_MapType *)&DAT_0082c920,(runtime_hmap *)local_98,
+               (string)in_stack_fffffffffffffec8,local_b8);
+    if (*extraout_RAX_01 == '\0') {
+      newLen = (void *)((int)newLen + 1);
+      local_90 = local_b8;
+      uStack_88 = SUB84(pvVar4,0);
+      uStack_84 = (undefined4)((uint)pvVar4 >> 0x20);
+      local_80 = (undefined4)uVar1;
+      uStack_7c = (undefined4)((uint)uVar1 >> 0x20);
+      pvVar4 = local_a8;
+      _local_78 = auVar2;
+      if (pvVar3 < newLen) {
+        ~r0.cap = in_stack_fffffffffffffed8;
+        ~r0.array = in_stack_fffffffffffffec8._type;
+        ~r0.len = (int)in_stack_fffffffffffffec8.data;
+        runtime_growslice(local_a8,(int)newLen,(int)pvVar3,1,(internal_abi_Type *)&DAT_00852c20,~r0)
+        ;
+        pvVar4 = extraout_RAX_02;
+        pvVar3 = extraout_RCX;
+        newLen = extraout_RBX_00;
+      }
+      if (runtime_writeBarrier._0_4_ != 0) {
+        local_b0 = pvVar4;
+        runtime_wbMove((internal_abi_Type *)&DAT_00852c20,
+                       (void *)((int)pvVar4 + (int)newLen * 0x28 + -0x28),&local_90);
+        pvVar4 = local_b0;
+      }
+      *(void **)((int)pvVar4 + (int)newLen * 0x28 + -0x28) = local_90;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0x20) = uStack_88;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0x1c) = uStack_84;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0x18) = local_80;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0x14) = uStack_7c;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0x10) = local_78._0_4_;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -0xc) = local_78._4_4_;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -8) = uStack_70;
+      *(undefined4 *)((int)pvVar4 + (int)newLen * 0x28 + -4) = uStack_6c;
+      local_a8 = pvVar4;
+    }
+    runtime_mapiternext(&local_68);
+    pvVar4 = local_a8;
+  }
+  local_a0[1] = newLen;
+  local_a0[2] = pvVar3;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RCX_00;
+    extraout_R11_00[1] = *extraout_RBX_01;
+    pvVar4 = extraout_RCX_00;
+    local_a0 = extraout_RBX_01;
+  }
+  *local_a0 = pvVar4;
+  sort_Sort((sort_Interface)in_stack_fffffffffffffec8);
+  return;
+}
+
+
+
+void net_http_Header_WriteSubset(net_http_Header h,io_Writer w,map_string_bool exclude,error ~r0)
+
+{
+  net_http_httptrace_ClientTrace *in_RCX;
+  int unaff_R14;
+  io_Writer in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  net_http_Header_writeSubset(h,in_stack_ffffffffffffffd0,exclude,in_RCX,in_stack_ffffffffffffffe0);
+  return;
+}
+
+
+
+void net_http_Header_writeSubset
+               (net_http_Header h,io_Writer w,map_string_bool exclude,
+               net_http_httptrace_ClientTrace *trace,error ~r0)
+
+{
+  char cVar1;
+  __net_http_keyValues kvs;
+  runtime_slice ~r0_00;
+  runtime_iface r_00;
+  string ~r0_01;
+  bool bVar2;
+  uint8 *puVar3;
+  int32 extraout_EAX;
+  undefined1 *extraout_RAX;
+  undefined8 extraout_RAX_00;
+  undefined1 *puVar4;
+  uint8 **extraout_RAX_01;
+  uint8 **ppuVar5;
+  char *extraout_RAX_02;
+  void *extraout_RAX_03;
+  char *extraout_RAX_04;
+  char *pcVar6;
+  net_http_headerSorter *extraout_RCX;
+  net_http_headerSorter *extraout_RCX_00;
+  net_http_headerSorter *hs;
+  uint extraout_RCX_01;
+  uint extraout_RCX_02;
+  uint uVar7;
+  int iVar8;
+  undefined8 extraout_RCX_03;
+  void *pvVar9;
+  undefined8 extraout_RBX;
+  int extraout_RBX_00;
+  int extraout_RBX_01;
+  int extraout_RBX_02;
+  uint extraout_RBX_03;
+  int iVar10;
+  int extraout_RBX_04;
+  int in_RSI;
+  map_string_bool in_RDI;
+  net_http_headerSorter *sorter;
+  undefined8 *puVar11;
+  uint newLen;
+  uint extraout_R9;
+  uint8 *k;
+  int extraout_R10;
+  int iVar12;
+  char **extraout_R11;
+  int32 r;
+  int i;
+  int unaff_R14;
+  int iStack0000000000000028;
+  interface___ in_stack_fffffffffffffe78;
+  runtime_itab *in_stack_fffffffffffffe88;
+  void *in_stack_fffffffffffffe90;
+  uint local_108;
+  uint local_100;
+  int local_f8;
+  int local_f0;
+  int local_e8;
+  undefined8 local_e0;
+  char *local_d8;
+  uint8 *local_d0;
+  void *local_c0;
+  undefined8 local_b8;
+  undefined8 *local_b0;
+  int local_a8;
+  void *local_a0;
+  uint8 **local_98;
+  map_string_bool local_90;
+  net_http_Header local_88;
+  undefined local_80 [16];
+  net_http_keyValues kv;
+  undefined local_48 [8];
+  undefined8 uStack_40;
+  undefined local_38 [16];
+  undefined local_28 [16];
+  undefined local_18 [16];
+  uint uVar13;
+  
+  iStack0000000000000028 = in_RSI;
+  while (&local_108 <= *(uint **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  r_00.data = in_stack_fffffffffffffe90;
+  r_00.tab = in_stack_fffffffffffffe88;
+  local_90 = in_RDI;
+  local_88 = h;
+  runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_00834ec0,
+                     (runtime_iface)in_stack_fffffffffffffe78,r_00);
+  puVar4 = extraout_RAX;
+  hs = extraout_RCX;
+  local_e0 = extraout_RBX;
+  if (extraout_RAX == (undefined1 *)0x0) {
+    local_80._8_8_ = trace;
+    local_80._0_8_ = exclude;
+    runtime_convT((internal_abi_Type *)&DAT_0084bc80,local_80,trace);
+    puVar4 = go_itab_net_http_stringWriter_io_StringWriter;
+    hs = extraout_RCX_00;
+    local_e0 = extraout_RAX_00;
+  }
+  kvs.cap = (int)in_stack_fffffffffffffe88;
+  kvs.array = (net_http_keyValues *)in_stack_fffffffffffffe78._type;
+  kvs.len = (int)in_stack_fffffffffffffe78.data;
+  net_http_Header_sortedKeyValues(local_88,local_90,kvs,hs);
+  iVar10 = 0;
+  uVar7 = 0;
+  newLen = 0;
+  pvVar9 = (void *)0x0;
+  ppuVar5 = extraout_RAX_01;
+  do {
+    if (extraout_RBX_00 <= iVar10) {
+      sync___Pool__Put(&net_http_headerSorterPool,in_stack_fffffffffffffe78);
+      return;
+    }
+    k = *ppuVar5;
+    kv.key.len._0_4_ = *(undefined4 *)(ppuVar5 + 1);
+    kv.key.len._4_4_ = *(undefined4 *)((int)ppuVar5 + 0xc);
+    puVar3 = ppuVar5[1];
+    kv.values.array._0_4_ = *(undefined4 *)(ppuVar5 + 2);
+    kv.values.array._4_4_ = *(undefined4 *)((int)ppuVar5 + 0x14);
+    kv.values.len._0_4_ = *(undefined4 *)(ppuVar5 + 3);
+    kv.values.len._4_4_ = *(undefined4 *)((int)ppuVar5 + 0x1c);
+    kv.values.cap._0_4_ = *(undefined4 *)(ppuVar5 + 4);
+    kv.values.cap._4_4_ = *(undefined4 *)((int)ppuVar5 + 0x24);
+    local_e8 = iVar10;
+    local_98 = ppuVar5;
+    kv.key.str = k;
+    if (puVar3 == (uint8 *)0x0) {
+      bVar2 = false;
+    }
+    else {
+      iVar8 = 0;
+      local_d0 = k;
+      local_c0 = pvVar9;
+      do {
+        if ((int)puVar3 <= iVar8) {
+          bVar2 = true;
+          goto LAB_006cf040;
+        }
+        r = (int32)k[iVar8];
+        if (k[iVar8] < 0x80) {
+          iVar8 = iVar8 + 1;
+        }
+        else {
+          runtime_decoderune((string)in_stack_fffffffffffffe78,(int)k,(int32)puVar3,iVar8);
+          ppuVar5 = local_98;
+          iVar10 = local_e8;
+          pvVar9 = local_c0;
+          k = local_d0;
+          iVar8 = extraout_RBX_01;
+          r = extraout_EAX;
+        }
+        uVar13 = (uint)r;
+        if (0x7e < (int)uVar13) break;
+        if (0x7e < uVar13) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+      } while (vendor_golang_org_x_net_http_httpguts_isTokenTable[uVar13] != false);
+      bVar2 = false;
+    }
+LAB_006cf040:
+    if (bVar2) {
+      iVar8 = CONCAT44(kv.values.array._4_4_,kv.values.array._0_4_);
+      local_f0 = CONCAT44(kv.values.len._4_4_,(undefined4)kv.values.len);
+      iVar12 = 0;
+      while (iVar12 < local_f0) {
+        ~r0_01.len = (int)in_stack_fffffffffffffe90;
+        ~r0_01.str = (uint8 *)in_stack_fffffffffffffe88;
+        local_108 = newLen;
+        local_100 = uVar7;
+        local_f8 = iVar12;
+        local_a8 = iVar8;
+        local_a0 = pvVar9;
+        strings___Replacer__Replace
+                  (net_http_headerNewlineToSpace,(string)in_stack_fffffffffffffe78,~r0_01);
+        iVar10 = extraout_RBX_02;
+        for (local_d8 = extraout_RAX_02;
+            (iVar10 != 0 &&
+            ((((cVar1 = *local_d8, cVar1 == ' ' || (cVar1 == '\t')) || (cVar1 == '\n')) ||
+             (cVar1 == '\r')))); local_d8 = local_d8 + ((dword)(-iVar10 >> 0x3f) & 1)) {
+          iVar10 = iVar10 + -1;
+        }
+        for (; (iVar10 != 0 &&
+               (((cVar1 = local_d8[iVar10 + -1], cVar1 == ' ' || (cVar1 == '\t')) ||
+                ((cVar1 == '\n' || (cVar1 == '\r')))))); iVar10 = iVar10 + -1) {
+        }
+        uStack_40._4_4_ = kv.key.len._4_4_;
+        uStack_40._0_4_ = (undefined4)kv.key.len;
+        local_48 = (undefined  [8])kv.key.str;
+        local_38._8_8_ = 2;
+        local_38._0_8_ = &DAT_008ae149;
+        local_28._8_8_ = iVar10;
+        local_28._0_8_ = local_d8;
+        local_18._8_8_ = 2;
+        local_18._0_8_ = &DAT_008ae1c2;
+        puVar11 = (undefined8 *)local_48;
+        for (iVar8 = 0; iVar8 < 4; iVar8 = iVar8 + 1) {
+          local_b0 = puVar11;
+          (**(code **)(puVar4 + 0x18))(local_e0,*puVar11,puVar11[1]);
+          if (extraout_RBX_04 != 0) {
+            local_b8 = extraout_RCX_03;
+            sync___Pool__Put(&net_http_headerSorterPool,in_stack_fffffffffffffe78);
+            return;
+          }
+          puVar11 = local_b0 + 2;
+        }
+        uVar7 = local_100;
+        pvVar9 = local_a0;
+        newLen = local_108;
+        if ((iStack0000000000000028 != 0) && (*(int *)(iStack0000000000000028 + 0x60) != 0)) {
+          newLen = local_108 + 1;
+          if (local_100 < newLen) {
+            ~r0_00.cap = (int)in_stack_fffffffffffffe88;
+            ~r0_00.array = in_stack_fffffffffffffe78._type;
+            ~r0_00.len = (int)in_stack_fffffffffffffe78.data;
+            runtime_growslice(local_a0,newLen,local_100,1,(internal_abi_Type *)&DAT_008075e0,~r0_00)
+            ;
+            uVar7 = extraout_RCX_01;
+            pvVar9 = extraout_RAX_03;
+            newLen = extraout_RBX_03;
+          }
+          iVar8 = (newLen - 1) * 0x10;
+          *(int *)((int)pvVar9 + iVar8 + 8) = iVar10;
+          pcVar6 = local_d8;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11 = extraout_RAX_04;
+            extraout_R11[1] = *(char **)((int)pvVar9 + extraout_R10);
+            pcVar6 = extraout_RAX_04;
+            uVar7 = extraout_RCX_02;
+            newLen = extraout_R9;
+            iVar8 = extraout_R10;
+          }
+          *(char **)((int)pvVar9 + iVar8) = pcVar6;
+        }
+        iVar8 = local_a8 + 0x10;
+        ppuVar5 = local_98;
+        iVar10 = local_e8;
+        iVar12 = local_f8 + 1;
+      }
+      if ((iStack0000000000000028 != 0) &&
+         (*(code ***)(iStack0000000000000028 + 0x60) != (code **)0x0)) {
+        (***(code ***)(iStack0000000000000028 + 0x60))
+                  (kv.key.str,CONCAT44(kv.key.len._4_4_,(undefined4)kv.key.len),pvVar9,newLen,uVar7)
+        ;
+        uVar7 = 0;
+        newLen = 0;
+        pvVar9 = (void *)0x0;
+        ppuVar5 = local_98;
+        iVar10 = local_e8;
+      }
+    }
+    ppuVar5 = ppuVar5 + 5;
+    iVar10 = iVar10 + 1;
+  } while( true );
+}
+
+
+
+void net_http_hasToken(string v,string token,bool ~r0)
+
+{
+  uint uVar1;
+  char cVar2;
+  char extraout_AL;
+  undefined7 in_register_00000001;
+  int iVar3;
+  byte *in_RCX;
+  uint uVar4;
+  int sp;
+  uint8 b;
+  uint in_RBX;
+  int endPos;
+  uint in_RDI;
+  int i;
+  byte bVar5;
+  byte bVar6;
+  int unaff_R14;
+  
+  iVar3 = CONCAT71(in_register_00000001,~r0);
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (((int)in_RBX < (int)in_RDI) || (in_RDI == 0)) {
+    return;
+  }
+  if ((in_RBX == in_RDI) && (runtime_memequal(), extraout_AL != '\0')) {
+    return;
+  }
+  uVar4 = 0;
+  do {
+    if ((int)(in_RBX - in_RDI) < (int)uVar4) {
+      return;
+    }
+    if (in_RBX <= uVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (((*in_RCX == *(byte *)(iVar3 + uVar4)) || (*in_RCX == (*(byte *)(iVar3 + uVar4) | 0x20))) &&
+       (((int)uVar4 < 1 ||
+        (((cVar2 = *(char *)((uVar4 - 1) + iVar3), cVar2 == ' ' || (cVar2 == ',')) ||
+         (cVar2 == '\t')))))) {
+      uVar1 = uVar4 + in_RDI;
+      if (in_RBX != uVar1) {
+        if (in_RBX <= uVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        cVar2 = *(char *)(iVar3 + uVar1);
+        if (((cVar2 != ' ') && (cVar2 != ',')) && (cVar2 != '\t')) goto LAB_006cf5c1;
+        if (in_RBX < uVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceAlen();
+        }
+      }
+      if (uVar1 < uVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      i = 0;
+      while( true ) {
+        if ((int)in_RDI <= i) {
+          return;
+        }
+        bVar5 = *(byte *)(i + ((int)-in_RDI >> 0x3f & uVar4) + iVar3);
+        if ((byte)(bVar5 + 0xbf) < 0x1a) {
+          bVar5 = bVar5 + 0x20;
+        }
+        bVar6 = in_RCX[i];
+        if ((byte)(bVar6 + 0xbf) < 0x1a) {
+          bVar6 = bVar6 + 0x20;
+        }
+        if (bVar5 != bVar6) break;
+        i = i + 1;
+      }
+    }
+LAB_006cf5c1:
+    uVar4 = uVar4 + 1;
+  } while( true );
+}
+
+
+
+void net_http___contextKey__String(net_http_contextKey *k,string ~r0)
+
+{
+  string ~r0_00;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.len = unaff_RBP;
+  ~r0_00.str = in_stack_fffffffffffffff0;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_00);
+  return;
+}
+
+
+
+void net_http_isNotToken(int32 r,bool ~r0)
+
+{
+  int i;
+  
+  if ((r < 0x7f) && (0x7e < (dword)r)) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  return;
+}
+
+
+
+void net_http_hexEscapeNonASCII(string s,string ~r0)
+
+{
+  byte *pbVar1;
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  __uint8 dst;
+  runtime_slice ~r0_02;
+  int in_RAX;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *ptr;
+  uint8 *extraout_RAX_01;
+  uint8 *extraout_RAX_02;
+  uint8 *extraout_RAX_03;
+  int iVar2;
+  int i;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  int newLen;
+  void *in_RBX;
+  int i_1;
+  size_t sVar3;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *extraout_RBX_02;
+  void *in_RDI;
+  int pos;
+  void *extraout_RDI;
+  void *pvVar4;
+  void *pvVar5;
+  int unaff_R14;
+  string in_stack_ffffffffffffff80;
+  int in_stack_ffffffffffffff90;
+  __uint8 in_stack_ffffffffffffff98;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  iVar2 = 0;
+  newLen = (int)(void *)0x0;
+  while (iVar2 < (int)in_RBX) {
+    pbVar1 = (byte *)(in_RAX + iVar2);
+    in_RDI = (void *)(newLen + 3);
+    newLen = newLen + 1;
+    iVar2 = iVar2 + 1;
+    if (0x7f < *pbVar1) {
+      newLen = (int)in_RDI;
+    }
+  }
+  if (in_RBX != (void *)newLen) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,0,newLen,in_RDI);
+    i_1 = 0;
+    pos = 0;
+    pvVar4 = (void *)0x0;
+    ptr = extraout_RAX;
+    do {
+      if ((int)in_RBX <= i_1) {
+        pvVar5 = pvVar4;
+        if (pos < (int)in_RBX) {
+          if (in_RBX < (uint)pos) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceB();
+          }
+          sVar3 = (int)in_RBX - pos;
+          pvVar5 = (void *)((int)pvVar4 + sVar3);
+          if ((uint)newLen < pvVar5) {
+            ~r0_02.cap = in_stack_ffffffffffffff90;
+            ~r0_02.array = in_stack_ffffffffffffff80.str;
+            ~r0_02.len = in_stack_ffffffffffffff80.len;
+            runtime_growslice(ptr,(int)pvVar5,newLen,sVar3,(internal_abi_Type *)&DAT_00807920,~r0_02
+                             );
+            ptr = extraout_RAX_03;
+            pvVar5 = extraout_RBX_02;
+          }
+          runtime_memmove(ptr + (int)pvVar4,(void *)((pos & (int)-sVar3 >> 0x3f) + in_RAX),sVar3);
+        }
+        runtime_slicebytetostring((runtime_tmpBuf *)0x0,ptr,(int)pvVar5,in_stack_ffffffffffffff80);
+        return;
+      }
+      if (0x7f < *(byte *)(in_RAX + i_1)) {
+        pvVar5 = pvVar4;
+        if (pos < i_1) {
+          if ((uint)i_1 < (uint)pos) {
+                    // WARNING: Subroutine does not return
+            runtime_panicSliceB();
+          }
+          sVar3 = i_1 - pos;
+          pvVar5 = (void *)((int)pvVar4 + sVar3);
+          if ((uint)newLen < pvVar5) {
+            ~r0_00.cap = in_stack_ffffffffffffff90;
+            ~r0_00.array = in_stack_ffffffffffffff80.str;
+            ~r0_00.len = in_stack_ffffffffffffff80.len;
+            runtime_growslice(ptr,(int)pvVar5,newLen,sVar3,(internal_abi_Type *)&DAT_00807920,~r0_00
+                             );
+            ptr = extraout_RAX_00;
+            newLen = (int)extraout_RCX;
+            pvVar5 = extraout_RBX;
+          }
+          runtime_memmove(ptr + (int)pvVar4,(void *)(in_RAX + (pos & (int)-sVar3 >> 0x3f)),sVar3);
+        }
+        pvVar5 = (void *)((int)pvVar5 + 1);
+        if ((uint)newLen < pvVar5) {
+          ~r0_01.cap = in_stack_ffffffffffffff90;
+          ~r0_01.array = in_stack_ffffffffffffff80.str;
+          ~r0_01.len = in_stack_ffffffffffffff80.len;
+          runtime_growslice(ptr,(int)pvVar5,newLen,1,(internal_abi_Type *)&DAT_00807920,~r0_01);
+          ptr = extraout_RAX_01;
+          pvVar5 = extraout_RBX_00;
+        }
+        ptr[(int)pvVar5 + -1] = 0x25;
+        dst.cap = in_stack_ffffffffffffff90;
+        dst.array = in_stack_ffffffffffffff80.str;
+        dst.len = in_stack_ffffffffffffff80.len;
+        strconv_AppendInt(dst,(int64)ptr,(int)pvVar5,in_stack_ffffffffffffff98);
+        pos = i_1 + 1;
+        ptr = extraout_RAX_02;
+        newLen = (int)extraout_RCX_00;
+        pvVar4 = extraout_RBX_01;
+      }
+      i_1 = i_1 + 1;
+    } while( true );
+  }
+  return;
+}
+
+
+
+void net_http_noBody_Read(int ~r0,error ~r1)
+
+{
+  return;
+}
+
+
+
+void net_http_noBody_Close(error ~r0)
+
+{
+  return;
+}
+
+
+
+void net_http_noBody_WriteTo(int64 ~r0,error ~r1)
+
+{
+  return;

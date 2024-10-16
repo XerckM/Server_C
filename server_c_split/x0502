@@ -1,0 +1,1000 @@
+  crypto_internal_bigmod_Nat *pcStack_10;
+  
+  while (local_d8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  auVar3 = FUN_0046cd74();
+  local_28 = auVar3._0_8_;
+  local_20._8_8_ = (crypto_internal_bigmod_Nat *)0x0;
+  pcVar2 = (crypto_internal_bigmod_Nat *)local_20._8_8_;
+  local_20._8_8_ = (crypto_internal_bigmod_Nat *)0x0;
+  pcStack_10 = (crypto_internal_bigmod_Nat *)0x20;
+  ~r0_00 = local_130;
+  len = (crypto_internal_bigmod_Nat *)((auVar3._8_8_)->nat->limbs).len;
+  local_20._0_8_ = ~r0_00;
+  if ((int)len < 0) {
+    local_20._8_8_ = pcVar2;
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_fffffffffffffea8);
+  }
+  if ((int)len < 0x21) {
+    if (len != (crypto_internal_bigmod_Nat *)0x0) {
+      runtime_memclrNoHeapPointers();
+      ~r0_00 = extraout_RSI;
+      pcVar2 = (crypto_internal_bigmod_Nat *)local_20._8_8_;
+    }
+    local_20._8_8_ = pcVar2;
+    pcVar1 = (crypto_internal_bigmod_Nat *)local_20._0_8_;
+    pcVar2 = pcStack_10;
+    if (pcStack_10 < len) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+  }
+  else {
+    local_20._8_8_ = pcVar2;
+    runtime_makeslice((internal_abi_Type *)&DAT_00807960,(int)len,(int)len,~r0_01);
+    ~r0_00 = len;
+    if ((int)local_20._8_8_ < (int)len) {
+      ~r0_00 = (crypto_internal_bigmod_Nat *)local_20._8_8_;
+    }
+    pcVar1 = __dest;
+    pcVar2 = len;
+    if (__dest != (crypto_internal_bigmod_Nat *)local_20._0_8_) {
+      local_30 = __dest;
+      runtime_memmove(__dest,(void *)local_20._0_8_,(int)~r0_00 << 3);
+      ~r0_00 = extraout_RSI_00;
+      pcVar1 = local_30;
+    }
+  }
+  local_20._0_8_ = pcVar1;
+  pcVar1 = local_28;
+  pcStack_10 = pcVar2;
+  local_20._8_8_ = len;
+  if (len == (crypto_internal_bigmod_Nat *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  ((__uint *)local_20._0_8_)->array = (uint *)0x1;
+  crypto_internal_bigmod___Nat__montgomeryMul
+            (pcVar1,pcVar1,(crypto_internal_bigmod_Nat *)local_20,auVar3._8_8_,~r0_00);
+  return;
+}
+
+
+
+void crypto_internal_bigmod___Nat__montgomeryMul
+               (crypto_internal_bigmod_Nat *x,crypto_internal_bigmod_Nat *a,
+               crypto_internal_bigmod_Nat *b,crypto_internal_bigmod_Modulus *m,
+               crypto_internal_bigmod_Nat *~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  undefined auVar4 [16];
+  undefined auVar5 [16];
+  undefined auVar6 [16];
+  undefined auVar7 [16];
+  undefined auVar8 [16];
+  undefined auVar9 [16];
+  undefined auVar10 [16];
+  undefined auVar11 [16];
+  crypto_internal_bigmod_Nat *pcVar12;
+  undefined *extraout_RAX;
+  uint d_1;
+  uint c1_1;
+  uint c2_1;
+  uint *extraout_RAX_00;
+  uint *extraout_RAX_01;
+  uint d_2;
+  uint c1_2;
+  uint c2_2;
+  uint *extraout_RAX_02;
+  uint *extraout_RAX_03;
+  uint d_3;
+  uint c1_3;
+  uint c2_3;
+  uint *extraout_RAX_04;
+  uint *extraout_RAX_05;
+  uint *extraout_RAX_06;
+  uint *extraout_RAX_07;
+  uint *puVar13;
+  uint lo_1;
+  uint lo;
+  crypto_internal_bigmod_Modulus *extraout_RCX;
+  crypto_internal_bigmod_Modulus *extraout_RCX_00;
+  crypto_internal_bigmod_Modulus *extraout_RCX_01;
+  crypto_internal_bigmod_Modulus *extraout_RCX_02;
+  crypto_internal_bigmod_Modulus *pcVar14;
+  uint Y;
+  uint Y_1;
+  uint Y_2;
+  uint Y_3;
+  uint uVar15;
+  uint hi_1;
+  uint hi;
+  uint len;
+  uint *extraout_RSI;
+  int iVar16;
+  crypto_internal_bigmod_Nat *extraout_RSI_00;
+  void *~r0_00;
+  undefined *~r0_01;
+  void *extraout_RDI;
+  void *extraout_RDI_00;
+  void *extraout_RDI_01;
+  void *extraout_RDI_02;
+  void *extraout_RDI_03;
+  void *extraout_RDI_04;
+  void *pvVar17;
+  int n;
+  uint extraout_R8;
+  uint *extraout_R9;
+  uint *puVar18;
+  uint *extraout_R10;
+  uint *puVar19;
+  int i_5;
+  uint uVar20;
+  uint **extraout_R11;
+  uint **extraout_R11_00;
+  uint **extraout_R11_01;
+  uint uVar21;
+  uint **extraout_R11_02;
+  uint c;
+  uint c2;
+  int unaff_R14;
+  uint c1;
+  uint d;
+  int i_4;
+  uint local_748;
+  int i_3;
+  int i_2;
+  int i_1;
+  int i;
+  uint local_718;
+  uint local_710;
+  uint c_3;
+  uint c_2;
+  uint c_1;
+  uint local_6d8;
+  uint local_6d0;
+  uint local_6c8;
+  uint local_6c0;
+  uint local_6b8;
+  undefined local_6b0 [128];
+  uint local_630 [16];
+  undefined local_5b0 [192];
+  uint local_4f0 [24];
+  undefined local_430 [256];
+  uint local_330 [32];
+  undefined local_230 [512];
+  undefined *local_30;
+  undefined *local_28;
+  uint *local_20;
+  uint *local_18;
+  uint *local_10;
+  
+  while (&c_1 <= *(uint **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar15 = (m->nat->limbs).len;
+  if ((uint)(a->limbs).cap < uVar15) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  if ((uint)(b->limbs).cap < uVar15) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAcap();
+  }
+  local_10 = (m->nat->limbs).array;
+  local_18 = (a->limbs).array;
+  local_20 = (b->limbs).array;
+  if (uVar15 == 0x10) {
+    pcVar12 = (crypto_internal_bigmod_Nat *)FUN_0046cd74();
+    c_1 = 0;
+    pcVar14 = extraout_RCX_02;
+    pvVar17 = extraout_RDI_01;
+    for (iVar16 = 0; iVar16 < 0x10; iVar16 = iVar16 + 1) {
+      local_28 = local_6b0 + iVar16 * 8;
+      crypto_internal_bigmod_addMulVVW1024();
+      crypto_internal_bigmod_addMulVVW1024();
+      uVar15 = (uint)((sdword)c_1 != 0);
+      local_630[iVar16] = local_748 * 2 + uVar15;
+      c_1 = (uint)(CARRY8(local_748,local_748) || CARRY8(local_748 * 2,uVar15));
+      pcVar12 = x;
+      pcVar14 = m;
+      pvVar17 = extraout_RDI_02;
+    }
+    if ((pcVar12->limbs).cap < 0x10) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807960,0x10,0x10,pvVar17);
+      (x->limbs).len = 0x10;
+      (x->limbs).cap = 0x10;
+      puVar13 = extraout_RAX_00;
+      pcVar12 = x;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_RAX_01;
+        extraout_R11[1] = (pcVar12->limbs).array;
+        puVar13 = extraout_RAX_01;
+      }
+      (pcVar12->limbs).array = puVar13;
+      pcVar14 = m;
+    }
+    else {
+      if ((pcVar12->limbs).len != 0) {
+        runtime_memclrNoHeapPointers();
+        pcVar12 = x;
+        pcVar14 = m;
+      }
+      if ((uint)(pcVar12->limbs).cap < 0x10) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (pcVar12->limbs).len = 0x10;
+    }
+    puVar13 = (pcVar12->limbs).array;
+    iVar16 = (pcVar12->limbs).len;
+    if (0x10 < iVar16) {
+      iVar16 = 0x10;
+    }
+    if (puVar13 != local_630) {
+      runtime_memmove(puVar13,local_630,iVar16 << 3);
+      pcVar12 = x;
+      pcVar14 = m;
+    }
+    crypto_internal_bigmod___Nat__maybeSubtractModulus(pcVar12,c_1,pcVar14);
+  }
+  else if (uVar15 == 0x18) {
+    pcVar12 = (crypto_internal_bigmod_Nat *)FUN_0046cd46();
+    uVar15 = 0;
+    pcVar14 = extraout_RCX_01;
+    pvVar17 = extraout_RDI_00;
+    for (iVar16 = 0; iVar16 < 0x18; iVar16 = iVar16 + 1) {
+      local_28 = local_5b0 + iVar16 * 8;
+      crypto_internal_bigmod_addMulVVW1536();
+      crypto_internal_bigmod_addMulVVW1536();
+      uVar15 = (uint)((sdword)uVar15 != 0);
+      local_4f0[iVar16] = local_748 * 2 + uVar15;
+      uVar15 = (uint)(CARRY8(local_748,local_748) || CARRY8(local_748 * 2,uVar15));
+      pcVar12 = x;
+      pcVar14 = m;
+      pvVar17 = extraout_RDI_03;
+    }
+    if ((pcVar12->limbs).cap < 0x18) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807960,0x18,0x18,pvVar17);
+      (x->limbs).len = 0x18;
+      (x->limbs).cap = 0x18;
+      puVar13 = extraout_RAX_02;
+      pcVar12 = x;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = extraout_RAX_03;
+        extraout_R11_00[1] = (pcVar12->limbs).array;
+        puVar13 = extraout_RAX_03;
+      }
+      (pcVar12->limbs).array = puVar13;
+      pcVar14 = m;
+    }
+    else {
+      if ((pcVar12->limbs).len != 0) {
+        runtime_memclrNoHeapPointers();
+        pcVar12 = x;
+        pcVar14 = m;
+      }
+      if ((uint)(pcVar12->limbs).cap < 0x18) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (pcVar12->limbs).len = 0x18;
+    }
+    puVar13 = (pcVar12->limbs).array;
+    iVar16 = (pcVar12->limbs).len;
+    if (0x18 < iVar16) {
+      iVar16 = 0x18;
+    }
+    if (puVar13 != local_4f0) {
+      runtime_memmove(puVar13,local_4f0,iVar16 << 3);
+      pcVar12 = x;
+      pcVar14 = m;
+    }
+    crypto_internal_bigmod___Nat__maybeSubtractModulus(pcVar12,uVar15,pcVar14);
+  }
+  else if (uVar15 == 0x20) {
+    pcVar12 = (crypto_internal_bigmod_Nat *)FUN_0046cd18();
+    uVar15 = 0;
+    pcVar14 = extraout_RCX_00;
+    pvVar17 = extraout_RDI;
+    for (iVar16 = 0; iVar16 < 0x20; iVar16 = iVar16 + 1) {
+      local_28 = local_430 + iVar16 * 8;
+      crypto_internal_bigmod_addMulVVW2048();
+      crypto_internal_bigmod_addMulVVW2048();
+      uVar15 = (uint)((sdword)uVar15 != 0);
+      local_330[iVar16] = local_748 * 2 + uVar15;
+      uVar15 = (uint)(CARRY8(local_748,local_748) || CARRY8(local_748 * 2,uVar15));
+      pcVar12 = x;
+      pcVar14 = m;
+      pvVar17 = extraout_RDI_04;
+    }
+    if ((pcVar12->limbs).cap < 0x20) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807960,0x20,0x20,pvVar17);
+      (x->limbs).len = 0x20;
+      (x->limbs).cap = 0x20;
+      puVar13 = extraout_RAX_04;
+      pcVar12 = x;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_05;
+        extraout_R11_01[1] = (pcVar12->limbs).array;
+        puVar13 = extraout_RAX_05;
+      }
+      (pcVar12->limbs).array = puVar13;
+      pcVar14 = m;
+    }
+    else {
+      if ((pcVar12->limbs).len != 0) {
+        runtime_memclrNoHeapPointers();
+        pcVar12 = x;
+        pcVar14 = m;
+      }
+      if ((uint)(pcVar12->limbs).cap < 0x20) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (pcVar12->limbs).len = 0x20;
+    }
+    puVar13 = (pcVar12->limbs).array;
+    iVar16 = (pcVar12->limbs).len;
+    if (0x20 < iVar16) {
+      iVar16 = 0x20;
+    }
+    if (puVar13 != local_330) {
+      runtime_memmove(puVar13,local_330,iVar16 << 3);
+      pcVar12 = x;
+      pcVar14 = m;
+    }
+    crypto_internal_bigmod___Nat__maybeSubtractModulus(pcVar12,uVar15,pcVar14);
+  }
+  else {
+    pcVar12 = (crypto_internal_bigmod_Nat *)FUN_0046cd18();
+    local_6b8 = extraout_R8 * 2;
+    if ((int)local_6b8 < 0x41) {
+      ~r0_01 = local_230;
+      pcVar14 = extraout_RCX;
+      local_6d0 = 0x40;
+      len = extraout_R8;
+      puVar13 = extraout_RSI;
+      puVar18 = extraout_R9;
+      puVar19 = extraout_R10;
+    }
+    else {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807960,0,local_6b8,~r0_00);
+      pcVar12 = x;
+      pcVar14 = m;
+      local_6d0 = local_6b8;
+      len = uVar15;
+      puVar13 = local_10;
+      ~r0_01 = extraout_RAX;
+      puVar18 = local_18;
+      puVar19 = local_20;
+    }
+    if (local_6d0 < local_6b8) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    local_6d8 = 0;
+    for (uVar20 = 0; (int)uVar20 < (int)len; uVar20 = uVar20 + 1) {
+      uVar1 = uVar20 + len;
+      if (local_6b8 <= uVar1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      uVar2 = puVar19[uVar20];
+      if (uVar1 < uVar20) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      uVar21 = uVar20 << 3 & (int)(uVar20 - local_6d0) >> 0x3f;
+      if (len <= len - 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      local_710 = 0;
+      for (i_5 = 0; i_5 < (int)len; i_5 = i_5 + 1) {
+        auVar4._8_8_ = 0;
+        auVar4._0_8_ = puVar18[i_5];
+        auVar6._8_8_ = 0;
+        auVar6._0_8_ = uVar2;
+        auVar8._8_8_ = 0;
+        auVar8._0_8_ = *(uint *)(~r0_01 + i_5 * 8 + uVar21);
+        auVar9._8_8_ = 0;
+        auVar9._0_8_ = local_710;
+        auVar9 = auVar4 * auVar6 + auVar8 + auVar9;
+        *(int *)(~r0_01 + i_5 * 8 + uVar21) = auVar9._0_8_;
+        local_710 = auVar9._8_8_;
+        pcVar12 = x;
+      }
+      iVar16 = *(int *)(~r0_01 + uVar20 * 8);
+      uVar3 = pcVar14->m0inv;
+      local_718 = 0;
+      for (i_4 = 0; i_4 < (int)len; i_4 = i_4 + 1) {
+        local_6c8 = puVar13[i_4];
+        auVar5._8_8_ = 0;
+        auVar5._0_8_ = uVar3 * iVar16;
+        auVar7._8_8_ = 0;
+        auVar7._0_8_ = local_6c8;
+        auVar10._8_8_ = 0;
+        auVar10._0_8_ = *(uint *)(~r0_01 + i_4 * 8 + uVar21);
+        auVar11._8_8_ = 0;
+        auVar11._0_8_ = local_718;
+        auVar11 = auVar5 * auVar7 + auVar10 + auVar11;
+        *(int *)(~r0_01 + i_4 * 8 + uVar21) = auVar11._0_8_;
+        local_718 = auVar11._8_8_;
+        pcVar12 = x;
+        puVar18 = local_18;
+      }
+      uVar2 = (uint)((sdword)local_6d8 != 0);
+      *(uint *)(~r0_01 + uVar1 * 8) = local_710 + local_718 + uVar2;
+      local_6d8 = (uint)(CARRY8(local_710,local_718) || CARRY8(local_710 + local_718,uVar2));
+      pcVar14 = m;
+      puVar19 = local_20;
+      local_6c0 = uVar1;
+    }
+    local_30 = ~r0_01;
+    if ((pcVar12->limbs).cap < (int)len) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00807960,len,len,~r0_01);
+      (x->limbs).len = uVar15;
+      (x->limbs).cap = uVar15;
+      puVar13 = extraout_RAX_06;
+      pcVar12 = x;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_02 = extraout_RAX_07;
+        extraout_R11_02[1] = (extraout_RSI_00->limbs).array;
+        puVar13 = extraout_RAX_07;
+        pcVar12 = extraout_RSI_00;
+      }
+      (pcVar12->limbs).array = puVar13;
+      pcVar14 = m;
+    }
+    else {
+      if ((pcVar12->limbs).len != 0) {
+        runtime_memclrNoHeapPointers();
+        pcVar12 = x;
+        pcVar14 = m;
+        len = uVar15;
+      }
+      uVar15 = len;
+      if ((uint)(pcVar12->limbs).cap < uVar15) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      (pcVar12->limbs).len = uVar15;
+    }
+    if (local_6b8 < uVar15) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    puVar13 = (pcVar12->limbs).array;
+    iVar16 = (pcVar12->limbs).len;
+    if ((int)(local_6b8 - uVar15) < iVar16) {
+      iVar16 = local_6b8 - uVar15;
+    }
+    if (puVar13 != (uint *)(local_30 + ((int)(uVar15 - local_6d0) >> 0x3f & uVar15 << 3))) {
+      runtime_memmove(puVar13,local_30 + ((int)(uVar15 - local_6d0) >> 0x3f & uVar15 << 3),
+                      iVar16 << 3);
+      pcVar12 = x;
+      pcVar14 = m;
+    }
+    crypto_internal_bigmod___Nat__maybeSubtractModulus(pcVar12,local_6d8,pcVar14);
+  }
+  return;
+}
+
+
+
+void crypto_internal_bigmod___Nat__Mul
+               (crypto_internal_bigmod_Nat *x,crypto_internal_bigmod_Nat *y,
+               crypto_internal_bigmod_Modulus *m,crypto_internal_bigmod_Nat *~r0)
+
+{
+  uint len;
+  uint *__src;
+  int iVar1;
+  crypto_internal_bigmod_Nat *pcVar2;
+  uint *extraout_RAX;
+  crypto_internal_bigmod_Nat *a;
+  crypto_internal_bigmod_Nat *xR;
+  crypto_internal_bigmod_Modulus *extraout_RCX;
+  crypto_internal_bigmod_Modulus *m_00;
+  crypto_internal_bigmod_Nat *extraout_RSI;
+  crypto_internal_bigmod_Nat *~r0_00;
+  crypto_internal_bigmod_Nat *~r0_01;
+  void *~r0_02;
+  int unaff_R14;
+  crypto_internal_bigmod_Nat *pcStack0000000000000008;
+  crypto_internal_bigmod_Modulus *pcStack0000000000000018;
+  uint local_128 [11];
+  undefined local_d0 [168];
+  crypto_internal_bigmod_Nat *local_28;
+  undefined local_20 [16];
+  int iStack_10;
+  
+  pcStack0000000000000008 = x;
+  pcStack0000000000000018 = m;
+  while (local_d0 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  local_28 = y;
+  pcVar2 = (crypto_internal_bigmod_Nat *)FUN_0046cd74();
+  local_20._8_8_ = 0;
+  iVar1 = local_20._8_8_;
+  local_20._8_8_ = 0;
+  iStack_10 = 0x20;
+  local_20._0_8_ = local_128;
+  len = (pcVar2->limbs).len;
+  if ((int)len < 0x21) {
+    if (0x20 < len) {
+      local_20._8_8_ = iVar1;
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    iStack_10 = 0x20;
+    local_20._8_8_ = len;
+    m_00 = extraout_RCX;
+  }
+  else {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807960,len,len,~r0_02);
+    iStack_10 = len;
+    local_20._8_8_ = len;
+    pcVar2 = pcStack0000000000000008;
+    m_00 = pcStack0000000000000018;
+    local_20._0_8_ = extraout_RAX;
+  }
+  __src = (pcVar2->limbs).array;
+  pcVar2 = (crypto_internal_bigmod_Nat *)(pcVar2->limbs).len;
+  ~r0_00 = (crypto_internal_bigmod_Nat *)local_20._8_8_;
+  if ((int)pcVar2 < (int)local_20._8_8_) {
+    ~r0_00 = pcVar2;
+  }
+  if ((uint *)local_20._0_8_ != __src) {
+    runtime_memmove((void *)local_20._0_8_,__src,(int)~r0_00 << 3);
+    m_00 = pcStack0000000000000018;
+    ~r0_00 = extraout_RSI;
+  }
+  crypto_internal_bigmod___Nat__montgomeryMul
+            ((crypto_internal_bigmod_Nat *)local_20,(crypto_internal_bigmod_Nat *)local_20,m_00->rr,
+             m_00,~r0_00);
+  crypto_internal_bigmod___Nat__montgomeryMul
+            (pcStack0000000000000008,a,local_28,pcStack0000000000000018,~r0_01);
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void crypto_internal_bigmod___Nat__Exp
+               (crypto_internal_bigmod_Nat *out,crypto_internal_bigmod_Nat *x,__uint8 e,
+               crypto_internal_bigmod_Modulus *m,crypto_internal_bigmod_Nat *~r0)
+
+{
+  crypto_internal_bigmod_Nat *pcVar1;
+  byte bVar2;
+  uint uVar3;
+  uint *__src;
+  int iVar4;
+  uint uVar5;
+  uint *extraout_RAX;
+  uint *extraout_RAX_00;
+  int iVar6;
+  uint *extraout_RAX_01;
+  uint *extraout_RAX_02;
+  uint *puVar7;
+  uint *__dest;
+  int i_1;
+  int i_3;
+  crypto_internal_bigmod_Nat *pcVar8;
+  int size;
+  int size_1;
+  int j;
+  crypto_internal_bigmod_Nat *extraout_RBX;
+  crypto_internal_bigmod_Nat *extraout_RBX_00;
+  crypto_internal_bigmod_Nat *extraout_RBX_01;
+  int i_2;
+  crypto_internal_bigmod_Nat *extraout_RSI;
+  crypto_internal_bigmod_Nat *extraout_RSI_00;
+  crypto_internal_bigmod_Nat *extraout_RSI_01;
+  crypto_internal_bigmod_Nat *extraout_RSI_02;
+  crypto_internal_bigmod_Nat *extraout_RSI_03;
+  uint uVar9;
+  crypto_internal_bigmod_Nat *~r0_00;
+  crypto_internal_bigmod_Nat *~r0_01;
+  crypto_internal_bigmod_Nat *~r0_02;
+  crypto_internal_bigmod_Nat *pcVar10;
+  uint k;
+  uint c1;
+  uint c1_1;
+  void *~r0_03;
+  void *~r0_04;
+  uint8 b;
+  crypto_internal_bigmod_Modulus *in_R8;
+  crypto_internal_bigmod_Modulus *extraout_R8;
+  crypto_internal_bigmod_Modulus *m_00;
+  uint c2;
+  uint mask;
+  uint c2_1;
+  uint mask_1;
+  uint **extraout_R11;
+  uint **extraout_R11_00;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffed88;
+  int i;
+  undefined local_1220 [16];
+  uint local_1210 [3];
+  undefined auStack_11f8 [232];
+  uint local_1110 [32];
+  uint local_1010 [32];
+  uint local_f10 [32];
+  uint local_e10 [32];
+  uint local_d10 [32];
+  uint local_c10 [32];
+  uint local_b10 [32];
+  uint local_a10 [32];
+  uint local_910 [32];
+  uint local_810 [32];
+  uint local_710 [32];
+  uint local_610 [32];
+  uint local_510 [32];
+  uint local_410 [32];
+  uint local_310 [32];
+  crypto_internal_bigmod_Nat *local_210;
+  uint *local_208;
+  undefined local_200 [16];
+  uint uStack_1f0;
+  undefined local_1e8 [24];
+  undefined local_1d0 [24];
+  undefined local_1b8 [24];
+  undefined local_1a0 [24];
+  undefined local_188 [24];
+  undefined local_170 [24];
+  undefined local_158 [24];
+  undefined local_140 [24];
+  undefined local_128 [24];
+  undefined local_110 [24];
+  undefined local_f8 [24];
+  undefined local_e0 [24];
+  undefined local_c8 [24];
+  undefined local_b0 [24];
+  undefined local_98 [16];
+  int iStack_88;
+  crypto_internal_bigmod_Nat *table [15];
+  
+  while ((&stack0x00000000 < (undefined *)0x11f8 ||
+         (auStack_11f8 <= *(undefined **)(unaff_R14 + 0x10)))) {
+    runtime_morestack_noctxt();
+  }
+  FUN_0046cd74();
+  stack0xffffffffffffff70 = ZEXT816(0x20) << 0x40;
+  local_98._0_8_ = local_310;
+  FUN_0046cd74();
+  local_b0._8_16_ = ZEXT816(0x20) << 0x40;
+  local_b0._0_8_ = local_410;
+  FUN_0046cd74();
+  local_c8._8_16_ = ZEXT816(0x20) << 0x40;
+  local_c8._0_8_ = local_510;
+  FUN_0046cd74();
+  local_e0._8_16_ = ZEXT816(0x20) << 0x40;
+  local_e0._0_8_ = local_610;
+  FUN_0046cd74();
+  local_f8._8_16_ = ZEXT816(0x20) << 0x40;
+  local_f8._0_8_ = local_710;
+  FUN_0046cd74();
+  local_110._8_16_ = ZEXT816(0x20) << 0x40;
+  local_110._0_8_ = local_810;
+  FUN_0046cd74();
+  local_128._8_16_ = ZEXT816(0x20) << 0x40;
+  local_128._0_8_ = local_910;
+  FUN_0046cd74();
+  local_140._8_16_ = ZEXT816(0x20) << 0x40;
+  local_140._0_8_ = local_a10;
+  FUN_0046cd74();
+  local_158._8_16_ = ZEXT816(0x20) << 0x40;
+  local_158._0_8_ = local_b10;
+  FUN_0046cd74();
+  local_170._8_16_ = ZEXT816(0x20) << 0x40;
+  local_170._0_8_ = local_c10;
+  FUN_0046cd74();
+  local_188._8_16_ = ZEXT816(0x20) << 0x40;
+  local_188._0_8_ = local_d10;
+  FUN_0046cd74();
+  local_1a0._8_16_ = ZEXT816(0x20) << 0x40;
+  local_1a0._0_8_ = local_e10;
+  FUN_0046cd74();
+  local_1b8._8_16_ = ZEXT816(0x20) << 0x40;
+  local_1b8._0_8_ = local_f10;
+  FUN_0046cd74();
+  local_1d0._8_16_ = ZEXT816(0x20) << 0x40;
+  local_1d0._0_8_ = local_1010;
+  FUN_0046cd74();
+  local_1e8._8_16_ = ZEXT816(0x20) << 0x40;
+  local_1e8._0_8_ = local_1110;
+  FUN_0046cda6();
+  local_210 = (crypto_internal_bigmod_Nat *)local_98;
+  table[1] = (crypto_internal_bigmod_Nat *)local_b0;
+  table[0] = local_210;
+  table[2] = (crypto_internal_bigmod_Nat *)local_c8;
+  table[3] = (crypto_internal_bigmod_Nat *)local_e0;
+  table[4] = (crypto_internal_bigmod_Nat *)local_f8;
+  table[5] = (crypto_internal_bigmod_Nat *)local_110;
+  table[6] = (crypto_internal_bigmod_Nat *)local_128;
+  table[7] = (crypto_internal_bigmod_Nat *)local_140;
+  table[8] = (crypto_internal_bigmod_Nat *)local_158;
+  table[9] = (crypto_internal_bigmod_Nat *)local_170;
+  table[10] = (crypto_internal_bigmod_Nat *)local_188;
+  table[11] = (crypto_internal_bigmod_Nat *)local_1a0;
+  table[12] = (crypto_internal_bigmod_Nat *)local_1b8;
+  table[13] = (crypto_internal_bigmod_Nat *)local_1d0;
+  table[14] = (crypto_internal_bigmod_Nat *)local_1e8;
+  uVar3 = (extraout_RBX->limbs).len;
+  if (iStack_88 < (int)uVar3) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807960,uVar3,uVar3,~r0_03);
+    (local_210->limbs).len = uVar3;
+    (local_210->limbs).cap = uVar3;
+    puVar7 = extraout_RAX;
+    pcVar8 = local_210;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = (extraout_RBX_00->limbs).array;
+      puVar7 = extraout_RAX_00;
+      pcVar8 = extraout_RBX_00;
+    }
+    (pcVar8->limbs).array = puVar7;
+    m_00 = in_R8;
+  }
+  else {
+    pcVar8 = extraout_RBX;
+    m_00 = extraout_R8;
+    if (local_98._8_8_ != 0) {
+      runtime_memclrNoHeapPointers();
+      pcVar8 = x;
+      m_00 = in_R8;
+    }
+    x = pcVar8;
+    if ((uint)(local_210->limbs).cap < uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    (local_210->limbs).len = uVar3;
+  }
+  puVar7 = (local_210->limbs).array;
+  iVar6 = (local_210->limbs).len;
+  __src = (x->limbs).array;
+  iVar4 = (x->limbs).len;
+  if (iVar4 < iVar6) {
+    iVar6 = iVar4;
+  }
+  if (__src != puVar7) {
+    runtime_memmove(puVar7,__src,iVar6 << 3);
+    m_00 = in_R8;
+  }
+  crypto_internal_bigmod___Nat__montgomeryMul(local_210,local_210,m_00->rr,m_00,local_210);
+  pcVar8 = extraout_RSI;
+  for (iVar6 = 1; iVar6 < 0xf; iVar6 = iVar6 + 1) {
+    crypto_internal_bigmod___Nat__montgomeryMul
+              (table[iVar6],table[iVar6 + -1],table[0],in_R8,pcVar8);
+    pcVar8 = extraout_RSI_00;
+  }
+  uVar3 = (in_R8->nat->limbs).len;
+  pcVar8 = out;
+  if ((out->limbs).cap < (int)uVar3) {
+    runtime_makeslice((internal_abi_Type *)&DAT_00807960,uVar3,uVar3,in_R8);
+    (out->limbs).len = uVar3;
+    (out->limbs).cap = uVar3;
+    puVar7 = extraout_RAX_01;
+    pcVar10 = extraout_RSI_02;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RAX_02;
+      extraout_R11_00[1] = (extraout_RBX_01->limbs).array;
+      puVar7 = extraout_RAX_02;
+      pcVar8 = extraout_RBX_01;
+      pcVar10 = extraout_RSI_03;
+    }
+    (pcVar8->limbs).array = puVar7;
+  }
+  else {
+    pcVar10 = (crypto_internal_bigmod_Nat *)(out->limbs).len;
+    if (pcVar10 != (crypto_internal_bigmod_Nat *)0x0) {
+      runtime_memclrNoHeapPointers();
+      pcVar10 = extraout_RSI_01;
+    }
+    if ((uint)(out->limbs).cap < uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    (out->limbs).len = uVar3;
+  }
+  if ((pcVar8->limbs).len == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  *(pcVar8->limbs).array = 1;
+  crypto_internal_bigmod___Nat__montgomeryMul(pcVar8,pcVar8,in_R8->rr,in_R8,pcVar10);
+  FUN_0046cd74();
+  local_200._8_8_ = 0;
+  uVar9 = local_200._8_8_;
+  local_200._8_8_ = 0;
+  uStack_1f0 = 0x20;
+  local_200._0_8_ = local_1210;
+  uVar3 = (in_R8->nat->limbs).len;
+  if ((int)uVar3 < 0) {
+    local_200._8_8_ = uVar9;
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffed88);
+  }
+  if ((int)uVar3 < 0x21) {
+    if (uVar3 != 0) {
+      runtime_memclrNoHeapPointers();
+      uVar9 = local_200._8_8_;
+    }
+    local_200._8_8_ = uVar9;
+    puVar7 = (uint *)local_200._0_8_;
+    uVar5 = uStack_1f0;
+    if (uStack_1f0 < uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+  }
+  else {
+    local_200._8_8_ = uVar9;
+    runtime_makeslice((internal_abi_Type *)&DAT_00807960,uVar3,uVar3,~r0_04);
+    uVar9 = uVar3;
+    if ((int)local_200._8_8_ < (int)uVar3) {
+      uVar9 = local_200._8_8_;
+    }
+    puVar7 = __dest;
+    uVar5 = uVar3;
+    if (__dest != (uint *)local_200._0_8_) {
+      local_208 = __dest;
+      runtime_memmove(__dest,(void *)local_200._0_8_,uVar9 << 3);
+      puVar7 = local_208;
+    }
+  }
+  local_200._0_8_ = puVar7;
+  uStack_1f0 = uVar5;
+  local_200._8_8_ = uVar3;
+  pcVar8 = (crypto_internal_bigmod_Nat *)0x0;
+  do {
+    if ((int)~r0 <= (int)pcVar8) {
+      crypto_internal_bigmod___Nat__montgomeryReduction(out,in_R8,pcVar8);
+      return;
+    }
+    bVar2 = *(byte *)((int)&(pcVar8->limbs).array + (int)&m->nat);
+    local_1220._8_8_ = in_XMM15._8_8_;
+    local_1220._0_8_ = 4;
+    for (iVar6 = 0; iVar6 < 2; iVar6 = iVar6 + 1) {
+      uVar3 = *(uint *)(local_1220 + iVar6 * 8);
+      crypto_internal_bigmod___Nat__montgomeryMul
+                (out,out,out,in_R8,(crypto_internal_bigmod_Nat *)in_R8);
+      crypto_internal_bigmod___Nat__montgomeryMul(out,out,out,in_R8,~r0_00);
+      crypto_internal_bigmod___Nat__montgomeryMul(out,out,out,in_R8,~r0_01);
+      crypto_internal_bigmod___Nat__montgomeryMul(out,out,out,in_R8,~r0_02);
+      if ((int)uVar3 < 0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicshift();
+      }
+      pcVar10 = (crypto_internal_bigmod_Nat *)
+                (uint)((dword)(bVar2 >> ((byte)uVar3 & 0x1f)) & -(dword)(uVar3 < 8) & 0xf);
+      i_1 = 0;
+      while (i_1 < 0xf) {
+        pcVar1 = (crypto_internal_bigmod_Nat *)(i_1 + 1);
+        c2_1 = (uint)(pcVar1 < pcVar10 || pcVar10 < pcVar1);
+        if ((uint)(table[i_1]->limbs).cap < (uint)local_200._8_8_) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceAcap();
+        }
+        puVar7 = (table[i_1]->limbs).array;
+        for (i_3 = 0; i_1 = (int)pcVar1, i_3 < (int)local_200._8_8_; i_3 = i_3 + 1) {
+          *(uint *)(local_200._0_8_ + i_3 * 8) =
+               *(uint *)(local_200._0_8_ + i_3 * 8) ^
+               (puVar7[i_3] ^ *(uint *)(local_200._0_8_ + i_3 * 8)) & -(c2_1 ^ 1);
+        }
+      }
+      crypto_internal_bigmod___Nat__montgomeryMul
+                ((crypto_internal_bigmod_Nat *)local_200,out,(crypto_internal_bigmod_Nat *)local_200
+                 ,in_R8,pcVar10);
+      uVar3 = (out->limbs).len;
+      if (uStack_1f0 < uVar3) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAcap();
+      }
+      puVar7 = (out->limbs).array;
+      for (i_2 = 0; i_2 < (int)uVar3; i_2 = i_2 + 1) {
+        uVar9 = puVar7[i_2];
+        puVar7[i_2] = uVar9 ^ (*(uint *)(local_200._0_8_ + i_2 * 8) ^ uVar9) &
+                              -(uint)(pcVar10 != (crypto_internal_bigmod_Nat *)0x0);
+      }
+    }
+    pcVar8 = (crypto_internal_bigmod_Nat *)((int)&(pcVar8->limbs).array + 1);
+  } while( true );
+}
+
+
+
+void crypto_internal_bigmod___Nat__ExpShort
+               (crypto_internal_bigmod_Nat *out,crypto_internal_bigmod_Nat *x,uint e,
+               crypto_internal_bigmod_Modulus *m,crypto_internal_bigmod_Nat *~r0)
+
+{
+  uint uVar1;
+  crypto_internal_bigmod_Nat *extraout_RAX;
+  crypto_internal_bigmod_Nat *extraout_RAX_00;
+  crypto_internal_bigmod_Nat *xR;
+  uint *extraout_RAX_01;
+  uint *extraout_RAX_02;
+  uint *puVar2;
+  uint *__dest;
+  crypto_internal_bigmod_Nat *pcVar3;
+  int i_1;
+  int len;
+  int iVar4;
+  int i;
+  uint k;
+  uint c1;
+  uint mask;
+  crypto_internal_bigmod_Nat **extraout_RBX;
+  crypto_internal_bigmod_Nat *extraout_RBX_00;
+  crypto_internal_bigmod_Nat *pcVar5;
+  crypto_internal_bigmod_Nat *extraout_RSI;
+  crypto_internal_bigmod_Nat *extraout_RSI_00;
+  crypto_internal_bigmod_Nat *extraout_RSI_01;
+  crypto_internal_bigmod_Nat *extraout_RSI_02;
+  crypto_internal_bigmod_Nat *extraout_RSI_03;
+  crypto_internal_bigmod_Nat *extraout_RSI_04;
+  crypto_internal_bigmod_Nat *extraout_RSI_05;
+  crypto_internal_bigmod_Nat *~r0_00;
+  crypto_internal_bigmod_Nat *pcVar6;
+  void *~r0_01;
+  void *~r0_02;
+  int size;
+  uint c2;
+  uint **extraout_R11;
+  int unaff_R14;
+  crypto_internal_bigmod_Nat *pcStack0000000000000008;
+  crypto_internal_bigmod_Nat *pcStack0000000000000018;
+  crypto_internal_bigmod_Modulus *pcStack0000000000000020;
+  interface___ in_stack_fffffffffffffd80;
+  uint local_248 [9];
+  undefined local_200 [184];
+  crypto_internal_bigmod_Nat local_148 [10];
+  crypto_internal_bigmod_Nat *local_48;
+  uint *local_40;
+  crypto_internal_bigmod_Nat local_38;
+  undefined local_20 [16];
+  int iStack_10;
+  
+  pcStack0000000000000008 = out;
+  pcStack0000000000000018 = (crypto_internal_bigmod_Nat *)e;
+  while (pcStack0000000000000020 = m, local_200 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    m = pcStack0000000000000020;
+  }
+  FUN_0046cd74();
+  local_20._8_8_ = 0;
+  iVar4 = local_20._8_8_;
+  local_20._8_8_ = 0;
+  iStack_10 = 0x20;
+  local_20._0_8_ = local_148;
+  pcVar6 = extraout_RBX[1];
+  if ((int)pcVar6 < 0x21) {
+    if ((crypto_internal_bigmod_Nat *)0x20 < pcVar6) {
+      local_20._8_8_ = iVar4;
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    iStack_10 = 0x20;
+    local_20._8_8_ = pcVar6;
+  }
+  else {

@@ -1,0 +1,1000 @@
+    runtime_morestack_noctxt();
+  }
+  bVar3 = rb->nbyte;
+  if (bVar3 < 0x81) {
+    iVar1 = bVar3 - 0x80;
+    unicode_utf8_EncodeRune
+              (in_stack_ffffffffffffffd0,
+               (sdword)rb + ((dword)(iVar1 >> 0x3f) & (dword)bVar3) + 0x100,-iVar1);
+    rb->nbyte = rb->nbyte + 4;
+    uVar4 = rb->nrune;
+    if (uVar4 < 0x20) {
+      pvVar2 = rb->rune + uVar4;
+      pvVar2->pos = 0;
+      pvVar2->size = 0;
+      pvVar2->ccc = 0;
+      pvVar2->tccc = 0;
+      pvVar2->nLead = 0;
+      pvVar2->flags = 0;
+      pvVar2->index = 0;
+      rb->rune[uVar4].pos = bVar3;
+      rb->rune[uVar4].size = extraout_AL;
+      rb->nrune = rb->nrune + 1;
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void vendor_golang_org_x_text_unicode_norm___reorderBuffer__assignRune
+               (vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb,int pos,int32 r)
+
+{
+  int iVar1;
+  vendor_golang_org_x_text_unicode_norm_Properties *pvVar2;
+  byte bVar3;
+  uint8 extraout_AL;
+  int sz;
+  uint8 bn;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((uint)pos < 0x20) {
+    bVar3 = rb->rune[pos].pos;
+    if (bVar3 < 0x81) {
+      iVar1 = bVar3 - 0x80;
+      unicode_utf8_EncodeRune
+                (in_stack_ffffffffffffffc8,
+                 (sdword)rb + ((dword)(iVar1 >> 0x3f) & (dword)bVar3) + 0x100,-iVar1);
+      pvVar2 = rb->rune + pos;
+      pvVar2->pos = 0;
+      pvVar2->size = 0;
+      pvVar2->ccc = 0;
+      pvVar2->tccc = 0;
+      pvVar2->nLead = 0;
+      pvVar2->flags = 0;
+      pvVar2->index = 0;
+      rb->rune[pos].pos = bVar3;
+      rb->rune[pos].size = extraout_AL;
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm___reorderBuffer__runeAt
+               (vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb,int n,int32 ~r0)
+
+{
+  vendor_golang_org_x_text_unicode_norm_Properties vVar1;
+  int32 r;
+  uint uVar2;
+  uint uVar3;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd8;
+  byte local_10;
+  uint8 uStack_f;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (0x1f < (uint)n) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  vVar1 = rb->rune[n];
+  local_10 = vVar1.pos;
+  uVar2 = (uint)vVar1 & 0xff;
+  uStack_f = vVar1.size;
+  uVar3 = (uint)(byte)(uStack_f + local_10);
+  if (0x80 < uVar3) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlen();
+  }
+  if (uVar2 <= uVar3) {
+    unicode_utf8_DecodeRune
+              (in_stack_ffffffffffffffd8,
+               (sdword)rb + ((dword)local_10 & (dword)((int)(uVar2 - 0x80) >> 0x3f)) + 0x100,
+               uVar3 - uVar2);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm_decomposeHangul(__uint8 buf,int32 r,int ~r0)
+
+{
+  int in_RCX;
+  sdword sVar1;
+  sdword in_EDI;
+  int unaff_R14;
+  sdword sStack0000000000000020;
+  __uint8 in_stack_ffffffffffffffc8;
+  
+  sStack0000000000000020 = in_EDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sVar1 = sStack0000000000000020 + -0xac00;
+  unicode_utf8_EncodeRune(in_stack_ffffffffffffffc8,r,~r0);
+  if ((uint)~r0 < 3) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  unicode_utf8_EncodeRune
+            (in_stack_ffffffffffffffc8,((dword)(-(in_RCX + -3) >> 0x3f) & 3) + r,~r0 + -3);
+  if ((sdword)(sStack0000000000000020 + (sVar1 / 0x1c) * -0x1c) == 0xac00) {
+    return;
+  }
+  if (5 < (uint)~r0) {
+    unicode_utf8_EncodeRune
+              (in_stack_ffffffffffffffc8,((dword)(-(in_RCX + -6) >> 0x3f) & 6) + r,~r0 + -6);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void vendor_golang_org_x_text_unicode_norm___reorderBuffer__decomposeHangul
+               (vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb,int32 r)
+
+{
+  sdword sVar1;
+  sdword sVar2;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  sVar1 = (sdword)(r + -0xac00) / 0x1c;
+  sVar2 = r + sVar1 * -0x1c;
+  vendor_golang_org_x_text_unicode_norm___reorderBuffer__appendRune(rb,sVar1 / 0x15 + 0x1100);
+  vendor_golang_org_x_text_unicode_norm___reorderBuffer__appendRune(rb,sVar1 % 0x15 + 0x1161);
+  if (sVar2 != 0xac00) {
+    vendor_golang_org_x_text_unicode_norm___reorderBuffer__appendRune(rb,sVar2 + -0x9a59);
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void vendor_golang_org_x_text_unicode_norm___reorderBuffer__combineHangul
+               (vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb,int s,int i,int k)
+
+{
+  uint uVar1;
+  byte bVar2;
+  int iVar3;
+  sdword extraout_EAX;
+  int32 l;
+  sdword extraout_EAX_00;
+  int32 v;
+  int32 ~r0;
+  dword dVar4;
+  int bn;
+  uint8 cccC;
+  uint8 cccB;
+  int unaff_R14;
+  vendor_golang_org_x_text_unicode_norm_reorderBuffer *pvStack0000000000000008;
+  
+  while (pvStack0000000000000008 = rb, &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    rb = pvStack0000000000000008;
+  }
+  iVar3 = rb->nrune;
+  while( true ) {
+    if (iVar3 <= i) {
+      rb->nrune = k;
+      return;
+    }
+    uVar1 = k - 1;
+    if (0x1f < uVar1) break;
+    if (0x1f < (uint)i) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    bVar2 = rb->rune[k - 1].ccc;
+    if (bVar2 == 0) {
+      s = uVar1;
+    }
+    if ((s == uVar1) || (bVar2 < rb->rune[i].ccc)) {
+      vendor_golang_org_x_text_unicode_norm___reorderBuffer__runeAt(rb,s,(int32)i);
+      vendor_golang_org_x_text_unicode_norm___reorderBuffer__runeAt(pvStack0000000000000008,i,~r0);
+      if (((dword)(extraout_EAX - 0x1100U) < 0x13) && ((dword)(extraout_EAX_00 - 0x1161U) < 0x15)) {
+        vendor_golang_org_x_text_unicode_norm___reorderBuffer__assignRune
+                  (pvStack0000000000000008,s,
+                   extraout_EAX_00 * 0x1c + extraout_EAX * 0x24c + -0x28469c);
+        rb = pvStack0000000000000008;
+      }
+      else {
+        dVar4 = extraout_EAX - 0xac00;
+        if (((dVar4 < 0x2ba4) && ((dword)(extraout_EAX_00 - 0x11a8U) < 0x1b)) &&
+           ((dword)(((sdword)dVar4 / 0x1c + ((sdword)dVar4 >> 0x1f)) * 0x1c) == dVar4)) {
+          vendor_golang_org_x_text_unicode_norm___reorderBuffer__assignRune
+                    (pvStack0000000000000008,s,extraout_EAX + extraout_EAX_00 + -0x11a7);
+          rb = pvStack0000000000000008;
+        }
+        else {
+          if (0x1f < (uint)k) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          pvStack0000000000000008->rune[k] = pvStack0000000000000008->rune[i];
+          k = k + 1;
+          rb = pvStack0000000000000008;
+        }
+      }
+    }
+    else {
+      if (0x1f < (uint)k) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      rb->rune[k] = rb->rune[i];
+      k = k + 1;
+    }
+    i = i + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void vendor_golang_org_x_text_unicode_norm___reorderBuffer__compose
+               (vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb)
+
+{
+  byte bVar1;
+  int iVar2;
+  bool bVar3;
+  ushort extraout_AX;
+  sdword extraout_EAX;
+  int32 ~r0;
+  uint32 key;
+  int32 combined;
+  vendor_golang_org_x_text_unicode_norm_reorderBuffer *rb_00;
+  int32 *extraout_RAX;
+  int i;
+  int s;
+  int k;
+  int bn;
+  void *~r0_00;
+  uint8 cccC;
+  bool blocked;
+  uint uVar4;
+  uint8 cccB;
+  uint uVar5;
+  int unaff_R14;
+  vendor_golang_org_x_text_unicode_norm_reorderBuffer *pvStack0000000000000008;
+  interface___ in_stack_ffffffffffffff98;
+  byte bStack_1e;
+  
+  pvStack0000000000000008 = rb;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (vendor_golang_org_x_text_unicode_norm_recompMapOnce.done == 0) {
+    sync___Once__doSlow(&vendor_golang_org_x_text_unicode_norm_recompMapOnce,
+                        (func__ **)
+                        &PTR_vendor_golang_org_x_text_unicode_norm_buildRecompMap_008ecc08);
+  }
+  iVar2 = pvStack0000000000000008->nrune;
+  if (iVar2 == 0) {
+    return;
+  }
+  i = 1;
+  s = 0;
+  k = 1;
+  rb_00 = pvStack0000000000000008;
+  do {
+    if (iVar2 <= i) {
+      rb_00->nrune = k;
+      return;
+    }
+    if (0x1f < (uint)i) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    uVar4 = (uint)rb_00->rune[i] & 0xff;
+    uVar5 = (uint)rb_00->rune[i] >> 8 & 0xff;
+    if (0x80 < uVar4 + uVar5) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    if (uVar4 + uVar5 < uVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    uVar4 = uVar4 & (int)(uVar4 - 0x80) >> 0x3f;
+    if (uVar5 == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (rb_00->byte[uVar4] == 0xe1) {
+      if (uVar5 < 2) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      if ((rb_00->byte[uVar4 + 1] & 0xfc) == 0x84) {
+        vendor_golang_org_x_text_unicode_norm___reorderBuffer__combineHangul(rb_00,s,i,k);
+        return;
+      }
+    }
+    if (((uint)rb_00->rune[i] & 0x80000000000) == 0) {
+LAB_006bd695:
+      if (0x1f < (uint)k) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      rb_00->rune[k] = rb_00->rune[i];
+      k = k + 1;
+    }
+    else {
+      uVar4 = k - 1;
+      if (0x1f < uVar4) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      bVar1 = rb_00->rune[k - 1].ccc;
+      if (bVar1 == 0) {
+        bVar3 = false;
+        s = uVar4;
+      }
+      else if (s == uVar4) {
+        bVar3 = false;
+      }
+      else {
+        bStack_1e = rb_00->rune[i].ccc;
+        bVar3 = bStack_1e <= bVar1;
+      }
+      if (bVar3) goto LAB_006bd695;
+      vendor_golang_org_x_text_unicode_norm___reorderBuffer__runeAt(rb_00,s,(int32)i);
+      vendor_golang_org_x_text_unicode_norm___reorderBuffer__runeAt(pvStack0000000000000008,i,~r0);
+      if (vendor_golang_org_x_text_unicode_norm_recompMap == (map_uint32_int32)0x0) {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffff98);
+      }
+      runtime_mapaccess1_fast32
+                ((internal_abi_MapType *)&DAT_00830640,
+                 (runtime_hmap *)vendor_golang_org_x_text_unicode_norm_recompMap,
+                 extraout_EAX * 0x10000 + (dword)extraout_AX,~r0_00);
+      rb_00 = pvStack0000000000000008;
+      if (*extraout_RAX == 0) goto LAB_006bd695;
+      vendor_golang_org_x_text_unicode_norm___reorderBuffer__assignRune
+                (pvStack0000000000000008,s,*extraout_RAX);
+      rb_00 = pvStack0000000000000008;
+    }
+    i = i + 1;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void vendor_golang_org_x_text_unicode_norm_buildRecompMap(void)
+
+{
+  dword dVar1;
+  dword dVar2;
+  dword dVar3;
+  dword dVar4;
+  map_uint32_int32 extraout_RAX;
+  map_uint32_int32 extraout_RAX_00;
+  map_uint32_int32 phVar5;
+  dword *extraout_RAX_01;
+  int i;
+  runtime_hmap *in_RDI;
+  runtime_hmap *extraout_RDI;
+  map_uint32_int32 *extraout_R11;
+  int unaff_R14;
+  undefined8 local_18;
+  uint local_10;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  runtime_makemap((internal_abi_MapType *)&DAT_00830640,0x3ad,(runtime_hmap *)0x0,in_RDI);
+  phVar5 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_00;
+    extraout_R11[1] = vendor_golang_org_x_text_unicode_norm_recompMap;
+    phVar5 = extraout_RAX_00;
+  }
+  local_18 = 0;
+  i = 0;
+  vendor_golang_org_x_text_unicode_norm_recompMap = phVar5;
+  while( true ) {
+    if (0x1d67 < i) {
+      return;
+    }
+    if (i + 8U < (uint)i) break;
+    if (&local_18 != (undefined8 *)((int)&DAT_008d2f70 + i)) {
+      local_18 = *(undefined8 *)((int)&DAT_008d2f70 + i);
+    }
+    dVar1 = local_18._4_4_ >> 0x18;
+    dVar2 = local_18._4_4_ & 0xff0000;
+    dVar3 = local_18._4_4_ & 0xff00;
+    dVar4 = local_18._4_4_ << 0x18;
+    local_10 = i + 8U;
+    runtime_mapassign_fast32
+              ((internal_abi_MapType *)&DAT_00830640,
+               (runtime_hmap *)vendor_golang_org_x_text_unicode_norm_recompMap,
+               (dword)local_18 >> 0x18 | ((dword)local_18 & 0xff0000) >> 8 |
+               ((dword)local_18 & 0xff00) << 8 | (dword)local_18 << 0x18,&local_18);
+    *extraout_RAX_01 = dVar1 | dVar2 >> 8 | dVar3 << 8 | dVar4;
+    i = local_10;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// DWARF original prototype: void
+// vendor/golang.org/x/text/unicode/norm.lookupInfoNFC(vendor/golang.org/x/text/unicode/norm.input
+// b, int i, vendor/golang.org/x/text/unicode/norm.Properties ~r0,
+// vendor/golang.org/x/text/unicode/norm.Properties ~r0)
+
+void vendor_golang_org_x_text_unicode_norm_lookupInfoNFC
+               (vendor_golang_org_x_text_unicode_norm_input b,int i,
+               vendor_golang_org_x_text_unicode_norm_Properties ~r0,
+               vendor_golang_org_x_text_unicode_norm_Properties ~r0_1)
+
+{
+  uint16 v_00;
+  uint16 v;
+  vendor_golang_org_x_text_unicode_norm_Properties ~r0_00;
+  int sz_00;
+  int sz;
+  int in_RDI;
+  vendor_golang_org_x_text_unicode_norm_Properties ~r0_1_00;
+  int in_R8;
+  int unaff_R14;
+  
+  b.str.str = (uint8 *)i;
+  b.bytes.array = (uint8 *)~r0_1;
+  b.str.len = (int)~r0;
+  b.bytes.len = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  vendor_golang_org_x_text_unicode_norm___input__charinfoNFC
+            (&b,in_R8,(uint16)b.bytes.array,b.bytes.len);
+  vendor_golang_org_x_text_unicode_norm_compInfo(v_00,sz_00,~r0_00,~r0_1_00);
+  return;
+}
+
+
+
+// DWARF original prototype: void
+// vendor/golang.org/x/text/unicode/norm.lookupInfoNFKC(vendor/golang.org/x/text/unicode/norm.input
+// b, int i, vendor/golang.org/x/text/unicode/norm.Properties ~r0,
+// vendor/golang.org/x/text/unicode/norm.Properties ~r0)
+
+void vendor_golang_org_x_text_unicode_norm_lookupInfoNFKC
+               (vendor_golang_org_x_text_unicode_norm_input b,int i,
+               vendor_golang_org_x_text_unicode_norm_Properties ~r0,
+               vendor_golang_org_x_text_unicode_norm_Properties ~r0_1)
+
+{
+  uint16 v_00;
+  uint16 v;
+  vendor_golang_org_x_text_unicode_norm_Properties ~r0_00;
+  int sz_00;
+  int sz;
+  int in_RDI;
+  vendor_golang_org_x_text_unicode_norm_Properties ~r0_1_00;
+  int in_R8;
+  int unaff_R14;
+  
+  b.str.str = (uint8 *)i;
+  b.bytes.array = (uint8 *)~r0_1;
+  b.str.len = (int)~r0;
+  b.bytes.len = in_RDI;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  vendor_golang_org_x_text_unicode_norm___input__charinfoNFKC
+            (&b,in_R8,(uint16)b.bytes.array,b.bytes.len);
+  vendor_golang_org_x_text_unicode_norm_compInfo(v_00,sz_00,~r0_00,~r0_1_00);
+  return;
+}
+
+
+
+// DWARF original prototype: void vendor/golang.org/x/text/unicode/norm.compInfo(uint16 v, int sz,
+// vendor/golang.org/x/text/unicode/norm.Properties ~r0,
+// vendor/golang.org/x/text/unicode/norm.Properties ~r0)
+
+void vendor_golang_org_x_text_unicode_norm_compInfo
+               (uint16 v,int sz,vendor_golang_org_x_text_unicode_norm_Properties ~r0,
+               vendor_golang_org_x_text_unicode_norm_Properties ~r0_1)
+
+{
+  uint8 h;
+  vendor_golang_org_x_text_unicode_norm_qcInfo f;
+  ushort uVar1;
+  uint8 c;
+  
+  if (v == 0) {
+    return;
+  }
+  if (0x7fff < v) {
+    return;
+  }
+  if (0x4be1 < v) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (0x2dd4 < v) {
+    uVar1 = (vendor_golang_org_x_text_unicode_norm_decomps[v] & 0x3f) + v + 1;
+    if (0x4be1 < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (0x4aee < uVar1) {
+      if (0x4bdf < uVar1) {
+        return;
+      }
+      if (0x4be1 < (ushort)((vendor_golang_org_x_text_unicode_norm_decomps[v] & 0x3f) + v + 2)) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+    }
+  }
+  return;
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm___input__charinfoNFC
+               (vendor_golang_org_x_text_unicode_norm_input *in,int p,uint16 ~r0,int ~r1)
+
+{
+  uint8 *puVar1;
+  uint uVar2;
+  __uint8 s;
+  int sz;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd8;
+  int in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar1 = (in->bytes).array;
+  if (puVar1 != (uint8 *)0x0) {
+    uVar2 = (in->bytes).len;
+    if ((uint)p <= uVar2) {
+      s.cap = in_stack_ffffffffffffffe8;
+      s.array = in_stack_ffffffffffffffd8.str;
+      s.len = in_stack_ffffffffffffffd8.len;
+      vendor_golang_org_x_text_unicode_norm___nfcTrie__lookup
+                (vendor_golang_org_x_text_unicode_norm_nfcData,s,
+                 (short)puVar1 + ((ushort)(-((in->bytes).cap - p) >> 0x3f) & (ushort)p),uVar2 - p);
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  uVar2 = (in->str).len;
+  if ((uint)p <= uVar2) {
+    sz = uVar2 - p;
+    vendor_golang_org_x_text_unicode_norm___nfcTrie__lookupString
+              (vendor_golang_org_x_text_unicode_norm_nfcData,in_stack_ffffffffffffffd8,
+               (short)(in->str).str + ((ushort)(-sz >> 0x3f) & (ushort)p),sz);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm___input__charinfoNFKC
+               (vendor_golang_org_x_text_unicode_norm_input *in,int p,uint16 ~r0,int ~r1)
+
+{
+  uint8 *puVar1;
+  uint uVar2;
+  __uint8 s;
+  int sz;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd8;
+  int in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar1 = (in->bytes).array;
+  if (puVar1 != (uint8 *)0x0) {
+    uVar2 = (in->bytes).len;
+    if ((uint)p <= uVar2) {
+      s.cap = in_stack_ffffffffffffffe8;
+      s.array = in_stack_ffffffffffffffd8.str;
+      s.len = in_stack_ffffffffffffffd8.len;
+      vendor_golang_org_x_text_unicode_norm___nfkcTrie__lookup
+                (vendor_golang_org_x_text_unicode_norm_nfkcData,s,
+                 (short)puVar1 + ((ushort)(-((in->bytes).cap - p) >> 0x3f) & (ushort)p),uVar2 - p);
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  uVar2 = (in->str).len;
+  if ((uint)p <= uVar2) {
+    sz = uVar2 - p;
+    vendor_golang_org_x_text_unicode_norm___nfkcTrie__lookupString
+              (vendor_golang_org_x_text_unicode_norm_nfkcData,in_stack_ffffffffffffffd8,
+               (short)(in->str).str + ((ushort)(-sz >> 0x3f) & (ushort)p),sz);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm___input__hangul
+               (vendor_golang_org_x_text_unicode_norm_input *in,int p,int32 r)
+
+{
+  byte bVar1;
+  byte bVar2;
+  uint8 *puVar3;
+  __uint8 p_00;
+  int iVar4;
+  int extraout_RBX;
+  int size;
+  int extraout_RBX_00;
+  uint uVar5;
+  uint8 b0_1;
+  uint8 b0;
+  uint8 b1_1;
+  uint8 b1;
+  int unaff_R14;
+  bool bVar6;
+  string in_stack_ffffffffffffffe0;
+  int in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  puVar3 = (in->bytes).array;
+  if (puVar3 == (uint8 *)0x0) {
+    uVar5 = (in->str).len;
+    if (uVar5 < (uint)p) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    puVar3 = (in->str).str;
+    iVar4 = uVar5 - p;
+    uVar5 = -iVar4 >> 0x3f & p;
+    if (iVar4 < 3) {
+      return;
+    }
+    bVar1 = puVar3[uVar5];
+    if (bVar1 < 0xea) {
+      return;
+    }
+    bVar2 = puVar3[uVar5 + 1];
+    if (bVar1 == 0xea) {
+      bVar6 = 0xaf < bVar2;
+LAB_006bdee7:
+      if (!bVar6) {
+        return;
+      }
+    }
+    else if (0xec < bVar1) {
+      if (0xed < bVar1) {
+        return;
+      }
+      if (0x9d < bVar2) {
+        if (bVar2 == 0x9e) {
+          bVar6 = puVar3[uVar5 + 2] < 0xa4;
+        }
+        else {
+          bVar6 = false;
+        }
+        goto LAB_006bdee7;
+      }
+    }
+    unicode_utf8_DecodeRuneInString(in_stack_ffffffffffffffe0,(sdword)puVar3 + (sdword)uVar5,iVar4);
+    iVar4 = extraout_RBX_00;
+    goto LAB_006bdef3;
+  }
+  uVar5 = (in->bytes).len;
+  if (uVar5 < (uint)p) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  iVar4 = uVar5 - p;
+  uVar5 = -((in->bytes).cap - p) >> 0x3f & p;
+  if (iVar4 < 3) {
+    return;
+  }
+  bVar1 = puVar3[uVar5];
+  if (bVar1 < 0xea) {
+    return;
+  }
+  bVar2 = puVar3[uVar5 + 1];
+  if (bVar1 == 0xea) {
+    bVar6 = 0xaf < bVar2;
+LAB_006bde6a:
+    if (!bVar6) {
+      return;
+    }
+  }
+  else if (0xec < bVar1) {
+    if (0xed < bVar1) {
+      return;
+    }
+    if (0x9d < bVar2) {
+      if (bVar2 == 0x9e) {
+        bVar6 = puVar3[uVar5 + 2] < 0xa4;
+      }
+      else {
+        bVar6 = false;
+      }
+      goto LAB_006bde6a;
+    }
+  }
+  p_00.cap = in_stack_fffffffffffffff0;
+  p_00.array = in_stack_ffffffffffffffe0.str;
+  p_00.len = in_stack_ffffffffffffffe0.len;
+  unicode_utf8_DecodeRune(p_00,(sdword)puVar3 + (sdword)uVar5,iVar4);
+  iVar4 = extraout_RBX;
+LAB_006bdef3:
+  if (iVar4 == 3) {
+    return;
+  }
+  return;
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm_nextHangul
+               (vendor_golang_org_x_text_unicode_norm_Iter *i,__uint8 ~r0)
+
+{
+  vendor_golang_org_x_text_unicode_norm_Properties vVar1;
+  __uint8 buf;
+  vendor_golang_org_x_text_unicode_norm_input vVar2;
+  undefined uVar3;
+  sdword extraout_EAX;
+  vendor_golang_org_x_text_unicode_norm_Iter *extraout_RAX;
+  vendor_golang_org_x_text_unicode_norm_Iter *extraout_RAX_00;
+  uint extraout_RAX_01;
+  undefined extraout_CL;
+  sdword r;
+  int next;
+  int extraout_RCX;
+  int p_00;
+  vendor_golang_org_x_text_unicode_norm_iterFunc **ppvVar4;
+  int p;
+  int extraout_RBX;
+  int p_01;
+  __uint8 *extraout_RBX_00;
+  __uint8 *extraout_RBX_01;
+  __uint8 *p_Var5;
+  undefined extraout_SIL;
+  undefined extraout_DIL;
+  undefined extraout_R8B;
+  uint16 extraout_R9W;
+  byte bVar6;
+  uint8 n;
+  undefined8 *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffff68;
+  int in_stack_ffffffffffffff78;
+  undefined in_stack_ffffffffffffff80 [16];
+  byte bStack_63;
+  uint8 uStack_5c;
+  undefined4 local_18;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  while (&local_18 <= *(undefined4 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  p_01 = i->p;
+  p_00 = p_01 + 3;
+  if (p_00 < (i->rb).nsrc) {
+    vendor_golang_org_x_text_unicode_norm___input__hangul(&(i->rb).src,p_00,(int32)p_00);
+    if (extraout_EAX == 0) {
+      vVar1 = i->info;
+      if (0x1e < (i->rb).ss) {
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(in_stack_ffffffffffffff68);
+      }
+      uStack_5c = vVar1.nLead;
+      bVar6 = (i->rb).ss + uStack_5c;
+      (i->rb).ss = bVar6;
+      if (bVar6 < 0x1f) {
+        if (uStack_5c == 0) {
+          bStack_63 = vVar1.flags;
+          (i->rb).ss = bStack_63 & 3;
+        }
+      }
+      else {
+        (i->rb).ss = 0;
+      }
+      local_18 = *(undefined4 *)&(i->rb).src.bytes.len;
+      uStack_14 = *(undefined4 *)((int)&(i->rb).src.bytes.len + 4);
+      uStack_10 = *(undefined4 *)&(i->rb).src.bytes.cap;
+      uStack_c = *(undefined4 *)((int)&(i->rb).src.bytes.cap + 4);
+      vVar2.bytes.array = (uint8 *)in_stack_ffffffffffffff78;
+      vVar2.str.str = (uint8 *)in_stack_ffffffffffffff68._type;
+      vVar2.str.len = (int)in_stack_ffffffffffffff68.data;
+      vVar2.bytes.len = in_stack_ffffffffffffff80._0_8_;
+      vVar2.bytes.cap = in_stack_ffffffffffffff80._8_8_;
+      uVar3 = (**(i->rb).f.info)(vVar2,(int)(i->rb).src.str.str,
+                                 (vendor_golang_org_x_text_unicode_norm_Properties *)
+                                 (i->rb).src.str.len);
+      vVar1.size = (char)extraout_RBX_00;
+      vVar1.pos = uVar3;
+      vVar1.ccc = extraout_CL;
+      vVar1.tccc = extraout_DIL;
+      vVar1.nLead = extraout_SIL;
+      vVar1.flags = extraout_R8B;
+      vVar1.index = extraout_R9W;
+      i->info = vVar1;
+      ppvVar4 = (i->rb).f.nextMain;
+      p_Var5 = extraout_RBX_00;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = ppvVar4;
+        extraout_R11_00[1] = extraout_RAX_00->next;
+        i = extraout_RAX_00;
+        p_Var5 = extraout_RBX_01;
+      }
+      i->next = ppvVar4;
+      (**ppvVar4)(i,p_Var5);
+      return;
+    }
+  }
+  else {
+    if (runtime_writeBarrier._0_4_ != 0) {
+      ppvVar4 = i->next;
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = ppvVar4;
+      i = extraout_RAX;
+      p_00 = extraout_RCX;
+      p_01 = extraout_RBX;
+    }
+    i->next = (vendor_golang_org_x_text_unicode_norm_iterFunc **)
+              &PTR_vendor_golang_org_x_text_unicode_norm_nextDone_008ecc40;
+    i->p = (i->rb).nsrc;
+  }
+  i->p = p_00;
+  r = (sdword)i + 0x228;
+  vendor_golang_org_x_text_unicode_norm___input__hangul(&(i->rb).src,p_01,r);
+  buf.cap = in_stack_ffffffffffffff78;
+  buf.array = (uint8 *)in_stack_ffffffffffffff68._type;
+  buf.len = (int)in_stack_ffffffffffffff68.data;
+  vendor_golang_org_x_text_unicode_norm_decomposeHangul(buf,r,0x80);
+  if (0x80 < extraout_RAX_01) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceAlen();
+  }
+  return;
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm_nextDone
+               (vendor_golang_org_x_text_unicode_norm_Iter *i,__uint8 ~r0)
+
+{
+  return;
+}
+
+
+
+void vendor_golang_org_x_text_unicode_norm_nextMulti
+               (vendor_golang_org_x_text_unicode_norm_Iter *i,__uint8 ~r0)
+
+{
+  uint uVar1;
+  vendor_golang_org_x_text_unicode_norm_Iter *extraout_RAX;
+  char extraout_CL;
+  int j;
+  int iVar2;
+  uint8 *puVar3;
+  vendor_golang_org_x_text_unicode_norm_iterFunc **ppvVar4;
+  __uint8 *in_RBX;
+  __uint8 *extraout_RBX;
+  __uint8 *extraout_RBX_00;
+  __uint8 *extraout_RBX_01;
+  vendor_golang_org_x_text_unicode_norm_Iter *extraout_RDI;
+  byte extraout_R8B;
+  uint8 **extraout_R11;
+  undefined8 *extraout_R11_00;
+  int unaff_R14;
+  bool bVar5;
+  undefined in_XMM15 [16];
+  vendor_golang_org_x_text_unicode_norm_input in_stack_ffffffffffffff60;
+  int local_30;
+  uint8 *local_20;
+  undefined local_18 [16];
+  
+  while (&local_20 <= *(uint8 ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RBX = extraout_RBX_01;
+  }
+  uVar1 = (i->multiSeg).len;
+  puVar3 = (i->multiSeg).array;
+  for (j = 1; (j < (int)uVar1 && ((puVar3[j] & 0xc0) == 0x80)); j = j + 1) {
+  }
+  iVar2 = (i->multiSeg).cap;
+  while( true ) {
+    if ((int)uVar1 <= j) {
+      ppvVar4 = (i->rb).f.nextMain;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_00 = ppvVar4;
+        extraout_R11_00[1] = extraout_RAX->next;
+        i = extraout_RAX;
+        in_RBX = extraout_RBX_00;
+      }
+      i->next = ppvVar4;
+      (**ppvVar4)(i,in_RBX);
+      return;
+    }
+    local_30 = in_XMM15._0_8_;
+    local_18._8_8_ = iVar2;
+    local_18._0_8_ = uVar1;
+    local_20 = puVar3;
+    (**(i->rb).f.info)(in_stack_ffffffffffffff60,local_30,
+                       (vendor_golang_org_x_text_unicode_norm_Properties *)0x0);
+    if (extraout_CL == '\0') {
+      bVar5 = (extraout_R8B & 8) == 0;
+    }
+    else {
+      bVar5 = false;
+    }
+    if (bVar5) break;
+    j = ((CONCAT15(extraout_R8B,(uint5)CONCAT11(extraout_CL,(char)extraout_RBX) << 8) & 0xff00) >> 8
+        ) + j;
+    in_RBX = extraout_RBX;
+  }
+  if ((uint)j <= uVar1) {
+    iVar2 = iVar2 - j;
+    (i->multiSeg).len = uVar1 - j;
+    (i->multiSeg).cap = iVar2;
+    puVar3 = puVar3 + (-iVar2 >> 0x3f & j);
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = puVar3;

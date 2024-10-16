@@ -1,0 +1,1000 @@
+    runtime_panicIndex();
+  }
+  iVar5 = *in_RAX;
+  uVar2 = *(undefined4 *)(iVar5 + 4 + i * 8);
+  if ((uint)j < (uint)in_RAX[1]) {
+    uVar3 = *(undefined4 *)(iVar5 + 4 + j * 8);
+    uVar1 = *(undefined2 *)(iVar5 + i * 8);
+    *(undefined2 *)(iVar5 + i * 8) = *(undefined2 *)(iVar5 + j * 8);
+    *(undefined4 *)(iVar5 + 4 + i * 8) = uVar3;
+    *(undefined2 *)(iVar5 + j * 8) = uVar1;
+    *(undefined4 *)(iVar5 + 4 + j * 8) = uVar2;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void compress_flate___CorruptInputError__Error(string ~r0)
+
+{
+  string **ppsVar1;
+  string ~r0_00;
+  int64 *in_RAX;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    ~r0.str = (uint8 *)in_RAX;
+    runtime_morestack_noctxt();
+    in_RAX = (int64 *)~r0.str;
+  }
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)&stack0xffffffffffffffd0;
+  }
+  if (in_RAX != (int64 *)0x0) {
+    strconv_FormatInt(*in_RAX,10,in_stack_ffffffffffffffd0);
+    ~r0_00.len = unaff_RBP;
+    ~r0_00.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void compress_flate___InternalError__Error(string ~r0)
+
+{
+  string **ppsVar1;
+  string ~r0_00;
+  uint8 *in_RAX;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    ~r0.str = in_RAX;
+    runtime_morestack_noctxt();
+    in_RAX = ~r0.str;
+  }
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)&stack0xffffffffffffffd0;
+  }
+  if (in_RAX != (uint8 *)0x0) {
+    ~r0_00.len = unaff_RBP;
+    ~r0_00.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_00);
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void compress_gzip___Reader__Reset(compress_gzip_Reader *z,io_Reader r,error ~r0)
+
+{
+  runtime_iface i;
+  compress_gzip_Header hdr;
+  error err;
+  int iVar1;
+  int extraout_RAX;
+  runtime_itab *extraout_RAX_00;
+  bufio_Reader *b;
+  undefined8 *dst;
+  bufio_Reader *r_1;
+  void *extraout_RAX_01;
+  void *in_RCX;
+  compress_gzip_Reader *extraout_RCX;
+  compress_gzip_Reader *pcVar2;
+  compress_gzip_Reader *z_00;
+  void *pvVar3;
+  undefined1 *in_RBX;
+  void *~r0_00;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  undefined8 extraout_RSI;
+  void *~r0_01;
+  void **extraout_R11;
+  void **extraout_R11_00;
+  void **extraout_R11_01;
+  void **extraout_R11_02;
+  int unaff_R14;
+  string in_XMM15;
+  undefined auVar4 [16];
+  runtime_itab *in_stack_fffffffffffffec8;
+  void *in_stack_fffffffffffffed0;
+  runtime_iface in_stack_fffffffffffffed8;
+  undefined auVar5 [24];
+  undefined in_stack_fffffffffffffee8 [56];
+  runtime_itab *in_stack_ffffffffffffff20;
+  runtime_itab *in_stack_ffffffffffffff28;
+  runtime_itab *prVar6;
+  undefined local_b8 [16];
+  undefined8 local_a8;
+  undefined8 local_70;
+  undefined8 local_68;
+  undefined local_60 [88];
+  
+  while (local_b8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  pvVar3 = (z->decompressor).data;
+  prVar6 = (z->decompressor).tab;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_wbZero((internal_abi_Type *)&DAT_0088dd20,z);
+    in_stack_ffffffffffffff28 = prVar6;
+  }
+  local_60._8_8_ = in_XMM15.len;
+  (z->Header).Comment = in_XMM15;
+  iVar1 = FUN_0046cce1();
+  *(undefined8 *)(iVar1 + 0x68) = extraout_RSI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = pvVar3;
+    extraout_R11[1] = *(void **)(extraout_RAX + 0x70);
+    iVar1 = extraout_RAX;
+  }
+  *(void **)(iVar1 + 0x70) = pvVar3;
+  *(undefined *)(iVar1 + 0x290) = 1;
+  i.data = in_stack_fffffffffffffed0;
+  i.tab = in_stack_fffffffffffffec8;
+  runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_0083d4a0,i,in_stack_fffffffffffffed8);
+  if (extraout_RAX_00 == (runtime_itab *)0x0) {
+    if ((in_RBX != go_itab__bufio_Reader_io_Reader) || (*(int *)((int)in_RCX + 8) < 0x1000)) {
+      runtime_newobject((internal_abi_Type *)&DAT_0088af00,~r0_00);
+      runtime_makeslice((internal_abi_Type *)&DAT_00807920,0x1000,0x1000,~r0_01);
+      local_b8._0_8_ = FUN_0046cdb0();
+      local_b8._8_8_ = 0x1000;
+      local_a8 = 0x1000;
+      local_70 = 0xffffffffffffffff;
+      local_68 = 0xffffffffffffffff;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_wbMove((internal_abi_Type *)&DAT_0088af00,dst,local_b8);
+      }
+      *dst = local_b8._0_8_;
+      in_RCX = (void *)FUN_0046d11a();
+    }
+    (z->r).tab = (runtime_itab *)go_itab__bufio_Reader_compress_flate_Reader;
+    pcVar2 = z;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = extraout_RAX_01;
+      extraout_R11_01[1] = (pcVar2->r).data;
+      in_RCX = extraout_RAX_01;
+    }
+    (pcVar2->r).data = in_RCX;
+  }
+  else {
+    (z->r).tab = extraout_RAX_00;
+    pcVar2 = z;
+    pvVar3 = ~r0_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = extraout_RBX;
+      extraout_R11_00[1] = (extraout_RCX->r).data;
+      pcVar2 = extraout_RCX;
+      pvVar3 = extraout_RBX;
+    }
+    (pcVar2->r).data = pvVar3;
+  }
+  FUN_0046cdb0();
+  hdr.Comment.len = (int)in_stack_fffffffffffffed0;
+  hdr.Comment.str = (uint8 *)in_stack_fffffffffffffec8;
+  hdr.Extra.array = (uint8 *)in_stack_fffffffffffffed8.tab;
+  hdr.Extra.len = (int)in_stack_fffffffffffffed8.data;
+  auVar5 = in_stack_fffffffffffffee8._8_24_;
+  hdr.Extra.cap = in_stack_fffffffffffffee8._0_8_;
+  hdr.ModTime.wall = auVar5._0_8_;
+  hdr.ModTime.ext = auVar5._8_8_;
+  hdr.ModTime.loc = (time_Location *)auVar5._16_8_;
+  hdr.Name.str = (uint8 *)SUB168(in_stack_fffffffffffffee8._32_16_,0);
+  hdr.Name.len = SUB168(in_stack_fffffffffffffee8._32_16_,8);
+  hdr.OS = in_stack_fffffffffffffee8[48];
+  hdr._81_7_ = in_stack_fffffffffffffee8._49_7_;
+  err.data = in_stack_ffffffffffffff28;
+  err.tab = in_stack_ffffffffffffff20;
+  compress_gzip___Reader__readHeader(z_00,hdr,err);
+  local_60._0_8_ = in_stack_fffffffffffffec8;
+  FUN_0046d11a();
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_wbMove((internal_abi_Type *)&DAT_0087f320,z,local_60);
+  }
+  (z->Header).Comment.str = (uint8 *)local_60._0_8_;
+  auVar4 = FUN_0046d11a();
+  pvVar3 = auVar4._8_8_;
+  (z->err).tab = auVar4._0_8_;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_02 = extraout_RBX_00;
+    extraout_R11_02[1] = (z->err).data;
+    pvVar3 = extraout_RBX_00;
+  }
+  (z->err).data = pvVar3;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void compress_gzip___Reader__Multistream(compress_gzip_Reader *z,bool ok)
+
+{
+  z->multistream = ok;
+  return;
+}
+
+
+
+void compress_gzip___Reader__readString(compress_gzip_Reader *z,string ~r0,error ~r1)
+
+{
+  __uint8 p;
+  runtime_slice ~r0_00;
+  __int32 a;
+  bool bVar1;
+  byte bVar2;
+  uint32 extraout_EAX;
+  void *extraout_RAX;
+  void *oldPtr;
+  void *extraout_RAX_00;
+  uint n;
+  uint oldCap;
+  uint extraout_RCX;
+  bool needConv;
+  int extraout_RBX;
+  uint extraout_RBX_00;
+  int iVar3;
+  void *~r0_01;
+  uint newLen;
+  int unaff_R14;
+  string in_stack_ffffffffffffff98;
+  int in_stack_ffffffffffffffa8;
+  string in_stack_ffffffffffffffb0;
+  int i;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  n = 0;
+  bVar1 = false;
+  while( true ) {
+    if (0x1ff < (int)n) {
+      return;
+    }
+    bVar2 = (*(code *)(z->r).tab[1].inter)((z->r).data);
+    if (0x1ff < n) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    z->buf[n] = bVar2;
+    if (extraout_RBX != 0) {
+      return;
+    }
+    bVar1 = (bool)(0x7f < bVar2 | bVar1);
+    if (bVar2 == 0) break;
+    n = n + 1;
+  }
+  p.cap = in_stack_ffffffffffffffa8;
+  p.array = in_stack_ffffffffffffff98.str;
+  p.len = in_stack_ffffffffffffff98.len;
+  hash_crc32_update(z->digest,hash_crc32_IEEETable,p,SUB81(z->buf,0),(sdword)n + 1);
+  z->digest = extraout_EAX;
+  if (bVar1) {
+    runtime_makeslice((internal_abi_Type *)&DAT_008077e0,0,n,~r0_01);
+    newLen = 0;
+    oldPtr = extraout_RAX;
+    oldCap = n;
+    for (iVar3 = 0; iVar3 < (int)n; iVar3 = iVar3 + 1) {
+      newLen = newLen + 1;
+      bVar2 = z->buf[iVar3];
+      if (oldCap < newLen) {
+        ~r0_00.cap = in_stack_ffffffffffffffa8;
+        ~r0_00.array = in_stack_ffffffffffffff98.str;
+        ~r0_00.len = in_stack_ffffffffffffff98.len;
+        runtime_growslice(oldPtr,newLen,oldCap,1,(internal_abi_Type *)&DAT_008077e0,~r0_00);
+        oldPtr = extraout_RAX_00;
+        oldCap = extraout_RCX;
+        newLen = extraout_RBX_00;
+      }
+      *(dword *)((int)oldPtr + newLen * 4 + -4) = (dword)bVar2;
+    }
+    a.cap = in_stack_ffffffffffffffa8;
+    a.array = (int32 *)in_stack_ffffffffffffff98.str;
+    a.len = in_stack_ffffffffffffff98.len;
+    runtime_slicerunetostring((runtime_tmpBuf *)0x0,a,in_stack_ffffffffffffffb0);
+    return;
+  }
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,z->buf,n,in_stack_ffffffffffffff98);
+  return;
+}
+
+
+
+void compress_gzip___Reader__readHeader(compress_gzip_Reader *z,compress_gzip_Header hdr,error err)
+
+{
+  ushort uVar1;
+  runtime_itab *prVar2;
+  __uint8 data;
+  __uint8 p;
+  __uint8 p_00;
+  error ~r1;
+  error ~r1_00;
+  io_ReadCloser ~r0;
+  __uint8 buf;
+  __uint8 buf_00;
+  __uint8 buf_01;
+  __uint8 buf_02;
+  error err_00;
+  error err_01;
+  error err_02;
+  error err_03;
+  undefined extraout_AL;
+  uint32 extraout_EAX;
+  uint32 extraout_EAX_00;
+  uint32 extraout_EAX_01;
+  int iVar3;
+  int min;
+  int min_00;
+  int min_01;
+  int min_02;
+  undefined8 extraout_RAX;
+  int extraout_RAX_00;
+  runtime_itab *extraout_RAX_01;
+  void *x;
+  runtime_itab *~r0_00;
+  void *x_00;
+  runtime_itab *tab;
+  runtime_itab *tab_00;
+  void *x_01;
+  compress_gzip_Reader *extraout_RCX;
+  int extraout_RBX;
+  runtime_itab *tab_01;
+  runtime_itab *tab_02;
+  runtime_itab *tab_03;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *pvVar4;
+  uint8 flg;
+  bool ~r0_01;
+  bool ~r0_02;
+  bool ~r0_03;
+  void *~r0_04;
+  void *x_02;
+  void *x_03;
+  void **extraout_R11;
+  int unaff_R14;
+  string in_stack_ffffffffffffff20;
+  runtime_itab *in_stack_ffffffffffffff30;
+  void *in_stack_ffffffffffffff38;
+  int in_stack_ffffffffffffff40;
+  undefined in_stack_ffffffffffffff48 [15];
+  undefined in_stack_ffffffffffffff57;
+  uint8 uVar5;
+  int local_60 [6];
+  runtime_itab *local_30;
+  undefined8 local_28;
+  runtime_itab *local_20;
+  undefined local_18;
+  runtime_itab *local_10;
+  
+  while (local_60 <= *(int **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  iVar3 = FUN_0046cdb0();
+  local_10 = (runtime_itab *)(iVar3 + 0x80);
+  local_60[0] = *(int *)(iVar3 + 0x60);
+  runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,*(runtime_itab **)(iVar3 + 0x58),
+                  local_10);
+  buf.len = (int)in_stack_ffffffffffffff38;
+  buf.array = (uint8 *)in_stack_ffffffffffffff30;
+  buf.cap = in_stack_ffffffffffffff40;
+  err_00.data._7_1_ = in_stack_ffffffffffffff57;
+  err_00._0_15_ = in_stack_ffffffffffffff48;
+  io_ReadAtLeast((io_Reader)in_stack_ffffffffffffff20,buf,min,local_60[0],err_00);
+  if (extraout_RBX != 0) {
+    return;
+  }
+  if (((z->buf[0] != 0x1f) || (z->buf[1] != 0x8b)) || (z->buf[2] != 8)) {
+    return;
+  }
+  uVar5 = z->buf[3];
+  data.cap = (int)in_stack_ffffffffffffff30;
+  data.array = in_stack_ffffffffffffff20.str;
+  data.len = in_stack_ffffffffffffff20.len;
+  hash_crc32_ChecksumIEEE(data,(uint32)local_10);
+  z->digest = extraout_EAX;
+  if ((uVar5 & 4) != 0) {
+    prVar2 = (runtime_itab *)(z->r).data;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,prVar2);
+    buf_00.len = (int)in_stack_ffffffffffffff38;
+    buf_00.array = (uint8 *)in_stack_ffffffffffffff30;
+    buf_00.cap = in_stack_ffffffffffffff40;
+    err_01.data._7_1_ = uVar5;
+    err_01._0_15_ = in_stack_ffffffffffffff48;
+    io_ReadAtLeast((io_Reader)in_stack_ffffffffffffff20,buf_00,min_00,(int)prVar2,err_01);
+    if (tab_01 != (runtime_itab *)0x0) {
+      if (io_EOF.tab == tab_01) {
+        runtime_ifaceeq(tab_01,x,io_EOF.data,~r0_01);
+      }
+      return;
+    }
+    p.cap = (int)in_stack_ffffffffffffff30;
+    p.array = in_stack_ffffffffffffff20.str;
+    p.len = in_stack_ffffffffffffff20.len;
+    hash_crc32_update(z->digest,hash_crc32_IEEETable,p,SUB81(local_10,0),2);
+    z->digest = extraout_EAX_00;
+    uVar1 = *(ushort *)z->buf;
+    runtime_makeslice((internal_abi_Type *)&DAT_00807920,(uint)uVar1,(uint)uVar1,~r0_04);
+    pvVar4 = (z->r).data;
+    local_18 = extraout_AL;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,~r0_00);
+    buf_01.len = (int)in_stack_ffffffffffffff38;
+    buf_01.array = (uint8 *)in_stack_ffffffffffffff30;
+    buf_01.cap = in_stack_ffffffffffffff40;
+    err_02.data._7_1_ = uVar5;
+    err_02._0_15_ = in_stack_ffffffffffffff48;
+    io_ReadAtLeast((io_Reader)in_stack_ffffffffffffff20,buf_01,min_01,(int)pvVar4,err_02);
+    if (tab_02 != (runtime_itab *)0x0) {
+      if (io_EOF.tab == tab_02) {
+        runtime_ifaceeq(tab_02,x_00,io_EOF.data,~r0_02);
+      }
+      return;
+    }
+    p_00.cap = (int)in_stack_ffffffffffffff30;
+    p_00.array = in_stack_ffffffffffffff20.str;
+    p_00.len = in_stack_ffffffffffffff20.len;
+    hash_crc32_update(z->digest,hash_crc32_IEEETable,p_00,(bool)local_18,(dword)uVar1);
+    z->digest = extraout_EAX_01;
+  }
+  if (((uVar5 & 8) != 0) &&
+     (~r1.data = in_stack_ffffffffffffff38, ~r1.tab = in_stack_ffffffffffffff30,
+     compress_gzip___Reader__readString(z,in_stack_ffffffffffffff20,~r1), tab != (runtime_itab *)0x0
+     )) {
+    if (io_EOF.tab == tab) {
+      runtime_ifaceeq(tab,x_02,io_EOF.data,SUB81(x_02,0));
+    }
+    return;
+  }
+  if (((uVar5 & 0x10) != 0) &&
+     (~r1_00.data = in_stack_ffffffffffffff38, ~r1_00.tab = in_stack_ffffffffffffff30,
+     compress_gzip___Reader__readString(z,in_stack_ffffffffffffff20,~r1_00),
+     tab_00 != (runtime_itab *)0x0)) {
+    if (io_EOF.tab == tab_00) {
+      runtime_ifaceeq(tab_00,x_03,io_EOF.data,SUB81(x_03,0));
+    }
+    return;
+  }
+  if ((uVar5 & 2) != 0) {
+    prVar2 = (runtime_itab *)(z->r).data;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,prVar2);
+    buf_02.len = (int)in_stack_ffffffffffffff38;
+    buf_02.array = (uint8 *)in_stack_ffffffffffffff30;
+    buf_02.cap = in_stack_ffffffffffffff40;
+    err_03.data._7_1_ = uVar5;
+    err_03._0_15_ = in_stack_ffffffffffffff48;
+    io_ReadAtLeast((io_Reader)in_stack_ffffffffffffff20,buf_02,min_02,(int)prVar2,err_03);
+    if (tab_03 != (runtime_itab *)0x0) {
+      if (io_EOF.tab == tab_03) {
+        runtime_ifaceeq(tab_03,x_01,io_EOF.data,~r0_03);
+      }
+      return;
+    }
+    if (*(short *)z->buf != (short)z->digest) {
+      return;
+    }
+  }
+  z->digest = 0;
+  if ((z->decompressor).tab == (runtime_itab *)0x0) {
+    local_20 = (runtime_itab *)(z->r).data;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,local_20);
+    ~r0.data = in_stack_ffffffffffffff38;
+    ~r0.tab = in_stack_ffffffffffffff30;
+    compress_flate_NewReader((io_Reader)in_stack_ffffffffffffff20,~r0);
+    (z->decompressor).tab = extraout_RAX_01;
+    pvVar4 = extraout_RBX_00;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RBX_01;
+      extraout_R11[1] = (extraout_RCX->decompressor).data;
+      z = extraout_RCX;
+      pvVar4 = extraout_RBX_01;
+    }
+    (z->decompressor).data = pvVar4;
+  }
+  else {
+    local_20 = (runtime_itab *)(z->r).data;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,local_20);
+    local_30 = (runtime_itab *)(z->decompressor).data;
+    local_28 = extraout_RAX;
+    runtime_assertI2I((internal_abi_InterfaceType *)&DAT_00839b40,(z->decompressor).tab,local_30);
+    (**(code **)(extraout_RAX_00 + 0x18))(local_30,local_28,local_20,0,0,0);
+  }
+  return;
+}
+
+
+
+void compress_gzip___Reader__Read(compress_gzip_Reader *z,__uint8 p,int n,error err)
+
+{
+  io_Reader r;
+  __uint8 p_00;
+  compress_gzip_Header hdr;
+  __uint8 buf;
+  error err_00;
+  char extraout_AL;
+  char extraout_AL_00;
+  uint32 extraout_EAX;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  void *pvVar1;
+  int min;
+  compress_gzip_Reader *extraout_RAX_01;
+  compress_gzip_Reader *pcVar2;
+  compress_gzip_Reader *extraout_RAX_02;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  void *x;
+  undefined8 extraout_RCX_01;
+  compress_gzip_Reader *extraout_RCX_02;
+  void *extraout_RCX_03;
+  void *pvVar3;
+  void *extraout_RCX_04;
+  runtime_itab *extraout_RBX;
+  runtime_itab *tab;
+  void *extraout_RBX_00;
+  runtime_itab *prVar4;
+  bool ~r0;
+  bool ~r0_00;
+  void *in_RDI;
+  void **extraout_R11;
+  undefined8 *extraout_R11_00;
+  void **extraout_R11_01;
+  void **extraout_R11_02;
+  void **extraout_R11_03;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  undefined auVar5 [16];
+  runtime_itab *in_stack_ffffffffffffff20;
+  void *in_stack_ffffffffffffff28;
+  uint8 *in_stack_ffffffffffffff30;
+  undefined in_stack_ffffffffffffff38 [16];
+  error in_stack_ffffffffffffff48;
+  undefined in_stack_ffffffffffffff58 [32];
+  runtime_itab *in_stack_ffffffffffffff78;
+  undefined local_60 [88];
+  
+  while (local_60 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((z->err).tab != (runtime_itab *)0x0) {
+    return;
+  }
+  pvVar1 = (void *)0x0;
+  pcVar2 = z;
+  while( true ) {
+    if (pvVar1 != (void *)0x0) {
+      return;
+    }
+    (*(code *)(pcVar2->decompressor).tab[1].inter)((pcVar2->decompressor).data,n);
+    (z->err).tab = extraout_RBX;
+    pvVar1 = extraout_RAX;
+    pvVar3 = extraout_RCX;
+    pcVar2 = z;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RCX_00;
+      extraout_R11[1] = (pcVar2->err).data;
+      pvVar1 = extraout_RAX_00;
+      pvVar3 = extraout_RCX_00;
+    }
+    (pcVar2->err).data = pvVar3;
+    if (in_RDI < pvVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    p_00.len = (int)in_stack_ffffffffffffff28;
+    p_00.array = (uint8 *)in_stack_ffffffffffffff20;
+    p_00.cap = (int)in_stack_ffffffffffffff30;
+    hash_crc32_update(pcVar2->digest,hash_crc32_IEEETable,p_00,SUB81(n,0),(uint32)pvVar1);
+    z->digest = extraout_EAX;
+    z->size = z->size + (sdword)pvVar1;
+    prVar4 = (z->err).tab;
+    if ((io_EOF.tab != prVar4) ||
+       (runtime_ifaceeq(prVar4,(z->err).data,io_EOF.data,~r0), extraout_AL == '\0')) {
+      return;
+    }
+    pvVar3 = (z->r).data;
+    runtime_convI2I((internal_abi_InterfaceType *)&DAT_00834b40,(z->r).tab,(runtime_itab *)z);
+    r.data = in_stack_ffffffffffffff28;
+    r.tab = in_stack_ffffffffffffff20;
+    buf.len = in_stack_ffffffffffffff38._0_8_;
+    buf.cap = in_stack_ffffffffffffff38._8_8_;
+    buf.array = in_stack_ffffffffffffff30;
+    io_ReadAtLeast(r,buf,min,(int)pvVar3,in_stack_ffffffffffffff48);
+    pvVar3 = compress_gzip_ErrChecksum.data;
+    if (tab != (runtime_itab *)0x0) {
+      pvVar1 = x;
+      prVar4 = tab;
+      if ((io_EOF.tab == tab) &&
+         (runtime_ifaceeq(tab,x,io_EOF.data,~r0_00), pvVar1 = x, prVar4 = tab,
+         extraout_AL_00 != '\0')) {
+        pvVar1 = io_ErrUnexpectedEOF.data;
+        prVar4 = io_ErrUnexpectedEOF.tab;
+      }
+      (z->err).tab = prVar4;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_03 = extraout_RCX_04;
+        extraout_R11_03[1] = (z->err).data;
+        pvVar1 = extraout_RCX_04;
+      }
+      (z->err).data = pvVar1;
+      return;
+    }
+    if ((*(uint32 *)z->buf != z->digest) || (z->size != *(uint32 *)(z->buf + 4))) break;
+    z->digest = 0;
+    z->size = 0;
+    if (z->multistream == false) {
+      return;
+    }
+    (z->err).tab = (runtime_itab *)0x0;
+    pcVar2 = z;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = extraout_RCX_01;
+      pcVar2 = extraout_RAX_01;
+    }
+    local_60._8_8_ = in_XMM15._8_8_;
+    (pcVar2->err).data = (void *)0x0;
+    pcVar2 = (compress_gzip_Reader *)FUN_0046cdb0();
+    hdr.Comment.len = (int)in_stack_ffffffffffffff28;
+    hdr.Comment.str = (uint8 *)in_stack_ffffffffffffff20;
+    hdr.Extra.array = in_stack_ffffffffffffff30;
+    hdr.Extra.len = in_stack_ffffffffffffff38._0_8_;
+    hdr.Extra.cap = in_stack_ffffffffffffff38._8_8_;
+    hdr.ModTime.wall = (uint64)in_stack_ffffffffffffff48.tab;
+    hdr.ModTime.ext = (int64)in_stack_ffffffffffffff48.data;
+    hdr.ModTime.loc = (time_Location *)in_stack_ffffffffffffff58._0_8_;
+    hdr.Name.str = (uint8 *)SUB168(in_stack_ffffffffffffff58._8_16_,0);
+    hdr.Name.len = SUB168(in_stack_ffffffffffffff58._8_16_,8);
+    hdr.OS = in_stack_ffffffffffffff58[24];
+    hdr._81_7_ = in_stack_ffffffffffffff58._25_7_;
+    err_00.data = pvVar1;
+    err_00.tab = in_stack_ffffffffffffff78;
+    compress_gzip___Reader__readHeader(pcVar2,hdr,err_00);
+    local_60._0_8_ = in_stack_ffffffffffffff20;
+    auVar5 = FUN_0046d11a();
+    pvVar3 = auVar5._8_8_;
+    (z->err).tab = auVar5._0_8_;
+    pcVar2 = z;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_01 = extraout_RBX_00;
+      extraout_R11_01[1] = (extraout_RCX_02->err).data;
+      pcVar2 = extraout_RCX_02;
+      pvVar3 = extraout_RBX_00;
+    }
+    (pcVar2->err).data = pvVar3;
+    if ((pcVar2->err).tab != (runtime_itab *)0x0) {
+      return;
+    }
+  }
+  (z->err).tab = compress_gzip_ErrChecksum.tab;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_02 = extraout_RCX_03;
+    extraout_R11_02[1] = (extraout_RAX_02->err).data;
+    z = extraout_RAX_02;
+    pvVar3 = extraout_RCX_03;
+  }
+  (z->err).data = pvVar3;
+  return;
+}
+
+
+
+void compress_gzip___Reader__Close(compress_gzip_Reader *z,error ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  (*(code *)((z->decompressor).tab)->fun[0])((z->decompressor).data);
+  return;
+}
+
+
+
+int compress_gzip_init(EVP_PKEY_CTX *ctx)
+
+{
+  return (int)ctx;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_NewError(string f,__interface___ x,error ~r0)
+
+{
+  string ~r0_00;
+  undefined8 extraout_RAX;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  undefined8 *puVar1;
+  undefined8 uVar2;
+  void *~r0_01;
+  undefined8 *extraout_R11;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  __interface___ in_stack_ffffffffffffffd0;
+  uint8 *in_stack_ffffffffffffffe8;
+  void *pvVar3;
+  int in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.len = in_stack_fffffffffffffff0;
+  ~r0_00.str = in_stack_ffffffffffffffe8;
+  google_golang_org_protobuf_internal_errors_format
+            (in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,~r0_00);
+  pvVar3 = ~r0_01;
+  uVar2 = extraout_RAX;
+  runtime_newobject((internal_abi_Type *)&DAT_008451e0,~r0_01);
+  extraout_RAX_00[1] = pvVar3;
+  puVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = uVar2;
+    puVar1 = extraout_RAX_01;
+  }
+  *puVar1 = uVar2;
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_EnumDescriptorOf
+               (interface___ e,google_golang_org_protobuf_reflect_protoreflect_EnumDescriptor ~r0)
+
+{
+  int in_RAX;
+  int extraout_RAX;
+  undefined8 extraout_RBX;
+  int unaff_R14;
+  runtime_eface in_stack_ffffffffffffffb8;
+  google_golang_org_protobuf_reflect_protoreflect_EnumDescriptor in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RAX != 0) {
+    runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00841260,in_stack_ffffffffffffffb8,
+                       in_stack_ffffffffffffffc8);
+    if (extraout_RAX == 0) {
+      google_golang_org_protobuf_internal_impl_LegacyLoadEnumDesc
+                ((reflect_Type)in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8);
+      return;
+    }
+    (**(code **)(extraout_RAX + 0x18))(extraout_RBX);
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_EnumTypeOf
+               (interface___ e,google_golang_org_protobuf_reflect_protoreflect_EnumType ~r0)
+
+{
+  int in_RAX;
+  int extraout_RAX;
+  undefined8 extraout_RBX;
+  int unaff_R14;
+  runtime_eface in_stack_ffffffffffffffb8;
+  google_golang_org_protobuf_reflect_protoreflect_EnumType in_stack_ffffffffffffffc8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RAX != 0) {
+    runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00841260,in_stack_ffffffffffffffb8,
+                       in_stack_ffffffffffffffc8);
+    if (extraout_RAX == 0) {
+      google_golang_org_protobuf_internal_impl_legacyLoadEnumType
+                ((reflect_Type)in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8);
+      return;
+    }
+    (**(code **)(extraout_RAX + 0x28))(extraout_RBX);
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_EnumStringOf
+               (google_golang_org_protobuf_reflect_protoreflect_EnumDescriptor ed,
+               google_golang_org_protobuf_reflect_protoreflect_EnumNumber n,string ~r0)
+
+{
+  undefined4 in_register_00000004;
+  sdword in_ECX;
+  undefined8 in_RBX;
+  int unaff_R14;
+  undefined auVar1 [16];
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  auVar1 = (**(code **)(CONCAT44(in_register_00000004,n) + 0x80))(in_RBX);
+  auVar1 = (**(code **)(auVar1._0_8_ + 0x20))(auVar1._8_8_,in_ECX);
+  if (auVar1._0_8_ != 0) {
+    (**(code **)(auVar1._0_8_ + 0x30))(auVar1._8_8_);
+    return;
+  }
+  strconv_FormatInt((int)in_ECX,10,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_legacyMessageWrapper_Reset
+               (google_golang_org_protobuf_internal_impl_legacyMessageWrapper m)
+
+{
+  int unaff_R14;
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  google_golang_org_protobuf_proto_Reset(in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void google_golang_org_protobuf_internal_impl_legacyMessageWrapper_String
+               (google_golang_org_protobuf_internal_impl_legacyMessageWrapper m,string ~r0)
+
+{
+  google_golang_org_protobuf_encoding_prototext_MarshalOptions o;
+  string ~r0_00;
+  undefined8 in_RAX;
+  undefined8 in_RBX;
+  uint8 *unaff_RBP;
+  int unaff_R14;
+  int unaff_retaddr;
+  undefined in_stack_ffffffffffffffc8 [32];
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  o.Indent.str = (uint8 *)in_RBX;
+  o._0_8_ = in_RAX;
+  o.Indent.len = in_stack_ffffffffffffffc8._0_8_;
+  o.EmitASCII = (bool)in_stack_ffffffffffffffc8[8];
+  o.allowInvalidUTF8 = (bool)in_stack_ffffffffffffffc8[9];
+  o.AllowPartial = (bool)in_stack_ffffffffffffffc8[10];
+  o.EmitUnknown = (bool)in_stack_ffffffffffffffc8[11];
+  o._28_4_ = in_stack_ffffffffffffffc8._12_4_;
+  o.Resolver.tab = (runtime_itab *)SUB168(in_stack_ffffffffffffffc8._16_16_,0);
+  o.Resolver.data = (void *)SUB168(in_stack_ffffffffffffffc8._16_16_,8);
+  ~r0_00.len = unaff_retaddr;
+  ~r0_00.str = unaff_RBP;
+  google_golang_org_protobuf_encoding_prototext_MarshalOptions_Format
+            (o,in_stack_ffffffffffffffe8,~r0_00);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_legacyMessageWrapper_ProtoMessage
+               (google_golang_org_protobuf_internal_impl_legacyMessageWrapper m)
+
+{
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_ProtoMessageV1Of
+               (interface___ m,google_golang_org_protobuf_runtime_protoiface_MessageV1 ~r0)
+
+{
+  __interface___ a;
+  string ~r0_00;
+  uint8 *in_RAX;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  int extraout_RAX_01;
+  void *x;
+  void *~r0_01;
+  undefined8 extraout_RBX;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffa8;
+  runtime_iface in_stack_ffffffffffffffb8;
+  int in_stack_ffffffffffffffc8;
+  int in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RAX == (uint8 *)0x0) {
+    return;
+  }
+  runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00845360,in_stack_ffffffffffffffa8,
+                     in_stack_ffffffffffffffb8);
+  if (extraout_RAX != 0) {
+    return;
+  }
+  runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_008395c0,in_stack_ffffffffffffffa8,
+                     in_stack_ffffffffffffffb8);
+  if (extraout_RAX_00 == 0) {
+    runtime_assertE2I2((internal_abi_InterfaceType *)&DAT_00836840,in_stack_ffffffffffffffa8,
+                       in_stack_ffffffffffffffb8);
+    if (extraout_RAX_01 != 0) {
+      runtime_convT((internal_abi_Type *)&DAT_00863c40,&stack0xffffffffffffffd8,~r0_01);
+      return;
+    }
+    a.cap = in_stack_ffffffffffffffc8;
+    a.array = (interface___ *)in_stack_ffffffffffffffb8.tab;
+    a.len = (int)in_stack_ffffffffffffffb8.data;
+    ~r0_00.len = in_stack_ffffffffffffffd8;
+    ~r0_00.str = in_RAX;
+    fmt_Sprintf((string)in_stack_ffffffffffffffa8,a,~r0_00);
+    runtime_convTstring((string)in_stack_ffffffffffffffa8,x);
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffa8);
+  }
+  (**(code **)(extraout_RAX_00 + 0x18))(extraout_RBX);
+  google_golang_org_protobuf_internal_impl_Export_ProtoMessageV1Of
+            (in_stack_ffffffffffffffa8,in_stack_ffffffffffffffb8);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_internal_impl_Export_protoMessageV2Of
+               (interface___ m,google_golang_org_protobuf_reflect_protoreflect_ProtoMessage ~r0)
+
+{
+  __interface___ a;
+  string ~r0_00;
+  undefined *in_RAX;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  void *x;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffb0;
+  runtime_iface in_stack_ffffffffffffffc0;
+  int in_stack_ffffffffffffffd0;
+  undefined4 in_stack_ffffffffffffffd8;
+  sdword sVar1;

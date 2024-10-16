@@ -1,0 +1,1000 @@
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_01 = extraout_RAX_03;
+    extraout_R11_01[1] = *(undefined8 *)((int)extraout_R10 + iVar4 * 8 + -0x18);
+    in_RAX = extraout_RAX_03;
+    pvVar1 = extraout_R10;
+  }
+  *(undefined8 *)((int)pvVar1 + iVar4 * 8 + -0x18) = in_RAX;
+  return;
+}
+
+
+
+void regexp___Regexp__Split(regexp_Regexp *re,string s,int n,__string ~r0)
+
+{
+  runtime_slice ~r0_00;
+  runtime_slice ~r0_01;
+  ____int ~r0_02;
+  undefined8 *extraout_RAX;
+  uint **extraout_RAX_00;
+  void *extraout_RAX_01;
+  void *extraout_RAX_02;
+  void *extraout_RAX_03;
+  void *oldPtr;
+  void *extraout_RAX_04;
+  void *extraout_RAX_05;
+  uint in_RCX;
+  uint extraout_RCX;
+  uint extraout_RCX_00;
+  uint uVar1;
+  uint **ppuVar2;
+  uint cap;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  uint extraout_RSI;
+  uint oldCap;
+  int in_RDI;
+  void *~r0_03;
+  int extraout_RDI;
+  int iVar3;
+  int extraout_RDI_00;
+  uint extraout_R8;
+  int iVar4;
+  int extraout_R9;
+  int extraout_R9_00;
+  int end;
+  uint *extraout_R10;
+  uint *puVar5;
+  uint uVar6;
+  int *extraout_R11;
+  int *extraout_R11_00;
+  uint uVar7;
+  int beg;
+  int iVar8;
+  int iVar9;
+  int unaff_R14;
+  string in_stack_ffffffffffffff78;
+  __int *in_stack_ffffffffffffff88;
+  undefined in_stack_ffffffffffffff90 [16];
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RDI == 0) {
+    return;
+  }
+  if (((re->expr).len != 0) && (in_RCX == 0)) {
+    runtime_newobject((internal_abi_Type *)&DAT_008117e0,(void *)n);
+    *extraout_RAX = 0;
+    return;
+  }
+  ~r0_02.len = in_stack_ffffffffffffff90._0_8_;
+  ~r0_02.cap = in_stack_ffffffffffffff90._8_8_;
+  ~r0_02.array = in_stack_ffffffffffffff88;
+  regexp___Regexp__FindAllStringIndex(re,in_stack_ffffffffffffff78,n,~r0_02);
+  runtime_makeslice((internal_abi_Type *)&DAT_008075e0,0,cap,~r0_03);
+  iVar4 = 0;
+  end = 0;
+  uVar6 = 0;
+  uVar7 = 0;
+  oldPtr = extraout_RAX_01;
+  uVar1 = in_RCX;
+  ppuVar2 = extraout_RAX_00;
+  oldCap = cap;
+  iVar3 = in_RDI;
+  while( true ) {
+    if (((int)cap <= iVar4) || ((0 < iVar3 && (iVar3 + -1 <= (int)uVar6)))) {
+      if (uVar1 != end) {
+        if (uVar1 < uVar7) {
+                    // WARNING: Subroutine does not return
+          runtime_panicSliceB();
+        }
+        uVar6 = uVar6 + 1;
+        iVar3 = n + (uVar7 & (int)-(uVar1 - uVar7) >> 0x3f);
+        if (oldCap < uVar6) {
+          ~r0_01.cap = (int)in_stack_ffffffffffffff88;
+          ~r0_01.array = in_stack_ffffffffffffff78.str;
+          ~r0_01.len = in_stack_ffffffffffffff78.len;
+          runtime_growslice(oldPtr,uVar6,oldCap,1,(internal_abi_Type *)&DAT_008075e0,~r0_01);
+          oldPtr = extraout_RAX_04;
+          uVar6 = extraout_RBX_00;
+        }
+        iVar4 = (uVar6 - 1) * 0x10;
+        *(uint *)((int)oldPtr + iVar4 + 8) = uVar1 - uVar7;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = extraout_R9_00;
+          extraout_R11_00[1] = *(int *)((int)extraout_RAX_05 + extraout_RDI_00);
+          oldPtr = extraout_RAX_05;
+          iVar4 = extraout_RDI_00;
+          iVar3 = extraout_R9_00;
+        }
+        *(int *)((int)oldPtr + iVar4) = iVar3;
+      }
+      return;
+    }
+    if (ppuVar2[1] == (uint *)0x0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (ppuVar2[1] < (uint *)0x2) break;
+    puVar5 = *ppuVar2;
+    end = *puVar5;
+    if (puVar5[1] != 0) {
+      if (uVar1 < (uint)end) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceAlen();
+      }
+      if ((uint)end < uVar7) {
+                    // WARNING: Subroutine does not return
+        runtime_panicSliceB();
+      }
+      uVar6 = uVar6 + 1;
+      iVar8 = (uVar7 & (int)-(end - uVar7) >> 0x3f) + n;
+      if (oldCap < uVar6) {
+        ~r0_00.cap = (int)in_stack_ffffffffffffff88;
+        ~r0_00.array = in_stack_ffffffffffffff78.str;
+        ~r0_00.len = in_stack_ffffffffffffff78.len;
+        runtime_growslice(oldPtr,uVar6,oldCap,1,(internal_abi_Type *)&DAT_008075e0,~r0_00);
+        oldPtr = extraout_RAX_02;
+        uVar1 = in_RCX;
+        oldCap = extraout_RCX;
+        iVar3 = in_RDI;
+        uVar6 = extraout_RBX;
+      }
+      iVar9 = (uVar6 - 1) * 0x10;
+      *(uint *)((int)oldPtr + iVar9 + 8) = end - uVar7;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = iVar8;
+        extraout_R11[1] = *(int *)((int)extraout_RAX_03 + iVar9);
+        oldPtr = extraout_RAX_03;
+        uVar1 = extraout_RCX_00;
+        oldCap = extraout_RSI;
+        iVar3 = extraout_RDI;
+        iVar4 = extraout_R9;
+        puVar5 = extraout_R10;
+        uVar6 = extraout_R8;
+      }
+      *(int *)((int)oldPtr + iVar9) = iVar8;
+    }
+    ppuVar2 = ppuVar2 + 3;
+    iVar4 = iVar4 + 1;
+    uVar7 = puVar5[1];
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void regexp___Regexp__MarshalText(regexp_Regexp *re,__uint8 ~r0,error ~r1)
+
+{
+  __uint8 ~r0_00;
+  undefined8 unaff_RBP;
+  int unaff_R14;
+  int unaff_retaddr;
+  string in_stack_ffffffffffffffe0;
+  undefined8 in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00.len = unaff_RBP;
+  ~r0_00.array = (uint8 *)in_stack_fffffffffffffff0;
+  ~r0_00.cap = unaff_retaddr;
+  runtime_stringtoslicebyte((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffe0,~r0_00);
+  return;
+}
+
+
+
+void regexp___Regexp__UnmarshalText(regexp_Regexp *re,__uint8 text,error ~r0)
+
+{
+  error ~r1;
+  regexp_syntax_Flags mode;
+  void *src;
+  regexp_Regexp *newRE;
+  int in_RCX;
+  bool longest;
+  uint8 *in_RBX;
+  int extraout_RBX;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd8;
+  runtime_itab *in_stack_ffffffffffffffe8;
+  void *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_slicebytetostring((runtime_tmpBuf *)0x0,in_RBX,in_RCX,in_stack_ffffffffffffffd8);
+  ~r1.data = in_stack_fffffffffffffff0;
+  ~r1.tab = in_stack_ffffffffffffffe8;
+  regexp_compile(in_stack_ffffffffffffffd8,mode,longest,(regexp_Regexp *)0xd4,~r1);
+  if (extraout_RBX == 0) {
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_wbMove((internal_abi_Type *)&DAT_0089df60,re,src);
+    }
+    FUN_0046d0d4();
+    return;
+  }
+  return;
+}
+
+
+
+void type__eq_regexp_entry(regexp_entry *p,regexp_entry *q,bool r)
+
+{
+  if (q->pc == p->pc) {
+    return;
+  }
+  return;
+}
+
+
+
+void type__eq_regexp_inputReader(regexp_inputReader *p,regexp_inputReader *q,bool r)
+
+{
+  runtime_itab *tab;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  int unaff_R14;
+  regexp_inputReader *prStack0000000000000008;
+  regexp_inputReader *prStack0000000000000010;
+  
+  prStack0000000000000008 = p;
+  prStack0000000000000010 = q;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL;
+  }
+  tab = (prStack0000000000000008->r).tab;
+  if ((prStack0000000000000010->r).tab == tab) {
+    runtime_ifaceeq(tab,(prStack0000000000000008->r).data,(prStack0000000000000010->r).data,
+                    (bool)in_DIL);
+  }
+  return;
+}
+
+
+
+void type__eq_regexp_job(regexp_job *p,regexp_job *q,bool r)
+
+{
+  if ((q->pc == p->pc) && (q->arg == p->arg)) {
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___onePassInst__MatchEmptyWidth(int32 before,int32 after)
+
+{
+  int *piVar1;
+  regexp_syntax_Inst *in_RAX;
+  undefined in_DIL;
+  undefined extraout_DIL;
+  int unaff_R14;
+  regexp_syntax_Inst *prStack0000000000000008;
+  int32 in_stack_00000010;
+  int32 in_stack_00000014;
+  undefined auStack_18 [16];
+  
+  prStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000010 = before;
+    in_stack_00000014 = after;
+    runtime_morestack_noctxt();
+    in_DIL = extraout_DIL;
+    before = in_stack_00000010;
+    after = in_stack_00000014;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((regexp_syntax_Inst **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  regexp_syntax___Inst__MatchEmptyWidth(prStack0000000000000008,before,after,(bool)in_DIL);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___onePassInst__MatchRune(int32 r)
+
+{
+  int *piVar1;
+  regexp_syntax_Inst *in_RAX;
+  int in_RCX;
+  int extraout_RCX;
+  int unaff_R14;
+  regexp_syntax_Inst *prStack0000000000000008;
+  int32 in_stack_00000010;
+  undefined auStack_18 [16];
+  
+  prStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000010 = r;
+    runtime_morestack_noctxt();
+    in_RCX = extraout_RCX;
+    r = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((regexp_syntax_Inst **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  regexp_syntax___Inst__MatchRunePos(prStack0000000000000008,r,in_RCX);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___onePassInst__MatchRunePos(int32 r)
+
+{
+  int *piVar1;
+  regexp_syntax_Inst *in_RAX;
+  int in_RCX;
+  int extraout_RCX;
+  int unaff_R14;
+  regexp_syntax_Inst *prStack0000000000000008;
+  int32 in_stack_00000010;
+  undefined auStack_18 [16];
+  
+  prStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000010 = r;
+    runtime_morestack_noctxt();
+    in_RCX = extraout_RCX;
+    r = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((regexp_syntax_Inst **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  regexp_syntax___Inst__MatchRunePos(prStack0000000000000008,r,in_RCX);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___onePassInst__String(void)
+
+{
+  int *piVar1;
+  regexp_syntax_Inst *in_RAX;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  regexp_syntax_Inst *prStack0000000000000008;
+  undefined auStack_38 [16];
+  strings_Builder b;
+  
+  prStack0000000000000008 = in_RAX;
+  while (b.buf.len = in_XMM15._0_8_, b.buf.array = in_XMM15._8_8_,
+        &stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((regexp_syntax_Inst **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_38;
+  }
+  regexp_syntax_dumpInst(&b,prStack0000000000000008);
+  if ((uint)b.buf.len <= (uint)-(int)b.buf.array) {
+    return;
+  }
+  if (b.buf.array != (uint8 *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicunsafestringlen();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicunsafestringnilptr();
+}
+
+
+
+void regexp___runeSlice__Len(int ~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)&stack0xfffffffffffffff8;
+  }
+  if (~r0 != 0) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicwrap();
+}
+
+
+
+void regexp___runeSlice__Less(int i,int j,bool ~r0)
+
+{
+  int *piVar1;
+  undefined7 in_register_00000009;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((undefined *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_18;
+  }
+  if (i == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if (*(uint *)(i + 8) <= (uint)j) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (CONCAT71(in_register_00000009,~r0) < *(uint *)(i + 8)) {
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void regexp___runeSlice__Swap(int i,int j)
+
+{
+  undefined4 uVar1;
+  int *piVar2;
+  int iVar3;
+  int *in_RAX;
+  int unaff_R14;
+  undefined auStack_18 [16];
+  
+  piVar2 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar2 != (int *)0x0) && ((undefined *)*piVar2 == &stack0x00000008)) {
+    *piVar2 = (int)auStack_18;
+  }
+  if (in_RAX == (int *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicwrap();
+  }
+  if ((uint)in_RAX[1] <= (uint)i) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  iVar3 = *in_RAX;
+  uVar1 = *(undefined4 *)(iVar3 + i * 4);
+  if ((uint)j < (uint)in_RAX[1]) {
+    *(undefined4 *)(iVar3 + i * 4) = *(undefined4 *)(iVar3 + j * 4);
+    *(undefined4 *)(iVar3 + j * 4) = uVar1;
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+// Local variable d:int64[RAX:8] conflicts with parameter, skipped.
+
+void google_golang_org_grpc_internal_grpcutil_EncodeDuration(time_Duration t,string ~r0)
+
+{
+  int iVar1;
+  string ~r0_00;
+  string ~r0_01;
+  string ~r0_02;
+  string ~r0_03;
+  string ~r0_04;
+  string ~r0_05;
+  int64 i;
+  int64 d_1;
+  int64 d_2;
+  int64 d_3;
+  int64 d_4;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (t < 1) {
+    return;
+  }
+  if (t < 100000000) {
+    strconv_FormatInt(t,10,in_stack_ffffffffffffffd0);
+    ~r0_05.len = unaff_RBP;
+    ~r0_05.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_05);
+    return;
+  }
+  iVar1 = t >> 0x3f;
+  d_1 = t / 1000 + iVar1;
+  if (0 < t + d_1 * -1000) {
+    d_1 = d_1 + 1;
+  }
+  if (d_1 < 100000000) {
+    strconv_FormatInt(d_1,10,in_stack_ffffffffffffffd0);
+    ~r0_04.len = unaff_RBP;
+    ~r0_04.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_04);
+    return;
+  }
+  d_2 = t / 1000000 + iVar1;
+  if (0 < t + d_2 * -1000000) {
+    d_2 = d_2 + 1;
+  }
+  if (d_2 < 100000000) {
+    strconv_FormatInt(d_2,10,in_stack_ffffffffffffffd0);
+    ~r0_03.len = unaff_RBP;
+    ~r0_03.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_03);
+    return;
+  }
+  d_3 = t / 1000000000 + iVar1;
+  if (0 < t + d_3 * -1000000000) {
+    d_3 = d_3 + 1;
+  }
+  if (99999999 < d_3) {
+    d_4 = t / 60000000000 + iVar1;
+    if (0 < t + d_4 * -60000000000) {
+      d_4 = d_4 + 1;
+    }
+    if (99999999 < d_4) {
+      i = t + SUB168(SEXT816(-0x63a000d9128a12ab) * SEXT816(t),8) >> 0x29;
+      if (0 < t + i * -3600000000000) {
+        i = i + 1;
+      }
+      strconv_FormatInt(i,10,in_stack_ffffffffffffffd0);
+      ~r0_00.len = unaff_RBP;
+      ~r0_00.str = in_stack_fffffffffffffff0;
+      runtime_concatstring2
+                ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_00);
+      return;
+    }
+    strconv_FormatInt(d_4,10,in_stack_ffffffffffffffd0);
+    ~r0_01.len = unaff_RBP;
+    ~r0_01.str = in_stack_fffffffffffffff0;
+    runtime_concatstring2
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_01);
+    return;
+  }
+  strconv_FormatInt(d_3,10,in_stack_ffffffffffffffd0);
+  ~r0_02.len = unaff_RBP;
+  ~r0_02.str = in_stack_fffffffffffffff0;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffd0,in_stack_ffffffffffffffe0,~r0_02);
+  return;
+}
+
+
+
+void google_golang_org_grpc_internal_grpcutil_ParseMethod
+               (string methodName,string service,string method,error ~b2)
+
+{
+  uint uVar1;
+  char *in_RAX;
+  uint extraout_RAX;
+  int pos;
+  undefined8 *extraout_RAX_00;
+  undefined8 *extraout_RAX_01;
+  void *in_RBX;
+  void *~r0;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc8;
+  string in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((in_RBX == (void *)0x0) || (*in_RAX != '/')) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,in_RBX);
+    extraout_RAX_01[1] = 0x28;
+    *extraout_RAX_01 = &DAT_008c49ec;
+    return;
+  }
+  uVar1 = (int)in_RBX - 1;
+  strings_LastIndex(in_stack_ffffffffffffffc8,in_stack_ffffffffffffffd8,
+                    (int)(in_RAX + ((dword)((int)-uVar1 >> 0x3f) & 1)));
+  if ((int)extraout_RAX < 0) {
+    runtime_newobject((internal_abi_Type *)&DAT_0083e560,~r0);
+    extraout_RAX_00[1] = 0x2e;
+    *extraout_RAX_00 = &DAT_008c77f9;
+    return;
+  }
+  if (extraout_RAX <= uVar1) {
+    if (extraout_RAX + 1 <= uVar1) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAlen();
+}
+
+
+
+void google_golang_org_protobuf_types_known_anypb_New
+               (google_golang_org_protobuf_reflect_protoreflect_ProtoMessage src,
+               google_golang_org_protobuf_types_known_anypb_Any *~r0,error ~r1)
+
+{
+  google_golang_org_protobuf_types_known_anypb_Any *dst_00;
+  google_golang_org_protobuf_types_known_anypb_Any *dst;
+  int extraout_RAX;
+  void *in_RBX;
+  int unaff_R14;
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_008818c0,in_RBX);
+  google_golang_org_protobuf_types_known_anypb_MarshalFrom
+            (dst_00,in_stack_ffffffffffffffd0,SUB83(~r0,0),in_stack_ffffffffffffffe0);
+  if (extraout_RAX != 0) {
+    return;
+  }
+  return;
+}
+
+
+
+void google_golang_org_protobuf_types_known_anypb_MarshalFrom
+               (google_golang_org_protobuf_types_known_anypb_Any *dst,
+               google_golang_org_protobuf_reflect_protoreflect_ProtoMessage src,
+               google_golang_org_protobuf_proto_MarshalOptions opts,error ~r0)
+
+{
+  __uint8 ~r0_00;
+  __interface___ x;
+  string ~r0_01;
+  error ~r1;
+  error ~r0_02;
+  uint8 *extraout_RAX;
+  uint8 *extraout_RAX_00;
+  uint8 *extraout_RAX_01;
+  uint8 *puVar1;
+  undefined8 in_RCX;
+  int extraout_RCX;
+  google_golang_org_protobuf_types_known_anypb_Any *extraout_RCX_00;
+  google_golang_org_protobuf_types_known_anypb_Any *extraout_RCX_01;
+  undefined5 in_register_0000001b;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  google_golang_org_protobuf_proto_MarshalOptions in_EDI;
+  int extraout_RDI;
+  uint8 **extraout_R11;
+  uint8 **extraout_R11_00;
+  int unaff_R14;
+  undefined auVar2 [16];
+  string in_stack_ffffffffffffffb8;
+  string in_stack_ffffffffffffffc8;
+  uint8 *in_stack_ffffffffffffffd8;
+  runtime_itab *in_stack_ffffffffffffffe0;
+  int iVar3;
+  void *in_stack_ffffffffffffffe8;
+  int iVar4;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_EDI = (google_golang_org_protobuf_proto_MarshalOptions)((uint3)in_EDI & 0xff);
+  }
+  if (CONCAT53(in_register_0000001b,opts) == 0) {
+    x.cap = (int)in_stack_ffffffffffffffd8;
+    x.array = (interface___ *)in_stack_ffffffffffffffc8.str;
+    x.len = in_stack_ffffffffffffffc8.len;
+    ~r0_02.data = in_stack_ffffffffffffffe8;
+    ~r0_02.tab = in_stack_ffffffffffffffe0;
+    google_golang_org_protobuf_internal_impl_Export_NewError(in_stack_ffffffffffffffb8,x,~r0_02);
+    return;
+  }
+  ~r0_00.cap = (int)in_stack_ffffffffffffffd8;
+  ~r0_00.array = in_stack_ffffffffffffffc8.str;
+  ~r0_00.len = in_stack_ffffffffffffffc8.len;
+  ~r1.data = in_stack_ffffffffffffffe8;
+  ~r1.tab = in_stack_ffffffffffffffe0;
+  google_golang_org_protobuf_proto_MarshalOptions_Marshal
+            (in_EDI,(google_golang_org_protobuf_reflect_protoreflect_ProtoMessage)
+                    in_stack_ffffffffffffffb8,~r0_00,~r1);
+  if (extraout_RDI != 0) {
+    return;
+  }
+  iVar3 = extraout_RBX;
+  iVar4 = extraout_RCX;
+  auVar2 = (**(code **)(CONCAT53(in_register_0000001b,opts) + 0x18))(in_RCX);
+  auVar2 = (**(code **)(auVar2._0_8_ + 0x20))(auVar2._8_8_);
+  (**(code **)(auVar2._0_8_ + 0x40))(auVar2._8_8_);
+  ~r0_01.len = iVar3;
+  ~r0_01.str = in_stack_ffffffffffffffd8;
+  runtime_concatstring2
+            ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffb8,in_stack_ffffffffffffffc8,~r0_01);
+  (dst->TypeUrl).len = extraout_RBX_00;
+  puVar1 = extraout_RAX_00;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX_01;
+    extraout_R11[1] = (extraout_RCX_00->TypeUrl).str;
+    puVar1 = extraout_RAX_01;
+    dst = extraout_RCX_00;
+  }
+  (dst->TypeUrl).str = puVar1;
+  (dst->Value).len = iVar3;
+  (dst->Value).cap = iVar4;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RAX;
+    extraout_R11_00[1] = (extraout_RCX_01->Value).array;
+    dst = extraout_RCX_01;
+  }
+  (dst->Value).array = extraout_RAX;
+  return;
+}
+
+
+
+void google_golang_org_protobuf_types_known_anypb_UnmarshalTo
+               (google_golang_org_protobuf_types_known_anypb_Any *src,
+               google_golang_org_protobuf_reflect_protoreflect_ProtoMessage dst,
+               google_golang_org_protobuf_proto_UnmarshalOptions opts,error ~r0)
+
+{
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage m;
+  google_golang_org_protobuf_reflect_protoreflect_FullName ~r0_00;
+  string val;
+  string val_00;
+  string f;
+  string f_00;
+  google_golang_org_protobuf_proto_UnmarshalOptions o;
+  __interface___ x;
+  __interface___ x_00;
+  __uint8 b;
+  error ~r0_01;
+  char extraout_AL;
+  void *x_01;
+  void *x_02;
+  undefined8 extraout_RAX;
+  undefined8 in_RCX;
+  int in_RBX;
+  int unaff_R14;
+  undefined auVar1 [16];
+  runtime_itab *in_stack_ffffffffffffff70;
+  void *in_stack_ffffffffffffff78;
+  undefined in_stack_ffffffffffffff80 [16];
+  uint8 *in_stack_ffffffffffffff90;
+  error in_stack_ffffffffffffff98;
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage in_stack_ffffffffffffffa8;
+  runtime_itab *in_stack_ffffffffffffffb8;
+  void *in_stack_ffffffffffffffc0;
+  undefined local_18 [16];
+  
+  while (local_18 + 8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (src != (google_golang_org_protobuf_types_known_anypb_Any *)0x0) {
+    m.data = in_stack_ffffffffffffff78;
+    m.tab = in_stack_ffffffffffffff70;
+    google_golang_org_protobuf_types_known_anypb___Any__MessageIs(src,m,SUB81(in_RBX,0));
+    if (extraout_AL != '\0') {
+      o.Resolver.tab = (runtime_itab *)in_RCX;
+      o._0_8_ = in_RBX;
+      o.Resolver.data = (runtime_itab *)in_stack_ffffffffffffff80._0_8_;
+      o.RecursionLimit = (void *)in_stack_ffffffffffffff80._8_8_;
+      b.len = (int)in_stack_ffffffffffffff98.tab;
+      b.cap = (int)in_stack_ffffffffffffff98.data;
+      b.array = in_stack_ffffffffffffff90;
+      ~r0_01.data = in_stack_ffffffffffffffc0;
+      ~r0_01.tab = in_stack_ffffffffffffffb8;
+      google_golang_org_protobuf_proto_UnmarshalOptions_Unmarshal
+                (o,b,in_stack_ffffffffffffffa8,~r0_01);
+      return;
+    }
+    auVar1 = (**(code **)(in_RBX + 0x18))(in_RCX);
+    auVar1 = (**(code **)(auVar1._0_8_ + 0x20))(auVar1._8_8_);
+    x_01 = (void *)(**(code **)(auVar1._0_8_ + 0x40))(auVar1._8_8_);
+    ~r0_00.len = (int)in_stack_ffffffffffffff78;
+    ~r0_00.str = (uint8 *)in_stack_ffffffffffffff70;
+    google_golang_org_protobuf_types_known_anypb___Any__MessageName(src,~r0_00);
+    val.len = (int)in_stack_ffffffffffffff78;
+    val.str = (uint8 *)in_stack_ffffffffffffff70;
+    runtime_convTstring(val,x_01);
+    val_00.len = (int)in_stack_ffffffffffffff78;
+    val_00.str = (uint8 *)in_stack_ffffffffffffff70;
+    runtime_convTstring(val_00,x_02);
+    local_18._8_8_ = extraout_RAX;
+    local_18._0_8_ = &DAT_00846560;
+    f.len = (int)in_stack_ffffffffffffff78;
+    f.str = (uint8 *)in_stack_ffffffffffffff70;
+    x.cap = (int)in_stack_ffffffffffffff90;
+    x.array = (interface___ *)in_stack_ffffffffffffff80._0_8_;
+    x.len = in_stack_ffffffffffffff80._8_8_;
+    google_golang_org_protobuf_internal_impl_Export_NewError(f,x,in_stack_ffffffffffffff98);
+    return;
+  }
+  f_00.len = (int)in_stack_ffffffffffffff78;
+  f_00.str = (uint8 *)in_stack_ffffffffffffff70;
+  x_00.cap = (int)in_stack_ffffffffffffff90;
+  x_00.array = (interface___ *)in_stack_ffffffffffffff80._0_8_;
+  x_00.len = in_stack_ffffffffffffff80._8_8_;
+  google_golang_org_protobuf_internal_impl_Export_NewError(f_00,x_00,in_stack_ffffffffffffff98);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_types_known_anypb_UnmarshalNew
+               (google_golang_org_protobuf_types_known_anypb_Any *src,
+               google_golang_org_protobuf_proto_UnmarshalOptions opts,
+               google_golang_org_protobuf_reflect_protoreflect_ProtoMessage dst,error err)
+
+{
+  runtime_iface i;
+  string val;
+  string f;
+  string f_00;
+  google_golang_org_protobuf_proto_UnmarshalOptions o;
+  __interface___ x;
+  __interface___ x_00;
+  __uint8 b;
+  error ~r0;
+  char extraout_AL;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  runtime_itab *tab;
+  int iVar1;
+  undefined8 extraout_RBX;
+  undefined8 extraout_RBX_00;
+  uint8 *puVar2;
+  void *x_01;
+  int unaff_R14;
+  undefined auVar3 [16];
+  runtime_itab *in_stack_ffffffffffffff78;
+  void *in_stack_ffffffffffffff80;
+  runtime_iface in_stack_ffffffffffffff88;
+  uint8 *in_stack_ffffffffffffff98;
+  error in_stack_ffffffffffffffa0;
+  google_golang_org_protobuf_reflect_protoreflect_ProtoMessage in_stack_ffffffffffffffb0;
+  runtime_itab *in_stack_ffffffffffffffc0;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (src == (google_golang_org_protobuf_types_known_anypb_Any *)0x0) {
+    iVar1 = 0;
+  }
+  else {
+    iVar1 = (src->TypeUrl).len;
+  }
+  if (iVar1 == 0) {
+    f_00.len = (int)in_stack_ffffffffffffff80;
+    f_00.str = (uint8 *)in_stack_ffffffffffffff78;
+    x_00.cap = (int)in_stack_ffffffffffffff98;
+    x_00.array = (interface___ *)in_stack_ffffffffffffff88.tab;
+    x_00.len = (int)in_stack_ffffffffffffff88.data;
+    google_golang_org_protobuf_internal_impl_Export_NewError(f_00,x_00,in_stack_ffffffffffffffa0);
+    return;
+  }
+  i.data = in_stack_ffffffffffffff80;
+  i.tab = in_stack_ffffffffffffff78;
+  runtime_assertI2I2((internal_abi_InterfaceType *)&DAT_0083d5a0,i,in_stack_ffffffffffffff88);
+  if (extraout_RAX == 0) {
+    return;
+  }
+  if (src == (google_golang_org_protobuf_types_known_anypb_Any *)0x0) {
+    iVar1 = 0;
+    puVar2 = (uint8 *)0x0;
+  }
+  else {
+    puVar2 = (src->TypeUrl).str;
+    iVar1 = (src->TypeUrl).len;
+  }
+  (**(code **)(extraout_RAX + 0x20))(extraout_RBX,puVar2,iVar1);
+  if (tab != (runtime_itab *)0x0) {
+    if ((google_golang_org_protobuf_reflect_protoregistry_NotFound.tab == tab) &&
+       (runtime_ifaceeq(tab,x_01,google_golang_org_protobuf_reflect_protoregistry_NotFound.data,
+                        SUB81(x_01,0)), extraout_AL != '\0')) {
+      return;
+    }
+    if (src == (google_golang_org_protobuf_types_known_anypb_Any *)0x0) {
+      puVar2 = (uint8 *)0x0;
+    }
+    else {
+      puVar2 = (src->TypeUrl).str;
+    }
+    val.len = (int)in_stack_ffffffffffffff80;
+    val.str = (uint8 *)in_stack_ffffffffffffff78;
+    runtime_convTstring(val,puVar2);
+    f.len = (int)in_stack_ffffffffffffff80;
+    f.str = (uint8 *)in_stack_ffffffffffffff78;
+    x.cap = (int)in_stack_ffffffffffffff98;
+    x.array = (interface___ *)in_stack_ffffffffffffff88.tab;
+    x.len = (int)in_stack_ffffffffffffff88.data;
+    google_golang_org_protobuf_internal_impl_Export_NewError(f,x,in_stack_ffffffffffffffa0);
+    return;
+  }
+  auVar3 = (**(code **)(extraout_RAX_00 + 0x20))(extraout_RBX_00);
+  auVar3 = (**(code **)(auVar3._0_8_ + 0x40))(auVar3._8_8_);
+  o.Resolver.data = in_stack_ffffffffffffff88.tab;
+  o.RecursionLimit = in_stack_ffffffffffffff88.data;
+  o.Merge = (bool)auVar3[0];
+  o.AllowPartial = (bool)auVar3[1];
+  o.DiscardUnknown = (bool)auVar3[2];
+  o._3_5_ = auVar3._3_5_;
+  o.Resolver.tab = (runtime_itab *)auVar3._8_8_;
+  b.len = (int)in_stack_ffffffffffffffa0.tab;
+  b.cap = (int)in_stack_ffffffffffffffa0.data;
+  b.array = in_stack_ffffffffffffff98;
+  ~r0.data = auVar3._0_8_;
+  ~r0.tab = in_stack_ffffffffffffffc0;
+  google_golang_org_protobuf_proto_UnmarshalOptions_Unmarshal(o,b,in_stack_ffffffffffffffb0,~r0);
+  return;
+}
+
+
+
+void google_golang_org_protobuf_types_known_anypb___Any__MessageIs
+               (google_golang_org_protobuf_types_known_anypb_Any *x,
+               google_golang_org_protobuf_reflect_protoreflect_ProtoMessage m,bool ~r0)
+
+{
+  char cVar1;
+  char extraout_AL;
+  undefined8 in_RCX;
+  uint uVar2;
+  undefined7 in_register_00000019;
+  uint extraout_RBX;
+  uint uVar3;
+  int unaff_R14;
+  undefined auVar4 [16];
+  undefined8 uStack0000000000000018;
+  
+  uStack0000000000000018 = in_RCX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (CONCAT71(in_register_00000019,~r0) == 0) {
+    return;
+  }
+  if (x == (google_golang_org_protobuf_types_known_anypb_Any *)0x0) {
+    uVar3 = 0;
+  }
+  else {
+    uVar3 = (x->TypeUrl).len;
+  }
+  auVar4 = (**(code **)(CONCAT71(in_register_00000019,~r0) + 0x18))(uStack0000000000000018);
+  auVar4 = (**(code **)(auVar4._0_8_ + 0x20))(auVar4._8_8_);
+  (**(code **)(auVar4._0_8_ + 0x40))(auVar4._8_8_);
+  if ((int)extraout_RBX <= (int)uVar3) {
+    uVar2 = uVar3 - extraout_RBX;
+    if (uVar3 < uVar2) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }

@@ -1,0 +1,1000 @@
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RAX_00;
+      extraout_R11[1] = (z->abs).array;
+      pmVar1 = extraout_RAX_00;
+    }
+    (z->abs).array = pmVar1;
+    z->neg = (bool)uVar2;
+    return;
+  }
+  math_big___Int__SetInt64(z,1,(math_big_Int *)b);
+  return;
+}
+
+
+
+void math_big___Int__Binomial(math_big_Int *z,int64 n,int64 k,math_big_Int *~r0)
+
+{
+  int len;
+  math_big_Word *~r0_00;
+  math_big_Word *extraout_RAX;
+  math_big_Word *extraout_RAX_00;
+  math_big_Int *y;
+  int extraout_RAX_01;
+  math_big_Int *extraout_RCX;
+  math_big_Int *r;
+  math_big_Int *extraout_RCX_00;
+  math_big_Int *pmVar1;
+  math_big_Int *pmVar2;
+  int iVar3;
+  int iVar4;
+  int cap;
+  math_big_Int *~r0_01;
+  math_big_Int *~r0_02;
+  math_big_Int *~r0_03;
+  math_big_Int *~r0_04;
+  math_big_Word *extraout_R8;
+  math_big_Word *__dest;
+  math_big_Word **extraout_R11;
+  int unaff_R14;
+  math_big_Int t;
+  math_big_Int i;
+  math_big_Int N;
+  math_big_Int K;
+  
+  while (&i.abs <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (k <= n) {
+    pmVar1 = (math_big_Int *)(n - k);
+    N.neg = false;
+    N.abs.array = (math_big_Word *)0x0;
+    K.neg = false;
+    K.abs.array = (math_big_Word *)0x0;
+    i.neg = false;
+    i.abs.array = (math_big_Word *)0x0;
+    t.neg = false;
+    t.abs.array = (math_big_Word *)0x0;
+    math_big___Int__SetInt64(&N,n,(math_big_Int *)k);
+    if ((int)pmVar1 < k) {
+      k = (int64)pmVar1;
+    }
+    math_big___Int__SetInt64(&K,k,pmVar1);
+    pmVar1 = math_big_intOne;
+    r = math_big_intOne;
+    if (z != math_big_intOne) {
+      cap = (z->abs).cap;
+      len = (math_big_intOne->abs).len;
+      ~r0_00 = (math_big_intOne->abs).array;
+      iVar3 = len;
+      if (cap < len) {
+        if (len == 1) {
+          runtime_makeslice((internal_abi_Type *)&DAT_00808860,1,1,~r0_00);
+          cap = 1;
+          iVar3 = 1;
+          __dest = extraout_RAX;
+        }
+        else {
+          cap = len + 4;
+          runtime_makeslice((internal_abi_Type *)&DAT_00808860,len,cap,~r0_00);
+          __dest = extraout_RAX_00;
+        }
+      }
+      else {
+        __dest = (z->abs).array;
+      }
+      iVar4 = iVar3;
+      if (len < iVar3) {
+        iVar4 = len;
+      }
+      if (__dest != ~r0_00) {
+        runtime_memmove(__dest,~r0_00,iVar4 << 3);
+      }
+      (z->abs).len = iVar3;
+      (z->abs).cap = cap;
+      pmVar2 = z;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11 = extraout_R8;
+        extraout_R11[1] = (pmVar2->abs).array;
+        pmVar1 = extraout_RCX;
+        __dest = extraout_R8;
+      }
+      (pmVar2->abs).array = __dest;
+      r = (math_big_Int *)(uint)pmVar1->neg;
+      pmVar2->neg = pmVar1->neg;
+    }
+    while( true ) {
+      math_big___Int__Cmp(&i,&K,(int)r);
+      if (-1 < extraout_RAX_01) break;
+      math_big___Int__Sub(&t,&N,&i,~r0_04);
+      math_big___Int__Mul(z,z,y,~r0_01);
+      math_big___Int__Add(&i,&i,math_big_intOne,~r0_02);
+      math_big___Int__Quo(z,z,&i,~r0_03);
+      r = extraout_RCX_00;
+    }
+    return;
+  }
+  math_big___Int__SetInt64(z,0,(math_big_Int *)k);
+  return;
+}
+
+
+
+void math_big___Int__Quo(math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *~r0)
+
+{
+  int extraout_RAX;
+  int extraout_RCX;
+  int extraout_RBX;
+  int *extraout_R11;
+  int unaff_R14;
+  bool bVar1;
+  div_t dVar2;
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000010;
+  math_big_Int *pmStack0000000000000018;
+  
+  pmStack0000000000000008 = z;
+  pmStack0000000000000018 = y;
+  pmStack0000000000000010 = x;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  dVar2 = math_big_nat_div((int)(pmStack0000000000000008->abs).array,
+                           (pmStack0000000000000008->abs).len);
+  (pmStack0000000000000008->abs).len = dVar2.rem;
+  (pmStack0000000000000008->abs).cap = extraout_RCX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    dVar2.rem = extraout_RBX;
+    dVar2.quot = extraout_RAX;
+    *extraout_R11 = extraout_RAX;
+    extraout_R11[1] = (int)(pmStack0000000000000008->abs).array;
+  }
+  (pmStack0000000000000008->abs).array = (math_big_Word *)dVar2.quot;
+  if (dVar2.rem == 0) {
+    bVar1 = false;
+  }
+  else {
+    bVar1 = pmStack0000000000000018->neg != pmStack0000000000000010->neg;
+  }
+  pmStack0000000000000008->neg = bVar1;
+  return;
+}
+
+
+
+void math_big___Int__Rem(math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *~r0)
+
+{
+  math_big_Int *extraout_RAX;
+  bool bVar1;
+  int extraout_RSI;
+  int extraout_RSI_00;
+  int iVar2;
+  math_big_Word *extraout_RDI;
+  math_big_Word *extraout_RDI_00;
+  math_big_Word *pmVar3;
+  int extraout_R8;
+  math_big_Word **extraout_R11;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000010;
+  
+  pmStack0000000000000008 = z;
+  pmStack0000000000000010 = x;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  math_big_nat_div(0,0);
+  (pmStack0000000000000008->abs).len = extraout_RSI;
+  (pmStack0000000000000008->abs).cap = extraout_R8;
+  iVar2 = extraout_RSI;
+  pmVar3 = extraout_RDI;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RDI_00;
+    extraout_R11[1] = (extraout_RAX->abs).array;
+    pmStack0000000000000008 = extraout_RAX;
+    iVar2 = extraout_RSI_00;
+    pmVar3 = extraout_RDI_00;
+  }
+  (pmStack0000000000000008->abs).array = pmVar3;
+  if (iVar2 == 0) {
+    bVar1 = false;
+  }
+  else {
+    bVar1 = pmStack0000000000000010->neg;
+  }
+  pmStack0000000000000008->neg = bVar1;
+  return;
+}
+
+
+
+void math_big___Int__QuoRem
+               (math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *r,math_big_Int *~r0,
+               math_big_Int *~r1)
+
+{
+  math_big_Word *pmVar1;
+  math_big_Word *extraout_RAX;
+  bool bVar2;
+  int extraout_RCX;
+  math_big_Int *pmVar3;
+  math_big_Int *extraout_RBX;
+  int extraout_RSI;
+  int extraout_RSI_00;
+  int extraout_RSI_01;
+  int iVar4;
+  math_big_Word *extraout_RDI;
+  math_big_Word *extraout_RDI_00;
+  math_big_Word *extraout_RDI_01;
+  math_big_Word *pmVar5;
+  int extraout_R8;
+  int extraout_R8_00;
+  int iVar6;
+  math_big_Word **extraout_R11;
+  math_big_Word **extraout_R11_00;
+  int unaff_R14;
+  bool bVar7;
+  div_t dVar8;
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000010;
+  math_big_Int *pmStack0000000000000018;
+  math_big_Int *pmStack0000000000000020;
+  
+  pmStack0000000000000008 = z;
+  pmStack0000000000000018 = y;
+  pmStack0000000000000010 = x;
+  pmStack0000000000000020 = r;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  dVar8 = math_big_nat_div((int)(pmStack0000000000000008->abs).array,
+                           (pmStack0000000000000008->abs).len);
+  pmVar1 = (math_big_Word *)dVar8.quot;
+  (pmStack0000000000000008->abs).len = dVar8.rem;
+  (pmStack0000000000000008->abs).cap = extraout_RCX;
+  pmVar3 = pmStack0000000000000008;
+  iVar4 = extraout_RSI;
+  pmVar5 = extraout_RDI;
+  iVar6 = extraout_R8;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11 = extraout_RAX;
+    extraout_R11[1] = (pmVar3->abs).array;
+    pmVar1 = extraout_RAX;
+    iVar4 = extraout_RSI_00;
+    pmVar5 = extraout_RDI_00;
+    iVar6 = extraout_R8_00;
+  }
+  (pmVar3->abs).array = pmVar1;
+  (pmStack0000000000000020->abs).len = iVar4;
+  (pmStack0000000000000020->abs).cap = iVar6;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier2();
+    *extraout_R11_00 = extraout_RDI_01;
+    extraout_R11_00[1] = (extraout_RBX->abs).array;
+    pmStack0000000000000020 = extraout_RBX;
+    iVar4 = extraout_RSI_01;
+    pmVar5 = extraout_RDI_01;
+  }
+  (pmStack0000000000000020->abs).array = pmVar5;
+  if ((pmVar3->abs).len == 0) {
+    bVar7 = false;
+  }
+  else {
+    bVar7 = pmStack0000000000000018->neg != pmStack0000000000000010->neg;
+  }
+  if (iVar4 == 0) {
+    bVar2 = false;
+  }
+  else {
+    bVar2 = pmStack0000000000000010->neg;
+  }
+  pmVar3->neg = bVar7;
+  pmStack0000000000000020->neg = bVar2;
+  return;
+}
+
+
+
+void math_big___Int__Div(math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *~r0)
+
+{
+  bool bVar1;
+  math_big_Int *in_RSI;
+  math_big_Int *extraout_RSI;
+  math_big_Int *~r0_00;
+  math_big_Int *in_R8;
+  math_big_Int *extraout_R8;
+  int unaff_R14;
+  math_big_Int r;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    in_R8 = extraout_R8;
+  }
+  bVar1 = y->neg;
+  r.neg = false;
+  r.abs.array = (math_big_Word *)0x0;
+  math_big___Int__QuoRem(z,x,y,&r,in_RSI,in_R8);
+  if (r.neg != false) {
+    if (bVar1 == false) {
+      math_big___Int__Sub(z,z,math_big_intOne,~r0_00);
+    }
+    else {
+      math_big___Int__Add(z,z,math_big_intOne,~r0_00);
+    }
+  }
+  return;
+}
+
+
+
+// Local variable y0:math/big.Int *[RCX:8] conflicts with parameter, skipped.
+
+void math_big___Int__Mod(math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *~r0)
+
+{
+  int iVar1;
+  math_big_Int *extraout_RAX;
+  math_big_Int *extraout_RAX_00;
+  math_big_Int *y_00;
+  math_big_Int *in_RSI;
+  int iVar2;
+  int iVar3;
+  math_big_Int *extraout_RSI;
+  math_big_Int *~r0_00;
+  math_big_Int *extraout_RDI;
+  math_big_Int *in_R8;
+  math_big_Int *extraout_R8;
+  math_big_Int *extraout_R8_00;
+  math_big_Int *__dest;
+  int cap;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int q;
+  undefined local_28 [24];
+  undefined8 uStack_10;
+  
+  pmStack0000000000000008 = z;
+  while (local_28 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RSI = extraout_RSI;
+    ~r0 = extraout_RDI;
+    in_R8 = extraout_R8_00;
+  }
+  if (y != pmStack0000000000000008) {
+    iVar1 = (pmStack0000000000000008->abs).cap;
+    y_00 = y;
+    if (iVar1 == 0) goto LAB_0063a65a;
+    iVar2 = (y->abs).cap;
+    if (iVar2 == 0) {
+      in_RSI = (math_big_Int *)0x0;
+      goto LAB_0063a65a;
+    }
+    in_R8 = (math_big_Int *)(pmStack0000000000000008->abs).array;
+    in_RSI = (math_big_Int *)((y->abs).array + iVar2 + -1);
+    if (in_RSI != (math_big_Int *)((int)in_R8 + iVar1 * 8 + -8)) goto LAB_0063a65a;
+  }
+  local_28[0] = false;
+  local_28._8_8_ = (math_big_Int *)0x0;
+  y_00 = (math_big_Int *)local_28;
+  unique0x10000258 = in_XMM15;
+  if (y != (math_big_Int *)local_28) {
+    iVar1 = (y->abs).len;
+    in_R8 = (math_big_Int *)(y->abs).array;
+    iVar2 = iVar1;
+    if (iVar1 < 1) {
+      __dest = (math_big_Int *)0x0;
+      cap = 0;
+    }
+    else if (iVar1 == 1) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00808860,1,1,~r0);
+      cap = 1;
+      iVar2 = 1;
+      __dest = extraout_RAX;
+    }
+    else {
+      cap = iVar1 + 4;
+      runtime_makeslice((internal_abi_Type *)&DAT_00808860,iVar1,cap,~r0);
+      __dest = extraout_RAX_00;
+    }
+    iVar3 = iVar2;
+    if (iVar1 < iVar2) {
+      iVar3 = iVar1;
+    }
+    if (__dest != in_R8) {
+      runtime_memmove(__dest,in_R8,iVar3 << 3);
+      in_R8 = extraout_R8;
+    }
+    uStack_10 = cap;
+    local_28._16_8_ = iVar2;
+    local_28[0] = y->neg;
+    in_RSI = (math_big_Int *)(uint)local_28[0];
+    y_00 = (math_big_Int *)local_28;
+    local_28._8_8_ = __dest;
+  }
+LAB_0063a65a:
+  q.neg = false;
+  q.abs.array = (math_big_Word *)0x0;
+  math_big___Int__QuoRem(&q,x,y,pmStack0000000000000008,in_RSI,in_R8);
+  if (pmStack0000000000000008->neg != false) {
+    if (y_00->neg == false) {
+      math_big___Int__Add(pmStack0000000000000008,pmStack0000000000000008,y_00,~r0_00);
+    }
+    else {
+      math_big___Int__Sub(pmStack0000000000000008,pmStack0000000000000008,y_00,~r0_00);
+    }
+  }
+  return;
+}
+
+
+
+// Local variable y0:math/big.Int *[RCX:8] conflicts with parameter, skipped.
+
+void math_big___Int__DivMod
+               (math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *m,math_big_Int *~r0,
+               math_big_Int *~r1)
+
+{
+  int iVar1;
+  math_big_Int *extraout_RAX;
+  math_big_Int *extraout_RAX_00;
+  math_big_Int *y_00;
+  int iVar2;
+  int iVar3;
+  math_big_Int *extraout_RSI;
+  math_big_Int *~r0_00;
+  math_big_Int *~r0_01;
+  math_big_Int *~r0_02;
+  math_big_Int *extraout_R8;
+  math_big_Int *extraout_R8_00;
+  math_big_Int *__dest;
+  int cap;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  math_big_Int *pmStack0000000000000008;
+  math_big_Int *pmStack0000000000000020;
+  undefined local_28 [24];
+  undefined8 uStack_10;
+  
+  pmStack0000000000000008 = z;
+  pmStack0000000000000020 = m;
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    ~r0 = extraout_RSI;
+    ~r1 = extraout_R8_00;
+  }
+  if (pmStack0000000000000008 != y) {
+    iVar1 = (pmStack0000000000000008->abs).cap;
+    y_00 = y;
+    if (iVar1 == 0) goto LAB_0063a8ec;
+    iVar2 = (y->abs).cap;
+    if (iVar2 == 0) {
+      ~r0 = (math_big_Int *)0x0;
+      goto LAB_0063a8ec;
+    }
+    ~r1 = (math_big_Int *)(pmStack0000000000000008->abs).array;
+    ~r0 = (math_big_Int *)((y->abs).array + iVar2 + -1);
+    if (~r0 != (math_big_Int *)((int)~r1 + iVar1 * 8 + -8)) goto LAB_0063a8ec;
+  }
+  local_28[0] = false;
+  local_28._8_8_ = (math_big_Int *)0x0;
+  y_00 = (math_big_Int *)local_28;
+  unique0x1000026a = in_XMM15;
+  if (y != (math_big_Int *)local_28) {
+    iVar1 = (y->abs).len;
+    ~r1 = (math_big_Int *)(y->abs).array;
+    iVar2 = iVar1;
+    if (iVar1 < 1) {
+      __dest = (math_big_Int *)0x0;
+      cap = 0;
+    }
+    else if (iVar1 == 1) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00808860,1,1,pmStack0000000000000020);
+      cap = 1;
+      iVar2 = 1;
+      __dest = extraout_RAX;
+    }
+    else {
+      cap = iVar1 + 4;
+      runtime_makeslice((internal_abi_Type *)&DAT_00808860,iVar1,cap,pmStack0000000000000020);
+      __dest = extraout_RAX_00;
+    }
+    iVar3 = iVar2;
+    if (iVar1 < iVar2) {
+      iVar3 = iVar1;
+    }
+    if (__dest != ~r1) {
+      runtime_memmove(__dest,~r1,iVar3 << 3);
+      ~r1 = extraout_R8;
+    }
+    uStack_10 = cap;
+    local_28._16_8_ = iVar2;
+    local_28[0] = y->neg;
+    ~r0 = (math_big_Int *)(uint)local_28[0];
+    y_00 = (math_big_Int *)local_28;
+    local_28._8_8_ = __dest;
+  }
+LAB_0063a8ec:
+  math_big___Int__QuoRem(pmStack0000000000000008,x,y,pmStack0000000000000020,~r0,~r1);
+  if (pmStack0000000000000020->neg != false) {
+    if (y_00->neg == false) {
+      math_big___Int__Sub(pmStack0000000000000008,pmStack0000000000000008,math_big_intOne,~r0_00);
+      math_big___Int__Add(pmStack0000000000000020,pmStack0000000000000020,y_00,~r0_02);
+    }
+    else {
+      math_big___Int__Add(pmStack0000000000000008,pmStack0000000000000008,math_big_intOne,~r0_00);
+      math_big___Int__Sub(pmStack0000000000000020,pmStack0000000000000020,y_00,~r0_01);
+    }
+  }
+  return;
+}
+
+
+
+void math_big___Int__Cmp(math_big_Int *x,math_big_Int *y,int r)
+
+{
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000008;
+  
+  pmStack0000000000000008 = x;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((y != pmStack0000000000000008) && (y->neg == pmStack0000000000000008->neg)) {
+    math_big_nat_cmp((pmStack0000000000000008->abs).array,(void *)(pmStack0000000000000008->abs).len
+                    );
+  }
+  return;
+}
+
+
+
+void math_big___Int__CmpAbs(math_big_Int *x,math_big_Int *y,int ~r0)
+
+{
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  math_big_nat_cmp((x->abs).array,(void *)(x->abs).len);
+  return;
+}
+
+
+
+void math_big___Int__Int64(math_big_Int *x,int64 ~r0)
+
+{
+  int64 v;
+  
+  return;
+}
+
+
+
+void math_big___Int__Uint64(math_big_Int *x,uint64 ~r0)
+
+{
+  uint64 v;
+  
+  return;
+}
+
+
+
+void math_big___Int__IsInt64(math_big_Int *x,bool ~r0)
+
+{
+  int64 w;
+  
+  if (1 < (x->abs).len) {
+    return;
+  }
+  return;
+}
+
+
+
+void math_big___Int__IsUint64(math_big_Int *x,bool ~r0)
+
+{
+  return;
+}
+
+
+
+void math_big___Int__Float64(math_big_Int *x,float64 ~r0,math_big_Accuracy ~r1)
+
+{
+  math_big_Float *~r0_00;
+  math_big_Word *pmVar1;
+  math_big_Float *x_00;
+  uint64 v;
+  int i;
+  int n;
+  math_big_Accuracy ~r1_00;
+  uint i_1;
+  uint top;
+  int iVar2;
+  uint uVar3;
+  int unaff_R14;
+  float64 f;
+  undefined in_XMM15 [16];
+  math_big_Word *pmStack_30;
+  math_big_Word *pmStack_28;
+  int iStack_20;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  ~r0_00 = (math_big_Float *)(x->abs).len;
+  pmVar1 = (x->abs).array;
+  if ((int)&~r0_00[-1].field_0x27 < 0) {
+    n = 0;
+  }
+  else {
+    uVar3 = pmVar1[(int)&~r0_00[-1].field_0x27];
+    uVar3 = uVar3 | uVar3 >> 1;
+    uVar3 = uVar3 >> 2 | uVar3;
+    uVar3 = uVar3 >> 4 | uVar3;
+    uVar3 = uVar3 >> 8 | uVar3;
+    uVar3 = uVar3 >> 0x10 | uVar3;
+    uVar3 = uVar3 >> 0x20 | uVar3;
+    iVar2 = 0x3f;
+    if (uVar3 != 0) {
+      for (; uVar3 >> iVar2 == 0; iVar2 = iVar2 + -1) {
+      }
+    }
+    if (uVar3 == 0) {
+      iVar2 = -1;
+    }
+    n = iVar2 + (int)&~r0_00[-1].field_0x27 * 0x40 + 1;
+  }
+  if (n == 0) {
+    return;
+  }
+  if (n < 0x36) {
+    return;
+  }
+  if (n < 0x40) {
+    if (~r0_00 == (math_big_Float *)0x0) {
+      iVar2 = 0;
+    }
+    else {
+      i_1 = 0;
+      while( true ) {
+        if (~r0_00 <= i_1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        uVar3 = pmVar1[i_1];
+        if (uVar3 != 0) break;
+        i_1 = i_1 + 1;
+      }
+      iVar2 = 0;
+      if (uVar3 != 0) {
+        for (; (uVar3 >> iVar2 & 1) == 0; iVar2 = iVar2 + 1) {
+        }
+      }
+      iVar2 = i_1 * 0x40 + iVar2;
+    }
+    if (n - iVar2 < 0x36) {
+      return;
+    }
+  }
+  pmStack_30 = in_XMM15._0_8_;
+  iStack_20 = in_XMM15._8_8_;
+  pmStack_28 = pmStack_30;
+  math_big___Float__SetInt((math_big_Float *)&pmStack_30,x,~r0_00);
+  math_big___Float__Float64(x_00,~r0,~r1_00);
+  return;
+}
+
+
+
+void math_big___Int__SetString(math_big_Int *z,string s,int base,math_big_Int *~r0,bool ~r1)
+
+{
+  math_big_Int *extraout_RAX;
+  math_big_Int *extraout_RAX_00;
+  math_big_Int *~r0_00;
+  int *extraout_R11;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000018;
+  io_ByteScanner in_stack_ffffffffffffffc8;
+  
+  pmStack0000000000000018 = ~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_newobject((internal_abi_Type *)&DAT_00860100,(void *)base);
+  (extraout_RAX->abs).array = (math_big_Word *)pmStack0000000000000018;
+  ~r0_00 = extraout_RAX;
+  if (runtime_writeBarrier._0_4_ != 0) {
+    runtime_gcWriteBarrier1();
+    *extraout_R11 = base;
+    ~r0_00 = extraout_RAX_00;
+  }
+  *(int *)~r0_00 = base;
+  (~r0_00->abs).len = 0;
+  (~r0_00->abs).cap = -1;
+  math_big___Int__setFromScanner(z,in_stack_ffffffffffffffc8,0x960e08,~r0_00,~r1);
+  return;
+}
+
+
+
+void math_big___Int__setFromScanner
+               (math_big_Int *z,io_ByteScanner r,int base,math_big_Int *~r0,bool ~r1)
+
+{
+  char extraout_AL;
+  int extraout_RCX;
+  void *x;
+  runtime_itab *tab;
+  bool ~r0_00;
+  undefined7 in_register_00000039;
+  int unaff_R14;
+  math_big_Int *pmStack0000000000000018;
+  io_ByteScanner in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe0;
+  
+  pmStack0000000000000018 = ~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  math_big___Int__scan
+            (z,in_stack_ffffffffffffffd0,base,pmStack0000000000000018,
+             CONCAT71(in_register_00000039,~r1),in_stack_ffffffffffffffe0);
+  if (extraout_RCX == 0) {
+    (**(code **)(base + 0x18))(pmStack0000000000000018);
+    if (io_EOF.tab == tab) {
+      runtime_ifaceeq(tab,x,io_EOF.data,~r0_00);
+      if (extraout_AL != '\0') {
+        return;
+      }
+    }
+    return;
+  }
+  return;
+}
+
+
+/*
+Unable to decompile 'math/big.(*Int).SetBytes'
+Cause: 
+Low-level Error: Overlapping input varnodes
+*/
+
+
+void math_big___Int__Bytes(math_big_Int *x,__uint8 ~r0)
+
+{
+  uint uVar1;
+  math_big_Word *pmVar2;
+  int iVar3;
+  int extraout_RAX;
+  uint len;
+  int iVar4;
+  void *in_RDI;
+  uint uVar5;
+  void *extraout_RDI;
+  math_big_Word d;
+  math_big_Word mVar6;
+  int iVar7;
+  int j;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    in_RDI = extraout_RDI;
+  }
+  len = (x->abs).len << 3;
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,len,len,in_RDI);
+  pmVar2 = (x->abs).array;
+  iVar3 = (x->abs).len;
+  uVar5 = len;
+  for (iVar4 = 0; iVar4 < iVar3; iVar4 = iVar4 + 1) {
+    mVar6 = pmVar2[iVar4];
+    for (iVar7 = 0; iVar7 < 8; iVar7 = iVar7 + 1) {
+      uVar1 = uVar5 - 1;
+      if ((int)uVar1 < 0) {
+        if ((char)mVar6 != '\0') {
+                    // WARNING: Subroutine does not return
+          runtime_gopanic(in_stack_ffffffffffffffd8);
+        }
+      }
+      else {
+        if (len <= uVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((uVar5 - 1) + extraout_RAX) = (char)mVar6;
+      }
+      mVar6 = mVar6 >> 8;
+      uVar5 = uVar1;
+    }
+  }
+  if ((int)uVar5 < 0) {
+    uVar5 = 0;
+  }
+  for (; (int)uVar5 < (int)len; uVar5 = uVar5 + 1) {
+    if (len <= uVar5) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (*(char *)(extraout_RAX + uVar5) != '\0') break;
+  }
+  if (len < uVar5) {
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+  return;
+}
+
+
+
+void math_big___Int__FillBytes(math_big_Int *x,__uint8 buf,__uint8 ~r0)
+
+{
+  uint uVar1;
+  math_big_Word *pmVar2;
+  int iVar3;
+  uint in_RCX;
+  uint uVar4;
+  int in_RBX;
+  int iVar5;
+  math_big_Word d;
+  math_big_Word mVar6;
+  int iVar7;
+  int j;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RCX != 0) {
+    runtime_memclrNoHeapPointers();
+  }
+  pmVar2 = (x->abs).array;
+  iVar3 = (x->abs).len;
+  uVar4 = in_RCX;
+  for (iVar5 = 0; iVar5 < iVar3; iVar5 = iVar5 + 1) {
+    mVar6 = pmVar2[iVar5];
+    for (iVar7 = 0; iVar7 < 8; iVar7 = iVar7 + 1) {
+      uVar1 = uVar4 - 1;
+      if ((int)uVar1 < 0) {
+        if ((char)mVar6 != '\0') {
+                    // WARNING: Subroutine does not return
+          runtime_gopanic(in_stack_ffffffffffffffe8);
+        }
+      }
+      else {
+        if (in_RCX <= uVar1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        *(char *)((uVar4 - 1) + in_RBX) = (char)mVar6;
+      }
+      mVar6 = mVar6 >> 8;
+      uVar4 = uVar1;
+    }
+  }
+  if ((int)uVar4 < 0) {
+    uVar4 = 0;
+  }
+  while( true ) {
+    if ((int)in_RCX <= (int)uVar4) {
+      return;
+    }
+    if (in_RCX <= uVar4) break;
+    if (*(char *)(in_RBX + uVar4) != '\0') {
+      return;
+    }
+    uVar4 = uVar4 + 1;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void math_big___Int__BitLen(math_big_Int *x,int ~r0)
+
+{
+  int iVar1;
+  uint top;
+  uint uVar2;
+  int i;
+  
+  iVar1 = (x->abs).len;
+  if (-1 < iVar1 + -1) {
+    uVar2 = (x->abs).array[iVar1 + -1];
+    uVar2 = uVar2 >> 1 | uVar2;
+    uVar2 = uVar2 >> 2 | uVar2;
+    uVar2 = uVar2 >> 4 | uVar2;
+    uVar2 = uVar2 >> 8 | uVar2;
+    uVar2 = uVar2 >> 0x10 | uVar2;
+    uVar2 = uVar2 >> 0x20 | uVar2;
+    iVar1 = 0x3f;
+    if (uVar2 != 0) {
+      for (; uVar2 >> iVar1 == 0; iVar1 = iVar1 + -1) {
+      }
+    }
+  }
+  return;
+}
+
+
+
+void math_big___Int__TrailingZeroBits(math_big_Int *x,uint ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  uint i;
+  
+  uVar1 = (x->abs).len;
+  if (uVar1 != 0) {
+    i = 0;
+    while( true ) {
+      if (uVar1 <= i) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      uVar2 = (x->abs).array[i];
+      if (uVar2 != 0) break;
+      i = i + 1;
+    }
+    iVar3 = 0;
+    if (uVar2 != 0) {
+      for (; (uVar2 >> iVar3 & 1) == 0; iVar3 = iVar3 + 1) {
+      }
+    }
+  }
+  return;
+}
+
+
+
+void math_big___Int__Exp(math_big_Int *z,math_big_Int *x,math_big_Int *y,math_big_Int *m,
+                        math_big_Int *~r0)
+
+{
+  int unaff_R14;
+  double in_XMM0_Qa;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  math_big___Int__exp(in_XMM0_Qa);
+  return;
+}
+
+
+
+double math_big___Int__exp(double __x)
+
+{
+  int iVar1;
+  int iVar2;
+  math_big_nat z;
+  math_big_nat z_00;
+  math_big_nat x;
+  math_big_nat x_00;
+  math_big_nat ~r0;

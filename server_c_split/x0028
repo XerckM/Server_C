@@ -1,0 +1,1000 @@
+    dword namesz; // Length of name field
+    dword descsz; // Length of description field
+    dword type; // Vendor specific type
+    char name[4]; // Vendor name
+    char BuildId[83];
+};
+
+typedef struct addrinfo addrinfo, *Paddrinfo;
+
+typedef __socklen_t socklen_t;
+
+typedef struct sockaddr sockaddr, *Psockaddr;
+
+struct addrinfo {
+    int ai_flags;
+    int ai_family;
+    int ai_socktype;
+    int ai_protocol;
+    socklen_t ai_addrlen;
+    struct sockaddr *ai_addr;
+    char *ai_canonname;
+    struct addrinfo *ai_next;
+};
+
+struct sockaddr {
+    sa_family_t sa_family;
+    char sa_data[14];
+};
+
+typedef struct _IO_FILE FILE;
+
+typedef struct msghdr msghdr, *Pmsghdr;
+
+struct msghdr {
+    void *msg_name;
+    socklen_t msg_namelen;
+    struct iovec *msg_iov;
+    size_t msg_iovlen;
+    void *msg_control;
+    size_t msg_controllen;
+    int msg_flags;
+};
+
+typedef struct ui_st ui_st, *Pui_st;
+
+struct ui_st {
+};
+
+typedef struct ui_st UI;
+
+typedef struct itimerspec itimerspec, *Pitimerspec;
+
+struct itimerspec {
+    struct timespec it_interval;
+    struct timespec it_value;
+};
+
+typedef struct sigevent sigevent, *Psigevent;
+
+struct sigevent {
+    sigval_t sigev_value;
+    int sigev_signo;
+    int sigev_notify;
+    union _union_1250 _sigev_un;
+};
+
+typedef __clockid_t clockid_t;
+
+typedef __timer_t timer_t;
+
+typedef struct __sigset_t sigset_t;
+
+typedef struct Elf64_Phdr Elf64_Phdr, *PElf64_Phdr;
+
+typedef enum Elf_ProgramHeaderType {
+    PT_NULL=0,
+    PT_LOAD=1,
+    PT_DYNAMIC=2,
+    PT_INTERP=3,
+    PT_NOTE=4,
+    PT_SHLIB=5,
+    PT_PHDR=6,
+    PT_TLS=7,
+    PT_GNU_EH_FRAME=1685382480,
+    PT_GNU_STACK=1685382481,
+    PT_GNU_RELRO=1685382482
+} Elf_ProgramHeaderType;
+
+struct Elf64_Phdr {
+    enum Elf_ProgramHeaderType p_type;
+    dword p_flags;
+    qword p_offset;
+    qword p_vaddr;
+    qword p_paddr;
+    qword p_filesz;
+    qword p_memsz;
+    qword p_align;
+};
+
+typedef struct Elf64_Dyn Elf64_Dyn, *PElf64_Dyn;
+
+typedef enum Elf64_DynTag {
+    DT_NULL=0,
+    DT_NEEDED=1,
+    DT_PLTRELSZ=2,
+    DT_PLTGOT=3,
+    DT_HASH=4,
+    DT_STRTAB=5,
+    DT_SYMTAB=6,
+    DT_RELA=7,
+    DT_RELASZ=8,
+    DT_RELAENT=9,
+    DT_STRSZ=10,
+    DT_SYMENT=11,
+    DT_INIT=12,
+    DT_FINI=13,
+    DT_SONAME=14,
+    DT_RPATH=15,
+    DT_SYMBOLIC=16,
+    DT_REL=17,
+    DT_RELSZ=18,
+    DT_RELENT=19,
+    DT_PLTREL=20,
+    DT_DEBUG=21,
+    DT_TEXTREL=22,
+    DT_JMPREL=23,
+    DT_BIND_NOW=24,
+    DT_INIT_ARRAY=25,
+    DT_FINI_ARRAY=26,
+    DT_INIT_ARRAYSZ=27,
+    DT_FINI_ARRAYSZ=28,
+    DT_RUNPATH=29,
+    DT_FLAGS=30,
+    DT_PREINIT_ARRAY=32,
+    DT_PREINIT_ARRAYSZ=33,
+    DT_RELRSZ=35,
+    DT_RELR=36,
+    DT_RELRENT=37,
+    DT_ANDROID_REL=1610612751,
+    DT_ANDROID_RELSZ=1610612752,
+    DT_ANDROID_RELA=1610612753,
+    DT_ANDROID_RELASZ=1610612754,
+    DT_ANDROID_RELR=1879040000,
+    DT_ANDROID_RELRSZ=1879040001,
+    DT_ANDROID_RELRENT=1879040003,
+    DT_GNU_PRELINKED=1879047669,
+    DT_GNU_CONFLICTSZ=1879047670,
+    DT_GNU_LIBLISTSZ=1879047671,
+    DT_CHECKSUM=1879047672,
+    DT_PLTPADSZ=1879047673,
+    DT_MOVEENT=1879047674,
+    DT_MOVESZ=1879047675,
+    DT_FEATURE_1=1879047676,
+    DT_POSFLAG_1=1879047677,
+    DT_SYMINSZ=1879047678,
+    DT_SYMINENT=1879047679,
+    DT_GNU_XHASH=1879047924,
+    DT_GNU_HASH=1879047925,
+    DT_TLSDESC_PLT=1879047926,
+    DT_TLSDESC_GOT=1879047927,
+    DT_GNU_CONFLICT=1879047928,
+    DT_GNU_LIBLIST=1879047929,
+    DT_CONFIG=1879047930,
+    DT_DEPAUDIT=1879047931,
+    DT_AUDIT=1879047932,
+    DT_PLTPAD=1879047933,
+    DT_MOVETAB=1879047934,
+    DT_SYMINFO=1879047935,
+    DT_VERSYM=1879048176,
+    DT_RELACOUNT=1879048185,
+    DT_RELCOUNT=1879048186,
+    DT_FLAGS_1=1879048187,
+    DT_VERDEF=1879048188,
+    DT_VERDEFNUM=1879048189,
+    DT_VERNEED=1879048190,
+    DT_VERNEEDNUM=1879048191,
+    DT_AUXILIARY=2147483645,
+    DT_FILTER=2147483647
+} Elf64_DynTag;
+
+struct Elf64_Dyn {
+    enum Elf64_DynTag d_tag;
+    qword d_val;
+};
+
+typedef struct Elf64_Rela Elf64_Rela, *PElf64_Rela;
+
+struct Elf64_Rela {
+    qword r_offset; // location to apply the relocation action
+    qword r_info; // the symbol table index and the type of relocation
+    qword r_addend; // a constant addend used to compute the relocatable field value
+};
+
+typedef struct Elf64_Shdr Elf64_Shdr, *PElf64_Shdr;
+
+typedef enum Elf_SectionHeaderType {
+    SHT_NULL=0,
+    SHT_PROGBITS=1,
+    SHT_SYMTAB=2,
+    SHT_STRTAB=3,
+    SHT_RELA=4,
+    SHT_HASH=5,
+    SHT_DYNAMIC=6,
+    SHT_NOTE=7,
+    SHT_NOBITS=8,
+    SHT_REL=9,
+    SHT_SHLIB=10,
+    SHT_DYNSYM=11,
+    SHT_INIT_ARRAY=14,
+    SHT_FINI_ARRAY=15,
+    SHT_PREINIT_ARRAY=16,
+    SHT_GROUP=17,
+    SHT_SYMTAB_SHNDX=18,
+    SHT_ANDROID_REL=1610612737,
+    SHT_ANDROID_RELA=1610612738,
+    SHT_GNU_ATTRIBUTES=1879048181,
+    SHT_GNU_HASH=1879048182,
+    SHT_GNU_LIBLIST=1879048183,
+    SHT_CHECKSUM=1879048184,
+    SHT_SUNW_move=1879048186,
+    SHT_SUNW_COMDAT=1879048187,
+    SHT_SUNW_syminfo=1879048188,
+    SHT_GNU_verdef=1879048189,
+    SHT_GNU_verneed=1879048190,
+    SHT_GNU_versym=1879048191
+} Elf_SectionHeaderType;
+
+struct Elf64_Shdr {
+    dword sh_name;
+    enum Elf_SectionHeaderType sh_type;
+    qword sh_flags;
+    qword sh_addr;
+    qword sh_offset;
+    qword sh_size;
+    dword sh_link;
+    dword sh_info;
+    qword sh_addralign;
+    qword sh_entsize;
+};
+
+typedef struct Elf64_Sym Elf64_Sym, *PElf64_Sym;
+
+struct Elf64_Sym {
+    dword st_name;
+    byte st_info;
+    byte st_other;
+    word st_shndx;
+    qword st_value;
+    qword st_size;
+};
+
+typedef struct Elf64_Ehdr Elf64_Ehdr, *PElf64_Ehdr;
+
+struct Elf64_Ehdr {
+    byte e_ident_magic_num;
+    char e_ident_magic_str[3];
+    byte e_ident_class;
+    byte e_ident_data;
+    byte e_ident_version;
+    byte e_ident_osabi;
+    byte e_ident_abiversion;
+    byte e_ident_pad[7];
+    word e_type;
+    word e_machine;
+    dword e_version;
+    qword e_entry;
+    qword e_phoff;
+    qword e_shoff;
+    dword e_flags;
+    word e_ehsize;
+    word e_phentsize;
+    word e_phnum;
+    word e_shentsize;
+    word e_shnum;
+    word e_shstrndx;
+};
+
+
+
+
+void net__text_(size_t param_1,undefined8 param_2,undefined8 param_3,int *param_4)
+
+{
+  int iVar1;
+  void *pvVar2;
+  int extraout_RBX;
+  int iVar3;
+  int extraout_RBX_00;
+  
+  iVar1 = *param_4;
+  pvVar2 = malloc(param_1);
+  iVar3 = extraout_RBX;
+  if ((pvVar2 == (void *)0x0) && (iVar1 == 0)) {
+    pvVar2 = malloc(0);
+    iVar3 = extraout_RBX_00;
+  }
+  *(void **)(iVar3 + 8) = pvVar2;
+  return;
+}
+
+
+
+undefined  [16] net__text_(undefined8 param_1,undefined8 param_2)
+
+{
+  dword dVar1;
+  socklen_t __hostlen;
+  int extraout_RAX;
+  int *piVar2;
+  int iVar3;
+  int extraout_RAX_00;
+  socklen_t *__salen;
+  int extraout_RBX;
+  undefined4 uVar4;
+  int iVar5;
+  undefined auVar6 [16];
+  
+  _cgo_topofstack();
+  iVar5 = extraout_RAX;
+  piVar2 = __errno_location();
+  __hostlen = *__salen;
+  *(undefined4 *)piVar2 = 0;
+  iVar3 = getnameinfo((sockaddr *)(uint)*(dword *)((int)__salen + 0x2c),(socklen_t)__salen,
+                      (char *)(uint)*(dword *)(__salen + 3),__hostlen,
+                      (char *)(uint)*(dword *)(__salen + 1),__salen[4],(uint)*(dword *)(__salen + 5)
+                     );
+  dVar1 = *(dword *)piVar2;
+  uVar4 = (undefined4)iVar3;
+  _cgo_topofstack();
+  *(undefined4 *)(extraout_RBX + 0x30 + (extraout_RAX_00 - iVar5)) = uVar4;
+  auVar6._4_4_ = 0;
+  auVar6._0_4_ = dVar1;
+  auVar6._8_8_ = param_2;
+  return auVar6;
+}
+
+
+
+undefined  [16] _cgo_9c8efe9babca_Cfunc_getnameinfo(undefined8 param_1,undefined8 param_2)
+
+{
+  int extraout_RAX;
+  int iVar1;
+  int extraout_RAX_00;
+  socklen_t *__salen;
+  int extraout_RBX;
+  int iVar2;
+  undefined auVar3 [16];
+  
+  _cgo_topofstack();
+  auVar3._0_8_ = (sockaddr *)CONCAT44(0,*(dword *)((int)__salen + 0x2c));
+  iVar2 = extraout_RAX;
+  iVar1 = getnameinfo(auVar3._0_8_,(socklen_t)__salen,(char *)(uint)*(dword *)(__salen + 3),*__salen
+                      ,(char *)(uint)*(dword *)(__salen + 1),__salen[4],
+                      (uint)*(dword *)(__salen + 5));
+  _cgo_topofstack();
+  *(sdword *)(extraout_RBX + 0x30 + (extraout_RAX_00 - iVar2)) = (sdword)iVar1;
+  auVar3._8_8_ = param_2;
+  return auVar3;
+}
+
+
+
+undefined  [16] net__text_(undefined8 param_1,undefined8 param_2)
+
+{
+  dword dVar1;
+  addrinfo *__req;
+  addrinfo **__pai;
+  int extraout_RAX;
+  int *__name;
+  int iVar2;
+  int extraout_RAX_00;
+  undefined8 *__service;
+  int extraout_RBX;
+  undefined4 uVar3;
+  int iVar4;
+  undefined auVar5 [16];
+  
+  _cgo_topofstack();
+  iVar4 = extraout_RAX;
+  __name = __errno_location();
+  __req = (addrinfo *)__service[3];
+  __pai = (addrinfo **)*__service;
+  *(undefined4 *)__name = 0;
+  iVar2 = getaddrinfo((char *)__name,(char *)__service,__req,__pai);
+  dVar1 = *(dword *)__name;
+  uVar3 = (undefined4)iVar2;
+  _cgo_topofstack();
+  *(undefined4 *)(extraout_RBX + 0x20 + (extraout_RAX_00 - iVar4)) = uVar3;
+  auVar5._4_4_ = 0;
+  auVar5._0_4_ = dVar1;
+  auVar5._8_8_ = param_2;
+  return auVar5;
+}
+
+
+
+void _cgo_9c8efe9babca_Cfunc_free(void *param_1)
+
+{
+  free(param_1);
+  return;
+}
+
+
+
+void _cgo_9c8efe9babca_Cfunc_freeaddrinfo(addrinfo *param_1)
+
+{
+  freeaddrinfo(param_1);
+  return;
+}
+
+
+
+void _cgo_9c8efe9babca_Cfunc_gai_strerror(void)
+
+{
+  int __ecode;
+  char *pcVar1;
+  int extraout_RAX;
+  int extraout_RBX;
+  int iVar2;
+  
+  _cgo_topofstack();
+  iVar2 = __ecode;
+  pcVar1 = gai_strerror(__ecode);
+  _cgo_topofstack();
+  *(char **)(extraout_RBX + 8 + (extraout_RAX - iVar2)) = pcVar1;
+  return;
+}
+
+
+
+void _cgo_9c8efe9babca_Cfunc_getaddrinfo(void)
+
+{
+  char *__name;
+  int iVar1;
+  int extraout_RAX;
+  undefined8 *__service;
+  int extraout_RBX;
+  char *pcVar2;
+  
+  _cgo_topofstack();
+  pcVar2 = __name;
+  iVar1 = getaddrinfo(__name,(char *)__service,(addrinfo *)__service[3],(addrinfo **)*__service);
+  _cgo_topofstack();
+  *(sdword *)(extraout_RBX + 0x20 + (extraout_RAX - (int)pcVar2)) = (sdword)iVar1;
+  return;
+}
+
+
+
+undefined  [16] net__text_(undefined8 param_1,undefined8 param_2)
+
+{
+  dword dVar1;
+  undefined4 uVar2;
+  int extraout_RAX;
+  int *piVar3;
+  int extraout_RAX_00;
+  int extraout_RBX;
+  int iVar4;
+  undefined auVar5 [16];
+  
+  _cgo_topofstack();
+  iVar4 = extraout_RAX;
+  piVar3 = __errno_location();
+  *(undefined4 *)piVar3 = 0;
+  uVar2 = __res_search();
+  dVar1 = *(dword *)piVar3;
+  _cgo_topofstack();
+  *(undefined4 *)(extraout_RBX + 0x20 + (extraout_RAX_00 - iVar4)) = uVar2;
+  auVar5._4_4_ = 0;
+  auVar5._0_4_ = dVar1;
+  auVar5._8_8_ = param_2;
+  return auVar5;
+}
+
+
+
+void _cgo_9c8efe9babca_Cfunc_res_search(void)
+
+{
+  undefined4 uVar1;
+  int extraout_RAX;
+  int extraout_RAX_00;
+  int extraout_RBX;
+  int iVar2;
+  
+  _cgo_topofstack();
+  iVar2 = extraout_RAX;
+  uVar1 = __res_search();
+  _cgo_topofstack();
+  *(undefined4 *)(extraout_RBX + 0x20 + (extraout_RAX_00 - iVar2)) = uVar1;
+  return;
+}
+
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+void fatalf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+           undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,void *param_9
+           ,void *param_10,char *param_11,undefined8 param_12,char *param_13,char *param_14,
+           char *param_15,undefined1 param_16)
+
+{
+  code *pcVar1;
+  int __c;
+  __gnuc_va_list __arg;
+  char *__format;
+  FILE *__stream;
+  undefined in_register_00001204 [12];
+  undefined in_register_00001224 [12];
+  undefined in_register_00001244 [12];
+  undefined in_register_00001264 [12];
+  undefined in_register_00001284 [12];
+  undefined in_register_000012a4 [12];
+  undefined in_register_000012c4 [12];
+  undefined in_register_000012e4 [12];
+  undefined local_c8 [64];
+  undefined local_88 [16];
+  undefined local_78 [16];
+  undefined local_68 [16];
+  undefined local_58 [16];
+  undefined local_48 [16];
+  undefined local_38 [16];
+  undefined local_28 [16];
+  void *pvStack_10;
+  
+  if ((char)param_9 != '\0') {
+    local_c8._52_12_ = in_register_00001204;
+    local_c8._48_4_ = param_1;
+    local_88._4_12_ = in_register_00001224;
+    local_88._0_4_ = param_2;
+    local_78._4_12_ = in_register_00001244;
+    local_78._0_4_ = param_3;
+    local_68._4_12_ = in_register_00001264;
+    local_68._0_4_ = param_4;
+    local_58._4_12_ = in_register_00001284;
+    local_58._0_4_ = param_5;
+    local_48._4_12_ = in_register_000012a4;
+    local_48._0_4_ = param_6;
+    local_38._4_12_ = in_register_000012c4;
+    local_38._0_4_ = param_7;
+    local_28._4_12_ = in_register_000012e4;
+    local_28._0_4_ = param_8;
+  }
+  local_c8._8_8_ = param_13;
+  local_c8._24_8_ = param_11;
+  local_c8._32_8_ = param_14;
+  local_c8._40_8_ = param_15;
+  pvStack_10 = param_10;
+  fwrite(param_9,(size_t)&stderr,_stderr,(FILE *)"runtime/cgo: ");
+  __c = vfprintf((FILE *)local_c8,__format,__arg);
+  fputc(__c,__stream);
+  abort();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+void pthread_key_destructor
+               (undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  if (_x_crosscall2_ptr != (code *)0x0) {
+                    // WARNING: Could not recover jumptable at 0x00401378. Too many branches
+                    // WARNING: Treating indirect jump as call
+    (*_x_crosscall2_ptr)(_x_crosscall2_ptr,param_2,0,0,param_4);
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+undefined  [16] _cgo_wait_runtime_init_done(pthread_mutex_t *param_1,uint param_2)
+
+{
+  undefined auVar1 [16];
+  pthread_cond_t *__cond;
+  undefined1 *__mutex;
+  pthread_mutex_t *extraout_RBX;
+  code *extraout_RBX_00;
+  undefined8 *extraout_RBX_01;
+  
+  __cond = (pthread_cond_t *)pthread_mutex_lock(param_1);
+  if (runtime_init_done == 0) {
+    __mutex = runtime_init_mu;
+    do {
+      pthread_cond_wait(__cond,(pthread_mutex_t *)__mutex);
+      __cond = (pthread_cond_t *)(uint)runtime_init_done;
+      __mutex = (undefined1 *)extraout_RBX;
+    } while (runtime_init_done == 0);
+  }
+  if (_x_cgo_pthread_key_created == 0) {
+    __cond = (pthread_cond_t *)
+             pthread_key_create((pthread_key_t *)&__cond->__align,
+                                (__destr_function *)&x_cgo_pthread_key_created);
+    if ((sdword)__cond == 0) {
+      *extraout_RBX_01 = 1;
+    }
+  }
+  pthread_mutex_unlock((pthread_mutex_t *)__cond);
+  if (extraout_RBX_00 != (code *)0x0) {
+    (*extraout_RBX_00)();
+  }
+  auVar1._8_8_ = 0;
+  auVar1._0_8_ = param_2;
+  return auVar1 << 0x40;
+}
+
+
+
+void x_cgo_bindm(pthread_key_t param_1,void *param_2)
+
+{
+  pthread_setspecific(param_1,param_2);
+  return;
+}
+
+
+
+void x_cgo_notify_runtime_init_done(pthread_mutex_t *param_1)
+
+{
+  pthread_cond_t *__cond;
+  pthread_mutex_t *__mutex;
+  
+  __cond = (pthread_cond_t *)pthread_mutex_lock(param_1);
+  runtime_init_done = 1;
+  __mutex = (pthread_mutex_t *)pthread_cond_broadcast(__cond);
+  pthread_mutex_unlock(__mutex);
+  return;
+}
+
+
+
+void x_cgo_set_context_function(pthread_mutex_t *param_1)
+
+{
+  pthread_mutex_t *__mutex;
+  undefined8 extraout_RBX;
+  
+  __mutex = (pthread_mutex_t *)pthread_mutex_lock(param_1);
+  cgo_context_function = extraout_RBX;
+  pthread_mutex_unlock(__mutex);
+  return;
+}
+
+
+
+undefined8 _cgo_get_context_function(pthread_mutex_t *param_1)
+
+{
+  pthread_mutex_t *__mutex;
+  undefined8 uVar1;
+  
+  __mutex = (pthread_mutex_t *)pthread_mutex_lock(param_1);
+  uVar1 = cgo_context_function;
+  pthread_mutex_unlock(__mutex);
+  return uVar1;
+}
+
+
+
+undefined  [16]
+_cgo_try_pthread_create
+          (undefined8 param_1,undefined8 param_2,__start_routine *param_3,void *param_4)
+
+{
+  timespec *__requested_time;
+  pthread_t *__newthread;
+  pthread_attr_t *__attr;
+  int extraout_RBX;
+  pthread_attr_t *extraout_RBX_00;
+  uint uVar1;
+  undefined auVar2 [16];
+  pthread_t local_48 [3];
+  undefined8 uStack_30;
+  
+  __attr = (pthread_attr_t *)0xf4240;
+  __newthread = local_48;
+  uStack_30 = param_2;
+  do {
+    __requested_time = (timespec *)pthread_create(__newthread,__attr,param_3,param_4);
+    uVar1 = (uint)__requested_time & 0xffffffff;
+    if ((sdword)__requested_time == 0) {
+      pthread_detach((pthread_t)__requested_time);
+      break;
+    }
+    if ((sdword)__requested_time != 0xb) break;
+    local_48[0] = 0;
+    __newthread = (pthread_t *)nanosleep(__requested_time,(timespec *)(extraout_RBX + 1000000));
+    __attr = extraout_RBX_00;
+  } while (extraout_RBX_00 != (pthread_attr_t *)0x1406f40);
+  auVar2._0_8_ = uVar1 & 0xffffffff;
+  auVar2._8_8_ = uStack_30;
+  return auVar2;
+}
+
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+void x_cgo_sys_thread_create
+               (undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4,
+               __start_routine *param_5)
+
+{
+  code *pcVar1;
+  char *__format;
+  undefined auVar2 [16];
+  undefined local_10 [16];
+  
+  auVar2 = _cgo_try_pthread_create(param_1,param_2,param_5,local_10);
+  if (auVar2._0_4_ == 0) {
+    return;
+  }
+  strerror(auVar2._0_8_);
+  fprintf((FILE *)0x0,__format);
+  abort();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+undefined8 threadentry(void *param_1,undefined8 param_2,undefined8 param_3,int param_4)
+
+{
+  undefined8 uVar1;
+  undefined8 extraout_RAX;
+  undefined8 extraout_RCX;
+  undefined8 extraout_RBX;
+  
+  uVar1 = *(undefined8 *)(param_4 + 0x10);
+  free(param_1);
+  crosscall_amd64(extraout_RAX,extraout_RBX,extraout_RCX,uVar1,setg_gcc);
+  return 0;
+}
+
+
+
+void x_cgo_init(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
+               size_t param_9)
+
+{
+  pthread_attr_t *ppVar1;
+  void *__ptr;
+  int *__errnum;
+  char *pcVar2;
+  char *extraout_RCX;
+  char *extraout_RCX_00;
+  size_t *__stacksize;
+  char **extraout_RBX;
+  void *extraout_RBX_00;
+  undefined8 in_RSI;
+  char *extraout_R8;
+  char *extraout_R8_00;
+  char *extraout_R9;
+  char *extraout_R9_00;
+  undefined4 extraout_XMM0_Da;
+  undefined in_stack_ffffffffffffffc8;
+  int local_30;
+  
+  setg_gcc = in_RSI;
+  ppVar1 = (pthread_attr_t *)malloc(param_9);
+  if (ppVar1 == (pthread_attr_t *)0x0) {
+    __errnum = __errno_location();
+    pcVar2 = strerror((int)__errnum);
+    ppVar1 = (pthread_attr_t *)
+             fatalf(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,(void *)0x0,
+                    extraout_RBX_00,extraout_RCX_00,"malloc failed: %s",pcVar2,extraout_R8_00,
+                    extraout_R9_00,in_stack_ffffffffffffffc8);
+    param_1 = extraout_XMM0_Da;
+  }
+  ppVar1 = (pthread_attr_t *)pthread_attr_init(ppVar1);
+  ppVar1 = (pthread_attr_t *)pthread_attr_getstacksize(ppVar1,__stacksize);
+  pcVar2 = &stack0x00000ff8 + -local_30;
+  *extraout_RBX = pcVar2;
+  if (extraout_RBX[1] <= pcVar2) {
+    ppVar1 = (pthread_attr_t *)
+             fatalf(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,(void *)0x0,
+                    extraout_RBX,extraout_RCX,"bad stack bounds: lo=%p hi=%p\n",pcVar2,extraout_R8,
+                    extraout_R9,in_stack_ffffffffffffffc8);
+  }
+  __ptr = (void *)pthread_attr_destroy(ppVar1);
+  free(__ptr);
+  if (x_cgo_inittls != (code *)0x0) {
+    (*x_cgo_inittls)();
+  }
+  return;
+}
+
+
+
+void _cgo_sys_thread_start
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
+               sigset_t *param_9,undefined8 param_10,undefined8 param_11,int *param_12)
+
+{
+  sdword sVar1;
+  int iVar2;
+  pthread_attr_t *ppVar3;
+  char *pcVar4;
+  __sigset_t *__oldmask;
+  __sigset_t *__oldmask_00;
+  char *extraout_RCX;
+  __sigset_t *__newmask;
+  size_t *__stacksize;
+  undefined8 extraout_RBX;
+  void *extraout_RBX_00;
+  char *extraout_R8;
+  char *extraout_R9;
+  undefined auVar5 [16];
+  undefined in_stack_fffffffffffffe98;
+  undefined8 local_160;
+  
+  iVar2 = sigfillset(param_9);
+  ppVar3 = (pthread_attr_t *)pthread_sigmask(iVar2,__newmask,__oldmask);
+  ppVar3 = (pthread_attr_t *)pthread_attr_init(ppVar3);
+  pthread_attr_getstacksize(ppVar3,__stacksize);
+  iVar2 = *param_12;
+  *(undefined8 *)(iVar2 + 8) = local_160;
+  auVar5 = _cgo_try_pthread_create
+                     (iVar2,extraout_RBX,(__start_routine *)param_12,&stack0xfffffffffffffe98);
+  sVar1 = auVar5._0_4_;
+  iVar2 = pthread_sigmask(auVar5._0_8_,auVar5._8_8_,__oldmask_00);
+  if (sVar1 == 0) {
+    return;
+  }
+  pcVar4 = strerror(iVar2);
+  fatalf(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,(void *)0x0,extraout_RBX_00
+         ,extraout_RCX,"pthread_create failed: %s",pcVar4,extraout_R8,extraout_R9,
+         in_stack_fffffffffffffe98);
+  return;
+}
+
+
+
+void * x_cgo_mmap(void *param_1,size_t param_2,int param_3,int param_4,int param_5,__off_t param_6)
+
+{
+  void *pvVar1;
+  int *piVar2;
+  
+  pvVar1 = mmap(param_1,param_2,param_3,param_4,param_5,param_6);
+  if (pvVar1 != (void *)0xffffffffffffffff) {
+    return pvVar1;
+  }
+  piVar2 = __errno_location();
+  return (void *)(int)*(sdword *)piVar2;
+}
+
+
+
+void x_cgo_munmap(void *param_1,size_t param_2)
+
+{
+  code *pcVar1;
+  int iVar2;
+  
+  iVar2 = munmap(param_1,param_2);
+  if (-1 < (sdword)iVar2) {
+    return;
+  }
+  abort();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+void x_cgo_munmap_cold(void)
+
+{
+  code *pcVar1;
+  
+  abort();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+void x_cgo_setenv(char *param_1,char *param_2,int param_3)
+
+{
+  setenv(param_1,param_2,param_3);
+  return;
+}
+
+
+
+void x_cgo_unsetenv(char *param_1)
+
+{
+  unsetenv(param_1);
+  return;
+}
+
+
+
+undefined  [16]
+x_cgo_sigaction(undefined8 param_1,sigaction *param_2,undefined8 param_3,undefined8 param_4,
+               sigset_t **param_5)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int iVar3;
+  sigaction *extraout_RCX;
+  sigaction *__oact;
+  sigaction *extraout_RCX_00;
+  sigset_t **in_RDX;
+  sigaction *extraout_RBX;
+  sigaction *extraout_RBX_00;
+  int extraout_RBX_01;
+  sigset_t **ppsVar4;
+  int iVar5;
+  uint uVar6;
+  undefined auVar7 [16];
+  sigset_t *local_178 [17];
+  dword local_f0;
+  sigset_t *local_d8 [17];
+  sdword local_50;
+  sigaction *psStack_30;
+  
+  uVar1 = 0;
+  ppsVar4 = local_178;
+  psStack_30 = param_2;
+  for (iVar3 = 0x13; iVar3 != 0; iVar3 = iVar3 + -1) {
+    *ppsVar4 = (sigset_t *)0x0;
+    ppsVar4 = ppsVar4 + 1;
+  }
+  ppsVar4 = local_d8;
+  for (iVar3 = 0x13; iVar3 != 0; iVar3 = iVar3 + -1) {
+    *ppsVar4 = (sigset_t *)0x0;
+    ppsVar4 = ppsVar4 + 1;
+  }
+  if (param_5 == (sigset_t **)0x0) {
+    __oact = (sigaction *)0x0;
+    if (in_RDX != (sigset_t **)0x0) {
+      __oact = (sigaction *)0x0;
+      goto LAB_004018e0;
+    }
+LAB_00401969:
+    uVar1 = sigaction(uVar1,param_2,__oact);
+    uVar6 = uVar1 & 0xffffffff;
+    if ((sdword)uVar1 != -1) goto LAB_00401952;
+  }
+  else {
+    local_178[0] = *param_5;
+    sigemptyset(local_178[0]);
+    __oact = extraout_RCX;
+    param_2 = extraout_RBX;
+    do {
+      while (((uint)param_5[3] >> ((uint)param_2 & 0x3f) & 1) == 0) {
+        param_2 = (sigaction *)((int)&param_2->__sigaction_handler + 1);
+        if (param_2 == (sigaction *)0x40) goto LAB_004018c1;
+      }
+      sigaddset(param_5[3],(int)((int)&param_2->__sigaction_handler + 1));
+      __oact = extraout_RCX_00;
+      param_2 = extraout_RBX_00;
+    } while (extraout_RBX_00 != (sigaction *)0x40);
+LAB_004018c1:
+    local_f0 = (dword)param_5[1] & 0xfbffffff;
+    uVar1 = (uint)local_f0;
+    if (in_RDX == (sigset_t **)0x0) goto LAB_00401969;
+LAB_004018e0:
+    uVar1 = sigaction(uVar1,param_2,__oact);
+    uVar6 = uVar1 & 0xffffffff;
+    if ((sdword)uVar1 != -1) {
+      iVar3 = 0;
+      in_RDX[3] = (sigset_t *)0x0;
+      iVar5 = 1;
+      *in_RDX = local_d8[0];
+      do {
+        local_d8[0] = (sigset_t *)sigismember(local_d8[0],iVar3);
+        if ((sdword)local_d8[0] == 1) {
+          local_d8[0] = (sigset_t *)(iVar5 << ((byte)extraout_RBX_01 & 0x3f));
+          in_RDX[3] = (sigset_t *)((uint)in_RDX[3] | (uint)local_d8[0]);
+        }
+        iVar3 = extraout_RBX_01 + 1;

@@ -1,0 +1,1000 @@
+  uint uVar1;
+  uint32 di;
+  byte extraout_CL;
+  bool d0;
+  uint extraout_RAX;
+  uint uVar2;
+  byte bVar3;
+  int iVar4;
+  int b;
+  dword dVar5;
+  int extraout_RBX;
+  int dexp2;
+  uint extra;
+  int q;
+  int iVar6;
+  int i;
+  byte bVar7;
+  bool exact;
+  bool roundUp_00;
+  bool roundUp;
+  dword dVar8;
+  uint uVar9;
+  uint32 extraMask;
+  dword dVar10;
+  uint32 dfrac;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffffc0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (prec < 0) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffc0);
+  }
+  if (9 < prec) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffc0);
+  }
+  if (mant == 0) {
+    d->nd = in_XMM15._0_8_;
+    d->dp = in_XMM15._8_8_;
+    return;
+  }
+  uVar1 = (uint)mant * 2 + 1;
+  iVar4 = 0x3f;
+  if (uVar1 != 0) {
+    for (; uVar1 >> iVar4 == 0; iVar4 = iVar4 + -1) {
+    }
+  }
+  if (iVar4 < 0x19) {
+    exp = iVar4 + exp + -0x19;
+    mant = mant << ((byte)-(iVar4 + -0x19) & 0x1f) & -(dword)((uint)-(iVar4 + -0x19) < 0x20);
+  }
+  iVar4 = prec - (exp * 0x13441 + 0x1ce618 >> 0x12);
+  uVar1 = iVar4 - 1;
+  exact = uVar1 < 0x1c;
+  strconv_mult64bitPow10(mant,exp,uVar1,(uint32)prec,uVar1,exact);
+  dVar10 = (dword)extraout_RAX;
+  if (-1 < extraout_RBX) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffc0);
+  }
+  bVar7 = extraout_CL;
+  if (iVar4 + 9U < 10) {
+    if (mant != 0) {
+      uVar2 = extraout_RAX;
+      uVar9 = (uint)mant;
+      for (iVar6 = 0; dVar10 = (dword)uVar2, SBORROW8(iVar6,-uVar1) != (int)(iVar6 + uVar1) < 0;
+          iVar6 = iVar6 + 1) {
+        uVar2 = uVar2 & 0xffffffff;
+        if (uVar9 != (uVar9 / 5) * 5) goto LAB_004bd98b;
+        uVar9 = uVar9 / 5;
+      }
+    }
+    exact = true;
+    bVar7 = 1;
+  }
+LAB_004bd98b:
+  bVar3 = (byte)-extraout_RBX;
+  dVar8 = -(dword)((uint)-extraout_RBX < 0x20);
+  dVar5 = dVar8 & dVar10 >> (bVar3 & 0x1f);
+  dVar10 = (1 << (bVar3 & 0x1f) & dVar8) - 1 & dVar10;
+  if (!exact) {
+    roundUp_00 = (dword)(dVar10 >> ((byte)-(extraout_RBX + 1) & 0x1f) &
+                        -(dword)((uint)-(extraout_RBX + 1) < 0x20)) == 1;
+    goto LAB_004bda29;
+  }
+  dVar8 = 1 << ((byte)-(extraout_RBX + 1) & 0x1f) & -(dword)((uint)-(extraout_RBX + 1) < 0x20);
+  if (dVar8 < dVar10) {
+LAB_004bd9f8:
+    roundUp_00 = true;
+  }
+  else {
+    if (dVar8 == dVar10) {
+      if (bVar7 == 0) goto LAB_004bd9f8;
+      if ((dVar8 == dVar10) && (bVar7 != 0)) {
+        roundUp_00 = (bool)((byte)dVar5 & 1);
+        goto LAB_004bda29;
+      }
+    }
+    roundUp_00 = false;
+  }
+LAB_004bda29:
+  if (dVar10 != 0) {
+    bVar7 = 0;
+  }
+  strconv_formatDecimal(d,(uint)dVar5,(bool)(bVar7 ^ 1),roundUp_00,prec);
+  d->dp = (d->dp - iVar4) + 1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// Local variable e2:int[RCX:8] conflicts with parameter, skipped.
+
+void strconv_ryuFtoaFixed64(strconv_decimalSlice *d,uint64 mant,int exp,int prec)
+
+{
+  uint extraout_RAX;
+  uint64 di;
+  byte extraout_CL;
+  bool d0;
+  byte bVar1;
+  int iVar2;
+  int extraout_RBX;
+  int dexp2;
+  uint extra;
+  uint m;
+  int b;
+  int q;
+  int iVar3;
+  int i;
+  byte bVar4;
+  bool exact;
+  bool roundUp_00;
+  bool roundUp;
+  uint uVar5;
+  uint64 extraMask;
+  uint uVar6;
+  uint64 dfrac;
+  int unaff_R14;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffffb8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (0x12 < prec) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffb8);
+  }
+  if (mant == 0) {
+    d->nd = in_XMM15._0_8_;
+    d->dp = in_XMM15._8_8_;
+    return;
+  }
+  iVar2 = 0x3f;
+  if (mant != 0) {
+    for (; mant >> iVar2 == 0; iVar2 = iVar2 + -1) {
+    }
+  }
+  if (mant == 0) {
+    iVar2 = -1;
+  }
+  if (iVar2 + 1 < 0x37) {
+    exp = iVar2 + exp + -0x36;
+    mant = mant << ((byte)-(iVar2 + -0x36) & 0x3f) & -(uint)((uint)-(iVar2 + -0x36) < 0x40);
+  }
+  iVar2 = prec - (exp * 0x13441 + 0x4105b6 >> 0x12);
+  uVar6 = iVar2 - 1;
+  exact = uVar6 < 0x38;
+  strconv_mult128bitPow10(mant,exp,uVar6,prec,uVar6,exact);
+  if (-1 < extraout_RBX) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffb8);
+  }
+  bVar4 = extraout_CL;
+  if (iVar2 + 0x15U < 0x16) {
+    if (mant != 0) {
+      for (iVar3 = 0; SBORROW8(iVar3,-uVar6) != (int)(iVar3 + uVar6) < 0; iVar3 = iVar3 + 1) {
+        if (mant != (mant / 5) * 5) goto LAB_004bdc2a;
+        mant = mant / 5;
+      }
+    }
+    exact = true;
+    bVar4 = 1;
+  }
+LAB_004bdc2a:
+  bVar1 = (byte)-extraout_RBX;
+  uVar6 = -(uint)((uint)-extraout_RBX < 0x40);
+  m = uVar6 & extraout_RAX >> (bVar1 & 0x3f);
+  uVar6 = (1 << (bVar1 & 0x3f) & uVar6) - 1 & extraout_RAX;
+  if (!exact) {
+    roundUp_00 = (uVar6 >> ((byte)-(extraout_RBX + 1) & 0x3f) &
+                 -(uint)((uint)-(extraout_RBX + 1) < 0x40)) == 1;
+    goto LAB_004bdcc9;
+  }
+  uVar5 = 1 << ((byte)-(extraout_RBX + 1) & 0x3f) & -(uint)((uint)-(extraout_RBX + 1) < 0x40);
+  if (uVar5 < uVar6) {
+LAB_004bdc98:
+    roundUp_00 = true;
+  }
+  else {
+    if (uVar5 == uVar6) {
+      if (bVar4 == 0) goto LAB_004bdc98;
+      if ((uVar5 == uVar6) && (bVar4 != 0)) {
+        roundUp_00 = (bool)((byte)m & 1);
+        goto LAB_004bdcc9;
+      }
+    }
+    roundUp_00 = false;
+  }
+LAB_004bdcc9:
+  if (uVar6 != 0) {
+    bVar4 = 0;
+  }
+  strconv_formatDecimal(d,m,(bool)(bVar4 ^ 1),roundUp_00,prec);
+  d->dp = (d->dp - iVar2) + 1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+// Local variable n:uint[RSI:8] conflicts with parameter, skipped.
+
+void strconv_formatDecimal(strconv_decimalSlice *d,uint64 m,bool trunc,bool roundUp,int prec)
+
+{
+  int iVar1;
+  dword dVar2;
+  uint64 max;
+  uint64 v;
+  uint64 v1;
+  uint uVar3;
+  uint64 b;
+  uint64 v2;
+  int iVar4;
+  int trimmed;
+  
+  dVar2 = (dword)roundUp;
+  if (0x13 < (uint)prec) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  iVar4 = 0;
+  v = m;
+  while (strconv_uint64pow10[prec] <= v) {
+    uVar3 = v % 10;
+    if (uVar3 < 6) {
+      if (uVar3 < 5) {
+        dVar2 = 0;
+      }
+      else if (trunc == false) {
+        dVar2 = (dword)(v / 10) & 1;
+      }
+      else {
+        dVar2 = 1;
+      }
+    }
+    else {
+      dVar2 = 1;
+    }
+    iVar4 = iVar4 + 1;
+    trunc = (bool)(trunc | uVar3 != 0);
+    v = v / 10;
+  }
+  if ((char)dVar2 != '\0') {
+    v = v + 1;
+  }
+  if (strconv_uint64pow10[prec] <= v) {
+    v = v / 10;
+    iVar4 = iVar4 + 1;
+  }
+  d->nd = prec;
+  while( true ) {
+    if (v < 100) {
+      if (v != 0) {
+        if (199 < v * 2 + 1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        if ((uint)(d->d).len <= prec - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        (d->d).array[prec - 1] =
+             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+             [v * 2 + 0x2ab3];
+        prec = prec - 1U;
+      }
+      if (9 < v) {
+        if (199 < v << 1) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        if ((uint)(d->d).len <= prec - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndexU();
+        }
+        (d->d).array[prec - 1] =
+             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+             [v * 2 + 0x2ab2];
+      }
+      while( true ) {
+        iVar1 = d->nd;
+        if ((uint)(d->d).len <= iVar1 - 1U) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        if ((d->d).array[iVar1 + -1] != 0x30) break;
+        d->nd = iVar1 - 1U;
+        iVar4 = iVar4 + 1;
+      }
+      d->dp = iVar1 + iVar4;
+      return;
+    }
+    if (v >> 0x20 == 0) {
+      v1 = (v & 0xffffffff) / 100;
+      uVar3 = (uint)(dword)((sdword)v + (sdword)v1 * -100);
+    }
+    else {
+      v1 = v / 100;
+      uVar3 = v % 100;
+    }
+    if (199 < uVar3 * 2 + 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    if ((uint)(d->d).len <= prec - 1U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    (d->d).array[prec - 1] =
+         "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+         [uVar3 * 2 + 0x2ab3];
+    if (199 < uVar3 << 1) break;
+    if ((uint)(d->d).len <= prec - 2U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    (d->d).array[prec - 2] =
+         "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+         [uVar3 * 2 + 0x2ab2];
+    v = v1;
+    prec = prec - 2U;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndexU();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void strconv_ryuFtoaShortest(strconv_decimalSlice *d,uint64 mant,int exp,strconv_floatInfo *flt)
+
+{
+  int iVar1;
+  dword extraout_EAX;
+  uint32 dl32;
+  dword extraout_EAX_00;
+  uint32 dc32;
+  dword extraout_EAX_01;
+  uint32 du32;
+  char cVar2;
+  char extraout_CL;
+  bool dl0;
+  char extraout_CL_00;
+  bool dc0;
+  char extraout_CL_01;
+  bool du0;
+  uint extraout_RAX;
+  uint extraout_RAX_00;
+  uint extraout_RAX_01;
+  int i_2;
+  char extraout_CL_02;
+  char extraout_CL_03;
+  char extraout_CL_04;
+  char cVar3;
+  byte bVar4;
+  int iVar5;
+  uint uVar6;
+  uint64 dl;
+  bool uok;
+  uint64 uVar7;
+  uint64 mc;
+  int extraout_RBX;
+  int extraout_RBX_00;
+  int iVar8;
+  uint extra;
+  int q;
+  int resE;
+  int resE_00;
+  uint64 dc;
+  int resE_01;
+  int resE_02;
+  uint central;
+  uint32 resM;
+  uint32 resM_00;
+  uint64 du;
+  bool cup;
+  bool c0;
+  uint64 resM_01;
+  uint64 resM_02;
+  uint uVar9;
+  bool exact;
+  bool exact_00;
+  bool exact_01;
+  bool exact_02;
+  char cVar10;
+  uint64 ml;
+  int iVar11;
+  uint64 mu;
+  uint64 fracu;
+  int e2;
+  uint64 upper;
+  uint uVar12;
+  uint uVar13;
+  uint64 extraMask;
+  int i;
+  int iVar14;
+  int i_1;
+  int unaff_R14;
+  uint uVar15;
+  uint64 fracc;
+  bool bVar16;
+  undefined in_XMM15 [16];
+  interface___ in_stack_ffffffffffffff70;
+  uint64 local_10;
+  
+  while (&local_10 <= *(uint64 **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (mant == 0) {
+    d->nd = in_XMM15._0_8_;
+    d->dp = in_XMM15._8_8_;
+    return;
+  }
+  if (exp < 1) {
+    uVar6 = -exp;
+    iVar1 = 0;
+    if (mant != 0) {
+      for (; (mant >> iVar1 & 1) == 0; iVar1 = iVar1 + 1) {
+      }
+    }
+    if (SBORROW8(iVar1,uVar6) == iVar1 + exp < 0) {
+      uVar6 = -(uint)(uVar6 < 0x40) & mant >> ((byte)uVar6 & 0x3f);
+      strconv_ryuDigits(d,uVar6,uVar6,uVar6,true,false);
+      return;
+    }
+  }
+  uVar6 = flt->mantbits;
+  if ((mant == (1 << ((byte)uVar6 & 0x3f) & -(uint)(uVar6 < 0x40))) &&
+     (exp != (flt->bias - uVar6) + 1)) {
+    mc = mant * 4;
+    mu = mc + 2;
+    e2 = exp + -2;
+    uVar7 = mc;
+  }
+  else {
+    mc = mant << 1;
+    mu = mant * 2 + 1;
+    e2 = exp + -1;
+    uVar7 = mant * 2;
+  }
+  ml = uVar7 - 1;
+  if (e2 == 0) {
+    strconv_ryuDigits(d,ml,mc,mu,true,false);
+    return;
+  }
+  iVar5 = e2 * -0x13441 >> 0x12;
+  iVar1 = iVar5 + 1;
+  local_10 = mant;
+  if (flt == &strconv_float32info) {
+    strconv_mult64bitPow10((uint32)ml,e2,iVar1,0xc0d6f0,iVar1,true);
+    strconv_mult64bitPow10((uint32)mc,e2,iVar1,resM,resE,exact);
+    strconv_mult64bitPow10((uint32)mu,e2,iVar1,resM_00,resE_00,exact_00);
+    uVar6 = (uint)extraout_EAX;
+    uVar15 = (uint)extraout_EAX_00;
+    uVar12 = (uint)extraout_EAX_01;
+    iVar8 = extraout_RBX;
+    cVar10 = extraout_CL;
+    cVar2 = extraout_CL_00;
+    cVar3 = extraout_CL_01;
+  }
+  else {
+    strconv_mult128bitPow10(ml,e2,iVar1,(uint64)flt,iVar1,true);
+    strconv_mult128bitPow10(mc,e2,iVar1,resM_01,resE_01,exact_01);
+    strconv_mult128bitPow10(mu,e2,iVar1,resM_02,resE_02,exact_02);
+    uVar6 = extraout_RAX;
+    iVar8 = extraout_RBX_00;
+    uVar15 = extraout_RAX_00;
+    uVar12 = extraout_RAX_01;
+    cVar10 = extraout_CL_02;
+    cVar2 = extraout_CL_03;
+    cVar3 = extraout_CL_04;
+  }
+  if (-1 < iVar8) {
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffff70);
+  }
+  if (0x37 < iVar1) {
+    cVar3 = '\0';
+    cVar2 = '\0';
+    cVar10 = '\0';
+  }
+  if (iVar5 + 0x19U < 0x18) {
+    iVar11 = -iVar1;
+    if (ml != 0) {
+      for (iVar14 = 0; SBORROW8(iVar14,iVar11) != iVar14 + iVar1 < 0; iVar14 = iVar14 + 1) {
+        if (ml != (ml / 5) * 5) goto LAB_004be49e;
+        ml = ml / 5;
+      }
+    }
+    cVar10 = '\x01';
+LAB_004be49e:
+    if (mc != 0) {
+      for (iVar14 = 0; SBORROW8(iVar14,iVar11) != iVar14 + iVar1 < 0; iVar14 = iVar14 + 1) {
+        if (mc != (mc / 5) * 5) goto LAB_004be4e9;
+        mc = mc / 5;
+      }
+    }
+    cVar2 = '\x01';
+LAB_004be4e9:
+    if (mu != 0) {
+      for (iVar14 = 0; SBORROW8(iVar14,iVar11) != iVar14 + iVar1 < 0; iVar14 = iVar14 + 1) {
+        if (mu != (mu / 5) * 5) goto LAB_004be2f2;
+        mu = mu / 5;
+      }
+    }
+    cVar3 = '\x01';
+  }
+LAB_004be2f2:
+  bVar4 = (byte)-iVar8;
+  uVar9 = -(uint)((uint)-iVar8 < 0x40);
+  uVar13 = (1 << (bVar4 & 0x3f) & uVar9) - 1;
+  uVar7 = uVar6 >> (bVar4 & 0x3f) & uVar9;
+  central = uVar15 >> (bVar4 & 0x3f) & uVar9;
+  uVar15 = uVar15 & uVar13;
+  uVar9 = uVar12 >> (bVar4 & 0x3f) & uVar9;
+  bVar16 = cVar3 == '\0' || (uVar12 & uVar13) != 0;
+  if ((cVar3 != '\0') && ((uVar12 & uVar13) == 0)) {
+    bVar16 = (local_10 & 1) == 0;
+  }
+  upper = uVar9 - 1;
+  if (bVar16) {
+    upper = uVar9;
+  }
+  if (cVar2 == '\0') {
+    bVar16 = (uVar15 >> ((byte)-(iVar8 + 1) & 0x3f) & -(uint)((uint)-(iVar8 + 1) < 0x40)) == 1;
+  }
+  else {
+    uVar12 = 1 << ((byte)-(iVar8 + 1) & 0x3f) & -(uint)((uint)-(iVar8 + 1) < 0x40);
+    if (uVar12 < uVar15) {
+      bVar16 = true;
+    }
+    else if (uVar12 == uVar15) {
+      bVar16 = (bool)((byte)central & 1);
+    }
+    else {
+      bVar16 = false;
+    }
+  }
+  if (((cVar10 == '\0') || ((uVar13 & uVar6) != 0)) || ((local_10 & 1) != 0)) {
+    uVar7 = uVar7 + 1;
+  }
+  c0 = cVar2 != '\0' && uVar15 == 0;
+  strconv_ryuDigits(d,uVar7,central,upper,c0,bVar16);
+  d->dp = (d->dp - iVar5) + -1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void strconv_ryuDigits(strconv_decimalSlice *d,uint64 lower,uint64 central,uint64 upper,bool c0,
+                      bool cup)
+
+{
+  dword upper_00;
+  uint32 central_00;
+  uint extraout_RAX;
+  uint uVar1;
+  uint32 central_01;
+  uint32 extraout_ECX;
+  strconv_decimalSlice *psVar2;
+  uint8 *puVar3;
+  uint32 lower_00;
+  uint32 extraout_EBX;
+  uint8 *extraout_RBX;
+  undefined extraout_SIL;
+  uint32 upper_01;
+  uint32 extraout_EDI;
+  int iVar4;
+  undefined extraout_R8B;
+  strconv_decimalSlice *extraout_R9;
+  uint32 lhi;
+  uint8 **extraout_R11;
+  int iVar5;
+  uint8 **extraout_R11_00;
+  dword lower_01;
+  uint n;
+  uint32 v;
+  uint32 v2;
+  int unaff_R14;
+  strconv_decimalSlice *psStack0000000000000008;
+  uint uVar6;
+  
+  psStack0000000000000008 = d;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  lower_01 = (dword)(lower / 1000000000);
+  lower_00 = (sdword)lower + lower_01 * -1000000000;
+  central_00 = (uint32)(central / 1000000000);
+  central_01 = (sdword)central + central_00 * -1000000000;
+  upper_00 = (dword)(upper / 1000000000);
+  upper_01 = (sdword)upper + upper_00 * -1000000000;
+  if (upper_00 == 0) {
+    strconv_ryuDigits32(psStack0000000000000008,lower_00,central_01,upper_01,c0,cup,8);
+  }
+  else if (lower_01 < upper_00) {
+    if (lower_00 != 0) {
+      lower_01 = lower_01 + 1;
+    }
+    strconv_ryuDigits32(psStack0000000000000008,lower_01,central_00,upper_00,c0 && central_01 == 0,
+                        500000000 < central_01 || central_01 == 500000000 && cup,8);
+    psStack0000000000000008->dp = psStack0000000000000008->dp + 9;
+  }
+  else {
+    psStack0000000000000008->nd = 0;
+    uVar1 = 9;
+    uVar6 = central / 1000000000;
+    while (v = (uint32)uVar6, v != 0) {
+      if ((uint)(psStack0000000000000008->d).len <= uVar1 - 1) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndexU();
+      }
+      (psStack0000000000000008->d).array[uVar1 - 1] =
+           (char)uVar6 + (char)((uVar6 & 0xffffffff) / 10) * -10 + 0x30;
+      uVar1 = uVar1 - 1;
+      uVar6 = (uVar6 & 0xffffffff) / 10;
+    }
+    uVar6 = (psStack0000000000000008->d).len;
+    if (uVar6 < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceBU();
+    }
+    iVar5 = (psStack0000000000000008->d).cap - uVar1;
+    (psStack0000000000000008->d).len = uVar6 - uVar1;
+    (psStack0000000000000008->d).cap = iVar5;
+    puVar3 = (psStack0000000000000008->d).array + (-iVar5 >> 0x3f & uVar1);
+    psVar2 = psStack0000000000000008;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11_00 = puVar3;
+      extraout_R11_00[1] = (extraout_R9->d).array;
+      uVar1 = extraout_RAX;
+      psVar2 = extraout_R9;
+      central_01 = extraout_ECX;
+      lower_00 = extraout_EBX;
+      c0 = (bool)extraout_SIL;
+      upper_01 = extraout_EDI;
+      cup = (bool)extraout_R8B;
+    }
+    (psVar2->d).array = puVar3;
+    psVar2->nd = -(uVar1 - 9);
+    strconv_ryuDigits32(psVar2,lower_00,central_01,upper_01,c0,cup,-(uVar1 - 9) + 8);
+  }
+  while (iVar5 = psStack0000000000000008->nd, psVar2 = psStack0000000000000008, 0 < iVar5) {
+    if ((uint)(psStack0000000000000008->d).len <= iVar5 - 1U) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if ((psStack0000000000000008->d).array[iVar5 + -1] != 0x30) break;
+    psStack0000000000000008->nd = iVar5 - 1U;
+  }
+  while( true ) {
+    if (psVar2->nd < 1) {
+      return;
+    }
+    if ((psVar2->d).len == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (*(psVar2->d).array != 0x30) {
+      return;
+    }
+    psVar2->nd = psVar2->nd + -1;
+    psVar2->dp = psVar2->dp + -1;
+    iVar5 = (psVar2->d).len;
+    if (iVar5 == 0) break;
+    iVar4 = (psVar2->d).cap + -1;
+    (psVar2->d).len = iVar5 + -1;
+    (psVar2->d).cap = iVar4;
+    puVar3 = (psVar2->d).array + ((dword)(-iVar4 >> 0x3f) & 1);
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier2();
+      *extraout_R11 = extraout_RBX;
+      extraout_R11[1] = (psVar2->d).array;
+      puVar3 = extraout_RBX;
+    }
+    (psVar2->d).array = puVar3;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceB();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void strconv_ryuDigits32(strconv_decimalSlice *d,uint32 lower,uint32 central,uint32 upper,bool c0,
+                        bool cup,int endindex)
+
+{
+  uint uVar1;
+  dword dVar2;
+  uint32 cdigit;
+  uint32 v;
+  sdword sVar3;
+  uint32 v2;
+  uint uVar4;
+  int iVar5;
+  int trimmed;
+  dword dVar6;
+  uint uVar7;
+  uint uVar8;
+  dword dVar9;
+  uint32 c;
+  int n;
+  int cNextDigit;
+  dword dVar10;
+  
+  uVar7 = (uint)lower;
+  uVar8 = (uint)central;
+  if (upper == 0) {
+    d->dp = endindex + 1;
+    return;
+  }
+  iVar5 = 0;
+  cNextDigit = 0;
+  uVar4 = (uint)upper;
+  while( true ) {
+    dVar9 = (dword)uVar8;
+    if ((dword)uVar4 == 0) break;
+    dVar6 = (sdword)uVar7 + 9;
+    uVar7 = dVar6 / 10;
+    dVar2 = dVar9 + (sdword)(uVar8 / 10) * -10;
+    dVar10 = (dword)(uVar4 / 10);
+    dVar6 = dVar6 / 10;
+    if (dVar10 < dVar6) break;
+    dVar9 = (sdword)(uVar8 / 10) + 1;
+    uVar1 = uVar8 / 10;
+    if ((dVar6 == dVar9) && ((dword)(uVar8 / 10) < dVar10)) {
+      dVar2 = 0;
+      cup = false;
+      uVar1 = (uint)dVar9;
+    }
+    uVar8 = uVar1;
+    c0 = c0 != false && cNextDigit == 0;
+    iVar5 = iVar5 + 1;
+    cNextDigit = (int)dVar2;
+    uVar4 = uVar4 / 10;
+  }
+  if (iVar5 < 1) goto LAB_004be97a;
+  if ((uint)cNextDigit < 6) {
+    if (cNextDigit == 5) {
+      if (c0 == false) goto LAB_004be964;
+      if (c0 != false) {
+        cup = (bool)((byte)uVar8 & 1);
+        goto LAB_004be97a;
+      }
+    }
+    cup = false;
+  }
+  else {
+LAB_004be964:
+    cup = true;
+  }
+LAB_004be97a:
+  if ((dVar9 < (dword)uVar4) && (cup != false)) {
+    uVar8 = (uint)(dword)(dVar9 + 1);
+  }
+  uVar7 = endindex - iVar5;
+  while( true ) {
+    sVar3 = (sdword)uVar8;
+    if ((int)uVar7 <= d->nd) {
+      if (uVar7 == d->nd) {
+        if ((uint)(d->d).len <= uVar7) {
+                    // WARNING: Subroutine does not return
+          runtime_panicIndex();
+        }
+        (d->d).array[uVar7] = (char)uVar8 + 0x30;
+      }
+      d->nd = (endindex - iVar5) + 1;
+      d->dp = endindex + 1;
+      return;
+    }
+    uVar8 = uVar8 / 100;
+    sVar3 = sVar3 + (sdword)uVar8 * -100;
+    uVar4 = (uint)(dword)(sVar3 * 2 + 1);
+    if (199 < uVar4) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if ((uint)(d->d).len <= uVar7) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    (d->d).array[uVar7] =
+         "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+         [uVar4 + 0x2ab2];
+    uVar4 = (uint)(dword)(sVar3 * 2);
+    if (199 < uVar4) break;
+    if ((uint)(d->d).len <= uVar7 - 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    (d->d).array[uVar7 - 1] =
+         "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZgrpc: addrConn.createTransport failed to connect to %s. Err: %vHealth check is requested but health check function is not set.malformed GOMEMLIMIT; see `go doc runtime/debug.SetMemoryLimit`attempt to delete an entry (id=%d) that doesn\'t currently existtransport: received per-RPC creds error with illegal status: %vnet/trace: trace used after finish:\nFinished at:\n%s\nUsed at:\n%selementNoneelementScriptelementStyleelementTextareaelementTitleecdsa: internal error: P256OrdInverse produced an invalid valuegrpc: Compressor is not installed for requested grpc-encoding %qgrpc: client streaming protocol violation: get <nil>, want <EOF>runtime.SetFinalizer: first argument was allocated into an arenareflect.StructOf: struct size would exceed virtual address spacethe stream is rejected because server is draining the connectionjson: invalid number literal, trying to unmarshal %q into Numberheader key %q contains value with non-printable ASCII charactersextension %v has mismatching containing message: got %v, want %vABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5received context error while waiting for new LB policy update: %suser arena chunk size is not a multiple of the physical page sizeruntime.SetFinalizer: pointer not at beginning of allocated blockbinarylogging: message to log is neither proto.message nor []bytex509: inner and outer signature algorithm identifiers don\'t matchx509: issuer name does not match subject from issuing certificatenistec: internal error: p224Table called with out-of-bounds valuenistec: internal error: p384Table called with out-of-bounds valuenistec: internal error: p521Table called with out-of-bounds valuegrpc: credentials.Bundle must return non-nil transport credential..." /* TRUNCATED STRING LITERAL */
+         [uVar4 + 0x2ab2];
+    uVar7 = uVar7 - 2;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+void strconv_mult64bitPow10(uint32 m,int e2,int q,uint32 resM,int resE,bool exact)
+
+{
+  uint64 lo;
+  uint64 pow;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (q != 0) {
+    if (q + 0x15cU < 0x2b8) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffe8);
+  }
+  return;
+}
+
+
+
+void strconv_mult128bitPow10(uint64 m,int e2,int q,uint64 resM,int resE,bool exact)
+
+{
+  uint64 l0;
+  uint64 h0;
+  uint64 mid;
+  uint64 l1;
+  uint64 h1;
+  int unaff_R14;
+  interface___ in_stack_ffffffffffffffd8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (q != 0) {
+    if (q + 0x15cU < 0x2b8) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_gopanic(in_stack_ffffffffffffffd8);
+  }
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void strconv_FormatUint(uint64 i,int base,string ~r0)
+
+{
+  uint uVar1;
+  string s;
+  uint8 *unaff_RBP;
+  int unaff_R14;
+  int unaff_retaddr;
+  __uint8 in_stack_ffffffffffffffc8;
+  __uint8 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((99 < i) || (base != 10)) {
+    s.len = unaff_retaddr;
+    s.str = unaff_RBP;
+    strconv_formatBits(in_stack_ffffffffffffffc8,0,0,false,SUB81(i,0),in_stack_ffffffffffffffe0,s);
+    return;
+  }
+  if ((int)i < 10) {
+    if (i + 1 < i) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+  }
+  else {
+    uVar1 = i * 2 + 2;
+    if (200 < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    if (uVar1 < i << 1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void strconv_FormatInt(int64 i,int base,string ~r0)
+
+{
+  uint uVar1;
+  string s;
+  uint8 *unaff_RBP;
+  int unaff_R14;
+  int unaff_retaddr;
+  __uint8 in_stack_ffffffffffffffc8;
+  __uint8 in_stack_ffffffffffffffe0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((99 < (uint)i) || (base != 10)) {
+    s.len = unaff_retaddr;
+    s.str = unaff_RBP;
+    strconv_formatBits(in_stack_ffffffffffffffc8,0,0,false,SUB81(i,0),in_stack_ffffffffffffffe0,s);
+    return;
+  }
+  if (i < 10) {
+    if (i + 1U < (uint)i) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+  }
+  else {
+    uVar1 = i * 2 + 2;
+    if (200 < uVar1) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAlen();
+    }
+    if (uVar1 < (uint)(i << 1)) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+  }
+  return;
+}
+
+
+
+void strconv_Itoa(int i,string ~r0)
+
+{
+  int unaff_R14;
+  string in_stack_ffffffffffffffe8;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  strconv_FormatInt(i,10,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void strconv_AppendInt(__uint8 dst,int64 i,int base,__uint8 ~r0)
+
+{
+  uint uVar1;
+  string s;
+  int extraout_RAX;
+  uint in_RCX;
+  char *__src;
+  int in_RSI;
+  size_t __n;
+  uint in_RDI;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffa0;

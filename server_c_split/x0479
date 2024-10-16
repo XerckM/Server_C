@@ -1,0 +1,1000 @@
+                        (runtime_slice)in_stack_ffffffffffffffb0);
+      __dest = (uintptr *)extraout_RAX_00;
+      pcVar2 = extraout_RCX;
+      pcVar3 = extraout_RBX;
+    }
+    runtime_memmove(__dest,in_RCX,in_RDI);
+    runtime_newobject((internal_abi_Type *)&DAT_00881ee0,~r0_00);
+    *extraout_RAX_01 = ~r0[1].publicKey;
+    ppcVar1 = extraout_RAX_01;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11 = c;
+      ppcVar1 = extraout_RAX_02;
+    }
+    ppcVar1[1] = (crypto_ecdh_PublicKey *)c;
+    ppcVar1[3] = pcVar3;
+    ppcVar1[4] = pcVar2;
+    if (runtime_writeBarrier._0_4_ != 0) {
+      runtime_gcWriteBarrier1();
+      *extraout_R11_00 = (crypto_ecdh_PublicKey *)__dest;
+      ppcVar1 = extraout_RAX_03;
+    }
+    ppcVar1[2] = (crypto_ecdh_PublicKey *)__dest;
+    return;
+  }
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve_go_shape__uint8___GenerateKey
+               (_param7 c,io_Reader rand,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  __uint8 key;
+  __uint8 buf;
+  error err;
+  char extraout_AL;
+  byte *extraout_RAX;
+  crypto_ecdh_PrivateKey *k;
+  int in_RCX;
+  void *x;
+  int extraout_RBX;
+  runtime_itab *tab;
+  bool ~r0_00;
+  void *in_RDI;
+  int unaff_R14;
+  io_Reader in_stack_ffffffffffffffa0;
+  uint8 *in_stack_ffffffffffffffb0;
+  error in_stack_ffffffffffffffb8;
+  runtime_itab *in_stack_ffffffffffffffc8;
+  void *len;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  len = (void *)(c->scalarOrder).len;
+  runtime_makeslice((internal_abi_Type *)&DAT_00807920,(int)len,(int)len,in_RDI);
+  crypto_internal_randutil_MaybeReadByte(in_stack_ffffffffffffffa0);
+  while( true ) {
+    buf.len = (int)in_stack_ffffffffffffffb8.tab;
+    buf.cap = (int)in_stack_ffffffffffffffb8.data;
+    buf.array = in_stack_ffffffffffffffb0;
+    err.data = len;
+    err.tab = in_stack_ffffffffffffffc8;
+    io_ReadAtLeast(in_stack_ffffffffffffffa0,buf,in_RCX,(int)in_RDI,err);
+    if (extraout_RBX != 0) {
+      return;
+    }
+    if ((c->scalarOrder).len == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if (crypto_ecdh_p521Order.len == 0) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndex();
+    }
+    if ((c->scalarOrder).array == crypto_ecdh_p521Order.array) {
+      if (len == (void *)0x0) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      *extraout_RAX = *extraout_RAX & 1;
+    }
+    if (len < (void *)0x2) break;
+    extraout_RAX[1] = extraout_RAX[1] ^ 0x42;
+    key.cap = (int)in_stack_ffffffffffffffb0;
+    key.array = (uint8 *)in_stack_ffffffffffffffa0.tab;
+    key.len = (int)in_stack_ffffffffffffffa0.data;
+    crypto_ecdh___nistCurve_go_shape__uint8___NewPrivateKey
+              (c,key,(crypto_ecdh_PrivateKey *)~r0->boring,in_stack_ffffffffffffffb8);
+    if ((crypto_ecdh_errInvalidPrivateKey.tab != tab) ||
+       (runtime_ifaceeq(tab,x,crypto_ecdh_errInvalidPrivateKey.data,~r0_00), extraout_AL == '\0')) {
+      return;
+    }
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndex();
+}
+
+
+
+EC_KEY * crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___ecdh
+                   (SSL *ssl,int is_export,int keylength)
+
+{
+  int *piVar1;
+  EC_KEY *pEVar2;
+  int unaff_R14;
+  SSL *in_stack_00000008;
+  int in_stack_00000010;
+  int in_stack_00000018;
+  undefined auStack_28 [32];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = ssl;
+    in_stack_00000010 = is_export;
+    in_stack_00000018 = keylength;
+    runtime_morestack_noctxt();
+    ssl = in_stack_00000008;
+    keylength = in_stack_00000018;
+    is_export = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((SSL **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_28;
+  }
+  pEVar2 = crypto_ecdh___nistCurve_go_shape__uint8___ecdh(ssl,0x966840,is_export);
+  return pEVar2;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___NewPublicKey
+               (_param11 c,__uint8 key,crypto_ecdh_PublicKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param11)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPublicKey
+            ((_param11)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PublicKey *)crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P521Point_
+             ,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___privateKeyToPublicKey
+               (_param9 c,crypto_ecdh_PrivateKey *key,crypto_ecdh_PublicKey *~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  _param9 in_stack_00000008;
+  crypto_ecdh_PrivateKey *in_stack_00000010;
+  undefined auStack_20 [24];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = c;
+    in_stack_00000010 = key;
+    runtime_morestack_noctxt();
+    c = in_stack_00000008;
+    key = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param9 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___privateKeyToPublicKey
+            ((_param9)c,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P521Point_,
+             (crypto_ecdh_PublicKey *)key);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___NewPrivateKey
+               (_param8 c,__uint8 key,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param8)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPrivateKey
+            ((_param8)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P521Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___GenerateKey
+               (_param7 c,io_Reader rand,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  io_Reader **ppiVar1;
+  int unaff_R14;
+  io_Reader in_stack_ffffffffffffffd8;
+  error in_stack_ffffffffffffffe8;
+  
+  rand.data = ~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    rand.tab = (runtime_itab *)c;
+    runtime_morestack_noctxt();
+    c = (_param7)rand.tab;
+  }
+  ppiVar1 = *(io_Reader ***)(unaff_R14 + 0x20);
+  if ((ppiVar1 != (io_Reader **)0x0) && (*ppiVar1 == &rand)) {
+    *ppiVar1 = (io_Reader *)&stack0xffffffffffffffd8;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___GenerateKey
+            ((_param7)c,in_stack_ffffffffffffffd8,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P521Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P521Point___String(_param6 c,string ~r0)
+
+{
+  string **ppsVar1;
+  int unaff_R14;
+  
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)register0x00000020;
+  }
+  return;
+}
+
+
+
+EC_KEY * crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___ecdh
+                   (SSL *ssl,int is_export,int keylength)
+
+{
+  int *piVar1;
+  EC_KEY *pEVar2;
+  int unaff_R14;
+  SSL *in_stack_00000008;
+  int in_stack_00000010;
+  int in_stack_00000018;
+  undefined auStack_28 [32];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = ssl;
+    in_stack_00000010 = is_export;
+    in_stack_00000018 = keylength;
+    runtime_morestack_noctxt();
+    ssl = in_stack_00000008;
+    keylength = in_stack_00000018;
+    is_export = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((SSL **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_28;
+  }
+  pEVar2 = crypto_ecdh___nistCurve_go_shape__uint8___ecdh(ssl,0x9667a0,is_export);
+  return pEVar2;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___NewPublicKey
+               (_param11 c,__uint8 key,crypto_ecdh_PublicKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param11)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPublicKey
+            ((_param11)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PublicKey *)crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P384Point_
+             ,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___privateKeyToPublicKey
+               (_param9 c,crypto_ecdh_PrivateKey *key,crypto_ecdh_PublicKey *~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  _param9 in_stack_00000008;
+  crypto_ecdh_PrivateKey *in_stack_00000010;
+  undefined auStack_20 [24];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = c;
+    in_stack_00000010 = key;
+    runtime_morestack_noctxt();
+    c = in_stack_00000008;
+    key = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param9 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___privateKeyToPublicKey
+            ((_param9)c,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P384Point_,
+             (crypto_ecdh_PublicKey *)key);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___NewPrivateKey
+               (_param8 c,__uint8 key,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param8)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPrivateKey
+            ((_param8)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P384Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___GenerateKey
+               (_param7 c,io_Reader rand,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  io_Reader **ppiVar1;
+  int unaff_R14;
+  io_Reader in_stack_ffffffffffffffd8;
+  error in_stack_ffffffffffffffe8;
+  
+  rand.data = ~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    rand.tab = (runtime_itab *)c;
+    runtime_morestack_noctxt();
+    c = (_param7)rand.tab;
+  }
+  ppiVar1 = *(io_Reader ***)(unaff_R14 + 0x20);
+  if ((ppiVar1 != (io_Reader **)0x0) && (*ppiVar1 == &rand)) {
+    *ppiVar1 = (io_Reader *)&stack0xffffffffffffffd8;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___GenerateKey
+            ((_param7)c,in_stack_ffffffffffffffd8,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P384Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P384Point___String(_param6 c,string ~r0)
+
+{
+  string **ppsVar1;
+  int unaff_R14;
+  
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)register0x00000020;
+  }
+  return;
+}
+
+
+
+EC_KEY * crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___ecdh
+                   (SSL *ssl,int is_export,int keylength)
+
+{
+  int *piVar1;
+  EC_KEY *pEVar2;
+  int unaff_R14;
+  SSL *in_stack_00000008;
+  int in_stack_00000010;
+  int in_stack_00000018;
+  undefined auStack_28 [32];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = ssl;
+    in_stack_00000010 = is_export;
+    in_stack_00000018 = keylength;
+    runtime_morestack_noctxt();
+    ssl = in_stack_00000008;
+    keylength = in_stack_00000018;
+    is_export = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((SSL **)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_28;
+  }
+  pEVar2 = crypto_ecdh___nistCurve_go_shape__uint8___ecdh(ssl,0x966700,is_export);
+  return pEVar2;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___NewPublicKey
+               (_param11 c,__uint8 key,crypto_ecdh_PublicKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param11)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPublicKey
+            ((_param11)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PublicKey *)crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P256Point_
+             ,in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___privateKeyToPublicKey
+               (_param9 c,crypto_ecdh_PrivateKey *key,crypto_ecdh_PublicKey *~r0)
+
+{
+  int *piVar1;
+  int unaff_R14;
+  _param9 in_stack_00000008;
+  crypto_ecdh_PrivateKey *in_stack_00000010;
+  undefined auStack_20 [24];
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    in_stack_00000008 = c;
+    in_stack_00000010 = key;
+    runtime_morestack_noctxt();
+    c = in_stack_00000008;
+    key = in_stack_00000010;
+  }
+  piVar1 = *(int **)(unaff_R14 + 0x20);
+  if ((piVar1 != (int *)0x0) && ((_param9 *)*piVar1 == &stack0x00000008)) {
+    *piVar1 = (int)auStack_20;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___privateKeyToPublicKey
+            ((_param9)c,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P256Point_,
+             (crypto_ecdh_PublicKey *)key);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___NewPrivateKey
+               (_param8 c,__uint8 key,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  __uint8 **pp_Var1;
+  int in_RCX;
+  int unaff_R14;
+  __uint8 in_stack_ffffffffffffffd0;
+  error in_stack_ffffffffffffffe8;
+  
+  key.len = (int)~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    key.array = (uint8 *)c;
+    key.cap = in_RCX;
+    runtime_morestack_noctxt();
+    c = (_param8)key.array;
+    in_RCX = key.cap;
+  }
+  pp_Var1 = *(__uint8 ***)(unaff_R14 + 0x20);
+  if ((pp_Var1 != (__uint8 **)0x0) && (*pp_Var1 == &key)) {
+    *pp_Var1 = (__uint8 *)&stack0xffffffffffffffd0;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___NewPrivateKey
+            ((_param8)c,in_stack_ffffffffffffffd0,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P256Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___GenerateKey
+               (_param7 c,io_Reader rand,crypto_ecdh_PrivateKey *~r0,error ~r1)
+
+{
+  io_Reader **ppiVar1;
+  int unaff_R14;
+  io_Reader in_stack_ffffffffffffffd8;
+  error in_stack_ffffffffffffffe8;
+  
+  rand.data = ~r0;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    rand.tab = (runtime_itab *)c;
+    runtime_morestack_noctxt();
+    c = (_param7)rand.tab;
+  }
+  ppiVar1 = *(io_Reader ***)(unaff_R14 + 0x20);
+  if ((ppiVar1 != (io_Reader **)0x0) && (*ppiVar1 == &rand)) {
+    *ppiVar1 = (io_Reader *)&stack0xffffffffffffffd8;
+  }
+  crypto_ecdh___nistCurve_go_shape__uint8___GenerateKey
+            ((_param7)c,in_stack_ffffffffffffffd8,
+             (crypto_ecdh_PrivateKey *)
+             crypto_ecdh__dict_nistCurve__crypto_internal_nistec_P256Point_,
+             in_stack_ffffffffffffffe8);
+  return;
+}
+
+
+
+void crypto_ecdh___nistCurve__crypto_internal_nistec_P256Point___String(_param6 c,string ~r0)
+
+{
+  string **ppsVar1;
+  int unaff_R14;
+  
+  ppsVar1 = *(string ***)(unaff_R14 + 0x20);
+  if ((ppsVar1 != (string **)0x0) && (*ppsVar1 == &~r0)) {
+    *ppsVar1 = (string *)register0x00000020;
+  }
+  return;
+}
+
+
+
+void math_big_Accuracy_String(math_big_Accuracy i,string ~r0)
+
+{
+  string ~r0_00;
+  int unaff_RBP;
+  int unaff_R14;
+  string in_stack_ffffffffffffffc0;
+  string in_stack_ffffffffffffffd0;
+  string in_stack_ffffffffffffffe0;
+  uint8 *in_stack_fffffffffffffff0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (2 < (byte)(i + 1U)) {
+    strconv_FormatInt((int)i,10,in_stack_ffffffffffffffc0);
+    ~r0_00.len = unaff_RBP;
+    ~r0_00.str = in_stack_fffffffffffffff0;
+    runtime_concatstring3
+              ((runtime_tmpBuf *)0x0,in_stack_ffffffffffffffc0,in_stack_ffffffffffffffd0,
+               in_stack_ffffffffffffffe0,~r0_00);
+    return;
+  }
+  if (3 < (uint)(int)(char)(i + 2)) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  if (math_big__Accuracy_index[(char)(i + 2)] < 0x10) {
+    if (math_big__Accuracy_index[(char)(i + 1U)] <= math_big__Accuracy_index[(char)(i + 2)]) {
+      return;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicSliceB();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicSliceAlen();
+}
+
+
+
+void math_big_addVWlarge(__math_big_Word z,__math_big_Word x,math_big_Word y,math_big_Word c)
+
+{
+  void *__src;
+  uint uVar1;
+  void *__dest;
+  int in_RCX;
+  int iVar2;
+  int i;
+  int iVar3;
+  int in_RSI;
+  int in_RDI;
+  int in_R8;
+  uint in_R9;
+  uint zi;
+  uint cc;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (iVar2 = 0; (iVar2 < (int)c && (iVar2 < in_RSI)); iVar2 = iVar2 + 1) {
+    if (in_R9 == 0) {
+      __dest = (void *)(y + (iVar2 - in_RCX >> 0x3f & iVar2 << 3));
+      __src = (void *)(in_RDI + (iVar2 << 3 & iVar2 - in_R8 >> 0x3f));
+      iVar3 = c - iVar2;
+      if (in_RSI - iVar2 < (int)(c - iVar2)) {
+        iVar3 = in_RSI - iVar2;
+      }
+      if (__src != __dest) {
+        runtime_memmove(__dest,__src,iVar3 << 3);
+      }
+      return;
+    }
+    uVar1 = *(uint *)(in_RDI + iVar2 * 8);
+    *(uint *)(y + iVar2 * 8) = in_R9 + uVar1;
+    in_R9 = (uint)CARRY8(in_R9,uVar1);
+  }
+  return;
+}
+
+
+
+void math_big_subVWlarge(__math_big_Word z,__math_big_Word x,math_big_Word y,math_big_Word c)
+
+{
+  void *__src;
+  uint uVar1;
+  void *__dest;
+  int in_RCX;
+  int iVar2;
+  int i;
+  int iVar3;
+  int in_RSI;
+  int in_RDI;
+  int in_R8;
+  uint in_R9;
+  uint cc;
+  uint zi;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  for (iVar2 = 0; (iVar2 < (int)c && (iVar2 < in_RSI)); iVar2 = iVar2 + 1) {
+    if (in_R9 == 0) {
+      __dest = (void *)(y + (iVar2 - in_RCX >> 0x3f & iVar2 << 3));
+      __src = (void *)(in_RDI + (iVar2 << 3 & iVar2 - in_R8 >> 0x3f));
+      iVar3 = c - iVar2;
+      if (in_RSI - iVar2 < (int)(c - iVar2)) {
+        iVar3 = in_RSI - iVar2;
+      }
+      if (__src != __dest) {
+        runtime_memmove(__dest,__src,iVar3 << 3);
+      }
+      return;
+    }
+    uVar1 = *(uint *)(in_RDI + iVar2 * 8);
+    *(uint *)(y + iVar2 * 8) = uVar1 - in_R9;
+    in_R9 = (uint)(uVar1 < in_R9);
+  }
+  return;
+}
+
+
+
+void math_big_divWW(math_big_Word x1,math_big_Word x0,math_big_Word y,math_big_Word m,
+                   math_big_Word q,math_big_Word r)
+
+{
+  int iVar1;
+  uint t0;
+  uint dq0;
+  uint d;
+  uint t1;
+  uint qq;
+  uint dq1;
+  uint r0;
+  uint s;
+  uint r1;
+  
+  iVar1 = 0x3f;
+  if (y != 0) {
+    for (; y >> iVar1 == 0; iVar1 = iVar1 + -1) {
+    }
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void math_big___Float__setExpAndRound(math_big_Float *z,int64 exp,uint sbit)
+
+{
+  math_big_Accuracy mVar1;
+  int unaff_R14;
+  double in_XMM0_Qa;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (exp < -0x80000000) {
+    if (z->neg == false) {
+      mVar1 = -1;
+    }
+    else {
+      mVar1 = 1;
+    }
+    z->acc = mVar1;
+    z->form = 0;
+    return;
+  }
+  if (0x7fffffff < exp) {
+    if (z->neg == false) {
+      mVar1 = 1;
+    }
+    else {
+      mVar1 = -1;
+    }
+    z->acc = mVar1;
+    z->form = 2;
+    return;
+  }
+  z->form = 1;
+  z->exp = (int32)exp;
+  math_big___Float__round(in_XMM0_Qa);
+  return;
+}
+
+
+
+double math_big___Float__round(double __x)
+
+{
+  void *__dest;
+  interface___ e;
+  dword *in_RAX;
+  undefined uVar1;
+  dword dVar2;
+  uint32 ntz;
+  uint uVar3;
+  math_big_Word lsb;
+  int iVar4;
+  bool inc;
+  uint in_RBX;
+  dword dVar5;
+  dword dVar6;
+  uint uVar7;
+  dword dVar8;
+  uint rbit;
+  uint uVar9;
+  int unaff_R14;
+  byte bVar10;
+  dword *pdStack0000000000000008;
+  internal_abi_Type *in_stack_ffffffffffffff98;
+  void *in_stack_ffffffffffffffa0;
+  int local_30;
+  
+  pdStack0000000000000008 = in_RAX;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  *(undefined *)((int)pdStack0000000000000008 + 5) = 0;
+  if (*(char *)((int)pdStack0000000000000008 + 6) != '\x01') {
+    return __x;
+  }
+  uVar3 = *(uint *)(pdStack0000000000000008 + 4);
+  dVar5 = (dword)uVar3;
+  dVar2 = *pdStack0000000000000008;
+  if ((dword)(dVar5 * 0x40) <= dVar2) {
+    return __x;
+  }
+  dVar6 = (dVar5 * 0x40 - dVar2) - 1;
+  uVar7 = (uint)(dVar6 >> 6);
+  __dest = *(void **)(pdStack0000000000000008 + 2);
+  if (uVar7 < uVar3) {
+    dVar8 = (dword)(*(uint *)((int)__dest + uVar7 * 8) >> ((byte)dVar6 & 0x3f)) & 1;
+  }
+  else {
+    dVar8 = 0;
+  }
+  if ((in_RBX == 0) && ((dVar8 == 0 || (*(char *)(pdStack0000000000000008 + 1) == '\0')))) {
+    if (uVar7 < uVar3) {
+      for (iVar4 = 0; iVar4 < (int)uVar7; iVar4 = iVar4 + 1) {
+        if (*(int *)((int)__dest + iVar4 * 8) != 0) {
+          in_RBX = 1;
+          goto LAB_00638611;
+        }
+      }
+      if ((*(int *)((int)__dest + uVar7 * 8) << (-(byte)dVar6 & 0x3f) &
+          -(uint)(-((dVar6 & 0x3f) - 0x40) < 0x40)) == 0) {
+        in_RBX = 0;
+      }
+      else {
+        in_RBX = 1;
+      }
+    }
+    else if (uVar3 == 0) {
+      in_RBX = 0;
+    }
+    else {
+      in_RBX = 1;
+    }
+  }
+LAB_00638611:
+  dVar6 = (dword)(dVar2 + 0x3f) >> 6;
+  if (dVar6 < dVar5) {
+    uVar7 = (uint)(dword)(dVar5 - dVar6);
+    if (uVar3 < uVar7) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceB();
+    }
+    uVar9 = (uint)(dword)(dVar5 - dVar6) << 3 &
+            (int)(uVar7 - *(int *)(pdStack0000000000000008 + 6)) >> 0x3f;
+    if ((int)(uVar3 - uVar7) < (int)uVar3) {
+      uVar3 = uVar3 - uVar7;
+    }
+    if (uVar9 != 0) {
+      runtime_memmove(__dest,(void *)((int)__dest + uVar9),uVar3 << 3);
+    }
+    if (*(uint *)(pdStack0000000000000008 + 6) < (uint)dVar6) {
+                    // WARNING: Subroutine does not return
+      runtime_panicSliceAcap();
+    }
+    *(uint *)(pdStack0000000000000008 + 4) = (uint)dVar6;
+  }
+  dVar2 = (dVar2 + 0x3f & 0xffffffc0) - *pdStack0000000000000008;
+  uVar3 = 1 << ((byte)dVar2 & 0x3f) & -(uint)(dVar2 < 0x40);
+  if ((dVar8 | (dword)in_RBX & 1) != 0) {
+    bVar10 = *(byte *)(pdStack0000000000000008 + 1);
+    if (bVar10 < 3) {
+      if (bVar10 == 0) {
+        if (dVar8 == 0) {
+          bVar10 = 0;
+        }
+        else if ((in_RBX & 1) == 0) {
+          if (*(int *)(pdStack0000000000000008 + 4) == 0) {
+                    // WARNING: Subroutine does not return
+            runtime_panicIndex();
+          }
+          bVar10 = (uVar3 & **(uint **)(pdStack0000000000000008 + 2)) != 0;
+        }
+        else {
+          bVar10 = 1;
+        }
+      }
+      else if (bVar10 == 1) {
+        bVar10 = dVar8 != 0;
+      }
+      else {
+        bVar10 = 0;
+      }
+    }
+    else if (bVar10 == 3) {
+      bVar10 = 1;
+    }
+    else if (bVar10 == 4) {
+      bVar10 = *(byte *)((int)pdStack0000000000000008 + 7);
+    }
+    else {
+      if (bVar10 != 5) {
+        e.data = in_stack_ffffffffffffffa0;
+        e._type = in_stack_ffffffffffffff98;
+                    // WARNING: Subroutine does not return
+        runtime_gopanic(e);
+      }
+      bVar10 = *(byte *)((int)pdStack0000000000000008 + 7) ^ 1;
+    }
+    if (*(byte *)((int)pdStack0000000000000008 + 7) == bVar10) {
+      uVar1 = 0xff;
+    }
+    else {
+      uVar1 = 1;
+    }
+    *(undefined *)((int)pdStack0000000000000008 + 5) = uVar1;
+    if ((bVar10 != 0) && (math_big_addVW(), local_30 != 0)) {
+      if (0x7ffffffe < (sdword)pdStack0000000000000008[8]) {
+        *(undefined *)((int)pdStack0000000000000008 + 6) = 2;
+        return __x;
+      }
+      pdStack0000000000000008[8] = pdStack0000000000000008[8] + 1;
+      math_big_shrVU();
+      uVar7 = (uint)(dword)(dVar6 - 1);
+      if (*(uint *)(pdStack0000000000000008 + 4) <= uVar7) {
+                    // WARNING: Subroutine does not return
+        runtime_panicIndex();
+      }
+      *(uint *)(*(int *)(pdStack0000000000000008 + 2) + uVar7 * 8) =
+           *(uint *)(*(int *)(pdStack0000000000000008 + 2) + uVar7 * 8) | 0x8000000000000000;
+    }
+  }
+  if (*(int *)(pdStack0000000000000008 + 4) == 0) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndex();
+  }
+  **(uint **)(pdStack0000000000000008 + 2) = **(uint **)(pdStack0000000000000008 + 2) & -uVar3;
+  return __x;
+}
+
+
+
+void math_big_fnorm(math_big_nat m,int64 ~r0)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint s;
+  uint in_RBX;
+  int unaff_R14;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RBX - 1 < in_RBX) {
+    uVar1 = *(uint *)(~r0 + -8 + in_RBX * 8);
+    iVar2 = 0x3f;
+    if (uVar1 != 0) {
+      for (; uVar1 >> iVar2 == 0; iVar2 = iVar2 + -1) {
+      }
+    }
+    if (uVar1 == 0) {
+      iVar2 = -1;
+    }
+    if (iVar2 != 0x3f) {
+      math_big_shlVU();
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return

@@ -1,0 +1,1000 @@
+        runtime_concatstring4
+                  ((runtime_tmpBuf *)0x0,(string)in_stack_fffffffffffffe90,a1_01,a2,a3,~r0_08);
+        uVar2 = extraout_RAX_05;
+      }
+      else {
+        local_40._4_4_ = tv.Value._type._4_4_;
+        local_40._0_4_ = tv.Value._type._0_4_;
+        uStack_38._4_4_ = tv.Value.data._4_4_;
+        uStack_38._0_4_ = tv.Value.data._0_4_;
+        a.cap = (int)in_stack_fffffffffffffea0;
+        a.array = (interface___ *)in_stack_fffffffffffffe90._type;
+        a.len = (int)in_stack_fffffffffffffe90.data;
+        ~r0_03.len = (int)in_stack_fffffffffffffeb0;
+        ~r0_03.str = in_stack_fffffffffffffea8;
+        local_70 = pvVar3;
+        fmt_Sprint(a,~r0_03);
+        local_78 = extraout_RAX_03;
+        runtime_makeslice((internal_abi_Type *)&DAT_008077e0,0,cap,~r0_11);
+        newLen = 0;
+        local_50 = extraout_RAX_04;
+        local_d0 = cap;
+        k = 0;
+        iVar6 = local_78;
+        while (k < (int)cap) {
+          c = (int32)*(byte *)(iVar6 + k);
+          if (*(byte *)(iVar6 + k) < 0x80) {
+            local_c8 = k + 1;
+          }
+          else {
+            local_f0 = k;
+            local_d8 = newLen;
+            runtime_decoderune((string)in_stack_fffffffffffffe90,iVar6,(int32)cap,k);
+            k = local_f0;
+            iVar6 = local_78;
+            newLen = local_d8;
+            local_c8 = extraout_RBX_00;
+            c = extraout_EAX;
+          }
+          if (c < 0x24) {
+            if (c == 0x20) {
+              if (k == 0) {
+                bVar7 = true;
+              }
+              else {
+                bVar7 = k == cap - 1;
+              }
+            }
+            else {
+              if (c == 0x22) goto LAB_0067e23c;
+              if (c != 0x23) goto LAB_0067e288;
+              bVar7 = k == 0;
+            }
+            if (bVar7) goto LAB_0067e23c;
+LAB_0067e288:
+            newLen = newLen + 1;
+            if (local_d0 < newLen) {
+              ~r0_01.cap = (int)in_stack_fffffffffffffea0;
+              ~r0_01.array = in_stack_fffffffffffffe90._type;
+              ~r0_01.len = (int)in_stack_fffffffffffffe90.data;
+              runtime_growslice(local_50,newLen,local_d0,1,(internal_abi_Type *)&DAT_008077e0,~r0_01
+                               );
+              local_50 = extraout_RAX_07;
+              local_d0 = extraout_RCX_00;
+              newLen = extraout_RBX_02;
+              iVar6 = local_78;
+            }
+            *(int32 *)((int)local_50 + newLen * 4 + -4) = c;
+            k = local_c8;
+          }
+          else {
+            if (0x3c < c) {
+              if ((c == 0x3e) || (c == 0x5c)) goto LAB_0067e23c;
+              goto LAB_0067e288;
+            }
+            if ((1 < (dword)(c - 0x2bU)) && (c < 0x3b)) goto LAB_0067e288;
+LAB_0067e23c:
+            newLen = newLen + 2;
+            if (local_d0 < newLen) {
+              ~r0_00.cap = (int)in_stack_fffffffffffffea0;
+              ~r0_00.array = in_stack_fffffffffffffe90._type;
+              ~r0_00.len = (int)in_stack_fffffffffffffe90.data;
+              runtime_growslice(local_50,newLen,local_d0,2,(internal_abi_Type *)&DAT_008077e0,~r0_00
+                               );
+              local_50 = extraout_RAX_06;
+              local_d0 = extraout_RCX;
+              newLen = extraout_RBX_01;
+              iVar6 = local_78;
+            }
+            *(undefined4 *)((int)local_50 + newLen * 4 + -8) = 0x5c;
+            *(int32 *)((int)local_50 + newLen * 4 + -4) = c;
+            k = local_c8;
+          }
+        }
+        a_00.cap = (int)in_stack_fffffffffffffea0;
+        a_00.array = (int32 *)in_stack_fffffffffffffe90._type;
+        a_00.len = (int)in_stack_fffffffffffffe90.data;
+        ~r0_04.len = (int)in_stack_fffffffffffffeb0;
+        ~r0_04.str = in_stack_fffffffffffffea8;
+        runtime_slicerunetostring(&local_c0,a_00,~r0_04);
+        a1_02.len = (int)in_stack_fffffffffffffea8;
+        a1_02.str = in_stack_fffffffffffffea0;
+        a2_00.len = in_stack_fffffffffffffeb8;
+        a2_00.str = in_stack_fffffffffffffeb0;
+        a3_00.len = (int)in_stack_fffffffffffffec8;
+        a3_00.str = in_stack_fffffffffffffec0;
+        ~r0_09.len._0_4_ = in_stack_fffffffffffffed8;
+        ~r0_09.str = (uint8 *)in_stack_fffffffffffffed0;
+        ~r0_09.len._4_4_ = c;
+        runtime_concatstring4
+                  ((runtime_tmpBuf *)0x0,(string)in_stack_fffffffffffffe90,a1_02,a2_00,a3_00,~r0_09)
+        ;
+        uVar2 = extraout_RAX_08;
+      }
+      ppiVar5 = local_48 + 5;
+      iVar6 = j + 1;
+    }
+    iVar6 = i + 1;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void crypto_x509_pkix___Name__FillFromRDNSequence
+               (crypto_x509_pkix_Name *n,crypto_x509_pkix_RDNSequence *rdns)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  uint8 *puVar4;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_RAX;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_RAX_00;
+  crypto_x509_pkix_AttributeTypeAndValue *oldPtr;
+  crypto_x509_pkix_Name *extraout_RAX_01;
+  crypto_x509_pkix_Name *extraout_RAX_02;
+  string *extraout_RAX_03;
+  string *extraout_RAX_04;
+  string *psVar5;
+  crypto_x509_pkix_Name *extraout_RAX_05;
+  string *extraout_RAX_06;
+  string *extraout_RAX_07;
+  crypto_x509_pkix_Name *extraout_RAX_08;
+  string *extraout_RAX_09;
+  string *extraout_RAX_10;
+  crypto_x509_pkix_Name *extraout_RAX_11;
+  string *extraout_RAX_12;
+  string *extraout_RAX_13;
+  crypto_x509_pkix_Name *extraout_RAX_14;
+  string *extraout_RAX_15;
+  string *extraout_RAX_16;
+  crypto_x509_pkix_Name *extraout_RAX_17;
+  string *extraout_RAX_18;
+  string *extraout_RAX_19;
+  crypto_x509_pkix_Name *extraout_RAX_20;
+  string *extraout_RAX_21;
+  string *extraout_RAX_22;
+  crypto_x509_pkix_Name *extraout_RAX_23;
+  int iVar6;
+  int extraout_RCX;
+  int extraout_RCX_00;
+  int extraout_RCX_01;
+  int extraout_RCX_02;
+  int extraout_RCX_03;
+  int iVar7;
+  int extraout_RCX_04;
+  int extraout_RCX_05;
+  int extraout_RCX_06;
+  int extraout_RCX_07;
+  int extraout_RCX_08;
+  int extraout_RCX_09;
+  int extraout_RCX_10;
+  int extraout_RCX_11;
+  int extraout_RCX_12;
+  int extraout_RCX_13;
+  int extraout_RCX_14;
+  int extraout_RCX_15;
+  crypto_x509_pkix_Name *pcVar8;
+  crypto_x509_pkix_RelativeDistinguishedNameSET *pcVar9;
+  int iVar10;
+  uint extraout_RBX;
+  uint extraout_RBX_00;
+  int extraout_RBX_01;
+  int extraout_RBX_02;
+  uint extraout_RBX_03;
+  uint extraout_RBX_04;
+  int extraout_RBX_05;
+  uint extraout_RBX_06;
+  uint extraout_RBX_07;
+  int extraout_RBX_08;
+  uint extraout_RBX_09;
+  uint extraout_RBX_10;
+  int extraout_RBX_11;
+  uint extraout_RBX_12;
+  uint extraout_RBX_13;
+  int extraout_RBX_14;
+  uint extraout_RBX_15;
+  uint extraout_RBX_16;
+  int extraout_RBX_17;
+  uint extraout_RBX_18;
+  uint extraout_RBX_19;
+  int extraout_RBX_20;
+  uint extraout_RBX_21;
+  uint extraout_RBX_22;
+  int extraout_RBX_23;
+  string *extraout_RDI;
+  string *extraout_RDI_00;
+  string *extraout_RDI_01;
+  string *extraout_RDI_02;
+  string *extraout_RDI_03;
+  string *extraout_RDI_04;
+  string *extraout_RDI_05;
+  int extraout_R8;
+  int extraout_R8_00;
+  int extraout_R8_01;
+  int iVar11;
+  int extraout_R8_02;
+  int extraout_R8_03;
+  int extraout_R8_04;
+  int extraout_R8_05;
+  int extraout_R8_06;
+  int extraout_R8_07;
+  int extraout_R9;
+  int extraout_R9_00;
+  int extraout_R9_01;
+  int iVar12;
+  int extraout_R9_02;
+  int extraout_R9_03;
+  int extraout_R9_04;
+  int extraout_R9_05;
+  int extraout_R9_06;
+  int extraout_R9_07;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_00;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_01;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_02;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_03;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_04;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_05;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_06;
+  crypto_x509_pkix_AttributeTypeAndValue *extraout_R10_07;
+  crypto_x509_pkix_AttributeTypeAndValue **extraout_R11;
+  uint8 **extraout_R11_00;
+  uint8 **extraout_R11_01;
+  string **extraout_R11_02;
+  uint8 **extraout_R11_03;
+  string **extraout_R11_04;
+  uint8 **extraout_R11_05;
+  string **extraout_R11_06;
+  uint8 **extraout_R11_07;
+  string **extraout_R11_08;
+  uint8 **extraout_R11_09;
+  string **extraout_R11_10;
+  uint8 **extraout_R11_11;
+  string **extraout_R11_12;
+  uint8 **extraout_R11_13;
+  string **extraout_R11_14;
+  uint8 **extraout_R11_15;
+  uint uVar13;
+  uint8 *puVar14;
+  int iVar15;
+  int unaff_R14;
+  crypto_x509_pkix_Name *pcStack0000000000000008;
+  runtime_slice in_stack_ffffffffffffff40;
+  crypto_x509_pkix_AttributeTypeAndValue *local_40;
+  crypto_x509_pkix_RelativeDistinguishedNameSET *local_38;
+  crypto_x509_pkix_AttributeTypeAndValue atv;
+  
+  while (pcStack0000000000000008 = n,
+        &local_40 <= *(crypto_x509_pkix_AttributeTypeAndValue ***)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+    n = pcStack0000000000000008;
+  }
+  pcVar9 = rdns->array;
+  iVar1 = rdns->len;
+  iVar6 = 0;
+  iVar11 = iVar1;
+  while (iVar6 < iVar11) {
+    iVar2 = pcVar9->len;
+    iVar7 = iVar6;
+    if (iVar2 != 0) {
+      local_40 = pcVar9->array;
+      iVar12 = iVar2;
+      local_38 = pcVar9;
+      for (iVar10 = 0; iVar10 < iVar12; iVar10 = iVar10 + 1) {
+        atv.Type.array = (local_40->Type).array;
+        atv.Type.len._0_4_ = *(undefined4 *)&(local_40->Type).len;
+        atv.Type.len._4_4_ = *(undefined4 *)((int)&(local_40->Type).len + 4);
+        atv.Type.cap._0_4_ = *(undefined4 *)&(local_40->Type).cap;
+        atv.Type.cap._4_4_ = *(undefined4 *)((int)&(local_40->Type).cap + 4);
+        atv.Value._type._0_4_ = *(undefined4 *)&(local_40->Value)._type;
+        atv.Value._type._4_4_ = *(undefined4 *)((int)&(local_40->Value)._type + 4);
+        atv.Value.data._0_4_ = *(undefined4 *)&(local_40->Value).data;
+        atv.Value.data._4_4_ = *(undefined4 *)((int)&(local_40->Value).data + 4);
+        uVar3 = (n->Names).cap;
+        uVar13 = (n->Names).len + 1;
+        oldPtr = (n->Names).array;
+        if (uVar3 < uVar13) {
+          runtime_growslice(oldPtr,uVar13,uVar3,1,(internal_abi_Type *)&DAT_00855b00,
+                            in_stack_ffffffffffffff40);
+          (pcStack0000000000000008->Names).cap = extraout_RCX;
+          oldPtr = extraout_RAX;
+          pcVar8 = pcStack0000000000000008;
+          uVar13 = extraout_RBX;
+          if (runtime_writeBarrier._0_4_ != 0) {
+            runtime_gcWriteBarrier2();
+            *extraout_R11 = extraout_RAX_00;
+            extraout_R11[1] = (pcVar8->Names).array;
+            oldPtr = extraout_RAX_00;
+            uVar13 = extraout_RBX_00;
+          }
+          (pcVar8->Names).array = oldPtr;
+          n = pcStack0000000000000008;
+          iVar7 = iVar6;
+          pcVar9 = local_38;
+          iVar11 = iVar1;
+          iVar12 = iVar2;
+        }
+        (n->Names).len = uVar13;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_wbMove((internal_abi_Type *)&DAT_00855b00,oldPtr + (uVar13 - 1),&atv);
+          n = pcStack0000000000000008;
+          iVar7 = iVar6;
+          pcVar9 = local_38;
+          iVar11 = iVar1;
+          iVar12 = iVar2;
+        }
+        oldPtr[uVar13 - 1].Type.array = atv.Type.array;
+        *(undefined4 *)&oldPtr[uVar13 - 1].Type.len = (undefined4)atv.Type.len;
+        *(undefined4 *)((int)&oldPtr[uVar13 - 1].Type.len + 4) = atv.Type.len._4_4_;
+        *(undefined4 *)&oldPtr[uVar13 - 1].Type.cap = (undefined4)atv.Type.cap;
+        *(undefined4 *)((int)&oldPtr[uVar13 - 1].Type.cap + 4) = atv.Type.cap._4_4_;
+        *(undefined4 *)&oldPtr[uVar13 - 1].Value._type = atv.Value._type._0_4_;
+        *(undefined4 *)((int)&oldPtr[uVar13 - 1].Value._type + 4) = atv.Value._type._4_4_;
+        *(undefined4 *)&oldPtr[uVar13 - 1].Value.data = atv.Value.data._0_4_;
+        *(undefined4 *)((int)&oldPtr[uVar13 - 1].Value.data + 4) = atv.Value.data._4_4_;
+        if ((undefined *)CONCAT44(atv.Value._type._4_4_,atv.Value._type._0_4_) == &DAT_008075e0) {
+          puVar14 = *(uint8 **)CONCAT44(atv.Value.data._4_4_,atv.Value.data._0_4_);
+          puVar4 = ((uint8 **)CONCAT44(atv.Value.data._4_4_,atv.Value.data._0_4_))[1];
+          if ((((CONCAT44(atv.Type.len._4_4_,(undefined4)atv.Type.len) == 4) &&
+               (*atv.Type.array == 2)) && (atv.Type.array[1] == 5)) && (atv.Type.array[2] == 4)) {
+            switch(atv.Type.array[3]) {
+            case 3:
+              (n->CommonName).len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_00 = puVar14;
+                extraout_R11_00[1] = (extraout_RAX_01->CommonName).str;
+                n = extraout_RAX_01;
+                iVar7 = extraout_RCX_00;
+                iVar10 = extraout_RBX_01;
+                iVar11 = extraout_R8;
+                iVar12 = extraout_R9;
+                local_40 = extraout_R10;
+              }
+              (n->CommonName).str = puVar14;
+              break;
+            case 5:
+              (n->SerialNumber).len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_01 = puVar14;
+                extraout_R11_01[1] = (extraout_RAX_02->SerialNumber).str;
+                n = extraout_RAX_02;
+                iVar7 = extraout_RCX_01;
+                iVar10 = extraout_RBX_02;
+                iVar11 = extraout_R8_00;
+                iVar12 = extraout_R9_00;
+                local_40 = extraout_R10_00;
+              }
+              (n->SerialNumber).str = puVar14;
+              break;
+            case 6:
+              uVar3 = (n->Country).cap;
+              uVar13 = (n->Country).len + 1;
+              psVar5 = (n->Country).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->Country).cap = extraout_RCX_02;
+                psVar5 = extraout_RAX_03;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_03;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_02 = extraout_RAX_04;
+                  extraout_R11_02[1] = (pcVar8->Country).array;
+                  psVar5 = extraout_RAX_04;
+                  uVar13 = extraout_RBX_04;
+                }
+                (pcVar8->Country).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->Country).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_03 = puVar14;
+                extraout_R11_03[1] = *(uint8 **)((int)&extraout_RDI->str + iVar15);
+                n = extraout_RAX_05;
+                iVar7 = extraout_RCX_03;
+                iVar10 = extraout_RBX_05;
+                psVar5 = extraout_RDI;
+                iVar11 = extraout_R8_01;
+                iVar12 = extraout_R9_01;
+                local_40 = extraout_R10_01;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 7:
+              uVar3 = (n->Locality).cap;
+              uVar13 = (n->Locality).len + 1;
+              psVar5 = (n->Locality).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->Locality).cap = extraout_RCX_04;
+                psVar5 = extraout_RAX_06;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_06;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_04 = extraout_RAX_07;
+                  extraout_R11_04[1] = (pcVar8->Locality).array;
+                  psVar5 = extraout_RAX_07;
+                  uVar13 = extraout_RBX_07;
+                }
+                (pcVar8->Locality).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->Locality).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_05 = puVar14;
+                extraout_R11_05[1] = *(uint8 **)((int)&extraout_RDI_00->str + iVar15);
+                n = extraout_RAX_08;
+                iVar7 = extraout_RCX_05;
+                iVar10 = extraout_RBX_08;
+                psVar5 = extraout_RDI_00;
+                iVar11 = extraout_R8_02;
+                iVar12 = extraout_R9_02;
+                local_40 = extraout_R10_02;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 8:
+              uVar3 = (n->Province).cap;
+              uVar13 = (n->Province).len + 1;
+              psVar5 = (n->Province).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->Province).cap = extraout_RCX_06;
+                psVar5 = extraout_RAX_09;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_09;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_06 = extraout_RAX_10;
+                  extraout_R11_06[1] = (pcVar8->Province).array;
+                  psVar5 = extraout_RAX_10;
+                  uVar13 = extraout_RBX_10;
+                }
+                (pcVar8->Province).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->Province).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_07 = puVar14;
+                extraout_R11_07[1] = *(uint8 **)((int)&extraout_RDI_01->str + iVar15);
+                n = extraout_RAX_11;
+                iVar7 = extraout_RCX_07;
+                iVar10 = extraout_RBX_11;
+                psVar5 = extraout_RDI_01;
+                iVar11 = extraout_R8_03;
+                iVar12 = extraout_R9_03;
+                local_40 = extraout_R10_03;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 9:
+              uVar3 = (n->StreetAddress).cap;
+              uVar13 = (n->StreetAddress).len + 1;
+              psVar5 = (n->StreetAddress).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->StreetAddress).cap = extraout_RCX_08;
+                psVar5 = extraout_RAX_12;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_12;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_08 = extraout_RAX_13;
+                  extraout_R11_08[1] = (pcVar8->StreetAddress).array;
+                  psVar5 = extraout_RAX_13;
+                  uVar13 = extraout_RBX_13;
+                }
+                (pcVar8->StreetAddress).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->StreetAddress).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_09 = puVar14;
+                extraout_R11_09[1] = *(uint8 **)((int)&extraout_RDI_02->str + iVar15);
+                n = extraout_RAX_14;
+                iVar7 = extraout_RCX_09;
+                iVar10 = extraout_RBX_14;
+                psVar5 = extraout_RDI_02;
+                iVar11 = extraout_R8_04;
+                iVar12 = extraout_R9_04;
+                local_40 = extraout_R10_04;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 10:
+              uVar3 = (n->Organization).cap;
+              uVar13 = (n->Organization).len + 1;
+              psVar5 = (n->Organization).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->Organization).cap = extraout_RCX_10;
+                psVar5 = extraout_RAX_15;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_15;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_10 = extraout_RAX_16;
+                  extraout_R11_10[1] = (pcVar8->Organization).array;
+                  psVar5 = extraout_RAX_16;
+                  uVar13 = extraout_RBX_16;
+                }
+                (pcVar8->Organization).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->Organization).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_11 = puVar14;
+                extraout_R11_11[1] = *(uint8 **)((int)&extraout_RDI_03->str + iVar15);
+                n = extraout_RAX_17;
+                iVar7 = extraout_RCX_11;
+                iVar10 = extraout_RBX_17;
+                psVar5 = extraout_RDI_03;
+                iVar11 = extraout_R8_05;
+                iVar12 = extraout_R9_05;
+                local_40 = extraout_R10_05;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 0xb:
+              uVar3 = (n->OrganizationalUnit).cap;
+              uVar13 = (n->OrganizationalUnit).len + 1;
+              psVar5 = (n->OrganizationalUnit).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->OrganizationalUnit).cap = extraout_RCX_12;
+                psVar5 = extraout_RAX_18;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_18;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_12 = extraout_RAX_19;
+                  extraout_R11_12[1] = (pcVar8->OrganizationalUnit).array;
+                  psVar5 = extraout_RAX_19;
+                  uVar13 = extraout_RBX_19;
+                }
+                (pcVar8->OrganizationalUnit).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->OrganizationalUnit).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_13 = puVar14;
+                extraout_R11_13[1] = *(uint8 **)((int)&extraout_RDI_04->str + iVar15);
+                n = extraout_RAX_20;
+                iVar7 = extraout_RCX_13;
+                iVar10 = extraout_RBX_20;
+                psVar5 = extraout_RDI_04;
+                iVar11 = extraout_R8_06;
+                iVar12 = extraout_R9_06;
+                local_40 = extraout_R10_06;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+              break;
+            case 0x11:
+              uVar3 = (n->PostalCode).cap;
+              uVar13 = (n->PostalCode).len + 1;
+              psVar5 = (n->PostalCode).array;
+              if (uVar3 < uVar13) {
+                runtime_growslice(psVar5,uVar13,uVar3,1,(internal_abi_Type *)&DAT_008075e0,
+                                  in_stack_ffffffffffffff40);
+                (pcStack0000000000000008->PostalCode).cap = extraout_RCX_14;
+                psVar5 = extraout_RAX_21;
+                pcVar8 = pcStack0000000000000008;
+                uVar13 = extraout_RBX_21;
+                if (runtime_writeBarrier._0_4_ != 0) {
+                  runtime_gcWriteBarrier2();
+                  *extraout_R11_14 = extraout_RAX_22;
+                  extraout_R11_14[1] = (pcVar8->PostalCode).array;
+                  psVar5 = extraout_RAX_22;
+                  uVar13 = extraout_RBX_22;
+                }
+                (pcVar8->PostalCode).array = psVar5;
+                n = pcStack0000000000000008;
+                iVar7 = iVar6;
+                pcVar9 = local_38;
+                iVar11 = iVar1;
+                iVar12 = iVar2;
+              }
+              (n->PostalCode).len = uVar13;
+              iVar15 = (uVar13 - 1) * 0x10;
+              psVar5[uVar13 - 1].len = (int)puVar4;
+              if (runtime_writeBarrier._0_4_ != 0) {
+                runtime_gcWriteBarrier2();
+                *extraout_R11_15 = puVar14;
+                extraout_R11_15[1] = *(uint8 **)((int)&extraout_RDI_05->str + iVar15);
+                n = extraout_RAX_23;
+                iVar7 = extraout_RCX_15;
+                iVar10 = extraout_RBX_23;
+                psVar5 = extraout_RDI_05;
+                iVar11 = extraout_R8_07;
+                iVar12 = extraout_R9_07;
+                local_40 = extraout_R10_07;
+              }
+              *(uint8 **)((int)&psVar5->str + iVar15) = puVar14;
+            }
+          }
+        }
+        local_40 = local_40 + 1;
+      }
+    }
+    pcVar9 = pcVar9 + 1;
+    iVar6 = iVar7 + 1;
+  }
+  return;
+}
+
+
+
+void crypto_x509_pkix_Name_appendRDNs
+               (crypto_x509_pkix_Name n,crypto_x509_pkix_RDNSequence in,__string values,
+               encoding_asn1_ObjectIdentifier oid,crypto_x509_pkix_RDNSequence ~r0)
+
+{
+  int *piVar1;
+  runtime_slice ~r0_00;
+  void *in_RAX;
+  int extraout_RAX;
+  undefined8 uVar2;
+  int extraout_RAX_00;
+  undefined8 extraout_RAX_01;
+  undefined8 extraout_RAX_02;
+  void *extraout_RAX_03;
+  int extraout_RAX_04;
+  int i_1;
+  uint in_RCX;
+  int iVar3;
+  int iVar4;
+  int extraout_RCX;
+  int in_RBX;
+  uint newLen;
+  uint extraout_RBX;
+  int in_RSI;
+  int extraout_RSI;
+  int extraout_RSI_00;
+  int extraout_RSI_01;
+  void **in_RDI;
+  void *extraout_RDI;
+  void *x;
+  int in_R9;
+  int in_R10;
+  undefined8 in_R11;
+  int *extraout_R11;
+  undefined8 *extraout_R11_00;
+  int *extraout_R11_01;
+  int iVar5;
+  int unaff_R14;
+  string in_stack_ffffffffffffff60;
+  int in_stack_ffffffffffffff70;
+  int local_60;
+  int i;
+  crypto_x509_pkix_AttributeTypeAndValue a;
+  
+  while (&a.Type.cap <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RSI != 0) {
+    for (iVar5 = 0; iVar5 < n.ExtraNames.len; iVar5 = iVar5 + 1) {
+      a.Type.array = ((n.ExtraNames.array)->Type).array;
+      piVar1 = &((n.ExtraNames.array)->Type).len;
+      a.Type.len._0_4_ = *(undefined4 *)piVar1;
+      a.Type.len._4_4_ = *(undefined4 *)((int)&((n.ExtraNames.array)->Type).len + 4);
+      iVar4 = *piVar1;
+      a.Type.cap._0_4_ = *(undefined4 *)&((n.ExtraNames.array)->Type).cap;
+      a.Type.cap._4_4_ = *(undefined4 *)((int)&((n.ExtraNames.array)->Type).cap + 4);
+      a.Value._type._0_4_ = *(undefined4 *)&((n.ExtraNames.array)->Value)._type;
+      a.Value._type._4_4_ = *(undefined4 *)((int)&((n.ExtraNames.array)->Value)._type + 4);
+      a.Value.data._0_4_ = *(undefined4 *)&((n.ExtraNames.array)->Value).data;
+      a.Value.data._4_4_ = *(undefined4 *)((int)&((n.ExtraNames.array)->Value).data + 4);
+      if (in_R10 == iVar4) {
+        local_60 = 0;
+        while( true ) {
+          if (iVar4 <= local_60) goto LAB_0067ed20;
+          if (*(int *)(in_R9 + local_60 * 8) != a.Type.array[local_60]) break;
+          local_60 = local_60 + 1;
+        }
+      }
+      n.ExtraNames.array = n.ExtraNames.array + 1;
+    }
+LAB_0067ed20:
+    if (n.ExtraNames.len <= iVar5) {
+      runtime_makeslice((internal_abi_Type *)&DAT_00855b00,in_RSI,in_RSI,in_RDI);
+      iVar5 = extraout_RAX;
+      for (iVar4 = 0; iVar4 < in_RSI; iVar4 = iVar4 + 1) {
+        iVar3 = iVar4 * 5;
+        x = *in_RDI;
+        *(int *)(iVar5 + 8 + iVar4 * 0x28) = in_R10;
+        *(undefined8 *)(iVar5 + 0x10 + iVar4 * 0x28) = in_R11;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11 = in_R9;
+          extraout_R11[1] = *(int *)(extraout_RAX_00 + extraout_RSI * 8);
+          iVar5 = extraout_RAX_00;
+          iVar3 = extraout_RSI;
+          x = extraout_RDI;
+        }
+        *(int *)(iVar5 + iVar3 * 8) = in_R9;
+        runtime_convTstring(in_stack_ffffffffffffff60,x);
+        *(undefined **)(extraout_RAX + 0x18 + iVar3 * 8) = &DAT_008075e0;
+        uVar2 = extraout_RAX_01;
+        iVar5 = extraout_RAX;
+        if (runtime_writeBarrier._0_4_ != 0) {
+          runtime_gcWriteBarrier2();
+          *extraout_R11_00 = extraout_RAX_02;
+          extraout_R11_00[1] = *(undefined8 *)(extraout_RSI_00 + 0x20 + extraout_RCX * 8);
+          uVar2 = extraout_RAX_02;
+          iVar3 = extraout_RCX;
+          iVar5 = extraout_RSI_00;
+        }
+        *(undefined8 *)(iVar5 + 0x20 + iVar3 * 8) = uVar2;
+        in_RDI = in_RDI + 2;
+      }
+      newLen = in_RBX + 1;
+      if (in_RCX < newLen) {
+        ~r0_00.cap = in_stack_ffffffffffffff70;
+        ~r0_00.array = in_stack_ffffffffffffff60.str;
+        ~r0_00.len = in_stack_ffffffffffffff60.len;
+        runtime_growslice(in_RAX,newLen,in_RCX,1,(internal_abi_Type *)&DAT_0080f5e0,~r0_00);
+        iVar5 = extraout_RAX;
+        in_RAX = extraout_RAX_03;
+        newLen = extraout_RBX;
+      }
+      iVar4 = newLen * 3;
+      *(int *)((int)in_RAX + newLen * 0x18 + -0x10) = in_RSI;
+      *(int *)((int)in_RAX + newLen * 0x18 + -8) = in_RSI;
+      if (runtime_writeBarrier._0_4_ != 0) {
+        runtime_gcWriteBarrier2();
+        *extraout_R11_01 = extraout_RAX_04;
+        extraout_R11_01[1] = *(int *)((int)in_RAX + extraout_RSI_01 * 8 + -0x18);
+        iVar5 = extraout_RAX_04;
+        iVar4 = extraout_RSI_01;
+      }
+      *(int *)((int)in_RAX + iVar4 * 8 + -0x18) = iVar5;
+      return;
+    }
+  }
+  return;
+}
+
+
+
+void crypto_x509_pkix_Name_ToRDNSequence(crypto_x509_pkix_Name n,crypto_x509_pkix_RDNSequence ret)
+
+{
+  runtime_slice ~r0;
+  crypto_x509_pkix_Name n_00;
+  crypto_x509_pkix_Name n_01;
+  crypto_x509_pkix_Name n_02;
+  crypto_x509_pkix_Name n_03;
+  crypto_x509_pkix_Name n_04;
+  crypto_x509_pkix_Name n_05;
+  crypto_x509_pkix_Name n_06;
+  crypto_x509_pkix_Name n_07;
+  crypto_x509_pkix_Name n_08;
+  crypto_x509_pkix_RDNSequence ~r0_00;
+  crypto_x509_pkix_RDNSequence ~r0_01;
+  crypto_x509_pkix_RDNSequence ~r0_02;
+  crypto_x509_pkix_RDNSequence ~r0_03;
+  crypto_x509_pkix_RDNSequence ~r0_04;
+  crypto_x509_pkix_RDNSequence ~r0_05;
+  crypto_x509_pkix_RDNSequence ~r0_06;
+  crypto_x509_pkix_RDNSequence ~r0_07;
+  crypto_x509_pkix_RDNSequence ~r0_08;
+  void *extraout_RAX;
+  void *extraout_RAX_00;
+  void *extraout_RAX_01;
+  int **ppiVar1;
+  void *oldPtr;
+  int **dst;
+  void *extraout_RAX_02;
+  int **extraout_RAX_03;
+  void *extraout_RCX;
+  void *extraout_RCX_00;
+  void *extraout_RCX_01;
+  void *oldCap;
+  void *extraout_RCX_02;
+  void *extraout_RCX_03;
+  void *extraout_RBX;
+  void *extraout_RBX_00;
+  void *extraout_RBX_01;
+  void *~r0_09;
+  void *extraout_RBX_02;
+  void *extraout_RBX_03;
+  int iVar2;
+  int extraout_RSI;
+  int iVar3;
+  void **extraout_R11;
+  int unaff_R14;
+  string *psVar4;
+  undefined in_stack_fffffffffffffe50 [16];
+  undefined auVar5 [24];
+  undefined auVar6 [24];
+  undefined auVar7 [24];
+  undefined auVar8 [24];
+  undefined auVar9 [24];
+  undefined auVar10 [24];
+  undefined auVar11 [24];
+  undefined in_stack_fffffffffffffe60 [224];
+  undefined auVar12 [24];
+  crypto_x509_pkix_RDNSequence in_stack_ffffffffffffff40;
+  __string in_stack_ffffffffffffff58;
+  encoding_asn1_ObjectIdentifier in_stack_ffffffffffffff70;
+  undefined8 in_stack_ffffffffffffff88;
+  undefined8 in_stack_ffffffffffffff90;
+  int in_stack_ffffffffffffff98;
+  crypto_x509_pkix_AttributeTypeAndValue atv;
+  
+  while (&stack0xfffffffffffffec8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  psVar4 = n.Country.array;
+  FUN_0046d08e();
+  n_00.Country.len = in_stack_fffffffffffffe50._0_8_;
+  n_00.Country.cap = in_stack_fffffffffffffe50._8_8_;
+  n_00.Country.array = psVar4;
+  auVar5 = in_stack_fffffffffffffe60._0_24_;
+  auVar6 = in_stack_fffffffffffffe60._24_24_;
+  auVar7 = in_stack_fffffffffffffe60._48_24_;
+  auVar8 = in_stack_fffffffffffffe60._72_24_;
+  auVar9 = in_stack_fffffffffffffe60._96_24_;
+  auVar10 = in_stack_fffffffffffffe60._120_24_;
+  auVar11 = in_stack_fffffffffffffe60._176_24_;
+  auVar12 = in_stack_fffffffffffffe60._200_24_;
+  n_00.Organization.array = (string *)auVar5._0_8_;
+  n_00.Organization.len = auVar5._8_8_;
+  n_00.Organization.cap = auVar5._16_8_;
+  n_00.OrganizationalUnit.array = (string *)auVar6._0_8_;
+  n_00.OrganizationalUnit.len = auVar6._8_8_;
+  n_00.OrganizationalUnit.cap = auVar6._16_8_;
+  n_00.Locality.array = (string *)auVar7._0_8_;
+  n_00.Locality.len = auVar7._8_8_;
+  n_00.Locality.cap = auVar7._16_8_;
+  n_00.Province.array = (string *)auVar8._0_8_;
+  n_00.Province.len = auVar8._8_8_;
+  n_00.Province.cap = auVar8._16_8_;
+  n_00.StreetAddress.array = (string *)auVar9._0_8_;
+  n_00.StreetAddress.len = auVar9._8_8_;
+  n_00.StreetAddress.cap = auVar9._16_8_;
+  n_00.PostalCode.array = (string *)auVar10._0_8_;
+  n_00.PostalCode.len = auVar10._8_8_;
+  n_00.PostalCode.cap = auVar10._16_8_;
+  n_00.SerialNumber.str = (uint8 *)SUB168(in_stack_fffffffffffffe60._144_16_,0);
+  n_00.SerialNumber.len = SUB168(in_stack_fffffffffffffe60._144_16_,8);
+  n_00.CommonName.str = (uint8 *)SUB168(in_stack_fffffffffffffe60._160_16_,0);
+  n_00.CommonName.len = SUB168(in_stack_fffffffffffffe60._160_16_,8);
+  n_00.Names.array = (crypto_x509_pkix_AttributeTypeAndValue *)auVar11._0_8_;
+  n_00.Names.len = auVar11._8_8_;
+  n_00.Names.cap = auVar11._16_8_;
+  n_00.ExtraNames.array = (crypto_x509_pkix_AttributeTypeAndValue *)auVar12._0_8_;
+  n_00.ExtraNames.len = auVar12._8_8_;
+  n_00.ExtraNames.cap = auVar12._16_8_;
+  ~r0_00.len = in_stack_ffffffffffffff90;
+  ~r0_00.array = (crypto_x509_pkix_RelativeDistinguishedNameSET *)in_stack_ffffffffffffff88;
+  ~r0_00.cap = in_stack_ffffffffffffff98;
+  crypto_x509_pkix_Name_appendRDNs
+            (n_00,in_stack_ffffffffffffff40,in_stack_ffffffffffffff58,in_stack_ffffffffffffff70,
+             ~r0_00);
+  psVar4 = n.Country.array;
+  FUN_0046d08e();
+  n_01.Country.len = in_stack_fffffffffffffe50._0_8_;
+  n_01.Country.cap = in_stack_fffffffffffffe50._8_8_;
+  n_01.Country.array = psVar4;
+  auVar5 = in_stack_fffffffffffffe60._0_24_;
+  auVar6 = in_stack_fffffffffffffe60._24_24_;
+  auVar7 = in_stack_fffffffffffffe60._48_24_;
+  auVar8 = in_stack_fffffffffffffe60._72_24_;
+  auVar9 = in_stack_fffffffffffffe60._96_24_;
+  auVar10 = in_stack_fffffffffffffe60._120_24_;
+  auVar11 = in_stack_fffffffffffffe60._176_24_;
+  auVar12 = in_stack_fffffffffffffe60._200_24_;
+  n_01.Organization.array = (string *)auVar5._0_8_;
+  n_01.Organization.len = auVar5._8_8_;
+  n_01.Organization.cap = auVar5._16_8_;
+  n_01.OrganizationalUnit.array = (string *)auVar6._0_8_;
+  n_01.OrganizationalUnit.len = auVar6._8_8_;
+  n_01.OrganizationalUnit.cap = auVar6._16_8_;
+  n_01.Locality.array = (string *)auVar7._0_8_;
+  n_01.Locality.len = auVar7._8_8_;
+  n_01.Locality.cap = auVar7._16_8_;
+  n_01.Province.array = (string *)auVar8._0_8_;
+  n_01.Province.len = auVar8._8_8_;
+  n_01.Province.cap = auVar8._16_8_;
+  n_01.StreetAddress.array = (string *)auVar9._0_8_;
+  n_01.StreetAddress.len = auVar9._8_8_;
+  n_01.StreetAddress.cap = auVar9._16_8_;
+  n_01.PostalCode.array = (string *)auVar10._0_8_;
+  n_01.PostalCode.len = auVar10._8_8_;
+  n_01.PostalCode.cap = auVar10._16_8_;
+  n_01.SerialNumber.str = (uint8 *)SUB168(in_stack_fffffffffffffe60._144_16_,0);
+  n_01.SerialNumber.len = SUB168(in_stack_fffffffffffffe60._144_16_,8);
+  n_01.CommonName.str = (uint8 *)SUB168(in_stack_fffffffffffffe60._160_16_,0);
+  n_01.CommonName.len = SUB168(in_stack_fffffffffffffe60._160_16_,8);
+  n_01.Names.array = (crypto_x509_pkix_AttributeTypeAndValue *)auVar11._0_8_;
+  n_01.Names.len = auVar11._8_8_;
+  n_01.Names.cap = auVar11._16_8_;
+  n_01.ExtraNames.array = (crypto_x509_pkix_AttributeTypeAndValue *)auVar12._0_8_;
+  n_01.ExtraNames.len = auVar12._8_8_;
+  n_01.ExtraNames.cap = auVar12._16_8_;
+  ~r0_01.len = in_stack_ffffffffffffff90;
+  ~r0_01.array = (crypto_x509_pkix_RelativeDistinguishedNameSET *)in_stack_ffffffffffffff88;
+  ~r0_01.cap = in_stack_ffffffffffffff98;
+  crypto_x509_pkix_Name_appendRDNs
+            (n_01,in_stack_ffffffffffffff40,in_stack_ffffffffffffff58,in_stack_ffffffffffffff70,
+             ~r0_01);
+  psVar4 = n.Country.array;
+  FUN_0046d08e();
+  n_02.Country.len = in_stack_fffffffffffffe50._0_8_;
+  n_02.Country.cap = in_stack_fffffffffffffe50._8_8_;
+  n_02.Country.array = psVar4;
+  auVar5 = in_stack_fffffffffffffe60._0_24_;
+  auVar6 = in_stack_fffffffffffffe60._24_24_;
+  auVar7 = in_stack_fffffffffffffe60._48_24_;
+  auVar8 = in_stack_fffffffffffffe60._72_24_;
+  auVar9 = in_stack_fffffffffffffe60._96_24_;
+  auVar10 = in_stack_fffffffffffffe60._120_24_;
+  auVar11 = in_stack_fffffffffffffe60._176_24_;
+  auVar12 = in_stack_fffffffffffffe60._200_24_;
+  n_02.Organization.array = (string *)auVar5._0_8_;
+  n_02.Organization.len = auVar5._8_8_;
+  n_02.Organization.cap = auVar5._16_8_;
+  n_02.OrganizationalUnit.array = (string *)auVar6._0_8_;
+  n_02.OrganizationalUnit.len = auVar6._8_8_;
+  n_02.OrganizationalUnit.cap = auVar6._16_8_;
+  n_02.Locality.array = (string *)auVar7._0_8_;
+  n_02.Locality.len = auVar7._8_8_;
+  n_02.Locality.cap = auVar7._16_8_;
+  n_02.Province.array = (string *)auVar8._0_8_;
+  n_02.Province.len = auVar8._8_8_;
+  n_02.Province.cap = auVar8._16_8_;

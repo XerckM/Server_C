@@ -1,0 +1,1000 @@
+  void *pvStack0000000000000008;
+  
+  pvStack0000000000000008 = ptr;
+  runtime_bulkBarrierPreWrite((uintptr)ptr,0,n);
+  runtime_memclrNoHeapPointers();
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime___mspan__refillAllocCache(runtime_mspan *s,uintptr whichByte)
+
+{
+  s->allocCache = ~*(uint *)(s->allocBits + whichByte);
+  return;
+}
+
+
+
+void runtime___mspan__nextFreeIndex(runtime_mspan *s,uintptr ~r0)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uintptr snelems;
+  uint uVar3;
+  uintptr sfreeindex;
+  uint64 aCache;
+  int iVar4;
+  int bitIndex;
+  uintptr result;
+  int unaff_R14;
+  string in_stack_ffffffffffffffd0;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  uVar1 = s->nelems;
+  uVar3 = s->freeindex;
+  if (uVar1 == uVar3) {
+    return;
+  }
+  if (uVar1 < uVar3) {
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffd0);
+  }
+  uVar2 = s->allocCache;
+  iVar4 = 0;
+  if (uVar2 != 0) {
+    for (; (uVar2 >> iVar4 & 1) == 0; iVar4 = iVar4 + 1) {
+    }
+  }
+  if (uVar2 == 0) {
+    iVar4 = 0x40;
+  }
+  while( true ) {
+    if (iVar4 != 0x40) {
+      if (uVar1 <= uVar3 + iVar4) {
+        s->freeindex = uVar1;
+        return;
+      }
+      uVar3 = uVar3 + iVar4 + 1;
+      s->allocCache = s->allocCache >> ((byte)(iVar4 + 1U) & 0x3f) & -(uint)(iVar4 + 1U < 0x40);
+      if (((uVar3 & 0x3f) == 0) && (uVar1 != uVar3)) {
+        runtime___mspan__refillAllocCache(s,uVar3 >> 3);
+      }
+      s->freeindex = uVar3;
+      return;
+    }
+    uVar3 = uVar3 + 0x40 & 0xffffffffffffffc0;
+    if (uVar1 <= uVar3) break;
+    runtime___mspan__refillAllocCache(s,uVar3 >> 3);
+    uVar2 = s->allocCache;
+    iVar4 = 0;
+    if (uVar2 != 0) {
+      for (; (uVar2 >> iVar4 & 1) == 0; iVar4 = iVar4 + 1) {
+      }
+    }
+    if (uVar2 == 0) {
+      iVar4 = 0x40;
+    }
+  }
+  s->freeindex = uVar1;
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_badPointer(runtime_mspan *s,uintptr p,uintptr refBase,uintptr refOff)
+
+{
+  byte bVar1;
+  uint64 v;
+  uint64 v_00;
+  int unaff_R14;
+  runtime_mspan *prStack0000000000000008;
+  uintptr uStack0000000000000018;
+  string in_stack_ffffffffffffffb0;
+  runtime_mSpanState state;
+  
+  prStack0000000000000008 = s;
+  uStack0000000000000018 = refBase;
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  runtime_printlock();
+  runtime_printlock();
+  runtime_printstring(in_stack_ffffffffffffffb0);
+  runtime_printhex(p);
+  runtime_printunlock();
+  if (prStack0000000000000008 != (runtime_mspan *)0x0) {
+    bVar1 = (prStack0000000000000008->state).s.value;
+    if (bVar1 == 1) {
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffb0);
+      runtime_printunlock();
+    }
+    else {
+      runtime_printlock();
+      runtime_printstring(in_stack_ffffffffffffffb0);
+      runtime_printunlock();
+    }
+    v = prStack0000000000000008->limit;
+    v_00 = prStack0000000000000008->startAddr;
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(v_00);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(v);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printuint((uint)bVar1);
+    runtime_printunlock();
+  }
+  runtime_printlock();
+  runtime_printnl();
+  runtime_printunlock();
+  if (uStack0000000000000018 != 0) {
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(uStack0000000000000018);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printhex(refOff);
+    runtime_printstring(in_stack_ffffffffffffffb0);
+    runtime_printunlock();
+    runtime_gcDumpObject(in_stack_ffffffffffffffb0,0x8af8e0,6);
+  }
+  *(undefined *)(*(int *)(unaff_R14 + 0x30) + 0x129) = 2;
+                    // WARNING: Subroutine does not return
+  runtime_throw(in_stack_ffffffffffffffb0);
+}
+
+
+
+void runtime_findObject(uintptr p,uintptr refBase,uintptr refOff,uintptr base,runtime_mspan *s,
+                       uintptr objIndex)
+
+{
+  uint8 uVar1;
+  uint uVar2;
+  runtime_mspan *s_00;
+  runtime_heapArena *ha;
+  runtime_mSpanState state;
+  
+  uVar2 = p + 0x800000000000 >> 0x1a;
+  if (uVar2 < 0x400000) {
+    if ((*runtime_mheap_.arenas[0])[uVar2] == (runtime_heapArena *)0x0) {
+      s_00 = (runtime_mspan *)0x0;
+    }
+    else {
+      s_00 = (*runtime_mheap_.arenas[0])[uVar2]->spans[(dword)(p >> 0xd) & 0x1fff];
+    }
+  }
+  else {
+    s_00 = (runtime_mspan *)0x0;
+  }
+  if (s_00 != (runtime_mspan *)0x0) {
+    uVar1 = (s_00->state).s.value;
+    if (((uVar1 == 1) && (s_00->startAddr <= p)) && (p < s_00->limit)) {
+      return;
+    }
+    if (uVar1 != 2) {
+      if (runtime_debug.invalidptr != 0) {
+        runtime_badPointer(s_00,p,refBase,refOff);
+      }
+      return;
+    }
+    return;
+  }
+  if ((p == 0xdeaddeaddeaddead) && (runtime_debug.invalidptr != 0)) {
+    runtime_badPointer((runtime_mspan *)0x0,0xdeaddeaddeaddead,refBase,refOff);
+  }
+  return;
+}
+
+
+
+void runtime_heapBitsForAddr(uintptr addr,uintptr size,runtime_heapBits ~r0)
+
+{
+  runtime_heapArena *ha;
+  uintptr off;
+  int iVar1;
+  uintptr valid;
+  dword dVar2;
+  uintptr word;
+  uintptr mask;
+  bool bVar4;
+  dword dVar3;
+  
+  if (0x3fffff < addr + 0x800000000000 >> 0x1a) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndexU();
+  }
+  dVar3 = (dword)(addr >> 3);
+  dVar2 = dVar3 & 0x7fffff;
+  if (dVar2 >> 6 < 0x20000) {
+    iVar1 = (dVar3 & 0x3f) - 0x40;
+    bVar4 = -(size >> 3) == iVar1;
+    if ((((uint)-iVar1 < size >> 3 || bVar4) && (!bVar4)) && (0x3fff < dVar2 >> 9)) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    return;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndexU();
+}
+
+
+
+// WARNING: Restarted to delay deadcode elimination for space: stack
+
+void runtime_heapBits_next(runtime_heapBits h,runtime_heapBits ~r0,uintptr ~r1)
+
+{
+  int iVar1;
+  runtime_heapBits ~r0_00;
+  uintptr extraout_RAX;
+  uint in_RCX;
+  uint extraout_RCX;
+  int i;
+  int in_RBX;
+  int extraout_RBX;
+  uintptr size;
+  undefined8 unaff_RBP;
+  int in_RDI;
+  int extraout_RDI;
+  uintptr unaff_retaddr;
+  undefined in_stack_ffffffffffffffe8 [16];
+  
+  while( true ) {
+    if (in_RCX != 0) {
+      iVar1 = 0;
+      if (in_RCX != 0) {
+        for (; (in_RCX >> iVar1 & 1) == 0; iVar1 = iVar1 + 1) {
+        }
+      }
+      return;
+    }
+    size = in_RBX + in_RDI * -8;
+    if (size == 0) break;
+    ~r0_00.mask = unaff_RBP;
+    ~r0_00.addr = in_stack_ffffffffffffffe8._0_8_;
+    ~r0_00.size = in_stack_ffffffffffffffe8._8_8_;
+    ~r0_00.valid = unaff_retaddr;
+    runtime_heapBitsForAddr(~r1 + in_RDI * 8,size,~r0_00);
+    ~r1 = extraout_RAX;
+    in_RCX = extraout_RCX;
+    in_RBX = extraout_RBX;
+    in_RDI = extraout_RDI;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_bulkBarrierPreWrite(uintptr dst,uintptr src,uintptr size)
+
+{
+  undefined8 *puVar1;
+  runtime_moduledata *prVar2;
+  runtime_heapBits ~r0;
+  runtime_heapBits h;
+  runtime_heapBits h_00;
+  runtime_heapBits ~r0_00;
+  runtime_heapBits ~r0_01;
+  uintptr extraout_RAX;
+  uintptr extraout_RAX_00;
+  uintptr extraout_RAX_01;
+  int iVar4;
+  undefined8 extraout_RCX;
+  uintptr extraout_RCX_00;
+  uint uVar5;
+  runtime_heapArena *ha;
+  runtime_mspan *s;
+  ___runtime_moduledata *p_2;
+  int iVar6;
+  ___runtime_moduledata *p_5;
+  uintptr extraout_RBX;
+  undefined8 extraout_RBX_00;
+  undefined8 *extraout_RSI;
+  uintptr addr_1;
+  uintptr *srcx;
+  undefined8 *extraout_RSI_00;
+  uintptr addr;
+  uintptr *dstx;
+  uintptr extraout_RDI;
+  runtime_moduledata **pprVar7;
+  uintptr *dstx_1;
+  uintptr (*p) [1];
+  runtime_moduledata *datap;
+  runtime_moduledata *datap_1;
+  uintptr (*p_1) [2];
+  int unaff_R14;
+  uintptr uStack0000000000000010;
+  string in_stack_ffffffffffffff90;
+  undefined in_stack_ffffffffffffffa0 [16];
+  undefined8 in_stack_ffffffffffffffb0;
+  uintptr in_stack_ffffffffffffffb8;
+  undefined8 in_stack_ffffffffffffffc0;
+  uintptr in_stack_ffffffffffffffc8;
+  uintptr uVar3;
+  
+  if (((dst | src | size) & 7) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffff90);
+  }
+  if (!runtime_writeBarrier.needed) {
+    return;
+  }
+  uVar5 = dst + 0x800000000000 >> 0x1a;
+  if (uVar5 < 0x400000) {
+    if ((*runtime_mheap_.arenas[0])[uVar5] == (runtime_heapArena *)0x0) {
+      s = (runtime_mspan *)0x0;
+    }
+    else {
+      s = (*runtime_mheap_.arenas[0])[uVar5]->spans[(dword)(dst >> 0xd) & 0x1fff];
+    }
+  }
+  else {
+    s = (runtime_mspan *)0x0;
+  }
+  if (s != (runtime_mspan *)0x0) {
+    if ((((s->state).s.value == 1) && (s->startAddr <= dst)) && (dst < s->limit)) {
+      iVar6 = *(int *)(*(int *)(unaff_R14 + 0x30) + 0xd0);
+      ~r0._16_16_ = in_stack_ffffffffffffffa0;
+      ~r0._0_16_ = (undefined  [16])in_stack_ffffffffffffff90;
+      uStack0000000000000010 = src;
+      runtime_heapBitsForAddr(dst,size,~r0);
+      uVar3 = extraout_RAX;
+      if (uStack0000000000000010 == 0) {
+        while (h_00.mask = in_stack_ffffffffffffffa0._0_8_,
+              h_00.valid = in_stack_ffffffffffffffa0._8_8_,
+              h_00.addr = (uintptr)in_stack_ffffffffffffff90.str,
+              h_00.size = in_stack_ffffffffffffff90.len, ~r0_01.size = in_stack_ffffffffffffffb8,
+              ~r0_01.addr = in_stack_ffffffffffffffb0, ~r0_01.mask = in_stack_ffffffffffffffc0,
+              ~r0_01.valid = in_stack_ffffffffffffffc8, runtime_heapBits_next(h_00,~r0_01,uVar3),
+              extraout_RSI_00 != (undefined8 *)0x0) {
+          uVar3 = extraout_RAX_01;
+          if (*(uint *)(iVar6 + 0x1270) < *(int *)(iVar6 + 0x1268) + 8U) {
+            in_stack_ffffffffffffffc0 = extraout_RBX_00;
+            in_stack_ffffffffffffffc8 = extraout_RCX_00;
+            runtime_wbBufFlush();
+            in_stack_ffffffffffffffb8 = uVar3;
+          }
+          puVar1 = *(undefined8 **)(iVar6 + 0x1268);
+          *(undefined8 **)(iVar6 + 0x1268) = puVar1 + 1;
+          *puVar1 = *extraout_RSI_00;
+        }
+      }
+      else {
+        while (h.mask = in_stack_ffffffffffffffa0._0_8_, h.valid = in_stack_ffffffffffffffa0._8_8_,
+              h.addr = (uintptr)in_stack_ffffffffffffff90.str,
+              h.size = in_stack_ffffffffffffff90.len, ~r0_00.size = in_stack_ffffffffffffffb8,
+              ~r0_00.addr = in_stack_ffffffffffffffb0, ~r0_00.mask = in_stack_ffffffffffffffc0,
+              ~r0_00.valid = in_stack_ffffffffffffffc8, runtime_heapBits_next(h,~r0_00,uVar3),
+              extraout_RSI != (undefined8 *)0x0) {
+          iVar4 = uStack0000000000000010 - dst;
+          if (*(uint *)(iVar6 + 0x1270) < *(int *)(iVar6 + 0x1268) + 0x10U) {
+            in_stack_ffffffffffffffb8 = extraout_RBX;
+            in_stack_ffffffffffffffc0 = extraout_RCX;
+            in_stack_ffffffffffffffc8 = extraout_RDI;
+            runtime_wbBufFlush();
+          }
+          puVar1 = *(undefined8 **)(iVar6 + 0x1268);
+          *(undefined8 **)(iVar6 + 0x1268) = puVar1 + 2;
+          *puVar1 = *extraout_RSI;
+          puVar1[1] = *(undefined8 *)((int)extraout_RSI + iVar4);
+          uVar3 = extraout_RAX_00;
+        }
+      }
+      return;
+    }
+    return;
+  }
+  if (runtime_modulesSlice == (___runtime_moduledata *)0x0) {
+    iVar6 = 0;
+    pprVar7 = (runtime_moduledata **)0x0;
+  }
+  else {
+    pprVar7 = runtime_modulesSlice->array;
+    iVar6 = runtime_modulesSlice->len;
+  }
+  iVar4 = 0;
+  while( true ) {
+    if (iVar6 <= iVar4) {
+      if (runtime_modulesSlice == (___runtime_moduledata *)0x0) {
+        iVar6 = 0;
+        pprVar7 = (runtime_moduledata **)0x0;
+      }
+      else {
+        pprVar7 = runtime_modulesSlice->array;
+        iVar6 = runtime_modulesSlice->len;
+      }
+      iVar4 = 0;
+      while( true ) {
+        if (iVar6 <= iVar4) {
+          return;
+        }
+        prVar2 = pprVar7[iVar4];
+        if ((prVar2->bss <= dst) && (dst < prVar2->ebss)) break;
+        iVar4 = iVar4 + 1;
+      }
+      runtime_bulkBarrierBitmap(dst,src,size,dst - prVar2->bss,(prVar2->gcbssmask).bytedata);
+      return;
+    }
+    prVar2 = pprVar7[iVar4];
+    if ((prVar2->data <= dst) && (dst < prVar2->edata)) break;
+    iVar4 = iVar4 + 1;
+  }
+  runtime_bulkBarrierBitmap(dst,src,size,dst - prVar2->data,(prVar2->gcdatamask).bytedata);
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_bulkBarrierPreWriteSrcOnly(uintptr dst,uintptr src,uintptr size)
+
+{
+  int iVar1;
+  undefined8 *puVar2;
+  runtime_heapBits ~r0;
+  runtime_heapBits h;
+  runtime_heapBits ~r0_00;
+  uintptr extraout_RAX;
+  uintptr ~r1;
+  uintptr extraout_RAX_00;
+  undefined8 extraout_RCX;
+  undefined8 extraout_RBX;
+  int extraout_RSI;
+  uintptr addr;
+  undefined8 *puVar3;
+  uintptr *srcx;
+  uintptr extraout_RDI;
+  uintptr (*p) [1];
+  int unaff_R14;
+  uintptr uStack0000000000000008;
+  uintptr uStack0000000000000010;
+  string in_stack_ffffffffffffffa8;
+  undefined in_stack_ffffffffffffffb8 [16];
+  uintptr in_stack_ffffffffffffffc8;
+  undefined8 in_stack_ffffffffffffffd0;
+  undefined8 in_stack_ffffffffffffffd8;
+  uintptr in_stack_ffffffffffffffe0;
+  
+  if (((dst | src | size) & 7) != 0) {
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffa8);
+  }
+  if (runtime_writeBarrier.needed) {
+    iVar1 = *(int *)(*(int *)(unaff_R14 + 0x30) + 0xd0);
+    ~r0._16_16_ = in_stack_ffffffffffffffb8;
+    ~r0._0_16_ = (undefined  [16])in_stack_ffffffffffffffa8;
+    uStack0000000000000008 = dst;
+    uStack0000000000000010 = src;
+    runtime_heapBitsForAddr(dst,size,~r0);
+    ~r1 = extraout_RAX;
+    while( true ) {
+      h.mask = in_stack_ffffffffffffffb8._0_8_;
+      h.valid = in_stack_ffffffffffffffb8._8_8_;
+      h.addr = (uintptr)in_stack_ffffffffffffffa8.str;
+      h.size = in_stack_ffffffffffffffa8.len;
+      ~r0_00.size = in_stack_ffffffffffffffd0;
+      ~r0_00.addr = in_stack_ffffffffffffffc8;
+      ~r0_00.mask = in_stack_ffffffffffffffd8;
+      ~r0_00.valid = in_stack_ffffffffffffffe0;
+      runtime_heapBits_next(h,~r0_00,~r1);
+      if (extraout_RSI == 0) break;
+      puVar3 = (undefined8 *)((extraout_RSI - uStack0000000000000008) + uStack0000000000000010);
+      ~r1 = extraout_RAX_00;
+      if (*(uint *)(iVar1 + 0x1270) < *(int *)(iVar1 + 0x1268) + 8U) {
+        in_stack_ffffffffffffffd0 = extraout_RBX;
+        in_stack_ffffffffffffffd8 = extraout_RCX;
+        in_stack_ffffffffffffffe0 = extraout_RDI;
+        runtime_wbBufFlush();
+        in_stack_ffffffffffffffc8 = ~r1;
+      }
+      puVar2 = *(undefined8 **)(iVar1 + 0x1268);
+      *(undefined8 **)(iVar1 + 0x1268) = puVar2 + 1;
+      *puVar2 = *puVar3;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_bulkBarrierBitmap(uintptr dst,uintptr src,uintptr size,uintptr maskOffset,uint8 *bits)
+
+{
+  undefined8 *puVar1;
+  int iVar2;
+  undefined8 *puVar3;
+  undefined8 *puVar4;
+  uintptr i;
+  byte *pbVar5;
+  uint8 mask;
+  dword dVar6;
+  uintptr (*p) [1];
+  uintptr *srcx;
+  uintptr (*p_1) [2];
+  int unaff_R14;
+  uintptr uStack0000000000000008;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  uintptr *dstx;
+  
+  iVar2 = *(int *)(*(int *)(unaff_R14 + 0x30) + 0xd0);
+  pbVar5 = bits + (maskOffset >> 6);
+  dVar6 = 1 << ((byte)(maskOffset >> 3) & 7);
+  i = 0;
+  uStack0000000000000008 = dst;
+  uStack0000000000000010 = src;
+  uStack0000000000000018 = size;
+  do {
+    if (size <= i) {
+      return;
+    }
+    if ((char)dVar6 == '\0') {
+      if (pbVar5[1] != 0) {
+        dVar6 = 1;
+        pbVar5 = pbVar5 + 1;
+        goto LAB_00419540;
+      }
+      i = i + 0x38;
+      pbVar5 = pbVar5 + 1;
+    }
+    else {
+LAB_00419540:
+      if ((*pbVar5 & (byte)dVar6) != 0) {
+        puVar1 = (undefined8 *)(i + dst);
+        if (src == 0) {
+          if (*(uint *)(iVar2 + 0x1270) < *(int *)(iVar2 + 0x1268) + 8U) {
+            runtime_wbBufFlush();
+            dVar6 = dVar6 & 0xff;
+            dst = uStack0000000000000008;
+            src = uStack0000000000000010;
+            size = uStack0000000000000018;
+          }
+          puVar3 = *(undefined8 **)(iVar2 + 0x1268);
+          *(undefined8 **)(iVar2 + 0x1268) = puVar3 + 1;
+          *puVar3 = *puVar1;
+        }
+        else {
+          puVar3 = (undefined8 *)(i + src);
+          if (*(uint *)(iVar2 + 0x1270) < *(int *)(iVar2 + 0x1268) + 0x10U) {
+            runtime_wbBufFlush();
+            dVar6 = dVar6 & 0xff;
+            dst = uStack0000000000000008;
+            src = uStack0000000000000010;
+            size = uStack0000000000000018;
+          }
+          puVar4 = *(undefined8 **)(iVar2 + 0x1268);
+          *(undefined8 **)(iVar2 + 0x1268) = puVar4 + 2;
+          *puVar4 = *puVar1;
+          puVar4[1] = *puVar3;
+        }
+      }
+      dVar6 = dVar6 << 1;
+    }
+    i = i + 8;
+  } while( true );
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_typeBitsBulkBarrier(internal_abi_Type *typ,uintptr dst,uintptr src,uintptr size)
+
+{
+  undefined8 *puVar1;
+  undefined8 *puVar2;
+  int iVar3;
+  undefined8 *puVar4;
+  uint64 v;
+  uint8 *ptrmask;
+  byte *pbVar5;
+  uintptr i;
+  uint32 bits;
+  uintptr *dstx;
+  uintptr *srcx;
+  uintptr (*p) [2];
+  int unaff_R14;
+  internal_abi_Type *piStack0000000000000008;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  uintptr uStack0000000000000020;
+  string in_stack_ffffffffffffffa0;
+  
+  if (typ == (internal_abi_Type *)0x0) {
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffa0);
+  }
+  piStack0000000000000008 = typ;
+  if (typ->Size_ != size) {
+    uStack0000000000000020 = size;
+    runtime_rtype_string((runtime_rtype)typ,in_stack_ffffffffffffffa0);
+    v = piStack0000000000000008->Size_;
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printuint(v);
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printuint(uStack0000000000000020);
+    runtime_printnl();
+    runtime_printunlock();
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffa0);
+  }
+  if ((typ->Kind_ & 0x40) != 0) {
+    runtime_rtype_string((runtime_rtype)typ,in_stack_ffffffffffffffa0);
+    runtime_printlock();
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printstring(in_stack_ffffffffffffffa0);
+    runtime_printunlock();
+                    // WARNING: Subroutine does not return
+    runtime_throw(in_stack_ffffffffffffffa0);
+  }
+  if (runtime_writeBarrier.needed) {
+    iVar3 = *(int *)(*(int *)(unaff_R14 + 0x30) + 0xd0);
+    pbVar5 = typ->GCData;
+    bits = 0;
+    uStack0000000000000010 = dst;
+    uStack0000000000000018 = src;
+    for (i = 0; i < typ->PtrBytes; i = i + 8) {
+      if ((i & 0x3f) == 0) {
+        bits = (uint32)*pbVar5;
+        pbVar5 = pbVar5 + 1;
+      }
+      else {
+        bits = bits >> 1;
+      }
+      if ((bits & 1) != 0) {
+        puVar1 = (undefined8 *)(i + dst);
+        puVar2 = (undefined8 *)(i + src);
+        if (*(uint *)(iVar3 + 0x1270) < *(int *)(iVar3 + 0x1268) + 0x10U) {
+          runtime_wbBufFlush();
+          typ = piStack0000000000000008;
+          src = uStack0000000000000018;
+          dst = uStack0000000000000010;
+        }
+        puVar4 = *(undefined8 **)(iVar3 + 0x1268);
+        *(undefined8 **)(iVar3 + 0x1268) = puVar4 + 2;
+        *puVar4 = *puVar1;
+        puVar4[1] = *puVar2;
+      }
+    }
+    return;
+  }
+  return;
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime___mspan__initHeapBits(runtime_mspan *s,bool forceClear)
+
+{
+  uintptr uVar1;
+  size_t extraout_RCX;
+  size_t __n;
+  uint uVar2;
+  void *__buf;
+  void *extraout_RBX;
+  uintptr base;
+  uintptr addr;
+  int unaff_R14;
+  runtime_writeHeapBits in_stack_ffffffffffffffb0;
+  uintptr i;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if ((!forceClear) && ((s->spanclass & 1) == 0)) {
+    if (s->elemsize == 8) {
+      uVar1 = s->npages;
+      __n = (size_t)((dword)(s->startAddr >> 3) & 0x3f);
+      addr = s->startAddr + __n * -8;
+      __buf = (void *)0x0;
+      for (uVar2 = 0; uVar2 < (uVar1 << 0xd) >> 3; uVar2 = uVar2 + 0x40) {
+        addr = runtime_writeHeapBits_write(addr,__buf,__n);
+        __n = extraout_RCX;
+        __buf = extraout_RBX;
+      }
+      runtime_writeHeapBits_flush(in_stack_ffffffffffffffb0,addr,(uintptr)__buf);
+      return;
+    }
+    return;
+  }
+  runtime_writeHeapBits_flush
+            (in_stack_ffffffffffffffb0,s->startAddr + (uint)((dword)(s->startAddr >> 3) & 0x3f) * -8
+             ,0);
+  return;
+}
+
+
+
+ssize_t runtime_writeHeapBits_write(int __fd,void *__buf,size_t __n)
+
+{
+  runtime_heapArena *prVar1;
+  uintptr data;
+  int in_RSI;
+  runtime_heapArena *ha;
+  uint in_RDI;
+  int in_R8;
+  dword dVar2;
+  uintptr idx;
+  uint uVar4;
+  uintptr m;
+  dword dVar3;
+  
+  if (__n + in_R8 < 0x41) {
+    return __fd;
+  }
+  uVar4 = __fd + 0x800000000000U >> 0x1a;
+  if (uVar4 < 0x400000) {
+    prVar1 = (*runtime_mheap_.arenas[0])[uVar4];
+    dVar3 = (dword)((uint)__fd >> 9);
+    dVar2 = dVar3 & 0x1ffff;
+    uVar4 = (uint)(dVar2 >> 3);
+    m = (1 << ((byte)in_RDI & 0x3f) & -(uint)(in_RDI < 0x40)) - 1 & prVar1->bitmap[dVar2];
+    prVar1->bitmap[dVar2] = m | (uint)__buf | in_RSI << ((byte)__n & 0x3f) & -(uint)(__n < 0x40);
+    if (uVar4 < 0x4000) {
+      prVar1->noMorePtrs[uVar4] = prVar1->noMorePtrs[uVar4] & ~(byte)(1 << (dVar3 & 7));
+      return __fd + 0x200;
+    }
+                    // WARNING: Subroutine does not return
+    runtime_panicIndexU();
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndexU();
+}
+
+
+
+void runtime_writeHeapBits_pad(runtime_writeHeapBits h,uintptr size,runtime_writeHeapBits ~r0)
+
+{
+  size_t in_RCX;
+  size_t extraout_RCX;
+  void *in_RBX;
+  void *extraout_RBX;
+  uint in_RSI;
+  uint uVar1;
+  int unaff_R14;
+  uintptr words;
+  
+  while (&stack0x00000000 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (in_RSI != 0) {
+    for (uVar1 = in_RSI >> 3; 0x40 < uVar1; uVar1 = uVar1 - 0x40) {
+      size = runtime_writeHeapBits_write(size,in_RBX,in_RCX);
+      in_RCX = extraout_RCX;
+      in_RBX = extraout_RBX;
+    }
+    runtime_writeHeapBits_write(size,in_RBX,in_RCX);
+    return;
+  }
+  return;
+}
+
+
+
+void runtime_writeHeapBits_flush(runtime_writeHeapBits h,uintptr addr,uintptr size)
+
+{
+  runtime_heapArena *prVar1;
+  dword dVar2;
+  uint uVar3;
+  uintptr idx_1;
+  uint in_RCX;
+  uint uVar4;
+  uintptr zeros;
+  int in_RSI;
+  uint uVar5;
+  uint in_RDI;
+  uintptr m;
+  runtime_heapArena *ha_1;
+  int in_R8;
+  runtime_heapArena *ha;
+  dword dVar6;
+  uintptr idx;
+  
+  uVar4 = ((in_R8 + in_RSI) - addr >> 3) - in_RCX;
+  if (uVar4 != 0) {
+    uVar5 = -(in_RCX - 0x40);
+    if (uVar4 <= uVar5 && -uVar4 != in_RCX - 0x40) {
+      uVar5 = uVar4;
+    }
+    in_RCX = in_RCX + uVar5;
+    uVar4 = uVar4 - uVar5;
+  }
+  uVar5 = addr + 0x800000000000 >> 0x1a;
+  if (0x3fffff < uVar5) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndexU();
+  }
+  prVar1 = (*runtime_mheap_.arenas[0])[uVar5];
+  dVar2 = (dword)(addr >> 9);
+  dVar6 = dVar2 & 0x1ffff;
+  if (in_RDI != in_RCX) {
+    prVar1->bitmap[dVar6] =
+         size | (-(1 << ((byte)in_RCX & 0x3f) & -(uint)(in_RCX < 0x40)) |
+                (1 << ((byte)in_RDI & 0x3f) & -(uint)(in_RDI < 0x40)) - 1) & prVar1->bitmap[dVar6];
+  }
+  if (uVar4 == 0) {
+    return;
+  }
+  uVar5 = (uint)(dVar6 >> 3);
+  if (0x3fff < uVar5) {
+                    // WARNING: Subroutine does not return
+    runtime_panicIndexU();
+  }
+  prVar1->noMorePtrs[uVar5] = prVar1->noMorePtrs[uVar5] | (byte)(1 << (dVar2 & 7));
+  uVar5 = addr + 0x200;
+  while( true ) {
+    uVar3 = uVar5 + 0x800000000000 >> 0x1a;
+    if (0x3fffff < uVar3) {
+                    // WARNING: Subroutine does not return
+      runtime_panicIndexU();
+    }
+    prVar1 = (*runtime_mheap_.arenas[0])[uVar3];
+    dVar2 = (dword)(uVar5 >> 9);
+    dVar6 = dVar2 & 0x1ffff;
+    if (uVar4 < 0x40) {
+      prVar1->bitmap[dVar6] = prVar1->bitmap[dVar6] & -(1 << ((byte)uVar4 & 0x3f));
+      return;
+    }
+    if (uVar4 == 0x40) {
+      prVar1->bitmap[dVar6] = 0;
+      return;
+    }
+    prVar1->bitmap[dVar6] = 0;
+    uVar3 = (uint)(dVar6 >> 3);
+    if (0x3fff < uVar3) break;
+    prVar1->noMorePtrs[uVar3] = prVar1->noMorePtrs[uVar3] | (byte)(1 << (dVar2 & 7));
+    uVar4 = uVar4 - 0x40;
+    uVar5 = uVar5 + 0x200;
+  }
+                    // WARNING: Subroutine does not return
+  runtime_panicIndexU();
+}
+
+
+
+// WARNING: Unknown calling convention
+
+void runtime_heapBitsSetType(uintptr x,uintptr size,uintptr dataSize,internal_abi_Type *typ)
+
+{
+  runtime_writeHeapBits ~r0;
+  runtime_writeHeapBits ~r0_00;
+  uint uVar1;
+  uintptr n_1;
+  uint extraout_RAX;
+  uintptr n;
+  uint8 *extraout_RAX_00;
+  uintptr uVar2;
+  uint8 *extraout_RAX_01;
+  uintptr size_00;
+  void *pvVar3;
+  size_t extraout_RCX;
+  size_t extraout_RCX_00;
+  size_t __n;
+  size_t extraout_RCX_01;
+  size_t extraout_RCX_02;
+  uintptr words;
+  size_t extraout_RCX_03;
+  size_t extraout_RCX_04;
+  uint8 *p_1;
+  size_t sVar4;
+  uintptr extraout_RBX;
+  void *extraout_RBX_00;
+  uintptr size_01;
+  void *extraout_RBX_01;
+  void *__buf;
+  uintptr extraout_RBX_02;
+  void *extraout_RBX_03;
+  uintptr extraout_RBX_04;
+  void *extraout_RBX_05;
+  void *extraout_RBX_06;
+  void *extraout_RBX_07;
+  uintptr extraout_RBX_08;
+  uintptr m;
+  uintptr m_1;
+  uintptr ptrs;
+  int iVar5;
+  uintptr m_3;
+  uintptr x_6;
+  uint8 *__fd;
+  uintptr m_2;
+  uintptr x_3;
+  uint8 *p_2;
+  uint8 *puVar6;
+  int unaff_R14;
+  uint8 *puStack0000000000000008;
+  uintptr uStack0000000000000010;
+  uintptr uStack0000000000000018;
+  internal_abi_Type *piStack0000000000000020;
+  runtime_writeHeapBits in_stack_ffffffffffffff50;
+  undefined in_stack_ffffffffffffff70 [16];
+  undefined8 in_stack_ffffffffffffff80;
+  uintptr in_stack_ffffffffffffff88;
+  uintptr j_1;
+  uintptr i_1;
+  uintptr i;
+  uint local_30;
+  uint8 *local_28;
+  uint8 *local_20;
+  uint8 *local_18;
+  uint8 *p;
+  
+  puStack0000000000000008 = (uint8 *)x;
+  uStack0000000000000018 = dataSize;
+  uStack0000000000000010 = size;
+  piStack0000000000000020 = typ;
+  while (&local_30 <= *(uint **)(unaff_R14 + 0x10)) {
+    runtime_morestack_noctxt();
+  }
+  if (uStack0000000000000010 == 8) {
+    return;
+  }
+  sVar4 = (size_t)((dword)((uint)puStack0000000000000008 >> 3) & 0x3f);
+  __fd = puStack0000000000000008 + sVar4 * -8;
+  if ((piStack0000000000000020->Kind_ & 0x40) != 0) {
+    local_30 = sVar4;
+    p = puStack0000000000000008;
+    runtime_runGCProg(piStack0000000000000020->GCData + 4,puStack0000000000000008,
+                      (uintptr)(piStack0000000000000020->GCData + 4));
+    pvVar3 = (void *)0x0;
+    iVar5 = 0;
+    uVar1 = extraout_RAX;
+    sVar4 = local_30;
+    puVar6 = p;
+    while( true ) {
+      for (; 8 < uVar1; uVar1 = uVar1 - 8) {
+        local_18 = puVar6;
+        __fd = (uint8 *)runtime_writeHeapBits_write((int)__fd,pvVar3,sVar4);
+        sVar4 = extraout_RCX_00;
+        pvVar3 = extraout_RBX_01;
+        puVar6 = local_18 + 1;
+      }
+      uVar2 = runtime_writeHeapBits_write((int)__fd,pvVar3,sVar4);
+      if (uStack0000000000000018 == iVar5 + piStack0000000000000020->Size_) break;
+      ~r0.valid = in_stack_ffffffffffffff80;
+      ~r0.addr = in_stack_ffffffffffffff70._0_8_;
+      ~r0.mask = in_stack_ffffffffffffff70._8_8_;
+      ~r0.low = in_stack_ffffffffffffff88;
+      runtime_writeHeapBits_pad(in_stack_ffffffffffffff50,uVar2,~r0);
+      iVar5 = piStack0000000000000020->Size_ + iVar5;
+      uVar1 = extraout_RAX;
+      sVar4 = extraout_RCX;
+      pvVar3 = extraout_RBX_00;
+      __fd = extraout_RAX_00;
+      puVar6 = p;
+    }
+    runtime_writeHeapBits_flush(in_stack_ffffffffffffff50,uVar2,size_01);
+    runtime_memclrNoHeapPointers();
+    return;
+  }
+  uVar1 = piStack0000000000000020->Size_;
+  ptrs = piStack0000000000000020->PtrBytes >> 3;
+  if (uStack0000000000000018 == uVar1) {
